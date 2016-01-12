@@ -1,10 +1,10 @@
 <neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2beta4.xsd" id="Simple_Golgi_Net">
 
-
+    <poissonFiringSynapse id="poissonFiringSyn" synapse="syn0" averageRate="150 Hz" spikeTarget="./syn0"/>
     <expTwoSynapse id="syn0" erev="0mV" gbase="1nS" tauDecay="10ms" tauRise="0.5ms"/>
-    <pulseGenerator id="Input_1" delay="200.0ms" duration="200.0ms" amplitude="-0.5E-5uA"/>
-    <pulseGenerator id="Input_2" delay="800.0ms" duration="200.0ms" amplitude="4E-5uA"/>
-    <network id="Simple_Golgi_Net_network">
+   <!-- <pulseGenerator id="Input_1" delay="200.0ms" duration="200.0ms" amplitude="-0.5E-5uA"/>
+    <pulseGenerator id="Input_2" delay="800.0ms" duration="200.0ms" amplitude="4E-5uA"/>-->
+    <network id="Simple_Golgi_Net_network" type="networkWithTemperature" temperature="23 degC" >
         <population id="Golgi_pop0" type="populationList" component="Simple_Golgi" size="10">
             <instance id="0">
                 <location y="10.16916945706836" x="416.619872545341138" z="825.206509253743207"/>
@@ -90,7 +90,7 @@
             <connection id="49" preCellId="../Golgi_pop0/9/Simple_Golgi" postCellId="../Golgi_pop0/8/Simple_Golgi"/>
             <connection id="50" preCellId="../Golgi_pop0/9/Simple_Golgi" postCellId="../Golgi_pop0/9/Simple_Golgi"/>
         </projection>
-        <inputList id="Input_list1" component="Input_1">
+       <!-- <inputList id="Input_list1" component="Input_1">
             <input destination="synapses" id="0" target="../Golgi_pop0/0/Simple_Golgi"/>
             <input destination="synapses" id="1" target="../Golgi_pop0/1/Simple_Golgi"/>
             <input destination="synapses" id="2" target="../Golgi_pop0/2/Simple_Golgi"/>
@@ -103,6 +103,18 @@
             <input destination="synapses" id="9" target="../Golgi_pop0/9/Simple_Golgi"/>
         </inputList>
         <inputList id="Input_list2" component="Input_2">
+            <input destination="synapses" id="0" target="../Golgi_pop0/0/Simple_Golgi"/>
+            <input destination="synapses" id="1" target="../Golgi_pop0/1/Simple_Golgi"/>
+            <input destination="synapses" id="2" target="../Golgi_pop0/2/Simple_Golgi"/>
+            <input destination="synapses" id="3" target="../Golgi_pop0/3/Simple_Golgi"/>
+            <input destination="synapses" id="4" target="../Golgi_pop0/4/Simple_Golgi"/>
+            <input destination="synapses" id="5" target="../Golgi_pop0/5/Simple_Golgi"/>
+            <input destination="synapses" id="6" target="../Golgi_pop0/6/Simple_Golgi"/>
+            <input destination="synapses" id="7" target="../Golgi_pop0/7/Simple_Golgi"/>
+            <input destination="synapses" id="8" target="../Golgi_pop0/8/Simple_Golgi"/>
+            <input destination="synapses" id="9" target="../Golgi_pop0/9/Simple_Golgi"/>
+        </inputList>-->
+       <inputList id="Input_list1" component="poissonFiringSyn">
             <input destination="synapses" id="0" target="../Golgi_pop0/0/Simple_Golgi"/>
             <input destination="synapses" id="1" target="../Golgi_pop0/1/Simple_Golgi"/>
             <input destination="synapses" id="2" target="../Golgi_pop0/2/Simple_Golgi"/>

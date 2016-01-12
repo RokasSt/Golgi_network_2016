@@ -104,7 +104,7 @@ for pre in range(0,size0):
         proj1.connections.append(conn)
         conn_count+=1
 
-Input_list1= neuroml.InputList(id="Input_list1", component="poissonFiringSyn")
+Input_list1= neuroml.InputList(id="Input_list1", component="")
 net.input_lists.append(Input_list1)
 #Input_list2= neuroml.InputList(id="Input_list2", component="Input_2")
 #net.input_lists.append(Input_list2)
@@ -139,7 +139,7 @@ validate_neuroml2(nml_file)
 
 # Create a LEMSSimulation to manage creation of LEMS file
 duration = 1000  # ms
-dt = 0.003  # ms
+dt = 0.001  # ms
 ls = LEMSSimulation(ref, duration, dt)
 
 
