@@ -44,31 +44,31 @@
 
         <!--Note: this could be: Simulation id="sim1" ... , but Component type="Simulation" ... 
         is used to allow validation of this file according to the LEMS schema specified above...-->
-    <Component type="Simulation" id="sim1" length="1500.0ms" step="0.005ms" target="network_Soma">
+    <Component type="Simulation" id="sim1" length="1500.0ms" step="0.001ms" target="network_Soma">
         
         <Display id="CG_v" title="Soma VOLTAGE" xmin="-100.0" xmax="1600.0" ymin="-75" ymax="50" timeScale="1ms">
             <Line id="VOLTAGE" timeScale="1ms" quantity="CG_Test/0/Simple_Golgi/v" scale="1 mV" color="#000000"/>
         </Display>
         
-        <Display id="Rates" title="Rate variables" xmin="-100.0" xmax="1600.0" ymin="-0.1" ymax="1.1" timeScale="1ms">
-           <!-- <Line id="KA a" timeScale="1ms" quantity="CG_Test/0/TestSoma/biophys/membraneProperties/KA_all/Golgi_KA/a/q" scale="1" color="#000000"/>
-            <Line id="KA b" timeScale="1ms" quantity="CG_Test/0/TestSoma/biophys/membraneProperties/KA_all/Golgi_KA/b/q" scale="1" color="#FF0000"/>-->
-            <!--<Line id="NaP m" timeScale="1ms" quantity="CG_Test/0/TestSoma/biophys/membraneProperties/NaP_all/Golgi_NaP/m/q" scale="1" color="#FF0000"/>-->
-             <!--<Line id="NaR s" timeScale="1ms" quantity="CG_Test/0/TestSoma/biophys/membraneProperties/NaR_all/Golgi_NaR/s/q" scale="1" color="#000000"/>
-             <Line id="NaR f" timeScale="1ms" quantity="CG_Test/0/TestSoma/biophys/membraneProperties/NaR_all/Golgi_NaR/f/q" scale="1" color="#FF0000"/>-->
-            <!-- <Line id="Na m" timeScale="1ms" quantity="CG_Test/0/TestSoma/biophys/membraneProperties/Na_all/Golgi_Na/m/q" scale="1" color="#000000"/>
-             <Line id="Na h" timeScale="1ms" quantity="CG_Test/0/TestSoma/biophys/membraneProperties/Na_all/Golgi_Na/h/q" scale="1" color="#FF0000"/>-->
-           <!-- <Line id="KM n" timeScale="1ms" quantity="CG_Test/0/TestSoma/biophys/membraneProperties/Kslow_all/Golgi_KM/n/q" scale="1" color="#FF0000"/>-->
-           <!--<Line id="KV n" timeScale="1ms" quantity="CG_Test/0/TestSoma/biophys/membraneProperties/KV_all/Golgi_KV/n/q" scale="1" color="#FF0000"/>-->
-           <!--<Line id="hcn1 fast" timeScale="1ms" quantity="CG_Test/0/TestSoma/biophys/membraneProperties/hcn1f_all/Golgi_hcn1f/f/q" scale="1" color="#FF0000"/>
-            <Line id="hcn1 slow" timeScale="1ms" quantity="CG_Test/0/TestSoma/biophys/membraneProperties/hcn1s_all/Golgi_hcn1s/s/q" scale="1" color="#FF0000"/>-->
-         <!-- <Line id="hcn2 fast" timeScale="1ms" quantity="CG_Test/0/TestSoma/biophys/membraneProperties/hcn2f_all/Golgi_hcn2f/f/q" scale="1" color="#FF0000"/>
-            <Line id="hcn2 slow" timeScale="1ms" quantity="CG_Test/0/TestSoma/biophys/membraneProperties/hcn2s_all/Golgi_hcn2s/s/q" scale="1" color="#FF0000"/>-->
-      <!--<Line id="HVA s" timeScale="1ms" quantity="CG_Test/0/TestSoma/biophys/membraneProperties_twoCa/CaHVA_all/Golgi_Ca_HVA/s/q" scale="1" color="#000000"/>
-          <Line id="HVA u" timeScale="1ms" quantity="CG_Test/0/TestSoma/biophys/membraneProperties_twoCa/CaHVA_all/Golgi_Ca_HVA/u/q" scale="1" color="#FF0000"/>-->
+        <!--<Display id="Rates" title="Rate variables" xmin="-100.0" xmax="1600.0" ymin="-0.1" ymax="1.1" timeScale="1ms">
+           <Line id="KA a" timeScale="1ms" quantity="CG_Test/0/TestSoma/biophys/membraneProperties/KA_all/Golgi_KA/a/q" scale="1" color="#000000"/>
+            <Line id="KA b" timeScale="1ms" quantity="CG_Test/0/TestSoma/biophys/membraneProperties/KA_all/Golgi_KA/b/q" scale="1" color="#FF0000"/>
+            <Line id="NaP m" timeScale="1ms" quantity="CG_Test/0/TestSoma/biophys/membraneProperties/NaP_all/Golgi_NaP/m/q" scale="1" color="#FF0000"/>
+            <Line id="NaR s" timeScale="1ms" quantity="CG_Test/0/TestSoma/biophys/membraneProperties/NaR_all/Golgi_NaR/s/q" scale="1" color="#000000"/>
+             <Line id="NaR f" timeScale="1ms" quantity="CG_Test/0/TestSoma/biophys/membraneProperties/NaR_all/Golgi_NaR/f/q" scale="1" color="#FF0000"/>
+           <Line id="Na m" timeScale="1ms" quantity="CG_Test/0/TestSoma/biophys/membraneProperties/Na_all/Golgi_Na/m/q" scale="1" color="#000000"/>
+             <Line id="Na h" timeScale="1ms" quantity="CG_Test/0/TestSoma/biophys/membraneProperties/Na_all/Golgi_Na/h/q" scale="1" color="#FF0000"/>
+           <Line id="KM n" timeScale="1ms" quantity="CG_Test/0/TestSoma/biophys/membraneProperties/Kslow_all/Golgi_KM/n/q" scale="1" color="#FF0000"/>
+           <Line id="KV n" timeScale="1ms" quantity="CG_Test/0/TestSoma/biophys/membraneProperties/KV_all/Golgi_KV/n/q" scale="1" color="#FF0000"/>
+           <Line id="hcn1 fast" timeScale="1ms" quantity="CG_Test/0/TestSoma/biophys/membraneProperties/hcn1f_all/Golgi_hcn1f/f/q" scale="1" color="#FF0000"/>
+            <Line id="hcn1 slow" timeScale="1ms" quantity="CG_Test/0/TestSoma/biophys/membraneProperties/hcn1s_all/Golgi_hcn1s/s/q" scale="1" color="#FF0000"/>
+         <Line id="hcn2 fast" timeScale="1ms" quantity="CG_Test/0/TestSoma/biophys/membraneProperties/hcn2f_all/Golgi_hcn2f/f/q" scale="1" color="#FF0000"/>
+            <Line id="hcn2 slow" timeScale="1ms" quantity="CG_Test/0/TestSoma/biophys/membraneProperties/hcn2s_all/Golgi_hcn2s/s/q" scale="1" color="#FF0000"/>
+      <Line id="HVA s" timeScale="1ms" quantity="CG_Test/0/TestSoma/biophys/membraneProperties_twoCa/CaHVA_all/Golgi_Ca_HVA/s/q" scale="1" color="#000000"/>
+          <Line id="HVA u" timeScale="1ms" quantity="CG_Test/0/TestSoma/biophys/membraneProperties_twoCa/CaHVA_all/Golgi_Ca_HVA/u/q" scale="1" color="#FF0000"/>
          <Line id="LVA m" timeScale="1ms" quantity="CG_Test/0/Simple_Golgi/biophys/membraneProperties_twoCa/CaLVA_all/Golgi_Ca_LVA/m/q" scale="1" color="#000000"/>
          <Line id="LVA h" timeScale="1ms" quantity="CG_Test/0/Simple_Golgi/biophys/membraneProperties_twoCa/CaLVA_all/Golgi_Ca_LVA/h/q" scale="1" color="#FF0000"/>
-       <!-- <Line id="BK c" timeScale="1ms" quantity="CG_Test/0/TestSoma/biophys/membraneProperties/BK_all/Golgi_BK/c/q" scale="1" color="#FF0000"/>-->
+       <Line id="BK c" timeScale="1ms" quantity="CG_Test/0/TestSoma/biophys/membraneProperties/BK_all/Golgi_BK/c/q" scale="1" color="#FF0000"/>
         </Display>
         
        <Display id="CG_conc" title="Soma [Ca2+]" xmin="-100.0" xmax="1600.0" ymin="-0.0006" ymax="0.006" timeScale="1ms">
@@ -77,13 +77,13 @@
 
         <Display id="CG_conc_ca2" title="Soma [Ca2+] ca2" xmin="-100.0" xmax="1600.0" ymin="-0.0006" ymax="0.006" timeScale="1ms">
             <Line id="[Ca2+]ca2" timeScale="1ms" quantity="CG_Test/0/Simple_Golgi/caConc2" scale="1 mM" color="#000000"/>
-        </Display>
+        </Display>-->
         
         <OutputFile id="v" fileName="Soma.v.dat">
             <OutputColumn id="v" quantity="CG_Test/0/Simple_Golgi/v"/>
         </OutputFile>
         
-        <!--<OutputFile id="rates" fileName="KA.dat">
+       <!-- <<OutputFile id="rates" fileName="KA.dat">
             <OutputColumn id="a" quantity="CG_Test/0/TestSoma/biophys/membraneProperties/KA_all/Golgi_KA/a/q"/>
             <OutputColumn id="b" quantity="CG_Test/0/TestSoma/biophys/membraneProperties/KA_all/Golgi_KA/b/q"/>
         </OutputFile>-->
@@ -133,7 +133,7 @@
             <OutputColumn id="u" quantity="CG_Test/0/TestSoma/biophys/membraneProperties_twoCa/CaHVA_all/Golgi_Ca_HVA/u/q"/>
         </OutputFile>-->
      
-        <OutputFile id="rates_m" fileName="CaLVA_m.dat">
+        <!--<OutputFile id="rates_m" fileName="CaLVA_m.dat">
             <OutputColumn id="s" quantity="CG_Test/0/Simple_Golgi/biophys/membraneProperties_twoCa/CaLVA_all/Golgi_Ca_LVA/m/q"/>
         </OutputFile>
         
@@ -155,7 +155,7 @@
 
        <OutputFile id="iCa2" fileName="iCa2.dat">
             <OutputColumn id="ica2" quantity="CG_Test/0/Simple_Golgi/iCa2"/>
-        </OutputFile>
+        </OutputFile>-->
 
        
     

@@ -1,5 +1,13 @@
-<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2beta4.xsd" id="Simple_Golgi_Net_network">
-      <include href="Simple_Golgi.cell.nml"/>
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2beta4.xsd" id="Simple_Golgi_Net">
+
+
+
+
+
+
+
+
+
       <include href="Golgi_Na.channel.nml"/>
       <include href="Golgi_NaR.channel.nml"/>
       <include href="Golgi_NaP.channel.nml"/>
@@ -16,72 +24,120 @@
       <include href="LeakCond.channel.nml"/>
       <include href="Golgi_CALC.nml"/>
       <include href="Golgi_CALC_ca2.nml"/>
+      <include href="Simple_Golgi.cell.nml"/>
+
     <expTwoSynapse id="syn0" erev="0mV" gbase="1nS" tauDecay="10ms" tauRise="0.5ms"/>
-    <poissonFiringSynapse id="poissonFiringSyn" synapse="syn0" averageRate="150 Hz" spikeTarget="./syn0"/>
+    <pulseGenerator id="Input_1" delay="200.0ms" duration="200.0ms" amplitude="-0.5E-5uA"/>
+    <pulseGenerator id="Input_2" delay="800.0ms" duration="200.0ms" amplitude="4E-5uA"/>
     <network id="Simple_Golgi_Net_network">
-        <population id="Pop0" component="Simple_Golgi" size="10"/>
-        <population id="Pop1" component="Simple_Golgi" size="10"/>
-        <projection id="Proj0" postsynapticPopulation="Pop1" presynapticPopulation="Pop0" synapse="syn0">
-            <connection id="0" preCellId="../Pop0[0]" postCellId="../Pop1[0]"/>
-            <connection id="1" preCellId="../Pop0[0]" postCellId="../Pop1[1]"/>
-            <connection id="2" preCellId="../Pop0[0]" postCellId="../Pop1[3]"/>
-            <connection id="3" preCellId="../Pop0[0]" postCellId="../Pop1[4]"/>
-            <connection id="4" preCellId="../Pop0[0]" postCellId="../Pop1[5]"/>
-            <connection id="5" preCellId="../Pop0[0]" postCellId="../Pop1[7]"/>
-            <connection id="6" preCellId="../Pop0[0]" postCellId="../Pop1[8]"/>
-            <connection id="7" preCellId="../Pop0[0]" postCellId="../Pop1[9]"/>
-            <connection id="8" preCellId="../Pop0[1]" postCellId="../Pop1[1]"/>
-            <connection id="9" preCellId="../Pop0[1]" postCellId="../Pop1[3]"/>
-            <connection id="10" preCellId="../Pop0[1]" postCellId="../Pop1[5]"/>
-            <connection id="11" preCellId="../Pop0[1]" postCellId="../Pop1[7]"/>
-            <connection id="12" preCellId="../Pop0[1]" postCellId="../Pop1[9]"/>
-            <connection id="13" preCellId="../Pop0[2]" postCellId="../Pop1[1]"/>
-            <connection id="14" preCellId="../Pop0[2]" postCellId="../Pop1[2]"/>
-            <connection id="15" preCellId="../Pop0[2]" postCellId="../Pop1[3]"/>
-            <connection id="16" preCellId="../Pop0[2]" postCellId="../Pop1[4]"/>
-            <connection id="17" preCellId="../Pop0[2]" postCellId="../Pop1[8]"/>
-            <connection id="18" preCellId="../Pop0[3]" postCellId="../Pop1[2]"/>
-            <connection id="19" preCellId="../Pop0[3]" postCellId="../Pop1[3]"/>
-            <connection id="20" preCellId="../Pop0[3]" postCellId="../Pop1[4]"/>
-            <connection id="21" preCellId="../Pop0[3]" postCellId="../Pop1[8]"/>
-            <connection id="22" preCellId="../Pop0[4]" postCellId="../Pop1[3]"/>
-            <connection id="23" preCellId="../Pop0[4]" postCellId="../Pop1[5]"/>
-            <connection id="24" preCellId="../Pop0[4]" postCellId="../Pop1[8]"/>
-            <connection id="25" preCellId="../Pop0[5]" postCellId="../Pop1[2]"/>
-            <connection id="26" preCellId="../Pop0[5]" postCellId="../Pop1[3]"/>
-            <connection id="27" preCellId="../Pop0[5]" postCellId="../Pop1[6]"/>
-            <connection id="28" preCellId="../Pop0[5]" postCellId="../Pop1[7]"/>
-            <connection id="29" preCellId="../Pop0[5]" postCellId="../Pop1[9]"/>
-            <connection id="30" preCellId="../Pop0[6]" postCellId="../Pop1[0]"/>
-            <connection id="31" preCellId="../Pop0[6]" postCellId="../Pop1[1]"/>
-            <connection id="32" preCellId="../Pop0[6]" postCellId="../Pop1[3]"/>
-            <connection id="33" preCellId="../Pop0[6]" postCellId="../Pop1[8]"/>
-            <connection id="34" preCellId="../Pop0[7]" postCellId="../Pop1[1]"/>
-            <connection id="35" preCellId="../Pop0[7]" postCellId="../Pop1[2]"/>
-            <connection id="36" preCellId="../Pop0[7]" postCellId="../Pop1[4]"/>
-            <connection id="37" preCellId="../Pop0[7]" postCellId="../Pop1[6]"/>
-            <connection id="38" preCellId="../Pop0[7]" postCellId="../Pop1[8]"/>
-            <connection id="39" preCellId="../Pop0[8]" postCellId="../Pop1[2]"/>
-            <connection id="40" preCellId="../Pop0[8]" postCellId="../Pop1[3]"/>
-            <connection id="41" preCellId="../Pop0[8]" postCellId="../Pop1[5]"/>
-            <connection id="42" preCellId="../Pop0[8]" postCellId="../Pop1[6]"/>
-            <connection id="43" preCellId="../Pop0[8]" postCellId="../Pop1[7]"/>
-            <connection id="44" preCellId="../Pop0[9]" postCellId="../Pop1[0]"/>
-            <connection id="45" preCellId="../Pop0[9]" postCellId="../Pop1[1]"/>
-            <connection id="46" preCellId="../Pop0[9]" postCellId="../Pop1[2]"/>
-            <connection id="47" preCellId="../Pop0[9]" postCellId="../Pop1[3]"/>
-            <connection id="48" preCellId="../Pop0[9]" postCellId="../Pop1[6]"/>
-            <connection id="49" preCellId="../Pop0[9]" postCellId="../Pop1[8]"/>
+        <population id="Golgi_pop0" type="populationList" component="Simple_Golgi" size="10">
+            <instance id="0">
+                <location y="10.16916945706836" x="416.619872545341138" z="825.206509253743207"/>
+            </instance>
+            <instance id="1">
+                <location y="368.411689488475702" x="298.639855199592773" z="193.661349045074246"/>
+            </instance>
+            <instance id="2">
+                <location y="161.687823929368193" x="566.008168728861278" z="124.26688428353016"/>
+            </instance>
+            <instance id="3">
+                <location y="562.078488075842984" x="432.936268009915921" z="174.343560723731798"/>
+            </instance>
+            <instance id="4">
+                <location y="354.901386336598762" x="553.22108556932983" z="958.064785099548658"/>
+            </instance>
+            <instance id="5">
+                <location y="978.639995570410065" x="91.29409887673512" z="412.119392939301008"/>
+            </instance>
+            <instance id="6">
+                <location y="148.146168930189162" x="503.935368110037473" z="718.967140300885035"/>
+            </instance>
+            <instance id="7">
+                <location y="341.56042577355214" x="189.971378721820344" z="23.521218142200539"/>
+            </instance>
+            <instance id="8">
+                <location y="967.482458879871388" x="339.51777239792068" z="978.798454185656851"/>
+            </instance>
+            <instance id="9">
+                <location y="3.454610755095566" x="744.530040141034647" z="940.238503097742864"/>
+            </instance>
+        </population>
+        <projection id="Golgi_to_Golgi0" postsynapticPopulation="Golgi_pop0" presynapticPopulation="Golgi_pop0" synapse="syn0">
+            <connection id="0" preCellId="../Golgi_pop0/0/Simple_Golgi" postCellId="../Golgi_pop0/2/Simple_Golgi"/>
+            <connection id="1" preCellId="../Golgi_pop0/0/Simple_Golgi" postCellId="../Golgi_pop0/3/Simple_Golgi"/>
+            <connection id="2" preCellId="../Golgi_pop0/0/Simple_Golgi" postCellId="../Golgi_pop0/4/Simple_Golgi"/>
+            <connection id="3" preCellId="../Golgi_pop0/0/Simple_Golgi" postCellId="../Golgi_pop0/8/Simple_Golgi"/>
+            <connection id="4" preCellId="../Golgi_pop0/1/Simple_Golgi" postCellId="../Golgi_pop0/3/Simple_Golgi"/>
+            <connection id="5" preCellId="../Golgi_pop0/1/Simple_Golgi" postCellId="../Golgi_pop0/5/Simple_Golgi"/>
+            <connection id="6" preCellId="../Golgi_pop0/1/Simple_Golgi" postCellId="../Golgi_pop0/8/Simple_Golgi"/>
+            <connection id="7" preCellId="../Golgi_pop0/2/Simple_Golgi" postCellId="../Golgi_pop0/2/Simple_Golgi"/>
+            <connection id="8" preCellId="../Golgi_pop0/2/Simple_Golgi" postCellId="../Golgi_pop0/3/Simple_Golgi"/>
+            <connection id="9" preCellId="../Golgi_pop0/2/Simple_Golgi" postCellId="../Golgi_pop0/6/Simple_Golgi"/>
+            <connection id="10" preCellId="../Golgi_pop0/2/Simple_Golgi" postCellId="../Golgi_pop0/7/Simple_Golgi"/>
+            <connection id="11" preCellId="../Golgi_pop0/2/Simple_Golgi" postCellId="../Golgi_pop0/9/Simple_Golgi"/>
+            <connection id="12" preCellId="../Golgi_pop0/3/Simple_Golgi" postCellId="../Golgi_pop0/0/Simple_Golgi"/>
+            <connection id="13" preCellId="../Golgi_pop0/3/Simple_Golgi" postCellId="../Golgi_pop0/1/Simple_Golgi"/>
+            <connection id="14" preCellId="../Golgi_pop0/3/Simple_Golgi" postCellId="../Golgi_pop0/3/Simple_Golgi"/>
+            <connection id="15" preCellId="../Golgi_pop0/3/Simple_Golgi" postCellId="../Golgi_pop0/8/Simple_Golgi"/>
+            <connection id="16" preCellId="../Golgi_pop0/4/Simple_Golgi" postCellId="../Golgi_pop0/1/Simple_Golgi"/>
+            <connection id="17" preCellId="../Golgi_pop0/4/Simple_Golgi" postCellId="../Golgi_pop0/2/Simple_Golgi"/>
+            <connection id="18" preCellId="../Golgi_pop0/4/Simple_Golgi" postCellId="../Golgi_pop0/4/Simple_Golgi"/>
+            <connection id="19" preCellId="../Golgi_pop0/4/Simple_Golgi" postCellId="../Golgi_pop0/6/Simple_Golgi"/>
+            <connection id="20" preCellId="../Golgi_pop0/4/Simple_Golgi" postCellId="../Golgi_pop0/8/Simple_Golgi"/>
+            <connection id="21" preCellId="../Golgi_pop0/5/Simple_Golgi" postCellId="../Golgi_pop0/2/Simple_Golgi"/>
+            <connection id="22" preCellId="../Golgi_pop0/5/Simple_Golgi" postCellId="../Golgi_pop0/3/Simple_Golgi"/>
+            <connection id="23" preCellId="../Golgi_pop0/5/Simple_Golgi" postCellId="../Golgi_pop0/5/Simple_Golgi"/>
+            <connection id="24" preCellId="../Golgi_pop0/5/Simple_Golgi" postCellId="../Golgi_pop0/6/Simple_Golgi"/>
+            <connection id="25" preCellId="../Golgi_pop0/5/Simple_Golgi" postCellId="../Golgi_pop0/7/Simple_Golgi"/>
+            <connection id="26" preCellId="../Golgi_pop0/6/Simple_Golgi" postCellId="../Golgi_pop0/0/Simple_Golgi"/>
+            <connection id="27" preCellId="../Golgi_pop0/6/Simple_Golgi" postCellId="../Golgi_pop0/1/Simple_Golgi"/>
+            <connection id="28" preCellId="../Golgi_pop0/6/Simple_Golgi" postCellId="../Golgi_pop0/2/Simple_Golgi"/>
+            <connection id="29" preCellId="../Golgi_pop0/6/Simple_Golgi" postCellId="../Golgi_pop0/3/Simple_Golgi"/>
+            <connection id="30" preCellId="../Golgi_pop0/6/Simple_Golgi" postCellId="../Golgi_pop0/6/Simple_Golgi"/>
+            <connection id="31" preCellId="../Golgi_pop0/6/Simple_Golgi" postCellId="../Golgi_pop0/8/Simple_Golgi"/>
+            <connection id="32" preCellId="../Golgi_pop0/7/Simple_Golgi" postCellId="../Golgi_pop0/1/Simple_Golgi"/>
+            <connection id="33" preCellId="../Golgi_pop0/7/Simple_Golgi" postCellId="../Golgi_pop0/2/Simple_Golgi"/>
+            <connection id="34" preCellId="../Golgi_pop0/7/Simple_Golgi" postCellId="../Golgi_pop0/4/Simple_Golgi"/>
+            <connection id="35" preCellId="../Golgi_pop0/7/Simple_Golgi" postCellId="../Golgi_pop0/5/Simple_Golgi"/>
+            <connection id="36" preCellId="../Golgi_pop0/7/Simple_Golgi" postCellId="../Golgi_pop0/6/Simple_Golgi"/>
+            <connection id="37" preCellId="../Golgi_pop0/7/Simple_Golgi" postCellId="../Golgi_pop0/7/Simple_Golgi"/>
+            <connection id="38" preCellId="../Golgi_pop0/8/Simple_Golgi" postCellId="../Golgi_pop0/0/Simple_Golgi"/>
+            <connection id="39" preCellId="../Golgi_pop0/8/Simple_Golgi" postCellId="../Golgi_pop0/1/Simple_Golgi"/>
+            <connection id="40" preCellId="../Golgi_pop0/8/Simple_Golgi" postCellId="../Golgi_pop0/3/Simple_Golgi"/>
+            <connection id="41" preCellId="../Golgi_pop0/8/Simple_Golgi" postCellId="../Golgi_pop0/4/Simple_Golgi"/>
+            <connection id="42" preCellId="../Golgi_pop0/8/Simple_Golgi" postCellId="../Golgi_pop0/5/Simple_Golgi"/>
+            <connection id="43" preCellId="../Golgi_pop0/8/Simple_Golgi" postCellId="../Golgi_pop0/6/Simple_Golgi"/>
+            <connection id="44" preCellId="../Golgi_pop0/8/Simple_Golgi" postCellId="../Golgi_pop0/8/Simple_Golgi"/>
+            <connection id="45" preCellId="../Golgi_pop0/8/Simple_Golgi" postCellId="../Golgi_pop0/9/Simple_Golgi"/>
+            <connection id="46" preCellId="../Golgi_pop0/9/Simple_Golgi" postCellId="../Golgi_pop0/1/Simple_Golgi"/>
+            <connection id="47" preCellId="../Golgi_pop0/9/Simple_Golgi" postCellId="../Golgi_pop0/2/Simple_Golgi"/>
+            <connection id="48" preCellId="../Golgi_pop0/9/Simple_Golgi" postCellId="../Golgi_pop0/7/Simple_Golgi"/>
+            <connection id="49" preCellId="../Golgi_pop0/9/Simple_Golgi" postCellId="../Golgi_pop0/8/Simple_Golgi"/>
+            <connection id="50" preCellId="../Golgi_pop0/9/Simple_Golgi" postCellId="../Golgi_pop0/9/Simple_Golgi"/>
         </projection>
-        <explicitInput input="poissonFiringSyn" destination="synapses" target="Pop0[0]"/>
-        <explicitInput input="poissonFiringSyn" destination="synapses" target="Pop0[1]"/>
-        <explicitInput input="poissonFiringSyn" destination="synapses" target="Pop0[2]"/>
-        <explicitInput input="poissonFiringSyn" destination="synapses" target="Pop0[3]"/>
-        <explicitInput input="poissonFiringSyn" destination="synapses" target="Pop0[4]"/>
-        <explicitInput input="poissonFiringSyn" destination="synapses" target="Pop0[5]"/>
-        <explicitInput input="poissonFiringSyn" destination="synapses" target="Pop0[6]"/>
-        <explicitInput input="poissonFiringSyn" destination="synapses" target="Pop0[7]"/>
-        <explicitInput input="poissonFiringSyn" destination="synapses" target="Pop0[8]"/>
-        <explicitInput input="poissonFiringSyn" destination="synapses" target="Pop0[9]"/>
+        <inputList id="Input_list1" component="Input_1">
+            <input destination="synapses" id="0" target="../Golgi_pop0/0/Simple_Golgi"/>
+            <input destination="synapses" id="1" target="../Golgi_pop0/1/Simple_Golgi"/>
+            <input destination="synapses" id="2" target="../Golgi_pop0/2/Simple_Golgi"/>
+            <input destination="synapses" id="3" target="../Golgi_pop0/3/Simple_Golgi"/>
+            <input destination="synapses" id="4" target="../Golgi_pop0/4/Simple_Golgi"/>
+            <input destination="synapses" id="5" target="../Golgi_pop0/5/Simple_Golgi"/>
+            <input destination="synapses" id="6" target="../Golgi_pop0/6/Simple_Golgi"/>
+            <input destination="synapses" id="7" target="../Golgi_pop0/7/Simple_Golgi"/>
+            <input destination="synapses" id="8" target="../Golgi_pop0/8/Simple_Golgi"/>
+            <input destination="synapses" id="9" target="../Golgi_pop0/9/Simple_Golgi"/>
+        </inputList>
+        <inputList id="Input_list2" component="Input_2">
+            <input destination="synapses" id="0" target="../Golgi_pop0/0/Simple_Golgi"/>
+            <input destination="synapses" id="1" target="../Golgi_pop0/1/Simple_Golgi"/>
+            <input destination="synapses" id="2" target="../Golgi_pop0/2/Simple_Golgi"/>
+            <input destination="synapses" id="3" target="../Golgi_pop0/3/Simple_Golgi"/>
+            <input destination="synapses" id="4" target="../Golgi_pop0/4/Simple_Golgi"/>
+            <input destination="synapses" id="5" target="../Golgi_pop0/5/Simple_Golgi"/>
+            <input destination="synapses" id="6" target="../Golgi_pop0/6/Simple_Golgi"/>
+            <input destination="synapses" id="7" target="../Golgi_pop0/7/Simple_Golgi"/>
+            <input destination="synapses" id="8" target="../Golgi_pop0/8/Simple_Golgi"/>
+            <input destination="synapses" id="9" target="../Golgi_pop0/9/Simple_Golgi"/>
+        </inputList>
     </network>
 </neuroml>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <neuroml xmlns="http://www.neuroml.org/schema/neuroml2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
          xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2  https://raw.githubusercontent.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2beta4.xsd" 
-         id="Simple_Golgi">
+         id="Simple_GolgiCell">
 
     
     
@@ -21,9 +21,10 @@
       <include href="LeakCond.channel.nml"/>
       <include href="Golgi_CALC.nml"/>
       <include href="Golgi_CALC_ca2.nml"/>
+      
 
 
-    <cell type="cellTwoCaPools" id="Simple_Golgi">
+    <cellTwoCaPools id="Simple_Golgi">
 
         <notes>A single segment/compartment Golgi cell</notes>
 
@@ -130,7 +131,7 @@
 
        </biophysicalProperties_twoCa>
 
-    </cell>
+    </cellTwoCaPools>
     
     
 
