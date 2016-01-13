@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2  https://raw.githubusercontent.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2beta4.xsd" 
+         id="Very_Simple_GolgiCell">
+
+    
+    
+      <include href="Golgi_Na.channel.nml"/>
+      <include href="Golgi_KV.channel.nml"/>
+      <include href="LeakCond.channel.nml"/>
+      
+
+
+    <cell id="Very_Simple_Golgi">
+
+        <notes>A single segment/compartment Golgi cell</notes>
+
+        <morphology id="morphology_Simple_CML_test">
+
+            <segment id="0" name="Soma">
+                <proximal x="0.0" y="0.0" z="0.0" diameter="27"/>
+                <distal x="0.0" y="27" z="0.0" diameter="27"/>
+            </segment>
+
+            <segmentGroup id="Soma" neuroLexId="sao864921383">    <!--
+                This group contains an unbranched set of segments, and all of the segmentGroups marked with
+                neuroLexId = sao864921383 form a non-overlapping set of all of the segments. 
+                These segmentGroups correspond to the 'cables' of NeuroML v1.8.1. -->
+
+                <member segment="0"/>
+            </segmentGroup>
+
+            <segmentGroup id="all">
+                <include segmentGroup="Soma"/>
+            </segmentGroup>
+
+            <segmentGroup id="soma_group" neuroLexId="GO:0043025">    <!--Soma group-->
+
+                <include segmentGroup="Soma"/>
+            </segmentGroup>
+
+            
+        </morphology> 
+
+            <!--Adding the biophysical parameters-->
+
+        <biophysicalProperties id="biophys">
+
+            <membraneProperties>
+                
+                <channelDensity condDensity="0.021 mS_per_cm2" id="LeakCond_all" ionChannel="LeakCond" erev="-55.0 mV" ion="non_specific"/>
+                
+                
+                <channelDensity condDensity="48.0 mS_per_cm2" id="Na_all" ionChannel="Golgi_Na" ion="na" erev="87.39 mV"/>
+
+                
+              <channelDensity condDensity="32.0 mS_per_cm2" id="KV_all" ionChannel="Golgi_KV" ion="k" erev="-84.69 mV"/>
+
+
+                <spikeThresh value="0 mV"/>
+
+                <specificCapacitance value="1 uF_per_cm2"/>
+
+                <initMembPotential value="-65.0 mV"/>
+
+            </membraneProperties>
+
+         
+
+         
+           <intracellularProperties>
+
+
+                <resistivity value="0.1 kohm_cm"/>
+
+            </intracellularProperties>
+
+
+
+
+       </biophysicalProperties>
+
+    </cell>
+    
+    
+
+  </neuroml>
+

@@ -1,4 +1,4 @@
-<Lems xmlns="http://www.neuroml.org/lems/0.7.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/lems/0.7.2  https://raw.github.com/LEMS/LEMS/development/Schemas/LEMS/LEMS_v0.7.2.xsd">
+<Lems>
     
     <!-- 
 
@@ -14,54 +14,24 @@
     <Include file="Networks.xml"/>
     <Include file="Simulation.xml"/>
     
-    <Include file="Simple_Golgi_Net.net.nml"/>
+    <Include file="Very_Simple_Golgi.cell.nml"/>
     <Include file="Golgi_Na.channel.nml"/>
-    <Include file="Golgi_NaR.channel.nml"/>
-    <Include file="Golgi_NaP.channel.nml"/>
-    <Include file="Golgi_KA.channel.nml"/>
-    <Include file="Golgi_KM.channel.nml"/>
     <Include file="Golgi_KV.channel.nml"/>
-    <Include file="Golgi_BK.channel.nml"/>
-    <Include file="Golgi_Ca_HVA.channel.nml"/>
-    <Include file="Golgi_Ca_LVA.channel.nml"/>
-    <Include file="Golgi_hcn1f.channel.nml"/>
-    <Include file="Golgi_hcn1s.channel.nml"/>
-    <Include file="Golgi_hcn2f.channel.nml"/>
-    <Include file="Golgi_hcn2s.channel.nml"/>
     <Include file="LeakCond.channel.nml"/>
-    <Include file="Golgi_CALC.nml"/>
-    <Include file="Golgi_CALC_ca2.nml"/>
-    <Include file="cellTwoCaPools.xml"/>
-    <Include file="Simple_Golgi.cell.nml"/>
+    <Include file="Simple_Golgi_Net.net.nml"/>
    
-    <Component type="Simulation" id="Simple_Golgi_Net" length="1000ms" step="0.003ms" target="Simple_Golgi_Net_network">
+    <Simulation id="Simple_Golgi_Net" length="500ms" step="0.003ms" target="Simple_Golgi_Net_network">
         
-        <Display id="display_voltages0" title="Voltages Golgi_pop0" timeScale="1ms" xmin="-1000" xmax="1100.0" ymin="-75" ymax="50">
-            <Line id="../Golgi_pop0/0: Vm" quantity="Golgi_pop0/0/Simple_Golgi/v" scale="1mV" color="#84459a" timeScale="1ms"/>
-            <Line id="../Golgi_pop0/1: Vm" quantity="Golgi_pop0/1/Simple_Golgi/v" scale="1mV" color="#92f4b2" timeScale="1ms"/>
-            <Line id="../Golgi_pop0/2: Vm" quantity="Golgi_pop0/2/Simple_Golgi/v" scale="1mV" color="#a11908" timeScale="1ms"/>
-            <Line id="../Golgi_pop0/3: Vm" quantity="Golgi_pop0/3/Simple_Golgi/v" scale="1mV" color="#11656e" timeScale="1ms"/>
-            <Line id="../Golgi_pop0/4: Vm" quantity="Golgi_pop0/4/Simple_Golgi/v" scale="1mV" color="#5f0819" timeScale="1ms"/>
-            <Line id="../Golgi_pop0/5: Vm" quantity="Golgi_pop0/5/Simple_Golgi/v" scale="1mV" color="#b56471" timeScale="1ms"/>
-            <Line id="../Golgi_pop0/6: Vm" quantity="Golgi_pop0/6/Simple_Golgi/v" scale="1mV" color="#090b35" timeScale="1ms"/>
-            <Line id="../Golgi_pop0/7: Vm" quantity="Golgi_pop0/7/Simple_Golgi/v" scale="1mV" color="#bf0976" timeScale="1ms"/>
-            <Line id="../Golgi_pop0/8: Vm" quantity="Golgi_pop0/8/Simple_Golgi/v" scale="1mV" color="#af973c" timeScale="1ms"/>
-            <Line id="../Golgi_pop0/9: Vm" quantity="Golgi_pop0/9/Simple_Golgi/v" scale="1mV" color="#66dbcc" timeScale="1ms"/>
+        <Display id="display_voltages0" title="Voltages Golgi_pop0" timeScale="1ms" xmin="-50.0" xmax="550.0" ymin="-75" ymax="50">
+            <Line id="../Golgi_pop0/0: Vm" quantity="Golgi_pop0/0/Very_Simple_Golgi/v" scale="1mV" color="#8fe460" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/1: Vm" quantity="Golgi_pop0/1/Very_Simple_Golgi/v" scale="1mV" color="#2ca1c7" timeScale="1ms"/>
         </Display>
         
-        <OutputFile id="Volts0_file" fileName="v_pop0.dat">
-            <OutputColumn id="v0" quantity="Golgi_pop0/0/Simple_Golgi/v"/> 
-            <OutputColumn id="v1" quantity="Golgi_pop0/1/Simple_Golgi/v"/> 
-            <OutputColumn id="v2" quantity="Golgi_pop0/2/Simple_Golgi/v"/> 
-            <OutputColumn id="v3" quantity="Golgi_pop0/3/Simple_Golgi/v"/> 
-            <OutputColumn id="v4" quantity="Golgi_pop0/4/Simple_Golgi/v"/> 
-            <OutputColumn id="v5" quantity="Golgi_pop0/5/Simple_Golgi/v"/> 
-            <OutputColumn id="v6" quantity="Golgi_pop0/6/Simple_Golgi/v"/> 
-            <OutputColumn id="v7" quantity="Golgi_pop0/7/Simple_Golgi/v"/> 
-            <OutputColumn id="v8" quantity="Golgi_pop0/8/Simple_Golgi/v"/> 
-            <OutputColumn id="v9" quantity="Golgi_pop0/9/Simple_Golgi/v"/> 
+        <OutputFile id="Volts0_file" fileName="Golgi_pop0.dat">
+            <OutputColumn id="v0" quantity="Golgi_pop0/0/Very_Simple_Golgi/v"/> 
+            <OutputColumn id="v1" quantity="Golgi_pop0/1/Very_Simple_Golgi/v"/> 
         </OutputFile>
         
-    </Component>
+    </Simulation>
 
 </Lems>
