@@ -6,28 +6,32 @@ import math
 import neuroml.writers as writers
 from neuroml.utils import validate_neuroml2
 import random
+import numpy as np
 
-
-def generate_golgi_cell_net(ref,cell_type,
-                        x_dim, y_dim, z_dim, no_of_cells, connection_probability, conductance_strength,pulse_delay1,pulse_duration1,pulse_amplitude1,pulse_delay2,pulse_duration2,pulse_amplitude2
-                        ):
+def generate_golgi_cell_net(ref,cell_array,dimension_array, connectivity_information,input_information,simulation_parameters,population_type):
+        
         
         random.seed(12345)
         nml_doc = neuroml.NeuroMLDocument(id=ref)
+        #cell_array will have to include cell_types and no_of_cells
+        #connectivity_information is a list of lists that will have to include connectivity parameters; now code only for a random configuration with parameters connection_probability and conductance_strength
+
+     
+
         
+        include_cell=neuroml.IncludeType(href="%s.cell.nml"%cell_type)
+        nml_doc.includes.append(include_cell)
+
         
+       x_dim=dimension_array[0]
+       y_dim=dimension_array[1]
+       z_dim=dimension_array[2]
         
-        nml_doc.include=neuroml.Include("%s.cell.nml"%cell_type)
         
 
-        gap_junction0 = neuroml.GapJunction(id="gap_junction0", conductance=conductance_strength)
-        nml_doc.gap_junctions.append(gap_junction0)
-
-	
-
-	Pulse_generator1=neuroml.PulseGenerator(id="Input_1",delay=pulse_delay1, duration=pulse_duration1, amplitude=pulse_amplitude1)
+	Pulse_generator1=neuroml.PulseGenerator(id="Input_1",delay=testing_inputs[1], duration=testing_inputs[2], amplitude=testing_inputs[3])
 	nml_doc.pulse_generators.append(Pulse_generator1)
-    Pulse_generator2=neuroml.PulseGenerator(id="Input_2",delay=pulse_delay2, duration=pulse_duration2, amplitude=pulse_amplitude2)
+        Pulse_generator2=neuroml.PulseGenerator(id="Input_2",delay=testing_inputs[4], duration=testing_inputs[5], amplitude=testing_inputs[6])
 	nml_doc.pulse_generators.append(Pulse_generator2)
 
 	
@@ -38,72 +42,164 @@ def generate_golgi_cell_net(ref,cell_type,
 
 
 	# Create populations
+        
+        if population_type ==None:
 	
-	Golgi_pop0 = neuroml.Population(id="Golgi_pop0", size = no_of_cells, type="populationList",
+	   Golgi_pop0 = neuroml.Population(id="Golgi_pop0", size = no_of_cells, type="populationList",
 		                  component=cell_type)
-	net.populations.append(Golgi_pop0)
+	   net.populations.append(Golgi_pop0)
 
 
 
-	
-	for cell in range(0,no_of_cells):
-	   Golgi_cell=neuroml.Instance(id="%d"%cell)
-	   Golgi_pop0.instances.append(Golgi_cell)
-	   X=random.random()
-	   Y=random.random()
-	   Z=random.random()
-	   Golgi_cell.location=neuroml.Location(x=x_dim*X,y=y_dim*Y, z=z_dim*Z)
+	   cell_positions=np.zeros([no_of_cells,3])
+
+           
+	   for cell in range(no_of_cells):
+	      Golgi_cell=neuroml.Instance(id="%d"%cell)
+	      Golgi_pop0.instances.append(Golgi_cell)
+	      X=random.random()
+	      Y=random.random()
+	      Z=random.random()
+              cell_positions[cell,0]=x_dim*X
+              cell_positions[cell,1]=y_dim*Y
+              cell_positions[cell,2]=z_dim*Z
+
+              
+	      Golgi_cell.location=neuroml.Location(x=x_dim*X,y=y_dim*Y, z=z_dim*Z)
 	   
 
-	# Create a projection between them
-	#proj1 = neuroml.Projection(id="Golgi_to_Golgi0", synapse=syn0.id,
-		                #presynaptic_population=Golgi_pop0.id, 
-		                #postsynaptic_population=Golgi_pop0.id)
-	#net.projections.append(proj1)
-        proj1 = neuroml.ElectricalProjection(id="Golgi_to_Golgi0",
+             #Define GapJunction and ElectricalProjection elements; however inclusion of these elements in the nml file is conditional (see below)
+
+
+           gap_junction0 = neuroml.GapJunction(id="gap_junction0", conductance=conductance_strength)
+       
+      
+        
+           proj1 = neuroml.ElectricalProjection(id="Golgi_to_Golgi0",
 		                presynaptic_population=Golgi_pop0.id, 
 		                postsynaptic_population=Golgi_pop0.id)
-	net.electrical_projections.append(proj1)
+
 
          
 
-	
-	conn_count = 0
-	for pre in range(0,no_of_cells):
-
-    
-            # randomly Connect cells with defined probability for now
-    
-	    for post in range(0,no_of_cells):
-	      if random.random() < connection_probability:
-		conn = \
-		  neuroml.ElectricalConnection(id=conn_count, \
-		           pre_cell_id="../%s/%d/Very_Simple_Golgi/%s"%(Golgi_pop0.id,pre,cell_type),
-		           post_cell_id="../%s/%d/Very_Simple_Golgi/%s"%(Golgi_pop0.id,post,cell_type),synapse=gap_junction0.id)
-		proj1.connections.append(conn)
-		conn_count+=1
-
-	    Input_list1=neuroml.InputList(id="Input_list1", component="Input_1")
-        net.input_lists.append(Input_list1)
-        Input_list2=neuroml.InputList(id="Input_list1", component="Input_2")
-        net.input_lists.append(Input_list2)
+	   projection_counter=0
+	   conn_count = 0
+	   for pre in range(no_of_cells):
         
-        for i in range(0,no_of_cells):
-            Inp = neuroml.Input(target="../%s/%d/%s"%(Golgi_pop0.id,i,cell_type),id="%d"%i,destination="synapses")
-            Input_list1.inputs.append(Inp)
+    
+            # randomly Connect cells with defined probability for now; scripted so that to avoid inclusion of projection and gap_junction/synapse components if there are no connections; otherwise the mod files are not compiled.
+    
+	       for post in range(no_of_cells):
+		   if random.random() < connection_probability:
+		      conn = \
+		      neuroml.ElectricalConnection(id=conn_count, \
+				   pre_cell="../%s/%d/%s"%(Golgi_pop0.id,pre,cell_type),
+				   post_cell="../%s/%d/%s"%(Golgi_pop0.id,post,cell_type),synapse=gap_junction0.id)
+                     
+		      if projection_counter==0:
+		         nml_doc.gap_junctions.append(gap_junction0)
+		         net.electrical_projections.append(proj1)
+		         projection_counter+=1
+		      proj1.electrical_connections.append(conn)
+		      conn_count+=1
 
-       for i in range(0,no_of_cells):
-            Inp = neuroml.Input(target="../%s/%d/%s"%(Golgi_pop0.id,i,cell_type),id="%d"%i,destination="synapses")
-            Input_list2.inputs.append(Inp)
+	
 
+
+        
+
+           Input_list1=neuroml.InputList(id="Input_list1", component="Input_1")
+           net.input_lists.append(Input_list1)
+           Input_list2=neuroml.InputList(id="Input_list2", component="Input_2")
+           net.input_lists.append(Input_list2)
+
+
+           randomly_select_target_cells=random.sample(range(no_of_cells),testing_inputs[0]*no_of_cells)
+
+
+           for i in randomly_select_target_cells:
+              Inp = neuroml.Input(target="../%s/%d/%s"%(Golgi_pop0.id,i,cell_type),id="%d"%i,destination="synapses")
+              Input_list1.input.append(Inp)
+
+           for i in randomly_select_target_cells:
+              Inp = neuroml.Input(target="../%s/%d/%s"%(Golgi_pop0.id,i,cell_type),id="%d"%i,destination="synapses")
+              Input_list2.input.append(Inp)
+
+        else:
+         
+           Golgi_pop0 = neuroml.Population(id="Golgi_pop0", size = no_of_cells,
+		                  component=cell_type)
+	   net.populations.append(Golgi_pop0)
+
+
+
+	   cell_positions=np.empty([no_of_cells,3])
+	   for cell in range(no_of_cells):
+	      
+	      X=random.random()
+	      Y=random.random()
+	      Z=random.random()
+	      cell_positions[cell,0]=x_dim*X
+              cell_positions[cell,1]=y_dim*Y
+              cell_positions[cell,2]=z_dim*Z
+	   
+
+             #Define GapJunction and ElectricalProjection elements; however inclusion of these elements in the nml file is conditional (see below)
+
+
+           gap_junction0 = neuroml.GapJunction(id="gap_junction0", conductance=conductance_strength)
        
+      
+        
+           proj1 = neuroml.ElectricalProjection(id="Golgi_to_Golgi0",
+		                presynaptic_population=Golgi_pop0.id, 
+		                postsynaptic_population=Golgi_pop0.id)
 
+
+         
+
+	   projection_counter=0
+	   conn_count = 0
+	   for pre in range(no_of_cells):
+        
+    
+            # randomly Connect cells with defined probability for now; scripted so that to avoid inclusion of projection and gap_junction/synapse components if there are no connections; otherwise the mod files are not compiled.
+    
+	       for post in range(no_of_cells):
+		   if random.random() < connection_probability:
+		      conn = \
+		      neuroml.ElectricalConnection(id=conn_count, \
+				   pre_cell="%d"%pre,
+				   post_cell="%d"%post,synapse=gap_junction0.id)
+                     
+		      if projection_counter==0:
+		         nml_doc.gap_junctions.append(gap_junction0)
+		         net.electrical_projections.append(proj1)
+		         projection_counter+=1
+		      proj1.electrical_connections.append(conn)
+		      conn_count+=1
+
+	
+           #block for explicit inputs
+           randomly_select_target_cells=random.sample(range(no_of_cells),testing_inputs[0]*no_of_cells)
+           
+        
+           for i in randomly_select_target_cells:
+              Inp = neuroml.ExplicitInput(target="%d"%i,input=Pulse_generator1.id,destination="synapses")
+              net.explicit_inputs.append(Inp)
+
+           for i in randomly_select_target_cells:
+              Inp = neuroml.ExplicitInput(target="%d"%i,input=Pulse_generator2.id,destination="synapses")
+              net.explicit_inputs.append(Inp)
+ 
+           
+           #block for explicit inputs
         nml_file = '%s.net.nml'%ref
 
         return nml_doc, nml_file, net.id, Golgi_pop0.id
 
 
-def Set_and_run_simulation(nml_document,nml_file_name,ref,duration,time_step, network_id,population_id,pop_size,cell_component):
+def Set_and_run_simulation(nml_document,nml_file_name,ref,duration,time_step, network_id,population_id,pop_size,cell_component,simulator):
 
     
 
@@ -126,7 +222,7 @@ def Set_and_run_simulation(nml_document,nml_file_name,ref,duration,time_step, ne
     
     ls.assign_simulation_target(network_id)
 #
-    ls.include_neuroml2_file(cell_component_nml)
+    #ls.include_neuroml2_file(cell_component_nml)
 
     ls.include_neuroml2_file(nml_file_name)
 
@@ -189,17 +285,18 @@ def Set_and_run_simulation(nml_document,nml_file_name,ref,duration,time_step, ne
     # Save to LEMS XML file
     lems_file_name = ls.save_to_file()
     # Run with jNeuroML
-    results1 = pynml.run_lems_with_jneuroml(lems_file_name, nogui=True, load_saved_data=True, plot=True)
+    if simulator=="jNeuroML":
+       results1 = pynml.run_lems_with_jneuroml(lems_file_name, nogui=True, load_saved_data=True, plot=True)
     # Run with jNeuroML_NEURON
-    #results1 = pynml.run_lems_with_jneuroml_neuron(lems_file_name, nogui=True, load_saved_data=True, plot=True)
-
-
+    if simulator=="jNeuroML_NEURON":
+       results1 = pynml.run_lems_with_jneuroml_neuron(lems_file_name, nogui=True, load_saved_data=True, plot=True)
 
 
 if __name__ == "__main__":
+      
+    Input_array=[1,"50.0ms","200.0ms","4E-5uA","250.0ms","200.0ms","-0.5E-5uA"]   # as a list
+    nml_doc, nml_file, net_id,population_id =generate_and_run_golgi_cell_net("Simple_Golgi_Net","Very_Simple_Golgi", 350, 350, 350, 2, 1,"0.5nS",Input_array,"not a list")
+    #nml_doc, nml_file, net_id,population_id =generate_golgi_cell_net("Simple_Golgi_Net","Very_Simple_Golgi", 350, 350, 350, 2, 0,"0.5nS","50.0ms","200.0ms","4E-5uA","0ms","0ms","0uA")
         
-        
-    nml_doc, nml_file, net_id,population_id =generate_golgi_cell_net("Simple_Golgi_Net","Very_Simple_Golgi", 350, 350, 350, 2, 0,"0.5nS","50.0ms","200.0ms","4E-5uA","200.0ms","200.0ms","-0.5E-5uA")
-        
-	Set_and_run_simulation(nml_doc,nml_file,"Simple_Golgi_Net",500,0.003, net_id,population_id,2,"Very_Simple_Golgi")
+    Set_and_run_simulation(nml_doc,nml_file,"Simple_Golgi_Net",500,0.0005, net_id,population_id,1,"Very_Simple_Golgi","jNeuroML")
 	
