@@ -199,7 +199,7 @@ def Set_and_run_simulation(nml_document,nml_file_name,ref,duration,time_step, ne
 if __name__ == "__main__":
         
         
-    nml_doc, nml_file, net_id,population_id =generate_golgi_cell_net("Simple_Golgi_Net","Very_Simple_Golgi", 350, 350, 350, 2, 0,"0.5nS","50.0ms","200.0ms","4E-5uA")
+    nml_doc, nml_file, net_id,population_id =generate_golgi_cell_net("Simple_Golgi_Net","Very_Simple_Golgi", 350, 350, 350, 2, 0,"0.5nS","50.0ms","200.0ms","4E-5uA","200.0ms","200.0ms","-0.5E-5uA")
         
 	Set_and_run_simulation(nml_doc,nml_file,"Simple_Golgi_Net",500,0.003, net_id,population_id,2,"Very_Simple_Golgi")
 	
