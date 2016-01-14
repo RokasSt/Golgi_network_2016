@@ -8,7 +8,7 @@ from neuroml.utils import validate_neuroml2
 import random
 import numpy as np
 
-def generate_golgi_cell_net(ref,cell_array,dimension_array, connectivity_information,input_information,simulation_parameters,population_type):
+def generate_and_run_golgi_cell_net(ref,cell_array,location_array, connectivity_information,input_information,simulation_parameters,population_type):
         
         
         random.seed(12345)
@@ -22,17 +22,22 @@ def generate_golgi_cell_net(ref,cell_array,dimension_array, connectivity_informa
         include_cell=neuroml.IncludeType(href="%s.cell.nml"%cell_type)
         nml_doc.includes.append(include_cell)
 
+        localization_type=location_array[0]
+        x_dim=location_array[1]
+        y_dim=location_array[2]
+        z_dim=location_array[3]
         
-       x_dim=dimension_array[0]
-       y_dim=dimension_array[1]
-       z_dim=dimension_array[2]
-        
-        
+        if input_information[0]=="testing":
+           fraction_of_cells_to_target=input_information[1]
+           #tests only with PulseGenerators for the time being; can be coded for other eligible inputs too
 
-	Pulse_generator1=neuroml.PulseGenerator(id="Input_1",delay=testing_inputs[1], duration=testing_inputs[2], amplitude=testing_inputs[3])
-	nml_doc.pulse_generators.append(Pulse_generator1)
-        Pulse_generator2=neuroml.PulseGenerator(id="Input_2",delay=testing_inputs[4], duration=testing_inputs[5], amplitude=testing_inputs[6])
-	nml_doc.pulse_generators.append(Pulse_generator2)
+           for pulse_x in range(0,len(input_information)-2):
+
+           
+	     Pulse_generator_x=neuroml.PulseGenerator(id="Input_%d"%pulse_x,delay=input_information[pulse_x+2][0],duration=input_information[pulse_x+2][1],amplitude=input_information[pulse_x+2][2])
+	     nml_doc.pulse_generators.append(Pulse_generator_x)
+             #Pulse_generator2=neuroml.PulseGenerator(id="Input_2",delay=testing_inputs[4], duration=testing_inputs[5], amplitude=testing_inputs[6])
+	     #nml_doc.pulse_generators.append(Pulse_generator2)
 
 	
 
@@ -44,7 +49,7 @@ def generate_golgi_cell_net(ref,cell_array,dimension_array, connectivity_informa
 	# Create populations
         
         if population_type ==None:
-	
+	   for x in range(1,cell_array[0]+1):
 	   Golgi_pop0 = neuroml.Population(id="Golgi_pop0", size = no_of_cells, type="populationList",
 		                  component=cell_type)
 	   net.populations.append(Golgi_pop0)
@@ -53,19 +58,19 @@ def generate_golgi_cell_net(ref,cell_array,dimension_array, connectivity_informa
 
 	   cell_positions=np.zeros([no_of_cells,3])
 
-           
-	   for cell in range(no_of_cells):
-	      Golgi_cell=neuroml.Instance(id="%d"%cell)
-	      Golgi_pop0.instances.append(Golgi_cell)
-	      X=random.random()
-	      Y=random.random()
-	      Z=random.random()
-              cell_positions[cell,0]=x_dim*X
-              cell_positions[cell,1]=y_dim*Y
-              cell_positions[cell,2]=z_dim*Z
+           if localization_type=="random":
+	      for cell in range(no_of_cells):
+	         Golgi_cell=neuroml.Instance(id="%d"%cell)
+	         Golgi_pop0.instances.append(Golgi_cell)
+	         X=random.random()
+	         Y=random.random()
+	         Z=random.random()
+                 cell_positions[cell,0]=x_dim*X
+                 cell_positions[cell,1]=y_dim*Y
+                 cell_positions[cell,2]=z_dim*Z
 
               
-	      Golgi_cell.location=neuroml.Location(x=x_dim*X,y=y_dim*Y, z=z_dim*Z)
+	         Golgi_cell.location=neuroml.Location(x=x_dim*X, y=y_dim*Y, z=z_dim*Z)
 	   
 
              #Define GapJunction and ElectricalProjection elements; however inclusion of these elements in the nml file is conditional (see below)
@@ -134,14 +139,15 @@ def generate_golgi_cell_net(ref,cell_array,dimension_array, connectivity_informa
 
 
 	   cell_positions=np.empty([no_of_cells,3])
-	   for cell in range(no_of_cells):
+           if localization_type=="random":
+	      for cell in range(no_of_cells):
 	      
-	      X=random.random()
-	      Y=random.random()
-	      Z=random.random()
-	      cell_positions[cell,0]=x_dim*X
-              cell_positions[cell,1]=y_dim*Y
-              cell_positions[cell,2]=z_dim*Z
+	         X=random.random()
+	         Y=random.random()
+	         Z=random.random()
+	         cell_positions[cell,0]=x_dim*X
+                 cell_positions[cell,1]=y_dim*Y
+                 cell_positions[cell,2]=z_dim*Z
 	   
 
              #Define GapJunction and ElectricalProjection elements; however inclusion of these elements in the nml file is conditional (see below)
@@ -293,10 +299,16 @@ def Set_and_run_simulation(nml_document,nml_file_name,ref,duration,time_step, ne
 
 
 if __name__ == "__main__":
-      
-    Input_array=[1,"50.0ms","200.0ms","4E-5uA","250.0ms","200.0ms","-0.5E-5uA"]   # as a list
-    nml_doc, nml_file, net_id,population_id =generate_and_run_golgi_cell_net("Simple_Golgi_Net","Very_Simple_Golgi", 350, 350, 350, 2, 1,"0.5nS",Input_array,"not a list")
-    #nml_doc, nml_file, net_id,population_id =generate_golgi_cell_net("Simple_Golgi_Net","Very_Simple_Golgi", 350, 350, 350, 2, 0,"0.5nS","50.0ms","200.0ms","4E-5uA","0ms","0ms","0uA")
+    
+    
+    Cell_array=[1,["Very_Simple_Golgi",2]]
+    Position_array=["random",350, 350, 350]
+    Conn_array=["random",[1,"0.5nS"]]
+    Input_array=["testing",1,["50.0ms","200.0ms","4E-5uA"],["250.0ms","200.0ms","-0.5E-5uA"]]
+    Sim_array=[500,0.0005,"jNeuroML"]
+    
+    generate_and_run_golgi_cell_net("Simple_Golgi_Net",Cell_array,Position_array,Conn_array,Input_array,Sim_array,"not a list")
+   
         
-    Set_and_run_simulation(nml_doc,nml_file,"Simple_Golgi_Net",500,0.0005, net_id,population_id,1,"Very_Simple_Golgi","jNeuroML")
+    
 	
