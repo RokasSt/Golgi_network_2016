@@ -20,11 +20,11 @@
     <Include file="LeakCond.channel.nml"/>
     <Include file="Simple_Golgi_Net.net.nml"/>
    
-    <Simulation id="Simple_Golgi_Net" length="500ms" step="0.003ms" target="Simple_Golgi_Net_network">
+    <Component type="Simulation" id="Simple_Golgi_Net" length="500ms" step="0.001ms" target="Simple_Golgi_Net_network">
         
-        <Display id="display_voltages0" title="Voltages Golgi_pop0" timeScale="1ms" xmin="-50.0" xmax="550.0" ymin="-75" ymax="50">
-            <Line id="../Golgi_pop0/0: Vm" quantity="Golgi_pop0/0/Very_Simple_Golgi/v" scale="1mV" color="#8fe460" timeScale="1ms"/>
-            <Line id="../Golgi_pop0/1: Vm" quantity="Golgi_pop0/1/Very_Simple_Golgi/v" scale="1mV" color="#2ca1c7" timeScale="1ms"/>
+      <Display id="display_voltages0" title="Voltages Golgi_pop0" timeScale="1ms" xmin="-50.0" xmax="550.0" ymin="-75" ymax="50">
+            <Line id="Golgi_pop0_0" quantity="Golgi_pop0/0/Very_Simple_Golgi/v" scale="1mV" color="#8fe460" timeScale="1ms"/>
+            <Line id="Golgi_pop1_1" quantity="Golgi_pop0/1/Very_Simple_Golgi/v" scale="1mV" color="#2ca1c7" timeScale="1ms"/>
         </Display>
         
         <OutputFile id="Volts0_file" fileName="Golgi_pop0.dat">
@@ -32,6 +32,17 @@
             <OutputColumn id="v1" quantity="Golgi_pop0/1/Very_Simple_Golgi/v"/> 
         </OutputFile>
         
-    </Simulation>
+        
+       <!-- <Display id="display_voltages0" title="Voltages Golgi_pop0" timeScale="1ms" xmin="-50.0" xmax="550.0" ymin="-75" ymax="50">
+            <Line id="../Golgi_pop0/0: Vm" quantity="Golgi_pop0[0]" scale="1mV" color="#8fe460" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/1: Vm" quantity="Golgi_pop0[1]" scale="1mV" color="#2ca1c7" timeScale="1ms"/>
+        </Display>
+        
+        <OutputFile id="Volts0_file" fileName="Golgi_pop0.dat">
+            <OutputColumn id="v0" quantity="Golgi_pop0[0]"/> 
+            <OutputColumn id="v1" quantity="Golgi_pop0[1]"/> 
+        </OutputFile>-->
+        
+    </Component>
 
 </Lems>

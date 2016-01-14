@@ -9,7 +9,7 @@ import random
 
 
 def generate_golgi_cell_net(ref,cell_type,
-                        x_dim, y_dim, z_dim, no_of_cells, connection_probability, conductance_strength,pulse_delay,pulse_duration,pulse_amplitude
+                        x_dim, y_dim, z_dim, no_of_cells, connection_probability, conductance_strength,pulse_delay1,pulse_duration1,pulse_amplitude1,pulse_delay2,pulse_duration2,pulse_amplitude2
                         ):
         
         random.seed(12345)
@@ -17,18 +17,18 @@ def generate_golgi_cell_net(ref,cell_type,
         
         
         
-        #include_cell=neuroml.Include("%s.cell.nml"%cell_type)
-        #nml_doc.includes.append(include_cell)
-
-
+        nml_doc.include=neuroml.Include("%s.cell.nml"%cell_type)
+        
 
         gap_junction0 = neuroml.GapJunction(id="gap_junction0", conductance=conductance_strength)
         nml_doc.gap_junctions.append(gap_junction0)
 
 	
 
-	Pulse_generator1=neuroml.PulseGenerator(id="Input_1",delay=pulse_delay, duration=pulse_duration, amplitude=pulse_amplitude)
+	Pulse_generator1=neuroml.PulseGenerator(id="Input_1",delay=pulse_delay1, duration=pulse_duration1, amplitude=pulse_amplitude1)
 	nml_doc.pulse_generators.append(Pulse_generator1)
+    Pulse_generator2=neuroml.PulseGenerator(id="Input_2",delay=pulse_delay2, duration=pulse_duration2, amplitude=pulse_amplitude2)
+	nml_doc.pulse_generators.append(Pulse_generator2)
 
 	
 
@@ -83,15 +83,20 @@ def generate_golgi_cell_net(ref,cell_type,
 		proj1.connections.append(conn)
 		conn_count+=1
 
-	
+	    Input_list1=neuroml.InputList(id="Input_list1", component="Input_1")
+        net.input_lists.append(Input_list1)
+        Input_list2=neuroml.InputList(id="Input_list1", component="Input_2")
+        net.input_lists.append(Input_list2)
+        
+        for i in range(0,no_of_cells):
+            Inp = neuroml.Input(target="../%s/%d/%s"%(Golgi_pop0.id,i,cell_type),id="%d"%i,destination="synapses")
+            Input_list1.inputs.append(Inp)
 
-        for i in range(no_of_cells):
-            expInp = neuroml.ExplicitInput(target="../%s/%d/%s"%(Golgi_pop0.id,i,cell_type),input=Pulse_generator1.id)
-            net.explicit_inputs.append(expInp)
-
+       for i in range(0,no_of_cells):
+            Inp = neuroml.Input(target="../%s/%d/%s"%(Golgi_pop0.id,i,cell_type),id="%d"%i,destination="synapses")
+            Input_list2.inputs.append(Inp)
 
        
-
 
         nml_file = '%s.net.nml'%ref
 
@@ -184,7 +189,7 @@ def Set_and_run_simulation(nml_document,nml_file_name,ref,duration,time_step, ne
     # Save to LEMS XML file
     lems_file_name = ls.save_to_file()
     # Run with jNeuroML
-    #results1 = pynml.run_lems_with_jneuroml(lems_file_name, nogui=True, load_saved_data=True, plot=True)
+    results1 = pynml.run_lems_with_jneuroml(lems_file_name, nogui=True, load_saved_data=True, plot=True)
     # Run with jNeuroML_NEURON
     #results1 = pynml.run_lems_with_jneuroml_neuron(lems_file_name, nogui=True, load_saved_data=True, plot=True)
 
@@ -194,7 +199,7 @@ def Set_and_run_simulation(nml_document,nml_file_name,ref,duration,time_step, ne
 if __name__ == "__main__":
         
         
-        nml_doc, nml_file, net_id,population_id =generate_golgi_cell_net("Simple_Golgi_Net","Very_Simple_Golgi", 350, 350, 350, 2, 0,"0.5nS","50.0ms","200.0ms","4E-5uA")
+    nml_doc, nml_file, net_id,population_id =generate_golgi_cell_net("Simple_Golgi_Net","Very_Simple_Golgi", 350, 350, 350, 2, 0,"0.5nS","50.0ms","200.0ms","4E-5uA")
         
 	Set_and_run_simulation(nml_doc,nml_file,"Simple_Golgi_Net",500,0.003, net_id,population_id,2,"Very_Simple_Golgi")
 	
