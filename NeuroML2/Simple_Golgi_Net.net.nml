@@ -1,19 +1,127 @@
 <neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2beta4.xsd" id="Simple_Golgi_Net">
     <include href="Very_Simple_Golgi.cell.nml"></include>
-    <gapJunction id="gap_junction0" conductance="0.5nS"/>
-    <pulseGenerator id="Input_1" delay="50.0ms" duration="200.0ms" amplitude="4E-5uA"/>
-    <pulseGenerator id="Input_2" delay="250.0ms" duration="200.0ms" amplitude="-0.5E-5uA"/>
+    <include href="Very_Simple_Golgi.cell.nml"></include>
+    <gapJunction id="gap_junction0" conductance="2nS"/>
+    <pulseGenerator id="Input_0" delay="50.0ms" duration="200.0ms" amplitude="4E-5uA"/>
+    <pulseGenerator id="Input_1" delay="250.0ms" duration="200.0ms" amplitude="-0.5E-5uA"/>
     <network id="Simple_Golgi_Net_network" type="networkWithTemperature" temperature="23 degC">
-        <population id="Golgi_pop0" component="Very_Simple_Golgi" size="2"/>
-        <electricalProjection id="Golgi_to_Golgi0" postsynapticPopulation="Golgi_pop0" presynapticPopulation="Golgi_pop0">
-            <electricalConnection id="0" synapse="gap_junction0" postCell="0" preCell="0"/>
-            <electricalConnection id="1" synapse="gap_junction0" postCell="1" preCell="0"/>
-            <electricalConnection id="2" synapse="gap_junction0" postCell="0" preCell="1"/>
-            <electricalConnection id="3" synapse="gap_junction0" postCell="1" preCell="1"/>
+        <population id="Golgi_pop0" type="populationList" component="Very_Simple_Golgi" size="4">
+            <instance id="0">
+                <location y="3.559209309973927" x="145.816955390869396" z="288.8222782388101"/>
+            </instance>
+            <instance id="1">
+                <location y="128.944091320966493" x="104.523949319857479" z="67.781472165775995"/>
+            </instance>
+            <instance id="2">
+                <location y="56.590738375278868" x="198.102859055101447" z="43.493409499235561"/>
+            </instance>
+            <instance id="3">
+                <location y="196.727470826545016" x="151.527693803470584" z="61.020246253306134"/>
+            </instance>
+        </population>
+        <population id="Golgi_pop1" type="populationList" component="Very_Simple_Golgi" size="4">
+            <instance id="0">
+                <location y="124.215485217809558" x="193.627379949265446" z="335.322674784842036"/>
+            </instance>
+            <instance id="1">
+                <location y="342.5239984496435" x="31.952934606857291" z="144.241787528755339"/>
+            </instance>
+            <instance id="2">
+                <location y="51.851159125566213" x="176.377378838513124" z="251.638499105309762"/>
+            </instance>
+            <instance id="3">
+                <location y="119.546149020743258" x="66.489982552637116" z="8.232426349770188"/>
+            </instance>
+        </population>
+        <electricalProjection id="proj0" postsynapticPopulation="Golgi_pop0" presynapticPopulation="Golgi_pop0">
+            <electricalConnection id="0" synapse="gap_junction0" postCell="../Golgi_pop1/1/Very_Simple_Golgi" preCell="../Golgi_pop0/0/Very_Simple_Golgi"/>
+            <electricalConnection id="1" synapse="gap_junction0" postCell="../Golgi_pop1/2/Very_Simple_Golgi" preCell="../Golgi_pop0/0/Very_Simple_Golgi"/>
+            <electricalConnection id="2" synapse="gap_junction0" postCell="../Golgi_pop1/3/Very_Simple_Golgi" preCell="../Golgi_pop0/0/Very_Simple_Golgi"/>
+            <electricalConnection id="3" synapse="gap_junction0" postCell="../Golgi_pop1/2/Very_Simple_Golgi" preCell="../Golgi_pop0/1/Very_Simple_Golgi"/>
+            <electricalConnection id="4" synapse="gap_junction0" postCell="../Golgi_pop1/3/Very_Simple_Golgi" preCell="../Golgi_pop0/1/Very_Simple_Golgi"/>
+            <electricalConnection id="5" synapse="gap_junction0" postCell="../Golgi_pop1/3/Very_Simple_Golgi" preCell="../Golgi_pop0/2/Very_Simple_Golgi"/>
+            <electricalConnection id="6" synapse="gap_junction0" postCell="../Golgi_pop1/1/Very_Simple_Golgi" preCell="../Golgi_pop0/0/Very_Simple_Golgi"/>
+            <electricalConnection id="7" synapse="gap_junction0" postCell="../Golgi_pop1/2/Very_Simple_Golgi" preCell="../Golgi_pop0/0/Very_Simple_Golgi"/>
+            <electricalConnection id="8" synapse="gap_junction0" postCell="../Golgi_pop1/3/Very_Simple_Golgi" preCell="../Golgi_pop0/0/Very_Simple_Golgi"/>
+            <electricalConnection id="9" synapse="gap_junction0" postCell="../Golgi_pop1/2/Very_Simple_Golgi" preCell="../Golgi_pop0/1/Very_Simple_Golgi"/>
+            <electricalConnection id="10" synapse="gap_junction0" postCell="../Golgi_pop1/3/Very_Simple_Golgi" preCell="../Golgi_pop0/1/Very_Simple_Golgi"/>
+            <electricalConnection id="11" synapse="gap_junction0" postCell="../Golgi_pop1/3/Very_Simple_Golgi" preCell="../Golgi_pop0/2/Very_Simple_Golgi"/>
+            <electricalConnection id="12" synapse="gap_junction0" postCell="../Golgi_pop1/1/Very_Simple_Golgi" preCell="../Golgi_pop1/0/Very_Simple_Golgi"/>
+            <electricalConnection id="13" synapse="gap_junction0" postCell="../Golgi_pop1/2/Very_Simple_Golgi" preCell="../Golgi_pop1/0/Very_Simple_Golgi"/>
+            <electricalConnection id="14" synapse="gap_junction0" postCell="../Golgi_pop1/3/Very_Simple_Golgi" preCell="../Golgi_pop1/0/Very_Simple_Golgi"/>
+            <electricalConnection id="15" synapse="gap_junction0" postCell="../Golgi_pop1/2/Very_Simple_Golgi" preCell="../Golgi_pop1/1/Very_Simple_Golgi"/>
+            <electricalConnection id="16" synapse="gap_junction0" postCell="../Golgi_pop1/3/Very_Simple_Golgi" preCell="../Golgi_pop1/1/Very_Simple_Golgi"/>
+            <electricalConnection id="17" synapse="gap_junction0" postCell="../Golgi_pop1/3/Very_Simple_Golgi" preCell="../Golgi_pop1/2/Very_Simple_Golgi"/>
+            <electricalConnection id="18" synapse="gap_junction0" postCell="../Golgi_pop1/1/Very_Simple_Golgi" preCell="../Golgi_pop1/0/Very_Simple_Golgi"/>
+            <electricalConnection id="19" synapse="gap_junction0" postCell="../Golgi_pop1/2/Very_Simple_Golgi" preCell="../Golgi_pop1/0/Very_Simple_Golgi"/>
+            <electricalConnection id="20" synapse="gap_junction0" postCell="../Golgi_pop1/3/Very_Simple_Golgi" preCell="../Golgi_pop1/0/Very_Simple_Golgi"/>
+            <electricalConnection id="21" synapse="gap_junction0" postCell="../Golgi_pop1/2/Very_Simple_Golgi" preCell="../Golgi_pop1/1/Very_Simple_Golgi"/>
+            <electricalConnection id="22" synapse="gap_junction0" postCell="../Golgi_pop1/3/Very_Simple_Golgi" preCell="../Golgi_pop1/1/Very_Simple_Golgi"/>
+            <electricalConnection id="23" synapse="gap_junction0" postCell="../Golgi_pop1/3/Very_Simple_Golgi" preCell="../Golgi_pop1/2/Very_Simple_Golgi"/>
         </electricalProjection>
-        <explicitInput input="Input_1" destination="synapses" target="1"/>
-        <explicitInput input="Input_1" destination="synapses" target="0"/>
-        <explicitInput input="Input_2" destination="synapses" target="1"/>
-        <explicitInput input="Input_2" destination="synapses" target="0"/>
+        <electricalProjection id="proj1" postsynapticPopulation="Golgi_pop1" presynapticPopulation="Golgi_pop0">
+            <electricalConnection id="0" synapse="gap_junction0" postCell="../Golgi_pop1/1/Very_Simple_Golgi" preCell="../Golgi_pop0/0/Very_Simple_Golgi"/>
+            <electricalConnection id="1" synapse="gap_junction0" postCell="../Golgi_pop1/2/Very_Simple_Golgi" preCell="../Golgi_pop0/0/Very_Simple_Golgi"/>
+            <electricalConnection id="2" synapse="gap_junction0" postCell="../Golgi_pop1/3/Very_Simple_Golgi" preCell="../Golgi_pop0/0/Very_Simple_Golgi"/>
+            <electricalConnection id="3" synapse="gap_junction0" postCell="../Golgi_pop1/2/Very_Simple_Golgi" preCell="../Golgi_pop0/1/Very_Simple_Golgi"/>
+            <electricalConnection id="4" synapse="gap_junction0" postCell="../Golgi_pop1/3/Very_Simple_Golgi" preCell="../Golgi_pop0/1/Very_Simple_Golgi"/>
+            <electricalConnection id="5" synapse="gap_junction0" postCell="../Golgi_pop1/3/Very_Simple_Golgi" preCell="../Golgi_pop0/2/Very_Simple_Golgi"/>
+            <electricalConnection id="6" synapse="gap_junction0" postCell="../Golgi_pop1/1/Very_Simple_Golgi" preCell="../Golgi_pop0/0/Very_Simple_Golgi"/>
+            <electricalConnection id="7" synapse="gap_junction0" postCell="../Golgi_pop1/2/Very_Simple_Golgi" preCell="../Golgi_pop0/0/Very_Simple_Golgi"/>
+            <electricalConnection id="8" synapse="gap_junction0" postCell="../Golgi_pop1/3/Very_Simple_Golgi" preCell="../Golgi_pop0/0/Very_Simple_Golgi"/>
+            <electricalConnection id="9" synapse="gap_junction0" postCell="../Golgi_pop1/2/Very_Simple_Golgi" preCell="../Golgi_pop0/1/Very_Simple_Golgi"/>
+            <electricalConnection id="10" synapse="gap_junction0" postCell="../Golgi_pop1/3/Very_Simple_Golgi" preCell="../Golgi_pop0/1/Very_Simple_Golgi"/>
+            <electricalConnection id="11" synapse="gap_junction0" postCell="../Golgi_pop1/3/Very_Simple_Golgi" preCell="../Golgi_pop0/2/Very_Simple_Golgi"/>
+            <electricalConnection id="12" synapse="gap_junction0" postCell="../Golgi_pop1/1/Very_Simple_Golgi" preCell="../Golgi_pop1/0/Very_Simple_Golgi"/>
+            <electricalConnection id="13" synapse="gap_junction0" postCell="../Golgi_pop1/2/Very_Simple_Golgi" preCell="../Golgi_pop1/0/Very_Simple_Golgi"/>
+            <electricalConnection id="14" synapse="gap_junction0" postCell="../Golgi_pop1/3/Very_Simple_Golgi" preCell="../Golgi_pop1/0/Very_Simple_Golgi"/>
+            <electricalConnection id="15" synapse="gap_junction0" postCell="../Golgi_pop1/2/Very_Simple_Golgi" preCell="../Golgi_pop1/1/Very_Simple_Golgi"/>
+            <electricalConnection id="16" synapse="gap_junction0" postCell="../Golgi_pop1/3/Very_Simple_Golgi" preCell="../Golgi_pop1/1/Very_Simple_Golgi"/>
+            <electricalConnection id="17" synapse="gap_junction0" postCell="../Golgi_pop1/3/Very_Simple_Golgi" preCell="../Golgi_pop1/2/Very_Simple_Golgi"/>
+            <electricalConnection id="18" synapse="gap_junction0" postCell="../Golgi_pop1/1/Very_Simple_Golgi" preCell="../Golgi_pop1/0/Very_Simple_Golgi"/>
+            <electricalConnection id="19" synapse="gap_junction0" postCell="../Golgi_pop1/2/Very_Simple_Golgi" preCell="../Golgi_pop1/0/Very_Simple_Golgi"/>
+            <electricalConnection id="20" synapse="gap_junction0" postCell="../Golgi_pop1/3/Very_Simple_Golgi" preCell="../Golgi_pop1/0/Very_Simple_Golgi"/>
+            <electricalConnection id="21" synapse="gap_junction0" postCell="../Golgi_pop1/2/Very_Simple_Golgi" preCell="../Golgi_pop1/1/Very_Simple_Golgi"/>
+            <electricalConnection id="22" synapse="gap_junction0" postCell="../Golgi_pop1/3/Very_Simple_Golgi" preCell="../Golgi_pop1/1/Very_Simple_Golgi"/>
+            <electricalConnection id="23" synapse="gap_junction0" postCell="../Golgi_pop1/3/Very_Simple_Golgi" preCell="../Golgi_pop1/2/Very_Simple_Golgi"/>
+        </electricalProjection>
+        <electricalProjection id="proj2" postsynapticPopulation="Golgi_pop1" presynapticPopulation="Golgi_pop1">
+            <electricalConnection id="0" synapse="gap_junction0" postCell="../Golgi_pop1/1/Very_Simple_Golgi" preCell="../Golgi_pop0/0/Very_Simple_Golgi"/>
+            <electricalConnection id="1" synapse="gap_junction0" postCell="../Golgi_pop1/2/Very_Simple_Golgi" preCell="../Golgi_pop0/0/Very_Simple_Golgi"/>
+            <electricalConnection id="2" synapse="gap_junction0" postCell="../Golgi_pop1/3/Very_Simple_Golgi" preCell="../Golgi_pop0/0/Very_Simple_Golgi"/>
+            <electricalConnection id="3" synapse="gap_junction0" postCell="../Golgi_pop1/2/Very_Simple_Golgi" preCell="../Golgi_pop0/1/Very_Simple_Golgi"/>
+            <electricalConnection id="4" synapse="gap_junction0" postCell="../Golgi_pop1/3/Very_Simple_Golgi" preCell="../Golgi_pop0/1/Very_Simple_Golgi"/>
+            <electricalConnection id="5" synapse="gap_junction0" postCell="../Golgi_pop1/3/Very_Simple_Golgi" preCell="../Golgi_pop0/2/Very_Simple_Golgi"/>
+            <electricalConnection id="6" synapse="gap_junction0" postCell="../Golgi_pop1/1/Very_Simple_Golgi" preCell="../Golgi_pop0/0/Very_Simple_Golgi"/>
+            <electricalConnection id="7" synapse="gap_junction0" postCell="../Golgi_pop1/2/Very_Simple_Golgi" preCell="../Golgi_pop0/0/Very_Simple_Golgi"/>
+            <electricalConnection id="8" synapse="gap_junction0" postCell="../Golgi_pop1/3/Very_Simple_Golgi" preCell="../Golgi_pop0/0/Very_Simple_Golgi"/>
+            <electricalConnection id="9" synapse="gap_junction0" postCell="../Golgi_pop1/2/Very_Simple_Golgi" preCell="../Golgi_pop0/1/Very_Simple_Golgi"/>
+            <electricalConnection id="10" synapse="gap_junction0" postCell="../Golgi_pop1/3/Very_Simple_Golgi" preCell="../Golgi_pop0/1/Very_Simple_Golgi"/>
+            <electricalConnection id="11" synapse="gap_junction0" postCell="../Golgi_pop1/3/Very_Simple_Golgi" preCell="../Golgi_pop0/2/Very_Simple_Golgi"/>
+            <electricalConnection id="12" synapse="gap_junction0" postCell="../Golgi_pop1/1/Very_Simple_Golgi" preCell="../Golgi_pop1/0/Very_Simple_Golgi"/>
+            <electricalConnection id="13" synapse="gap_junction0" postCell="../Golgi_pop1/2/Very_Simple_Golgi" preCell="../Golgi_pop1/0/Very_Simple_Golgi"/>
+            <electricalConnection id="14" synapse="gap_junction0" postCell="../Golgi_pop1/3/Very_Simple_Golgi" preCell="../Golgi_pop1/0/Very_Simple_Golgi"/>
+            <electricalConnection id="15" synapse="gap_junction0" postCell="../Golgi_pop1/2/Very_Simple_Golgi" preCell="../Golgi_pop1/1/Very_Simple_Golgi"/>
+            <electricalConnection id="16" synapse="gap_junction0" postCell="../Golgi_pop1/3/Very_Simple_Golgi" preCell="../Golgi_pop1/1/Very_Simple_Golgi"/>
+            <electricalConnection id="17" synapse="gap_junction0" postCell="../Golgi_pop1/3/Very_Simple_Golgi" preCell="../Golgi_pop1/2/Very_Simple_Golgi"/>
+            <electricalConnection id="18" synapse="gap_junction0" postCell="../Golgi_pop1/1/Very_Simple_Golgi" preCell="../Golgi_pop1/0/Very_Simple_Golgi"/>
+            <electricalConnection id="19" synapse="gap_junction0" postCell="../Golgi_pop1/2/Very_Simple_Golgi" preCell="../Golgi_pop1/0/Very_Simple_Golgi"/>
+            <electricalConnection id="20" synapse="gap_junction0" postCell="../Golgi_pop1/3/Very_Simple_Golgi" preCell="../Golgi_pop1/0/Very_Simple_Golgi"/>
+            <electricalConnection id="21" synapse="gap_junction0" postCell="../Golgi_pop1/2/Very_Simple_Golgi" preCell="../Golgi_pop1/1/Very_Simple_Golgi"/>
+            <electricalConnection id="22" synapse="gap_junction0" postCell="../Golgi_pop1/3/Very_Simple_Golgi" preCell="../Golgi_pop1/1/Very_Simple_Golgi"/>
+            <electricalConnection id="23" synapse="gap_junction0" postCell="../Golgi_pop1/3/Very_Simple_Golgi" preCell="../Golgi_pop1/2/Very_Simple_Golgi"/>
+        </electricalProjection>
+        <inputList id="Input_list0" component="Input_0">
+            <input destination="synapses" id="0" target="../Golgi_pop0/0/Very_Simple_Golgi"/>
+            <input destination="synapses" id="1" target="../Golgi_pop0/1/Very_Simple_Golgi"/>
+            <input destination="synapses" id="1" target="../Golgi_pop1/1/Very_Simple_Golgi"/>
+            <input destination="synapses" id="2" target="../Golgi_pop1/2/Very_Simple_Golgi"/>
+        </inputList>
+        <inputList id="Input_list1" component="Input_1">
+            <input destination="synapses" id="0" target="../Golgi_pop0/0/Very_Simple_Golgi"/>
+            <input destination="synapses" id="1" target="../Golgi_pop0/1/Very_Simple_Golgi"/>
+            <input destination="synapses" id="1" target="../Golgi_pop1/1/Very_Simple_Golgi"/>
+            <input destination="synapses" id="2" target="../Golgi_pop1/2/Very_Simple_Golgi"/>
+        </inputList>
     </network>
 </neuroml>
