@@ -9,6 +9,21 @@ import random
 import numpy as np
 import string
 
+#### the distance-dependent functions based on experimental results of Vervaeke et al. (2010); from https://github.com/epiasini/GJGolgi_ReducedMorph/blob/master/neuroConstruct/scripts/utils.py
+def distance(p, q):
+    return math.sqrt(sum([(a - b)**2 for a,b in zip(p,q)]))
+
+def connection_probability_vervaeke_2010(r):
+    return - 17.45 + 18.36 / (math.exp((r-267.)/39.) + 1)
+
+def coupling_coefficient_vervaeke_2010(r):
+    return - 2.3 + 29.7 * math.exp(-r/70.4)
+
+def synaptic_weight_vervaeke_2010(r):
+    cc = coupling_coefficient_vervaeke_2010(r)
+    return 1000. * (0.576 * math.exp(cc / 12.4) + 0.000590 * math.exp(cc / 2.79) - 0.564)
+
+### a main script for generating and running golgi cell network
 def generate_and_run_golgi_cell_net(ref,cell_array,location_array, connectivity_information,input_information,simulation_parameters,population_type):
         
         
@@ -56,16 +71,17 @@ def generate_and_run_golgi_cell_net(ref,cell_array,location_array, connectivity_
 	      Golgi_pop_index_array.append("Golgi_pop%d"%x)
               neuroml_Golgi_pop_array.append(Golgi_pop)
 	      net.populations.append(Golgi_pop)
+
+
+	   cell_position_array=[]
            
-           total_no_of_cells=0
            for cell_population in range(cell_array[0]):
-               total_no_of_cells=total_no_of_cells+cell_array[cell_population+1][1]
-	   cell_positions=np.zeros([total_no_of_cells,3])
-           
-           
+               
+	       cell_position_array.append(np.zeros([cell_array[cell_population+1][1],3]))
+               
 
            if localization_type=="random":
-              pop_step=0
+              
               for cell_pop in range(cell_array[0]):
                   golgi_pop=neuroml_Golgi_pop_array[cell_pop]
                   for cell in range(cell_array[cell_pop+1][1]):
@@ -74,12 +90,12 @@ def generate_and_run_golgi_cell_net(ref,cell_array,location_array, connectivity_
 	              X=random.random()
 	              Y=random.random()
 	              Z=random.random()
-                      cell_positions[cell+pop_step,0]=x_dim*X
-                      cell_positions[cell+pop_step,1]=y_dim*Y
-                      cell_positions[cell+pop_step,2]=z_dim*Z
+                      cell_position_array[cell_pop][cell,0]=x_dim*X
+                      cell_position_array[cell_pop][cell,1]=y_dim*Y
+                      cell_position_array[cell_pop][cell,2]=z_dim*Z
                       Golgi_cell.location=neuroml.Location(x=x_dim*X, y=y_dim*Y, z=z_dim*Z)
-                      print cell_positions[cell+pop_step,0], cell_positions[cell+pop_step,1], cell_positions[cell+pop_step,2]
-                  pop_step=pop_step+cell_array[cell_pop+1][1]
+                      print cell_position_array[cell_pop][cell,0], cell_position_array[cell_pop][cell,1], cell_position_array[cell_pop][cell,2]
+                 
 	   
 
              #Define GapJunction and ElectricalProjection elements; however inclusion of these elements in the nml file is conditional (see below)
@@ -157,30 +173,30 @@ def generate_and_run_golgi_cell_net(ref,cell_array,location_array, connectivity_
 	   
 
 
+           cell_position_array=[]
            
-           total_no_of_cells=0
            for cell_population in range(cell_array[0]):
-               total_no_of_cells=total_no_of_cells+cell_array[cell_population+1][1]
-	   cell_positions=np.zeros([total_no_of_cells,3])
+               
+	       cell_position_array.append(np.zeros([cell_array[cell_population+1][1],3]))
                
            
            
            if localization_type=="random":
-              for cell in range(total_no_of_cells):
+              for cell_pop in range(cell_array[0]):
+                  for cell in range(cell_array[cell_pop+1][1]):
 	             
 	              X=random.random()
 	              Y=random.random()
 	              Z=random.random()
-                      cell_positions[cell,0]=x_dim*X
-                      cell_positions[cell,1]=y_dim*Y
-                      cell_positions[cell,2]=z_dim*Z
-                      print cell_positions[cell,0], cell_positions[cell,1], cell_positions[cell,2]
+                      cell_position_array[cell_pop][cell,0]=x_dim*X
+                      cell_position_array[cell_pop][cell,1]=y_dim*Y
+                      cell_position_array[cell_pop][cell,2]=z_dim*Z
+                      print cell_position_array[cell_pop][cell,0], cell_position_array[cell_pop][cell,1], cell_position_array[cell_pop][cell,2]
 	   
-
              #Define GapJunction and ElectricalProjection elements; however inclusion of these elements in the nml file is conditional (see below)
 
              # for now only assume one Golgi population and code firstly for a uniform-random connectivity case; then extend the model with different connectivity rules
-           #if connectivity_information[0]=="Vervaeke_2010_one_compartment":
+           
 
            #block(s) for explicit inputs
            if input_information[0]=="testing":
@@ -193,7 +209,45 @@ def generate_and_run_golgi_cell_net(ref,cell_array,location_array, connectivity_
            #block for explicit inputs end
 
 
-           #if connectivity_information[0]=="Vervaeke_2010_one_compartment":
+           if connectivity_information[0]=="Vervaeke_2010_one_compartment":
+               neuroml_projection_array=[]
+               initial_projection_counter=0
+               for pre_pop_index in range(0,len(Golgi_pop_index_array)):
+                   for post_pop_index in range(0,len(Golgi_pop_index_array)):
+                       if pre_pop_index<=post_pop_index:
+                          proj = neuroml.ElectricalProjection(id="proj%d"%initial_projection_counter,
+		                presynaptic_population=Golgi_pop_index_array[pre_pop_index], 
+		                postsynaptic_population=Golgi_pop_index_array[post_pop_index])
+                          neuroml_projection_array.append(proj)
+                          initial_projection_counter+=1
+               gap_counter=0
+               for proj_index in range(initial_projection_counter):
+                   
+	           projection_counter=0
+	           conn_count = 0
+	           for pre_pop_index in range(0,len(Golgi_pop_index_array)):
+                       for post_pop_index in range(0,len(Golgi_pop_index_array)):
+                           if pre_pop_index<=post_pop_index:
+                              pre_cell_positions=cell_position_array[pre_pop_index]
+                              post_cell_positions=cell_position_array[post_pop_index]
+                              for Pre_cell in range(cell_array[pre_pop_index+1][1]):
+                          # randomly Connect cells with defined probability for now; scripted so that to avoid inclusion of projection and gap_junction/synapse components if there are no connections; otherwise the mod files are not compiled.
+                                  for Post_cell in range(cell_array[post_pop_index+1][1]):
+                                      if Pre_cell<Post_cell:
+                                         distance_between_cells=distance(pre_cell_positions[Pre_cell],post_cell_positions[Post_cell])/connectivity_information[1]
+                                         if random.random() <connection_probability_vervaeke_2010(distance_between_cells):
+                                            conn =neuroml.ElectricalConnection(id=conn_count,pre_cell="%d"%Pre_cell,post_cell="%d"%Post_cell,synapse=gap_junction0.id)
+                                            gap_junction = neuroml.GapJunction(id="gap_junction%d"%gap_counter, conductance="%fnS"%synaptic_weight_vervaeke_2010(distance_between_cells))
+		                            nml_doc.gap_junctions.append(gap_junction)
+		                            gap_counter+=1
+		                            if projection_counter==0:
+                                               net.electrical_projections.append(neuroml_projection_array[proj_index])
+                                               projection_counter+=1
+                                               projection=neuroml_projection_array[proj_index]
+		                            projection.electrical_connections.append(conn)
+		                            conn_count+=1
+
+                
 
            
            if connectivity_information[0]=="uniform random":
@@ -215,7 +269,7 @@ def generate_and_run_golgi_cell_net(ref,cell_array,location_array, connectivity_
 	           projection_counter=0
 	           conn_count = 0
 	           for pre_pop_index in range(0,len(Golgi_pop_index_array)):
-                       for post_pop_Index in range(0,len(Golgi_pop_index_array)):
+                       for post_pop_index in range(0,len(Golgi_pop_index_array)):
                            if pre_pop_index<=post_pop_index:
                               for Pre_cell in range(cell_array[pre_pop_index+1][1]):
                           # randomly Connect cells with defined probability for now; scripted so that to avoid inclusion of projection and gap_junction/synapse components if there are no connections; otherwise the mod files are not compiled.
@@ -264,48 +318,7 @@ def generate_and_run_golgi_cell_net(ref,cell_array,location_array, connectivity_
     
            ls.assign_simulation_target(net.id)
 
-        #ls.include_neuroml2_file(cell_component_nml)
-
            ls.include_neuroml2_file(nml_file)
-
-
-        #cell_file ="Very_Simple_Golgi.cell.nml"
-        #channel_Na="Golgi_Na.channel.nml"
-        #channel_NaR="Golgi_NaR.channel.nml"
-        #channel_NaP="Golgi_NaP.channel.nml"
-        #channel_KA="Golgi_KA.channel.nml"
-        #channel_KM="Golgi_KM.channel.nml"
-        #channel_KV="Golgi_KV.channel.nml"
-        #channel_BK="Golgi_BK.channel.nml"
-        #channel_Ca_HVA="Golgi_Ca_HVA.channel.nml"
-        #channel_Ca_LVA="Golgi_Ca_LVA.channel.nml"
-        #channel_hcn1f="Golgi_hcn1f.channel.nml"
-        #channel_hcn1s="Golgi_hcn1s.channel.nml"
-        #channel_hcn2f="Golgi_hcn2f.channel.nml"
-        #channel_hcn2s="Golgi_hcn2s.channel.nml"
-        #channel_leak="LeakCond.channel.nml"
-        #decaymodel_ca="Golgi_CALC.nml"
-        #decaymodel_ca2="Golgi_CALC_ca2.nml"
-        #twoCa_pools="cellTwoCaPools.xml"
-
-        # Include existing NeuroML2 files
-        #ls.include_neuroml2_file(channel_Na)
-        #ls.include_neuroml2_file(channel_NaR)  
-        #ls.include_neuroml2_file(channel_NaP)
-        #ls.include_neuroml2_file(channel_KA)
-        #ls.include_neuroml2_file(channel_KM)
-        #ls.include_neuroml2_file(channel_KV)
-        #ls.include_neuroml2_file(channel_BK)
-        #ls.include_neuroml2_file(channel_Ca_HVA)
-        #ls.include_neuroml2_file(channel_Ca_LVA)
-        #ls.include_neuroml2_file(channel_hcn1f)
-        #ls.include_neuroml2_file(channel_hcn1s)
-        #ls.include_neuroml2_file(channel_hcn2f)
-        #ls.include_neuroml2_file(channel_hcn2s)
-        #ls.include_neuroml2_file(channel_leak)
-        #ls.include_neuroml2_file(decaymodel_ca)
-        #ls.include_neuroml2_file(decaymodel_ca2)
-        #ls.include_lems_file(twoCa_pools)
 
         # Specify Displays and Output Files
         if simulation_parameters[2]=="jNeuroML":
@@ -442,8 +455,9 @@ def generate_and_run_golgi_cell_net(ref,cell_array,location_array, connectivity_
 
 if __name__ == "__main__":
     
-    # one Cell_array for testing generation of multiple populations; for the test below, code generates two populations and four projections as expected
+    # a line below is a Cell_array for testing generation of multiple populations; code generates two populations and four projections as expected
     Cell_array=[2,["Very_Simple_Golgi",4],["Very_Simple_Golgi",4]]
+    
     #Cell_array=[1,["Very_Simple_Golgi",8]]
     Position_array=["random",350, 350, 350]
     Conn_array=["uniform random",[1,"2nS"]]
