@@ -11,7 +11,7 @@
       
 
 
-    <cell id="Very_Simple_Golgi">
+    <cell id="Very_Simple_Golgi_test_morph">
 
         <notes>A single segment/compartment Golgi cell</notes>
 
@@ -23,25 +23,25 @@
             </segment>
 
             <segment id="1" name="dend2">
-                <parent segment="0" fractionAlong="0.5"/>
+                <parent segment="0" fractionAlong="1"/>
                 <proximal x="0.0" y="0.0" z="0.0" diameter="3.0"/>
                 <distal x="113.0" y="0.0" z="0.0" diameter="3.0"/>
             </segment>
 
             <segment id="2" name="dend_1">
-                <parent segment="0" fractionAlong="0.5"/>
+                <parent segment="0" fractionAlong="1"/>
                 <proximal x="0.0" y="0.0" z="0.0" diameter="3.0"/>
                 <distal x="72.0" y="87.0" z="4.0" diameter="3.0"/>
             </segment>
 
             <segment id="5" name="dend_3">
-                <parent segment="0" fractionAlong="0.5"/>
+                <parent segment="0" fractionAlong="1"/>
                 <proximal x="0.0" y="0.0" z="0.0" diameter="3.0"/>
                 <distal x="72.0" y="-87.0" z="4.0" diameter="3.0"/>
             </segment>
 
             <segment id="6" name="axon">
-                <parent segment="0" fractionAlong="0.5"/>
+                <parent segment="0" fractionAlong="1"/>
                 <proximal x="0.0" y="0.0" z="0.0" diameter="2.4"/>
                 <distal x="-1200.0" y="0.0" z="0.0" diameter="2.4"/>
             </segment>
