@@ -25,10 +25,10 @@ def synaptic_weight_vervaeke_2010(r):
 
 
 
-def extract_morphology_information(cell_pair,target_array):
+def extract_morphology_information(cell_array,target_array):
     loaded_cell_array={}
     cell_segment_group_array=[]
-    for cell in cell_pair:
+    for cell in cell_array:
         cell_nml_file = '%s.cell.nml'%cell
         document_cell = neuroml.loaders.NeuroMLLoader.load(cell_nml_file)
         loaded_cell_array[cell]=document_cell.cells[0]
@@ -67,9 +67,9 @@ def extract_morphology_information(cell_pair,target_array):
     print cell_segment_group_array[0]
     print cell_segment_group_array[1]
 
-    if target_array[0]=="segment groups with probabilities":
+    if target_array[0]=="segment groups":
        target_segment_array=[]
-       for cell_index in range(0, len(cell_pair)):
+       for cell_index in range(0, len(cell_array)):
            cell_specific_segment_array=[]
            cell_type=cell_segment_group_array[cell_index][0]
            cell_specific_segment_array.append(cell_type)
@@ -90,7 +90,8 @@ def extract_morphology_information(cell_pair,target_array):
                       cell_specific_segment_array.append(segment_target_array)
            target_segment_array.append(cell_specific_segment_array)
            print target_segment_array
-               
+
+    return target_segment_array        
 
 
 
@@ -99,7 +100,7 @@ def extract_morphology_information(cell_pair,target_array):
 
 
 if __name__ == "__main__":
-    extract_morphology_information(["Very_Simple_Golgi_test_morph","Very_Simple_Golgi_test_morph"],["segment groups with probabilities",["dendrite_group","Section_3"],["dendrite_group"]])
+    extract_morphology_information(["Very_Simple_Golgi_test_morph","Very_Simple_Golgi_test_morph"],["segment groups",["dendrite_group","Section_3"],["dendrite_group"]])
       
 
 
