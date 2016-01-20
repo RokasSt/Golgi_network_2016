@@ -64,8 +64,7 @@ def extract_morphology_information(cell_array,target_array):
         cell_segment_group.append(cell)
         cell_segment_group.append(segment_group_array)
         cell_segment_group_array.append(cell_segment_group)
-    print cell_segment_group_array[0]
-    print cell_segment_group_array[1]
+    
 
     if target_array[0]=="segment groups":
        target_segment_array=[]

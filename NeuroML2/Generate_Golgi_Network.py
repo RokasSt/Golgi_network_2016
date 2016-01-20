@@ -650,9 +650,10 @@ def generate_and_run_golgi_cell_net(ref,cell_array,location_array, connectivity_
 if __name__ == "__main__":
     
     # a line below is a Cell_array for testing generation of multiple populations; code generates two populations and four projections as expected
-    Cell_array=[2,["Very_Simple_Golgi_test_morph",4],["Very_Simple_Golgi_test_morph",4]]
+    #Cell_array=[2,["Very_Simple_Golgi_test_morph",4],["Very_Simple_Golgi_test_morph",4]]
     
-    #Cell_array=[1,["Very_Simple_Golgi",8]]
+    Cell_array=[1,["Very_Simple_Golgi_test_morph",3]]
+    #Cell_array=[1,["Very_Simple_Golgi",2]]
     Position_array=["random",350, 350, 350]
     #Conn_array=["uniform random",[1,"2nS"]]
     Input_array=["testing",0.5,["20.0ms","200.0ms","4E-5uA"],["220.0ms","200.0ms","-0.5E-5uA"]]
@@ -662,13 +663,15 @@ if __name__ == "__main__":
 
     #Sim_array=[450,0.0003,"no simulation"]
     
-    Conn_array=["Vervaeke_2010_one_compartment",1]     # second parameter controls spatial scale
+    #Conn_array=["Vervaeke_2010_one_compartment",1]     # second parameter controls spatial scale
 
     #Conn_array=["Vervaeke_2010_multi_compartment",1,[["dendrite_group"],[1]],[["dendrite_group"],[1]]]
 
-    #Conn_array=["Vervaeke_2012_based",["homogeneous conductance",426],["average no of connections per cell",15],["average no of gap junctions per cell",35],["model probability","Poisson"],\
+    Conn_array=["Vervaeke_2010_multi_compartment",1,[["dendrite_group"],[1]]]
+
+    #Conn_array=["Vervaeke_2012_based",["homogeneous conductance",426],["no of gap junctions per connection",],\
                                                                    #[["dendrite_group"],[1]],[["dendrite_group"],[1]]]
-    #Conn_array=["Vervaeke_2012_based",["heterogeneous conductance","Gaussian",426,10],["average no of connections per cell",15],["average no of gap junctions per cell",35],["model probability","Poisson"],\
+    #Conn_array=["Vervaeke_2012_based",["heterogeneous conductance","Gaussian",426,10],["no of gap junctions per connection",35],\
                                                                    #[["dendrite_group"],[1]],[["dendrite_group"],[1]]]
     
                                                                    

@@ -15,11 +15,7 @@
     <Include file="Simulation.xml"/>
     
     <Include file="Simple_Golgi_Net.net.nml"/>
-    <Include file="Very_Simple_Golgi.cell.nml"/>
-    <Include file="Golgi_Na.channel.nml"/>
-    <Include file="Golgi_KV.channel.nml"/>
-    <Include file="LeakCond.channel.nml"/>
-    <Include file="Very_Simple_Golgi.cell.nml"/>
+    <Include file="Very_Simple_Golgi_test_morph.cell.nml"/>
     <Include file="Golgi_Na.channel.nml"/>
     <Include file="Golgi_KV.channel.nml"/>
     <Include file="LeakCond.channel.nml"/>
@@ -27,31 +23,15 @@
     <Simulation id="Simple_Golgi_Net" length="450ms" step="0.0003ms" target="Simple_Golgi_Net_network">
         
         <Display id="display_voltages0" title="Voltages Golgi_pop0" timeScale="1ms" xmin="-45.0" xmax="495.0" ymin="-75" ymax="50">
-            <Line id="Golgi_pop0[0]: Vm" quantity="Golgi_pop0[0]/v" scale="1mV" color="#147de9" timeScale="1ms"/>
-            <Line id="Golgi_pop0[1]: Vm" quantity="Golgi_pop0[1]/v" scale="1mV" color="#2a3a46" timeScale="1ms"/>
-            <Line id="Golgi_pop0[2]: Vm" quantity="Golgi_pop0[2]/v" scale="1mV" color="#f79fca" timeScale="1ms"/>
-            <Line id="Golgi_pop0[3]: Vm" quantity="Golgi_pop0[3]/v" scale="1mV" color="#3b0b63" timeScale="1ms"/>
+            <Line id="Golgi_pop0[0]: Vm" quantity="Golgi_pop0[0]/v" scale="1mV" color="#b80e3b" timeScale="1ms"/>
+            <Line id="Golgi_pop0[1]: Vm" quantity="Golgi_pop0[1]/v" scale="1mV" color="#30a1f6" timeScale="1ms"/>
+            <Line id="Golgi_pop0[2]: Vm" quantity="Golgi_pop0[2]/v" scale="1mV" color="#577081" timeScale="1ms"/>
         </Display>
         
-        <Display id="display_voltages1" title="Voltages Golgi_pop1" timeScale="1ms" xmin="-45.0" xmax="495.0" ymin="-75" ymax="50">
-            <Line id="Golgi_pop1[0]: Vm" quantity="Golgi_pop1[0]/v" scale="1mV" color="#29ddf4" timeScale="1ms"/>
-            <Line id="Golgi_pop1[1]: Vm" quantity="Golgi_pop1[1]/v" scale="1mV" color="#49cdbe" timeScale="1ms"/>
-            <Line id="Golgi_pop1[2]: Vm" quantity="Golgi_pop1[2]/v" scale="1mV" color="#8980bb" timeScale="1ms"/>
-            <Line id="Golgi_pop1[3]: Vm" quantity="Golgi_pop1[3]/v" scale="1mV" color="#850561" timeScale="1ms"/>
-        </Display>
-        
-        <OutputFile id="Volts0_file0" fileName="Golgi_pop0_0_NEURON_V2010single1.dat">
+        <OutputFile id="Volts0_file0" fileName="Golgi_pop0_0_NEURON_V2010multi1.dat">
             <OutputColumn id="v0" quantity="Golgi_pop0[0]/v"/> 
             <OutputColumn id="v1" quantity="Golgi_pop0[1]/v"/> 
             <OutputColumn id="v2" quantity="Golgi_pop0[2]/v"/> 
-            <OutputColumn id="v3" quantity="Golgi_pop0[3]/v"/> 
-        </OutputFile>
-        
-        <OutputFile id="Volts1_file0" fileName="Golgi_pop1_0_NEURON_V2010single1.dat">
-            <OutputColumn id="v0" quantity="Golgi_pop1[0]/v"/> 
-            <OutputColumn id="v1" quantity="Golgi_pop1[1]/v"/> 
-            <OutputColumn id="v2" quantity="Golgi_pop1[2]/v"/> 
-            <OutputColumn id="v3" quantity="Golgi_pop1[3]/v"/> 
         </OutputFile>
         
     </Simulation>

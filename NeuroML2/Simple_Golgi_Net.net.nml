@@ -1,42 +1,16 @@
 <neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2beta4.xsd" id="Simple_Golgi_Net">
-    <include href="Very_Simple_Golgi.cell.nml"></include>
-    <include href="Very_Simple_Golgi.cell.nml"></include>
-    <gapJunction id="gap_junction0" conductance="445.007413pS"/>
-    <gapJunction id="gap_junction1" conductance="590.667702pS"/>
-    <gapJunction id="gap_junction2" conductance="445.007413pS"/>
-    <gapJunction id="gap_junction3" conductance="638.653166pS"/>
-    <gapJunction id="gap_junction4" conductance="590.667702pS"/>
-    <gapJunction id="gap_junction5" conductance="217.899952pS"/>
-    <gapJunction id="gap_junction6" conductance="445.007413pS"/>
-    <gapJunction id="gap_junction7" conductance="638.653166pS"/>
-    <gapJunction id="gap_junction8" conductance="590.667702pS"/>
+    <include href="Very_Simple_Golgi_test_morph.cell.nml"></include>
+    <gapJunction id="gap_junction0" conductance="173.988486pS"/>
     <pulseGenerator id="Input_0" delay="20.0ms" duration="200.0ms" amplitude="4E-5uA"/>
     <pulseGenerator id="Input_1" delay="220.0ms" duration="200.0ms" amplitude="-0.5E-5uA"/>
     <network id="Simple_Golgi_Net_network" type="networkWithTemperature" temperature="23 degC">
-        <population id="Golgi_pop0" component="Very_Simple_Golgi" size="4"/>
-        <population id="Golgi_pop1" component="Very_Simple_Golgi" size="4"/>
+        <population id="Golgi_pop0" component="Very_Simple_Golgi_test_morph" size="3"/>
         <electricalProjection id="proj0" postsynapticPopulation="Golgi_pop0" presynapticPopulation="Golgi_pop0">
-            <electricalConnection id="0" synapse="gap_junction0" postCell="3" preCell="1"/>
-            <electricalConnection id="1" synapse="gap_junction1" postCell="3" preCell="1"/>
-        </electricalProjection>
-        <electricalProjection id="proj1" postsynapticPopulation="Golgi_pop1" presynapticPopulation="Golgi_pop0">
-            <electricalConnection id="0" synapse="gap_junction2" postCell="3" preCell="1"/>
-            <electricalConnection id="1" synapse="gap_junction3" postCell="2" preCell="0"/>
-            <electricalConnection id="2" synapse="gap_junction4" postCell="3" preCell="1"/>
-            <electricalConnection id="3" synapse="gap_junction5" postCell="2" preCell="0"/>
-        </electricalProjection>
-        <electricalProjection id="proj2" postsynapticPopulation="Golgi_pop1" presynapticPopulation="Golgi_pop1">
-            <electricalConnection id="0" synapse="gap_junction6" postCell="3" preCell="1"/>
-            <electricalConnection id="1" synapse="gap_junction7" postCell="2" preCell="0"/>
-            <electricalConnection id="2" synapse="gap_junction8" postCell="3" preCell="1"/>
+            <electricalConnection id="0" synapse="gap_junction0" preFractionAlong="0.503935" preSegment="5" postFractionAlong="0.148146" postSegment="2" postCell="2" preCell="1"/>
         </electricalProjection>
         <explicitInput input="Input_0" destination="synapses" target="Golgi_pop0[1]"/>
         <explicitInput input="Input_1" destination="synapses" target="Golgi_pop0[1]"/>
         <explicitInput input="Input_0" destination="synapses" target="Golgi_pop0[2]"/>
         <explicitInput input="Input_1" destination="synapses" target="Golgi_pop0[2]"/>
-        <explicitInput input="Input_0" destination="synapses" target="Golgi_pop1[3]"/>
-        <explicitInput input="Input_1" destination="synapses" target="Golgi_pop1[3]"/>
-        <explicitInput input="Input_0" destination="synapses" target="Golgi_pop1[2]"/>
-        <explicitInput input="Input_1" destination="synapses" target="Golgi_pop1[2]"/>
     </network>
 </neuroml>
