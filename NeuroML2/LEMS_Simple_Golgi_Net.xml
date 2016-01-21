@@ -23,13 +23,13 @@
     <Simulation id="Simple_Golgi_Net" length="450ms" step="0.005ms" target="Simple_Golgi_Net_network">
         
         <Display id="display_voltages0" title="Voltages Golgi_pop0" timeScale="1ms" xmin="-45.0" xmax="495.0" ymin="-75" ymax="50">
-            <Line id="../Golgi_pop0/0: Vm" quantity="Golgi_pop0/0/Very_Simple_Golgi_test_morph/v" scale="1mV" color="#fa8826" timeScale="1ms"/>
-            <Line id="../Golgi_pop0/1: Vm" quantity="Golgi_pop0/1/Very_Simple_Golgi_test_morph/v" scale="1mV" color="#6980a8" timeScale="1ms"/>
+            <Line id="Golgi_pop0[0]: Vm" quantity="Golgi_pop0[0]/v" scale="1mV" color="#fa8826" timeScale="1ms"/>
+            <Line id="Golgi_pop0[1]: Vm" quantity="Golgi_pop0[1]/v" scale="1mV" color="#6980a8" timeScale="1ms"/>
         </Display>
         
-        <OutputFile id="Volts0_file0" fileName="Golgi_pop0_0_NEURON_V2012multi1_2c_1input.dat">
-            <OutputColumn id="v0" quantity="Golgi_pop0/0/Very_Simple_Golgi_test_morph/v"/> 
-            <OutputColumn id="v1" quantity="Golgi_pop0/1/Very_Simple_Golgi_test_morph/v"/> 
+        <OutputFile id="Volts0_file0" fileName="Golgi_pop0_0_NEURON_V2010multi1_2c_1input.dat">
+            <OutputColumn id="v0" quantity="Golgi_pop0[0]/v"/> 
+            <OutputColumn id="v1" quantity="Golgi_pop0[1]/v"/> 
         </OutputFile>
         
     </Simulation>
