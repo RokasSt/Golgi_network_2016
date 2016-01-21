@@ -363,8 +363,37 @@ def generate_and_run_golgi_cell_net(ref,cell_array,location_array, connectivity_
                                                           for post_segment_group in range(0,len(connectivity_information[post_pop_index+4][0])):
                                                               if random.random() < connectivity_information[post_pop_index+4][1][post_segment_group]:
                                                                  post_group=connectivity_information[post_pop_index+4][0][post_segment_group]
-                                                                 
-                 
+                                                                 for segment_group in range(0,len(target_segment_array[pre_pop_index])-1):
+                                                                     if target_segment_array[pre_pop_index][segment_group+1][0]==pre_group:
+                                                                        pre_segment_ids=target_segment_array[pre_pop_index][segment_group+1][1:]
+                                                                        break
+                                                                 for segment_group in range(0,len(target_segment_array[post_pop_index])-1):
+                                                                     if target_segment_array[post_pop_index][segment_group+1][0]==post_group:
+                                                                        post_segment_ids=target_segment_array[post_pop_index][segment_group+1][1:]
+                                                                        break
+                                                                 Pre_segment_id=random.sample(pre_segment_ids,1)
+                                                                 Pre_segment_id=Pre_segment_id[0]
+                                                                 Post_segment_id=random.sample(post_segment_ids,1)
+                                                                 Post_segment_id=Post_segment_id[0]
+                                                                 if connectivity_information[2][0]=="constant conductance":
+                                                                    gap_junction = neuroml.GapJunction(id="gap_junction%d"%gap_counter, conductance="%fpS"%connectivity_information[2][1])
+                                                                 if connectivity_information[2][0]=="variable conductance":
+                                                                    if connectivity_information[2][1]=="gaussian":
+                                                                       gap_junction = neuroml.GapJunction(id="gap_junction%d"%gap_counter, conductance="%fpS"%random.gauss(connectivity_information[2][2],connectivity_information[2][3]))
+                                                                    #other options can be added such as gamma distribution
+                                                                 conn =neuroml.ElectricalConnection(id=conn_count,pre_cell="%d"%Pre_cell,post_cell="%d"%Post_cell,synapse=gap_junction.id,\
+                                                                             pre_segment="%d"%Pre_segment_id,post_segment="%d"%Post_segment_id,\
+                                                                             pre_fraction_along="%f"%random.random(),post_fraction_along="%f"%random.random())
+                                            
+		                                                 nml_doc.gap_junctions.append(gap_junction)
+		                                                 gap_counter+=1
+		                                                 if projection_counter==0:
+                                                                    net.electrical_projections.append(proj)
+                                                                    projection_counter+=1
+                                               
+		                                                 proj.electrical_connections.append(conn)
+		                                                 conn_count+=1
+                                                                 x=0
            if connectivity_information[0]=="Vervaeke_2010_multi_compartment":
                cell_names=[]
                for cell in range(cell_array[0]):
@@ -696,7 +725,12 @@ if __name__ == "__main__":
     # a line below is a Cell_array for testing generation of multiple populations; code generates two populations and four projections as expected
     #Cell_array=[2,["Very_Simple_Golgi_test_morph",4],["Very_Simple_Golgi_test_morph",4]]
     
+    #Cell_array=[1,["Very_Simple_Golgi_test_morph",3]]
+
+
+    #test one multi-compartment cell with no connections
     Cell_array=[1,["Very_Simple_Golgi_test_morph",3]]
+
     #Cell_array=[1,["Very_Simple_Golgi",2]]
     Position_array=["random",350, 350, 350]
     #Conn_array=["uniform random",[1,"2nS"]]
@@ -723,7 +757,7 @@ if __name__ == "__main__":
     #Conn_array=["Vervaeke_2012_based",1,["constant conductance",426],"segments",[["Section_1","dend_1"],[0.7,0.3]],[["Section_1","dend_1"],[0.7,0.3]]]
     #testing case 2 with subsegment probabilities:
     #one cell group with subsegment probabilities of only one segment
-    #Conn_array=["Vervaeke_2012_based",1,["heterogeneous conductance","Gaussian",426,10],"subsegments",[["Section_1"],[[[0.25,0.2],[0.25,0.4],[0.25,0.4],[0.25,0.4]]]]]
+    #Conn_array=["Vervaeke_2012_based",1,["variable conductance","Gaussian",426,10],"subsegments",[["Section_1"],[[[0.25,0.2],[0.25,0.4],[0.25,0.4],[0.25,0.4]]]]]
     
                                                                    
     generate_and_run_golgi_cell_net("Simple_Golgi_Net",Cell_array,Position_array,Conn_array,Input_array,Sim_array,"not a list")
