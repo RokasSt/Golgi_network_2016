@@ -173,18 +173,19 @@ def generate_and_run_golgi_cell_net(ref,cell_array,location_array, connectivity_
                                          if random.random() <connection_probability_vervaeke_2010(distance_between_cells):
                                             x=0
                                             while x==0:
-                                                for pre_segment_group in range(0,len(connectivity_information[pre_pop_index+2][0])):
-                                                    if random.random() < connectivity_information[pre_pop_index+2][1][pre_segment_group]:
-                                                       pre_group=connectivity_information[pre_pop_index+2][0][pre_segment_group]
-                                                       x=1
-                                                       break
+                                                pre_segment_group=random.sample(range(0,len(connectivity_information[pre_pop_index+2][0])),1)
+                                                pre_segment_group=pre_segment_group[0]
+                                                if random.random() < connectivity_information[pre_pop_index+2][1][pre_segment_group]:
+                                                   pre_group=connectivity_information[pre_pop_index+2][0][pre_segment_group]
+                                                   x=1
+                                                   
                                             y=0
                                             while y==0:
-                                                for post_segment_group in range(0,len(connectivity_information[post_pop_index+2][0])):
-                                                    if random.random() < connectivity_information[post_pop_index+2][1][post_segment_group]:
-                                                       post_group=connectivity_information[post_pop_index+2][0][post_segment_group]
-                                                       y=1
-                                                       break
+                                                post_segment_group=random.sample(range(0,len(connectivity_information[post_pop_index+2][0])),1)
+                                                post_segment_group=post_segment_group[0]
+                                                if random.random() < connectivity_information[post_pop_index+2][1][post_segment_group]:
+                                                   post_group=connectivity_information[post_pop_index+2][0][post_segment_group]
+                                                   y=1
                                                                    
                                             for segment_group in range(0,len(target_segment_array[pre_pop_index])):
                                                 if target_segment_array[pre_pop_index][segment_group+1][0]==pre_group:
@@ -380,10 +381,10 @@ def generate_and_run_golgi_cell_net(ref,cell_array,location_array, connectivity_
                                                                  Post_segment_id=random.sample(post_segment_ids,1)
                                                                  Post_segment_id=Post_segment_id[0]
                                                                  if connectivity_information[2][0]=="constant conductance":
-                                                                    gap_junction = neuroml.GapJunction(id="gap_junction%d"%gap_counter, conductance="%fpS"%connectivity_information[2][1])
+                                                                    gap_junction = neuroml.GapJunction(id="gap_junction%d"%gap_counter, conductance="%f%s"%(connectivity_information[2][1],connectivity_information[2][2]))
                                                                  if connectivity_information[2][0]=="variable conductance":
                                                                     if connectivity_information[2][1]=="gaussian":
-                                                                       gap_junction = neuroml.GapJunction(id="gap_junction%d"%gap_counter, conductance="%fpS"%random.gauss(connectivity_information[2][2],connectivity_information[2][3]))
+                                                                       gap_junction = neuroml.GapJunction(id="gap_junction%d"%gap_counter, conductance="%f%s"%(random.gauss(connectivity_information[2][2],connectivity_information[2][3]),connectivity_information[2][4]))
                                                                     #other options can be added such as gamma distribution
                                                                  conn =neuroml.ElectricalConnection(id=conn_count,pre_cell="%d"%Pre_cell,post_cell="%d"%Post_cell,synapse=gap_junction.id,\
                                                                              pre_segment="%d"%Pre_segment_id,post_segment="%d"%Post_segment_id,\
@@ -397,7 +398,7 @@ def generate_and_run_golgi_cell_net(ref,cell_array,location_array, connectivity_
                                                
 		                                                 proj.electrical_connections.append(conn)
 		                                                 conn_count+=1
-                                                                 x=0
+                                                                 x=1
            if connectivity_information[0]=="Vervaeke_2010_multi_compartment":
                cell_names=[]
                for cell in range(cell_array[0]):
@@ -436,18 +437,20 @@ def generate_and_run_golgi_cell_net(ref,cell_array,location_array, connectivity_
                                          if random.random() <connection_probability_vervaeke_2010(distance_between_cells):
                                             x=0
                                             while x==0:
-                                                for pre_segment_group in range(0,len(connectivity_information[pre_pop_index+2][0])):
-                                                    if random.random() < connectivity_information[pre_pop_index+2][1][pre_segment_group]:
-                                                       pre_group=connectivity_information[pre_pop_index+2][0][pre_segment_group]
-                                                       x=1
-                                                       break
+                                                pre_segment_group=random.sample(range(0,len(connectivity_information[pre_pop_index+2][0])),1)
+                                                pre_segment_group=pre_segment_group[0]
+                                                if random.random() < connectivity_information[pre_pop_index+2][1][pre_segment_group]:
+                                                   pre_group=connectivity_information[pre_pop_index+2][0][pre_segment_group]
+                                                   x=1
+                                                   
                                             y=0
                                             while y==0:
-                                                for post_segment_group in range(0,len(connectivity_information[post_pop_index+2][0])):
-                                                    if random.random() < connectivity_information[post_pop_index+2][1][post_segment_group]:
-                                                       post_group=connectivity_information[post_pop_index+2][0][post_segment_group]
-                                                       y=1
-                                                       break
+                                                post_segment_group=random.sample(range(0,len(connectivity_information[post_pop_index+2][0])),1)
+                                                post_segment_group=post_segment_group[0]
+                                                if random.random() < connectivity_information[post_pop_index+2][1][post_segment_group]:
+                                                   post_group=connectivity_information[post_pop_index+2][0][post_segment_group]
+                                                   y=1
+                                                       
                                                                    
                                             for segment_group in range(0,len(target_segment_array[pre_pop_index])-1):
                                                 if target_segment_array[pre_pop_index][segment_group+1][0]==pre_group:
@@ -669,11 +672,12 @@ def generate_and_run_golgi_cell_net(ref,cell_array,location_array, connectivity_
 
 if __name__ == "__main__":
     
+
+    #ordering of arguments inside lists matters! see examples below for the exact order of different arguments in input arrays
+
     # a line below is a Cell_array for testing generation of multiple populations; code generates two populations and four projections as expected
     #Cell_array=[2,["Very_Simple_Golgi_test_morph",4],["Very_Simple_Golgi_test_morph",4]]
-    
    
-
 
     #test one multi-compartment cell with no connections
     Cell_array=[1,["Very_Simple_Golgi_test_morph",2]]
@@ -689,29 +693,36 @@ if __name__ == "__main__":
     #Sim_array=[simulation time,simulation timestep, simulate or not simulate: if simulate then either "jNeuroML_NEURON" or "jNeuroML" string has to be specified; otherwise a different string such as "no simulation" has to be specified, the last argument must be an identifier of dat file such as "NEURON_V2010multi1"] 
 
     Sim_array=[450,0.005,"jNeuroML_NEURON","NEURON_V2010multi1_2c_1input"]
+
+    #Sim_array=[450,0.005,"no simulation","NEURON_V2012multi1_2c_1input"]
     
     #Conn_array=["Vervaeke_2010_one_compartment",1]     # second parameter controls spatial scale
 
     #Conn_array=["Vervaeke_2010_multi_compartment",1,[["dendrite_group"],[1]],[["dendrite_group"],[1]]]
 
-    #Below: modify conn_array by introducing a scaling factor that scales a pico-level conductance to nano-scale; this can be used to test the presence of the electrical connection because input to one of the cells elicits noticeable spiking response in the second cell. Pico-level conductance at a single gap-junction is not sufficient to elicit action potentials in the second cell. This optional parameter, if present, has to be appended at the end of conn_array.
+    #Below: modify conn_array by introducing a scaling factor that scales a hard-coded pico-level conductance to nano-scale; this can be used to test the presence of the electrical connection because input to one of the cells elicits noticeable spiking response in the second cell. Pico-level conductance at a single gap-junction is not sufficient to elicit action potentials in the second cell. This optional parameter, if present, has to be appended at the end of conn_array.
+    
     Conn_array=["Vervaeke_2010_multi_compartment",1,[["dendrite_group"],[1]],["testing",4]]
 
     #template for connectivity array for models with simulated GJ density
-    #Conn_array=["Vervaeke_2012_based",spatial scale,["homogeneous or heterogeneous conductance",...],["level of applying probabilities: segment/segment groups and subsegment"],\
+    #Conn_array=["Vervaeke_2012_based",spatial scale,["homogeneous or heterogeneous conductance",a value of a discrete GJ conductance,"units e.g. pS or nS"],["level of applying probabilities: segment/segment groups and subsegment"],\
     #[list of segments with their respective probabilities for each cell or list of segments each with list of subsegment probabilities
     #testing case 1 with segment probabilities (note that appropriate names of segment groups are passed); either constant or variable conductance:
+    
     #one cell group
-    #Conn_array=["Vervaeke_2012_based",1,["constant conductance",426],"segments",[["Section_1","dend_1"],[0.7,0.3]]]
+    #Conn_array=["Vervaeke_2012_based",1,["constant conductance",426,"pS"],"segments",[["Section_1","dend_1"],[0.7,0.3]]]
     #two cell groups
-    #Conn_array=["Vervaeke_2012_based",1,["constant conductance",426],"segments",[["Section_1","dend_1"],[0.7,0.3]],[["Section_1","dend_1"],[0.7,0.3]]]
+    #Conn_array=["Vervaeke_2012_based",1,["constant conductance",426,"pS"],"segments",[["Section_1","dend_1"],[0.7,0.3]],[["Section_1","dend_1"],[0.7,0.3]]]
     #testing case 2 with subsegment probabilities:
     #one cell group with subsegment probabilities of only one segment
-    #Conn_array=["Vervaeke_2012_based",1,["variable conductance","Gaussian",426,10],"subsegments",[["Section_1"],[[[0.25,0.2],[0.25,0.4],[0.25,0.4],[0.25,0.4]]]]]
+    #Conn_array=["Vervaeke_2012_based",1,["variable conductance","Gaussian",426,10,"pS"],"subsegments",[["Section_1"],[[[0.25,0.2],[0.25,0.4],[0.25,0.4],[0.25,0.4]]]]]
+                                                                  
+    #generate_and_run_golgi_cell_net("Simple_Golgi_Net",Cell_array,Position_array,Conn_array,Input_array,Sim_array,"not a list")
+
+    #use different references to generate different network examples
+    generate_and_run_golgi_cell_net("V2010_2cells_1input",Cell_array,Position_array,Conn_array,Input_array,Sim_array,"not a list")
     
-                                                                   
-    generate_and_run_golgi_cell_net("Simple_Golgi_Net",Cell_array,Position_array,Conn_array,Input_array,Sim_array,"not a list")
-   
+    
         
     
 	

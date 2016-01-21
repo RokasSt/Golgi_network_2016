@@ -4,11 +4,22 @@
     <pulseGenerator id="Input_0" delay="20.0ms" duration="200.0ms" amplitude="4E-5uA"/>
     <pulseGenerator id="Input_1" delay="220.0ms" duration="200.0ms" amplitude="-0.5E-5uA"/>
     <network id="Simple_Golgi_Net_network" type="networkWithTemperature" temperature="23 degC">
-        <population id="Golgi_pop0" component="Very_Simple_Golgi_test_morph" size="2"/>
+        <population id="Golgi_pop0" type="populationList" component="Very_Simple_Golgi_test_morph" size="2">
+            <instance id="0">
+                <location y="1.016916945706836" x="41.661987254534118" z="82.520650925374312"/>
+            </instance>
+            <instance id="1">
+                <location y="36.841168948847567" x="29.863985519959279" z="19.366134904507426"/>
+            </instance>
+        </population>
         <electricalProjection id="proj0" postsynapticPopulation="Golgi_pop0" presynapticPopulation="Golgi_pop0">
-            <electricalConnection id="0" synapse="gap_junction0" preFractionAlong="0.553221" preSegment="2" postFractionAlong="0.354901" postSegment="1" postCell="1" preCell="0"/>
+            <electricalConnection id="0" synapse="gap_junction0" preFractionAlong="0.354901" preSegment="1" postFractionAlong="0.958065" postSegment="2" postCell="../Golgi_pop0/1/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/0/Very_Simple_Golgi_test_morph"/>
         </electricalProjection>
-        <explicitInput input="Input_0" destination="synapses" target="Golgi_pop0[1]"/>
-        <explicitInput input="Input_1" destination="synapses" target="Golgi_pop0[1]"/>
+        <inputList id="Input_list0" component="Input_0">
+            <input destination="synapses" id="0" target="../Golgi_pop0/0/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+        <inputList id="Input_list1" component="Input_1">
+            <input destination="synapses" id="0" target="../Golgi_pop0/0/Very_Simple_Golgi_test_morph"/>
+        </inputList>
     </network>
 </neuroml>
