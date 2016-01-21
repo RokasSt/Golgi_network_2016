@@ -1,16 +1,14 @@
 <neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2beta4.xsd" id="Simple_Golgi_Net">
     <include href="Very_Simple_Golgi_test_morph.cell.nml"></include>
-    <gapJunction id="gap_junction0" conductance="173.988486pS"/>
+    <gapJunction id="gap_junction0" conductance="2232.032922pS"/>
     <pulseGenerator id="Input_0" delay="20.0ms" duration="200.0ms" amplitude="4E-5uA"/>
     <pulseGenerator id="Input_1" delay="220.0ms" duration="200.0ms" amplitude="-0.5E-5uA"/>
     <network id="Simple_Golgi_Net_network" type="networkWithTemperature" temperature="23 degC">
-        <population id="Golgi_pop0" component="Very_Simple_Golgi_test_morph" size="3"/>
+        <population id="Golgi_pop0" component="Very_Simple_Golgi_test_morph" size="2"/>
         <electricalProjection id="proj0" postsynapticPopulation="Golgi_pop0" presynapticPopulation="Golgi_pop0">
-            <electricalConnection id="0" synapse="gap_junction0" preFractionAlong="0.503935" preSegment="5" postFractionAlong="0.148146" postSegment="2" postCell="2" preCell="1"/>
+            <electricalConnection id="0" synapse="gap_junction0" preFractionAlong="0.553221" preSegment="2" postFractionAlong="0.354901" postSegment="1" postCell="1" preCell="0"/>
         </electricalProjection>
         <explicitInput input="Input_0" destination="synapses" target="Golgi_pop0[1]"/>
         <explicitInput input="Input_1" destination="synapses" target="Golgi_pop0[1]"/>
-        <explicitInput input="Input_0" destination="synapses" target="Golgi_pop0[2]"/>
-        <explicitInput input="Input_1" destination="synapses" target="Golgi_pop0[2]"/>
     </network>
 </neuroml>
