@@ -1,0 +1,37 @@
+<Lems>
+    
+    <!-- 
+
+        This LEMS file has been automatically generated using PyNeuroML v0.1.7 (libNeuroML v0.2.11)
+
+     -->
+    
+    <!-- Specify which component to run -->
+    <Target component="V2010_2cells_1input"/>
+
+    <!-- Include core NeuroML2 ComponentType definitions -->
+    <Include file="Cells.xml"/>
+    <Include file="Networks.xml"/>
+    <Include file="Simulation.xml"/>
+    
+    <Include file="V2010_2cells_1input.net.nml"/>
+    <Include file="../Very_Simple_Golgi_test_morph.cell.nml"/>
+    <Include file="../Golgi_Na.channel.nml"/>
+    <Include file="../Golgi_KV.channel.nml"/>
+    <Include file="../LeakCond.channel.nml"/>
+   
+    <Simulation id="V2010_2cells_1input" length="450ms" step="0.005ms" target="V2010_2cells_1input_network">
+        
+        <Display id="display_voltages0" title="Voltages Golgi_pop0" timeScale="1ms" xmin="-45.0" xmax="495.0" ymin="-75" ymax="50">
+            <Line id="Golgi_pop0[0]: Vm" quantity="Golgi_pop0[0]/v" scale="1mV" color="#fa8826" timeScale="1ms"/>
+            <Line id="Golgi_pop0[1]: Vm" quantity="Golgi_pop0[1]/v" scale="1mV" color="#6980a8" timeScale="1ms"/>
+        </Display>
+        
+        <OutputFile id="Volts0_file0" fileName="Golgi_pop0_0_NEURON_V2010multi1_2c_1input.dat">
+            <OutputColumn id="v0" quantity="Golgi_pop0[0]/v"/> 
+            <OutputColumn id="v1" quantity="Golgi_pop0[1]/v"/> 
+        </OutputFile>
+        
+    </Simulation>
+
+</Lems>
