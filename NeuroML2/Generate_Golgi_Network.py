@@ -199,7 +199,11 @@ def generate_and_run_golgi_cell_net(ref,cell_array,location_array, connectivity_
                                             Pre_segment_id=Pre_segment_id[0]
                                             Post_segment_id=random.sample(post_segment_ids,1)
                                             Post_segment_id=Post_segment_id[0]
-                                            gap_junction = neuroml.GapJunction(id="gap_junction%d"%gap_counter, conductance="%fpS"%synaptic_weight_vervaeke_2010(distance_between_cells))
+                                            if connectivity_information[-1][0]=="testing":
+                                               gap_junction = neuroml.GapJunction(id="gap_junction%d"%gap_counter, conductance="%fpS"%(synaptic_weight_vervaeke_2010(distance_between_cells)*connectivity_information[-1][1]))
+                                            else:
+                                               gap_junction = neuroml.GapJunction(id="gap_junction%d"%gap_counter, conductance="%fpS"%synaptic_weight_vervaeke_2010(distance_between_cells))
+                                               gap_junction = neuroml.GapJunction(id="gap_junction%d"%gap_counter, conductance="%fpS"%synaptic_weight_vervaeke_2010(distance_between_cells)*connectivity_information[-1][1])
                                             conn =neuroml.ElectricalConnection(id=conn_count,\
                                                                                 pre_cell="../%s/%d/%s"%(Golgi_pop_index_array[pre_pop_index],Pre_cell,cell_array[pre_pop_index+1][0]),\
                                                                               post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_array[post_pop_index+1][0]),\
@@ -457,7 +461,10 @@ def generate_and_run_golgi_cell_net(ref,cell_array,location_array, connectivity_
                                             Pre_segment_id=Pre_segment_id[0]
                                             Post_segment_id=random.sample(post_segment_ids,1)
                                             Post_segment_id=Post_segment_id[0]
-                                            gap_junction = neuroml.GapJunction(id="gap_junction%d"%gap_counter, conductance="%fpS"%synaptic_weight_vervaeke_2010(distance_between_cells))
+                                            if connectivity_information[-1][0]=="testing":
+                                               gap_junction = neuroml.GapJunction(id="gap_junction%d"%gap_counter, conductance="%fpS"%(synaptic_weight_vervaeke_2010(distance_between_cells)*connectivity_information[-1][1]))
+                                            else:
+                                               gap_junction = neuroml.GapJunction(id="gap_junction%d"%gap_counter, conductance="%fpS"%synaptic_weight_vervaeke_2010(distance_between_cells))
                                             
                                             conn =neuroml.ElectricalConnection(id=conn_count,pre_cell="%d"%Pre_cell,post_cell="%d"%Post_cell,synapse=gap_junction.id,\
                                                                              pre_segment="%d"%Pre_segment_id,post_segment="%d"%Post_segment_id,\
@@ -575,71 +582,72 @@ def generate_and_run_golgi_cell_net(ref,cell_array,location_array, connectivity_
 
         validate_neuroml2(nml_file)
 
-        if simulation_parameters[2]=="jNeuroML" or simulation_parameters[2]=="jNeuroML_NEURON":
         
         # Create a LEMSSimulation to manage creation of LEMS file
 
-           ls = LEMSSimulation(ref, simulation_parameters[0], simulation_parameters[1])
+        ls = LEMSSimulation(ref, simulation_parameters[0], simulation_parameters[1])
 
         # Point to network as target of simulation
     
-           ls.assign_simulation_target(net.id)
+        ls.assign_simulation_target(net.id)
 
-           ls.include_neuroml2_file(nml_file)
+        ls.include_neuroml2_file(nml_file)
+        
+        
 
         # Specify Displays and Output Files
-        if simulation_parameters[2]=="jNeuroML":
-	   if string.lower(population_type) =="list":
-	      for x in range(cell_array[0]):
-	         disp = "display_voltages%d"%x
-	         ls.create_display(disp, "Voltages Golgi_pop%d"%x, "-75", "50")
-	         of0 = 'Volts%d_file0'%x
-	         ls.create_output_file(of0, "Golgi_pop%d_0_jNeuroML_%s.dat"%(x,simulation_parameters[3]))
-	         dat_file_counter=0
-	         max_traces = 20
-	         if cell_array[x+1][1]<=max_traces:
-	            for i in range(cell_array[x+1][1]):
-		        quantity = "%s/%i/%s/v"%(Golgi_pop_index_array[x], i,cell_array[x+1][0])
-			ls.add_line_to_display(disp, "../%s/%i: Vm"%(Golgi_pop_index_array[x],i), quantity, "1mV", pynml.get_next_hex_color())
-		        ls.add_column_to_output_file(of0, 'v%i'%i, quantity)
+        
+	if string.lower(population_type) =="list":
+	   for x in range(cell_array[0]):
+	       disp = "display_voltages%d"%x
+	       ls.create_display(disp, "Voltages Golgi_pop%d"%x, "-75", "50")
+	       of0 = 'Volts%d_file0'%x
+	       ls.create_output_file(of0, "Golgi_pop%d_0_%s.dat"%(x,simulation_parameters[3]))
+	       dat_file_counter=0
+	       max_traces = 20
+	       if cell_array[x+1][1]<=max_traces:
+	          for i in range(cell_array[x+1][1]):
+		      quantity = "%s/%i/%s/v"%(Golgi_pop_index_array[x], i,cell_array[x+1][0])
+	              ls.add_line_to_display(disp, "../%s/%i: Vm"%(Golgi_pop_index_array[x],i), quantity, "1mV", pynml.get_next_hex_color())
+		      ls.add_column_to_output_file(of0, 'v%i'%i, quantity)
 					   
-	         else:
-		    randomly_select_displayed_cells=random.sample(range(cell_array[x+1][1]),max_traces)
-		    for y in randomly_select_displayed_cells:
-		       quantity = "%s/%i/%s/v"%(Golgi_pop_index_array[x], y,cell_array[x+1][0])
-		       ls.add_line_to_display(disp, "../%s/%i: Vm"%(Golgi_pop_index_array[x],y), quantity, "1mV", pynml.get_next_hex_color())
+	       else:
+		  randomly_select_displayed_cells=random.sample(range(cell_array[x+1][1]),max_traces)
+		  for y in randomly_select_displayed_cells:
+		      quantity = "%s/%i/%s/v"%(Golgi_pop_index_array[x], y,cell_array[x+1][0])
+		      ls.add_line_to_display(disp, "../%s/%i: Vm"%(Golgi_pop_index_array[x],y), quantity, "1mV", pynml.get_next_hex_color())
 					      
-		    for i in range(cell_array[x+1][1]):
-		        quantity = "%s/%i/%s/v"%(Golgi_pop_index_array[x], i,cell_array[x+1][0])
-		        if i<=max_traces:
-			   ls.add_column_to_output_file(of0, 'v%i'%i, quantity)
-		        else:
-			   max_traces=max_traces+max_traces
-			   del of0
-			   dat_file_counter+=1
-			   of0='Volts%d_file%d'%(x,dat_file_counter)
-		           ls.create_output_file(of0, "Golgi_pop%d_%d_jNeuroML_%s.dat"%(x,dat_file_counter,simulation_parameters[3]))
-		           ls.add_column_to_output_file(of0, 'v%i'%i, quantity)
-           else:
-	      for x in range(cell_array[0]):
-	         disp = "display_voltages%d"%x
-	         ls.create_display(disp, "Voltages Golgi_pop%d"%x, "-75", "50")
-		 of0 = 'Volts%d_file0'%x
-		 ls.create_output_file(of0, "Golgi_pop%d_0_jNeuroML_%s.dat"%(x,simulation_parameters[3]))
-		 dat_file_counter=0
-		 max_traces = 20
-		 if cell_array[x+1][1]<=max_traces:
-		    for i in range(cell_array[x+1][1]):
+		  for i in range(cell_array[x+1][1]):
+		      quantity = "%s/%i/%s/v"%(Golgi_pop_index_array[x], i,cell_array[x+1][0])
+		      if i<=max_traces:
+			 ls.add_column_to_output_file(of0, 'v%i'%i, quantity)
+		      else:
+			 max_traces=max_traces+max_traces
+			 del of0
+			 dat_file_counter+=1
+			 of0='Volts%d_file%d'%(x,dat_file_counter)
+		         ls.create_output_file(of0, "Golgi_pop%d_%d_%s.dat"%(x,dat_file_counter,simulation_parameters[3]))
+		         ls.add_column_to_output_file(of0, 'v%i'%i, quantity)
+        else:
+	    for x in range(cell_array[0]):
+	        disp = "display_voltages%d"%x
+	        ls.create_display(disp, "Voltages Golgi_pop%d"%x, "-75", "50")
+	        of0 = 'Volts%d_file0'%x
+	        ls.create_output_file(of0, "Golgi_pop%d_0_%s.dat"%(x,simulation_parameters[3]))
+	        dat_file_counter=0
+	        max_traces = 20
+	        if cell_array[x+1][1]<=max_traces:
+		   for i in range(cell_array[x+1][1]):
 		       quantity = "%s[%i]/v"%(Golgi_pop_index_array[x], i)
 		       ls.add_line_to_display(disp, "%s[%i]: Vm"%(Golgi_pop_index_array[x],i), quantity, "1mV", pynml.get_next_hex_color())
 		       ls.add_column_to_output_file(of0, 'v%i'%i, quantity)
-	         else:
-		    randomly_select_displayed_cells=random.sample(range(cell_array[x+1][1]),max_traces)
-		    for y in randomly_select_displayed_cells:
+	        else:
+		   randomly_select_displayed_cells=random.sample(range(cell_array[x+1][1]),max_traces)
+		   for y in randomly_select_displayed_cells:
 		       quantity = "%s[%i]/v"%(Golgi_pop_index_array[x], y)
 		       ls.add_line_to_display(disp, "%s[%i]: Vm"%(Golgi_pop_index_array[x],y), quantity, "1mV", pynml.get_next_hex_color())
 					      
-		    for i in range(cell_array[x+1][1]):
+		   for i in range(cell_array[x+1][1]):
 		       quantity = "%s[%i]/v"%(Golgi_pop_index_array[x], i)
 		       if i<=max_traces:
 		          ls.add_column_to_output_file(of0, 'v%i'%i, quantity)
@@ -648,76 +656,15 @@ def generate_and_run_golgi_cell_net(ref,cell_array,location_array, connectivity_
 			  del of0
 			  dat_file_counter+=1
 			  of0='Volts%d_file%d'%(x,dat_file_counter)
-			  ls.create_output_file(of0, "Golgi_pop%d_%d_jNeuroML_%s.dat"%(x,dat_file_counter,simulation_parameters[3]))
+			  ls.create_output_file(of0, "Golgi_pop%d_%d_%s.dat"%(x,dat_file_counter,simulation_parameters[3]))
 			  ls.add_column_to_output_file(of0, 'v%i'%i, quantity)
-	   lems_file_name = ls.save_to_file()
+	# save LEMS file
+        lems_file_name = ls.save_to_file()
+        if simulation_parameters[2]=="jNeuroML":
 	   results1 = pynml.run_lems_with_jneuroml(lems_file_name, nogui=True, load_saved_data=True, plot=True)
-
         if simulation_parameters[2]=="jNeuroML_NEURON":
-           if string.lower(population_type) =="list":
-	      for x in range(cell_array[0]):
-	         disp = "display_voltages%d"%x
-		 ls.create_display(disp, "Voltages Golgi_pop%d"%x, "-75", "50")
-		 of0 = 'Volts%d_file0'%x
-		 ls.create_output_file(of0, "Golgi_pop%d_0_NEURON_%s.dat"%(x,simulation_parameters[3]))
-		 dat_file_counter=0
-		 max_traces = 20
-		 if cell_array[x+1][1]<=max_traces:
-		    for i in range(cell_array[x+1][1]):
-		       quantity = "%s/%i/%s/v"%(Golgi_pop_index_array[x], i,cell_array[x+1][0])
-		       ls.add_line_to_display(disp, "../%s/%i: Vm"%(Golgi_pop_index_array[x],i), quantity, "1mV", pynml.get_next_hex_color())
-		       ls.add_column_to_output_file(of0, 'v%i'%i, quantity)
-		 else:
-		    randomly_select_displayed_cells=random.sample(range(cell_array[x+1][1]),max_traces)
-		    for y in randomly_select_displayed_cells:
-		       quantity = "%s/%i/%s/v"%(Golgi_pop_index_array[x], y,cell_array[x+1][0])
-		       ls.add_line_to_display(disp, "../%s/%i: Vm"%(Golgi_pop_index_array[x],y), quantity, "1mV", pynml.get_next_hex_color())
-	            for i in range(cell_array[x+1][1]):
-	               quantity = "%s/%i/%s/v"%(Golgi_pop_index_array[x], i,cell_array[x+1][0])
-		       if i<=max_traces:
-		          ls.add_column_to_output_file(of0, 'v%i'%i, quantity)
-		       else:
-		          max_traces=max_traces+max_traces
-		          del of0
-		          dat_file_counter+=1
-		          of0='Volts%d_file%d'%(x,dat_file_counter)
-		          ls.create_output_file(of0, "Golgi_pop%d_%d_NEURON_%s.dat"%(x,dat_file_counter,simulation_parameters[3]))
-			  ls.add_column_to_output_file(of0, 'v%i'%i, quantity)
-	   else:
-		     for x in range(cell_array[0]):
-		        disp = "display_voltages%d"%x
-		        ls.create_display(disp, "Voltages Golgi_pop%d"%x, "-75", "50")
-		        of0 = 'Volts%d_file0'%x
-		        ls.create_output_file(of0, "Golgi_pop%d_0_NEURON_%s.dat"%(x,simulation_parameters[3]))
-		        dat_file_counter=0
-		        max_traces = 20
-		        if cell_array[x+1][1]<=max_traces:
-		           for i in range(cell_array[x+1][1]):
-			      quantity = "%s[%i]/v"%(Golgi_pop_index_array[x], i)
-			      ls.add_line_to_display(disp, "%s[%i]: Vm"%(Golgi_pop_index_array[x],i), quantity, "1mV", pynml.get_next_hex_color())
-			      ls.add_column_to_output_file(of0, 'v%i'%i, quantity)
-			   
-			else:
-		             randomly_select_displayed_cells=random.sample(range(cell_array[x+1][1]),max_traces)
-		             for y in randomly_select_displayed_cells:
-		                 quantity = "%s[%i]/v"%(Golgi_pop_index_array[x], y)
-			         ls.add_line_to_display(disp, "%s[%i]: Vm"%(Golgi_pop_index_array[x],y), quantity, "1mV", pynml.get_next_hex_color())
-			      
-		             for i in range(cell_array[x+1][1]):
-			         quantity = "%s[%i]/v"%(Golgi_pop_index_array[x], i)
-			         if i<=max_traces:
-			            ls.add_column_to_output_file(of0, 'v%i'%i, quantity)
-			         else:
-		                    max_traces=max_traces+max_traces
-		                    del of0
-		                    dat_file_counter+=1
-		                    of0='Volts%d_file%d'%(x,dat_file_counter)
-		                    ls.create_output_file(of0, "Golgi_pop%d_%d_NEURON_%s.dat"%(x,dat_file_counter,simulation_parameters[3]))
-			            ls.add_column_to_output_file(of0, 'v%i'%i, quantity)
-                # Save to LEMS XML file
-           lems_file_name = ls.save_to_file() 
-                # Run with jNeuroML_NEURON
            results1 = pynml.run_lems_with_jneuroml_neuron(lems_file_name, nogui=True, load_saved_data=True, plot=True)
+        
          
 
 if __name__ == "__main__":
@@ -725,27 +672,30 @@ if __name__ == "__main__":
     # a line below is a Cell_array for testing generation of multiple populations; code generates two populations and four projections as expected
     #Cell_array=[2,["Very_Simple_Golgi_test_morph",4],["Very_Simple_Golgi_test_morph",4]]
     
-    #Cell_array=[1,["Very_Simple_Golgi_test_morph",3]]
+   
 
 
     #test one multi-compartment cell with no connections
-    Cell_array=[1,["Very_Simple_Golgi_test_morph",3]]
+    Cell_array=[1,["Very_Simple_Golgi_test_morph",2]]
 
-    #Cell_array=[1,["Very_Simple_Golgi",2]]
-    Position_array=["random",350, 350, 350]
+    #Cell_array=[1,["Very_Simple_Golgi",3]]
+    Position_array=["random",100, 100, 100]
     #Conn_array=["uniform random",[1,"2nS"]]
     Input_array=["testing",0.5,["20.0ms","200.0ms","4E-5uA"],["220.0ms","200.0ms","-0.5E-5uA"]]
     # 0.0002 ms, 0.0003 ms timesteps produce, on average, a 0.5 ms spike time difference between JNeuroML and NEURON simulations. Qualitatively, the traces are the same.
     
-    Sim_array=[450,0.0003,"jNeuroML_NEURON","V2010multi1"] 
+    #use larger timestep if simulated with NEURON
+    #a line below is a template for sim_array:
+    #Sim_array=[simulation time,simulation timestep, simulate or not simulate: if simulate then either "jNeuroML_NEURON" or "jNeuroML" string has to be specified; otherwise a different string such as "no simulation" has to be specified, the last argument must be an identifier of dat file such as "NEURON_V2010multi1"] 
 
-    #Sim_array=[450,0.0003,"no simulation"]
+    Sim_array=[450,0.005,"jNeuroML_NEURON","NEURON_V2010multi1_2c_1input"]
     
     #Conn_array=["Vervaeke_2010_one_compartment",1]     # second parameter controls spatial scale
 
     #Conn_array=["Vervaeke_2010_multi_compartment",1,[["dendrite_group"],[1]],[["dendrite_group"],[1]]]
 
-    Conn_array=["Vervaeke_2010_multi_compartment",1,[["dendrite_group"],[1]]]
+    #Below: modify conn_array by introducing a scaling factor that scales a pico-level conductance to nano-scale; this can be used to test the presence of the electrical connection because input to one of the cells elicits noticeable spiking response in the second cell. Pico-level conductance at a single gap-junction is not sufficient to elicit action potentials in the second cell. This optional parameter, if present, has to be appended at the end of conn_array.
+    Conn_array=["Vervaeke_2010_multi_compartment",1,[["dendrite_group"],[1]],["testing",4]]
 
     #template for connectivity array for models with simulated GJ density
     #Conn_array=["Vervaeke_2012_based",spatial scale,["homogeneous or heterogeneous conductance",...],["level of applying probabilities: segment/segment groups and subsegment"],\
