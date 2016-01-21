@@ -139,10 +139,10 @@
                 <channelDensity condDensity="0.021 mS_per_cm2" id="LeakCond_all" ionChannel="LeakCond" erev="-55.0 mV" ion="non_specific"/>
                 
                 
-                <channelDensity condDensity="48.0 mS_per_cm2" id="Na_all" ionChannel="Golgi_Na" ion="na" erev="87.39 mV"/>
+                <channelDensity condDensity="48.0 mS_per_cm2" id="Na_all" ionChannel="Golgi_Na" ion="na" erev="87.39 mV" segmentGroup="soma_group"/>
 
                 
-              <channelDensity condDensity="32.0 mS_per_cm2" id="KV_all" ionChannel="Golgi_KV" ion="k" erev="-84.69 mV"/>
+              <channelDensity condDensity="32.0 mS_per_cm2" id="KV_all" ionChannel="Golgi_KV" ion="k" erev="-84.69 mV" segmentGroup="soma_group"/>
 
 
                 <spikeThresh value="0 mV"/>
