@@ -23,13 +23,49 @@
     <Simulation id="Simple_Golgi_Net" length="450ms" step="0.005ms" target="Simple_Golgi_Net_network">
         
         <Display id="display_voltages0" title="Voltages Golgi_pop0" timeScale="1ms" xmin="-45.0" xmax="495.0" ymin="-75" ymax="50">
-            <Line id="Golgi_pop0[0]: Vm" quantity="Golgi_pop0[0]/v" scale="1mV" color="#fa8826" timeScale="1ms"/>
-            <Line id="Golgi_pop0[1]: Vm" quantity="Golgi_pop0[1]/v" scale="1mV" color="#6980a8" timeScale="1ms"/>
+            <Line id="Golgi_pop0[0]: Vm" quantity="Golgi_pop0[0]/v" scale="1mV" color="#2c4278" timeScale="1ms"/>
+            <Line id="Golgi_pop0[1]: Vm" quantity="Golgi_pop0[1]/v" scale="1mV" color="#fefdca" timeScale="1ms"/>
+            <Line id="Golgi_pop0[2]: Vm" quantity="Golgi_pop0[2]/v" scale="1mV" color="#93d927" timeScale="1ms"/>
+            <Line id="Golgi_pop0[3]: Vm" quantity="Golgi_pop0[3]/v" scale="1mV" color="#76da60" timeScale="1ms"/>
+            <Line id="Golgi_pop0[4]: Vm" quantity="Golgi_pop0[4]/v" scale="1mV" color="#ba91c1" timeScale="1ms"/>
+            <Line id="Golgi_pop0[5]: Vm" quantity="Golgi_pop0[5]/v" scale="1mV" color="#98ba08" timeScale="1ms"/>
+            <Line id="Golgi_pop0[6]: Vm" quantity="Golgi_pop0[6]/v" scale="1mV" color="#ec49b6" timeScale="1ms"/>
+            <Line id="Golgi_pop0[7]: Vm" quantity="Golgi_pop0[7]/v" scale="1mV" color="#35ce7d" timeScale="1ms"/>
+            <Line id="Golgi_pop0[8]: Vm" quantity="Golgi_pop0[8]/v" scale="1mV" color="#48e443" timeScale="1ms"/>
+            <Line id="Golgi_pop0[9]: Vm" quantity="Golgi_pop0[9]/v" scale="1mV" color="#845841" timeScale="1ms"/>
+            <Line id="Golgi_pop0[10]: Vm" quantity="Golgi_pop0[10]/v" scale="1mV" color="#41daa0" timeScale="1ms"/>
+            <Line id="Golgi_pop0[11]: Vm" quantity="Golgi_pop0[11]/v" scale="1mV" color="#a95c40" timeScale="1ms"/>
+            <Line id="Golgi_pop0[12]: Vm" quantity="Golgi_pop0[12]/v" scale="1mV" color="#5e787e" timeScale="1ms"/>
+            <Line id="Golgi_pop0[13]: Vm" quantity="Golgi_pop0[13]/v" scale="1mV" color="#0afbbe" timeScale="1ms"/>
+            <Line id="Golgi_pop0[14]: Vm" quantity="Golgi_pop0[14]/v" scale="1mV" color="#7ddc9a" timeScale="1ms"/>
+            <Line id="Golgi_pop0[15]: Vm" quantity="Golgi_pop0[15]/v" scale="1mV" color="#1f7306" timeScale="1ms"/>
+            <Line id="Golgi_pop0[16]: Vm" quantity="Golgi_pop0[16]/v" scale="1mV" color="#be2c74" timeScale="1ms"/>
+            <Line id="Golgi_pop0[17]: Vm" quantity="Golgi_pop0[17]/v" scale="1mV" color="#b8b125" timeScale="1ms"/>
+            <Line id="Golgi_pop0[18]: Vm" quantity="Golgi_pop0[18]/v" scale="1mV" color="#ba55fc" timeScale="1ms"/>
+            <Line id="Golgi_pop0[19]: Vm" quantity="Golgi_pop0[19]/v" scale="1mV" color="#31b219" timeScale="1ms"/>
         </Display>
         
-        <OutputFile id="Volts0_file0" fileName="Golgi_pop0_0_NEURON_V2010multi1_2c_1input.dat">
+        <OutputFile id="Volts0_file0" fileName="Golgi_pop0_0_NEURON_V2012multi1_2c_1input.dat">
             <OutputColumn id="v0" quantity="Golgi_pop0[0]/v"/> 
             <OutputColumn id="v1" quantity="Golgi_pop0[1]/v"/> 
+            <OutputColumn id="v2" quantity="Golgi_pop0[2]/v"/> 
+            <OutputColumn id="v3" quantity="Golgi_pop0[3]/v"/> 
+            <OutputColumn id="v4" quantity="Golgi_pop0[4]/v"/> 
+            <OutputColumn id="v5" quantity="Golgi_pop0[5]/v"/> 
+            <OutputColumn id="v6" quantity="Golgi_pop0[6]/v"/> 
+            <OutputColumn id="v7" quantity="Golgi_pop0[7]/v"/> 
+            <OutputColumn id="v8" quantity="Golgi_pop0[8]/v"/> 
+            <OutputColumn id="v9" quantity="Golgi_pop0[9]/v"/> 
+            <OutputColumn id="v10" quantity="Golgi_pop0[10]/v"/> 
+            <OutputColumn id="v11" quantity="Golgi_pop0[11]/v"/> 
+            <OutputColumn id="v12" quantity="Golgi_pop0[12]/v"/> 
+            <OutputColumn id="v13" quantity="Golgi_pop0[13]/v"/> 
+            <OutputColumn id="v14" quantity="Golgi_pop0[14]/v"/> 
+            <OutputColumn id="v15" quantity="Golgi_pop0[15]/v"/> 
+            <OutputColumn id="v16" quantity="Golgi_pop0[16]/v"/> 
+            <OutputColumn id="v17" quantity="Golgi_pop0[17]/v"/> 
+            <OutputColumn id="v18" quantity="Golgi_pop0[18]/v"/> 
+            <OutputColumn id="v19" quantity="Golgi_pop0[19]/v"/> 
         </OutputFile>
         
     </Simulation>
