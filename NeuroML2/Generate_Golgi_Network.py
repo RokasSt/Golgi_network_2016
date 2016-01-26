@@ -9,6 +9,7 @@ import random
 import numpy as np
 import string
 
+
 from methods import *
 
 
@@ -16,8 +17,10 @@ from methods import *
 ### a main script for generating and running golgi cell network by Rokas Stanislovas (2016)
 def generate_and_run_golgi_cell_net(ref,cell_array,location_array, connectivity_information,input_information,simulation_parameters,population_type):
         
-        
-        random.seed(12345)
+        if string.lower(simulation_parameters[5][0])=="seed":
+           if simulation_parameters[5][1]==True:
+              random.seed(12345)
+              
         nml_doc = neuroml.NeuroMLDocument(id=ref)
         #cell_array will have to include cell_types and no_of_cells
         #connectivity_information is a list of lists that will have to include connectivity parameters; now code only for a random configuration with parameters connection_probability and conductance_strength
@@ -676,14 +679,14 @@ def generate_and_run_golgi_cell_net(ref,cell_array,location_array, connectivity_
 	   for x in range(cell_array[0]):
 	       disp = "display_voltages%d"%x
 	       ls.create_display(disp, "Voltages Golgi_pop%d"%x, "-75", "50")
-	       of0 = 'Volts%d_file0'%x
-	       ls.create_output_file(of0, "Golgi_pop%d_0_%s.dat"%(x,simulation_parameters[3]))
-	       dat_file_counter=0
+	       
 	       max_traces = 20
 	       if cell_array[x+1][1]<=max_traces:
 	          for i in range(cell_array[x+1][1]):
 		      quantity = "%s/%i/%s/v"%(Golgi_pop_index_array[x], i,cell_array[x+1][0])
 	              ls.add_line_to_display(disp, "../%s/%i: Vm"%(Golgi_pop_index_array[x],i), quantity, "1mV", pynml.get_next_hex_color())
+                      of0 = 'Volts%d_file0_%d'%(x,i)
+                      ls.create_output_file(of0, "simulations/sim%d/Golgi_pop%d_%s_cell%d.dat"%(simulation_parameters[4],x,simulation_parameters[3],i))
 		      ls.add_column_to_output_file(of0, 'v%i'%i, quantity)
 					   
 	       else:
@@ -694,27 +697,20 @@ def generate_and_run_golgi_cell_net(ref,cell_array,location_array, connectivity_
 					      
 		  for i in range(cell_array[x+1][1]):
 		      quantity = "%s/%i/%s/v"%(Golgi_pop_index_array[x], i,cell_array[x+1][0])
-		      if i<=max_traces:
-			 ls.add_column_to_output_file(of0, 'v%i'%i, quantity)
-		      else:
-			 max_traces=max_traces+max_traces
-			 del of0
-			 dat_file_counter+=1
-			 of0='Volts%d_file%d'%(x,dat_file_counter)
-		         ls.create_output_file(of0, "Golgi_pop%d_%d_%s.dat"%(x,dat_file_counter,simulation_parameters[3]))
-		         ls.add_column_to_output_file(of0, 'v%i'%i, quantity)
+                      of0 = 'Volts%d_file0_%d'%(x,i)
+                      ls.create_output_file(of0, "simulations/sim%d/Golgi_pop%d_%s_cell%d.dat"%(simulation_parameters[4],x,simulation_parameters[3],i))
+		      ls.add_column_to_output_file(of0, 'v%i'%i, quantity)
         else:
 	    for x in range(cell_array[0]):
 	        disp = "display_voltages%d"%x
 	        ls.create_display(disp, "Voltages Golgi_pop%d"%x, "-75", "50")
-	        of0 = 'Volts%d_file0'%x
-	        ls.create_output_file(of0, "Golgi_pop%d_0_%s.dat"%(x,simulation_parameters[3]))
-	        dat_file_counter=0
 	        max_traces = 20
 	        if cell_array[x+1][1]<=max_traces:
 		   for i in range(cell_array[x+1][1]):
 		       quantity = "%s[%i]/v"%(Golgi_pop_index_array[x], i)
 		       ls.add_line_to_display(disp, "%s[%i]: Vm"%(Golgi_pop_index_array[x],i), quantity, "1mV", pynml.get_next_hex_color())
+                       of0 = 'Volts%d_file0_%d'%(x,i)
+	               ls.create_output_file(of0, "simulations/sim%d/Golgi_pop%d_%s_cell%d.dat"%(simulation_parameters[4],x,simulation_parameters[3],i))
 		       ls.add_column_to_output_file(of0, 'v%i'%i, quantity)
 	        else:
 		   randomly_select_displayed_cells=random.sample(range(cell_array[x+1][1]),max_traces)
@@ -724,27 +720,26 @@ def generate_and_run_golgi_cell_net(ref,cell_array,location_array, connectivity_
 					      
 		   for i in range(cell_array[x+1][1]):
 		       quantity = "%s[%i]/v"%(Golgi_pop_index_array[x], i)
-		       if i<=max_traces:
-		          ls.add_column_to_output_file(of0, 'v%i'%i, quantity)
-		       else:
-			  max_traces=max_traces+max_traces
-			  del of0
-			  dat_file_counter+=1
-			  of0='Volts%d_file%d'%(x,dat_file_counter)
-			  ls.create_output_file(of0, "Golgi_pop%d_%d_%s.dat"%(x,dat_file_counter,simulation_parameters[3]))
-			  ls.add_column_to_output_file(of0, 'v%i'%i, quantity)
+		       of0 = 'Volts%d_file0_%d'%(x,i)
+		       ls.create_output_file(of0, "simulations/sim%d/Golgi_pop%d_%s_cell%d.dat"%(simulation_parameters[4],x,simulation_parameters[3],i))
+		       ls.add_column_to_output_file(of0, 'v%i'%i, quantity)
 	# save LEMS file
         lems_file_name = ls.save_to_file()
-        if simulation_parameters[2]=="jNeuroML":
-	   results1 = pynml.run_lems_with_jneuroml(lems_file_name, nogui=True, load_saved_data=True, plot=True)
-        if simulation_parameters[2]=="jNeuroML_NEURON":
-           results1 = pynml.run_lems_with_jneuroml_neuron(lems_file_name, nogui=True, load_saved_data=True, plot=True)
-        
+        if string.lower(simulation_parameters[6][0])=="plot":
+           if simulation_parameters[6][1]==True:
+              if simulation_parameters[2]=="jNeuroML":
+	         results1 = pynml.run_lems_with_jneuroml(lems_file_name, nogui=True, load_saved_data=True, plot=True)
+              if simulation_parameters[2]=="jNeuroML_NEURON":
+                 results1 = pynml.run_lems_with_jneuroml_neuron(lems_file_name, nogui=True, load_saved_data=True, plot=True)
+           else:
+              if simulation_parameters[2]=="jNeuroML":
+	         results1 = pynml.run_lems_with_jneuroml(lems_file_name, nogui=True, load_saved_data=False, plot=False)
+              if simulation_parameters[2]=="jNeuroML_NEURON":
+                 results1 = pynml.run_lems_with_jneuroml_neuron(lems_file_name, nogui=True, load_saved_data=False, plot=False)
          
-
 if __name__ == "__main__":
     
-
+    #Run_simulations(1,True,True)
     #ordering of arguments inside lists matters! see examples below for the exact order of different arguments in input arrays
 
     # a line below is a Cell_array for testing generation of multiple populations; code generates two populations and four projections as expected
@@ -752,7 +747,7 @@ if __name__ == "__main__":
    
 
     #test one multi-compartment cell with no connections
-    Cell_array=[1,["Very_Simple_Golgi_test_morph",20]]
+    Cell_array=[1,["Very_Simple_Golgi_test_morph",2]]
 
     #Cell_array=[1,["Very_Simple_Golgi",3]]
     Position_array=["random",100, 100, 100]
@@ -764,9 +759,9 @@ if __name__ == "__main__":
     #a line below is a template for sim_array:
     #Sim_array=[simulation time,simulation timestep, simulate or not simulate: if simulate then either "jNeuroML_NEURON" or "jNeuroML" string has to be specified; otherwise a different string such as "no simulation" has to be specified, the last argument must be an identifier of dat file such as "NEURON_V2010multi1"] 
 
-    #Sim_array=[450,0.005,"jNeuroML_NEURON","NEURON_V2010multi1_2c_1input"]
+    Sim_array=[450,0.005,"jNeuroML_NEURON","NEURON_V2010multi1",0,["seed","True"],["plot",True]]
 
-    Sim_array=[450,0.005,"no simulation","NEURON_V2012multi1_2c_1input"]
+    #Sim_array=[450,0.005,"no simulation","NEURON_V2012multi1_2c_1input"]
     
     #Conn_array=["Vervaeke_2010_one_compartment",1]     # second parameter controls spatial scale
 
@@ -774,7 +769,7 @@ if __name__ == "__main__":
 
     #Below: modify conn_array by introducing a scaling factor that scales a hard-coded pico-level conductance to nano-scale; this can be used to test the presence of the electrical connection because input to one of the cells elicits noticeable spiking response in the second cell. Pico-level conductance at a single gap-junction is not sufficient to elicit action potentials in the second cell. This optional parameter, if present, has to be appended at the end of conn_array.
     
-    #Conn_array=["Vervaeke_2010_multi_compartment",1,[["dendrite_group"],[1]],["testing",4]]
+    Conn_array=["Vervaeke_2010_multi_compartment",1,[["dendrite_group"],[1]],["testing",4]]
 
     #template for connectivity array for models with simulated GJ density
     #Conn_array=["Vervaeke_2012_based",spatial scale,["homogeneous or heterogeneous conductance",a value of a discrete GJ conductance,"units e.g. pS or nS"],["level of applying probabilities: segment/segment groups and subsegment"],\
@@ -788,17 +783,15 @@ if __name__ == "__main__":
     #testing case 2 with subsegment probabilities:
                                             
     #one cell group with subsegment probabilities of only one segment
-    Conn_array=["Vervaeke_2012_based",1,["variable conductance","Gaussian",426,10,"pS"],"segments and subsegments",[["Section_1"],[1],[[[0.25,0.2],[0.25,0.4],[0.25,0.4],[0.25,0]]]]]
+    #Conn_array=["Vervaeke_2012_based",1,["variable conductance","Gaussian",426,10,"pS"],"segments and subsegments",[["Section_1"],[1],[[[0.25,0.2],[0.25,0.4],[0.25,0.4],[0.25,0]]]]]
                                                                   
-    generate_and_run_golgi_cell_net("Simple_Golgi_Net",Cell_array,Position_array,Conn_array,Input_array,Sim_array,"not a list")
+    #generate_and_run_golgi_cell_net("Simple_Golgi_Net",Cell_array,Position_array,Conn_array,Input_array,Sim_array,"not a list")
 
     #use different references to generate different network examples
-    #generate_and_run_golgi_cell_net("V2010_2cells_1input",Cell_array,Position_array,Conn_array,Input_array,Sim_array,"not a list")
+    generate_and_run_golgi_cell_net("V2010_2cells_1input",Cell_array,Position_array,Conn_array,Input_array,Sim_array,"not a list")
     
     #generate_and_run_golgi_cell_net("V2012_2cells_1input",Cell_array,Position_array,Conn_array,Input_array,Sim_array,"not a list")
 
-    
-    
-        
-    
-	
+   
+ 
+
