@@ -12,32 +12,27 @@ import itertools
 
 import utils
 
+def Synchronization_analysis(n_trials,sim_duration):
 
+    
 
-n_trials = 
+    fig, ax = plt.subplots(figsize=(4,2),ncols=1,nrows=2, sharex=True)
+    lines = []
+    labels = []
 
-sim_duration =
-n_cells = 
-n_excluded_cells = 0
-
-fig, ax = plt.subplots(figsize=(4,2),ncols=1,nrows=2, sharex=True)
-lines = []
-labels = []
-
-distances = []
-color = sns.color_palette()[0]
+   distances = []
+   color = sns.color_palette()[0]
 
 for trial in range(n_trials):
     
-    sim_dir = '../simulations/' + sim_ref
+    sim_dir = 'simulations/sim%d'%trial
     time = np.loadtxt(sim_dir + '/time.dat')
     spike_trains = []
     for cell in range(n_cells):
         spikes = np.loadtxt('{}/Golgi_network_{}'.format(sim_dir, cell))
         spikes = np.loadtxt("PySpike_testdata.txt")
         print spikes
-        spike_trains = spk.load_spike_trains_from_txt("PySpike_testdata.txt".format(,
-                                              edges=(0, sim_duration))
+        spike_trains = spk.load_spike_trains_from_txt("PySpike_testdata_{}.txt".format(trial), edges=(0, sim_duration))
         
         if trial==0:
             ax[0].scatter(spikes,
@@ -45,7 +40,7 @@ for trial in range(n_trials):
                           marker='|',
                           s=2,
                           c=color)
-    distances.append(pyspike.spike_profile_multi(spike_trains[n_excluded_cells:]))
+    distances.append(pyspike.spike_profile_multi(spike_trains)
 
 # average synchrony index across trials
 average_distance = distances[0]
@@ -77,6 +72,16 @@ plt.tight_layout()
 # fig.legend(lines, labels, title='Variance scaling', loc='center', ncol=n_models,
 #            bbox_to_anchor=(0.55, 0.55))
 fig.savefig('Desync_Golgi_Net.pdf')
+
+if __name__ == "__main__":
+
+  spikes = np.loadtxt("PySpike_testdata.txt")
+  print spikes
+
+
+
+
+
 
         
                     
