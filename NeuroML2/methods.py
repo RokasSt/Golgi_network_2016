@@ -8,6 +8,10 @@ from neuroml.utils import validate_neuroml2
 import random
 import numpy as np
 import string
+import os.path
+from pyelectro import analysis
+from pyelectro import io
+import numpy as np
 
 #### the distance-dependent functions based on experimental results of Vervaeke et al. (2010); from https://github.com/epiasini/GJGolgi_ReducedMorph/blob/master/neuroConstruct/scripts/utils.py
 def distance(p, q):
@@ -23,7 +27,33 @@ def synaptic_weight_vervaeke_2010(r):
     cc = coupling_coefficient_vervaeke_2010(r)
     return 1000. * (0.576 * math.exp(cc / 12.4) + 0.000590 * math.exp(cc / 2.79) - 0.564)
 
+###################
 
+def get_spike_times(dat_file_name,exp_id,sim_id):
+
+    delimiter = '\t'
+    if os.path.isfile('simulations/sim'+'%d/'%sim_id+dat_file_name+'.dat'):
+       times, data = analysis.load_csv_data('simulations/%s/sim'%exp_id +'%d/'%sim_id+dat_file_name+'.dat'+, delimiter=delimiter)
+       print("Loaded data with %i times & %i datapoints from %s"%(len(times),len(data),dat_file_name+'.dat'))
+
+   
+    results = analysis.max_min(data, times)
+
+    Spike_time_array=np.asarray(results['maxima_times'])
+
+    Spike_time_aray=np.transpose(Spike_time_array)
+  
+    print results['maxima_times']
+
+    np.savetxt('simulations/%s/sim%d/txt/%s.txt'%(exp_id,sim_id,dat_file_name),Spike_time_array,fmt='%f',newline=" ")
+        
+    return results['maxima_times']
+
+def get_cell_ids_for_sync_analysis(pop_params,target_specifications):
+    
+    
+
+    return target_cells
 
 def extract_morphology_information(cell_array,target_array):
     loaded_cell_array={}

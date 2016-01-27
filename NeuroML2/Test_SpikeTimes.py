@@ -1,21 +1,18 @@
 
 import os.path
-
 from pyelectro import analysis
 from pyelectro import io
-
-import os
 import numpy as np
 
 
 def get_spike_times(data_file):
 
-    #data_file = '.dat'
+    
     delimiter = '\t'
     if os.path.isfile(data_file):
        times, data = analysis.load_csv_data(data_file, delimiter=delimiter)
-    elif os.path.isfile('txt/simulations/'+data_file):
-         times, data = analysis.load_csv_data('txt/simulations/'+data_file, delimiter=delimiter)
+    elif os.path.isfile('simulations/'+data_file):
+         times, data = analysis.load_csv_data('simulations/'+data_file, delimiter=delimiter)
 
     print("Loaded data with %i times & %i datapoints from %s"%(len(times),len(data),data_file))
 
@@ -28,7 +25,7 @@ def get_spike_times(data_file):
   
     print results['maxima_times']
 
-    np.savetxt('txt/simulations/Golgi_pop0_0_NEURON_V2010multi1_1c_1input.txt',Spike_time_array,fmt='%f',newline=" ")
+    np.savetxt('simulations/txt/Golgi_pop0_0_NEURON_V2010multi1_1c_1input.txt',Spike_time_array,fmt='%f',newline=" ")
         
     return results['maxima_times']
 
