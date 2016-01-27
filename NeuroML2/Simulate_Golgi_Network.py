@@ -2,7 +2,7 @@
 from  Generate_Golgi_Network import *
 import os.path
 
-def run_simulations(simulator,experiment_identifier,no_of_trials,seed_specifier,plot_specifier,["save somata positions","no"]):
+def run_simulations(simulator,experiment_identifier,no_of_trials,seed_specifier,plot_specifier,save_soma_specifier):
     #create directories for saving data for each trial..... sim1,sim2.....
     
     Cell_array=[1,["Very_Simple_Golgi_test_morph",2]]
@@ -10,21 +10,29 @@ def run_simulations(simulator,experiment_identifier,no_of_trials,seed_specifier,
     Input_array=["testing",0.5,["20.0ms","200.0ms","4E-5uA"],["220.0ms","200.0ms","-0.5E-5uA"]]
     Conn_array=["Vervaeke_2010_multi_compartment",1,[["dendrite_group"],[1]],["testing",4]]
     for simulation_trial in range(0,no_of_trials):
-        Sim_array=[450,0.005,simulator,experiment_identifier,,simulation_trial,["seed",seed_specifier],["plot",plot_specifier]]
+        Sim_array=[450,0.005,simulator,experiment_identifier,simulation_trial,["seed",seed_specifier[1]],["plot",plot_specifier[1]]]
         #create a new directory for each new experiment
-        newpath = r'simulations/V2012multi1_2c_1input/sim%d'%simulation_trial
+        newpath = r'simulations/%s/sim%d'%(experiment_identifier,simulation_trial)
         if not os.path.exists(newpath):
                os.makedirs(newpath)
-        if seed_specifier==True:
-           sim_params,pop_params=generate_golgi_cell_net("Simple_Golgi_Net",Cell_array,Position_array,Conn_array,Input_array,Sim_array,"not a list",[output,True])
+        if seed_specifier[1]==True:
+           sim_params,pop_params=generate_golgi_cell_net("Simple_Golgi_Net",Cell_array,Position_array,Conn_array,Input_array,Sim_array,"not a list",["output",True])
+
+           if save_soma_specifier[1]=="Yes":
+              save_soma_positions(pop_params,r'simulations/%s'%(experiment_identifier))
+              print("saved soma positions in the experiment directory %s"%r'simulations/%s'%(experiment_identifier))
            generate_LEMS_and_run(sim_params,pop_params)
         else:
-           sim_params,pop_params=generate_golgi_cell_net("Simple_Golgi_Net%d"%simulation_trial,Cell_array,Position_array,Conn_array,Input_array,Sim_array,"not a list",[output,True])
+           sim_params,pop_params=generate_golgi_cell_net("Simple_Golgi_Net%d"%simulation_trial,Cell_array,Position_array,Conn_array,Input_array,Sim_array,"not a list",["output",True])
+
+           if save_soma_specifier[1]=="Yes":
+              save_soma_positions(pop_params,r'simulations/%s/sim%d'%(experiment_identifier,simulation_trial))
+              print("saved soma positions in the experiment directory %s"%r'simulations/%s/sim%d'%(experiment_identifier,simulation_trial))
            generate_LEMS_and_run(sim_params,pop_params)
            
 if __name__ == "__main__":
     
-    run_simulations("jNeuroML_NEURON","V2012multi1_2c_1input",1,True,True,["save somata positions","no"])
+    run_simulations("jNeuroML_NEURON","V2012multi1_2c_1input",1,["seed specifier",True],["plot specifier",True],["save somata positions","Yes"])
     #ordering of arguments inside lists matters! see examples below for the exact order of different arguments in input arrays
 
     # a line below is a Cell_array for testing generation of multiple populations; code generates two populations and four projections as expected

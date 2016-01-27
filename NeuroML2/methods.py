@@ -32,8 +32,8 @@ def synaptic_weight_vervaeke_2010(r):
 def get_spike_times(dat_file_name,exp_id,sim_id):
 
     delimiter = '\t'
-    if os.path.isfile('simulations/sim'+'%d/'%sim_id+dat_file_name+'.dat'):
-       times, data = analysis.load_csv_data('simulations/%s/sim'%exp_id +'%d/'%sim_id+dat_file_name+'.dat'+, delimiter=delimiter)
+    if os.path.isfile('simulations/%s/sim'%exp_id+'%d/'%sim_id+dat_file_name+ '.dat'):
+       times, data = analysis.load_csv_data('simulations/%s/sim'%exp_id +'%d/'%sim_id+dat_file_name+'.dat', delimiter=delimiter)
        print("Loaded data with %i times & %i datapoints from %s"%(len(times),len(data),dat_file_name+'.dat'))
 
    
@@ -45,12 +45,49 @@ def get_spike_times(dat_file_name,exp_id,sim_id):
   
     print results['maxima_times']
 
+    newpath = r'simulations/%s/sim%d/txt'%(exp_id,sim_id)
+    if not os.path.exists(newpath):
+               os.makedirs(newpath)
+
     np.savetxt('simulations/%s/sim%d/txt/%s.txt'%(exp_id,sim_id,dat_file_name),Spike_time_array,fmt='%f',newline=" ")
         
     return results['maxima_times']
 
-def get_cell_ids_for_sync_analysis(pop_params,target_specifications):
-    
+
+def save_soma_positions(population_params,save_to_path):
+    population_type=population_params[0]
+    cell_array=population_params[1]
+    Golgi_pop_index_array=population_params[2]
+    soma_position_array=population_params[3]
+    for cell_group in range(0,cell_array[0]):
+        soma_positions=soma_position_array[cell_group]
+        np.savetxt('%s/%s.txt'%(save_to_path,Golgi_pop_index_array[cell_group]),soma_positions,fmt='%f')
+
+
+def get_cell_ids_for_sync_analysis(target_specifications,no_of_cell_groups,experiment_specifiers):
+    target_cells=[]
+    if target_specifications[0]=="all":
+       if experiment_specifiers[1][1]==False:
+          for cell_group in range(0,no_of_cell_groups):
+              cell_group_positions=np.loadtxt('simulations/%s/Golgi_pop%d.txt'%(experiment_specifiers[0],cell_group))
+              dim_array=np.shape(cell_group_positions)
+              target_cell_ids=range(0,dim_array[0])
+              target_cells.append(target_cell_ids)
+       else: 
+          for cell_group in range(0,no_of_cell_groups):
+              #no need to iterate over simulations in the case all cells are analysed.
+              cell_group_positions=np.loadtxt('simulations/%s/sim0/Golgi_pop%d.txt'%(experiment_specifiers[0],cell_group))
+              dim_array=np.shape(cell_group_positions)
+              target_cell_ids=range(0,dim_array[0])
+              target_cells.append(target_cell_ids)
+    #if target_specifications[0]=="random":
+
+    #if target_specifications[0]=="explicit":
+       
+    #if target_specifications[0]=="subtype specific":
+
+    #if target_specifcations[0]=="3D region specific":
+       print target_cells
     
 
     return target_cells

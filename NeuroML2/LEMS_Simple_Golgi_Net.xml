@@ -27,11 +27,11 @@
             <Line id="Golgi_pop0[1]: Vm" quantity="Golgi_pop0[1]/v" scale="1mV" color="#6980a8" timeScale="1ms"/>
         </Display>
         
-        <OutputFile id="Volts0_file0_0" fileName="simulations/sim0/Golgi_pop0_NEURON_V2010multi1_cell0.dat">
+        <OutputFile id="Volts0_file0_0" fileName="simulations/V2012multi1_2c_1input/sim0/Golgi_pop0_cell0.dat">
             <OutputColumn id="v0" quantity="Golgi_pop0[0]/v"/> 
         </OutputFile>
         
-        <OutputFile id="Volts0_file0_1" fileName="simulations/sim0/Golgi_pop0_NEURON_V2010multi1_cell1.dat">
+        <OutputFile id="Volts0_file0_1" fileName="simulations/V2012multi1_2c_1input/sim0/Golgi_pop0_cell1.dat">
             <OutputColumn id="v1" quantity="Golgi_pop0[1]/v"/> 
         </OutputFile>
         

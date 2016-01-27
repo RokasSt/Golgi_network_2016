@@ -675,14 +675,14 @@ def generate_golgi_cell_net(ref,cell_array,location_array, connectivity_informat
            return sim_info_array, cell_info_array
 
 def generate_LEMS_and_run(sim_array,pop_array):
-        sim_array[0]=ref
-        sim_array[1]=net.id
-        sim_array[2]=simulation_parameters
-        sim_array[3]=nml_file
+        ref=sim_array[0]
+        net_id=sim_array[1]
+        simulation_parameters=sim_array[2]
+        nml_file=sim_array[3]
 
-        pop_array[0]=population_type
-        pop_array[1]=cell_array
-        pop_array[2]=Golgi_pop_index_array
+        population_type=pop_array[0]
+        cell_array=pop_array[1]
+        Golgi_pop_index_array=pop_array[2]
         
         # Create a LEMSSimulation to manage creation of LEMS file
 
@@ -690,7 +690,7 @@ def generate_LEMS_and_run(sim_array,pop_array):
 
         # Point to network as target of simulation
     
-        ls.assign_simulation_target(net.id)
+        ls.assign_simulation_target(net_id)
 
         ls.include_neuroml2_file(nml_file)
         
