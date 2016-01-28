@@ -33,6 +33,7 @@ def run_simulations(simulator,experiment_identifier,no_of_trials,seed_specifier,
            generate_LEMS_and_run(sim_params,pop_params)
            
 if __name__ == "__main__":
+    # put network parameters here pack to one array
     
     run_simulations("jNeuroML_NEURON","V2010multi1_2c_1input",1,["seed specifier",True],["plot specifier",True],["save somata positions","Yes"])
     #ordering of arguments inside lists matters! see examples below for the exact order of different arguments in input arrays
