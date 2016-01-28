@@ -2,18 +2,15 @@
 from  Generate_Golgi_Network import *
 import os.path
 
-def run_simulations(simulator,experiment_identifier,no_of_trials,seed_specifier,plot_specifier,save_soma_specifier):
+def run_simulations(network_parameters,sim_duration,time_step,simulator,experiment_identifier,no_of_trials,seed_specifier,plot_specifier,save_soma_specifier):
     
-    Cell_array=[2,["Very_Simple_Golgi_test_morph",4],["Very_Simple_Golgi_test_morph",4]]
-   
-    #Cell_array=[1,["Very_Simple_Golgi_test_morph",2]]
-    Position_array=["random",100, 100, 100]
-    Input_array=["testing",0.5,["20.0ms","200.0ms","4E-5uA"],["220.0ms","200.0ms","-0.5E-5uA"]]
-    #Conn_array=["Vervaeke_2010_multi_compartment",1,[["dendrite_group"],[1]],["testing",4]]
-    Conn_array=["Vervaeke_2010_multi_compartment",1,[["dendrite_group"],[1]],[["dendrite_group"],[1]],["testing",4]]
+    Cell_array=network_parameters[0]
+    Position_array=network_parameters[1]
+    Conn_array=network_parameters[2]
+    Input_array=network_parameters[3]
+    
     for simulation_trial in range(0,no_of_trials):
-        Sim_array=[450,0.005,simulator,experiment_identifier,simulation_trial,["seed",seed_specifier[1]],["plot",plot_specifier[1]]]
-        #create a new directory for each new experiment
+        Sim_array=[sim_duration,time_step,simulator,experiment_identifier,simulation_trial,["seed",seed_specifier[1]],["plot",plot_specifier[1]]]
         newpath = r'simulations/%s/sim%d'%(experiment_identifier,simulation_trial)
         if not os.path.exists(newpath):
                os.makedirs(newpath)
@@ -33,9 +30,21 @@ def run_simulations(simulator,experiment_identifier,no_of_trials,seed_specifier,
            generate_LEMS_and_run(sim_params,pop_params)
            
 if __name__ == "__main__":
-    # put network parameters here pack to one array
+
+
+    #Cell_array=[1,["Very_Simple_Golgi_test_morph",2]]
+    #Conn_array=["Vervaeke_2010_multi_compartment",1,[["dendrite_group"],[1]],["testing",4]]
     
-    run_simulations("jNeuroML_NEURON","V2010multi1_2c_1input",1,["seed specifier",True],["plot specifier",True],["save somata positions","Yes"])
+    net_params=[]
+    net_params[0] =[2,["Very_Simple_Golgi_test_morph",4],["Very_Simple_Golgi_test_morph",4]]
+    net_params[1]=["random",100, 100, 100]
+    net_params[2]=["Vervaeke_2010_multi_compartment",1,[["dendrite_group"],[1]],[["dendrite_group"],[1]],["testing",4]]
+    ne_params[3]=["testing",0.5,["20.0ms","200.0ms","4E-5uA"],["220.0ms","200.0ms","-0.5E-5uA"]]
+    run_simulations(net_params,450,0.005,"jNeuroML_NEURON","V2010multi1_2p4c4c_4inp",1,["seed specifier",True],["plot specifier",True],["save somata positions","Yes"])
+
+
+
+    
     #ordering of arguments inside lists matters! see examples below for the exact order of different arguments in input arrays
 
     # a line below is a Cell_array for testing generation of multiple populations; code generates two populations and four projections as expected

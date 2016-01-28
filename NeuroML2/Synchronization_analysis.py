@@ -40,12 +40,14 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
                    if trial in trial_ids_for_raster_plot:
                       ax[trial].scatter(spikes,np.zeros_like(spikes)+cell,marker='|',s=2,c=color)
            distances.append(pyspike.spike_profile_multi(spike_trains))
-
+           
+    #if specify_targets[0]=="3D region specific" and string.lower(specify_targets[0])!= "subtype specific"):
+           
     if string.lower(specify_targets[0])=="subtype specific":
        for trial in range(0,n_trials):
            sim_dir = 'simulations/' + exp_specify[0]+'/sim%d'%trial+'/txt'
            spike_trains = []
-           if specify_targets[0][2]=="randomly set targets only once":
+           if specify_targets[0][2]=="randomly set target ids only once":
               for pop in range(0,len(target_cell_array)):
                   for cell in range(0,len(target_cell_array[pop])):
                        #create target txt file containing spike times
@@ -126,11 +128,11 @@ if __name__=="__main__":
    #Test1
    #Synchronization_analysis(450,["all"],1,["V2012multi1_2c_1input",["seed specifier",True],1],[0])
    #Test2
-   Synchronization_analysis(450,["subtype specific","random fraction","randomly set targets only once",[0.5,0.5]],2,["V2010multi1_2c_1input",["seed specifier",True],1],[0])
+   Synchronization_analysis(450,["subtype specific","random fraction","randomly set target ids only once",[0.5,0.5]],2,["V2010multi1_2c_1input",["seed specifier",True],1],[0])
    #the former in general would have the following format : ["subtype specific","random fraction","randomize only once" or "randomize on every trial","[fraction of Golgi_pop0 to target, fraction of Golgi_pop1 to target, ...,fraction of Golgi_pop n to target]]
    #Test3
-   #Synchronization_analysis(450,["subtype specific","explicit list",[0,1]],1,["V2012multi1_2c_1input",["seed specifier",True],1])
-
+   #Synchronization_analysis(450,["subtype specific","explicit list",[[0,1]]],1,["V2012multi1_2c_1input",["seed specifier",True],1])
+   #Synchronization_analysis(450,["3D region specific",[[40,80],[40,80],[40,80]]],1,["V2012multi1_2c_1input",["seed specifier",True],1])
    print("Testing Synchronization_analysis.py")
    
 
