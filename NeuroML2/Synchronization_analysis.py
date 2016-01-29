@@ -133,6 +133,14 @@ if __name__=="__main__":
    #Test3
    #Synchronization_analysis(450,["subtype specific","explicit list",[[0,1]]],1,["V2012multi1_2c_1input",["seed specifier",True],1])
    #Synchronization_analysis(450,["3D region specific",[[40,80],[40,80],[40,80]]],1,["V2012multi1_2c_1input",["seed specifier",True],1])
+   #Synchronization_analysis(450,["3D region specific",[[40,80],[40,80],[40,80]]],1,["V2012multi1_2c_1input",["seed specifier",True],1])
+   
+   #if present, "3D region specific" string has to be at 0 index position in a parameter array; more flexible search through input arrays  might be coded in the future 
+   #Synchronization_analysis(450,["3D region specific",[[40,80],[40,80],[40,80]],/
+   #"subtype specific","random fraction","randomly set target ids only once",[0.5,0.5]],1,["V2012multi1_2c_1input",["seed specifier",True],1])
+   #if seeded, 3D region specificity and explicit list can be combined because ids within a given region do not change across simulation trials
+   #Synchronization_analysis(450,["3D region specific",[[40,80],[40,80],[40,80]],/
+   #"subtype specific","random fraction",[0.5,0.5]],1,["V2012multi1_2c_1input",["seed specifier",False],1])
    print("Testing Synchronization_analysis.py")
    
 

@@ -98,6 +98,8 @@ def get_cell_ids_for_sync_analysis(target_specifications,no_of_cell_groups,exper
                     target_cells.append(random_targets_per_cell_group)
              else:
                 for cell_group in range(0,no_of_cell_groups):
+                    #no need to scan through a list of simulations because this type of selection is not based on the position of cell soma;
+                    #just get id listing via no of cells per population from sim0 dir
                     cell_group_positions=np.loadtxt('simulations/%s/sim0/Golgi_pop%d.txt'%(experiment_specifiers[0],cell_group))
                     dim_array=np.shape(cell_group_positions)
                     target_cell_ids=range(0,dim_array[0])
@@ -116,7 +118,7 @@ def get_cell_ids_for_sync_analysis(target_specifications,no_of_cell_groups,exper
                  else: 
                     for cell_group in range(0,no_of_cell_groups):
                         #no need to scan through a list of simulations because this type of selection is not based on the position of cell soma;
-                        #just get id listing via no of cells per population
+                        #just get id listing via no of cells per population from sim0 dir
                         cell_group_positions=np.loadtxt('simulations/%s/sim0/Golgi_pop%d.txt'%(experiment_specifiers[0],cell_group))
                         dim_array=np.shape(cell_group_positions)
                         target_cell_ids=range(0,dim_array[0])
@@ -126,36 +128,95 @@ def get_cell_ids_for_sync_analysis(target_specifications,no_of_cell_groups,exper
        
     
     #########
-    if (target_specifcations[0]=="3D region specific" and target_specifcations[1] != "subtype specific"):
+    if (target_specifcations[0]=="3D region specific") and (not("subtype specific" in target_specifcations)):
        if experiment_specifiers[1][1]==True:
           for cell_group in range(0,no_of_cell_groups):
               cell_group_positions=np.loadtxt('simulations/%s/Golgi_pop%d.txt'%(experiment_specifiers[0],cell_group))
               dim_array=np.shape(cell_group_positions)
-              random_targets_per_cell_group=[]
+              region_specific_targets_per_cell_group=[]
               for 3D_region in range(1,len(target_specifcations)):
                   for cell in range(0,dim_array[0]):
                       if target_specifcations[3D_region][0][0] <  cell_group_positions[cell,0] and cell_group_positions[cell,0] < target_specifcations[3D_region][0][1]:
                          if target_specifcations[3D_region][1][0] <  cell_group_positions[cell,1] and cell_group_positions[cell,1] < target_specifcations[3D_region][1][1]:
                             if target_specifcations[3D_region][2][0] <  cell_group_positions[cell,2] and cell_group_positions[cell,2] < target_specifcations[3D_region][2][1]:
-                               random_targets_per_cell_group.append(cell)
-              target_cells.append(random_targets_per_cell_group)
+                               region_specific_targets_per_cell_group.append(cell)
+              target_cells.append(region_specific_targets_per_cell_group)
        else:
           for trial in range(0,experiment_specifiers[2]):
-              random_targets_per_trial=[]
+              region_specific_targets_per_trial=[]
               for cell_group in range(0,no_of_cell_groups):
                   cell_group_positions=np.loadtxt('simulations/%s/sim%d/Golgi_pop%d.txt'%(experiment_specifiers[0],trial,cell_group))
                   dim_array=np.shape(cell_group_positions)
-                  random_targets_per_cell_group=[]
+                  region_specific_targets_per_cell_group=[]
                   for 3D_region in range(1,len(target_specifcations)):
                       for cell in range(0,dim_array[0]):
                           if target_specifcations[3D_region][0][0] <  cell_group_positions[cell,0] and cell_group_positions[cell,0] < target_specifcations[3D_region][0][1]:
                              if target_specifcations[3D_region][1][0] <  cell_group_positions[cell,1] and cell_group_positions[cell,1] < target_specifcations[3D_region][1][1]:
                                 if target_specifcations[3D_region][2][0] <  cell_group_positions[cell,2] and cell_group_positions[cell,2] < target_specifcations[3D_region][2][1]:
-                                   random_targets_per_cell_group.append(cell)
-                  random_targets_per_trial.append(random_targets_per_cell_group)
-              target_cells.append(random_targets_per_trial)
+                                   region_specific_targets_per_cell_group.append(cell)
+                  region_specific_targets_per_trial.append(region_specific_targets_per_cell_group)
+              target_cells.append(region_specific_targets_per_trial)
        
-    #if (target_specifications[0]=="subtype specific" and target_specifcations[1]=="3D region specific") or (target_specifications[1]=="subtype specific" and target_specifcations[0]=="3D region specific"):
+    if (target_specifcations[0]=="3D region specific") and ("subtype specific" in target_specifcations):
+       region_specific_target_cells=[]
+       subtype_specifier_position=target_specifcations.index("subtype specific")
+       if experiment_specifiers[1][1]==True:
+          for cell_group in range(0,no_of_cell_groups):
+              cell_group_positions=np.loadtxt('simulations/%s/Golgi_pop%d.txt'%(experiment_specifiers[0],cell_group))
+              dim_array=np.shape(cell_group_positions)
+              region_specific_targets_per_cell_group=[]
+              for 3D_region in range(1,subtype_specifier_position):
+                  for cell in range(0,dim_array[0]):
+                      if target_specifcations[3D_region][0][0] <  cell_group_positions[cell,0] and cell_group_positions[cell,0] < target_specifcations[3D_region][0][1]:
+                         if target_specifcations[3D_region][1][0] <  cell_group_positions[cell,1] and cell_group_positions[cell,1] < target_specifcations[3D_region][1][1]:
+                            if target_specifcations[3D_region][2][0] <  cell_group_positions[cell,2] and cell_group_positions[cell,2] < target_specifcations[3D_region][2][1]:
+                               region_specific_targets_per_cell_group.append(cell)     
+              region_specific_target_cells.append(region_specific_targets_per_cell_group)
+          if "random fraction" in target_specifcations:
+             if "randomly set target ids only once" in target_specifcations:
+                for cell_group in range(0,no_of_cell_groups):
+                    no_of_cells_per_region=len(region_specific_target_cells[cell_group])
+                    random_targets_per_cell_group=random.sample(region_specific_target_cells[cell_group],int(round(target_specifications[subtype_specifier_position+3][cell_group]*no_of_cells_per_region)))
+                    target_cells.append(random_targets_per_cell_group)
+             else:
+                for trial in range(0,experiment_specifiers[2]):
+                    random_targets_per_trial=[]
+                    for cell_group in range(0,no_of_cell_groups):
+                        no_of_cells_per_region=len(region_specific_target_cells[cell_group])
+                        random_targets_per_cell_group=random.sample(region_specific_target_cells[cell_group],int(round(target_specifications[subtype_specifier_position+3][cell_group]*no_of_cells_per_region)))
+                        random_targets_per_trial.append(random_targets_per_cell_group)
+                    target_cells.append(random_targets_per_trial)
+          if "explicit list" in target_specifcations:
+             for cell_group in range(0,no_of_cell_groups):
+                 targets_per_cell_group=[]
+                 for target_id in target_specifications[subtype_specifier_position+2][cell_group]:
+                     if target_id in region_specific_target_cells[cell_group]:
+                        targets_per_cell_group.append(target_id)
+                target_cells.append(targets_per_cell_group)
+       else:
+          for trial in range(0,experiment_specifiers[2]):
+              region_specific_targets_per_trial=[]
+              for cell_group in range(0,no_of_cell_groups):
+                  # if different seed is used everytime, randomly generated cell positions will be simulation-specific; therefore look inside sim%d
+                  cell_group_positions=np.loadtxt('simulations/%s/sim%d/Golgi_pop%d.txt'%(experiment_specifiers[0],trial,cell_group))
+                  dim_array=np.shape(cell_group_positions)
+                  region_specific_targets_per_cell_group=[]
+                  for 3D_region in range(1,subtype_specifier_position):
+                      for cell in range(0,dim_array[0]):
+                          if target_specifcations[3D_region][0][0] <  cell_group_positions[cell,0] and cell_group_positions[cell,0] < target_specifcations[3D_region][0][1]:
+                             if target_specifcations[3D_region][1][0] <  cell_group_positions[cell,1] and cell_group_positions[cell,1] < target_specifcations[3D_region][1][1]:
+                                if target_specifcations[3D_region][2][0] <  cell_group_positions[cell,2] and cell_group_positions[cell,2] < target_specifcations[3D_region][2][1]:
+                                   region_specific_targets_per_cell_group.append(cell)
+                  region_specific_targets_per_trial.append(region_specific_targets_per_cell_group)
+              region_specific_target_cells.append(region_specific_targets_per_trial)
+         if "random fraction" in target_specifcations:
+            for trial in range(0,experiment_specifiers[2]):
+                for cell_group in range(0,no_of_cell_groups):
+                    no_of_cells_per_region=len(region_specific_target_cells[trial][cell_group])
+                    random_targets_per_cell_group=random.sample(region_specific_target_cells[trial][cell_group],int(round(target_specifications[subtype_specifier_position+3][cell_group]*no_of_cells_per_region)))
+                    target_cells.append(random_targets_per_cell_group[trial][cell_group])
+              
+          
 
     print target_cells
     
