@@ -136,9 +136,9 @@ def get_cell_ids_for_sync_analysis(target_specifications,no_of_cell_groups,exper
               region_specific_targets_per_cell_group=[]
               for 3D_region in range(1,len(target_specifcations)):
                   for cell in range(0,dim_array[0]):
-                      if target_specifcations[3D_region][0][0] <  cell_group_positions[cell,0] and cell_group_positions[cell,0] < target_specifcations[3D_region][0][1]:
-                         if target_specifcations[3D_region][1][0] <  cell_group_positions[cell,1] and cell_group_positions[cell,1] < target_specifcations[3D_region][1][1]:
-                            if target_specifcations[3D_region][2][0] <  cell_group_positions[cell,2] and cell_group_positions[cell,2] < target_specifcations[3D_region][2][1]:
+                      if target_specifications[3D_region][0][0] <  cell_group_positions[cell,0] and cell_group_positions[cell,0] < target_specifications[3D_region][0][1]:
+                         if target_specifications[3D_region][1][0] <  cell_group_positions[cell,1] and cell_group_positions[cell,1] < target_specifications[3D_region][1][1]:
+                            if target_specifications[3D_region][2][0] <  cell_group_positions[cell,2] and cell_group_positions[cell,2] < target_specifications[3D_region][2][1]:
                                region_specific_targets_per_cell_group.append(cell)
               target_cells.append(region_specific_targets_per_cell_group)
        else:
@@ -150,9 +150,9 @@ def get_cell_ids_for_sync_analysis(target_specifications,no_of_cell_groups,exper
                   region_specific_targets_per_cell_group=[]
                   for 3D_region in range(1,len(target_specifcations)):
                       for cell in range(0,dim_array[0]):
-                          if target_specifcations[3D_region][0][0] <  cell_group_positions[cell,0] and cell_group_positions[cell,0] < target_specifcations[3D_region][0][1]:
-                             if target_specifcations[3D_region][1][0] <  cell_group_positions[cell,1] and cell_group_positions[cell,1] < target_specifcations[3D_region][1][1]:
-                                if target_specifcations[3D_region][2][0] <  cell_group_positions[cell,2] and cell_group_positions[cell,2] < target_specifcations[3D_region][2][1]:
+                          if target_specifications[3D_region][0][0] <  cell_group_positions[cell,0] and cell_group_positions[cell,0] < target_specifications[3D_region][0][1]:
+                             if target_specifications[3D_region][1][0] <  cell_group_positions[cell,1] and cell_group_positions[cell,1] < target_specifications[3D_region][1][1]:
+                                if target_specifications[3D_region][2][0] <  cell_group_positions[cell,2] and cell_group_positions[cell,2] < target_specifications[3D_region][2][1]:
                                    region_specific_targets_per_cell_group.append(cell)
                   region_specific_targets_per_trial.append(region_specific_targets_per_cell_group)
               target_cells.append(region_specific_targets_per_trial)
@@ -167,9 +167,9 @@ def get_cell_ids_for_sync_analysis(target_specifications,no_of_cell_groups,exper
               region_specific_targets_per_cell_group=[]
               for 3D_region in range(1,subtype_specifier_position):
                   for cell in range(0,dim_array[0]):
-                      if target_specifcations[3D_region][0][0] <  cell_group_positions[cell,0] and cell_group_positions[cell,0] < target_specifcations[3D_region][0][1]:
-                         if target_specifcations[3D_region][1][0] <  cell_group_positions[cell,1] and cell_group_positions[cell,1] < target_specifcations[3D_region][1][1]:
-                            if target_specifcations[3D_region][2][0] <  cell_group_positions[cell,2] and cell_group_positions[cell,2] < target_specifcations[3D_region][2][1]:
+                      if target_specifications[3D_region][0][0] <  cell_group_positions[cell,0] and cell_group_positions[cell,0] < target_specifications[3D_region][0][1]:
+                         if target_specifications[3D_region][1][0] <  cell_group_positions[cell,1] and cell_group_positions[cell,1] < target_specifications[3D_region][1][1]:
+                            if target_specifications[3D_region][2][0] <  cell_group_positions[cell,2] and cell_group_positions[cell,2] < target_specifications[3D_region][2][1]:
                                region_specific_targets_per_cell_group.append(cell)     
               region_specific_target_cells.append(region_specific_targets_per_cell_group)
           if "random fraction" in target_specifcations:
@@ -211,10 +211,12 @@ def get_cell_ids_for_sync_analysis(target_specifications,no_of_cell_groups,exper
               region_specific_target_cells.append(region_specific_targets_per_trial)
          if "random fraction" in target_specifcations:
             for trial in range(0,experiment_specifiers[2]):
+                random_targets_per_trial=[]
                 for cell_group in range(0,no_of_cell_groups):
-                    no_of_cells_per_region=len(region_specific_target_cells[trial][cell_group])
-                    random_targets_per_cell_group=random.sample(region_specific_target_cells[trial][cell_group],int(round(target_specifications[subtype_specifier_position+3][cell_group]*no_of_cells_per_region)))
-                    target_cells.append(random_targets_per_cell_group[trial][cell_group])
+                     no_of_cells_per_region=len(region_specific_target_cells[trial][cell_group])
+                     random_targets_per_cell_group=random.sample(region_specific_target_cells[trial][cell_group],int(round(target_specifications[subtype_specifier_position+2][cell_group]*no_of_cells_per_region)))
+                     random_targets_per_trial.append(random_targets_per_cell_group)
+                target_cells.append(random_targets_per_trial)
               
           
 
@@ -222,6 +224,100 @@ def get_cell_ids_for_sync_analysis(target_specifications,no_of_cell_groups,exper
     
 
     return target_cells
+
+def plot_voltage_traces(no_of_cell_groups,experiment_id,trial_id,plot_specifying_array,seed_specifying_array):
+    cell_no_array=[]
+    if seed_specifying_array[1]==True:
+       for cell_group in range(0,no_of_cell_groups):
+           cell_group_positions=np.loadtxt('simulations/%s/Golgi_pop%d.txt'%(experiment_id,cell_group))
+           dim_array=np.shape(cell_group_positions)
+           cell_no_array.append(dim_array[0])
+    else:
+       for cell_group in range(0,no_of_cell_groups):
+           cell_group_positions=np.loadtxt('simulations/%s/sim%d/Golgi_pop%d.txt'%(experiment_id,trial_id,cell_group))
+           dim_array=np.shape(cell_group_positions)
+           cell_no_array.append(dim_array[0])
+    if plot_specifying_array[0]=="one population one subplot":
+        
+       if plot_specifying_array[1]=="explicit lists":
+          which_pops_to_plot=[]
+          no_of_pops_to_plot=0
+          
+          for cell_group in range(0,no_of_cell_groups):
+              if plot_specifying_array[2][cell_group] !=[]:
+                 which_pops_to_plot.append(cell_group)
+                 no_of_pops_to_plot=no_of_pops_to_plot+1
+
+          rows = max(1,math.ceil(no_of_pops_to_plot/3))
+          columns = min(3,no_of_pops_to_plot)
+          fig,ax = plt.subplots(rows,columns,sharex=True,
+                              figsize=(4*columns,4*rows))
+          ax = ax.ravel()
+          
+          for pop in range(0,no_of_pops_to_plot):
+              ax[pop].set_xlabel('Time (ms)')
+              ax[pop].set_ylabel('Membrane potential (V)')
+              ax[pop].xaxis.grid(True)
+              ax[pop].yaxis.grid(True)
+              fig.canvas.set_window_title("Golgi_pop%d cells"%which_pops_to_plot[pop])
+              for cell in plot_specifying_array[2][which_pops_to_plot[pop]]:
+                  data=[]
+                  cell_path='simulations/%s/sim'%experiment_id+'%d/'%trial_id+'Golgi_pop%d_cell%d'%(which_pops_to_plot[pop],cell)+'.dat'
+                  for line in open(cell_path):
+                      values=line.split() # for each line there is a time point and voltage value at that time point
+                      for x in range(0,2):
+                          data[x].append(float(values[x]))
+                  time_array=data[0]
+                  ax[pop].plot(data[0],data[1],label='Golgi_pop%d_cell%d'%(which_pops_to_plot[pop],cell))
+                  print_comment("Adding trace for: Golgi_pop%d_cell%d, from: %s"%(which_pops_to_plot[pop],cell,cell_path), verbose)
+              ax[pop].used = True
+              legend = True
+              if legend:
+                 ax[pop].legend(loc='upper right', fancybox=True, shadow=True,ncol=4)
+              
+       # random fraction includes the case of ploting all cells of a given population       
+       if plot_specifying_array[1]=="random fractions":
+          which_pops_to_plot=[]
+          no_of_pops_to_plot=0
+          for cell_group in range(0,no_of_cell_groups):
+              if plot_specifying_array[2][cell_group] !=[]:
+                 which_pops_to_plot.append(cell_group)
+                 no_of_pops_to_plot=no_of_pops_to_plot+1
+
+          rows = max(1,math.ceil(no_of_pops_to_plot/3))
+          columns = min(3,no_of_pops_to_plot)
+          fig,ax = plt.subplots(rows,columns,sharex=True,
+                              figsize=(4*columns,4*rows))
+          ax = ax.ravel()
+
+          for pop in range(0,no_of_pops_to_plot):
+              ax[pop].set_xlabel('Time (ms)')
+              ax[pop].set_ylabel('Membrane potential (V)')
+              ax[pop].xaxis.grid(True)
+              ax[pop].yaxis.grid(True)
+              fig.canvas.set_window_title("Golgi_pop%d cells"%which_pops_to_plot[pop])
+              
+              which_cells_to_plot=random.sample(range(0,cell_no_array[which_pops_to_plot[pop]]),int(round(cell_no_array[which_pops_to_plot[pop]]*plot_specifying_array[2][which_pops_to_plot[pop]])))
+              
+              for cell in which_cells_to_plot:
+                  data=[]
+                  cell_path='simulations/%s/sim'%experiment_id+'%d/'%trial_id+'Golgi_pop%d_cell%d'%(which_pops_to_plot[pop],cell)+'.dat'
+                  for line in open(cell_path):
+                      values=line.split() # for each line there is a time point and voltage value at that time point
+                      for x in range(0,2):
+                          data[x].append(float(values[x]))
+                  time_array=data[0]
+                  ax[pop].plot(data[0],data[1],label='Golgi_pop%d_cell%d'%(which_pops_to_plot[pop],cell))
+                  print_comment("Adding trace for: Golgi_pop%d_cell%d, from: %s"%(which_pops_to_plot[pop],cell,cell_path), verbose)
+              ax[pop].used = True
+              legend = True
+              if legend:
+                 ax[pop].legend(loc='upper right', fancybox=True, shadow=True,ncol=4)
+                  
+
+    if plot_specifying_array[0]=="pairs":
+       for pair in range(0,len(plot_specifying_array[1])):
+           
 
 def extract_morphology_information(cell_array,target_array):
     loaded_cell_array={}

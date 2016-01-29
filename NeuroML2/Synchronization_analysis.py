@@ -41,8 +41,73 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
                       ax[trial].scatter(spikes,np.zeros_like(spikes)+cell,marker='|',s=2,c=color)
            distances.append(pyspike.spike_profile_multi(spike_trains))
            
-    #if specify_targets[0]=="3D region specific" and string.lower(specify_targets[0])!= "subtype specific"):
-           
+    if (specify_targets[0]=="3D region specific") and (not("subtype specific" in specify_targets )):
+       for trial in range(0,n_trials):
+           sim_dir = 'simulations/' + exp_specify[0]+'/sim%d'%trial+'/txt'
+           spike_trains = []
+           if exp_specify[1][1]==True:
+              for pop in range(0,len(target_cell_array)):
+                  for cell in range(0,len(target_cell_array[pop])):
+                      #create target txt file containing spike times
+                      methods.get_spike_times('Golgi_pop%d_cell%d'%(pop,target_cell_array[pop][cell]),exp_specify[0],trial)
+                      spikes = np.loadtxt('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cell_array[pop][cell]))
+                      spike_train=pyspike.SpikeTrain(spikes,[0,sim_duration])
+                      spike_trains.append(spike_train)
+                   
+                      if trial in trial_ids_for_raster_plot:
+                         ax[trial].scatter(spikes,np.zeros_like(spikes)+target_cell_array[pop][cell],marker='|',s=2,c=color)
+           else:
+              for pop in range(0,len(target_cell_array)):
+                  for cell in range(0,len(target_cell_array[pop])):
+                      methods.get_spike_times('Golgi_pop%d_cell%d'%(pop,target_cell_array[trial][pop][cell]),exp_specify[0],trial)
+                      spikes = np.loadtxt('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cell_array[trial][pop][cell]))
+                      spike_train=pyspike.SpikeTrain(spikes,[0,sim_duration])
+                      spike_trains.append(spike_train)
+                   
+                      if trial in trial_ids_for_raster_plot:
+                         ax[trial].scatter(spikes,np.zeros_like(spikes)+target_cell_array[trial][pop][cell],marker='|',s=2,c=color)
+                            
+           distances.append(pyspike.spike_profile_multi(spike_trains))
+          
+    if (specify_targets[0]=="3D region specific") and ("subtype specific" in specify_targets):
+       for trial in range(0,n_trials):
+           sim_dir = 'simulations/' + exp_specify[0]+'/sim%d'%trial+'/txt'
+           spike_trains = []
+           if exp_specify[1][1]==True:
+              if ("randomly set target ids only once" in specify_targets ) or ("explicit list" in specify_targets):
+                 for pop in range(0,len(target_cell_array)):
+                     for cell in range(0,len(target_cell_array[pop])):
+                         #create target txt file containing spike times
+                         methods.get_spike_times('Golgi_pop%d_cell%d'%(pop,target_cell_array[pop][cell]),exp_specify[0],trial)
+                         spikes = np.loadtxt('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cell_array[pop][cell]))
+                         spike_train=pyspike.SpikeTrain(spikes,[0,sim_duration])
+                         spike_trains.append(spike_train)
+                   
+                         if trial in trial_ids_for_raster_plot:
+                            ax[trial].scatter(spikes,np.zeros_like(spikes)+target_cell_array[pop][cell],marker='|',s=2,c=color)
+              else:
+                 for pop in range(0,len(target_cell_array)):
+                     for cell in range(0,len(target_cell_array[pop])):
+                         methods.get_spike_times('Golgi_pop%d_cell%d'%(pop,target_cell_array[trial][pop][cell]),exp_specify[0],trial)
+                         spikes = np.loadtxt('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cell_array[trial][pop][cell]))
+                         spike_train=pyspike.SpikeTrain(spikes,[0,sim_duration])
+                         spike_trains.append(spike_train)
+                   
+                         if trial in trial_ids_for_raster_plot:
+                            ax[trial].scatter(spikes,np.zeros_like(spikes)+target_cell_array[trial][pop][cell],marker='|',s=2,c=color)
+           else:
+              for pop in range(0,len(target_cell_array)):
+                  for cell in range(0,len(target_cell_array[pop])):
+                      methods.get_spike_times('Golgi_pop%d_cell%d'%(pop,target_cell_array[trial][pop][cell]),exp_specify[0],trial)
+                      spikes = np.loadtxt('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cell_array[trial][pop][cell]))
+                      spike_train=pyspike.SpikeTrain(spikes,[0,sim_duration])
+                      spike_trains.append(spike_train)
+                   
+                      if trial in trial_ids_for_raster_plot:
+                         ax[trial].scatter(spikes,np.zeros_like(spikes)+target_cell_array[trial][pop][cell],marker='|',s=2,c=color)
+                         
+           distances.append(pyspike.spike_profile_multi(spike_trains))
+          
     if string.lower(specify_targets[0])=="subtype specific":
        for trial in range(0,n_trials):
            sim_dir = 'simulations/' + exp_specify[0]+'/sim%d'%trial+'/txt'
