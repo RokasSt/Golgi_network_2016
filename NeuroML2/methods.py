@@ -225,7 +225,7 @@ def get_cell_ids_for_sync_analysis(target_specifications,no_of_cell_groups,exper
 
     return target_cells
 
-def plot_voltage_traces(no_of_cell_groups,experiment_id,trial_id,plot_specifying_array,seed_specifying_array):
+def plot_voltage_traces(no_of_cell_groups,experiment_id,trial_id,plot_specifying_array,seed_specifying_array,legend=False):
     cell_no_array=[]
     if seed_specifying_array[1]==True:
        for cell_group in range(0,no_of_cell_groups):
@@ -271,7 +271,6 @@ def plot_voltage_traces(no_of_cell_groups,experiment_id,trial_id,plot_specifying
                   ax[pop].plot(data[0],data[1],label='Golgi_pop%d_cell%d'%(which_pops_to_plot[pop],cell))
                   print_comment("Adding trace for: Golgi_pop%d_cell%d, from: %s"%(which_pops_to_plot[pop],cell,cell_path), verbose)
               ax[pop].used = True
-              legend = True
               if legend:
                  ax[pop].legend(loc='upper right', fancybox=True, shadow=True,ncol=4)
               
@@ -310,14 +309,82 @@ def plot_voltage_traces(no_of_cell_groups,experiment_id,trial_id,plot_specifying
                   ax[pop].plot(data[0],data[1],label='Golgi_pop%d_cell%d'%(which_pops_to_plot[pop],cell))
                   print_comment("Adding trace for: Golgi_pop%d_cell%d, from: %s"%(which_pops_to_plot[pop],cell,cell_path), verbose)
               ax[pop].used = True
-              legend = True
               if legend:
                  ax[pop].legend(loc='upper right', fancybox=True, shadow=True,ncol=4)
                   
-
+    #identify Golgi cell populations with pop id (0,1,2,3....) in the input array (here internal variable is plot_specifying_array)
     if plot_specifying_array[0]=="pairs":
+       rows = max(1,math.ceil(len(plot_specifying_array[1])/3))
+       columns = min(3,len(plot_specifying_array[1]))
+       fig,ax = plt.subplots(rows,columns,sharex=True,
+                              figsize=(4*columns,4*rows))
+       ax = ax.ravel()
        for pair in range(0,len(plot_specifying_array[1])):
+           pop1=plot_specifying_array[1][0]
+           pop2=plot_specifying_array[1][1]
+           ax[pair].set_xlabel('Time (ms)')
+           ax[pair].set_ylabel('Membrane potential (V)')
+           ax[pair].xaxis.grid(True)
+           ax[pair].yaxis.grid(True)
+           fig.canvas.set_window_title("Golgi_pop%d and Golgi_pop%d cells"%(pop1,pop2))
            
+           if plot_specifying_array[2]=="explicit lists":
+               
+              for cell in plot_specifying_array[3][pair][0]:
+                  data=[]
+                  cell_path='simulations/%s/sim'%experiment_id+'%d/'%trial_id+'Golgi_pop%d_cell%d'%(pop1,cell)+'.dat'
+                  for line in open(cell_path):
+                      values=line.split() # for each line there is a time point and voltage value at that time point
+                      for x in range(0,2):
+                          data[x].append(float(values[x]))
+                  time_array=data[0]
+                  ax[pair].plot(data[0],data[1],label='Golgi_pop%d_cell%d'%(pop1,cell))
+                  print_comment("Adding trace for: Golgi_pop%d_cell%d, from: %s"%(pop1,cell,cell_path), verbose)
+                  
+              for cell in plot_specifying_array[3][pair][1]:
+                  data=[]
+                  cell_path='simulations/%s/sim'%experiment_id+'%d/'%trial_id+'Golgi_pop%d_cell%d'%(pop2,cell)+'.dat'
+                  for line in open(cell_path):
+                      values=line.split() # for each line there is a time point and voltage value at that time point
+                      for x in range(0,2):
+                          data[x].append(float(values[x]))
+                  time_array=data[0]
+                  ax[pair].plot(data[0],data[1],label='Golgi_pop%d_cell%d'%(pop2,cell))
+                  print_comment("Adding trace for: Golgi_pop%d_cell%d, from: %s"%(pop2,cell,cell_path), verbose)
+                  
+           if plot_specifying_array[2]=="random fractions":
+
+              which_cells_to_plot_pop1=random.sample(range(0,cell_no_array[pop1]),\
+                                                int(round(cell_no_array[pop1]*plot_specifying_array[3][pop1])))
+              
+              which_cells_to_plot_pop2=random.sample(range(0,cell_no_array[pop2]),\
+                                                int(round(cell_no_array[pop2]*plot_specifying_array[3][pop2])))
+
+              for cell in which_cells_to_plot_pop1:
+                  data=[]
+                  cell_path='simulations/%s/sim'%experiment_id+'%d/'%trial_id+'Golgi_pop%d_cell%d'%(pop1,cell)+'.dat'
+                  for line in open(cell_path):
+                      values=line.split() # for each line there is a time point and voltage value at that time point
+                      for x in range(0,2):
+                          data[x].append(float(values[x]))
+                  time_array=data[0]
+                  ax[pair].plot(data[0],data[1],label='Golgi_pop%d_cell%d'%(pop1,cell))
+                  print_comment("Adding trace for: Golgi_pop%d_cell%d, from: %s"%(pop1,cell,cell_path), verbose)
+
+              for cell in which_cells_to_plot_pop2:
+                  data=[]
+                  cell_path='simulations/%s/sim'%experiment_id+'%d/'%trial_id+'Golgi_pop%d_cell%d'%(pop2,cell)+'.dat'
+                  for line in open(cell_path):
+                      values=line.split() # for each line there is a time point and voltage value at that time point
+                      for x in range(0,2):
+                          data[x].append(float(values[x]))
+                  time_array=data[0]
+                  ax[pair].plot(data[0],data[1],label='Golgi_pop%d_cell%d'%(pop2,cell))
+                  print_comment("Adding trace for: Golgi_pop%d_cell%d, from: %s"%(pop2,cell,cell_path), verbose)
+
+           ax[pair].used = True
+           if legend:
+              ax[pair].legend(loc='upper right', fancybox=True, shadow=True,ncol=4)
 
 def extract_morphology_information(cell_array,target_array):
     loaded_cell_array={}
