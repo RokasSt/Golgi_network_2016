@@ -31,7 +31,10 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
 
     if spike_plot_parameters[0]=="2D raster plots":
 
-       fig_stack, ax_stack = plt.subplots(figsize=(4,6),ncols=1,nrows=1+no_of_groups, sharex=True)
+        ncols=1
+        nrows=1+no_of_groups
+
+       fig_stack, ax_stack = plt.subplots(figsize=(4,nrows),ncols,nrows, sharex=True)
 
        if spike_plot_parameters[2]=="save all rasters to separate files":
 
@@ -39,21 +42,23 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
           raster_ax_array=[]
 
           for trial in range(0,n_trials):
-              fig, ax = plt.subplots(figsize=(4,6),ncols=1,nrows=1+no_of_groups, sharex=True)
+              ncols=1
+              nrows=1+no_of_groups
+              fig, ax = plt.subplots(figsize=(4,nrows),ncols,nrows, sharex=True)
               raster_fig_array.append(fig)
               raster_ax_array.append(ax)
-
+    
     if spike_plot_parameters[0]=="3D scatter plot":
 
-       nrows = max(1,math.ceil(no_of_groups/3))
-       ncols = min(3,no_of_groups)
+       nrows = max(1,math.ceil((1+no_of_groups)/3))
+       ncols = min(3,1+no_of_groups)
 
-       fig_stack, ax_stack = plt.subplots(figsize=(4*ncols,2*rows),ncols,nrows,sharex=True,projection='3d')
+       fig_stack, ax_stack = plt.subplots(figsize=(4*ncols,4*rows),ncols,nrows,sharex=False,projection='3d')
 
        if spike_plot_parameters[2]=="save all rasters to separate files":
 
 
-           fig_3D_separate, ax_3D_separate = plt.subplots(figsize=(4*ncols,2*rows),ncols,nrows, sharex=True,projection='3d')
+           fig_3D_separate, ax_3D_separate = plt.subplots(figsize=(4*ncols,2*rows),ncols,nrows, sharex=False,projection='3d')
 
 
 
@@ -83,18 +88,91 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
         distances = []
         
         color = sns.color_palette()
-
-        if string.lower(specify_targets[0])=="all":
-           for trial in range(0,n_trials):
-               sim_dir = 'simulations/' + exp_specify[0][exp_id]+'/sim%d'%trial+'/txt'
-               spike_trains = []
-               3D_spikes_array=[]   #needed if 3D plot
-               3D_spike_times_array=[]
-               sim_axis_array=[]
+        if spike_plot_parameters[0]=="3D scatter plot":
+           3D_spikes=[]
+           3D_spike_times=[]
+           sim_axis_array=[]
+           population_wise_3D_spikes=[]
+           population_wise_3D_spike_times=[]
+           population_wise_sim_axis_array=[]
+        
+        
+        for trial in range(0,n_trials):
+            sim_dir = 'simulations/' + exp_specify[0][exp_id]+'/sim%d'%trial+'/txt'
+            spike_trains = []
+            if spike_plot_parameters[0]=="3D scatter plot":
+               3D_spikes_array_per_trial=[]   
+               3D_spike_times_array_per_trial=[]
+               sim_axis_array_per_trial=[]
+            ######   
+            if (specify_targets[0]=="3D region specific") and (not("subtype specific" in specify_targets )):
+               if exp_specify[1][1]==True:
+                  for pop in range(0,len(target_cell_array)):
+                      if spike_plot_parameters[0]=="3D scatter plot":
+                         3D_spikes_per_pop=[]   
+                         3D_spike_times_per_pop=[]
+                         sim_axis_per_pop=[]
+                      for cell in range(0,len(target_cell_array[pop])):
+                          #create target txt file containing spike times
+                          methods.get_spike_times('Golgi_pop%d_cell%d'%(pop,target_cell_array[pop][cell]),exp_specify[0],trial)
+                          spikes = np.loadtxt('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cell_array[pop][cell]))
+                          spike_train=pyspike.SpikeTrain(spikes,[0,sim_duration])
+                          spike_trains.append(spike_train)
+                          if spike_plot_parameters[0]=="2D raster plot":
+                             if trial in spike_plot_parameters[1]:
+                                ax_stack[pop].scatter(spikes,np.zeros_like(spikes)+(target_cell_array[pop][cell]+exp_id*cell_no_array[pop]),marker='|',s=2,c=color)
+                             if spike_plot_parameters[2]=="save all rasters to separate files":
+                                raster_ax_array[trial][pop].scatter(spikes,np.zeros_like(spikes)+(target_cell_array[pop][cell]+exp_id*cell_no_array[pop]),marker='|',s=2,c=color)
+                          if spike_plot_parameters[0]=="3D scatter plot":
+                             if cell==0:
+                                3D_spikes_per_pop=np.zeros_like(spikes)+(target_cell_array[pop][cell]+ exp_id*cell_no_array[pop])
+                                3D_spike_times_per_pop=spikes
+                                sim_axis_per_pop=np.zeros_like(spikes)+trial+1  # for display start numbering trials from the index of 1
+                             else:
+                                3D_spikes_per_pop=3D_spikes_per_pop+np.zeros_like(spikes)+(target_cell_array[pop][cell]+exp_id*cell_no_array[pop])
+                                3D_spike_times_per_pop=3D_spike_times_per_pop+spikes
+                                sim_axis_per_pop=sim_axis_per_pop+np.zeros_like(spikes)+trial+1
+                      if spike_plot_parameters[0]=="3D scatter plot":
+                         3D_spikes_array_per_trial.append(3D_spikes_per_pop)
+                         3D_spike_times_array_per_trial.append(3D_spike_times_per_pop)
+                         sim_axis_array_per_trial.append(sim_axis_per_pop)
+                         
+               else:
+                  for pop in range(0,len(target_cell_array[trial])):
+                      if spike_plot_parameters[0]=="3D scatter plot":
+                         3D_spikes_per_pop=[]   
+                         3D_spike_times_per_pop=[]
+                         sim_axis_per_pop=[]
+                      for cell in range(0,len(target_cell_array[trial][pop])):
+                          methods.get_spike_times('Golgi_pop%d_cell%d'%(pop,target_cell_array[trial][pop][cell]),exp_specify[0],trial)
+                          spikes = np.loadtxt('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cell_array[trial][pop][cell]))
+                          spike_train=pyspike.SpikeTrain(spikes,[0,sim_duration])
+                          spike_trains.append(spike_train)
+                          if spike_plot_parameters[0]=="2D raster plot":
+                             if trial in spike_plot_parameters[1]:
+                                ax_stack[pop].scatter(spikes,np.zeros_like(spikes)+(target_cell_array[trial][pop][cell]+exp_id*cell_no_array[pop]),marker='|',s=2,c=color)
+                             if spike_plot_parameters[2]=="save all rasters to separate files":
+                                raster_ax_array[trial][pop].scatter(spikes,np.zeros_like(spikes)+(target_cell_array[trial][pop][cell]+exp_id*cell_no_array[pop]),marker='|',s=2,c=color)
+                          if spike_plot_parameters[0]=="3D scatter plot":
+                             if cell==0:
+                                3D_spikes_per_pop=np.zeros_like(spikes)+(target_cell_array[trial][pop][cell]+ exp_id*cell_no_array[pop])
+                                3D_spike_times_per_pop=spikes
+                                sim_axis_per_pop=np.zeros_like(spikes)+trial+1  # for display start numbering trials from the index of 1
+                             else:
+                                3D_spikes_per_pop=3D_spikes_per_pop+np.zeros_like(spikes)+(target_cell_array[trial][pop][cell]+exp_id*cell_no_array[pop])
+                                3D_spike_times_per_pop=3D_spike_times_per_pop+spikes
+                                sim_axis_per_pop=sim_axis_per_pop+np.zeros_like(spikes)+trial+1
+                      if spike_plot_parameters[0]=="3D scatter plot":
+                         3D_spikes_array_per_trial.append(3D_spikes_per_pop)
+                         3D_spike_times_array_per_trial.append(3D_spike_times_per_pop)
+                         sim_axis_array_per_trial.append(sim_axis_per_pop)
+            ######   
+            if string.lower(specify_targets[0])=="all":
                for pop in range(0,len(target_cell_array)):
-                   3D_spikes=[]   #needed if 3D plot
-                   3D_spike_times=[]
-                   sim_axis=[]
+                   if spike_plot_parameters[0]=="3D scatter plot":
+                      3D_spikes_per_pop=[]   
+                      3D_spike_times_per_pop=[]
+                      sim_axis_per_pop=[]
                    for cell in range(0,len(target_cell_array[pop])):
                        #create target txt file containing spike times
                        methods.get_spike_times('Golgi_pop%d_cell%d'%(pop,cell),exp_specify[0][exp_id],trial)
@@ -107,119 +185,186 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
                           if spike_plot_parameters[2]=="save all rasters to separate files":
                              raster_ax_array[trial][pop].scatter(spikes,np.zeros_like(spikes)+(cell+exp_id*cell_no_array[pop]),marker='|',s=2,c=color)
                        if spike_plot_parameters[0]=="3D scatter plot":
-                          3D_spikes.append(np.zeros_like(spikes)+(cell+exp_id*cell_no_array[pop]))
-                          3D_spike_times.append(spikes)
-                          sim_axis.append(np.zeros_like(spikes)+trial+1)
-                   3D_spikes_array.append(3D_spikes)
-                   3D_spike_times_array.append(3D_spike_times)
-                   sim_axis_array.append(sim_axis)
-               distances.append(pyspike.spike_profile_multi(spike_trains))
-           for pop in range(0,len(target_cell_array)):
-               ax_stack[pop].scatter(3D_spike_times_array[pop],sim_axis_array[pop],3D_spikes_array[pop],marker='|',s=2,c=color)
-           
-           
-    if (specify_targets[0]=="3D region specific") and (not("subtype specific" in specify_targets )):
-       for trial in range(0,n_trials):
-           sim_dir = 'simulations/' + exp_specify[0]+'/sim%d'%trial+'/txt'
-           spike_trains = []
-           if exp_specify[1][1]==True:
-              for pop in range(0,len(target_cell_array)):
-                  for cell in range(0,len(target_cell_array[pop])):
-                      #create target txt file containing spike times
-                      methods.get_spike_times('Golgi_pop%d_cell%d'%(pop,target_cell_array[pop][cell]),exp_specify[0],trial)
-                      spikes = np.loadtxt('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cell_array[pop][cell]))
-                      spike_train=pyspike.SpikeTrain(spikes,[0,sim_duration])
-                      spike_trains.append(spike_train)
-                   
-                      if trial in tr:
-                         ax[trial].scatter(spikes,np.zeros_like(spikes)+target_cell_array[pop][cell],marker='|',s=2,c=color)
-           else:
-              for pop in range(0,len(target_cell_array)):
-                  for cell in range(0,len(target_cell_array[pop])):
-                      methods.get_spike_times('Golgi_pop%d_cell%d'%(pop,target_cell_array[trial][pop][cell]),exp_specify[0],trial)
-                      spikes = np.loadtxt('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cell_array[trial][pop][cell]))
-                      spike_train=pyspike.SpikeTrain(spikes,[0,sim_duration])
-                      spike_trains.append(spike_train)
-                   
-                      if trial in trial_ids_for_raster_plot:
-                         ax[trial].scatter(spikes,np.zeros_like(spikes)+target_cell_array[trial][pop][cell],marker='|',s=2,c=color)
-                            
-           distances.append(pyspike.spike_profile_multi(spike_trains))
-          
-    if (specify_targets[0]=="3D region specific") and ("subtype specific" in specify_targets):
-       for trial in range(0,n_trials):
-           sim_dir = 'simulations/' + exp_specify[0]+'/sim%d'%trial+'/txt'
-           spike_trains = []
-           if exp_specify[1][1]==True:
-              if ("randomly set target ids only once" in specify_targets ) or ("explicit list" in specify_targets):
-                 for pop in range(0,len(target_cell_array)):
-                     for cell in range(0,len(target_cell_array[pop])):
-                         #create target txt file containing spike times
-                         methods.get_spike_times('Golgi_pop%d_cell%d'%(pop,target_cell_array[pop][cell]),exp_specify[0],trial)
-                         spikes = np.loadtxt('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cell_array[pop][cell]))
-                         spike_train=pyspike.SpikeTrain(spikes,[0,sim_duration])
-                         spike_trains.append(spike_train)
-                   
-                         if trial in trial_ids_for_raster_plot:
-                            ax[trial].scatter(spikes,np.zeros_like(spikes)+target_cell_array[pop][cell],marker='|',s=2,c=color)
-              else:
-                 for pop in range(0,len(target_cell_array)):
-                     for cell in range(0,len(target_cell_array[pop])):
-                         methods.get_spike_times('Golgi_pop%d_cell%d'%(pop,target_cell_array[trial][pop][cell]),exp_specify[0],trial)
-                         spikes = np.loadtxt('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cell_array[trial][pop][cell]))
-                         spike_train=pyspike.SpikeTrain(spikes,[0,sim_duration])
-                         spike_trains.append(spike_train)
-                   
-                         if trial in trial_ids_for_raster_plot:
-                            ax[trial].scatter(spikes,np.zeros_like(spikes)+target_cell_array[trial][pop][cell],marker='|',s=2,c=color)
-           else:
-              for pop in range(0,len(target_cell_array)):
-                  for cell in range(0,len(target_cell_array[pop])):
-                      methods.get_spike_times('Golgi_pop%d_cell%d'%(pop,target_cell_array[trial][pop][cell]),exp_specify[0],trial)
-                      spikes = np.loadtxt('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cell_array[trial][pop][cell]))
-                      spike_train=pyspike.SpikeTrain(spikes,[0,sim_duration])
-                      spike_trains.append(spike_train)
-                   
-                      if trial in trial_ids_for_raster_plot:
-                         ax[trial].scatter(spikes,np.zeros_like(spikes)+target_cell_array[trial][pop][cell],marker='|',s=2,c=color)
-                         
-           distances.append(pyspike.spike_profile_multi(spike_trains))
-          
-    if string.lower(specify_targets[0])=="subtype specific":
-       for trial in range(0,n_trials):
-           sim_dir = 'simulations/' + exp_specify[0]+'/sim%d'%trial+'/txt'
-           spike_trains = []
-           if specify_targets[0][2]=="randomly set target ids only once":
-              for pop in range(0,len(target_cell_array)):
-                  for cell in range(0,len(target_cell_array[pop])):
-                       #create target txt file containing spike times
-                       methods.get_spike_times('Golgi_pop%d_cell%d'%(pop,target_cell_array[pop][cell]),exp_specify[0],trial)
-                       spikes = np.loadtxt('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cell_array[pop][cell]))
-                       spike_train=pyspike.SpikeTrain(spikes,[0,sim_duration])
-                       spike_trains.append(spike_train)
-                   
-                       if trial in trial_ids_for_raster_plot:
-                          ax[trial].scatter(spikes,np.zeros_like(spikes)+target_cell_array[pop][cell],marker='|',s=2,c=color)
-           else:
-              for pop in range(0,len(target_cell_array)):
-                  for cell in range(0,len(target_cell_array[pop])):
-                      #create target txt file containing spike times
-                      if n_trials==1:
-                         methods.get_spike_times('Golgi_pop%d_cell%d'%(pop,target_cell_array[pop][cell]),exp_specify[0],trial)
-                         spikes = np.loadtxt('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cell_array[pop][cell]))
-                      else:
-                         methods.get_spike_times('Golgi_pop%d_cell%d'%(pop,target_cell_array[trial][pop][cell]),exp_specify[0],trial)
-                         spikes = np.loadtxt('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cell_array[trial][pop][cell]))
-                      spike_train=pyspike.SpikeTrain(spikes,[0,sim_duration])
-                      spike_trains.append(spike_train)
-                   
-                      if trial in trial_ids_for_raster_plot:
-                         if n_trials==1:
-                            ax[trial].scatter(spikes,np.zeros_like(spikes)+target_cell_array[pop][cell],marker='|',s=2,c=color)
-                         else:
-                            ax[trial].scatter(spikes,np.zeros_like(spikes)+target_cell_array[trial][pop][cell],marker='|',s=2,c=color)
+                           if cell==0:
+                              3D_spikes_per_pop=np.zeros_like(spikes)+(cell+exp_id*cell_no_array[pop])
+                              3D_spike_times_per_pop=spikes
+                              sim_axis_per_pop=np.zeros_like(spikes)+trial+1  # for display start numbering trials from the index of 1
+                           else:
+                               3D_spikes_per_pop=3D_spikes_per_pop+np.zeros_like(spikes)+(cell+exp_id*cell_no_array[pop])
+                               3D_spike_times_per_pop=3D_spike_times_per_pop+spikes
+                               sim_axis_per_pop=sim_axis_per_pop+np.zeros_like(spikes)+trial+1
+                               
+                   if spike_plot_parameters[0]=="3D scatter plot":
+                      3D_spikes_array_per_trial.append(3D_spikes_per_pop)
+                      3D_spike_times_array_per_trial.append(3D_spike_times_per_pop)
+                      sim_axis_array_per_trial.append(sim_axis_per_pop)
+            ########
+            if (specify_targets[0]=="3D region specific") and ("subtype specific" in specify_targets):
+               if exp_specify[1][1]==True:
+                  if ("randomly set target ids only once" in specify_targets ) or ("explicit list" in specify_targets):
+                     for pop in range(0,len(target_cell_array)):
+                         for cell in range(0,len(target_cell_array[pop])):
+                             #create target txt file containing spike times
+                             methods.get_spike_times('Golgi_pop%d_cell%d'%(pop,target_cell_array[pop][cell]),exp_specify[0],trial)
+                             spikes = np.loadtxt('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cell_array[pop][cell]))
+                             spike_train=pyspike.SpikeTrain(spikes,[0,sim_duration])
+                             spike_trains.append(spike_train)
+                             if spike_plot_parameters[0]=="2D raster plot":
+                                if trial in spike_plot_parameters[1]:
+                                   ax_stack[pop].scatter(spikes,np.zeros_like(spikes)+(target_cell_array[pop][cell]+exp_id*cell_no_array[pop]),marker='|',s=2,c=color)
+                                if spike_plot_parameters[2]=="save all rasters to separate files":
+                                   raster_ax_array[trial][pop].scatter(spikes,np.zeros_like(spikes)+(target_cell_array[pop][cell]+exp_id*cell_no_array[pop]),marker='|',s=2,c=color)
+                             if spike_plot_parameters[0]=="3D scatter plot":
+                                if cell==0:
+                                   3D_spikes_per_pop=np.zeros_like(spikes)+(target_cell_array[pop][cell]+ exp_id*cell_no_array[pop])
+                                   3D_spike_times_per_pop=spikes
+                                   sim_axis_per_pop=np.zeros_like(spikes)+trial+1  # for display start numbering trials from the index of 1
+                                else:
+                                   3D_spikes_per_pop=3D_spikes_per_pop+np.zeros_like(spikes)+(target_cell_array[pop][cell]+exp_id*cell_no_array[pop])
+                                   3D_spike_times_per_pop=3D_spike_times_per_pop+spikes
+                                   sim_axis_per_pop=sim_axis_per_pop+np.zeros_like(spikes)+trial+1
+                         if spike_plot_parameters[0]=="3D scatter plot":
+                            3D_spikes_array_per_trial.append(3D_spikes_per_pop)
+                            3D_spike_times_array_per_trial.append(3D_spike_times_per_pop)
+                            sim_axis_array_per_trial.append(sim_axis_per_pop)
+                  else:
+                     for pop in range(0,len(target_cell_array[trial])):
+                         for cell in range(0,len(target_cell_array[trial][pop])):
+                             methods.get_spike_times('Golgi_pop%d_cell%d'%(pop,target_cell_array[trial][pop][cell]),exp_specify[0],trial)
+                             spikes = np.loadtxt('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cell_array[trial][pop][cell]))
+                             spike_train=pyspike.SpikeTrain(spikes,[0,sim_duration])
+                             spike_trains.append(spike_train)
+                             if spike_plot_parameters[0]=="2D raster plot":
+                                if trial in spike_plot_parameters[1]:
+                                   ax_stack[pop].scatter(spikes,np.zeros_like(spikes)+(target_cell_array[trial][pop][cell]+exp_id*cell_no_array[pop]),marker='|',s=2,c=color)
+                                if spike_plot_parameters[2]=="save all rasters to separate files":
+                                raster_ax_array[trial][pop].scatter(spikes,np.zeros_like(spikes)+(target_cell_array[trial][pop][cell]+exp_id*cell_no_array[pop]),marker='|',s=2,c=color)
+                             if spike_plot_parameters[0]=="3D scatter plot":
+                                if cell==0:
+                                   3D_spikes_per_pop=np.zeros_like(spikes)+(target_cell_array[trial][pop][cell]+ exp_id*cell_no_array[pop])
+                                   3D_spike_times_per_pop=spikes
+                                   sim_axis_per_pop=np.zeros_like(spikes)+trial+1  # for display start numbering trials from the index of 1
+                                else:
+                                   3D_spikes_per_pop=3D_spikes_per_pop+np.zeros_like(spikes)+(target_cell_array[trial][pop][cell]+exp_id*cell_no_array[pop])
+                                   3D_spike_times_per_pop=3D_spike_times_per_pop+spikes
+                                   sim_axis_per_pop=sim_axis_per_pop+np.zeros_like(spikes)+trial+1
+                         if spike_plot_parameters[0]=="3D scatter plot":
+                            3D_spikes_array_per_trial.append(3D_spikes_per_pop)
+                            3D_spike_times_array_per_trial.append(3D_spike_times_per_pop)
+                            sim_axis_array_per_trial.append(sim_axis_per_pop)
+               else:
+                  for pop in range(0,len(target_cell_array[trial])):
+                      for cell in range(0,len(target_cell_array[trial][pop])):
+                          methods.get_spike_times('Golgi_pop%d_cell%d'%(pop,target_cell_array[trial][pop][cell]),exp_specify[0],trial)
+                          spikes = np.loadtxt('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cell_array[trial][pop][cell]))
+                          spike_train=pyspike.SpikeTrain(spikes,[0,sim_duration])
+                          spike_trains.append(spike_train)
+                          if spike_plot_parameters[0]=="2D raster plot":
+                             if trial in spike_plot_parameters[1]:
+                                ax_stack[pop].scatter(spikes,np.zeros_like(spikes)+(target_cell_array[trial][pop][cell]+exp_id*cell_no_array[pop]),marker='|',s=2,c=color)
+                             if spike_plot_parameters[2]=="save all rasters to separate files":
+                                raster_ax_array[trial][pop].scatter(spikes,np.zeros_like(spikes)+(target_cell_array[trial][pop][cell]+exp_id*cell_no_array[pop]),marker='|',s=2,c=color)
+                          if spike_plot_parameters[0]=="3D scatter plot":
+                             if cell==0:
+                                3D_spikes_per_pop=np.zeros_like(spikes)+(target_cell_array[trial][pop][cell]+ exp_id*cell_no_array[pop])
+                                3D_spike_times_per_pop=spikes
+                                sim_axis_per_pop=np.zeros_like(spikes)+trial+1  # for display start numbering trials from the index of 1
+                             else:
+                                3D_spikes_per_pop=3D_spikes_per_pop+np.zeros_like(spikes)+(target_cell_array[trial][pop][cell]+exp_id*cell_no_array[pop])
+                                3D_spike_times_per_pop=3D_spike_times_per_pop+spikes
+                                sim_axis_per_pop=sim_axis_per_pop+np.zeros_like(spikes)+trial+1
+                      if spike_plot_parameters[0]=="3D scatter plot":
+                         3D_spikes_array_per_trial.append(3D_spikes_per_pop)
+                         3D_spike_times_array_per_trial.append(3D_spike_times_per_pop)
+                         sim_axis_array_per_trial.append(sim_axis_per_pop)
+            ########
+            if string.lower(specify_targets[0])=="subtype specific":
+               if specify_targets[0][2]=="randomly set target ids only once":
+                  for pop in range(0,len(target_cell_array)):
+                      for cell in range(0,len(target_cell_array[pop])):
+                          #create target txt file containing spike times
+                          methods.get_spike_times('Golgi_pop%d_cell%d'%(pop,target_cell_array[pop][cell]),exp_specify[0],trial)
+                          spikes = np.loadtxt('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cell_array[pop][cell]))
+                          spike_train=pyspike.SpikeTrain(spikes,[0,sim_duration])
+                          spike_trains.append(spike_train)
+                          if spike_plot_parameters[0]=="2D raster plot":
+                             if trial in spike_plot_parameters[1]:
+                                ax_stack[pop].scatter(spikes,np.zeros_like(spikes)+(target_cell_array[pop][cell]+exp_id*cell_no_array[pop]),marker='|',s=2,c=color)
+                              if spike_plot_parameters[2]=="save all rasters to separate files":
+                                 raster_ax_array[trial][pop].scatter(spikes,np.zeros_like(spikes)+(target_cell_array[pop][cell]+exp_id*cell_no_array[pop]),marker='|',s=2,c=color)
+                          if spike_plot_parameters[0]=="3D scatter plot":
+                             if cell==0:
+                                3D_spikes_per_pop=np.zeros_like(spikes)+(target_cell_array[pop][cell]+ exp_id*cell_no_array[pop])
+                                3D_spike_times_per_pop=spikes
+                                sim_axis_per_pop=np.zeros_like(spikes)+trial+1  # for display start numbering trials from the index of 1
+                             else:
+                                3D_spikes_per_pop=3D_spikes_per_pop+np.zeros_like(spikes)+(target_cell_array[pop][cell]+exp_id*cell_no_array[pop])
+                                3D_spike_times_per_pop=3D_spike_times_per_pop+spikes
+                                sim_axis_per_pop=sim_axis_per_pop+np.zeros_like(spikes)+trial+1
+                      if spike_plot_parameters[0]=="3D scatter plot":
+                         3D_spikes_array_per_trial.append(3D_spikes_per_pop)
+                         3D_spike_times_array_per_trial.append(3D_spike_times_per_pop)
+                         sim_axis_array_per_trial.append(sim_axis_per_pop)
+                       
+               else:
+                  for pop in range(0,len(target_cell_array[trial])):
+                      for cell in range(0,len(target_cell_array[trial][pop])):
+                          #create target txt file containing spike times
+                          methods.get_spike_times('Golgi_pop%d_cell%d'%(pop,target_cell_array[trial][pop][cell]),exp_specify[0],trial)
+                          spikes = np.loadtxt('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cell_array[trial][pop][cell]))
+                          spike_train=pyspike.SpikeTrain(spikes,[0,sim_duration])
+                          spike_trains.append(spike_train)
+                          if spike_plot_parameters[0]=="2D raster plot":
+                             if trial in spike_plot_parameters[1]:
+                                ax_stack[pop].scatter(spikes,np.zeros_like(spikes)+(target_cell_array[trial][pop][cell]+exp_id*cell_no_array[pop]),marker='|',s=2,c=color)
+                             if spike_plot_parameters[2]=="save all rasters to separate files":
+                                raster_ax_array[trial][pop].scatter(spikes,np.zeros_like(spikes)+(target_cell_array[trial][pop][cell]+exp_id*cell_no_array[pop]),marker='|',s=2,c=color)
+                          if spike_plot_parameters[0]=="3D scatter plot":
+                             if cell==0:
+                                3D_spikes_per_pop=np.zeros_like(spikes)+(target_cell_array[trial][pop][cell]+ exp_id*cell_no_array[pop])
+                                3D_spike_times_per_pop=spikes
+                                sim_axis_per_pop=np.zeros_like(spikes)+trial+1  # for display start numbering trials from the index of 1
+                             else:
+                                3D_spikes_per_pop=3D_spikes_per_pop+np.zeros_like(spikes)+(target_cell_array[trial][pop][cell]+exp_id*cell_no_array[pop])
+                                3D_spike_times_per_pop=3D_spike_times_per_pop+spikes
+                                sim_axis_per_pop=sim_axis_per_pop+np.zeros_like(spikes)+trial+1
+                      if spike_plot_parameters[0]=="3D scatter plot":
+                         3D_spikes_array_per_trial.append(3D_spikes_per_pop)
+                         3D_spike_times_array_per_trial.append(3D_spike_times_per_pop)
+                         sim_axis_array_per_trial.append(sim_axis_per_pop)
+                      
+            ########           
+            if spike_plot_parameters[0]=="3D scatter plot":
+               3D_spikes.append(3D_spikes_array_per_trial)
+               3D_spike_times.append(3D_spike_times_array_per_trial)
+               sim_axis_array.append(sim_axis_array_per_trial)
+                  
+            distances.append(pyspike.spike_profile_multi(spike_trains))
 
-           distances.append(pyspike.spike_profile_multi(spike_trains))
+            for pop in range(0,no_of_groups):
+                population_wise_3D_spikes.append(3D_spikes[0][pop])
+                population_wise_3D_spike_times.append(3D_spike_times[0][pop])
+                population_wise_sim_axis_array.append(sim_axis_array[0][pop])
+               
+            for pop in range(0,no_of_groups):
+                for trial in range(1,n_trials):
+                    population_wise_3D_spikes[pop]=population_wise_3D_spikes[pop]+3D_spikes[trial][pop]
+                    population_wise_3D_spike_times[pop]=population_wise_3D_spike_times[pop]+3D_spike_times[trial][pop]
+                    population_wise_sim_axis_array[pop]=population_wise_sim_axis_array[pop]+sim_axis_array[trial][pop]
+
+            for pop in range(0,no_of_groups):
+                ax_stack[pop].scatter(population_wise_3D_spike_times[pop],population_wise_sim_axis_array[pop],population_wise_3D_spikes[pop],marker='|',s=2,c=color)
+
+            if spike_plot_parameters[0]=="3D scatter plot":
+               if spike_plot_parameters[2]=="save all rasters to separate files":
+                  for pop in range(0,no_of_groups):
+                      ax_3D_separate[pop].scatter(population_wise_3D_spike_times[pop],population_wise_sim_axis_array[pop],population_wise_3D_spikes[pop],marker='|',s=2,c=color)
+            ######         
+            
+            
+    
+          
+   
 
     # average synchrony index across trials
     average_distance = distances[0]
