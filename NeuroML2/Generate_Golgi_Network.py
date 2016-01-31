@@ -262,8 +262,65 @@ def generate_golgi_cell_net(ref,cell_array,location_array, connectivity_informat
 
 	   
 
+           #make InputList for MF and PF synapses
 
-        
+
+           
+	   ###### implementing physiological heterogeneity between cells with variations in a basal firing rate
+           if "variable basal firing rate" in input_information:
+              for var in input_information:
+                  if type(var) is list:
+                     if var[0]=="amplitude distribution":
+                        if "gaussian" in var:
+                            pop_average_array=[]
+                            pop_variance_array=[]
+                            gaussian_model=True
+                            for pop_var in range(0,var[2]):
+                                pop_average_array.append(var[2][pop_var])
+                                pop_variance_array.append(var[3][pop_var])
+                            units=var[4]
+                        if "uniform" in var:
+                            pop_left_bound=[]
+                            pop_right_bound=[]
+                            uniform_model=True
+                            for pop_var in range(0,var[2]):
+                                pop_left_bound.append(var[2][pop_var])
+                                pop_right_bound.append(var[3][pop_var])
+                            units=var[4]
+                     if var[0]=="offset distribution":
+                        if "gaussian" in var:
+                            offset_gaussian_model=True
+                            pop_offset_average=[]
+                            pop_offset_variance=[]
+                            for pop_var in range(0,len(var[2]):
+                                pop_offset_average.append(var[2][pop_var])
+                                pop_offset_variance.append(var[3][pop_var])
+                            offset_units=var[4]
+                        if "uniform" in var:
+                            offset_uniform_model=True
+                            pop_offset_left_bound=[]
+                            pop_offset_right_bound=[]
+                            for pop_var in range(0,len(var[2])):
+                                pop_offset_left_bound.append(var[2][pop_var])
+                                pop_offset_right_bound.append(var[2][pop_var])
+                            offset_units=var[4]
+              for pop in range(0,len(Golgi_pop_index_array)):
+                  for cell in range(cell_array[pop+1][1]):
+                      if gaussian_model:
+                         amp=random.gauss(pop_average[pop],pop_variance[pop])
+                      if uniform_model:
+                         amp=random.uniform(pop_left_bound[pop],pop_right_bound[pop])
+                      if offset_gaussian_model:
+                         offset=random.gauss(pop_offset_average[pop],pop_offset_variance[pop])
+                      if offset_uniform_model:
+                         offset=random.uniform(pop_offset_left_bound[pop],pop_offset_right_bound[pop])
+                      Pulse_generator_variable=neuroml.PulseGenerator(id="Input_%d%d"%(pop,cell),delay="%f%s"%(offset,offset_units),duration="%f%s"%(simulation_parameters[1]-offset,offset_units),amplitude="%f%s"%(amp,units))
+	              nml_doc.pulse_generators.append(Pulse_generator_variable)
+	              Input_list=neuroml.InputList(id="Input_list%d%d"(%pop,cell),component="Input_%d%d"%(pop,cell))
+	              net.input_lists.append(Input_list)
+	              Inp = neuroml.Input(target="../%s/%d/%s"%(Golgi_pop_index_array[pop],cell,cell_array[pop+1][0]),id="%d"%cell,destination="synapses")
+	              Input_list.input.append(Inp)
+	              
            if input_information[0]=="testing":
               neuroml_input_array=[]
               for pulse_x in range(0,len(input_information)-2):
@@ -326,6 +383,62 @@ def generate_golgi_cell_net(ref,cell_array,location_array, connectivity_informat
                          Inp = neuroml.ExplicitInput(target="%s[%d]"%(Golgi_pop_index_array[pop],i),input="Input_%d"%pulse_x,destination="synapses")
                          net.explicit_inputs.append(Inp)
            #block for explicit inputs end
+           
+           # as a template net_params[3]=["variable basal firing rate",["amplitude distribution","gaussian",[100],[50],"nA"],["offset distribution","uniform",[50],[100],"ms"]]        
+           if "variable basal firing rate" in input_information:
+              for var in input_information:
+                  if type(var) is list:
+                     if var[0]=="amplitude distribution":
+                        if "gaussian" in var:
+                            pop_average_array=[]
+                            pop_variance_array=[]
+                            gaussian_model=True
+                            for pop_var in range(0,var[2]):
+                                pop_average_array.append(var[2][pop_var])
+                                pop_variance_array.append(var[3][pop_var])
+                            units=var[4]
+                        if "uniform" in var:
+                            pop_left_bound=[]
+                            pop_right_bound=[]
+                            uniform_model=True
+                            for pop_var in range(0,var[2]):
+                                pop_left_bound.append(var[2][pop_var])
+                                pop_right_bound.append(var[3][pop_var])
+                            units=var[4]
+                     if var[0]=="offset distribution":
+                        if "gaussian" in var:
+                            offset_gaussian_model=True
+                            pop_offset_average=[]
+                            pop_offset_variance=[]
+                            for pop_var in range(0,len(var[2]):
+                                pop_offset_average.append(var[2][pop_var])
+                                pop_offset_variance.append(var[3][pop_var])
+                            offset_units=var[4]                 
+                        if "uniform" in var:
+                            offset_uniform_model=True
+                            pop_offset_left_bound=[]
+                            pop_offset_right_bound=[]
+                            for pop_var in range(0,len(var[2])):
+                                pop_offset_left_bound.append(var[2][pop_var])
+                                pop_offset_right_bound.append(var[2][pop_var])
+                            offset_units=var[4]
+              for pop in range(0,len(Golgi_pop_index_array)):
+                  for cell in range(cell_array[pop+1][1]):
+                      if gaussian_model:
+                         amp=random.gauss(pop_average[pop],pop_variance[pop])
+                      if uniform_model:
+                         amp=random.uniform(pop_left_bound[pop],pop_right_bound[pop])
+                      if offset_gaussian_model:
+                         offset=random.gauss(pop_offset_average[pop],pop_offset_variance[pop])
+                      if offset_uniform_model:
+                         offset=random.uniform(pop_offset_left_bound[pop],pop_offset_right_bound[pop])
+                      Pulse_generator_variable=neuroml.PulseGenerator(id="Input_%d%d"%(pop,cell),delay="%f%s"%(offset,offset_units),duration="%f%s"%(simulation_parameters[1]-offset,offset_units),amplitude="%f%s"%(amp,units))
+	              nml_doc.pulse_generators.append(Pulse_generator_variable)
+	              Inp = neuroml.ExplicitInput(target="%s[%d]"%(Golgi_pop_index_array[pop],cell),input="Input_%d%d"%(pop,cell),destination="synapses")
+                      net.explicit_inputs.append(Inp)
+	              
+
+           
            if connectivity_information[0]=="Vervaeke_2012_based":
                cell_names=[]
                for cell in range(cell_array[0]):

@@ -43,6 +43,7 @@ if __name__ == "__main__":
     run_simulations(net_params,450,0.005,"jNeuroML_NEURON","V2010multi1_2p4c4c_4inp",1,["seed specifier",True],["plot specifier",True],["save somata positions","Yes"])
 
 
+    #net_params[3]=["variable basal firing rate",["amplitude distribution","gaussian","100","50","nA"],["offset distribution","uniform",50,100]]
 
     
     #ordering of arguments inside lists matters! see examples below for the exact order of different arguments in input arrays
