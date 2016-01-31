@@ -386,6 +386,8 @@ def plot_voltage_traces(no_of_cell_groups,experiment_id,trial_id,plot_specifying
            if legend:
               ax[pair].legend(loc='upper right', fancybox=True, shadow=True,ncol=4)
 
+def get_unique_target_points(targeting_specifications,
+
 def get_3D_connection_length(cell_array,pre_pop,post_pop,pre_cell_ID,post_cell_ID,pre_segment_ID,post_segment_ID,pre_fraction_Along,post_fraction_Along):
     #cell_array variable has to contain cell component names
     loaded_cell_array={}

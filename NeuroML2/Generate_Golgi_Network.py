@@ -258,14 +258,60 @@ def generate_golgi_cell_net(ref,cell_array,location_array, connectivity_informat
                                                
 		                            proj.electrical_connections.append(conn)
 		                            conn_count+=1
-               
-
-	   
-           #  input_information=["MF inputs", "segment groups" , "segments" , 
-           #make InputList for MF and PF synapses
-         
-
            
+           # use below as a template : 
+           # input_information=[["MF",[pop0_array,pop1_array,pop2_array]],["PF",[pop0_array,pop1_array,pop2_array]]]
+           # all pop_arrays have to be of the following form:
+           # first_array=["uniform" or "3D region specific", if "uniform" fraction to target, if "3D region specific",
+           # pop0_array=[pop_index,first_array,synapse_array_per_pop,[[synapse average_rate_list]]["constant number of inputs per cell" or "variable number of inputs per cell"
+           # if variable then "binomial",average_no_of_inputs,max_no_of_inputs    ]   then
+           # for each different synapse     "segment groups and segments",[["Section_1","dend_1"],[0.7,0.3]]
+           # "segments and subsegments"
+           # [["Section_1"],[1],[[[0.25,0.2],[0.25,0.4],[0.25,0.4],[0.25,0]]]]
+           #make InputList for MF and PF synapses
+           for var in range(0,len(input_information)):
+                #more options can be added in the future
+                if "MF"==input_information[var][0] or "PF"==input_information[var][0]:
+                   inp_group_specifier=input_information[var][0]
+                   synapse_name_array=[]
+                   for pop in range(0,len(input_information[var][1])):
+                       names_of_synapses=input_information[var][1][pop][2]
+                       for name in names_of_synapses:
+                           synapse_name_array.append(name)
+                   unique_synapse_names=np.unique(synapse_name_array)
+                   for unique_synapse in unique_synapse_names:
+                       include_synapse=neuroml.IncludeType(href="%s.synapse.nml"%unique_synapse)
+                       nml_doc.includes.append(include_synapse)
+                   for pop in range(0,len(input_information[var][1])):
+                       genuine_pop_index=input_information[var][1][pop][0]
+                       segment_group_list=[]
+                       segment_group_list.append("segment groups")
+                       segment_group_list.append(input_information[var][1][pop][6][0])
+                       segment_target_array=extract_morphology_information(cell_array[genuine_pop_index+1][0],segment_group_list)
+                       for poisson_synapse_list in range(0,len(input_information[var][1][pop][3])):
+                           poisson_syn=PoissonFiringSynapse(id="%s_pop%dsyn%d"%(inp_group_specifier,genuine_pop_index,poisson_synapse_list),\
+                                                       average_rate="%f per_s"%input_information[var][1][pop][3][poisson_synapse_list][1],\
+                                   synapse=input_information[var][1][pop][3][poisson_synapse_list][0] ,\
+                                   spike_target="./%s"%input_information[var][1][pop][3][poisson_synapse_list][0])
+                      nml_doc.poisson_firing_synapses.append(poisson_syn)
+                      input_list = InputList(id="%s_Input_pop%dsyn%d"%(inp_group_specifier,pop,poisson_synapse_list),\
+                                             component=poisson_syn.id, population=Golgi_pop_index_array[genuine_pop_index])
+                      which_cells_to_target_array=input_information[var][1][pop][1]
+                      if which_cells_to_target_array[0]=="uniform":
+                         fraction_to_target_per_pop=which_cells_to_target_array[1]
+                         target_cells=random.sample(range(cell_array[genuine_pop_index+1][1]),int(round(fraction_to_target_per_pop*cell_array[genuine_pop_index+1][1]))
+                         for target_cell in target_cells:
+                             if input_information[var][1][pop][4][0]=="constant number of inputs per cell":
+                                no_of_inputs=input_information[var][1][pop][4][1]
+                             if input_information[var][1][pop][4][0]=="variable number of inputs per cell":
+                                if input_information[var][1][pop][4][1]=="binomial":
+                                   no_of_inputs=np.random.binomial(input_information[var][1][pop][4][3],input_information[var][1][pop][4][2]/input_information[var][1][pop][4][3])
+                             ### other options can be added
+                             if input_information[var][1][pop][5]=="segment groups and segments":
+                                   
+                             if input_information[var][1][pop][5]=="segments and subsegments":
+                      if which_cells_to_target_array[0]=="3D region specific":
+                
 	   ###### implementing physiological heterogeneity between cells with variations in a basal firing rate
            if "variable basal firing rate" in input_information:
               for var in input_information:
