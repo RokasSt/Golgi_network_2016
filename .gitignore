@@ -1,42 +1,28 @@
-/NeuroML2/Soma.v.dat
-/neuroConstruct/generatedNeuroML2/LEMS_SolinasEtAl-GolgiCell.xml
-/NeuroML2/KAHP.states.dat
-/NeuroML2/KAHP.v.dat
-/NeuroML2/time.dat
+
+
 /NeuroML2/simulator.props
 
 /NeuroML2/*.mod
 /NeuroML2/*.hoc
 /NeuroML2/*.dat
+/NeuroML2/*_nrn.py 
 
-/NEURON*/test/*.dat
-/NEURON*/*.dat
-/NEURON*/Golgi_count.txt
-/NEURON*/SimData*
+/NeuroML2/Examples/*.mod
+/NeuroML2/Examples/*.hoc
+/NeuroML2/Examples/*.dat
+/NeuroML2/Examples/*_nrn.py 
+/NeuroML2/Examples/*.props
 
-/neuroConstruct/generatedNeuroML/README
-*.svg
-neuroConstruct/generatedNeuroML2/*.dat
-/neuroConstruct/generatedNeuroML2/clean.sh
-/neuroConstruct/generatedNeuroML2/*.dat.lems
 
-*.props
-runsim.sh
-/neuroConstruct/generatedNeuroML2/*.hoc
-/neuroConstruct/generatedNeuroML2/*.mod
-*_nrn.py
-*.js
-
-LEMS_Test*ml
-*.pyc
-*i686
-*x86_64
-generatedNEURON
-generatedGENESIS
-generatedMOOSE
-generatedPSICS
-simulations
-*.bak
-*py.class
-*~
+/NeuroML2/*.pyc
+/NeuroML2/*i686
+/NeuroML2/*x86_64
+/NeuroML2/generatedNEURON
+/NeuroML2/generatedGENESIS
+/NeuroML2/generatedMOOSE
+/NeuroML2/generatedPSICS
+/NeuroML2/simulations
+/NeuroML2/*.bak
+/NeuroML2/*py.class
+/NeuroML2/*~
 
