@@ -261,9 +261,9 @@ def generate_golgi_cell_net(ref,cell_array,location_array, connectivity_informat
                
 
 	   
-
+           #  input_information=["MF inputs", "segment groups" , "segments" , 
            #make InputList for MF and PF synapses
-
+         
 
            
 	   ###### implementing physiological heterogeneity between cells with variations in a basal firing rate

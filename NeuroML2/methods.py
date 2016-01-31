@@ -386,6 +386,74 @@ def plot_voltage_traces(no_of_cell_groups,experiment_id,trial_id,plot_specifying
            if legend:
               ax[pair].legend(loc='upper right', fancybox=True, shadow=True,ncol=4)
 
+def get_3D_connection_length(cell_array,pre_pop,post_pop,pre_cell_ID,post_cell_ID,pre_segment_ID,post_segment_ID,pre_fraction_Along,post_fraction_Along):
+    #cell_array variable has to contain cell component names
+    loaded_cell_array={}
+    for cell_pop in range(0,len(cell_array)):
+        if cell_pop==pre_pop:
+           Pre_cell_name=cell_array[pre_pop]
+           pre_cell_nml_file = '%s.cell.nml'%cell_array[pre_pop]
+           document_cell = neuroml.loaders.NeuroMLLoader.load(pre_cell_nml_file)
+           loaded_cell_array[cell_array[pre_pop]]=document_cell.cells[0]
+           pre_cell_position=cell_position_array[pre_pop][pre_cell_ID]
+        if cell_pop==post_pop:
+           Post_cell_name=cell_array[post_pop]
+           post_cell_nml_file = '%s.cell.nml'%cell_array[post_pop]
+           document_cell = neuroml.loaders.NeuroMLLoader.load(post_cell_nml_file)
+           loaded_cell_array[cell_array[post_pop]]=document_cell.cells[0]
+           post_cell_position=cell_position_array[post_pop][post_cell_ID]
+        for pre_segment in loaded_cell_array[Pre_cell_name].morphology.segments:
+            if pre_segment.id==pre_segment_ID:
+               xd=pre_segment.distal.x
+               yd=pre_segment.distal.y
+               zd=pre_segment.distal.z
+               if pre_segment_ID !=0:
+                  xp=pre_segment.parent.distal.x
+                  yp=pre_segment.parent.distal.y
+                  zp=pre_segment.parent.distal.z
+               else:
+                  xp=pre_segment.proximal.x
+                  yp=pre_segment.proximal.y
+                  zp=pre_segment.proximal.z
+               # translate the points by soma location vector
+               xd=xd+pre_cell_position[0]
+               yd=yd+pre_cell_position[1]
+               zd=zd+pre_cell_position[2]
+               xp=xp+pre_cell_position[0]
+               yp=yp+pre_cell_position[1]
+               zp=zp+pre_cell_position[2]
+               pre_target_point=[]
+               pre_target_point.append(pre_fraction_Along*(xd-xp)+xp)
+               pre_target_point.append(pre_fraction_Along*(yd-yp)+yp)
+               pre_target_point.append(pre_fraction_Along*(zd-zp)+zp)
+        for post_segment in loaded_cell_array[Post_cell_name].morphology.segments:
+            if post_segment.id==post_segment_ID:
+               xd=post_segment.distal.x
+               yd=post_segment.distal.y
+               zd=post_segment.distal.z
+               if pre_segment_ID !=0:
+                  xp=post_segment.parent.distal.x
+                  yp=post_segment.parent.distal.y
+                  zp=post_segment.parent.distal.z
+               else:
+                  xp=post_segment.proximal.x
+                  yp=post_segment.proximal.y
+                  zp=post_segment.proximal.z
+               # translate the points by soma location vector
+               xd=xd+post_cell_position[0]
+               yd=yd+post_cell_position[1]
+               zd=zd+post_cell_position[2]
+               xp=xp+post_cell_position[0]
+               yp=yp+post_cell_position[1]
+               zp=zp+post_cell_position[2]
+               post_target_point=[]
+               post_target_point.append(post_fraction_Along*(xd-xp)+xp)
+               post_target_point.append(post_fraction_Along*(yd-yp)+yp)
+               post_target_point.append(post_fraction_Along*(zd-zp)+zp)
+        connection_length=distance(pre_target_point,post_target_point)
+        
+    return connection_length      
+        
 def extract_morphology_information(cell_array,target_array):
     loaded_cell_array={}
     cell_segment_group_array=[]
