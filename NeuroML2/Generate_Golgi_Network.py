@@ -299,7 +299,7 @@ def generate_golgi_cell_net(ref,cell_array,location_array, connectivity_informat
                            which_cells_to_target_array=input_information[var][1][pop][1]
                            if which_cells_to_target_array[0]=="uniform":
                               fraction_to_target_per_pop=which_cells_to_target_array[1]
-                              target_cells=random.sample(range(cell_array[genuine_pop_index+1][1]),int(round(fraction_to_target_per_pop*cell_array[genuine_pop_index+1][1]))
+                              target_cells=random.sample(range(cell_array[genuine_pop_index+1][1]),int(round(fraction_to_target_per_pop*cell_array[genuine_pop_index+1][1])))
                               count=0                           
                               for target_cell in target_cells:
                                   if input_information[var][1][pop][4][0]=="constant number of inputs per cell":
@@ -315,31 +315,39 @@ def generate_golgi_cell_net(ref,cell_array,location_array, connectivity_informat
                                                          
                                   syn_input = neuroml.Input(id=count,target="../%s/%i/%s"%(Golgi_pop_index_array[genuine_pop_index],\
                                                                                            target_cell,cell_array[genuine_pop_index+1][0] ),destination="synapses") 
+                     
                                   input_list.input.append(syn_input)
-                          if which_cells_to_target_array[0]=="3D region specific":
-                             cell_positions=cell_position_array[genuine_pop_index]
-                             dim_array=np.shape(cell_positions)
-                             region_specific_targets_per_cell_group=[]
-                             for 3D_region in range(1,len(which_cells_to_target_array[1])):
-                                 for cell in range(0,dim_array[0]):
-                                     if which_cells_to_target_array[1][3D_region][0][0] <  cell_positions[cell,0] and cell_positions[cell,0] < which_cells_to_target_array[1][3D_region][0][1]:
-                                        if which_cells_to_target_array[1][3D_region][1][0] <  cell_positions[cell,1] and cell_positions[cell,1] <which_cells_to_target_array[1][3D_region][1][1]:
-                                           if which_cells_to_target_array[1][3D_region][2][0] <  cell_positions[cell,2] and cell_positions[cell,2] < which_cells_to_target_array[1][3D_region][2][1]:
-                                              region_specific_targets_per_cell_group.append(cell)     
-                             if which_cells_to_target_array[2]=="all":
-                                for target_cell in region_specific_targets_per_cell_group:
-                                    syn_input = neuroml.Input(id=count,target="../%s/%i/%s"%(Golgi_pop_index_array[genuine_pop_index],\
+                                  count=count+1
+
+                           if which_cells_to_target_array[0]=="3D region specific":
+                              cell_positions=cell_position_array[genuine_pop_index]
+                              dim_array=np.shape(cell_positions)
+                              region_specific_targets_per_cell_group=[]
+                              for region in range(1,len(which_cells_to_target_array[1])):
+                                  for cell in range(0,dim_array[0]):
+                                      if (which_cells_to_target_array[1][region][0][0] <  cell_positions[cell,0]) and (cell_positions[cell,0] < which_cells_to_target_array[1][region][0][1]):
+                                         if (which_cells_to_target_array[1][region][1][0] <  cell_positions[cell,1]) and (cell_positions[cell,1] <which_cells_to_target_array[1][region][1][1]) :
+                                            if (which_cells_to_target_array[1][region][2][0] <  cell_positions[cell,2]) and (cell_positions[cell,2] < which_cells_to_target_array[1][region][2][1]):
+                                               region_specific_targets_per_cell_group.append(cell)  
+   
+                              if which_cells_to_target_array[2]=="all":
+                                 count=0
+                                 for target_cell in region_specific_targets_per_cell_group:
+                                     syn_input = neuroml.Input(id=count,target="../%s/%i/%s"%(Golgi_pop_index_array[genuine_pop_index],\
                                                                                            target_cell,cell_array[genuine_pop_index+1][0] ),destination="synapses") 
-                                    input_list.input.append(syn_input)
-                             #  now coded so that the same fraction applies to all 3D regions
-                             if which_cells_to_target_array[2]=="random fraction":
-                                random_targets_per_cell_group=random.sample(region_specific_targets_per_cell_group,\
+                                     input_list.input.append(syn_input)
+                                     count=count+1
+                              #  now coded so that the same fraction applies to all 3D regions
+                              if which_cells_to_target_array[2]=="random fraction":
+                                 random_targets_per_cell_group=random.sample(region_specific_targets_per_cell_group,\
                                                 int(round(which_cells_to_target_array[3]*len(region_specific_targets_per_cell_group))))
-                                for target_cell in random_targets_per_cell_group:
-                                    syn_input = neuroml.Input(id=count,target="../%s/%i/%s"%(Golgi_pop_index_array[genuine_pop_index],\
+                                 count=0
+                                 for target_cell in random_targets_per_cell_group:
+                                     syn_input = neuroml.Input(id=count,target="../%s/%i/%s"%(Golgi_pop_index_array[genuine_pop_index],\
                                                                                            target_cell,cell_array[genuine_pop_index+1][0]),destination="synapses") 
-                                    input_list.input.append(syn_input)
-                                                         
+                                     input_list.input.append(syn_input)
+                                     count=count+1           
+        
 	   ###### implementing physiological heterogeneity between cells with variations in a basal firing rate
            if "variable basal firing rate" in input_information:
               for var in input_information:
@@ -366,7 +374,7 @@ def generate_golgi_cell_net(ref,cell_array,location_array, connectivity_informat
                             offset_gaussian_model=True
                             pop_offset_average=[]
                             pop_offset_variance=[]
-                            for pop_var in range(0,len(var[2]):
+                            for pop_var in range(0,len(var[2])):
                                 pop_offset_average.append(var[2][pop_var])
                                 pop_offset_variance.append(var[3][pop_var])
                             offset_units=var[4]
@@ -390,7 +398,7 @@ def generate_golgi_cell_net(ref,cell_array,location_array, connectivity_informat
                          offset=random.uniform(pop_offset_left_bound[pop],pop_offset_right_bound[pop])
                       Pulse_generator_variable=neuroml.PulseGenerator(id="Input_%d%d"%(pop,cell),delay="%f%s"%(offset,offset_units),duration="%f%s"%(simulation_parameters[1]-offset,offset_units),amplitude="%f%s"%(amp,units))
 	              nml_doc.pulse_generators.append(Pulse_generator_variable)
-	              Input_list=neuroml.InputList(id="Input_list%d%d"(%pop,cell),component="Input_%d%d"%(pop,cell))
+	              Input_list=neuroml.InputList(id="Input_list%d%d"%(pop,cell),component="Input_%d%d"%(pop,cell))
 	              net.input_lists.append(Input_list)
 	              Inp = neuroml.Input(target="../%s/%d/%s"%(Golgi_pop_index_array[pop],cell,cell_array[pop+1][0]),id="%d"%cell,destination="synapses")
 	              Input_list.input.append(Inp)
@@ -484,7 +492,7 @@ def generate_golgi_cell_net(ref,cell_array,location_array, connectivity_informat
                             offset_gaussian_model=True
                             pop_offset_average=[]
                             pop_offset_variance=[]
-                            for pop_var in range(0,len(var[2]):
+                            for pop_var in range(0,len(var[2])):
                                 pop_offset_average.append(var[2][pop_var])
                                 pop_offset_variance.append(var[3][pop_var])
                             offset_units=var[4]                 
@@ -947,4 +955,5 @@ def generate_LEMS_and_run(sim_array,pop_array):
 	         results1 = pynml.run_lems_with_jneuroml(lems_file_name, nogui=True, load_saved_data=False, plot=False)
               if simulation_parameters[2]=="jNeuroML_NEURON":
                  results1 = pynml.run_lems_with_jneuroml_neuron(lems_file_name, nogui=True, load_saved_data=False, plot=False)
+              print("Finished running simulation with %s"%simulation_parameters[2])
          

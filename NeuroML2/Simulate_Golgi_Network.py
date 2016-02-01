@@ -15,7 +15,7 @@ def run_simulations(network_parameters,sim_duration,time_step,simulator,experime
         if not os.path.exists(newpath):
                os.makedirs(newpath)
         if seed_specifier[1]==True:
-           sim_params,pop_params=generate_golgi_cell_net("Simple_Golgi_Net",Cell_array,Position_array,Conn_array,Input_array,Sim_array,"not a list",["output",True])
+           sim_params,pop_params=generate_golgi_cell_net("Golgi%s"%(experiment_identifier),Cell_array,Position_array,Conn_array,Input_array,Sim_array,"not a list",["output",True])
 
            if save_soma_specifier[1]=="Yes":
               save_soma_positions(pop_params,r'simulations/%s'%(experiment_identifier))
@@ -36,11 +36,11 @@ if __name__ == "__main__":
     #Conn_array=["Vervaeke_2010_multi_compartment",1,[["dendrite_group"],[1]],["testing",4]]
     
     net_params=[]
-    net_params[0] =[2,["Very_Simple_Golgi_test_morph",4],["Very_Simple_Golgi_test_morph",4]]
-    net_params[1]=["random",100, 100, 100]
-    net_params[2]=["Vervaeke_2010_multi_compartment",1,[["dendrite_group"],[1]],[["dendrite_group"],[1]],["testing",4]]
-    net_params[3]=["testing",0.5,["20.0ms","200.0ms","4E-5uA"],["220.0ms","200.0ms","-0.5E-5uA"]]
-    run_simulations(net_params,450,0.005,"jNeuroML_NEURON","V2010multi1_2p4c4c_4inp",1,["seed specifier",True],["plot specifier",True],["save somata positions","Yes"])
+    net_params.append([2,["Very_Simple_Golgi_test_morph",2],["Very_Simple_Golgi_test_morph",2]])
+    net_params.append(["random",50, 50, 50])
+    net_params.append(["Vervaeke_2010_multi_compartment",1,[["dendrite_group"],[1]],[["dendrite_group"],[1]],["testing",4]])
+    net_params.append(["testing",0.5,["20.0ms","200.0ms","4E-5uA"],["220.0ms","200.0ms","-0.5E-5uA"]])
+    run_simulations(net_params,450,0.005,"jNeuroML_NEURON","V2010multi1_2p4c4c_4inp",1,["seed specifier",True],["plot specifier",False],["save somata positions","Yes"])
 
 
     #net_params[3]=["variable basal firing rate",["amplitude distribution","gaussian","100","50","nA"],["offset distribution","uniform",50,100]]
