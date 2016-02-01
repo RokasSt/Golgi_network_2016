@@ -386,7 +386,68 @@ def plot_voltage_traces(no_of_cell_groups,experiment_id,trial_id,plot_specifying
            if legend:
               ax[pair].legend(loc='upper right', fancybox=True, shadow=True,ncol=4)
 
-def get_unique_target_points(targeting_specifications,
+def get_unique_target_points(seg_specifications,mode_of_targeting,targeting_specifications,no_of_points_per_cell):
+    target_points_per_cell=np.zeros([no_of_points_per_cell,2])
+    if mode_of_targeting=="segments and subsegments":
+       x=0
+       while x==0:
+          pre_seg_search_array=[]
+          pre_fraction_search_array=[]
+          y=0
+          while y != no_of_points_per_cell:
+             for pre_segment in range(0,len(targeting_specifications[0])):
+                 if random.random() < targeting_specifications[1][pre_segment]:
+                    pre_seg=targeting_specifications[0][pre_segment]
+                    pre_seg_index=pre_segment
+                    for segment in range(0,len(seg_specifications[0])-1):
+                        if seg_specifications[0][segment+1][0]==pre_seg:
+                           pre_segment_ids=seg_specifications[0][segment+1][1:]
+                           Pre_segment_id=random.sample(pre_segment_ids,1)
+                           Pre_segment_id=Pre_segment_id[0]
+                           pre_seg_search_array.append(Pre_segment_id)
+                           for subseg in range(0,len(targeting_specifications[2][pre_seg_index])):
+                               if random.random() < targeting_specifications[2][pre_seg_index][subseg][1]:
+                                  pre_subseg_id=subseg
+                                  pre_subseg=targeting_specifications[2][pre_seg_index][subseg][0]
+                                  pre_fraction_before_pre_subseg=0
+                                  if pre_subseg_id !=0:
+                                     for ind in range(0,pre_subseg_id):
+                                         pre_fraction_before_pre_subseg=pre_fraction_before_pre_subseg+targeting_specifications[2][pre_seg_index][ind][0]
+                                         random_pre_fraction=random.uniform(0,pre_subseg)
+                                         Pre_fraction_final=random_pre_fraction+pre_fraction_before_pre_subseg
+                                         pre_fraction_search_array.append(Pre_fraction_final)
+                                         y=y+1
+                           break
+          if len(pre_fraction_search_array)==len(set(pre_fraction_search_array)):
+             x=1
+             
+    if mode_of_targeting=="segment groups and segments":
+       x=0
+       while x==0:
+          pre_seg_search_array=[]
+          pre_fraction_search_array=[]
+          y=0
+          while y != no_of_points_per_cell:
+             for pre_segment_group in range(0,len(targeting_specifications[0])):
+                 if random.random() <  targeting_specifications[1][pre_segment_group]:
+                    pre_group=targeting_specifications[0][pre_segment_group]
+                    for segment_group in range(0,len(seg_specifications[0])-1):
+                        if seg_specifications[0][segment_group+1][0]==pre_group:
+                           pre_segment_ids=seg_specifications[0][segment_group+1][1:]
+                           Pre_segment_id=random.sample(pre_segment_ids,1)
+                           Pre_segment_id=Pre_segment_id[0]
+                           pre_seg_search_array.append(Pre_segment_id)
+                           pre_fraction_search_array.append(random.random())
+                           y=y+1
+                           break
+          if len(pre_fraction_search_array)==len(set(pre_fraction_search_array)):
+             x=1
+             
+    for point in range(0,no_of_points_per_cell):
+        target_points_per_cell[point,1]=pre_seg_search_array[point]
+        target_points_per_cell[point,2]=pre_fraction_search_array[point]
+
+    return target_points_per_cell
 
 def get_3D_connection_length(cell_array,pre_pop,post_pop,pre_cell_ID,post_cell_ID,pre_segment_ID,post_segment_ID,pre_fraction_Along,post_fraction_Along):
     #cell_array variable has to contain cell component names

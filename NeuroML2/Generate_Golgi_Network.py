@@ -262,12 +262,12 @@ def generate_golgi_cell_net(ref,cell_array,location_array, connectivity_informat
            # use below as a template : 
            # input_information=[["MF",[pop0_array,pop1_array,pop2_array]],["PF",[pop0_array,pop1_array,pop2_array]]]
            # all pop_arrays have to be of the following form:
-           # first_array=["uniform" or "3D region specific", if "uniform" fraction to target, if "3D region specific",
+           # first_array=["uniform" or "3D region specific", if "uniform" fraction to target, if "3D region specific",[[40,80],[40,80],[40,80]]],all or random frac
            # pop0_array=[pop_index,first_array,synapse_array_per_pop,[[synapse average_rate_list]]["constant number of inputs per cell" or "variable number of inputs per cell"
            # if variable then "binomial",average_no_of_inputs,max_no_of_inputs    ]   then
            # for each different synapse     "segment groups and segments",[["Section_1","dend_1"],[0.7,0.3]]
            # "segments and subsegments"
-           # [["Section_1"],[1],[[[0.25,0.2],[0.25,0.4],[0.25,0.4],[0.25,0]]]]
+           # [["Section_1"],[1],[ [[0.25,0.2],[0.25,0.4],[0.25,0.4],[0.25,0]]         ]             ]
            #make InputList for MF and PF synapses
            for var in range(0,len(input_information)):
                 #more options can be added in the future
@@ -289,29 +289,57 @@ def generate_golgi_cell_net(ref,cell_array,location_array, connectivity_informat
                        segment_group_list.append(input_information[var][1][pop][6][0])
                        segment_target_array=extract_morphology_information(cell_array[genuine_pop_index+1][0],segment_group_list)
                        for poisson_synapse_list in range(0,len(input_information[var][1][pop][3])):
-                           poisson_syn=PoissonFiringSynapse(id="%s_pop%dsyn%d"%(inp_group_specifier,genuine_pop_index,poisson_synapse_list),\
+                           poisson_syn=neuroml.PoissonFiringSynapse(id="%s_pop%dsyn%d"%(inp_group_specifier,genuine_pop_index,poisson_synapse_list),\
                                                        average_rate="%f per_s"%input_information[var][1][pop][3][poisson_synapse_list][1],\
                                    synapse=input_information[var][1][pop][3][poisson_synapse_list][0] ,\
                                    spike_target="./%s"%input_information[var][1][pop][3][poisson_synapse_list][0])
-                      nml_doc.poisson_firing_synapses.append(poisson_syn)
-                      input_list = InputList(id="%s_Input_pop%dsyn%d"%(inp_group_specifier,pop,poisson_synapse_list),\
+                           nml_doc.poisson_firing_synapses.append(poisson_syn)
+                           input_list =neuroml.InputList(id="%s_Input_pop%dsyn%d"%(inp_group_specifier,genuine_pop_index,poisson_synapse_list),\
                                              component=poisson_syn.id, population=Golgi_pop_index_array[genuine_pop_index])
-                      which_cells_to_target_array=input_information[var][1][pop][1]
-                      if which_cells_to_target_array[0]=="uniform":
-                         fraction_to_target_per_pop=which_cells_to_target_array[1]
-                         target_cells=random.sample(range(cell_array[genuine_pop_index+1][1]),int(round(fraction_to_target_per_pop*cell_array[genuine_pop_index+1][1]))
-                         for target_cell in target_cells:
-                             if input_information[var][1][pop][4][0]=="constant number of inputs per cell":
-                                no_of_inputs=input_information[var][1][pop][4][1]
-                             if input_information[var][1][pop][4][0]=="variable number of inputs per cell":
-                                if input_information[var][1][pop][4][1]=="binomial":
-                                   no_of_inputs=np.random.binomial(input_information[var][1][pop][4][3],input_information[var][1][pop][4][2]/input_information[var][1][pop][4][3])
-                             ### other options can be added
-                             if input_information[var][1][pop][5]=="segment groups and segments":
-                                   
-                             if input_information[var][1][pop][5]=="segments and subsegments":
-                      if which_cells_to_target_array[0]=="3D region specific":
-                
+                           which_cells_to_target_array=input_information[var][1][pop][1]
+                           if which_cells_to_target_array[0]=="uniform":
+                              fraction_to_target_per_pop=which_cells_to_target_array[1]
+                              target_cells=random.sample(range(cell_array[genuine_pop_index+1][1]),int(round(fraction_to_target_per_pop*cell_array[genuine_pop_index+1][1]))
+                              count=0                           
+                              for target_cell in target_cells:
+                                  if input_information[var][1][pop][4][0]=="constant number of inputs per cell":
+                                     no_of_inputs=input_information[var][1][pop][4][1]
+                                  if input_information[var][1][pop][4][0]=="variable number of inputs per cell":
+                                     if input_information[var][1][pop][4][1]=="binomial":
+                                        no_of_inputs=np.random.binomial(input_information[var][1][pop][4][3],input_information[var][1][pop][4][2]/input_information[var][1][pop][4][3])
+                                     ### other options can be added
+                                  if input_information[var][1][pop][5]=="segment groups and segments":
+                                     target_points=get_unique_target_points(segment_target_array,"segment groups and segments",input_information[var][1][pop][6],no_of_inputs)
+                                  if input_information[var][1][pop][5]=="segments and subsegments":
+                                     target_points=get_unique_target_points(segment_target_array,"segments and subsegments",input_information[var][1][pop][6],no_of_inputs)
+                                                         
+                                  syn_input = neuroml.Input(id=count,target="../%s/%i/%s"%(Golgi_pop_index_array[genuine_pop_index],\
+                                                                                           target_cell,cell_array[genuine_pop_index+1][0] ),destination="synapses") 
+                                  input_list.input.append(syn_input)
+                          if which_cells_to_target_array[0]=="3D region specific":
+                             cell_positions=cell_position_array[genuine_pop_index]
+                             dim_array=np.shape(cell_positions)
+                             region_specific_targets_per_cell_group=[]
+                             for 3D_region in range(1,len(which_cells_to_target_array[1])):
+                                 for cell in range(0,dim_array[0]):
+                                     if which_cells_to_target_array[1][3D_region][0][0] <  cell_positions[cell,0] and cell_positions[cell,0] < which_cells_to_target_array[1][3D_region][0][1]:
+                                        if which_cells_to_target_array[1][3D_region][1][0] <  cell_positions[cell,1] and cell_positions[cell,1] <which_cells_to_target_array[1][3D_region][1][1]:
+                                           if which_cells_to_target_array[1][3D_region][2][0] <  cell_positions[cell,2] and cell_positions[cell,2] < which_cells_to_target_array[1][3D_region][2][1]:
+                                              region_specific_targets_per_cell_group.append(cell)     
+                             if which_cells_to_target_array[2]=="all":
+                                for target_cell in region_specific_targets_per_cell_group:
+                                    syn_input = neuroml.Input(id=count,target="../%s/%i/%s"%(Golgi_pop_index_array[genuine_pop_index],\
+                                                                                           target_cell,cell_array[genuine_pop_index+1][0] ),destination="synapses") 
+                                    input_list.input.append(syn_input)
+                             #  now coded so that the same fraction applies to all 3D regions
+                             if which_cells_to_target_array[2]=="random fraction":
+                                random_targets_per_cell_group=random.sample(region_specific_targets_per_cell_group,\
+                                                int(round(which_cells_to_target_array[3]*len(region_specific_targets_per_cell_group))))
+                                for target_cell in random_targets_per_cell_group:
+                                    syn_input = neuroml.Input(id=count,target="../%s/%i/%s"%(Golgi_pop_index_array[genuine_pop_index],\
+                                                                                           target_cell,cell_array[genuine_pop_index+1][0]),destination="synapses") 
+                                    input_list.input.append(syn_input)
+                                                         
 	   ###### implementing physiological heterogeneity between cells with variations in a basal firing rate
            if "variable basal firing rate" in input_information:
               for var in input_information:
@@ -669,6 +697,7 @@ def generate_golgi_cell_net(ref,cell_array,location_array, connectivity_informat
                                       if compare_ids:
                                          distance_between_cells=distance(pre_cell_positions[Pre_cell],post_cell_positions[Post_cell])/connectivity_information[1]
                                          if random.random() <connection_probability_vervaeke_2010(distance_between_cells):
+                                            #correct the below with maximal connection length
                                             x=0
                                             while x==0:
                                                 pre_segment_group=random.sample(range(0,len(connectivity_information[pre_pop_index+2][0])),1)
