@@ -527,29 +527,37 @@ def get_unique_target_points(seg_specifications,mode_of_targeting,targeting_spec
           pre_fraction_search_array=[]
           y=0
           while y != no_of_points_per_cell:
-             for pre_segment in range(0,len(targeting_specifications[0])):
-                 if random.random() < targeting_specifications[1][pre_segment]:
-                    pre_seg=targeting_specifications[0][pre_segment]
-                    pre_seg_index=pre_segment
-                    for segment in range(0,len(seg_specifications[0])-1):
-                        if seg_specifications[0][segment+1][0]==pre_seg:
-                           pre_segment_ids=seg_specifications[0][segment+1][1:]
-                           Pre_segment_id=random.sample(pre_segment_ids,1)
-                           Pre_segment_id=Pre_segment_id[0]
-                           pre_seg_search_array.append(Pre_segment_id)
-                           for subseg in range(0,len(targeting_specifications[2][pre_seg_index])):
-                               if random.random() < targeting_specifications[2][pre_seg_index][subseg][1]:
-                                  pre_subseg_id=subseg
-                                  pre_subseg=targeting_specifications[2][pre_seg_index][subseg][0]
-                                  pre_fraction_before_pre_subseg=0
-                                  if pre_subseg_id !=0:
-                                     for ind in range(0,pre_subseg_id):
-                                         pre_fraction_before_pre_subseg=pre_fraction_before_pre_subseg+targeting_specifications[2][pre_seg_index][ind][0]
-                                         random_pre_fraction=random.uniform(0,pre_subseg)
-                                         Pre_fraction_final=random_pre_fraction+pre_fraction_before_pre_subseg
-                                         pre_fraction_search_array.append(Pre_fraction_final)
-                                         y=y+1
-                           break
+             pre_segment=random.sample(range(0,len(targeting_specifications[0])),1)
+             pre_segment=pre_segment[0]
+             if random.random() < targeting_specifications[1][pre_segment]:
+                pre_seg=targeting_specifications[0][pre_segment]
+                pre_seg_index=pre_segment
+                for segment in range(0,len(seg_specifications[0])-1):
+                    if seg_specifications[0][segment+1][0]==pre_seg:
+                       pre_segment_ids=seg_specifications[0][segment+1][1:]
+                       Pre_segment_id=random.sample(pre_segment_ids,1)
+                       Pre_segment_id=Pre_segment_id[0]
+                       pre_seg_search_array.append(Pre_segment_id)
+                       z=0
+                       while z==0:
+                          subseg=random.sample(range(0,len(targeting_specifications[2][pre_seg_index])),1)
+                          subseg=subseg[0]
+                          if random.random() < targeting_specifications[2][pre_seg_index][subseg][1]:
+                             pre_subseg_id=subseg
+                             pre_subseg=targeting_specifications[2][pre_seg_index][subseg][0]
+                             print pre_subseg
+                             random_pre_fraction=random.uniform(0,pre_subseg)
+                             print random_pre_fraction
+                             pre_fraction_before_pre_subseg=0
+                             if pre_subseg_id !=0:
+                                for ind in range(0,pre_subseg_id):
+                                    pre_fraction_before_pre_subseg=pre_fraction_before_pre_subseg+targeting_specifications[2][pre_seg_index][ind][0]
+                             Pre_fraction_final=random_pre_fraction+pre_fraction_before_pre_subseg
+                          
+                             pre_fraction_search_array.append(Pre_fraction_final)
+                             z=1
+                       y=y+1
+                       break
           if len(pre_fraction_search_array)==len(set(pre_fraction_search_array)):
              x=1
              
@@ -560,28 +568,30 @@ def get_unique_target_points(seg_specifications,mode_of_targeting,targeting_spec
           pre_fraction_search_array=[]
           y=0
           while y != no_of_points_per_cell:
-             for pre_segment_group in range(0,len(targeting_specifications[0])):
-                 if random.random() <  targeting_specifications[1][pre_segment_group]:
-                    pre_group=targeting_specifications[0][pre_segment_group]
-                    for segment_group in range(0,len(seg_specifications[0])-1):
-                        if seg_specifications[0][segment_group+1][0]==pre_group:
-                           pre_segment_ids=seg_specifications[0][segment_group+1][1:]
-                           Pre_segment_id=random.sample(pre_segment_ids,1)
-                           Pre_segment_id=Pre_segment_id[0]
-                           pre_seg_search_array.append(Pre_segment_id)
-                           pre_fraction_search_array.append(random.random())
-                           y=y+1
-                           break
+             pre_segment_group=random.sample(range(0,len(targeting_specifications[0])),1)
+             pre_segment_group=pre_segment_group[0]
+             if random.random() <  targeting_specifications[1][pre_segment_group]:
+                pre_group=targeting_specifications[0][pre_segment_group]
+                for segment_group in range(0,len(seg_specifications[0])-1):
+                    if seg_specifications[0][segment_group+1][0]==pre_group:
+                       pre_segment_ids=seg_specifications[0][segment_group+1][1:]
+                       Pre_segment_id=random.sample(pre_segment_ids,1)
+                       Pre_segment_id=Pre_segment_id[0]
+                       pre_seg_search_array.append(Pre_segment_id)
+                       pre_fraction_search_array.append(random.random())
+                       y=y+1
+                       break
           if len(pre_fraction_search_array)==len(set(pre_fraction_search_array)):
              x=1
              
     for point in range(0,no_of_points_per_cell):
-        target_points_per_cell[point,1]=pre_seg_search_array[point]
-        target_points_per_cell[point,2]=pre_fraction_search_array[point]
-
+        target_points_per_cell[point,0]=pre_seg_search_array[point]
+        target_points_per_cell[point,1]=pre_fraction_search_array[point]
+    #below line of printing is for testing:
+    print target_points_per_cell
     return target_points_per_cell
 
-def get_3D_connection_length(cell_array,pre_pop,post_pop,pre_cell_ID,post_cell_ID,pre_segment_ID,post_segment_ID,pre_fraction_Along,post_fraction_Along):
+def get_3D_connection_length(cell_array,cell_position_array,pre_pop,post_pop,pre_cell_ID,post_cell_ID,pre_segment_ID,post_segment_ID,pre_fraction_Along,post_fraction_Along):
     #cell_array variable has to contain cell component names
     loaded_cell_array={}
     for cell_pop in range(0,len(cell_array)):
@@ -602,14 +612,21 @@ def get_3D_connection_length(cell_array,pre_pop,post_pop,pre_cell_ID,post_cell_I
                xd=pre_segment.distal.x
                yd=pre_segment.distal.y
                zd=pre_segment.distal.z
+               print xd, yd, zd
                if pre_segment_ID !=0:
-                  xp=pre_segment.parent.distal.x
-                  yp=pre_segment.parent.distal.y
-                  zp=pre_segment.parent.distal.z
+                  get_segment_parent=pre_segment.parent
+                  get_segment_parent_id=get_segment_parent.segments
+                  for pre_segment_parent in loaded_cell_array[Pre_cell_name].morphology.segments:
+                      if pre_segment_parent.id==get_segment_parent_id:
+                         xp=pre_segment_parent.distal.x
+                         yp=pre_segment_parent.distal.y
+                         zp=pre_segment_parent.distal.z
+                         
                else:
                   xp=pre_segment.proximal.x
                   yp=pre_segment.proximal.y
                   zp=pre_segment.proximal.z
+               print xp, yp, zp
                # translate the points by soma location vector
                xd=xd+pre_cell_position[0]
                yd=yd+pre_cell_position[1]
@@ -626,14 +643,21 @@ def get_3D_connection_length(cell_array,pre_pop,post_pop,pre_cell_ID,post_cell_I
                xd=post_segment.distal.x
                yd=post_segment.distal.y
                zd=post_segment.distal.z
+               print xd,yd,zd
                if pre_segment_ID !=0:
-                  xp=post_segment.parent.distal.x
-                  yp=post_segment.parent.distal.y
-                  zp=post_segment.parent.distal.z
+                  get_segment_parent=post_segment.parent
+                  get_segment_parent_id=get_segment_parent.segments
+                  for post_segment_parent in loaded_cell_array[Pre_cell_name].morphology.segments:
+                      if post_segment_parent.id==get_segment_parent_id:
+                         xp=post_segment_parent.distal.x
+                         yp=post_segment_parent.distal.y
+                         zp=post_segment_parent.distal.z
+                         
                else:
                   xp=post_segment.proximal.x
                   yp=post_segment.proximal.y
                   zp=post_segment.proximal.z
+               print xp,yp,zp
                # translate the points by soma location vector
                xd=xd+post_cell_position[0]
                yd=yd+post_cell_position[1]
@@ -646,12 +670,13 @@ def get_3D_connection_length(cell_array,pre_pop,post_pop,pre_cell_ID,post_cell_I
                post_target_point.append(post_fraction_Along*(yd-yp)+yp)
                post_target_point.append(post_fraction_Along*(zd-zp)+zp)
         connection_length=distance(pre_target_point,post_target_point)
-        
+    print connection_length    
     return connection_length      
         
 def extract_morphology_information(cell_array,target_array):
     loaded_cell_array={}
     cell_segment_group_array=[]
+    segment_array=[]
     for cell in cell_array:
         cell_nml_file = '%s.cell.nml'%cell
         document_cell = neuroml.loaders.NeuroMLLoader.load(cell_nml_file)
@@ -659,10 +684,17 @@ def extract_morphology_information(cell_array,target_array):
         print("Loaded morphology file from: %s, with id: %s"%(cell_nml_file, loaded_cell_array[cell].id))
         segment_id_array=[]
         segment_group_array={}
+        cell_segment_array=[]
         #print("Now printing segment ids")
         for segment in loaded_cell_array[cell].morphology.segments:
             segment_id_array.append(segment.id)   
             print segment.id
+            print segment.name
+            # the block below is added for handling targeting at the segment level
+            segment_name_and_id=[]
+            segment_name_and_id.append(segment.name)
+            segment_name_and_id.append(segment.id)
+            cell_segment_array.append(segment_name_and_id)
         print("Now printing segment group ids their segments and groups")
         for segment_group in loaded_cell_array[cell].morphology.segment_groups:
             pooled_segment_group_data={}
@@ -688,8 +720,22 @@ def extract_morphology_information(cell_array,target_array):
         cell_segment_group.append(cell)
         cell_segment_group.append(segment_group_array)
         cell_segment_group_array.append(cell_segment_group)
-    
+        segment_array.append(cell_segment_array)
 
+    if target_array[0]=="segments":
+       target_segment_array=[]
+       for cell_index in range(0, len(cell_array)):
+           target_segment_array_per_cell_group=[]
+           target_segment_array_per_cell_group.append(cell_array[cell_index])
+           for segment_counter in range(0,len(segment_array[cell_index])):
+               for target_segment in range(0,len(target_array[cell_index+1])):
+                   if segment_array[cell_index][segment_counter][0]==target_array[cell_index+1][target_segment]: 
+                      segment_information_per_cell=[]
+                      segment_information_per_cell.append(target_array[cell_index+1][target_segment])
+                      segment_information_per_cell.append(segment_array[cell_index][segment_counter][1])
+                      target_segment_array_per_cell_group.append(segment_information_per_cell)
+           target_segment_array.append(target_segment_array_per_cell_group)
+                          
     if target_array[0]=="segment groups":
        target_segment_array=[]
        for cell_index in range(0, len(cell_array)):
@@ -712,7 +758,7 @@ def extract_morphology_information(cell_array,target_array):
                                  segment_target_array.append(included_segment_group_segment)
                       cell_specific_segment_array.append(segment_target_array)
            target_segment_array.append(cell_specific_segment_array)
-           print target_segment_array
+    print target_segment_array
 
     return target_segment_array        
 
@@ -723,11 +769,33 @@ def extract_morphology_information(cell_array,target_array):
 
 
 if __name__ == "__main__":
-   extract_morphology_information(["Very_Simple_Golgi_test_morph","Very_Simple_Golgi_test_morph"],["segment groups",["dendrite_group","Section_3"],["dendrite_group"]])
-      
 
-  #get_3D_connection_length(cell_array,pre_pop,post_pop,pre_cell_ID,post_cell_ID,pre_segment_ID,post_segment_ID,pre_fraction_Along,post_fraction_Along):
-  #get_unique_target_points(seg_specifications,mode_of_targeting,targeting_specifications,no_of_points_per_cell)
+
+  #these are for testing and debugging !!!!!
+
+
+   #extract_morphology_information(["Very_Simple_Golgi_test_morph","Very_Simple_Golgi_test_morph"],["segment groups",["dendrite_group","Section_3"],["dendrite_group"]])
+
+
+      
+  #extract_morphology_information(["Very_Simple_Golgi_test_morph"],["segment groups",["Section_1","dend_1"]])
+
+
+
+  #get_3D_connection_length(["Very_Simple_Golgi_test_morph"],[np.array([[1,2,3],[4,5,6]])],0,0,0,1,1,2,0.456,0.789)
+
+
+  
+ # target_points=get_unique_target_points([['Very_Simple_Golgi_test_morph', ['Section_1', 1], ['dend_1', 2]]],"segment groups and segments",[["Section_1","dend_1"],[0.7,0.3]],8)
+
+
+ #extract_morphology_information(["Very_Simple_Golgi_test_morph"],["segments",["dend2","dend_3"]])
+
+
+ target_points=get_unique_target_points([['Very_Simple_Golgi_test_morph', ['dend2', 1], ['dend_3', 5]]]
+     ,"segments and subsegments",[["dend2","dend_3"],[0.8,0.2],[ [[0.25,1],[0.25,0],[0.25,0],[0.25,0]  ] , [[0.25,0],[0.25,0.8],[0.25,0.2],[0.25,0]  ]                                                            ]    ]    ,8)
+
+
 
 
 
