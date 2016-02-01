@@ -23,16 +23,49 @@
     <Simulation id="Simple_Golgi_Net" length="450ms" step="0.005ms" target="Simple_Golgi_Net_network">
         
         <Display id="display_voltages0" title="Voltages Golgi_pop0" timeScale="1ms" xmin="-45.0" xmax="495.0" ymin="-75" ymax="50">
-            <Line id="Golgi_pop0[0]: Vm" quantity="Golgi_pop0[0]/v" scale="1mV" color="#fa8826" timeScale="1ms"/>
-            <Line id="Golgi_pop0[1]: Vm" quantity="Golgi_pop0[1]/v" scale="1mV" color="#6980a8" timeScale="1ms"/>
+            <Line id="Golgi_pop0[0]: Vm" quantity="Golgi_pop0[0]/v" scale="1mV" color="#34cd4f" timeScale="1ms"/>
+            <Line id="Golgi_pop0[1]: Vm" quantity="Golgi_pop0[1]/v" scale="1mV" color="#91e19c" timeScale="1ms"/>
+            <Line id="Golgi_pop0[2]: Vm" quantity="Golgi_pop0[2]/v" scale="1mV" color="#5be070" timeScale="1ms"/>
+            <Line id="Golgi_pop0[3]: Vm" quantity="Golgi_pop0[3]/v" scale="1mV" color="#fa4c52" timeScale="1ms"/>
         </Display>
         
-        <OutputFile id="Volts0_file0_0" fileName="simulations/V2012multi1_2c_1input/sim0/Golgi_pop0_cell0.dat">
+        <Display id="display_voltages1" title="Voltages Golgi_pop1" timeScale="1ms" xmin="-45.0" xmax="495.0" ymin="-75" ymax="50">
+            <Line id="Golgi_pop1[0]: Vm" quantity="Golgi_pop1[0]/v" scale="1mV" color="#48bb6e" timeScale="1ms"/>
+            <Line id="Golgi_pop1[1]: Vm" quantity="Golgi_pop1[1]/v" scale="1mV" color="#db3522" timeScale="1ms"/>
+            <Line id="Golgi_pop1[2]: Vm" quantity="Golgi_pop1[2]/v" scale="1mV" color="#177e84" timeScale="1ms"/>
+            <Line id="Golgi_pop1[3]: Vm" quantity="Golgi_pop1[3]/v" scale="1mV" color="#87111a" timeScale="1ms"/>
+        </Display>
+        
+        <OutputFile id="Volts0_file0_0" fileName="simulations/V2010multi1_2c_1input/sim0/Golgi_pop0_cell0.dat">
             <OutputColumn id="v0" quantity="Golgi_pop0[0]/v"/> 
         </OutputFile>
         
-        <OutputFile id="Volts0_file0_1" fileName="simulations/V2012multi1_2c_1input/sim0/Golgi_pop0_cell1.dat">
+        <OutputFile id="Volts0_file0_1" fileName="simulations/V2010multi1_2c_1input/sim0/Golgi_pop0_cell1.dat">
             <OutputColumn id="v1" quantity="Golgi_pop0[1]/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_2" fileName="simulations/V2010multi1_2c_1input/sim0/Golgi_pop0_cell2.dat">
+            <OutputColumn id="v2" quantity="Golgi_pop0[2]/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_3" fileName="simulations/V2010multi1_2c_1input/sim0/Golgi_pop0_cell3.dat">
+            <OutputColumn id="v3" quantity="Golgi_pop0[3]/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts1_file0_0" fileName="simulations/V2010multi1_2c_1input/sim0/Golgi_pop1_cell0.dat">
+            <OutputColumn id="v0" quantity="Golgi_pop1[0]/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts1_file0_1" fileName="simulations/V2010multi1_2c_1input/sim0/Golgi_pop1_cell1.dat">
+            <OutputColumn id="v1" quantity="Golgi_pop1[1]/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts1_file0_2" fileName="simulations/V2010multi1_2c_1input/sim0/Golgi_pop1_cell2.dat">
+            <OutputColumn id="v2" quantity="Golgi_pop1[2]/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts1_file0_3" fileName="simulations/V2010multi1_2c_1input/sim0/Golgi_pop1_cell3.dat">
+            <OutputColumn id="v3" quantity="Golgi_pop1[3]/v"/> 
         </OutputFile>
         
     </Simulation>

@@ -1,14 +1,55 @@
 <neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2beta4.xsd" id="Simple_Golgi_Net">
     <include href="Very_Simple_Golgi_test_morph.cell.nml"></include>
     <gapJunction id="gap_junction0" conductance="2232.032922pS"/>
+    <gapJunction id="gap_junction1" conductance="2249.178416pS"/>
+    <gapJunction id="gap_junction2" conductance="6748.015819pS"/>
+    <gapJunction id="gap_junction3" conductance="10430.270059pS"/>
+    <gapJunction id="gap_junction4" conductance="5720.991436pS"/>
+    <gapJunction id="gap_junction5" conductance="12826.737422pS"/>
+    <gapJunction id="gap_junction6" conductance="1505.518468pS"/>
+    <gapJunction id="gap_junction7" conductance="2563.060474pS"/>
+    <gapJunction id="gap_junction8" conductance="12244.350443pS"/>
+    <gapJunction id="gap_junction9" conductance="3172.116126pS"/>
+    <gapJunction id="gap_junction10" conductance="5122.553387pS"/>
+    <gapJunction id="gap_junction11" conductance="6380.714794pS"/>
+    <gapJunction id="gap_junction12" conductance="1326.195729pS"/>
+    <gapJunction id="gap_junction13" conductance="7389.874054pS"/>
+    <gapJunction id="gap_junction14" conductance="2139.116597pS"/>
+    <gapJunction id="gap_junction15" conductance="1965.142645pS"/>
     <pulseGenerator id="Input_0" delay="20.0ms" duration="200.0ms" amplitude="4E-5uA"/>
     <pulseGenerator id="Input_1" delay="220.0ms" duration="200.0ms" amplitude="-0.5E-5uA"/>
     <network id="Simple_Golgi_Net_network" type="networkWithTemperature" temperature="23 degC">
-        <population id="Golgi_pop0" component="Very_Simple_Golgi_test_morph" size="2"/>
+        <population id="Golgi_pop0" component="Very_Simple_Golgi_test_morph" size="4"/>
+        <population id="Golgi_pop1" component="Very_Simple_Golgi_test_morph" size="4"/>
         <electricalProjection id="proj0" postsynapticPopulation="Golgi_pop0" presynapticPopulation="Golgi_pop0">
-            <electricalConnection id="0" synapse="gap_junction0" preFractionAlong="0.958065" preSegment="2" postFractionAlong="0.091294" postSegment="2" postCell="1" preCell="0"/>
+            <electricalConnection id="0" synapse="gap_junction0" preFractionAlong="0.885536" preSegment="1" postFractionAlong="0.578086" postSegment="2" postCell="1" preCell="0"/>
+            <electricalConnection id="1" synapse="gap_junction1" preFractionAlong="0.873190" preSegment="5" postFractionAlong="0.216380" postSegment="1" postCell="2" preCell="0"/>
+            <electricalConnection id="2" synapse="gap_junction2" preFractionAlong="0.983293" preSegment="1" postFractionAlong="0.832205" postSegment="1" postCell="2" preCell="1"/>
+            <electricalConnection id="3" synapse="gap_junction3" preFractionAlong="0.078563" preSegment="1" postFractionAlong="0.994604" postSegment="5" postCell="3" preCell="1"/>
+        </electricalProjection>
+        <electricalProjection id="proj1" postsynapticPopulation="Golgi_pop1" presynapticPopulation="Golgi_pop0">
+            <electricalConnection id="0" synapse="gap_junction4" preFractionAlong="0.626104" preSegment="2" postFractionAlong="0.325761" postSegment="1" postCell="0" preCell="0"/>
+            <electricalConnection id="1" synapse="gap_junction5" preFractionAlong="0.164952" preSegment="2" postFractionAlong="0.967282" postSegment="1" postCell="2" preCell="0"/>
+            <electricalConnection id="2" synapse="gap_junction6" preFractionAlong="0.496066" preSegment="1" postFractionAlong="0.184854" postSegment="1" postCell="3" preCell="0"/>
+            <electricalConnection id="3" synapse="gap_junction7" preFractionAlong="0.416718" preSegment="5" postFractionAlong="0.243268" postSegment="5" postCell="1" preCell="1"/>
+            <electricalConnection id="4" synapse="gap_junction8" preFractionAlong="0.413251" preSegment="2" postFractionAlong="0.691883" postSegment="1" postCell="3" preCell="1"/>
+            <electricalConnection id="5" synapse="gap_junction9" preFractionAlong="0.893961" preSegment="1" postFractionAlong="0.330288" postSegment="1" postCell="2" preCell="2"/>
+            <electricalConnection id="6" synapse="gap_junction10" preFractionAlong="0.363960" preSegment="1" postFractionAlong="0.516687" postSegment="2" postCell="3" preCell="2"/>
+            <electricalConnection id="7" synapse="gap_junction11" preFractionAlong="0.685901" preSegment="1" postFractionAlong="0.401791" postSegment="5" postCell="3" preCell="3"/>
+        </electricalProjection>
+        <electricalProjection id="proj2" postsynapticPopulation="Golgi_pop1" presynapticPopulation="Golgi_pop1">
+            <electricalConnection id="0" synapse="gap_junction12" preFractionAlong="0.920992" preSegment="1" postFractionAlong="0.676145" postSegment="2" postCell="1" preCell="0"/>
+            <electricalConnection id="1" synapse="gap_junction13" preFractionAlong="0.349130" preSegment="2" postFractionAlong="0.901378" postSegment="1" postCell="2" preCell="0"/>
+            <electricalConnection id="2" synapse="gap_junction14" preFractionAlong="0.232246" preSegment="1" postFractionAlong="0.424292" postSegment="5" postCell="3" preCell="1"/>
+            <electricalConnection id="3" synapse="gap_junction15" preFractionAlong="0.099616" preSegment="1" postFractionAlong="0.148515" postSegment="1" postCell="3" preCell="2"/>
         </electricalProjection>
         <explicitInput input="Input_0" destination="synapses" target="Golgi_pop0[1]"/>
         <explicitInput input="Input_1" destination="synapses" target="Golgi_pop0[1]"/>
+        <explicitInput input="Input_0" destination="synapses" target="Golgi_pop0[2]"/>
+        <explicitInput input="Input_1" destination="synapses" target="Golgi_pop0[2]"/>
+        <explicitInput input="Input_0" destination="synapses" target="Golgi_pop1[3]"/>
+        <explicitInput input="Input_1" destination="synapses" target="Golgi_pop1[3]"/>
+        <explicitInput input="Input_0" destination="synapses" target="Golgi_pop1[2]"/>
+        <explicitInput input="Input_1" destination="synapses" target="Golgi_pop1[2]"/>
     </network>
 </neuroml>
