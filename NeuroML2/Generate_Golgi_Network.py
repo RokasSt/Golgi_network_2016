@@ -267,7 +267,7 @@ def generate_golgi_cell_net(ref,cell_array,location_array, connectivity_informat
            # if variable then "binomial",average_no_of_inputs,max_no_of_inputs    ]   then
            # for each different synapse     "segment groups and segments",[["Section_1","dend_1"],[0.7,0.3]]
            # "segments and subsegments"
-           # [["Section_1"],[1],[ [[0.25,0.2],[0.25,0.4],[0.25,0.4],[0.25,0]]         ]             ]
+           # [["Section_1"],[1],[ [   [0.25,0.2],[0.25,0.4],[0.25,0.4],[0.25,0]  ]         ]             ]          (note nesting  - four brackets at the end)
            #make InputList for MF and PF synapses
            for var in range(0,len(input_information)):
                 #more options can be added in the future
