@@ -529,7 +529,7 @@ if __name__=="__main__":
    #spike_plot_params=["3D raster plot",[0], # the same options !!!!!
    #spike_plot_params=["3D scatter plot", # one plot for each population include all sims; then the same options !!!!!
    #template:plot_params=[main figure title,syn_label_string,legend_title,label_array,xaxis_fontsize,yaxis_fontsize] 
-   Synchronization_analysis(450,["subtype specific","random fraction","randomly set target ids only once",[0.5,0.5]],2,[["V2010multi1_2c_1input"],["seed specifier",True],1],spike_plot_params,plot_params)
+   Synchronization_analysis(450,["subtype specific","random fraction","randomly set target ids only once",[1,1]],2,[["V2010multi1_2c_1input"],["seed specifier",True],1],spike_plot_params,plot_params)
    #the former in general would have the following format : ["subtype specific","random fraction","randomize only once" or "randomize on every trial","[fraction of Golgi_pop0 to target, fraction of Golgi_pop1 to target, ...,fraction of Golgi_pop n to target]]
    #Test3
    #Synchronization_analysis(450,["subtype specific","explicit list",[[0,1]]],1,["V2012multi1_2c_1input",["seed specifier",True],1])
