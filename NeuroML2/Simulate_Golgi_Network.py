@@ -111,7 +111,7 @@ if __name__ == "__main__":
     #one cell group
     #Conn_array=["Vervaeke_2012_based",1,["constant conductance",2000,"pS"],["segment groups and segments"],[["Section_1","dend_1"],[0.7,0.3]]]
     #two cell groups
-    #Conn_array=["Vervaeke_2012_based",1,["constant conductance",426,"pS"],["segment groups and segments","segment groups and segments"],\
+    #Conn_array=["Vervaeke_2012_based",1,[["Very_Simple_Golgi_test_morph","Very_Simple_Golgi_test_morph","constant conductance",426,"pS"]],["segment groups and segments","segment groups and segments"],\
                       #[  [["Section_1","dend_1"],[0.7,0.3]],  [["Section_1","dend_1"],[0.7,0.3]]    ],[["Very_Simple_Golgi_test_morph","Very_Simple_Golgi_test_morph","constant number of GJ contacts per pair", 8] or ["variable number of GJ contacts per pair","binomial",..,..,4,8]],\
                     #    ["testing",4],["maximal connection length",None]                    ]
     #testing case 2 with subsegment probabilities:
