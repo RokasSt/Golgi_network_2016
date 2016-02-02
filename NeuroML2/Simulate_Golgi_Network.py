@@ -41,12 +41,12 @@ if __name__ == "__main__":
     net_params.append(["Vervaeke_2010_multi_compartment",1,[["dendrite_group"],[1]],[["dendrite_group"],[1]],["testing",4],["maximal connection length",None]])
 
     #####use the arrays below just to test generation of basal firing rate-modulating current inputs and MF/PF inputs; put realistic parameters later
-    basal_f_changing_array=["variable basal firing rate",\
-    ["amplitude distribution","gaussian",[100,100],[20,20],"nA"],["offset distribution","uniform",[50,50],[100,100],"ms"]]
-    MFpop_array0=[0,["uniform",0.5],["MFSpikeSyn"],[["MFSpikeSyn",50],["MFSpikeSyn",100] ],["constant number of inputs per cell",8],\
-    "segment groups and segments",[ [["Section_1","dend_1"],[0.7,0.3]], [["Section_1","dend_1"],[0.7,0.3]]]]
-    MFpop_array1=[1,["uniform",0.5],["MFSpikeSyn"],[["MFSpikeSyn",70],["MFSpikeSyn",200]],["constant number of inputs per cell",4],\
-    "segments and subsegments",[ [["Soma","dend_3"],[0.7,0.3],[[[0.5,1],[0.5,0]],[[0.5,0.7],[0.5,0.3]]]],[["Soma","dend_3"],[0.7,0.3],[[[0.5,1],[0.5,1]],[[0.5,0.7],[0.5,0.3]]]]              ]]
+    #basal_f_changing_array=["variable basal firing rate",\
+   # ["amplitude distribution","gaussian",[100,100],[20,20],"nA"],["offset distribution","uniform",[50,50],[100,100],"ms"]]
+    #MFpop_array0=[0,["uniform",0.5],["MFSpikeSyn"],[["MFSpikeSyn",50],["MFSpikeSyn",100] ],["constant number of inputs per cell",8],\
+    #"segment groups and segments",[ [["Section_1","dend_1"],[0.7,0.3]], [["Section_1","dend_1"],[0.7,0.3]]]]
+    #MFpop_array1=[1,["uniform",0.5],["MFSpikeSyn"],[["MFSpikeSyn",70],["MFSpikeSyn",200]],["constant number of inputs per cell",4],\
+    #"segments and subsegments",[ [["Soma","dend_3"],[0.7,0.3],[[[0.5,1],[0.5,0]],[[0.5,0.7],[0.5,0.3]]]],[["Soma","dend_3"],[0.7,0.3],[[[0.5,1],[0.5,1]],[[0.5,0.7],[0.5,0.3]]]]              ]]
 
     #
     #
@@ -56,12 +56,12 @@ if __name__ == "__main__":
 
 
 
-    input_array=[ [ ["MF",[MFpop_array0,MFpop_array1]]]    ,basal_f_changing_array]
-    net_params.append(input_array)
+    #input_array=[ [ ["MF",[MFpop_array0,MFpop_array1]]]    ,basal_f_changing_array]
+    #net_params.append(input_array)
     ########
 
-    #net_params.append(["testing",0.5,["20.0ms","200.0ms","4E-5uA"],["220.0ms","200.0ms","-0.5E-5uA"]])
-    run_simulations(net_params,450,0.005,"no simulation","V2010multi_test_vf_and_MFinput_gen",1,["seed specifier",True],["plot specifier",False],["save somata positions","Yes"],"list")
+    net_params.append(["testing",0.5,["20.0ms","200.0ms","4E-5uA"],["220.0ms","200.0ms","-0.5E-5uA"]])
+    run_simulations(net_params,450,0.005,"no simulation","test_Lists",1,["seed specifier",True],["plot specifier",False],["save somata positions","Yes"],"list")
 
 
     #net_params[3]=["variable basal firing rate",["amplitude distribution","gaussian","100","50","nA"],["offset distribution","uniform",50,100]]

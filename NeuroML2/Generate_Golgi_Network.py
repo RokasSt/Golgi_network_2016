@@ -209,7 +209,7 @@ def generate_golgi_cell_net(ref,cell_array,location_array, connectivity_informat
                                                         nml_doc.gap_junctions.append(gap_junction)
 		                                        gap_counter+=1
                                                         #other options can be added such as gamma distribution
-                                                     conn =neuroml.ElectricalConnection(id=conn_count,pre_cell="%d"%Pre_cell,post_cell="%d"%Post_cell,synapse=gap,\
+                                                     conn =neuroml.ElectricalConnectionInstance(id=conn_count,pre_cell="%d"%Pre_cell,post_cell="%d"%Post_cell,synapse=gap,\
                                                              pre_segment="%d"%Pre_segment_id,post_segment="%d"%Post_segment_id,\
                                                              pre_fraction_along="%f"%random.random(),post_fraction_along="%f"%random.random())
                                             
@@ -217,11 +217,11 @@ def generate_golgi_cell_net(ref,cell_array,location_array, connectivity_informat
                                                         net.electrical_projections.append(proj)
                                                         projection_counter+=1
                                                
-		                                     proj.electrical_connections.append(conn)
+		                                     proj.electrical_connection_instances.append(conn)
 		                                     conn_count+=1
                                                      x=1
                                                   if connectivity_information[2][pair_index][2]=="constant conductance":
-                                                     conn =neuroml.ElectricalConnection(id=conn_count,pre_cell="%d"%Pre_cell,post_cell="%d"%Post_cell,synapse=gap_id_per_pair,\
+                                                     conn =neuroml.ElectricalConnectionInstance(id=conn_count,pre_cell="%d"%Pre_cell,post_cell="%d"%Post_cell,synapse=gap_id_per_pair,\
                                                               pre_segment="%d"%Pre_segment_id,post_segment="%d"%Post_segment_id,\
                                                               pre_fraction_along="%f"%Pre_fraction,post_fraction_along="%f"%Post_fraction)
                                             
@@ -229,7 +229,7 @@ def generate_golgi_cell_net(ref,cell_array,location_array, connectivity_informat
                                                         net.electrical_projections.append(proj)
                                                         projection_counter+=1
                                                
-		                                     proj.electrical_connections.append(conn)
+		                                     proj.electrical_connection_instances.append(conn)
 		                                     conn_count+=1
                                                      x=1
                                                   else:
@@ -246,7 +246,7 @@ def generate_golgi_cell_net(ref,cell_array,location_array, connectivity_informat
                                                            nml_doc.gap_junctions.append(gap_junction)
 		                                           gap_counter+=1
                                                         #other options can be added such as gamma distribution
-                                                        conn =neuroml.ElectricalConnection(id=conn_count,\
+                                                        conn =neuroml.ElectricalConnectionInstance(id=conn_count,\
 pre_cell="../%s/%d/%s"%(Golgi_pop_index_array[pre_pop_index],Pre_cell,cell_array[pre_pop_index+1][0]),\
 post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_array[post_pop_index+1][0]),synapse=gap,\
                                                              pre_segment="%d"%Pre_segment_id,post_segment="%d"%Post_segment_id,\
@@ -256,12 +256,12 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                                                            net.electrical_projections.append(proj)
                                                            projection_counter+=1
                                                
-		                                        proj.electrical_connections.append(conn)
+		                                        proj.electrical_connection_instances.append(conn)
 		                                        conn_count+=1
                                                         x=1
 
                                                      if connectivity_information[2][pair_index][2]=="constant conductance":
-                                                        conn =neuroml.ElectricalConnection(id=conn_count,pre_cell="%d"%Pre_cell,post_cell="%d"%Post_cell,synapse=gap_id_per_pair,\
+                                                        conn =neuroml.ElectricalConnectionInstance(id=conn_count,pre_cell="%d"%Pre_cell,post_cell="%d"%Post_cell,synapse=gap_id_per_pair,\
                                                               pre_segment="%d"%Pre_segment_id,post_segment="%d"%Post_segment_id,\
                                                               pre_fraction_along="%f"%Pre_fraction,post_fraction_along="%f"%Post_fraction)
                                             
@@ -269,7 +269,7 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                                                            net.electrical_projections.append(proj)
                                                            projection_counter+=1
                                                
-		                                        proj.electrical_connections.append(conn)
+		                                        proj.electrical_connection_instances.append(conn)
 		                                        conn_count+=1
                                                         x=1
 
@@ -299,7 +299,7 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                                          distance_between_cells=distance(pre_cell_positions[Pre_cell],post_cell_positions[Post_cell])/connectivity_information[1]
                                          if random.random() <connection_probability_vervaeke_2010(distance_between_cells):
                                             gap_junction = neuroml.GapJunction(id="gap_junction%d"%gap_counter, conductance="%fpS"%synaptic_weight_vervaeke_2010(distance_between_cells))
-                                            conn =neuroml.ElectricalConnection(id=conn_count,\
+                                            conn =neuroml.ElectricalConnectionInstance(id=conn_count,\
                                                                                pre_cell="../%s/%d/%s"%(Golgi_pop_index_array[pre_pop_index],Pre_cell,cell_array[pre_pop_index+1][0]),\
                                                                                post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_array[post_pop_index+1][0]),\
                                                                                synapse=gap_junction.id)
@@ -310,7 +310,7 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                                                net.electrical_projections.append(proj)
                                                projection_counter+=1
                                                
-		                            proj.electrical_connections.append(conn)
+		                            proj.electrical_connection_instances.append(conn)
 		                            conn_count+=1
 		                            
 		                            
@@ -423,7 +423,7 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                                             else:
                                                gap_junction = neuroml.GapJunction(id="gap_junction%d"%gap_counter, conductance="%fpS"%synaptic_weight_vervaeke_2010(distance_between_cells))
                                                gap_junction = neuroml.GapJunction(id="gap_junction%d"%gap_counter, conductance="%fpS"%synaptic_weight_vervaeke_2010(distance_between_cells)*connectivity_information[-1][1])
-                                            conn =neuroml.ElectricalConnection(id=conn_count,\
+                                            conn =neuroml.ElectricalConnectionInstance(id=conn_count,\
                                                                                 pre_cell="../%s/%d/%s"%(Golgi_pop_index_array[pre_pop_index],Pre_cell,cell_array[pre_pop_index+1][0]),\
                                                                               post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_array[post_pop_index+1][0]),\
                                                                                synapse=gap_junction.id,pre_segment="%d"%Pre_segment_id,post_segment="%d"%Post_segment_id,\
@@ -434,7 +434,7 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                                                net.electrical_projections.append(proj)
                                                projection_counter+=1
                                                
-		                            proj.electrical_connections.append(conn)
+		                            proj.electrical_connection_instances.append(conn)
 		                            conn_count+=1
               
                                                                    
@@ -461,7 +461,7 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                                          compare_ids=Pre_cell<=Post_cell                   
                                       if compare_ids:
                                          if random.random() < connectivity_information[1][0]:
-                                            conn =neuroml.ElectricalConnection(id=conn_count, \
+                                            conn =neuroml.ElectricalConnectionInstance(id=conn_count, \
 				   pre_cell="../%s/%d/%s"%(Golgi_pop_index_array[pre_pop_index],Pre_cell,cell_array[pre_pop_index+1][0]),
 				   post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_array[post_pop_index+1][0]),synapse=gap_junction0.id)
                                             if gap_counter==0:
@@ -471,7 +471,7 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                                                net.electrical_projections.append(proj)
                                                projection_counter+=1
                                                
-		                            proj.electrical_connections.append(conn)
+		                            proj.electrical_connection_instances.append(conn)
 		                            conn_count+=1
            
            # use below as a template : 
@@ -484,8 +484,10 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
            # "segments and subsegments"
            # [["Section_1"],[1],[ [   [0.25,0.2],[0.25,0.4],[0.25,0.4],[0.25,0]  ]         ]             ]          (note nesting  - four brackets at the end)
            #make InputList for MF and PF synapses
-           for input_group in input_information:
-               for var in range(0,len(input_group)):
+           if "testing" not in input_information:
+              for input_group in input_information:
+                 if type(input_group) is list:
+                    for var in range(0,len(input_group)):
                       #more options can be added in the future
                       if "MF"==input_group[var][0] or "PF"==input_group[var][0]:
                           inp_group_specifier=input_group[var][0]
@@ -604,8 +606,9 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                                                 count=count+1       
         
 	   ###### implementing physiological heterogeneity between cells with variations in a basal firing rate
-           for input_group in input_information:
-               if "variable basal firing rate"==input_group[0]:
+           if "testing" not in input_information:
+             for input_group in input_information:
+                if "variable basal firing rate"==input_group[0]:
                   for var in input_group:
                       if type(var) is list:
                          if var[0]=="amplitude distribution":
@@ -665,16 +668,16 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
 	              
            if input_information[0]=="testing":
               neuroml_input_array=[]
-              for pulse_x in range(0,len(input_information)-2):
-                  Input_list=neuroml.InputList(id="Input_list%d"%pulse_x, component="Input_%d"%pulse_x)
-                  neuroml_input_array.append(Input_list)
-                  net.input_lists.append(Input_list)
               for pop in range(0,len(Golgi_pop_index_array)):
-                  randomly_select_target_cells=random.sample(range(cell_array[pop+1][1]),int(round(fraction_of_cells_to_target_in_pop*cell_array[pop+1][1])))
-                  for input_list in neuroml_input_array:
-                      for i in randomly_select_target_cells:
-                          Inp = neuroml.Input(target="../%s/%d/%s"%(Golgi_pop_index_array[pop],i,cell_array[pop+1][0]),id="%d"%i,destination="synapses")
-                          input_list.input.append(Inp)
+                  for pulse_x in range(0,len(input_information)-2):
+                      Input_list=neuroml.InputList(id="Input_list%d"%pulse_x, component="Input_%d"%pulse_x,populations="%s"%Golgi_pop_index_array[pop])
+                      neuroml_input_array.append(Input_list)
+                      net.input_lists.append(Input_list)
+                      randomly_select_target_cells=random.sample(range(cell_array[pop+1][1]),int(round(fraction_of_cells_to_target_in_pop*cell_array[pop+1][1])))
+                      for input_list in neuroml_input_array:
+                          for i in randomly_select_target_cells:
+                              Inp = neuroml.Input(target="../%s/%d/%s"%(Golgi_pop_index_array[pop],i,cell_array[pop+1][0]),id="%d"%i,destination="synapses")
+                              input_list.input.append(Inp)
                       
 
         else:
@@ -726,9 +729,10 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                          net.explicit_inputs.append(Inp)
            #block for explicit inputs end
            
-           # as a template: if var in input_information is ["variable basal firing rate",["amplitude distribution","gaussian",[100],[50],"nA"],["offset distribution","uniform",[50],[100],"ms"]]        
-           for input_group in input_information:
-               if "variable basal firing rate"==input_group[0]:
+           # as a template: if var in input_information is ["variable basal firing rate",["amplitude distribution","gaussian",[100],[50],"nA"],["offset distribution","uniform",[50],[100],"ms"]]  
+           if "testing" not in input_information:      
+             for input_group in input_information:
+                if "variable basal firing rate"==input_group[0]:
                   for var in input_group:
                       if type(var) is list:
                          if var[0]=="amplitude distribution":
