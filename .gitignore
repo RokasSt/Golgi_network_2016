@@ -1,17 +1,17 @@
 
 
 /NeuroML2/simulator.props
-
+/NeuroML2/Examples
 /NeuroML2/*.mod
 /NeuroML2/*.hoc
 /NeuroML2/*.dat
 /NeuroML2/*_nrn.py 
 
-/NeuroML2/Examples/*.mod
-/NeuroML2/Examples/*.hoc
-/NeuroML2/Examples/*.dat
-/NeuroML2/Examples/*_nrn.py 
-/NeuroML2/Examples/*.props
+/NeuroML2/*.mod
+/NeuroML2/*.hoc
+/NeuroML2/*.dat
+/NeuroML2/*_nrn.py 
+/NeuroML2/*.props
 
 
 /NeuroML2/*.pyc
