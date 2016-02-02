@@ -38,7 +38,33 @@ if __name__ == "__main__":
     net_params=[]
     net_params.append([2,["Very_Simple_Golgi_test_morph",2],["Very_Simple_Golgi_test_morph",2]])
     net_params.append(["random",50, 50, 50])
-    net_params.append(["Vervaeke_2010_multi_compartment",1,[["dendrite_group"],[1]],[["dendrite_group"],[1]],["testing",4]])
+    net_params.append(["Vervaeke_2010_multi_compartment",1,[["dendrite_group"],[1]],[["dendrite_group"],[1]],["testing",4],["maximal connection length",None])
+
+    #####use the arrays below just to test generation of basal firing rate-modulating current inputs and MF/PF inputs; put realistic parameters later
+    # basal_f_changing_array=["variable basal firing rate",\
+    #["amplitude distribution","gaussian",[100,100],[20,20],"nA"],["offset distribution","uniform",[50,50],[100,100],"ms"]]
+    # MFpop_array0=[0,["uniform",0.5],["MFSpikeSyn"],[["MFSpikeSyn",50],["MFSpikeSyn",100]]["constant number of inputs per cell",8],\
+    #"segment groups and segments",[ [["Section_1","dend_1"],[0.7,0.3]], [["Section_1","dend_1"],[0.7,0.3]]]]
+    # MFpop_array1=[0,["uniform",0.5],["MFSpikeSyn"],[["MFSpikeSyn",70],["MFSpikeSyn",200]]["constant number of inputs per cell",4],\
+    #  "segments and subsegments",[ [["Soma","dend_3"],[0.7,0.3],[[[0.5,1],[0.5,1]],[[0.5,0.7],[0.5,0.3]]]],[["Soma","dend_3"],[0.7,0.3],[[[0.5,1],[0.5,1]],[[0.5,0.7],[0.5,0.3]]]]              ]]
+
+
+
+
+    #      #  or "segments and subsegments"
+           # [["Section_1"],[1],[ [   [0.25,0.2],[0.25,0.4],[0.25,0.4],[0.25,0]  ]         ]             ] 
+    #
+    #
+    #
+    #
+    #     [["MF",[pop0_array,pop1_array,pop2_array]],["PF",[PFpop0_array,PFpop1_array,PFpop2_array]]]
+
+
+
+    #input_array=[ ["MF",[MFpop_array0,MFpop_array1]  ]  ],basal_f_changing_array]
+    #net_params.append(input_array)
+    ########
+
     net_params.append(["testing",0.5,["20.0ms","200.0ms","4E-5uA"],["220.0ms","200.0ms","-0.5E-5uA"]])
     run_simulations(net_params,450,0.005,"jNeuroML_NEURON","V2010multi1_2p4c4c_4inp",1,["seed specifier",True],["plot specifier",False],["save somata positions","Yes"])
 
@@ -83,9 +109,11 @@ if __name__ == "__main__":
     #testing case 1 with segment probabilities (note that appropriate names of segment groups are passed); either constant or variable conductance:
     
     #one cell group
-    #Conn_array=["Vervaeke_2012_based",1,["constant conductance",2000,"pS"],"segment groups and segments",[["Section_1","dend_1"],[0.7,0.3]]]
+    #Conn_array=["Vervaeke_2012_based",1,["constant conductance",2000,"pS"],["segment groups and segments"],[["Section_1","dend_1"],[0.7,0.3]]]
     #two cell groups
-    #Conn_array=["Vervaeke_2012_based",1,["constant conductance",426,"pS"],"segment groups and segments",[["Section_1","dend_1"],[0.7,0.3]],[["Section_1","dend_1"],[0.7,0.3]]]
+    #Conn_array=["Vervaeke_2012_based",1,["constant conductance",426,"pS"],["segment groups and segments","segment groups and segments"],\
+                      #[  [["Section_1","dend_1"],[0.7,0.3]],  [["Section_1","dend_1"],[0.7,0.3]]    ],[["Very_Simple_Golgi_test_morph","Very_Simple_Golgi_test_morph","constant number of GJ contacts per pair", 8] or ["variable number of GJ contacts per pair","binomial",..,..,4,8]],\
+                    #    ["testing",4],["maximal connection length",None]                    ]
     #testing case 2 with subsegment probabilities:
                                             
     #one cell group with subsegment probabilities of only one segment
