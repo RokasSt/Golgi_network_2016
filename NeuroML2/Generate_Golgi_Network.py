@@ -120,17 +120,17 @@ def generate_golgi_cell_net(ref,cell_array,location_array, connectivity_informat
                for pre_pop_index in range(0,len(Golgi_pop_index_array)):
                        
                    if connectivity_information[3][pre_pop_index]=="segment groups and segments":
-                      pre_pop_target_segment_array=extract_morphology_information([cell_names[pre_pop_index],\
-                                                                                          ["segment groups",connectivity_information[4][pre_pop_index][0]])
+                      pre_pop_target_segment_array=extract_morphology_information([cell_names[pre_pop_index]],\
+                                                                                          ["segment groups",connectivity_information[4][pre_pop_index][0] ])
                    if connectivity_information[3][pre_pop_index]=="segments and subsegments":
-                      pre_pop_target_segment_array=extract_morphology_information([cell_names[pre_pop_index],\
+                      pre_pop_target_segment_array=extract_morphology_information([cell_names[pre_pop_index]],\
                                                                                           ["segments",connectivity_information[4][pre_pop_index][0]])
                    for post_pop_index in range(0,len(Golgi_pop_index_array)):
                        if connectivity_information[3][post_pop_index]=="segment groups and segments":
-                          post_pop_target_segment_array=extract_morphology_information([cell_names[post_pop_index],\
+                          post_pop_target_segment_array=extract_morphology_information([cell_names[post_pop_index]],\
                                                                                           ["segment groups",connectivity_information[4][post_pop_index][0]])
                        if connectivity_information[3][post_pop_index]=="segments and subsegments":
-                          post_pop_target_segment_array=extract_morphology_information([cell_names[post_pop_index],\
+                          post_pop_target_segment_array=extract_morphology_information([cell_names[post_pop_index]],\
                                                                                           ["segments",connectivity_information[4][post_pop_index][0]])                                                
                        if pre_pop_index<=post_pop_index:
                           proj = neuroml.ElectricalProjection(id="proj%d"%initial_projection_counter,
@@ -143,7 +143,7 @@ def generate_golgi_cell_net(ref,cell_array,location_array, connectivity_informat
                           post_cell_positions=cell_position_array[post_pop_index]
                           pairs=[]                                                    
                           for pair in range(0,len(pairs)):
-                              if collections.Counter(pairs[pair])==collections.Counter([cell_names[pre_pop_index],cell_names[post_pop_index] ):
+                              if collections.Counter(pairs[pair])==collections.Counter([cell_names[pre_pop_index],cell_names[post_pop_index]] ):
                                  if connectivity_information[5][pair][2]=="constant number of GJ contacts per pair":
                                     no_of_GJcon_per_pair=connectivity_information[5][pair][3]
                                  if connectivity_information[5][pair][2]=="variable number of GJ contacts per pair":
@@ -157,7 +157,7 @@ def generate_golgi_cell_net(ref,cell_array,location_array, connectivity_informat
                           variable_conductance_parameters_of_cell_pairs=[]
 
                           for pair in range(0,len(pairs_gap_conductance)):
-                              if collections.Counter(pairs_gap_conductance[pair])==collections.Counter([cell_names[pre_pop_index],cell_names[post_pop_index] ):
+                              if collections.Counter(pairs_gap_conductance[pair])==collections.Counter([cell_names[pre_pop_index],cell_names[post_pop_index]] ):
                                  pair_index=pair
                                  if connectivity_information[2][pair][2]=="constant conductance":
                                     conductance_value=connectivity_information[2][pair][3]
@@ -232,7 +232,7 @@ def generate_golgi_cell_net(ref,cell_array,location_array, connectivity_informat
 		                                     proj.electrical_connections.append(conn)
 		                                     conn_count+=1
                                                      x=1
-                                                 else:
+                                                  else:
                                                      post_target_point=get_unique_target_points(post_pop_target_segment_array,post_targeting_mode,\
                                                                                 connectivity_information[4][post_pop_index],1) 
                                                      Pre_segment_id=pre_target_points[pre_target_point,0]
@@ -415,8 +415,8 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                                                   Pre_segment_id=Pre_segment_id[0]
                                                   Post_segment_id=random.sample(post_segment_ids,1)
                                                   Post_segment_id=Post_segment_id[0]
-                                                  pre_fraction=random.random()
-                                                  post_fraction=random.random()
+                                                  Pre_fraction=random.random()
+                                                  Post_fraction=random.random()
                                             
                                             if connectivity_information[-2][0]=="testing":
                                                gap_junction = neuroml.GapJunction(id="gap_junction%d"%gap_counter, conductance="%fpS"%(synaptic_weight_vervaeke_2010(distance_between_cells)*connectivity_information[-2][1]))
@@ -427,7 +427,7 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                                                                                 pre_cell="../%s/%d/%s"%(Golgi_pop_index_array[pre_pop_index],Pre_cell,cell_array[pre_pop_index+1][0]),\
                                                                               post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_array[post_pop_index+1][0]),\
                                                                                synapse=gap_junction.id,pre_segment="%d"%Pre_segment_id,post_segment="%d"%Post_segment_id,\
-                                                                               pre_fraction_along="%f"pre_fraction,post_fraction_along="%f"%post_fraction)
+                                                                               pre_fraction_along="%f"%Pre_fraction,post_fraction_along="%f"%Post_fraction)
 		                            nml_doc.gap_junctions.append(gap_junction)
 		                            gap_counter+=1
 		                            if projection_counter==0:
@@ -484,119 +484,124 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
            # "segments and subsegments"
            # [["Section_1"],[1],[ [   [0.25,0.2],[0.25,0.4],[0.25,0.4],[0.25,0]  ]         ]             ]          (note nesting  - four brackets at the end)
            #make InputList for MF and PF synapses
-           for var in range(0,len(input_information)):
-                #more options can be added in the future
-                if "MF"==input_information[var][0] or "PF"==input_information[var][0]:
-                   inp_group_specifier=input_information[var][0]
-                   synapse_name_array=[]
-                   for pop in range(0,len(input_information[var][1])):
-                       names_of_synapses=input_information[var][1][pop][2]
-                       for name in names_of_synapses:
-                           synapse_name_array.append(name)
-                   unique_synapse_names=np.unique(synapse_name_array)
-                   for unique_synapse in unique_synapse_names:
-                       include_synapse=neuroml.IncludeType(href="%s.synapse.nml"%unique_synapse)
-                       nml_doc.includes.append(include_synapse)
-                   for pop in range(0,len(input_information[var][1])):
-                       genuine_pop_index=input_information[var][1][pop][0]
-                       segment_group_list=[]
-                       if input_information[var][1][pop][5]=="segment groups and segments":
-                          segment_group_list.append("segment groups")
-                       if input_information[var][1][pop][5]=="segments and subsegments":
-                          segment_group_list.append("segments")
-                       for poisson_synapse_list in range(0,len(input_information[var][1][pop][3])):
-                           segment_group_list.append(input_information[var][1][pop][6][poisson_synapse_list][0])
-                           segment_target_array=extract_morphology_information(cell_array[genuine_pop_index+1][0],segment_group_list)
-                           targeting_parameters=input_information[var][1][pop][6][poisson_synapse_list]
-                           poisson_syn=neuroml.PoissonFiringSynapse(id="%s_pop%dsyn%d"%(inp_group_specifier,genuine_pop_index,poisson_synapse_list),\
-                                                       average_rate="%f per_s"%input_information[var][1][pop][3][poisson_synapse_list][1],\
-                                   synapse=input_information[var][1][pop][3][poisson_synapse_list][0] ,\
-                                   spike_target="./%s"%input_information[var][1][pop][3][poisson_synapse_list][0])
-                           nml_doc.poisson_firing_synapses.append(poisson_syn)
-                           input_list =neuroml.InputList(id="%s_Input_pop%dsyn%d"%(inp_group_specifier,genuine_pop_index,poisson_synapse_list),\
-                                             component=poisson_syn.id, population=Golgi_pop_index_array[genuine_pop_index])
-                           which_cells_to_target_array=input_information[var][1][pop][1]
-                           if which_cells_to_target_array[0]=="uniform":
-                              fraction_to_target_per_pop=which_cells_to_target_array[1]
-                              target_cells=random.sample(range(cell_array[genuine_pop_index+1][1]),int(round(fraction_to_target_per_pop*cell_array[genuine_pop_index+1][1])))
-                              count=0                           
-                              for target_cell in target_cells:
-                                  if input_information[var][1][pop][4][0]=="constant number of inputs per cell":
-                                     no_of_inputs=input_information[var][1][pop][4][1]
-                                  if input_information[var][1][pop][4][0]=="variable number of inputs per cell":
-                                     if input_information[var][1][pop][4][1]=="binomial":
-                                        no_of_inputs=np.random.binomial(input_information[var][1][pop][4][3],input_information[var][1][pop][4][2]/input_information[var][1][pop][4][3])
-                                     ### other options can be added
+           for input_group in input_information:
+               for var in range(0,len(input_group)):
+                      #more options can be added in the future
+                      if "MF"==input_group[var][0] or "PF"==input_group[var][0]:
+                          inp_group_specifier=input_group[var][0]
+                          synapse_name_array=[]
+                          for pop in range(0,len(input_group[var][1])):
+                              names_of_synapses=input_group[var][1][pop][2]
+                              for name in names_of_synapses:
+                                  synapse_name_array.append(name)
+                              unique_synapse_names=np.unique(synapse_name_array)
+                          for unique_synapse in unique_synapse_names:
+                              include_synapse=neuroml.IncludeType(href="%s.synapse.nml"%unique_synapse)
+                              nml_doc.includes.append(include_synapse)
+                          for pop in range(0,len(input_group[var][1])):
+                              genuine_pop_index=input_group[var][1][pop][0]
+                              segment_group_list=[]
+                              if input_group[var][1][pop][5]=="segment groups and segments":
+                                 segment_group_list.append("segment groups")
+                              if input_group[var][1][pop][5]=="segments and subsegments":
+                                 segment_group_list.append("segments")
+                              for poisson_synapse_list in range(0,len(input_group[var][1][pop][3])):
+                                  segment_group_list.append(input_group[var][1][pop][6][poisson_synapse_list][0])
+                                  segment_target_array=extract_morphology_information([cell_array[genuine_pop_index+1][0]],segment_group_list)
+                                  targeting_parameters=input_group[var][1][pop][6][poisson_synapse_list]
+                                  poisson_syn=neuroml.PoissonFiringSynapse(id="%s_pop%dsyn%d"%(inp_group_specifier,genuine_pop_index,poisson_synapse_list),\
+                                                       average_rate="%f per_s"%input_group[var][1][pop][3][poisson_synapse_list][1],\
+                                         synapse=input_group[var][1][pop][3][poisson_synapse_list][0] ,\
+                                         spike_target="./%s"%input_group[var][1][pop][3][poisson_synapse_list][0])
+                                  nml_doc.poisson_firing_synapses.append(poisson_syn)
 
-                                  if input_information[var][1][pop][5]=="segment groups and segments":
-                                     target_points=get_unique_target_points(segment_target_array,"segment groups and segments",targeting_parameters,no_of_inputs)
-                                  if input_information[var][1][pop][5]=="segments and subsegments":
-                                     target_points=get_unique_target_points(segment_target_array,"segments and subsegments",targeting_parameters,no_of_inputs)
-                                  count_point=0
-                                  for target_point in range(0,len(target_points)):                     
-                                      syn_input = neuroml.Input(id="%d_p%d"%(count,count_point),target="../%s/%i/%s"%(Golgi_pop_index_array[genuine_pop_index],\
+                                  input_list =neuroml.InputList(id="%s_Input_pop%dsyn%d"%(inp_group_specifier,genuine_pop_index,poisson_synapse_list),\
+                                             component=poisson_syn.id, populations=Golgi_pop_index_array[genuine_pop_index])
+                                  net.input_lists.append(input_list)
+                                  which_cells_to_target_array=input_group[var][1][pop][1]
+                                  if which_cells_to_target_array[0]=="uniform":
+                                     fraction_to_target_per_pop=which_cells_to_target_array[1]
+                                     target_cells=random.sample(range(cell_array[genuine_pop_index+1][1]),int(round(fraction_to_target_per_pop*cell_array[genuine_pop_index+1][1])))
+                                     count=0                           
+                                     for target_cell in target_cells:
+                                         if input_group[var][1][pop][4][0]=="constant number of inputs per cell":
+                                             no_of_inputs=input_group[var][1][pop][4][1]
+                                         if input_group[var][1][pop][4][0]=="variable number of inputs per cell":
+                                            if input_group[var][1][pop][4][1]=="binomial":
+                                               no_of_inputs=np.random.binomial(input_group[var][1][pop][4][3],\
+                                                      input_group[var][1][pop][4][2]/input_group[var][1][pop][4][3])
+                                            ### other options can be added
+
+                                         if input_group[var][1][pop][5]=="segment groups and segments":
+                                            target_points=get_unique_target_points(segment_target_array,"segment groups and segments",targeting_parameters,no_of_inputs)
+                                         if input_group[var][1][pop][5]=="segments and subsegments":
+                                            target_points=get_unique_target_points(segment_target_array,"segments and subsegments",targeting_parameters,no_of_inputs)
+                                         #count_point=0
+                                         for target_point in range(0,len(target_points)):                     
+                                             syn_input = neuroml.Input(id="%d"%(count),target="../%s/%i/%s"%(Golgi_pop_index_array[genuine_pop_index],\
                                                                   target_cell,cell_array[genuine_pop_index+1][0] ),destination="synapses",\
-                                                                  segmentId="%d"%target_points[target_point,0],fractionAlong="%f"%target_points[target_point,1]) 
-                     
-                                      input_list.input.append(syn_input)
-                                      count_point=count_point+1
+                                                                  segment_id="%d"%target_points[target_point,0],fraction_along="%f"%target_points[target_point,1]) 
+                                             
+                                             input_list.input.append(syn_input)
+                                             #count_point=count_point+1
 
-                                  count=count+1
+                                             count=count+1
 
-                           if which_cells_to_target_array[0]=="3D region specific":
-                              cell_positions=cell_position_array[genuine_pop_index]
-                              dim_array=np.shape(cell_positions)
-                              region_specific_targets_per_cell_group=[]
-                              for region in range(1,len(which_cells_to_target_array[1])):
-                                  for cell in range(0,dim_array[0]):
-                                      if (which_cells_to_target_array[1][region][0][0] <  cell_positions[cell,0]) and (cell_positions[cell,0] < which_cells_to_target_array[1][region][0][1]):
-                                         if (which_cells_to_target_array[1][region][1][0] <  cell_positions[cell,1]) and (cell_positions[cell,1] <which_cells_to_target_array[1][region][1][1]) :
-                                            if (which_cells_to_target_array[1][region][2][0] <  cell_positions[cell,2]) and (cell_positions[cell,2] < which_cells_to_target_array[1][region][2][1]):
-                                               region_specific_targets_per_cell_group.append(cell)  
+                                  if which_cells_to_target_array[0]=="3D region specific":
+                                     cell_positions=cell_position_array[genuine_pop_index]
+                                     dim_array=np.shape(cell_positions)
+                                     region_specific_targets_per_cell_group=[]
+                                     for region in range(1,len(which_cells_to_target_array[1])):
+                                         for cell in range(0,dim_array[0]):
+                                             if (which_cells_to_target_array[1][region][0][0] <  cell_positions[cell,0]) and (cell_positions[cell,0] < which_cells_to_target_array[1][region][0][1]):
+                                                if (which_cells_to_target_array[1][region][1][0] <  cell_positions[cell,1]) and (cell_positions[cell,1] <which_cells_to_target_array[1][region][1][1]) :
+                                                   if (which_cells_to_target_array[1][region][2][0] <  cell_positions[cell,2]) and (cell_positions[cell,2] < which_cells_to_target_array[1][region][2][1]):
+                                                      region_specific_targets_per_cell_group.append(cell)  
    
-                              if which_cells_to_target_array[2]=="all":
-                                 count=0
-                                 for target_cell in region_specific_targets_per_cell_group:
-                                     if input_information[var][1][pop][4][0]=="constant number of inputs per cell":
-                                        no_of_inputs=input_information[var][1][pop][4][1]
-                                     if input_information[var][1][pop][4][0]=="variable number of inputs per cell":
-                                        if input_information[var][1][pop][4][1]=="binomial":
-                                        no_of_inputs=np.random.binomial(input_information[var][1][pop][4][3],input_information[var][1][pop][4][2]/input_information[var][1][pop][4][3])
-                                     if input_information[var][1][pop][5]=="segment groups and segments":
-                                        target_points=get_unique_target_points(segment_target_array,"segment groups and segments",targeting_parameters,no_of_inputs)
-                                     if input_information[var][1][pop][5]=="segments and subsegments":
-                                        target_points=get_unique_target_points(segment_target_array,"segments and subsegments",targeting_parameters,no_of_inputs)
-                                     count_point=0
-                                     for target_point in range(0,len(target_points)):       
-                                         syn_input = neuroml.Input(id="%d_p%d"%(count,count_point),target="../%s/%i/%s"%(Golgi_pop_index_array[genuine_pop_index],\
+                                     if which_cells_to_target_array[2]=="all":
+                                        count=0
+                                        for target_cell in region_specific_targets_per_cell_group:
+                                            if input_group[var][1][pop][4][0]=="constant number of inputs per cell":
+                                               no_of_inputs=input_group[var][1][pop][4][1]
+                                            if input_group[var][1][pop][4][0]=="variable number of inputs per cell":
+                                               if input_group[var][1][pop][4][1]=="binomial":
+                                                  no_of_inputs=np.random.binomial(input_group[var][1][pop][4][3],input_group[var][1][pop][4][2]/input_group[var][1][pop][4][3])
+                                            if input_group[var][1][pop][5]=="segment groups and segments":
+                                               target_points=get_unique_target_points(segment_target_array,"segment groups and segments",targeting_parameters,no_of_inputs)
+                                            if input_group[var][1][pop][5]=="segments and subsegments":
+                                               target_points=get_unique_target_points(segment_target_array,"segments and subsegments",targeting_parameters,no_of_inputs)
+                                            #count_point=0
+                                            for target_point in range(0,len(target_points)):       
+                                                syn_input = neuroml.Input(id="%d"%(count),target="../%s/%i/%s"%(Golgi_pop_index_array[genuine_pop_index],\
                                                                   target_cell,cell_array[genuine_pop_index+1][0] ),destination="synapses",\
-                                                                  segmentId="%d"%target_points[target_point,0],fractionAlong="%f"%target_points[target_point,1]) 
-                                         input_list.input.append(syn_input)
-                                         count_point=count_point+1
-                                     count=count+1
-                              #  now coded so that the same fraction applies to all 3D regions
-                              if which_cells_to_target_array[2]=="random fraction":
-                                 random_targets_per_cell_group=random.sample(region_specific_targets_per_cell_group,\
+                                                                  segmentId="%d"%target_points[target_point,0],fraction_along="%f"%target_points[target_point,1]) 
+                                                input_list.input.append(syn_input)
+                                                #count_point=count_point+1
+                                                count=count+1
+                                      #  now coded so that the same fraction applies to all 3D regions
+                                     if which_cells_to_target_array[2]=="random fraction":
+                                        random_targets_per_cell_group=random.sample(region_specific_targets_per_cell_group,\
                                                 int(round(which_cells_to_target_array[3]*len(region_specific_targets_per_cell_group))))
-                                 count=0
-                                 for target_cell in random_targets_per_cell_group:
-                                     if input_information[var][1][pop][4][0]=="constant number of inputs per cell":
-                                        no_of_inputs=input_information[var][1][pop][4][1]
-                                     if input_information[var][1][pop][4][0]=="variable number of inputs per cell":
-                                        if input_information[var][1][pop][4][1]=="binomial":
-                                        no_of_inputs=np.random.binomial(input_information[var][1][pop][4][3],input_information[var][1][pop][4][2]/input_information[var][1][pop][4][3])
-                                     if input_information[var][1][pop][5]=="segment groups and segments":
-                                        target_points=get_unique_target_points(segment_target_array,"segment groups and segments",targeting_parameters,no_of_inputs)
-                                     if input_information[var][1][pop][5]=="segments and subsegments":
-                                        target_points=get_unique_target_points(segment_target_array,"segments and subsegments",targeting_parameters,no_of_inputs)
-                                     count_point=0
-                                     for target_point in range(0,len(target_points)):       
-                                         syn_input = neuroml.Input(id="%d_p%d"%(count,count_point),target="../%s/%i/%s"%(Golgi_pop_index_array[genuine_pop_index],\
+                                        count=0
+                                        for target_cell in random_targets_per_cell_group:
+                                            if input_group[var][1][pop][4][0]=="constant number of inputs per cell":
+                                               no_of_inputs=input_group[var][1][pop][4][1]
+                                            if input_group[var][1][pop][4][0]=="variable number of inputs per cell":
+                                               if input_group[var][1][pop][4][1]=="binomial":
+                                                  no_of_inputs=np.random.binomial(input_group[var][1][pop][4][3],input_group[var][1][pop][4][2]/input_group[var][1][pop][4][3])
+                                            if input_group[var][1][pop][5]=="segment groups and segments":
+                                               target_points=get_unique_target_points(segment_target_array,"segment groups and segments",targeting_parameters,no_of_inputs)
+                                            if input_group[var][1][pop][5]=="segments and subsegments":
+                                               target_points=get_unique_target_points(segment_target_array,"segments and subsegments",targeting_parameters,no_of_inputs)
+                                            #count_point=0
+                                            for target_point in range(0,len(target_points)):       
+                                                syn_input = neuroml.Input(id="%d"%(count),target="../%s/%i/%s"%(Golgi_pop_index_array[genuine_pop_index],\
                                                                   target_cell,cell_array[genuine_pop_index+1][0] ),destination="synapses",\
-                                                                  segmentId="%d"%target_points[target_point,0],fractionAlong="%f"%target_points[target_point,1]) 
-                                         input_list.input.append(syn_input)
-                                         count_point=count_point+1
-                                     count=count+1       
+                                                                  segment_id="%d"%target_points[target_point,0],fraction_along="%f"%target_points[target_point,1]) 
+                                                
+                                                input_list.input.append(syn_input)
+                                                #count_point=count_point+1
+                                                count=count+1       
         
 	   ###### implementing physiological heterogeneity between cells with variations in a basal firing rate
            for input_group in input_information:
@@ -604,11 +609,13 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                   for var in input_group:
                       if type(var) is list:
                          if var[0]=="amplitude distribution":
+                            gaussian_model=False
+                            uniform_model=False
                             if "gaussian" in var:
                                 pop_average_array=[]
                                 pop_variance_array=[]
                                 gaussian_model=True
-                                for pop_var in range(0,var[2]):
+                                for pop_var in range(0,len(var[2])):
                                     pop_average_array.append(var[2][pop_var])
                                     pop_variance_array.append(var[3][pop_var])
                                 units=var[4]
@@ -616,31 +623,33 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                                pop_left_bound=[]
                                pop_right_bound=[]
                                uniform_model=True
-                               for pop_var in range(0,var[2]):
+                               for pop_var in range(0,len(var[2])):
                                    pop_left_bound.append(var[2][pop_var])
                                    pop_right_bound.append(var[3][pop_var])
                                units=var[4]
-                            if var[0]=="offset distribution":
-                               if "gaussian" in var:
-                                  offset_gaussian_model=True
-                                  pop_offset_average=[]
-                                  pop_offset_variance=[]
-                                  for pop_var in range(0,len(var[2])):
-                                      pop_offset_average.append(var[2][pop_var])
-                                      pop_offset_variance.append(var[3][pop_var])
-                                  offset_units=var[4]
-                               if "uniform" in var:
-                                  offset_uniform_model=True
-                                  pop_offset_left_bound=[]
-                                  pop_offset_right_bound=[]
-                                  for pop_var in range(0,len(var[2])):
-                                      pop_offset_left_bound.append(var[2][pop_var])
-                                      pop_offset_right_bound.append(var[3][pop_var])
-                                  offset_units=var[4]
+                         if var[0]=="offset distribution":
+                            offset_gaussian_model=False
+                            offset_uniform_model=False
+                            if "gaussian" in var:
+                                offset_gaussian_model=True
+                                pop_offset_average=[]
+                                pop_offset_variance=[]
+                                for pop_var in range(0,len(var[2])):
+                                    pop_offset_average.append(var[2][pop_var])
+                                    pop_offset_variance.append(var[3][pop_var])
+                                offset_units=var[4]
+                            if "uniform" in var:
+                                offset_uniform_model=True
+                                pop_offset_left_bound=[]
+                                pop_offset_right_bound=[]
+                                for pop_var in range(0,len(var[2])):
+                                    pop_offset_left_bound.append(var[2][pop_var])
+                                    pop_offset_right_bound.append(var[3][pop_var])
+                                offset_units=var[4]
                   for pop in range(0,len(Golgi_pop_index_array)):
                       for cell in range(cell_array[pop+1][1]):
                           if gaussian_model:
-                             amp=random.gauss(pop_average[pop],pop_variance[pop])
+                             amp=random.gauss(pop_average_array[pop],pop_variance_array[pop])
                           if uniform_model:
                              amp=random.uniform(pop_left_bound[pop],pop_right_bound[pop])
                           if offset_gaussian_model:
@@ -723,11 +732,13 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                   for var in input_group:
                       if type(var) is list:
                          if var[0]=="amplitude distribution":
+                            gaussian_model=False
+                            uniform_model=False
                             if "gaussian" in var:
                                pop_average_array=[]
                                pop_variance_array=[]
                                gaussian_model=True
-                               for pop_var in range(0,var[2]):
+                               for pop_var in range(0,len(var[2])):
                                    pop_average_array.append(var[2][pop_var])
                                    pop_variance_array.append(var[3][pop_var])
                                units=var[4]
@@ -735,31 +746,33 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                                pop_left_bound=[]
                                pop_right_bound=[]
                                uniform_model=True
-                               for pop_var in range(0,var[2]):
+                               for pop_var in range(0,len(var[2])):
                                    pop_left_bound.append(var[2][pop_var])
                                    pop_right_bound.append(var[3][pop_var])
                                units=var[4]
-                            if var[0]=="offset distribution":
-                               if "gaussian" in var:
-                                  offset_gaussian_model=True
-                                  pop_offset_average=[]
-                                  pop_offset_variance=[]
-                                  for pop_var in range(0,len(var[2])):
-                                      pop_offset_average.append(var[2][pop_var])
-                                      pop_offset_variance.append(var[3][pop_var])
-                                  offset_units=var[4]                 
-                               if "uniform" in var:
-                                  offset_uniform_model=True
-                                  pop_offset_left_bound=[]
-                                  pop_offset_right_bound=[]
-                                  for pop_var in range(0,len(var[2])):
-                                      pop_offset_left_bound.append(var[2][pop_var])
-                                      pop_offset_right_bound.append(var[3][pop_var])
-                                  offset_units=var[4]
+                         if var[0]=="offset distribution":
+                            offset_gaussian_model=False
+                            offset_uniform_model=False
+                            if "gaussian" in var:
+                               offset_gaussian_model=True
+                               pop_offset_average=[]
+                               pop_offset_variance=[]
+                               for pop_var in range(0,len(var[2])):
+                                   pop_offset_average.append(var[2][pop_var])
+                                   pop_offset_variance.append(var[3][pop_var])
+                               offset_units=var[4]                 
+                            if "uniform" in var:
+                                offset_uniform_model=True
+                                pop_offset_left_bound=[]
+                                pop_offset_right_bound=[]
+                                for pop_var in range(0,len(var[2])):
+                                    pop_offset_left_bound.append(var[2][pop_var])
+                                    pop_offset_right_bound.append(var[3][pop_var])
+                                offset_units=var[4]
                   for pop in range(0,len(Golgi_pop_index_array)):
                       for cell in range(cell_array[pop+1][1]):
                           if gaussian_model:
-                             amp=random.gauss(pop_average[pop],pop_variance[pop])
+                             amp=random.gauss(pop_average_array[pop],pop_variance_array[pop])
                           if uniform_model:
                              amp=random.uniform(pop_left_bound[pop],pop_right_bound[pop])
                           if offset_gaussian_model:
@@ -795,17 +808,17 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                for pre_pop_index in range(0,len(Golgi_pop_index_array)):
                        
                    if connectivity_information[3][pre_pop_index]=="segment groups and segments":
-                      pre_pop_target_segment_array=extract_morphology_information([cell_names[pre_pop_index],\
+                      pre_pop_target_segment_array=extract_morphology_information([cell_names[pre_pop_index]],\
                                                                                           ["segment groups",connectivity_information[4][pre_pop_index][0]])
                    if connectivity_information[3][pre_pop_index]=="segments and subsegments":
-                      pre_pop_target_segment_array=extract_morphology_information([cell_names[pre_pop_index],\
+                      pre_pop_target_segment_array=extract_morphology_information([cell_names[pre_pop_index]],\
                                                                                           ["segments",connectivity_information[4][pre_pop_index][0]])
                    for post_pop_index in range(0,len(Golgi_pop_index_array)):
                        if connectivity_information[3][post_pop_index]=="segment groups and segments":
-                          post_pop_target_segment_array=extract_morphology_information([cell_names[post_pop_index],\
+                          post_pop_target_segment_array=extract_morphology_information([cell_names[post_pop_index]],\
                                                                                           ["segment groups",connectivity_information[4][post_pop_index][0]])
                        if connectivity_information[3][post_pop_index]=="segments and subsegments":
-                          post_pop_target_segment_array=extract_morphology_information([cell_names[post_pop_index],\
+                          post_pop_target_segment_array=extract_morphology_information([cell_names[post_pop_index]],\
                                                                                           ["segments",connectivity_information[4][post_pop_index][0]])                                                
                        if pre_pop_index<=post_pop_index:
                           proj = neuroml.ElectricalProjection(id="proj%d"%initial_projection_counter,
@@ -818,7 +831,7 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                           post_cell_positions=cell_position_array[post_pop_index]
                           pairs=[]                                                    
                           for pair in range(0,len(pairs)):
-                              if collections.Counter(pairs[pair])==collections.Counter([cell_names[pre_pop_index],cell_names[post_pop_index] ):
+                              if collections.Counter(pairs[pair])==collections.Counter([cell_names[pre_pop_index],cell_names[post_pop_index]] ):
                                  if connectivity_information[5][pair][2]=="constant number of GJ contacts per pair":
                                     no_of_GJcon_per_pair=connectivity_information[5][pair][3]
                                  if connectivity_information[5][pair][2]=="variable number of GJ contacts per pair":
@@ -832,7 +845,7 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                           variable_conductance_parameters_of_cell_pairs=[]
 
                           for pair in range(0,len(pairs_gap_conductance)):
-                              if collections.Counter(pairs_gap_conductance[pair])==collections.Counter([cell_names[pre_pop_index],cell_names[post_pop_index] ):
+                              if collections.Counter(pairs_gap_conductance[pair])==collections.Counter([ cell_names[pre_pop_index],cell_names[post_pop_index]] ):
                                  pair_index=pair
                                  if connectivity_information[2][pair][2]=="constant conductance":
                                     conductance_value=connectivity_information[2][pair][3]
@@ -907,7 +920,7 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
 		                                     proj.electrical_connections.append(conn)
 		                                     conn_count+=1
                                                      x=1
-                                                 else:
+                                                  else:
                                                      post_target_point=get_unique_target_points(post_pop_target_segment_array,post_targeting_mode,\
                                                                                 connectivity_information[4][post_pop_index],1) 
                                                      Pre_segment_id=pre_target_points[pre_target_point,0]
@@ -923,7 +936,7 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                                                         #other options can be added such as gamma distribution
                                                         conn =neuroml.ElectricalConnection(id=conn_count,pre_cell="%d"%Pre_cell,post_cell="%d"%Post_cell,synapse=gap,\
                                                              pre_segment="%d"%Pre_segment_id,post_segment="%d"%Post_segment_id,\
-                                                             pre_fraction_along="%f"%random.random(),post_fraction_along="%f"%random.random())
+                                                             pre_fraction_along="%f"%Pre_fraction,post_fraction_along="%f"%Post_fraction)
                                             
 		                                        if projection_counter==0:
                                                            net.electrical_projections.append(proj)
@@ -954,6 +967,7 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                gap_counter=0
                initial_projection_counter=0
                segment_group_list=[]
+               #for the time beging V2010 uses probabilities of targeting specific segment groups and a pool of segments per segment group; sufficient as for 2010-     detailed model
                segment_group_list.append("segment groups")
                for cell_population in range(0,len(Golgi_pop_index_array)):
                    segment_group_list.append(connectivity_information[cell_population+2][0])
@@ -1264,12 +1278,19 @@ def generate_LEMS_and_run(sim_array,pop_array):
            if simulation_parameters[6][1]==True:
               if simulation_parameters[2]=="jNeuroML":
 	         results1 = pynml.run_lems_with_jneuroml(lems_file_name, nogui=True, load_saved_data=True, plot=True)
-              if simulation_parameters[2]=="jNeuroML_NEURON":
+                 print("Finished building network and running simulation with %s"%simulation_parameters[2])
+              elif simulation_parameters[2]=="jNeuroML_NEURON":
                  results1 = pynml.run_lems_with_jneuroml_neuron(lems_file_name, nogui=True, load_saved_data=True, plot=True)
+                 print("Finished building a network and running simulation with %s"%simulation_parameters[2])
+              else:
+                 print("Finished building a network")
            else:
               if simulation_parameters[2]=="jNeuroML":
 	         results1 = pynml.run_lems_with_jneuroml(lems_file_name, nogui=True, load_saved_data=False, plot=False)
-              if simulation_parameters[2]=="jNeuroML_NEURON":
+                 print("Finished building a network and running simulation with %s"%simulation_parameters[2])
+              elif simulation_parameters[2]=="jNeuroML_NEURON":
                  results1 = pynml.run_lems_with_jneuroml_neuron(lems_file_name, nogui=True, load_saved_data=False, plot=False)
-              print("Finished running simulation with %s"%simulation_parameters[2])
+                 print("Finished building a network and running simulation with %s"%simulation_parameters[2])
+              else:
+                 print("Finished building a network")
          

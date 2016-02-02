@@ -2,7 +2,7 @@
 from  Generate_Golgi_Network import *
 import os.path
 
-def run_simulations(network_parameters,sim_duration,time_step,simulator,experiment_identifier,no_of_trials,seed_specifier,plot_specifier,save_soma_specifier):
+def run_simulations(network_parameters,sim_duration,time_step,simulator,experiment_identifier,no_of_trials,seed_specifier,plot_specifier,save_soma_specifier,list_or_not):
     
     Cell_array=network_parameters[0]
     Position_array=network_parameters[1]
@@ -15,14 +15,14 @@ def run_simulations(network_parameters,sim_duration,time_step,simulator,experime
         if not os.path.exists(newpath):
                os.makedirs(newpath)
         if seed_specifier[1]==True:
-           sim_params,pop_params=generate_golgi_cell_net("Golgi%s"%(experiment_identifier),Cell_array,Position_array,Conn_array,Input_array,Sim_array,"not a list",["output",True])
+           sim_params,pop_params=generate_golgi_cell_net("Golgi%s"%(experiment_identifier),Cell_array,Position_array,Conn_array,Input_array,Sim_array,list_or_not,["output",True])
 
            if save_soma_specifier[1]=="Yes":
               save_soma_positions(pop_params,r'simulations/%s'%(experiment_identifier))
               print("saved soma positions in the experiment directory %s"%r'simulations/%s'%(experiment_identifier))
            generate_LEMS_and_run(sim_params,pop_params)
         else:
-           sim_params,pop_params=generate_golgi_cell_net("Simple_Golgi_Net%d"%simulation_trial,Cell_array,Position_array,Conn_array,Input_array,Sim_array,"not a list",["output",True])
+           sim_params,pop_params=generate_golgi_cell_net("Golgi%s_trial%d"%(experiment_identifier,simulation_trial),Cell_array,Position_array,Conn_array,Input_array,Sim_array,list_or_not,["output",True])
 
            if save_soma_specifier[1]=="Yes":
               save_soma_positions(pop_params,r'simulations/%s/sim%d'%(experiment_identifier,simulation_trial))
@@ -36,37 +36,32 @@ if __name__ == "__main__":
     #Conn_array=["Vervaeke_2010_multi_compartment",1,[["dendrite_group"],[1]],["testing",4]]
     
     net_params=[]
-    net_params.append([2,["Very_Simple_Golgi_test_morph",2],["Very_Simple_Golgi_test_morph",2]])
-    net_params.append(["random",50, 50, 50])
-    net_params.append(["Vervaeke_2010_multi_compartment",1,[["dendrite_group"],[1]],[["dendrite_group"],[1]],["testing",4],["maximal connection length",None])
+    net_params.append([2,["Very_Simple_Golgi_test_morph",10],["Very_Simple_Golgi_test_morph",10]])
+    net_params.append(["random",100, 100, 100])
+    net_params.append(["Vervaeke_2010_multi_compartment",1,[["dendrite_group"],[1]],[["dendrite_group"],[1]],["testing",4],["maximal connection length",None]])
 
     #####use the arrays below just to test generation of basal firing rate-modulating current inputs and MF/PF inputs; put realistic parameters later
-    # basal_f_changing_array=["variable basal firing rate",\
-    #["amplitude distribution","gaussian",[100,100],[20,20],"nA"],["offset distribution","uniform",[50,50],[100,100],"ms"]]
-    # MFpop_array0=[0,["uniform",0.5],["MFSpikeSyn"],[["MFSpikeSyn",50],["MFSpikeSyn",100]]["constant number of inputs per cell",8],\
-    #"segment groups and segments",[ [["Section_1","dend_1"],[0.7,0.3]], [["Section_1","dend_1"],[0.7,0.3]]]]
-    # MFpop_array1=[0,["uniform",0.5],["MFSpikeSyn"],[["MFSpikeSyn",70],["MFSpikeSyn",200]]["constant number of inputs per cell",4],\
-    #  "segments and subsegments",[ [["Soma","dend_3"],[0.7,0.3],[[[0.5,1],[0.5,1]],[[0.5,0.7],[0.5,0.3]]]],[["Soma","dend_3"],[0.7,0.3],[[[0.5,1],[0.5,1]],[[0.5,0.7],[0.5,0.3]]]]              ]]
+    basal_f_changing_array=["variable basal firing rate",\
+    ["amplitude distribution","gaussian",[100,100],[20,20],"nA"],["offset distribution","uniform",[50,50],[100,100],"ms"]]
+    MFpop_array0=[0,["uniform",0.5],["MFSpikeSyn"],[["MFSpikeSyn",50],["MFSpikeSyn",100] ],["constant number of inputs per cell",8],\
+    "segment groups and segments",[ [["Section_1","dend_1"],[0.7,0.3]], [["Section_1","dend_1"],[0.7,0.3]]]]
+    MFpop_array1=[1,["uniform",0.5],["MFSpikeSyn"],[["MFSpikeSyn",70],["MFSpikeSyn",200]],["constant number of inputs per cell",4],\
+    "segments and subsegments",[ [["Soma","dend_3"],[0.7,0.3],[[[0.5,1],[0.5,0]],[[0.5,0.7],[0.5,0.3]]]],[["Soma","dend_3"],[0.7,0.3],[[[0.5,1],[0.5,1]],[[0.5,0.7],[0.5,0.3]]]]              ]]
 
-
-
-
-    #      #  or "segments and subsegments"
-           # [["Section_1"],[1],[ [   [0.25,0.2],[0.25,0.4],[0.25,0.4],[0.25,0]  ]         ]             ] 
     #
     #
     #
     #
-    #     [["MF",[pop0_array,pop1_array,pop2_array]],["PF",[PFpop0_array,PFpop1_array,PFpop2_array]]]
+    
 
 
 
-    #input_array=[ ["MF",[MFpop_array0,MFpop_array1]  ]  ],basal_f_changing_array]
-    #net_params.append(input_array)
+    input_array=[ [ ["MF",[MFpop_array0,MFpop_array1]]]    ,basal_f_changing_array]
+    net_params.append(input_array)
     ########
 
-    net_params.append(["testing",0.5,["20.0ms","200.0ms","4E-5uA"],["220.0ms","200.0ms","-0.5E-5uA"]])
-    run_simulations(net_params,450,0.005,"jNeuroML_NEURON","V2010multi1_2p4c4c_4inp",1,["seed specifier",True],["plot specifier",False],["save somata positions","Yes"])
+    #net_params.append(["testing",0.5,["20.0ms","200.0ms","4E-5uA"],["220.0ms","200.0ms","-0.5E-5uA"]])
+    run_simulations(net_params,450,0.005,"no simulation","V2010multi_test_vf_and_MFinput_gen",1,["seed specifier",True],["plot specifier",False],["save somata positions","Yes"],"list")
 
 
     #net_params[3]=["variable basal firing rate",["amplitude distribution","gaussian","100","50","nA"],["offset distribution","uniform",50,100]]
