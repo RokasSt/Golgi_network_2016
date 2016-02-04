@@ -8,7 +8,7 @@ from neuroml.utils import validate_neuroml2
 import random
 import numpy as np
 import string
-import os.path
+import os
 from pyelectro import analysis
 from pyelectro import io
 import numpy as np
@@ -34,6 +34,7 @@ def get_spike_times(dat_file_name,exp_id,sim_id):
 
     delimiter = '\t'
     if os.path.isfile('simulations/%s/sim'%exp_id+'%d/'%sim_id+dat_file_name+ '.dat'):
+       
        times, data = analysis.load_csv_data('simulations/%s/sim'%exp_id +'%d/'%sim_id+dat_file_name+'.dat', delimiter=delimiter)
        print("Loaded data with %i times & %i datapoints from %s"%(len(times),len(data),dat_file_name+'.dat'))
 
@@ -46,9 +47,9 @@ def get_spike_times(dat_file_name,exp_id,sim_id):
   
     print results['maxima_times']
 
-    newpath = r'simulations/%s/sim%d/txt'%(exp_id,sim_id)
+    newpath = 'simulations/%s/sim%d/txt'%(exp_id,sim_id)
     if not os.path.exists(newpath):
-               os.makedirs(newpath)
+       os.makedirs(newpath)
 
     np.savetxt('simulations/%s/sim%d/txt/%s.txt'%(exp_id,sim_id,dat_file_name),Spike_time_array,fmt='%f',newline=" ")
         
@@ -129,7 +130,7 @@ def get_cell_ids_for_sync_analysis(target_specifications,no_of_cell_groups,exper
        
     
     #########
-    if (target_specifcations[0]=="3D region specific") and (not("subtype specific" in target_specifcations)):
+    if (target_specifications[0]=="3D region specific") and (not("subtype specific" in target_specifications)):
        if experiment_specifiers[1][1]==True:
           for cell_group in range(0,no_of_cell_groups):
               cell_group_positions=np.loadtxt('simulations/%s/Golgi_pop%d.txt'%(experiment_specifiers[0],cell_group))
@@ -158,7 +159,7 @@ def get_cell_ids_for_sync_analysis(target_specifications,no_of_cell_groups,exper
                   region_specific_targets_per_trial.append(region_specific_targets_per_cell_group)
               target_cells.append(region_specific_targets_per_trial)
        
-    if (target_specifcations[0]=="3D region specific") and ("subtype specific" in target_specifcations):
+    if (target_specifications[0]=="3D region specific") and ("subtype specific" in target_specifications):
        region_specific_target_cells=[]
        subtype_specifier_position=target_specifcations.index("subtype specific")
        if experiment_specifiers[1][1]==True:

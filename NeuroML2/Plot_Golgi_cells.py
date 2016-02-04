@@ -14,4 +14,8 @@ if __name__ == "__main__":
 
    #plot_voltage_traces(2,"V2010multi1_2p4c4c_4inp",0,["pairs",[[0,1]],"random fraction",[  [1,0.5]    ]   ],["seed specifier",True],["save specifier",True,"testing_plot4.pdf"],True)  
 
-   plot_voltage_traces(2,"test_Lists",0,["one population one subplot","random fraction",[[1],[1]]],["seed specifier",True],["save specifier",True,"testing_lists1.pdf"],False)  
+   #plot_voltage_traces(2,"test_Lists",0,["one population one subplot","random fraction",[[1],[1]]],["seed specifier",True],["save specifier",True,"testing_lists1.pdf"],False)  
+  
+  #plot_voltage_traces(2,"test_Lists_and_sync",2,["one population one subplot","random fraction",[[1],[1]]],["seed specifier",False],["save specifier",False],False)  
+  
+   #plot_voltage_traces(2,"test_Lists2_and_sync",2,["one population one subplot","random fraction",[[1],[1]]],["seed specifier",False],["save specifier",False],False)  

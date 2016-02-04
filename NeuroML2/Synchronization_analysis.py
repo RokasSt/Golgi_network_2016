@@ -307,8 +307,8 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
                   for pop in range(0,len(target_cell_array)):
                       for cell in range(0,len(target_cell_array[pop])):
                           #create target txt file containing spike times
-                          if not os.path.isfile('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cell_array[pop][cell])):
-                             methods.get_spike_times('Golgi_pop%d_cell%d'%(pop,target_cell_array[pop][cell]),exp_specify[0][exp_id],trial)
+                          
+                          methods.get_spike_times('Golgi_pop%d_cell%d'%(pop,target_cell_array[pop][cell]),exp_specify[0][exp_id],trial)
                           spikes = np.loadtxt('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cell_array[pop][cell]))
                           spike_train=pyspike.SpikeTrain(spikes,[0,sim_duration])
                           spike_trains.append(spike_train)
@@ -316,7 +316,7 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
                              if trial in spike_plot_parameters[1]:
                                 ax_stack[pop].scatter(spikes,np.zeros_like(spikes)+(target_cell_array[pop][cell]+exp_id*(cell_no_array[pop]+1)),marker='|',s=2,c=color)
                              if spike_plot_parameters[2]=="save all simulations to separate files":
-                                raster_ax_array[trial][pop].scatter(spikes,np.zeros_like(spikes)+(target_cell_array[pop][cell]+exp_id*cell_no_array[pop]),marker='|',s=2,c=color)
+                                raster_ax_array[trial][pop].scatter(spikes,np.zeros_like(spikes)+(target_cell_array[pop][cell]+exp_id*(cell_no_array[pop]+1)),marker='|',s=2,c=color)
                           if spike_plot_parameters[0]=="3D scatter plot":
                              if cell==0:
                                 spikes_per_pop_3D=np.zeros_like(spikes)+(target_cell_array[pop][cell]+ exp_id*cell_no_array[pop])
@@ -335,8 +335,8 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
                   for pop in range(0,len(target_cell_array[trial])):
                       for cell in range(0,len(target_cell_array[trial][pop]) ):
                           #create target txt file containing spike times
-                          if not os.path.isfile('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cell_array[pop][cell])):
-                             methods.get_spike_times('Golgi_pop%d_cell%d'%(pop,target_cell_array[trial][pop][cell]),exp_specify[0][exp_id],trial)
+                          
+                          methods.get_spike_times('Golgi_pop%d_cell%d'%(pop,target_cell_array[trial][pop][cell]),exp_specify[0][exp_id],trial)
                           spikes = np.loadtxt('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cell_array[trial][pop][cell]))
                           spike_train=pyspike.SpikeTrain(spikes,[0,sim_duration])
                           spike_trains.append(spike_train)
@@ -470,13 +470,13 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
           plt.clf()
           for pop in range(0,no_of_groups):
               ax_3D_rasters_only[pop].set_zticks([cell_no_array[pop] * k for k in range(len(general_plot_parameters[3]))])
-              ax_3D_rasters_only[pop].set_zlim((cell_no_array[pop]*len(general_plot_parameters[3])-1, 0))
+              ax_3D_rasters_onily[pop].set_zlim((cell_no_array[pop]*len(general_plot_parameters[3])-1, 0))
               ax_3D_rasters_only[pop].locator_params(tight=True, nbins=len(general_plot_parameters[3]))
               ax_3D_rasters_only[pop].set_zlabel('Cell number, population %d'%pop,size=5)
               ax_3D_rasters_only[pop].set_xticks(marks)
               ax_3D_rasters_only[pop].set_xlabel('Time (ms)')
               ax_3D_rasters_only[pop].set_yticks(range(0,n_trials+1))
-              ax_3D_rasters_only[pop].set_ylabel('Simulation number')
+              
           for pop in range(0,no_of_groups):
               for tick in ax_3D[pop].xaxis.get_major_ticks():
                   tick.label.set_fontsize(general_plot_parameters[4]) 
@@ -488,38 +488,60 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
        plt.clf()
        
     if spike_plot_parameters[0]=="2D raster plots":    
-          
+       #create label array
+
        for pop in range(0,no_of_groups):
-           ax_stack[pop].set_yticks([(cell_no_array[pop]+1) * k for k in range(len(general_plot_parameters[3]))])
-           ax_stack[pop].set_ylim((0,cell_no_array[pop]*len(general_plot_parameters[3])))
-           #ax_stack[pop].set_ylim((cell_no_array[pop]*len(general_plot_parameters[3])-1, 0))
-           #ax_stack[pop].locator_params(axis='y',tight=True, nbins=len(general_plot_parameters[3]))
+           label_array=[]
+           ytick_array=[]
+           for exp in range(0,len(general_plot_parameters[3])):
+               label_array.append("%d"%0)
+               label_array.append("%d"%(cell_no_array[pop]-1))
+
+               if exp==0:
+                  ytick_array.append(exp)
+                  ytick_array.append(cell_no_array[pop]-1)
+                  left_value=cell_no_array[pop]-1
+               else:
+                  ytick_array.append(left_value+2)
+                  ytick_array.append(left_value+2+cell_no_array[pop])
+                  left_value=left_value+2+cell_no_array[pop]
+           print label_array
+           print ytick_array
+            
+           ax_stack[pop].set_yticks(ytick_array)
+           fig_stack.canvas.draw()
+           ax_stack[pop].set_ylim(0,(cell_no_array[pop]+1)*len(general_plot_parameters[3]) )
            ax_stack[pop].set_ylabel('Cell id, population %d'%pop,size=4)
+           ax_stack[pop].set_yticks([cell_no_array[pop]+(cell_no_array[pop]+2)*k for k in range(0,len(general_plot_parameters[3]))],minor=True)
+           ax_stack[pop].yaxis.grid(False, which='major')
+           ax_stack[pop].yaxis.grid(True, which='minor')
+           
+           labels = [x.get_text() for x in ax_stack[pop].get_yticklabels()]
+           
+           for label in range(0,len(labels)):
+               labels[label] =label_array[label]
+
+           ax_stack[pop].set_yticklabels(labels)
+           if pop==0:
+              ax_stack[pop].set_title('Raster plots for Golgi cell populations (trial id=%d)'%spike_plot_parameters[1][0],size=6)
        for pop in range(0,no_of_groups+1):
            for tick in ax_stack[pop].xaxis.get_major_ticks():
                tick.label.set_fontsize(general_plot_parameters[4]) 
            for tick in ax_stack[pop].yaxis.get_major_ticks():
                tick.label.set_fontsize(general_plot_parameters[5])
        ax_stack[no_of_groups].locator_params(axis='y', tight=True, nbins=10)
-       ax_stack[no_of_groups].set_xlabel('Time (ms)',size=8)
-       ax_stack[no_of_groups].set_ylabel('Synchrony index:\n %s'%general_plot_parameters[1],size=4)
+       ax_stack[no_of_groups].set_xlabel('Time (ms)',fontsize=6)
+       ax_stack[no_of_groups].set_ylabel('Synchrony index',size=4)
        ax_stack[no_of_groups].set_xticks(marks)
+       ax_stack[no_of_groups].set_title('Synchronization between %s'%general_plot_parameters[1],size=6)
        fig_stack.tight_layout()
        
-       fig_stack.subplots_adjust(top=0.85)
+       fig_stack.subplots_adjust(top=0.80)
        fig_stack.subplots_adjust(bottom=0.15)
-       fig_stack.subplots_adjust(hspace=.6)
+       fig_stack.subplots_adjust(hspace=.4)
        l=fig_stack.legend(lines,general_plot_parameters[3],title=general_plot_parameters[2], loc='upper center',ncol=len(general_plot_parameters[3]),bbox_to_anchor=(0.55, 1.0))
        plt.setp(l.get_title(),fontsize=6)
        plt.setp(l.get_texts(), fontsize=6)
-       #colour_counter1=0
-       #for text in l.get_texts():
-           #plt.setp(text, color=label_colours[colour_counter1])
-           #colour_counter1+=1
-       #colour_counter2=0
-       #for mark in l.get_keys():
-           #plt.setp(mark, color=label_colours[colour_counter2])
-           #colour_counter2+=1
        fig_stack.savefig('simulations/%s.%s'%(general_plot_parameters[0],spike_plot_parameters[3]))
        
        if spike_plot_parameters[2]=="save all simulations to separate files":
@@ -565,14 +587,14 @@ if __name__=="__main__":
    #Test1
    #Synchronization_analysis(450,["all"],1,["V2012multi1_2c_1input",["seed specifier",True],1],[0])
    #Test2
-   spike_plot_params=["2D raster plots",[0],"save all simulations to separate files","pdf"]         
+   spike_plot_params=["2D raster plots",[2],"save all simulations to separate files","pdf"]         
    #spike_plot_params=["3D raster plot",[0], # the same options !!!!!
    #spike_plot_params=["3D scatter plot", # one plot for each population include all sims; then the same options !!!!!
-   plot_params=["test_lists","Golgi pop 0 and pop1","Spatial scale",["1","20"],6,6] 
+   plot_params=["test_lists_5trials","Golgi pop 0 and pop1","Spatial scale",["1","20"],4,4] 
    #Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_specify,spike_plot_parameters,general_plot_parameters)
 
    
-   Synchronization_analysis(450,["subtype specific","random fraction","randomly set target ids only once",[1,1]],2,[["test_Lists","test_Lists2"],["seed specifier",True],1],spike_plot_params,plot_params)
+   Synchronization_analysis(450,["subtype specific","random fraction","randomly set target ids only once",[1,1]],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",False],1],spike_plot_params,plot_params)
    #the former in general would have the following format : ["subtype specific","random fraction","randomize only once" or "randomize on every trial","[fraction of Golgi_pop0 to target, fraction of Golgi_pop1 to target, ...,fraction of Golgi_pop n to target]]
    #Test3
    #Synchronization_analysis(450,["subtype specific","explicit list",[[0,1]]],1,["V2012multi1_2c_1input",["seed specifier",True],1])
