@@ -594,7 +594,7 @@ if __name__=="__main__":
    #Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_specify,spike_plot_parameters,general_plot_parameters)
 
    
-   Synchronization_analysis(450,["subtype specific","random fraction","randomly set target ids only once",[1,1]],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",False],1],spike_plot_params,plot_params)
+   Synchronization_analysis(450,["subtype specific","random fraction","randomly set target ids only once",[1,1]],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",False],5],spike_plot_params,plot_params)
    #the former in general would have the following format : ["subtype specific","random fraction","randomize only once" or "randomize on every trial","[fraction of Golgi_pop0 to target, fraction of Golgi_pop1 to target, ...,fraction of Golgi_pop n to target]]
    #Test3
    #Synchronization_analysis(450,["subtype specific","explicit list",[[0,1]]],1,["V2012multi1_2c_1input",["seed specifier",True],1])
