@@ -76,7 +76,48 @@ def generate_golgi_cell_net(ref,cell_array,location_array, connectivity_informat
                
 	       cell_position_array.append(np.zeros([cell_array[cell_population+1][1],3]))
                
-
+           if localization_type=="random no overlap"
+              cell_diameter_array=[]
+              for cell_pop in range(cell_array[0]):
+                  cell_diameter=get_soma_diameter(cell_names[cell_pop])
+                  cell_diameter_array.append(cell_diameter)
+              for cell_pop in range(cell_array[0]):
+                  golgi_pop=neuroml_Golgi_pop_array[cell_pop]
+                  cell_diameter=get_soma_diameter(cell_names[cell_pop])
+                  for cell in range(cell_array[cell_pop+1][1]):
+	              Golgi_cell=neuroml.Instance(id="%d"%cell)
+	              golgi_pop.instances.append(Golgi_cell)
+	              if cell_pop==0 and cell==0:
+                         X=random.random()
+	                 Y=random.random()
+	                 Z=random.random()
+                         cell_position_array[cell_pop][cell,0]=x_dim*X
+                         cell_position_array[cell_pop][cell,1]=y_dim*Y
+                         cell_position_array[cell_pop][cell,2]=z_dim*Z
+                         Golgi_cell.location=neuroml.Location(x=x_dim*X, y=y_dim*Y, z=z_dim*Z)
+                         print cell_position_array[cell_pop][cell,0], cell_position_array[cell_pop][cell,1], cell_position_array[cell_pop][cell,2]
+                      else:
+                         x=0
+                         while x==0:
+                            overlap_counter=0
+                            X=(random.random())*x_dim
+	                    Y=(random.random())*y_dim
+	                    Z=(random.random())*z_dim
+                            for cell_pop_x in range(cell_array[0]):
+                                pop_cell_positions=cell_position_array[cell_pop_x]
+                                for cell_x in range(cell_array[cell_pop_x+1][1]):
+                                    if cell_position_array[cell_pop_x][cell_x,0]+cell_position_array[cell_pop_x][cell_x,1]+cell_position_array[cell_pop_x][cell_x,2] >0:
+                                       if distance([X,Y,Z],cell_position_array[cell_pop_x][cell_x]) < (cell_diameter+cell_diameter_array[cell_pop_x])/2:
+                                          overlap_counter+=1
+                            if overlap_counter==0:
+                               cell_position_array[cell_pop][cell,0]=X
+                               cell_position_array[cell_pop][cell,1]=Y
+                               cell_position_array[cell_pop][cell,2]=Z
+                               Golgi_cell.location=neuroml.Location(x=X, y=Y, z=Z)
+                               
+                               print cell_position_array[cell_pop][cell,0], cell_position_array[cell_pop][cell,1], cell_position_array[cell_pop][cell,2]
+                               x=1
+                      
            if localization_type=="random":
               
               for cell_pop in range(cell_array[0]):
@@ -511,10 +552,21 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                                   segment_group_list.append(input_group[var][1][pop][6][poisson_synapse_list][0])
                                   segment_target_array=extract_morphology_information([cell_array[genuine_pop_index+1][0]],segment_group_list)
                                   targeting_parameters=input_group[var][1][pop][6][poisson_synapse_list]
-                                  poisson_syn=neuroml.PoissonFiringSynapse(id="%s_pop%dsyn%d"%(inp_group_specifier,genuine_pop_index,poisson_synapse_list),\
-                                                       average_rate="%f per_s"%input_group[var][1][pop][3][poisson_synapse_list][1],\
-                                         synapse=input_group[var][1][pop][3][poisson_synapse_list][0] ,\
-                                         spike_target="./%s"%input_group[var][1][pop][3][poisson_synapse_list][0])
+                                  
+                                  if input_group[var][1][pop][3][poisson_synapse_list][1]=="persistent":
+                                     poisson_syn=neuroml.PoissonFiringSynapse(id="%s_pop%dsyn%d"%(inp_group_specifier,genuine_pop_index,poisson_synapse_list),\
+                                                       average_rate="%f per_s"%input_group[var][1][pop][3][poisson_synapse_list][2],\
+                                            synapse=input_group[var][1][pop][3][poisson_synapse_list][0] ,\
+                                            spike_target="./%s"%input_group[var][1][pop][3][poisson_synapse_list][0])
+                                     
+                                  if input_group[var][1][pop][3][poisson_synapse_list][1]=="transient":
+                                     poisson_syn=neuroml.TransientPoissonFiringSynapse(id="%s_pop%dsyn%d"%(inp_group_specifier,genuine_pop_index,poisson_synapse_list),\
+                                            average_rate="%f per_s"%input_group[var][1][pop][3][poisson_synapse_list][2],\
+                                            synapse=input_group[var][1][pop][3][poisson_synapse_list][0] ,\
+                                            spike_target="./%s"%input_group[var][1][pop][3][poisson_synapse_list][0],\
+                                            delay="%f%s"%(input_group[var][1][pop][3][poisson_synapse_list][3],input_group[var][1][pop][3][poisson_synapse_list][5]),\
+                                            duration="%f%s"%(input_group[var][1][pop][3][poisson_synapse_list][4] ,input_group[var][1][pop][3][poisson_synapse_list][5])  )
+                                  
                                   nml_doc.poisson_firing_synapses.append(poisson_syn)
 
                                   input_list =neuroml.InputList(id="%s_Input_pop%dsyn%d"%(inp_group_specifier,genuine_pop_index,poisson_synapse_list),\
@@ -614,6 +666,7 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                          if var[0]=="amplitude distribution":
                             gaussian_model=False
                             uniform_model=False
+                            constant_model=False
                             if "gaussian" in var:
                                 pop_average_array=[]
                                 pop_variance_array=[]
@@ -622,6 +675,12 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                                     pop_average_array.append(var[2][pop_var])
                                     pop_variance_array.append(var[3][pop_var])
                                 units=var[4]
+                            if "constant" in var:
+                               pop_amplitude=[]
+                               constant_model=True
+                               for pop_var in range(0,len(var[2])):
+                                   pop_amplitude.append(var[2][pop_var])
+                               units=var[3]  
                             if "uniform" in var:
                                pop_left_bound=[]
                                pop_right_bound=[]
@@ -633,6 +692,7 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                          if var[0]=="offset distribution":
                             offset_gaussian_model=False
                             offset_uniform_model=False
+                            offset_constant_model=False
                             if "gaussian" in var:
                                 offset_gaussian_model=True
                                 pop_offset_average=[]
@@ -641,6 +701,12 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                                     pop_offset_average.append(var[2][pop_var])
                                     pop_offset_variance.append(var[3][pop_var])
                                 offset_units=var[4]
+                            if "constant" in var:
+                                pop_offset=[]
+                                offset_constant_model=True
+                                for pop_var in range(0,len(var[2])):
+                                    pop_offset.append(var[2][pop_var])
+                                offset_units=var[3]   
                             if "uniform" in var:
                                 offset_uniform_model=True
                                 pop_offset_left_bound=[]
@@ -655,10 +721,14 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                              amp=random.gauss(pop_average_array[pop],pop_variance_array[pop])
                           if uniform_model:
                              amp=random.uniform(pop_left_bound[pop],pop_right_bound[pop])
+                          if constant_model:
+                             amp=pop_amplitude[pop] 
                           if offset_gaussian_model:
                              offset=random.gauss(pop_offset_average[pop],pop_offset_variance[pop])
                           if offset_uniform_model:
                              offset=random.uniform(pop_offset_left_bound[pop],pop_offset_right_bound[pop])
+                          if offset_constant_model:
+                             offset=pop_offset[pop]
                           Pulse_generator_variable=neuroml.PulseGenerator(id="Input_%d%d"%(pop,cell),delay="%f%s"%(offset,offset_units),duration="%f%s"%(simulation_parameters[1]-offset,offset_units),amplitude="%f%s"%(amp,units))
 	                  nml_doc.pulse_generators.append(Pulse_generator_variable)
 	                  Input_list=neuroml.InputList(id="Input_list%d%d"%(pop,cell),component="Input_%d%d"%(pop,cell))
@@ -738,6 +808,7 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                          if var[0]=="amplitude distribution":
                             gaussian_model=False
                             uniform_model=False
+                            constant_model=False
                             if "gaussian" in var:
                                pop_average_array=[]
                                pop_variance_array=[]
@@ -754,17 +825,30 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                                    pop_left_bound.append(var[2][pop_var])
                                    pop_right_bound.append(var[3][pop_var])
                                units=var[4]
+                            if "constant" in var:
+                               pop_amplitude=[]
+                               constant_model=True
+                               for pop_var in range(0,len(var[2])):
+                                   pop_amplitude.append(var[2][pop_var])
+                               units=var[3]
                          if var[0]=="offset distribution":
                             offset_gaussian_model=False
                             offset_uniform_model=False
+                            offset_constant_model=False
                             if "gaussian" in var:
-                               offset_gaussian_model=True
-                               pop_offset_average=[]
-                               pop_offset_variance=[]
-                               for pop_var in range(0,len(var[2])):
-                                   pop_offset_average.append(var[2][pop_var])
-                                   pop_offset_variance.append(var[3][pop_var])
-                               offset_units=var[4]                 
+                                offset_gaussian_model=True
+                                pop_offset_average=[]
+                                pop_offset_variance=[]
+                                for pop_var in range(0,len(var[2])):
+                                    pop_offset_average.append(var[2][pop_var])
+                                    pop_offset_variance.append(var[3][pop_var])
+                                offset_units=var[4]
+                            if "constant" in var:
+                                pop_offset=[]
+                                offset_constant_model=True
+                                for pop_var in range(0,len(var[2])):
+                                    pop_offset.append(var[2][pop_var])
+                                offset_units=var[3]
                             if "uniform" in var:
                                 offset_uniform_model=True
                                 pop_offset_left_bound=[]
@@ -773,16 +857,21 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                                     pop_offset_left_bound.append(var[2][pop_var])
                                     pop_offset_right_bound.append(var[3][pop_var])
                                 offset_units=var[4]
+                         
                   for pop in range(0,len(Golgi_pop_index_array)):
                       for cell in range(cell_array[pop+1][1]):
                           if gaussian_model:
                              amp=random.gauss(pop_average_array[pop],pop_variance_array[pop])
                           if uniform_model:
                              amp=random.uniform(pop_left_bound[pop],pop_right_bound[pop])
+                          if constant_model:
+                             amp=pop_amplitude[pop]
                           if offset_gaussian_model:
                              offset=random.gauss(pop_offset_average[pop],pop_offset_variance[pop])
                           if offset_uniform_model:
                              offset=random.uniform(pop_offset_left_bound[pop],pop_offset_right_bound[pop])
+                          if offset_constant_model:
+                             offset=pop_offset[pop]
                           Pulse_generator_variable=neuroml.PulseGenerator(id="Input_%d%d"%(pop,cell),delay="%f%s"%(offset,offset_units),duration="%f%s"%(simulation_parameters[1]-offset,offset_units),amplitude="%f%s"%(amp,units))
 	                  nml_doc.pulse_generators.append(Pulse_generator_variable)
 	                  Inp = neuroml.ExplicitInput(target="%s[%d]"%(Golgi_pop_index_array[pop],cell),input="Input_%d%d"%(pop,cell),destination="synapses")

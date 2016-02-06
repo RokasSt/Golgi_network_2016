@@ -66,6 +66,31 @@ def save_soma_positions(population_params,save_to_path):
         np.savetxt('%s/%s.txt'%(save_to_path,Golgi_pop_index_array[cell_group]),soma_positions,fmt='%f')
 
 
+def get_soma_diameter(cell_type):
+    loaded_cell_array={}
+    cell_nml_file = '%s.cell.nml'%cell_type
+    document_cell = neuroml.loaders.NeuroMLLoader.load(cell_nml_file)
+    loaded_cell_array[cell_type]=document_cell.cells[0]
+    cell_diameter=0
+    for segment in loaded_cell_array[cell_type].morphology.segments:
+        #for now assumes that a soma segment has id=0 in each cell type
+        if segment.id==0:
+           
+           proximal_diameter=segment.distal.diameter
+           distal_diameter=segment.proximal.diameter
+           
+           if proximal_diameter > distal_diameter:
+               
+              cell_diameter=proximal_diameter
+              
+           else:
+              cell_diameter=distal_diameter
+            
+           break  
+
+    return cell_diameter
+
+
 def get_cell_ids_for_sync_analysis(target_specifications,no_of_cell_groups,experiment_specifiers):
     target_cells=[]
     #########

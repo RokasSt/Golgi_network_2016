@@ -43,14 +43,14 @@ if __name__ == "__main__":
     #####use the arrays below just to test generation of basal firing rate-modulating current inputs and MF/PF inputs; put realistic parameters later
     #basal_f_changing_array=["variable basal firing rate",\
    # ["amplitude distribution","gaussian",[100,100],[20,20],"nA"],["offset distribution","uniform",[50,50],[100,100],"ms"]]
-    #MFpop_array0=[0,["uniform",0.5],["MFSpikeSyn"],[["MFSpikeSyn",50],["MFSpikeSyn",100] ],["constant number of inputs per cell",8],\
+    #MFpop_array0=[0,["uniform",0.5],["MFSpikeSyn"],[["MFSpikeSyn","persistent",50],["MFSpikeSyn","persistent",100] ],["constant number of inputs per cell",8],\
     #"segment groups and segments",[ [["Section_1","dend_1"],[0.7,0.3]], [["Section_1","dend_1"],[0.7,0.3]]]]
-    #MFpop_array1=[1,["uniform",0.5],["MFSpikeSyn"],[["MFSpikeSyn",70],["MFSpikeSyn",200]],["constant number of inputs per cell",4],\
+    #MFpop_array1=[1,["uniform",0.5],["MFSpikeSyn"],[["MFSpikeSyn","persistent",70],["MFSpikeSyn","persistent",200]],["constant number of inputs per cell",4],\
     #"segments and subsegments",[ [["Soma","dend_3"],[0.7,0.3],[[[0.5,1],[0.5,0]],[[0.5,0.7],[0.5,0.3]]]],[["Soma","dend_3"],[0.7,0.3],[[[0.5,1],[0.5,1]],[[0.5,0.7],[0.5,0.3]]]]              ]]
 
     #
-    #
-    #
+    # Updates: make an option to use a transient Poisson synapse . e.g.
+    # [["MFSpikeSyn","transient",50,"delay value","duration value","units"],["MFSpikeSyn","persistent",100] ]
     #
     
 
