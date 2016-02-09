@@ -76,7 +76,7 @@ def generate_golgi_cell_net(ref,cell_array,location_array, connectivity_informat
                
 	       cell_position_array.append(np.zeros([cell_array[cell_population+1][1],3]))
                
-           if localization_type=="random no overlap"
+           if localization_type=="random no overlap":
               cell_diameter_array=[]
               for cell_pop in range(cell_array[0]):
                   cell_diameter=get_soma_diameter(cell_names[cell_pop])

@@ -112,7 +112,9 @@ def get_cell_ids_for_sync_analysis(target_specifications,no_of_cell_groups,exper
         
        if target_specifications[1]=="explicit list":
           for cell_group in range(0,no_of_cell_groups):
-              target_cells.append(target_specifications[2][cell_group])
+              if target_specifications[2][cell_group] !=[]:
+                 target_specifications[2][cell_group].append('pop%d'%cell_group)
+                 target_cells.append(target_specifications[2][cell_group])
               
        if target_specifications[1]=="random fraction":
           if target_specifications[2]=="randomly set target ids only once":
@@ -122,7 +124,9 @@ def get_cell_ids_for_sync_analysis(target_specifications,no_of_cell_groups,exper
                     dim_array=np.shape(cell_group_positions)
                     target_cell_ids=range(0,dim_array[0])
                     random_targets_per_cell_group=random.sample(target_cell_ids,int(round(target_specifications[3][cell_group]*dim_array[0])))
-                    target_cells.append(random_targets_per_cell_group)
+                    if random_targets_per_cell_group !=[]:
+                       random_targets_per_cell_group.append('pop%d'%cell_group)
+                       target_cells.append(random_targets_per_cell_group)
              else:
                 for cell_group in range(0,no_of_cell_groups):
                     #no need to scan through a list of simulations because this type of selection is not based on the position of cell soma;
@@ -131,7 +135,9 @@ def get_cell_ids_for_sync_analysis(target_specifications,no_of_cell_groups,exper
                     dim_array=np.shape(cell_group_positions)
                     target_cell_ids=range(0,dim_array[0])
                     random_targets_per_cell_group=random.sample(target_cell_ids,int(round(target_specifications[3][cell_group]*dim_array[0])))
-                    target_cells.append(random_targets_per_cell_group)
+                    if random_targets_per_cell_group !=[]:
+                       random_targets_per_cell_group.append('pop%d'%cell_group)
+                       target_cells.append(random_targets_per_cell_group)
           else:
              for trial in range(0,experiment_specifiers[2]):
                  random_targets_per_trial=[]
@@ -141,7 +147,9 @@ def get_cell_ids_for_sync_analysis(target_specifications,no_of_cell_groups,exper
                         dim_array=np.shape(cell_group_positions)
                         target_cell_ids=range(0,dim_array[0])
                         random_targets_per_cell_group=random.sample(target_cell_ids,int(round(target_specifications[3][cell_group]*dim_array[0])))
-                        random_targets_per_trial.append(random_targets_per_cell_group)
+                        if random_targets_per_cell_group != []:
+                           random_targets_per_cell_group.append('pop%d'%cell_group)
+                           random_targets_per_trial.append(random_targets_per_cell_group)
                  else: 
                     for cell_group in range(0,no_of_cell_groups):
                         #no need to scan through a list of simulations because this type of selection is not based on the position of cell soma;
@@ -150,7 +158,9 @@ def get_cell_ids_for_sync_analysis(target_specifications,no_of_cell_groups,exper
                         dim_array=np.shape(cell_group_positions)
                         target_cell_ids=range(0,dim_array[0])
                         random_targets_per_cell_group=random.sample(target_cell_ids,int(round(target_specifications[3][cell_group]*dim_array[0])))
-                        random_targets_per_trial.append(random_targets_per_cell_group)
+                        if random_targets_per_cell_group != []:
+                           random_targets_per_cell_group.append('pop%d'%cell_group)
+                           random_targets_per_trial.append(random_targets_per_cell_group)
                  target_cells.append(random_targets_per_trial)
        
     
@@ -168,7 +178,9 @@ def get_cell_ids_for_sync_analysis(target_specifications,no_of_cell_groups,exper
                             if target_specifications[region][2][0] <  cell_group_positions[cell,2] and cell_group_positions[cell,2] < target_specifications[region][2][1]:
                                region_specific_targets_per_cell_group.append(cell)
               region_specific_targets_per_cell_group=list(set(region_specific_targets_per_cell_group))
-              target_cells.append(region_specific_targets_per_cell_group)
+              if region_specific_targets_per_cell_group != []:
+                 region_specific_targets_per_cell_group.append('pop%d'%cell_group)
+                 target_cells.append(region_specific_targets_per_cell_group)
        else:
           for trial in range(0,experiment_specifiers[2]):
               region_specific_targets_per_trial=[]
@@ -183,7 +195,9 @@ def get_cell_ids_for_sync_analysis(target_specifications,no_of_cell_groups,exper
                                 if target_specifications[region][2][0] <  cell_group_positions[cell,2] and cell_group_positions[cell,2] < target_specifications[region][2][1]:
                                    region_specific_targets_per_cell_group.append(cell)
                   region_specific_targets_per_cell_group=list(set(region_specific_targets_per_cell_group))
-                  region_specific_targets_per_trial.append(region_specific_targets_per_cell_group)
+                  if region_specific_targets_per_cell_group != []:
+                     region_specific_targets_per_cell_group.append('pop%d'%cell_group)
+                     region_specific_targets_per_trial.append(region_specific_targets_per_cell_group)
               target_cells.append(region_specific_targets_per_trial)
        
     if (target_specifications[0]=="3D region specific") and ("subtype specific" in target_specifications):
@@ -199,21 +213,30 @@ def get_cell_ids_for_sync_analysis(target_specifications,no_of_cell_groups,exper
                       if target_specifications[region][0][0] <  cell_group_positions[cell,0] and cell_group_positions[cell,0] < target_specifications[region][0][1]:
                          if target_specifications[region][1][0] <  cell_group_positions[cell,1] and cell_group_positions[cell,1] < target_specifications[region][1][1]:
                             if target_specifications[region][2][0] <  cell_group_positions[cell,2] and cell_group_positions[cell,2] < target_specifications[region][2][1]:
-                               region_specific_targets_per_cell_group.append(cell)     
+                               region_specific_targets_per_cell_group.append(cell) 
+              region_specific_targets_per_cell_group=list(set(region_specific_targets_per_cell_group))
               region_specific_target_cells.append(region_specific_targets_per_cell_group)
           if "random fraction" in target_specifcations:
              if "randomly set target ids only once" in target_specifications:
                 for cell_group in range(0,no_of_cell_groups):
-                    no_of_cells_per_region=len(region_specific_target_cells[cell_group])
-                    random_targets_per_cell_group=random.sample(region_specific_target_cells[cell_group],int(round(target_specifications[subtype_specifier_position+3][cell_group]*no_of_cells_per_region)))
-                    target_cells.append(random_targets_per_cell_group)
+                    random_targets_per_cell_group=[]
+                    if region_specific_target_cells[cell_group] != []:
+                       no_of_cells_per_region=len(region_specific_target_cells[cell_group])
+                       random_targets_per_cell_group=random.sample(region_specific_target_cells[cell_group],int(round(target_specifications[subtype_specifier_position+3][cell_group]*no_of_cells_per_region)))
+                    if random_targets_per_cell_group != []:
+                       random_targets_per_cell_group.append('pop%d'%cell_group) 
+                       target_cells.append(random_targets_per_cell_group)
              else:
                 for trial in range(0,experiment_specifiers[2]):
                     random_targets_per_trial=[]
                     for cell_group in range(0,no_of_cell_groups):
-                        no_of_cells_per_region=len(region_specific_target_cells[cell_group])
-                        random_targets_per_cell_group=random.sample(region_specific_target_cells[cell_group],int(round(target_specifications[subtype_specifier_position+3][cell_group]*no_of_cells_per_region)))
-                        random_targets_per_trial.append(random_targets_per_cell_group)
+                        random_targets_per_cell_group=[]
+                        if region_specific_target_cells[cell_group] != []:
+                           no_of_cells_per_region=len(region_specific_target_cells[cell_group])
+                           random_targets_per_cell_group=random.sample(region_specific_target_cells[cell_group],int(round(target_specifications[subtype_specifier_position+3][cell_group]*no_of_cells_per_region)))
+                        if random_targets_per_cell_group !=[]:
+                           random_targets_per_cell_group.append('pop%d'%cell_group) 
+                           random_targets_per_trial.append(random_targets_per_cell_group)
                     target_cells.append(random_targets_per_trial)
           if "explicit list" in target_specifcations:
              for cell_group in range(0,no_of_cell_groups):
@@ -221,7 +244,9 @@ def get_cell_ids_for_sync_analysis(target_specifications,no_of_cell_groups,exper
                  for target_id in target_specifications[subtype_specifier_position+2][cell_group]:
                      if target_id in region_specific_target_cells[cell_group]:
                         targets_per_cell_group.append(target_id)
-                 target_cells.append(targets_per_cell_group)
+                 if targets_per_cell_group != []:
+                    targets_per_cell_group.append('pop%d'%cell_group) 
+                    target_cells.append(targets_per_cell_group)
        else:
           for trial in range(0,experiment_specifiers[2]):
               region_specific_targets_per_trial=[]
@@ -232,20 +257,25 @@ def get_cell_ids_for_sync_analysis(target_specifications,no_of_cell_groups,exper
                   region_specific_targets_per_cell_group=[]
                   for region in range(1,subtype_specifier_position):
                       for cell in range(0,dim_array[0]):
-                          if target_specifcations[region][0][0] <  cell_group_positions[cell,0] and cell_group_positions[cell,0] < target_specifcations[region][0][1]:
-                             if target_specifcations[region][1][0] <  cell_group_positions[cell,1] and cell_group_positions[cell,1] < target_specifcations[region][1][1]:
-                                if target_specifcations[region][2][0] <  cell_group_positions[cell,2] and cell_group_positions[cell,2] < target_specifcations[region][2][1]:
+                          if target_specifications[region][0][0] <  cell_group_positions[cell,0] and cell_group_positions[cell,0] < target_specifications[region][0][1]:
+                             if target_specifications[region][1][0] <  cell_group_positions[cell,1] and cell_group_positions[cell,1] < target_specifications[region][1][1]:
+                                if target_specifications[region][2][0] <  cell_group_positions[cell,2] and cell_group_positions[cell,2] < target_specifications[region][2][1]:
                                    region_specific_targets_per_cell_group.append(cell)
+                  region_specific_targets_per_cell_group=list(set(region_specific_targets_per_cell_group))
                   region_specific_targets_per_trial.append(region_specific_targets_per_cell_group)
               region_specific_target_cells.append(region_specific_targets_per_trial)
-              if "random fraction" in target_specifcations:
-                  for trial in range(0,experiment_specifiers[2]):
-                       random_targets_per_trial=[]
-                       for cell_group in range(0,no_of_cell_groups):
-                           no_of_cells_per_region=len(region_specific_target_cells[trial][cell_group])
-                           random_targets_per_cell_group=random.sample(region_specific_target_cells[trial][cell_group],int(round(target_specifications[subtype_specifier_position+2][cell_group]*no_of_cells_per_region)))
-                           random_targets_per_trial.append(random_targets_per_cell_group)
-                       target_cells.append(random_targets_per_trial)
+          if "random fraction" in target_specifications:
+              for trial in range(0,experiment_specifiers[2]):
+                  random_targets_per_trial=[]
+                  for cell_group in range(0,no_of_cell_groups):
+                      random_targets_per_cell_group=[]
+                      if region_specific_target_cells[trial][cell_group] != []:
+                         no_of_cells_per_region=len(region_specific_target_cells[trial][cell_group])
+                         random_targets_per_cell_group=random.sample(region_specific_target_cells[trial][cell_group],int(round(target_specifications[subtype_specifier_position+3][cell_group]*no_of_cells_per_region)))
+                      if random_targets_per_cell_group !=[]:
+                         random_targets_per_cell_group.append('pop%d'%cell_group)
+                         random_targets_per_trial.append(random_targets_per_cell_group)
+                  target_cells.append(random_targets_per_trial)
               
           
 
@@ -823,7 +853,15 @@ if __name__ == "__main__":
  #target_points=get_unique_target_points([['Very_Simple_Golgi_test_morph', ['dend2', 1], ['dend_3', 5]]]
    #  ,"segments and subsegments",[["dend2","dend_3"],[0.8,0.2],[ [[0.25,1],[0.25,0],[0.25,0],[0.25,0]  ] , [[0.25,0],[0.25,0.8],[0.25,0.2],[0.25,0]  ]                                                            ]    ]    ,8)
 
- #target_cell_array=get_cell_ids_for_sync_analysis(["3D region specific",[[40,80],[40,80],[40,80]],[[40,80],[40,80],[40,80]] ],2, ["test_Lists_and_sync",["seed specifier",False],5])
-  target_cell_array=get_cell_ids_for_sync_analysis(["subtype specific","random fraction","randomly set target ids only once",[0,1]],2, ["test_Lists_and_sync",["seed specifier",False],5])
+ #target_cell_array=get_cell_ids_for_sync_analysis(["3D region specific",[[0,100],[0,100],[0,100]],[[0,100],[0,100],[0,100]] ],2, ["test_Lists_and_sync",["seed specifier",False],5])
+
+ target_cell_array=get_cell_ids_for_sync_analysis(["3D region specific",[[0,50],[0,50],[0,50]],"subtype specific","random fraction","randomly set target ids only once",[ 0,1 ] ],2, ["test_Lists_and_sync",["seed specifier",False],5])
+ 
+  
+  #target_cell_array=get_cell_ids_for_sync_analysis(["subtype specific","explicit list",[ [],[5,6,7,8,9] ] ],2, ["test_Lists_and_sync",["seed specifier",False],5])
+
+  #target_cell_array=get_cell_ids_for_sync_analysis(["subtype specific","random fraction","randomly set target ids only once",[ 1,1 ] ],2, ["test_Lists_and_sync",["seed specifier",False],5])
+
+  #target_cell_array=get_cell_ids_for_sync_analysis(["subtype specific","random fraction","randomize each trial individually",[ 0,1 ] ],2, ["test_Lists_and_sync",["seed specifier",False],5])
 
 

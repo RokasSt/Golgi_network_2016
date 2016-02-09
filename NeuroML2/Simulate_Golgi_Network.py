@@ -35,10 +35,10 @@ if __name__ == "__main__":
     #Cell_array=[1,["Very_Simple_Golgi_test_morph",2]]
     #Conn_array=["Vervaeke_2010_multi_compartment",1,[["dendrite_group"],[1]],["testing",4]]
     
-    #net_params=[]
-    #net_params.append([2,["Very_Simple_Golgi_test_morph",10],["Very_Simple_Golgi_test_morph",10]])
-    #net_params.append(["random",100, 100, 100])
-    #net_params.append(["Vervaeke_2010_multi_compartment",1,[["dendrite_group"],[1]],[["dendrite_group"],[1]],["testing",4],["maximal connection length",None]])
+    net_params=[]
+    net_params.append([2,["Very_Simple_Golgi_test_morph",10],["Very_Simple_Golgi_test_morph",10]])
+    net_params.append(["random",100, 100, 100])
+    net_params.append(["Vervaeke_2010_multi_compartment",1,[["dendrite_group"],[1]],[["dendrite_group"],[1]],["testing",4],["maximal connection length",None]])
 
     #####use the arrays below just to test generation of basal firing rate-modulating current inputs and MF/PF inputs; put realistic parameters later
     #basal_f_changing_array=["variable basal firing rate",\
@@ -60,16 +60,16 @@ if __name__ == "__main__":
     #net_params.append(input_array)
     ########
 
-    #net_params.append(["testing",0.5,["20.0ms","200.0ms","4E-5uA"],["220.0ms","200.0ms","-0.5E-5uA"]])
-    #run_simulations(net_params,450,0.005,"jNeuroML_NEURON","test_Lists_and_sync",5,["seed specifier",False],["plot specifier",False],["save somata positions","Yes"],"list")  
+    net_params.append(["testing",0.5,["20.0ms","200.0ms","4E-5uA"],["220.0ms","200.0ms","-0.5E-5uA"]])
+    run_simulations(net_params,450,0.005,"jNeuroML_NEURON","test_Lists_and_sync",5,["seed specifier",False],["plot specifier",False],["save somata positions","Yes"],"list")  
 
-    net_params2=[]
-    net_params2.append([2,["Very_Simple_Golgi_test_morph",10],["Very_Simple_Golgi_test_morph",10]])
-    net_params2.append(["random",100, 100, 100])
-    net_params2.append(["Vervaeke_2010_multi_compartment",20,[["dendrite_group"],[1]],[["dendrite_group"],[1]],["testing",4],["maximal connection length",None]])
-    net_params2.append(["testing",0.5,["20.0ms","200.0ms","4E-5uA"],["220.0ms","200.0ms","-0.5E-5uA"]])
+    #net_params2=[]
+    #net_params2.append([2,["Very_Simple_Golgi_test_morph",10],["Very_Simple_Golgi_test_morph",10]])
+    #net_params2.append(["random",100, 100, 100])
+    #net_params2.append(["Vervaeke_2010_multi_compartment",20,[["dendrite_group"],[1]],[["dendrite_group"],[1]],["testing",4],["maximal connection length",None]])
+    #net_params2.append(["testing",0.5,["20.0ms","200.0ms","4E-5uA"],["220.0ms","200.0ms","-0.5E-5uA"]])
    
-    run_simulations(net_params2,450,0.005,"jNeuroML_NEURON","test_Lists2_and_sync",5,["seed specifier",False],["plot specifier",False],["save somata positions","Yes"],"list")
+    #run_simulations(net_params2,450,0.005,"jNeuroML_NEURON","test_Lists2_and_sync",5,["seed specifier",False],["plot specifier",False],["save somata positions","Yes"],"list")
     
 
 

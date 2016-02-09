@@ -5,7 +5,7 @@ from matplotlib import pyplot as plt
 import matplotlib
 import seaborn as sns
 import pyspike
-import methods
+from methods import *
 import string
 import subprocess
 import os
@@ -34,29 +34,6 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
 
     n_trials=exp_specify[2]
 
-    if spike_plot_parameters[0]=="2D raster plots":
-
-       columns=1
-       rows=1+no_of_groups
-
-       fig_stack, ax_stack = plt.subplots(figsize=(4,rows),ncols=columns,nrows=rows, sharex=True)
-       ax_stack=ax_stack.ravel()
-       
-       if spike_plot_parameters[2]=="save all simulations to separate files":
-
-          raster_fig_array=[]
-          raster_ax_array=[]
-
-          fig_sync, ax_sync=plt.subplots(figsize=(2,1.5),ncols=1,nrows=1)
-
-          for trial in range(0,n_trials):
-              columns=1
-              rows=no_of_groups
-              fig, ax = plt.subplots(figsize=(4,rows),ncols=columns,nrows=rows, sharex=True)
-              if no_of_groups >1:
-                 ax=ax.ravel()
-              raster_fig_array.append(fig)
-              raster_ax_array.append(ax)
    
 
     lines = []
@@ -69,15 +46,34 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
         experiment_parameters.append(exp_specify[1])
         experiment_parameters.append(exp_specify[2])
        
-        target_cell_array=methods.get_cell_ids_for_sync_analysis(specify_targets,no_of_groups,experiment_parameters)
-
+        target_cell_array=get_cell_ids_for_sync_analysis(specify_targets,no_of_groups,experiment_parameters)
         
+        test_target_cell_array_1=target_cell_array
+        if exp_id==0:
+           if spike_plot_parameters[0]=="2D raster plots":
+              if ("explicit list" in specify_targets):
+                 rows=1+len(target_cell_array)
+                 columns=1
+                 fig_stack, ax_stack = plt.subplots(figsize=(4,rows),ncols=columns,nrows=rows, sharex=True)
+                 if len(target_cell_array) >1:
+                    ax_stack=ax_stack.ravel()
+       
+                 if spike_plot_parameters[2]=="save all simulations to separate files":
 
-        #plot_params=["2D raster plot",[0],"save all simulations to separate files","pdf",#"jpeg"or"png",....]         
+                    raster_fig_array=[]
+                    raster_ax_array=[]
 
-        #plot_params=["3D raster plot",[0], # the same options !!!!!
+                    fig_sync, ax_sync=plt.subplots(figsize=(2,1.5),ncols=1,nrows=1)
 
-        #plot_params=["3D scatter plot", # one plot for each population include all sims; then the same options !!!!!
+                    for trial in range(0,n_trials):
+                        columns=1
+                        rows=len(target_cell_array)
+                        fig, ax = plt.subplots(figsize=(4,rows),ncols=columns,nrows=rows, sharex=True)
+                        if len(target_cell_array)>1:
+                           ax=ax.ravel()
+                        raster_fig_array.append(fig)
+                        raster_ax_array.append(ax)
+       
        
         distances = []
         
@@ -87,41 +83,63 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
         for trial in range(0,n_trials):
             sim_dir = 'simulations/' + exp_specify[0][exp_id]+'/sim%d'%trial+'/txt'
             spike_trains = []
+            spike_time_array=[]
+            spikes_array=[]
+            pop_index_array=[]
             ######   
-            if exp_specify[1][1]==True and (("randomly set target ids only once" in specify_targets ) or ("explicit list" in specify_targets)):
-               for pop in range(0,len(target_cell_array)):
-                   if  len(target_cell_array[pop]) >0:
-                       for cell in range(0,len(target_cell_array[pop])):
-                           #create target txt file containing spike times
-                           if not os.path.isfile('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cell_array[pop][cell])):
-                              methods.get_spike_times('Golgi_pop%d_cell%d'%(pop,target_cell_array[pop][cell]),exp_specify[0][exp_id],trial)
-                                 spikes = np.loadtxt('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cell_array[pop][cell]))
-                           spike_train=pyspike.SpikeTrain(spikes,[0,sim_duration])
-                           spike_trains.append(spike_train)
-                           if spike_plot_parameters[0]=="2D raster plots":
-                              if trial in spike_plot_parameters[1]:
-                                 ax_stack[pop].scatter(spikes,np.zeros_like(spikes)+(target_cell_array[pop][cell]+exp_id*(cell_no_array[pop]+1)),marker='|',s=2,c=color)
-                              if spike_plot_parameters[2]=="save all simulations to separate files":
-                                 raster_ax_array[trial][pop].scatter(spikes,np.zeros_like(spikes)+(target_cell_array[pop][cell]+exp_id*(cell_no_array[pop]+1)),marker='|',s=2,c=color)
-                             
+            if exp_specify[1][1]==True or (("randomly set target ids only once" in specify_targets ) or ("explicit list" in specify_targets)):
+            
+               
+               x=False
+               print len(target_cell_array)
+               
+               for target_pop in range(0,len(target_cell_array)):
+                   print target_pop
+                   for pop in range(0,no_of_groups):
+                       if  target_cell_array[target_pop][-1]==('pop%d'%(pop)):
+                           x=True
+                           for cell in range(0,(len(target_cell_array[target_pop])-2)):
+                               #create target txt file containing spike times
+                               if not os.path.isfile('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cell_array[target_pop][cell])):
+                                  get_spike_times('Golgi_pop%d_cell%d'%(pop,target_cell_array[target_pop][cell]),exp_specify[0][exp_id],trial)
+                               spikes = np.loadtxt('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cell_array[target_pop][cell]))
+                               spike_train=pyspike.SpikeTrain(spikes,[0,sim_duration])
+                               spike_trains.append(spike_train)
+                               spike_time_array.append(spikes)
+                               spikes_array.append(np.zeros_like(spikes)+(target_cell_array[target_pop][cell]+exp_id*(cell_no_array[pop]+1)))
+                               pop_index_array.append(target_pop)
+                               pop_index_array_test=pop_index_array 
                 
             else:
                for pop in range(0,len(target_cell_array[trial])):
-                   if len(target_cell_array[trial][pop]) > 0:
-                      for cell in range(0,len(target_cell_array[trial][pop])):
+                   if target_cell_array[trial][pop][-1]=='pop%d'%pop:
+                      print("there is a population")
+                      for cell in range(0,(len(target_cell_array[trial][pop])-2)):
                           if not os.path.isfile('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cell_array[trial][pop][cell])):
-                             methods.get_spike_times('Golgi_pop%d_cell%d'%(pop,target_cell_array[trial][pop][cell]),exp_specify[0][exp_id],trial)
+                             get_spike_times('Golgi_pop%d_cell%d'%(pop,target_cell_array[trial][pop][cell]),exp_specify[0][exp_id],trial)
                           spikes = np.loadtxt('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cell_array[trial][pop][cell]))
                           spike_train=pyspike.SpikeTrain(spikes,[0,sim_duration])
                           spike_trains.append(spike_train)
-                          if spike_plot_parameters[0]=="2D raster plots":
-                             if trial in spike_plot_parameters[1]:
-                                ax_stack[pop].scatter(spikes,np.zeros_like(spikes)+(target_cell_array[trial][pop][cell]+exp_id*(cell_no_array[pop]+1)),marker='|',s=2,c=color)
-                             if spike_plot_parameters[2]=="save all simulations to separate files":
-                                raster_ax_array[trial][pop].scatter(spikes,np.zeros_like(spikes)+(target_cell_array[trial][pop][cell]+exp_id*(cell_no_array[pop]+1)),marker='|',s=2,c=color)
+                          spike_time_array.append(spikes)
+                          spikes_array.append(np.zeros_like(spikes)+(target_cell_array[trial][pop][cell]+exp_id*(cell_no_array[pop]+1)))
+                          pop_index_array.append(pop)
                           
-                             
-            ########           
+            if spike_plot_parameters[0]=="2D raster plots":
+               if trial in spike_plot_parameters[1]:
+                  for spikes_variable in range(0,len(spike_time_array)):
+                      if len(target_cell_array) >1:
+                         ax_stack[pop_index_array[spikes_variable]].scatter(spike_time_array[spikes_variable],spikes_array[spikes_variable],marker='|',s=2,c=color)
+                      else:
+                         ax_stack.scatter(spike_time_array[spikes_variable],spikes_array[spikes_variable],marker='|',s=2,c=color)
+               if spike_plot_parameters[2]=="save all simulations to separate files":
+                  for spikes_variable in range(0,len(spike_time_array)):
+                      if len(target_cell_array) >1:
+                         raster_ax_array[trial][pop_index_array[spikes_variable]].scatter(spike_time_array[spikes_variable],spikes_array[spikes_variable],marker='|',s=2,c=color)
+                      else:
+                         raster_ax_array[trial].scatter(spike_time_array[spikes_variable],spikes_array[spikes_variable],marker='|',s=2,c=color)           
+            ########   
+            if x:
+               print("there was a target population")        
             distances.append(pyspike.spike_profile_multi(spike_trains))
             ######## 
                
@@ -178,6 +196,7 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
                   ytick_array.append(left_value+2)
                   ytick_array.append(left_value+2+cell_no_array[pop])
                   left_value=left_value+2+cell_no_array[pop]
+
            print label_array
            print ytick_array
             
@@ -233,7 +252,7 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
           fig_sync.subplots_adjust(bottom=0.55)
           l=fig_sync.legend(lines_sep,general_plot_parameters[3],title=general_plot_parameters[2],loc='center',ncol=len(general_plot_parameters[3]),bbox_to_anchor=(0.52, 0.25),prop={'size':4})
           plt.setp(l.get_title(),fontsize=4)
-          #plt.setp(l.get_texts(), fontsize=general_plot_parameters[4])
+          
           
           
           
@@ -330,7 +349,9 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
 
               if testing:
                  print target_cell_array
-
+                 print test_target_cell_array_1
+                 print pop_index_array_test
+                 print spike_time_array
 if __name__=="__main__":
    #Test1
    #Synchronization_analysis(450,["all"],1,["V2012multi1_2c_1input",["seed specifier",True],1],[0])
@@ -340,18 +361,18 @@ if __name__=="__main__":
    
    #plot_params=["test_lists_5trials3D","Golgi pop 0 and pop1","Spatial scale",["1","20"],4,4] 
   
-   spike_plot_params=["2D raster plots",[1],"save all simulations to separate files","pdf"]  
+   spike_plot_params=["2D raster plots",[3],"save all simulations to separate files","pdf"]  
    plot_params=["test_lists_5trials","Golgi pop 0 and pop1","Spatial scale",["1","20"],3,3]   
 
    #Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_specify,spike_plot_parameters,general_plot_parameters)
 
    
    
-   Synchronization_analysis(450,["subtype specific","random fraction","randomly set target ids only once",[0,1]],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",False],5],spike_plot_params,plot_params,True)
+   #Synchronization_analysis(450,["subtype specific","random fraction","randomly set target ids only once",[0,1]],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",False],5],spike_plot_params,plot_params,True)
 
    #Test options other than subtype specific, random fraction
   
-   #Synchronization_analysis(450,["subtype specific","explicit list",[ [0,1,2,3,4],[5,6,7,8,9] ] ],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",False],5],spike_plot_params,plot_params)
+   Synchronization_analysis(450,["subtype specific","explicit list",[ [],[5,6,7,8,9] ] ],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",False],5],spike_plot_params,plot_params,True)
 
    #Synchronization_analysis(450,["3D region specific",[[40,80],[40,80],[40,80]],[[40,80],[40,80],[40,80]] ],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",False],5],spike_plot_params,plot_params)
 
