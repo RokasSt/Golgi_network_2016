@@ -111,10 +111,21 @@ def get_cell_ids_for_sync_analysis(target_specifications,no_of_cell_groups,exper
     if target_specifications[0]=="subtype specific":
         
        if target_specifications[1]=="explicit list":
-          for cell_group in range(0,no_of_cell_groups):
-              if target_specifications[2][cell_group] !=[]:
-                 target_specifications[2][cell_group].append('pop%d'%cell_group)
-                 target_cells.append(target_specifications[2][cell_group])
+          if experiment_specifiers[2] >1:
+             target_cells_per_trial=[]
+             for cell_group in range(0,no_of_cell_groups):
+                 if target_specifications[2][cell_group] !=[]:
+                    target_array=target_specifications[2][cell_group]
+                    target_array.append('pop%d'%cell_group)
+                    target_cells_per_trial.append(target_array)
+             for trial in range(0,experiment_specifiers[2]):
+                 target_cells.append(target_cells_per_trial)
+          else:
+             for cell_group in range(0,no_of_cell_groups):
+                 if target_specifications[2][cell_group] !=[]:
+                    target_array=target_specifications[2][cell_group]
+                    target_array.append('pop%d'%cell_group)
+                    target_cells.append(target_array)
               
        if target_specifications[1]=="random fraction":
           if target_specifications[2]=="randomly set target ids only once":
@@ -855,10 +866,10 @@ if __name__ == "__main__":
 
  #target_cell_array=get_cell_ids_for_sync_analysis(["3D region specific",[[0,100],[0,100],[0,100]],[[0,100],[0,100],[0,100]] ],2, ["test_Lists_and_sync",["seed specifier",False],5])
 
- target_cell_array=get_cell_ids_for_sync_analysis(["3D region specific",[[0,50],[0,50],[0,50]],"subtype specific","random fraction","randomly set target ids only once",[ 0,1 ] ],2, ["test_Lists_and_sync",["seed specifier",False],5])
+ #target_cell_array=get_cell_ids_for_sync_analysis(["3D region specific",[[0,50],[0,50],[0,50]],"subtype specific","random fraction","randomly set target ids only once",[ 0,1 ] ],2, ["test_Lists_and_sync",["seed specifier",False],5])
  
   
-  #target_cell_array=get_cell_ids_for_sync_analysis(["subtype specific","explicit list",[ [],[5,6,7,8,9] ] ],2, ["test_Lists_and_sync",["seed specifier",False],5])
+  target_cell_array=get_cell_ids_for_sync_analysis(["subtype specific","explicit list",[ [1,2,3],[5,6,7,8,9] ] ],2, ["test_Lists_and_sync",["seed specifier",False],5])
 
   #target_cell_array=get_cell_ids_for_sync_analysis(["subtype specific","random fraction","randomly set target ids only once",[ 1,1 ] ],2, ["test_Lists_and_sync",["seed specifier",False],5])
 
