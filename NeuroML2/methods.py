@@ -139,6 +139,7 @@ def get_cell_ids_for_sync_analysis(target_specifications,no_of_cell_groups,exper
                        random_targets_per_cell_group.append('pop%d'%cell_group)
                        target_cells.append(random_targets_per_cell_group)
              else:
+                target_cells_per_trial=[]
                 for cell_group in range(0,no_of_cell_groups):
                     #no need to scan through a list of simulations because this type of selection is not based on the position of cell soma;
                     #just get id listing via no of cells per population from sim0 dir
@@ -148,7 +149,9 @@ def get_cell_ids_for_sync_analysis(target_specifications,no_of_cell_groups,exper
                     random_targets_per_cell_group=random.sample(target_cell_ids,int(round(target_specifications[3][cell_group]*dim_array[0])))
                     if random_targets_per_cell_group !=[]:
                        random_targets_per_cell_group.append('pop%d'%cell_group)
-                       target_cells.append(random_targets_per_cell_group)
+                       target_cells_per_trial.append(random_targets_per_cell_group)
+                for trial in range(0,experiment_specifiers[2]):
+                    target_cells.append(target_cells_per_trial)
           else:
              for trial in range(0,experiment_specifiers[2]):
                  random_targets_per_trial=[]
@@ -869,7 +872,10 @@ if __name__ == "__main__":
  #target_cell_array=get_cell_ids_for_sync_analysis(["3D region specific",[[0,50],[0,50],[0,50]],"subtype specific","random fraction","randomly set target ids only once",[ 0,1 ] ],2, ["test_Lists_and_sync",["seed specifier",False],5])
  
   
-  target_cell_array=get_cell_ids_for_sync_analysis(["subtype specific","explicit list",[ [1,2,3],[5,6,7,8,9] ] ],2, ["test_Lists_and_sync",["seed specifier",False],5])
+  #target_cell_array=get_cell_ids_for_sync_analysis(["subtype specific","explicit list",[ [1,2,3],[5,6,7,8,9] ] ],2, ["test_Lists_and_sync",["seed specifier",False],5])
+  
+  target_cell_array=get_cell_ids_for_sync_analysis(["subtype specific","random fraction","randomly set target ids only once",[0,1]],2, ["test_Lists_and_sync",["seed specifier",False],5])
+
 
   #target_cell_array=get_cell_ids_for_sync_analysis(["subtype specific","random fraction","randomly set target ids only once",[ 1,1 ] ],2, ["test_Lists_and_sync",["seed specifier",False],5])
 

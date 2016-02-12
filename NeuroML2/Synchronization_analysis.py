@@ -13,7 +13,7 @@ import math
 from mpl_toolkits.mplot3d import Axes3D
 
 
-def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_specify,spike_plot_parameters,general_plot_parameters,testing=False):
+def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_specify,spike_plot_parameters,general_plot_parameters):
 
 
     cell_no_array=[]
@@ -65,7 +65,7 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
                     no_of_rasters=len(target_cell_array_target_trial)
                     rows=1+no_of_rasters
                     columns=1
-                    fig_stack, ax_stack = plt.subplots(figsize=(4,rows),ncols=columns,nrows=rows, sharex=True)
+                    fig_stack, ax_stack = plt.subplots(figsize=(4,rows+1),ncols=columns,nrows=rows, sharex=True)
                     ax_stack=ax_stack.ravel()
                  
                     
@@ -296,7 +296,7 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
                      left_value=cell_no_array[target_pop_index_array[target_trial_index][pop]]-1
                   else:
                      ytick_array.append(left_value+2)
-                     ytick_array.append(left_value+2+cell_no_array[target_pop_index_array[target_trial_index][pop]])
+                     ytick_array.append(left_value+1+cell_no_array[target_pop_index_array[target_trial_index][pop]])
                      left_value=left_value+2+cell_no_array[target_pop_index_array[target_trial_index][pop]]
 
               print label_array
@@ -317,7 +317,7 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
 
               ax_stack[pop].set_yticklabels(labels)
               if pop==0:
-                 ax_stack[pop].set_title('Raster plots for Golgi cell populations (trial id=%d)'%spike_plot_parameters[1],size=6)
+                 ax_stack[pop].set_title('Raster plots for target Golgi cell populations (trial id=%d)'%spike_plot_parameters[1],size=6)
               for pop in range(0,no_of_rasters+1):
                   for tick in ax_stack[pop].xaxis.get_major_ticks():
                       tick.label.set_fontsize(general_plot_parameters[4]) 
@@ -356,7 +356,7 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
                                left_value=cell_no_array[target_pop_index_array[trial][pop]]-1
                             else:
                                ytick_array.append(left_value+2)
-                               ytick_array.append(left_value+2+cell_no_array[target_pop_index_array[trial][pop]]   )
+                               ytick_array.append(left_value+1+cell_no_array[target_pop_index_array[trial][pop]]   )
                                left_value=left_value+2+cell_no_array[target_pop_index_array[trial][pop]]
                         ax_all_trials[row_counter].set_yticks(ytick_array)
                         #ax_all_trials[row_counter].canvas.draw()
@@ -392,7 +392,7 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
                            left_value=cell_no_array[target_pop_index_array[trial][0]]-1
                         else:
                            ytick_array.append(left_value+2)
-                           ytick_array.append(left_value+2+cell_no_array[target_pop_index_array[trial][0]]   )
+                           ytick_array.append(left_value+1+cell_no_array[target_pop_index_array[trial][0]]   )
                            left_value=left_value+2+cell_no_array[target_pop_index_array[trial][0]]
                     ax_all_trials[row_counter].set_yticks(ytick_array)
                     ax_all_trials[row_counter].set_ylim(0,(cell_no_array[target_pop_index_array[trial][0]]+1)*len(general_plot_parameters[3]) )
@@ -428,7 +428,7 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
                     left_value=cell_no_array[target_pop_index_array[0][0]]-1
                  else:
                     ytick_array.append(left_value+2)
-                    ytick_array.append(left_value+2+cell_no_array[target_pop_index_array[0][0]]   )
+                    ytick_array.append(left_value+1+cell_no_array[target_pop_index_array[0][0]]   )
                     left_value=left_value+2+cell_no_array[target_pop_index_array[0][0]]
              ax_all_trials.set_yticks(ytick_array)
              ax_all_trials.canvas.draw()
@@ -477,7 +477,7 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
                                left_value=cell_no_array[target_pop_index_array[trial][pop]]-1
                             else:
                                ytick_array.append(left_value+2)
-                               ytick_array.append(left_value+2+cell_no_array[target_pop_index_array[trial][pop]]   )
+                               ytick_array.append(left_value+1+cell_no_array[target_pop_index_array[trial][pop]]   )
                                left_value=left_value+2+cell_no_array[target_pop_index_array[trial][pop]]
                         raster_ax_array[trial][pop].set_yticks(ytick_array)
                         raster_fig_array[trial].canvas.draw()
@@ -513,7 +513,7 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
                            left_value=cell_no_array[target_pop_index_array[trial][0]]-1
                         else:
                            ytick_array.append(left_value+2)
-                           ytick_array.append(left_value+2+cell_no_array[target_pop_index_array[trial][0]]   )
+                           ytick_array.append(left_value+1+cell_no_array[target_pop_index_array[trial][0]]   )
                            left_value=left_value+2+cell_no_array[target_pop_index_array[trial][0]]
                         raster_ax_array[trial].set_yticks(ytick_array)
                         raster_fig_array[trial].canvas.draw()
@@ -558,7 +558,7 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
                               left_value=cell_no_array[target_pop_index_array[0][pop]]-1
                            else:
                               ytick_array.append(left_value+2)
-                              ytick_array.append(left_value+2+cell_no_array[target_pop_index_array[0][pop]]   )
+                              ytick_array.append(left_value+1+cell_no_array[target_pop_index_array[0][pop]]   )
                               left_value=left_value+2+cell_no_array[target_pop_index_array[0][pop]]
                        ax_stack_one_trial[pop].set_yticks(ytick_array)
                        fig_stack_one_trial.canvas.draw()
@@ -594,7 +594,7 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
                           left_value=cell_no_array[target_pop_index_array[0][0]]-1
                        else:
                           ytick_array.append(left_value+2)
-                          ytick_array.append(left_value+2+cell_no_array[target_pop_index_array[0][0]]   )
+                          ytick_array.append(left_value+1+cell_no_array[target_pop_index_array[0][0]]   )
                           left_value=left_value+2+cell_no_array[target_pop_index_array[0][0]]
                    ax_stack_one_trial.set_yticks(ytick_array)
                    fig_stack_one_trial.canvas.draw()
@@ -626,16 +626,14 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
     
     print non_empty_trial_indices
     print target_pop_index_array
-
+    print("Finished running Synchronization_analysis.py")
 if __name__=="__main__":
-   #Test1
-   #Synchronization_analysis(450,["all"],1,["V2012multi1_2c_1input",["seed specifier",True],1],[0])
-   #Test2
-   #forget 3D plots for spike rasters; not the best way to visualize, spike dispersion is more obvious from 2D plots
-   #spike_plot_params=["3D scatter plot",[2],"save 3D scatter plots separately","pdf"]         
    
-   #plot_params=["test_lists_5trials3D","Golgi pop 0 and pop1","Spatial scale",["1","20"],4,4] 
-  
+          
+   print("Testing Synchronization_analysis.py")
+   
+   # 3 is the id of the representative trial that is ploted on the same figure as synchrony plot; any trial can be passed in this way starting (id=0,id=1, ....)
+   
    #spike_plot_params=["2D raster plots",3,"save all trials to separate files","save sync plot to a separate file","pdf"]  
 
    spike_plot_params=["2D raster plots",3,"save all trials to one separate file","save sync plot to a separate file","pdf"]  
@@ -644,22 +642,26 @@ if __name__=="__main__":
 
    plot_params=["test_lists_5trials","Golgi pop 0 and pop1","Spatial scale",["1","20"],3,3]   
 
-   #Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_specify,spike_plot_parameters,general_plot_parameters)
+   # template: Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_specify,spike_plot_parameters,general_plot_parameters)
 
    
    
-   #Synchronization_analysis(450,["subtype specific","random fraction","randomly set target ids only once",[0,1]],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",False],5],spike_plot_params,plot_params,True)
+   Synchronization_analysis(450,["subtype specific","random fraction","randomly set target ids only once",[1,1]],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",False],5],spike_plot_params,plot_params)
 
    #Test options other than subtype specific, random fraction
   
-   Synchronization_analysis(450,["subtype specific","explicit list",[ [],[5,6,7,8,9] ] ],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",False],5],spike_plot_params,plot_params,True)
+   #Synchronization_analysis(450,["subtype specific","explicit list",[ [],[5,6,7,8,9] ] ],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",False],5],spike_plot_params,plot_params)
 
-   #Synchronization_analysis(450,["3D region specific",[[40,80],[40,80],[40,80]],[[40,80],[40,80],[40,80]] ],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",False],5],spike_plot_params,plot_params)
+   
 
    ####
    
-   # Test the configurations below:
+   # Test the configurations below based on targeting specifications:
+   
    #target_cell_array=get_cell_ids_for_sync_analysis(["3D region specific",[[0,100],[0,100],[0,100]],[[0,100],[0,100],[0,100]] ],2, ["test_Lists_and_sync",["seed specifier",False],5])
+
+   #Synchronization_analysis(450,["3D region specific",[[0,100],[0,100],[0,100]],[[0,100],[0,100],[0,100]] ],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",False],5],spike_plot_params,plot_params,True)
+   
 
    #target_cell_array=get_cell_ids_for_sync_analysis(["3D region specific",[[0,50],[0,50],[0,50]],"subtype specific","random fraction","randomly set target ids only once",[ 0,1 ] ],2, ["test_Lists_and_sync",["seed specifier",False],5])
  
@@ -674,22 +676,8 @@ if __name__=="__main__":
 
 
 
-   ###
- 
-
-   #the former in general would have the following format : ["subtype specific","random fraction","randomize only once" or "randomize on every trial","[fraction of Golgi_pop0 to target, fraction of Golgi_pop1 to target, ...,fraction of Golgi_pop n to target]]
-   #Test3
-   #Synchronization_analysis(450,["subtype specific","explicit list",[[0,1]]],1,["V2012multi1_2c_1input",["seed specifier",True],1])
-   #Synchronization_analysis(450,["3D region specific",[[40,80],[40,80],[40,80]]],1,["V2012multi1_2c_1input",["seed specifier",True],1])
-   #Synchronization_analysis(450,["3D region specific",[[40,80],[40,80],[40,80]]],1,["V2012multi1_2c_1input",["seed specifier",True],1])
+  
    
-   #if present, "3D region specific" string has to be at 0 index position in a parameter array; more flexible search through input arrays  might be coded in the future 
-   #Synchronization_analysis(450,["3D region specific",[[40,80],[40,80],[40,80]],/
-   #"subtype specific","random fraction","randomly set target ids only once",[0.5,0.5]],1,["V2012multi1_2c_1input",["seed specifier",True],1])
-   #if seeded, 3D region specificity and explicit list can be combined because ids within a given region do not change across simulation trials
-   #Synchronization_analysis(450,["3D region specific",[[40,80],[40,80],[40,80]],/
-   #"subtype specific","random fraction",[0.5,0.5]],1,["V2012multi1_2c_1input",["seed specifier",False],1])
-   print("Testing Synchronization_analysis.py")
    
    
 
