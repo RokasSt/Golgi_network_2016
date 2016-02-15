@@ -95,18 +95,39 @@ def get_cell_ids_for_sync_analysis(target_specifications,no_of_cell_groups,exper
     target_cells=[]
     #########
     if target_specifications[0]=="all":
-       if experiment_specifiers[1][1]==True:
-          for cell_group in range(0,no_of_cell_groups):
-              cell_group_positions=np.loadtxt('simulations/%s/Golgi_pop%d.txt'%(experiment_specifiers[0],cell_group))
-              dim_array=np.shape(cell_group_positions)
-              target_cell_ids=range(0,dim_array[0])
-              target_cells.append(target_cell_ids)
-       else: 
-          for cell_group in range(0,no_of_cell_groups):
-              cell_group_positions=np.loadtxt('simulations/%s/sim0/Golgi_pop%d.txt'%(experiment_specifiers[0],cell_group))
-              dim_array=np.shape(cell_group_positions)
-              target_cell_ids=range(0,dim_array[0])
-              target_cells.append(target_cell_ids)
+       if experiment_specifiers[2]>1:
+          target_cells_per_trial=[]
+          if experiment_specifiers[1][1]==True:
+             for cell_group in range(0,no_of_cell_groups):
+                 cell_group_positions=np.loadtxt('simulations/%s/Golgi_pop%d.txt'%(experiment_specifiers[0],cell_group))
+                 dim_array=np.shape(cell_group_positions)
+                 target_cells_ids=range(0,dim_array[0])
+                 target_cells_ids.append('pop%d'%cell_group)
+                 target_cells_per_trial.append(target_cells_ids)
+          else: 
+             for cell_group in range(0,no_of_cell_groups):
+                 cell_group_positions=np.loadtxt('simulations/%s/sim0/Golgi_pop%d.txt'%(experiment_specifiers[0],cell_group))
+                 dim_array=np.shape(cell_group_positions)
+                 target_cells_ids=range(0,dim_array[0])
+                 target_cells_ids.append('pop%d'%cell_group)
+                 target_cells_per_trial.append(target_cells_ids)
+          for trial in range(0,experiment_specifiers[2]):
+              target_cells.append(target_cells_per_trial)
+       else:
+          if experiment_specifiers[1][1]==True:
+             for cell_group in range(0,no_of_cell_groups):
+                 cell_group_positions=np.loadtxt('simulations/%s/Golgi_pop%d.txt'%(experiment_specifiers[0],cell_group))
+                 dim_array=np.shape(cell_group_positions)
+                 target_cells_ids=range(0,dim_array[0])
+                 target_cells_ids.append('pop%d'%cell_group)
+                 target_cells.append(target_cells_ids)
+          else: 
+             for cell_group in range(0,no_of_cell_groups):
+                 cell_group_positions=np.loadtxt('simulations/%s/sim0/Golgi_pop%d.txt'%(experiment_specifiers[0],cell_group))
+                 dim_array=np.shape(cell_group_positions)
+                 target_cells_ids=range(0,dim_array[0])
+                 target_cells_ids.append('pop%d'%cell_group)
+                 target_cells.append(target_cells_ids)
     #########
     if target_specifications[0]=="subtype specific":
         
@@ -128,7 +149,56 @@ def get_cell_ids_for_sync_analysis(target_specifications,no_of_cell_groups,exper
                     target_cells.append(target_array)
               
        if target_specifications[1]=="random fraction":
-          if target_specifications[2]=="randomly set target ids only once":
+          if experiment_specifiers[2] >1:
+             if target_specifications[2]=="randomly set target ids only once":
+                target_cells_per_trial=[]
+                if experiment_specifiers[1][1]==True:
+                   for cell_group in range(0,no_of_cell_groups):
+                       cell_group_positions=np.loadtxt('simulations/%s/Golgi_pop%d.txt'%(experiment_specifiers[0],cell_group))
+                       dim_array=np.shape(cell_group_positions)
+                       target_cell_ids=range(0,dim_array[0])
+                       random_targets_per_cell_group=random.sample(target_cell_ids,int(round(target_specifications[3][cell_group]*dim_array[0])))
+                       if random_targets_per_cell_group !=[]:
+                          random_targets_per_cell_group.append('pop%d'%cell_group)
+                          target_cells_per_trial.append(random_targets_per_cell_group)
+                else:
+                   for cell_group in range(0,no_of_cell_groups):
+                       #no need to scan through a list of simulations because this type of selection is not based on the position of cell soma;
+                       #just get id listing via no of cells per population from sim0 dir
+                       cell_group_positions=np.loadtxt('simulations/%s/sim0/Golgi_pop%d.txt'%(experiment_specifiers[0],cell_group))
+                       dim_array=np.shape(cell_group_positions)
+                       target_cell_ids=range(0,dim_array[0])
+                       random_targets_per_cell_group=random.sample(target_cell_ids,int(round(target_specifications[3][cell_group]*dim_array[0])))
+                       if random_targets_per_cell_group !=[]:
+                          random_targets_per_cell_group.append('pop%d'%cell_group)
+                          target_cells_per_trial.append(random_targets_per_cell_group)
+                for trial in range(0,experiment_specifiers[2]):
+                    target_cells.append(target_cells_per_trial)
+             else:
+                for trial in range(0,experiment_specifiers[2]):
+                    random_targets_per_trial=[]
+                    if experiment_specifiers[1][1]==True:
+                       for cell_group in range(0,no_of_cell_groups):
+                           cell_group_positions=np.loadtxt('simulations/%s/Golgi_pop%d.txt'%(experiment_specifiers[0],cell_group))
+                           dim_array=np.shape(cell_group_positions)
+                           target_cell_ids=range(0,dim_array[0])
+                           random_targets_per_cell_group=random.sample(target_cell_ids,int(round(target_specifications[3][cell_group]*dim_array[0])))
+                           if random_targets_per_cell_group != []:
+                              random_targets_per_cell_group.append('pop%d'%cell_group)
+                              random_targets_per_trial.append(random_targets_per_cell_group)
+                    else: 
+                       for cell_group in range(0,no_of_cell_groups):
+                           #no need to scan through a list of simulations because this type of selection is not based on the position of cell soma;
+                           #just get id listing via no of cells per population from sim0 dir
+                           cell_group_positions=np.loadtxt('simulations/%s/sim0/Golgi_pop%d.txt'%(experiment_specifiers[0],cell_group))
+                           dim_array=np.shape(cell_group_positions)
+                           target_cell_ids=range(0,dim_array[0])
+                           random_targets_per_cell_group=random.sample(target_cell_ids,int(round(target_specifications[3][cell_group]*dim_array[0])))
+                           if random_targets_per_cell_group != []:
+                              random_targets_per_cell_group.append('pop%d'%cell_group)
+                              random_targets_per_trial.append(random_targets_per_cell_group)
+                    target_cells.append(random_targets_per_trial)
+          else: 
              if experiment_specifiers[1][1]==True:
                 for cell_group in range(0,no_of_cell_groups):
                     cell_group_positions=np.loadtxt('simulations/%s/Golgi_pop%d.txt'%(experiment_specifiers[0],cell_group))
@@ -139,7 +209,6 @@ def get_cell_ids_for_sync_analysis(target_specifications,no_of_cell_groups,exper
                        random_targets_per_cell_group.append('pop%d'%cell_group)
                        target_cells.append(random_targets_per_cell_group)
              else:
-                target_cells_per_trial=[]
                 for cell_group in range(0,no_of_cell_groups):
                     #no need to scan through a list of simulations because this type of selection is not based on the position of cell soma;
                     #just get id listing via no of cells per population from sim0 dir
@@ -149,70 +218,82 @@ def get_cell_ids_for_sync_analysis(target_specifications,no_of_cell_groups,exper
                     random_targets_per_cell_group=random.sample(target_cell_ids,int(round(target_specifications[3][cell_group]*dim_array[0])))
                     if random_targets_per_cell_group !=[]:
                        random_targets_per_cell_group.append('pop%d'%cell_group)
-                       target_cells_per_trial.append(random_targets_per_cell_group)
-                for trial in range(0,experiment_specifiers[2]):
-                    target_cells.append(target_cells_per_trial)
-          else:
-             for trial in range(0,experiment_specifiers[2]):
-                 random_targets_per_trial=[]
-                 if experiment_specifiers[1][1]==True:
-                    for cell_group in range(0,no_of_cell_groups):
-                        cell_group_positions=np.loadtxt('simulations/%s/Golgi_pop%d.txt'%(experiment_specifiers[0],cell_group))
-                        dim_array=np.shape(cell_group_positions)
-                        target_cell_ids=range(0,dim_array[0])
-                        random_targets_per_cell_group=random.sample(target_cell_ids,int(round(target_specifications[3][cell_group]*dim_array[0])))
-                        if random_targets_per_cell_group != []:
-                           random_targets_per_cell_group.append('pop%d'%cell_group)
-                           random_targets_per_trial.append(random_targets_per_cell_group)
-                 else: 
-                    for cell_group in range(0,no_of_cell_groups):
-                        #no need to scan through a list of simulations because this type of selection is not based on the position of cell soma;
-                        #just get id listing via no of cells per population from sim0 dir
-                        cell_group_positions=np.loadtxt('simulations/%s/sim0/Golgi_pop%d.txt'%(experiment_specifiers[0],cell_group))
-                        dim_array=np.shape(cell_group_positions)
-                        target_cell_ids=range(0,dim_array[0])
-                        random_targets_per_cell_group=random.sample(target_cell_ids,int(round(target_specifications[3][cell_group]*dim_array[0])))
-                        if random_targets_per_cell_group != []:
-                           random_targets_per_cell_group.append('pop%d'%cell_group)
-                           random_targets_per_trial.append(random_targets_per_cell_group)
-                 target_cells.append(random_targets_per_trial)
+                       target_cells.append(random_targets_per_cell_group)
+                
        
     
     #########
     if (target_specifications[0]=="3D region specific") and (not("subtype specific" in target_specifications)):
-       if experiment_specifiers[1][1]==True:
-          for cell_group in range(0,no_of_cell_groups):
-              cell_group_positions=np.loadtxt('simulations/%s/Golgi_pop%d.txt'%(experiment_specifiers[0],cell_group))
-              dim_array=np.shape(cell_group_positions)
-              region_specific_targets_per_cell_group=[]
-              for region in range(1,len(target_specifcations)):
-                  for cell in range(0,dim_array[0]):
-                      if target_specifications[region][0][0] <  cell_group_positions[cell,0] and cell_group_positions[cell,0] < target_specifications[region][0][1]:
-                         if target_specifications[region][1][0] <  cell_group_positions[cell,1] and cell_group_positions[cell,1] < target_specifications[region][1][1]:
-                            if target_specifications[region][2][0] <  cell_group_positions[cell,2] and cell_group_positions[cell,2] < target_specifications[region][2][1]:
-                               region_specific_targets_per_cell_group.append(cell)
-              region_specific_targets_per_cell_group=list(set(region_specific_targets_per_cell_group))
-              if region_specific_targets_per_cell_group != []:
-                 region_specific_targets_per_cell_group.append('pop%d'%cell_group)
-                 target_cells.append(region_specific_targets_per_cell_group)
+       if experiment_specifiers[2] >1:
+          if experiment_specifiers[1][1]==True:
+             target_cells_per_trial=[]
+             for cell_group in range(0,no_of_cell_groups):
+                 cell_group_positions=np.loadtxt('simulations/%s/Golgi_pop%d.txt'%(experiment_specifiers[0],cell_group))
+                 dim_array=np.shape(cell_group_positions)
+                 region_specific_targets_per_cell_group=[]
+                 for region in range(1,len(target_specifcations)):
+                     for cell in range(0,dim_array[0]):
+                         if target_specifications[region][0][0] <  cell_group_positions[cell,0] and cell_group_positions[cell,0] < target_specifications[region][0][1]:
+                            if target_specifications[region][1][0] <  cell_group_positions[cell,1] and cell_group_positions[cell,1] < target_specifications[region][1][1]:
+                               if target_specifications[region][2][0] <  cell_group_positions[cell,2] and cell_group_positions[cell,2] < target_specifications[region][2][1]:
+                                  region_specific_targets_per_cell_group.append(cell)
+                 region_specific_targets_per_cell_group=list(set(region_specific_targets_per_cell_group))
+                 if region_specific_targets_per_cell_group != []:
+                    region_specific_targets_per_cell_group.append('pop%d'%cell_group)
+                    target_cells_per_trial.append(region_specific_targets_per_cell_group)
+             for trial in range(0,experiment_specifiers[2]):
+                 target_cells.append(target_cells_per_trial)
+          else:
+             for trial in range(0,experiment_specifiers[2]):
+                 region_specific_targets_per_trial=[]
+                 for cell_group in range(0,no_of_cell_groups):
+                     cell_group_positions=np.loadtxt('simulations/%s/sim%d/Golgi_pop%d.txt'%(experiment_specifiers[0],trial,cell_group))
+                     dim_array=np.shape(cell_group_positions)
+                     region_specific_targets_per_cell_group=[]
+                     for region in range(1,len(target_specifications)):
+                         for cell in range(0,dim_array[0]):
+                             if target_specifications[region][0][0] <  cell_group_positions[cell,0] and cell_group_positions[cell,0] < target_specifications[region][0][1]:
+                                if target_specifications[region][1][0] <  cell_group_positions[cell,1] and cell_group_positions[cell,1] < target_specifications[region][1][1]:
+                                   if target_specifications[region][2][0] <  cell_group_positions[cell,2] and cell_group_positions[cell,2] < target_specifications[region][2][1]:
+                                      region_specific_targets_per_cell_group.append(cell)
+                     region_specific_targets_per_cell_group=list(set(region_specific_targets_per_cell_group))
+                     if region_specific_targets_per_cell_group != []:
+                        region_specific_targets_per_cell_group.append('pop%d'%cell_group)
+                        region_specific_targets_per_trial.append(region_specific_targets_per_cell_group)
+                 target_cells.append(region_specific_targets_per_trial)
        else:
-          for trial in range(0,experiment_specifiers[2]):
-              region_specific_targets_per_trial=[]
-              for cell_group in range(0,no_of_cell_groups):
-                  cell_group_positions=np.loadtxt('simulations/%s/sim%d/Golgi_pop%d.txt'%(experiment_specifiers[0],trial,cell_group))
-                  dim_array=np.shape(cell_group_positions)
-                  region_specific_targets_per_cell_group=[]
-                  for region in range(1,len(target_specifications)):
-                      for cell in range(0,dim_array[0]):
-                          if target_specifications[region][0][0] <  cell_group_positions[cell,0] and cell_group_positions[cell,0] < target_specifications[region][0][1]:
-                             if target_specifications[region][1][0] <  cell_group_positions[cell,1] and cell_group_positions[cell,1] < target_specifications[region][1][1]:
-                                if target_specifications[region][2][0] <  cell_group_positions[cell,2] and cell_group_positions[cell,2] < target_specifications[region][2][1]:
-                                   region_specific_targets_per_cell_group.append(cell)
-                  region_specific_targets_per_cell_group=list(set(region_specific_targets_per_cell_group))
-                  if region_specific_targets_per_cell_group != []:
-                     region_specific_targets_per_cell_group.append('pop%d'%cell_group)
-                     region_specific_targets_per_trial.append(region_specific_targets_per_cell_group)
-              target_cells.append(region_specific_targets_per_trial)
+          if experiment_specifiers[1][1]==True:
+             for cell_group in range(0,no_of_cell_groups):
+                 cell_group_positions=np.loadtxt('simulations/%s/Golgi_pop%d.txt'%(experiment_specifiers[0],cell_group))
+                 dim_array=np.shape(cell_group_positions)
+                 region_specific_targets_per_cell_group=[]
+                 for region in range(1,len(target_specifcations)):
+                     for cell in range(0,dim_array[0]):
+                         if target_specifications[region][0][0] <  cell_group_positions[cell,0] and cell_group_positions[cell,0] < target_specifications[region][0][1]:
+                            if target_specifications[region][1][0] <  cell_group_positions[cell,1] and cell_group_positions[cell,1] < target_specifications[region][1][1]:
+                               if target_specifications[region][2][0] <  cell_group_positions[cell,2] and cell_group_positions[cell,2] < target_specifications[region][2][1]:
+                                  region_specific_targets_per_cell_group.append(cell)
+                 region_specific_targets_per_cell_group=list(set(region_specific_targets_per_cell_group))
+                 if region_specific_targets_per_cell_group != []:
+                    region_specific_targets_per_cell_group.append('pop%d'%cell_group)
+                    target_cells.append(region_specific_targets_per_cell_group)
+             
+          else:
+             for cell_group in range(0,no_of_cell_groups):
+                 cell_group_positions=np.loadtxt('simulations/%s/sim%d/Golgi_pop%d.txt'%(experiment_specifiers[0],trial,cell_group))
+                 dim_array=np.shape(cell_group_positions)
+                 region_specific_targets_per_cell_group=[]
+                 for region in range(1,len(target_specifications)):
+                     for cell in range(0,dim_array[0]):
+                         if target_specifications[region][0][0] <  cell_group_positions[cell,0] and cell_group_positions[cell,0] < target_specifications[region][0][1]:
+                            if target_specifications[region][1][0] <  cell_group_positions[cell,1] and cell_group_positions[cell,1] < target_specifications[region][1][1]:
+                               if target_specifications[region][2][0] <  cell_group_positions[cell,2] and cell_group_positions[cell,2] < target_specifications[region][2][1]:
+                                  region_specific_targets_per_cell_group.append(cell)
+                 region_specific_targets_per_cell_group=list(set(region_specific_targets_per_cell_group))
+                 if region_specific_targets_per_cell_group != []:
+                    region_specific_targets_per_cell_group.append('pop%d'%cell_group)
+                    target_cells.append(region_specific_targets_per_cell_group)
+                 
        
     if (target_specifications[0]=="3D region specific") and ("subtype specific" in target_specifications):
        region_specific_target_cells=[]

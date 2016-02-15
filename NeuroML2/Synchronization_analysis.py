@@ -340,6 +340,7 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
 
        if "save all trials to one separate file" in spike_plot_parameters:
           print pop_no_array
+          print target_pop_index_array
           if total_no_of_rows >1:
              row_counter=0
              for trial in range(0,len(non_empty_trial_indices)):
@@ -349,7 +350,7 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
                         ytick_array=[]
                         for exp in range(0,len(general_plot_parameters[3])):
                             label_array.append("%d"%0)
-                            label_array.append("%d"%(cell_no_array[target_pop_index_array[trial][pop]]-1))
+                            label_array.append("%d"%(cell_no_array[target_pop_index_array[trial][pop] ]-1))
                             if exp==0:
                                ytick_array.append(exp)
                                ytick_array.append(cell_no_array[target_pop_index_array[trial][pop]]-1)
@@ -646,21 +647,23 @@ if __name__=="__main__":
 
    
    
-   Synchronization_analysis(450,["subtype specific","random fraction","randomly set target ids only once",[1,1]],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",False],5],spike_plot_params,plot_params)
+   #Synchronization_analysis(450,["subtype specific","random fraction","randomly set target ids only once",[1,1]],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",False],5],spike_plot_params,plot_params)
 
    #Test options other than subtype specific, random fraction
   
    #Synchronization_analysis(450,["subtype specific","explicit list",[ [],[5,6,7,8,9] ] ],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",False],5],spike_plot_params,plot_params)
-
+  
    
 
    ####
    
    # Test the configurations below based on targeting specifications:
+   #Synchronization_analysis(450,["all"],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",False],5],spike_plot_params,plot_params)
+   
    
    #target_cell_array=get_cell_ids_for_sync_analysis(["3D region specific",[[0,100],[0,100],[0,100]],[[0,100],[0,100],[0,100]] ],2, ["test_Lists_and_sync",["seed specifier",False],5])
 
-   #Synchronization_analysis(450,["3D region specific",[[0,100],[0,100],[0,100]],[[0,100],[0,100],[0,100]] ],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",False],5],spike_plot_params,plot_params,True)
+   Synchronization_analysis(450,["3D region specific",[[0,50],[0,50],[0,50]],[[80,100],[80,100],[80,100]] ],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",False],5],spike_plot_params,plot_params)
    
 
    #target_cell_array=get_cell_ids_for_sync_analysis(["3D region specific",[[0,50],[0,50],[0,50]],"subtype specific","random fraction","randomly set target ids only once",[ 0,1 ] ],2, ["test_Lists_and_sync",["seed specifier",False],5])
