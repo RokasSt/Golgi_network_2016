@@ -62,20 +62,74 @@ def generate_golgi_cell_net(ref,cell_array,location_array, connectivity_informat
         Golgi_pop_index_array=[]
         neuroml_Golgi_pop_array=[]
         if string.lower(population_type) =="list":
-	   for x in range(cell_array[0]):
+	   
+
+	   cell_position_array=[]
+	   
+           no_density_model=True
+            
+	   if type(localization_type) is list:
+              if string.lower(localization_type[0])=="density based":
+                 ### will override cell numbers in cell_array if specified
+                 no_density_model=False
+                 for cell_group in range(0,len(localization_type[2])):
+                     ### assuming that Y_values returned by load_density_data represent the depth with zero indicating Purkinje cell level
+                     X_array,Z_array,density_values=load_density_data(localization_type[2][cell_group],localization_type[1])
+                     
+           if no_density_model:
+              for cell_population in range(cell_array[0]):
+                  cell_position_array.append(np.zeros([cell_array[cell_population+1][1],3]))
+
+
+           for x in range(cell_array[0]):
 	      Golgi_pop = neuroml.Population(id="Golgi_pop%d"%x, size =cell_array[x+1][1], type="populationList",
 		                  component=cell_array[x+1][0])
 	      Golgi_pop_index_array.append("Golgi_pop%d"%x)
               neuroml_Golgi_pop_array.append(Golgi_pop)
 	      net.populations.append(Golgi_pop)
-
-
-	   cell_position_array=[]
            
-           for cell_population in range(cell_array[0]):
-               
-	       cell_position_array.append(np.zeros([cell_array[cell_population+1][1],3]))
-               
+           
+           if type(localization_type) is list:
+              if string.lower(localization_type[0])=="minimal distance":
+                 for cell_pop in range(cell_array[0]):
+                     golgi_pop=neuroml_Golgi_pop_array[cell_pop]
+                     for cell in range(cell_array[cell_pop+1][1]):
+	                 Golgi_cell=neuroml.Instance(id="%d"%cell)
+	                 golgi_pop.instances.append(Golgi_cell)
+	                 if cell_pop==0 and cell==0:
+                            X=random.random()
+	                    Y=random.random()
+	                    Z=random.random()
+                            cell_position_array[cell_pop][cell,0]=x_dim*X
+                            cell_position_array[cell_pop][cell,1]=y_dim*Y
+                            cell_position_array[cell_pop][cell,2]=z_dim*Z
+                            Golgi_cell.location=neuroml.Location(x=x_dim*X, y=y_dim*Y, z=z_dim*Z)
+                            print cell_position_array[cell_pop][cell,0], cell_position_array[cell_pop][cell,1], cell_position_array[cell_pop][cell,2]
+                         else:
+                            x=0
+                            while x==0:
+                                overlap_counter=0
+                                X=(random.random())*x_dim
+	                        Y=(random.random())*y_dim
+	                        Z=(random.random())*z_dim
+                                for cell_pop_x in range(cell_array[0]):
+                                    pop_cell_positions=cell_position_array[cell_pop_x]
+                                    for cell_x in range(cell_array[cell_pop_x+1][1]):
+                                        if cell_position_array[cell_pop_x][cell_x,0]+cell_position_array[cell_pop_x][cell_x,1]+cell_position_array[cell_pop_x][cell_x,2] >0:
+                                           if string.lower(localization_type[1])=="uniform":
+                                              if distance([X,Y,Z],cell_position_array[cell_pop_x][cell_x]) < localization_type[2]:
+                                                 overlap_counter+=1
+                                           #if string.lower(localization_type[1])=="cell group specific": might be added in the future
+                                              
+                                if overlap_counter==0:
+                                   cell_position_array[cell_pop][cell,0]=X
+                                   cell_position_array[cell_pop][cell,1]=Y
+                                   cell_position_array[cell_pop][cell,2]=Z
+                                   Golgi_cell.location=neuroml.Location(x=X, y=Y, z=Z)
+                               
+                                   print cell_position_array[cell_pop][cell,0], cell_position_array[cell_pop][cell,1], cell_position_array[cell_pop][cell,2]
+                                   x=1
+                               
            if localization_type=="random no overlap":
               cell_diameter_array=[]
               for cell_pop in range(cell_array[0]):

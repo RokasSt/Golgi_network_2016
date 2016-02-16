@@ -90,6 +90,18 @@ def get_soma_diameter(cell_type):
 
     return cell_diameter
 
+def load_density_data(file_name,relative_path):
+    ### based on Antoine's script load_matrix.py
+    filename=relative_path+file_name
+    X,Y,Val=np.loadtxt(filename,delimiter=',')
+    shape=filename.split('shape ')[-1].split('.txt')[0].split(' ')
+    xshape=int(shape[0])
+    yshape=int(shape[1])
+    X=X.reshape(xshape,yshape)
+    Y=Y.reshape(xshape,yshape)
+    Val1=Val.reshape(xshape,yshape)
+    print X, Y, Val1
+    return X, Y, Val1
 
 def get_cell_ids_for_sync_analysis(target_specifications,no_of_cell_groups,experiment_specifiers):
     target_cells=[]
@@ -955,11 +967,14 @@ if __name__ == "__main__":
   
   #target_cell_array=get_cell_ids_for_sync_analysis(["subtype specific","explicit list",[ [1,2,3],[5,6,7,8,9] ] ],2, ["test_Lists_and_sync",["seed specifier",False],5])
   
-  target_cell_array=get_cell_ids_for_sync_analysis(["subtype specific","random fraction","randomly set target ids only once",[0,1]],2, ["test_Lists_and_sync",["seed specifier",False],5])
+  #target_cell_array=get_cell_ids_for_sync_analysis(["subtype specific","random fraction","randomly set target ids only once",[0,1]],2, ["test_Lists_and_sync",["seed specifier",False],5])
 
 
   #target_cell_array=get_cell_ids_for_sync_analysis(["subtype specific","random fraction","randomly set target ids only once",[ 1,1 ] ],2, ["test_Lists_and_sync",["seed specifier",False],5])
 
   #target_cell_array=get_cell_ids_for_sync_analysis(["subtype specific","random fraction","randomize each trial individually",[ 0,1 ] ],2, ["test_Lists_and_sync",["seed specifier",False],5])
 
-
+ #test load_density_data:
+ # X,Y,ro_value=load_density_data(file_name,relative_path)
+ 
+ 

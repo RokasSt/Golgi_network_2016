@@ -4,30 +4,40 @@ import os.path
 
 def run_simulations(network_parameters,sim_duration,time_step,simulator,experiment_identifier,no_of_trials,seed_specifier,plot_specifier,save_soma_specifier,list_or_not):
     
-    Cell_array=network_parameters[0]
-    Position_array=network_parameters[1]
-    Conn_array=network_parameters[2]
-    Input_array=network_parameters[3]
-    
-    for simulation_trial in range(0,no_of_trials):
-        Sim_array=[sim_duration,time_step,simulator,experiment_identifier,simulation_trial,["seed",seed_specifier[1]],["plot",plot_specifier[1]]]
-        newpath = r'simulations/%s/sim%d'%(experiment_identifier,simulation_trial)
-        if not os.path.exists(newpath):
-               os.makedirs(newpath)
-        if seed_specifier[1]==True:
-           sim_params,pop_params=generate_golgi_cell_net("Golgi%s"%(experiment_identifier),Cell_array,Position_array,Conn_array,Input_array,Sim_array,list_or_not,["output",True])
-
-           if save_soma_specifier[1]=="Yes":
-              save_soma_positions(pop_params,r'simulations/%s'%(experiment_identifier))
-              print("saved soma positions in the experiment directory %s"%r'simulations/%s'%(experiment_identifier))
-           generate_LEMS_and_run(sim_params,pop_params)
-        else:
-           sim_params,pop_params=generate_golgi_cell_net("Golgi%s_trial%d"%(experiment_identifier,simulation_trial),Cell_array,Position_array,Conn_array,Input_array,Sim_array,list_or_not,["output",True])
-
-           if save_soma_specifier[1]=="Yes":
-              save_soma_positions(pop_params,r'simulations/%s/sim%d'%(experiment_identifier,simulation_trial))
-              print("saved soma positions in the experiment directory %s"%r'simulations/%s/sim%d'%(experiment_identifier,simulation_trial))
-           generate_LEMS_and_run(sim_params,pop_params)
+    if seed_specifier[1]==True:
+       for simulation_trial in range(0,no_of_trials):
+           for exp_i in range(0,len(experiment_identifier)):
+               Cell_array=network_parameters[exp_i][0]
+               Position_array=network_parameters[exp_i][1]
+               Conn_array=network_parameters[exp_i][2]
+               Input_array=network_parameters[exp_i][3]
+               Sim_array=[sim_duration,time_step,simulator,experiment_identifier[exp_i],simulation_trial,["seed",seed_specifier[1]],["plot",plot_specifier[1]]]
+               newpath = r'simulations/%s/sim%d'%(experiment_identifier[exp_i],simulation_trial)
+               if not os.path.exists(newpath):
+                  os.makedirs(newpath)
+               sim_params,pop_params=generate_golgi_cell_net("Golgi%s"%(experiment_identifier[exp_i]),Cell_array,Position_array,Conn_array,Input_array,Sim_array,list_or_not,["output",True])
+               if save_soma_specifier[1]=="Yes":
+                  save_soma_positions(pop_params,r'simulations/%s'%(experiment_identifier[exp_i]))
+                  print("saved soma positions in the experiment directory %s"%r'simulations/%s'%(experiment_identifier))
+               generate_LEMS_and_run(sim_params,pop_params)
+    else:
+       for simulation_trial in range(0,no_of_trials):
+           seed_number=random.sample(range(0,15000),1)[0]
+           random.seed(seed_number)
+           for exp_i in range(0,len(experiment_identifier)):
+               Cell_array=network_parameters[exp_i][0]
+               Position_array=network_parameters[exp_i][1]
+               Conn_array=network_parameters[exp_i][2]
+               Input_array=network_parameters[exp_i][3]
+               Sim_array=[sim_duration,time_step,simulator,experiment_identifier[exp_i],simulation_trial,["seed",seed_specifier[1]],["plot",plot_specifier[1]]]
+               newpath = r'simulations/%s/sim%d'%(experiment_identifier[exp_i],simulation_trial)
+               if not os.path.exists(newpath):
+                  os.makedirs(newpath)
+               sim_params,pop_params=generate_golgi_cell_net("Golgi%s_trial%d"%(experiment_identifier[exp_i],simulation_trial),Cell_array,Position_array,Conn_array,Input_array,Sim_array,list_or_not,["output",True])
+               if save_soma_specifier[1]=="Yes":
+                  save_soma_positions(pop_params,r'simulations/%s/sim%d'%(experiment_identifier[exp_i],simulation_trial))
+                  print("saved soma positions in the experiment directory %s"%r'simulations/%s/sim%d'%(experiment_identifier[exp_i],simulation_trial))
+               generate_LEMS_and_run(sim_params,pop_params)
            
 if __name__ == "__main__":
 
@@ -35,11 +45,6 @@ if __name__ == "__main__":
     #Cell_array=[1,["Very_Simple_Golgi_test_morph",2]]
     #Conn_array=["Vervaeke_2010_multi_compartment",1,[["dendrite_group"],[1]],["testing",4]]
     
-    net_params=[]
-    net_params.append([2,["Very_Simple_Golgi_test_morph",10],["Very_Simple_Golgi_test_morph",10]])
-    net_params.append(["random",100, 100, 100])
-    net_params.append(["Vervaeke_2010_multi_compartment",1,[["dendrite_group"],[1]],[["dendrite_group"],[1]],["testing",4],["maximal connection length",None]])
-
     #####use the arrays below just to test generation of basal firing rate-modulating current inputs and MF/PF inputs; put realistic parameters later
     #basal_f_changing_array=["variable basal firing rate",\
    # ["amplitude distribution","gaussian",[100,100],[20,20],"nA"],["offset distribution","uniform",[50,50],[100,100],"ms"]]
@@ -52,24 +57,31 @@ if __name__ == "__main__":
     # Updates: make an option to use a transient Poisson synapse . e.g.
     # [["MFSpikeSyn","transient",50,"delay value","duration value","units"],["MFSpikeSyn","persistent",100] ]
     #
-    
-
-
 
     #input_array=[ [ ["MF",[MFpop_array0,MFpop_array1]]]    ,basal_f_changing_array]
     #net_params.append(input_array)
     ########
-
+    #### try to introduce density models
+    #  net_params.append([ ["density based","relative path\",['GlyT2 density matrix of shape 35 152.txt'] ],100, 100, 100,"minimal distance",25])
+    net_params=[]
+    net_params.append([2,["Very_Simple_Golgi_test_morph",10],["Very_Simple_Golgi_test_morph",10]])
+    net_params.append(["random",100, 100, 100])
+    net_params.append(["Vervaeke_2010_multi_compartment",1,[["dendrite_group"],[1]],[["dendrite_group"],[1]],["testing",4],["maximal connection length",None]])
     net_params.append(["testing",0.5,["20.0ms","200.0ms","4E-5uA"],["220.0ms","200.0ms","-0.5E-5uA"]])
-    run_simulations(net_params,450,0.005,"jNeuroML_NEURON","test_Lists_and_sync",5,["seed specifier",False],["plot specifier",False],["save somata positions","Yes"],"list")  
-
-    #net_params2=[]
-    #net_params2.append([2,["Very_Simple_Golgi_test_morph",10],["Very_Simple_Golgi_test_morph",10]])
-    #net_params2.append(["random",100, 100, 100])
-    #net_params2.append(["Vervaeke_2010_multi_compartment",20,[["dendrite_group"],[1]],[["dendrite_group"],[1]],["testing",4],["maximal connection length",None]])
-    #net_params2.append(["testing",0.5,["20.0ms","200.0ms","4E-5uA"],["220.0ms","200.0ms","-0.5E-5uA"]])
    
-    #run_simulations(net_params2,450,0.005,"jNeuroML_NEURON","test_Lists2_and_sync",5,["seed specifier",False],["plot specifier",False],["save somata positions","Yes"],"list")
+    net_params2=[]
+    net_params2.append([2,["Very_Simple_Golgi_test_morph",10],["Very_Simple_Golgi_test_morph",10]])
+    net_params2.append(["random",100, 100, 100])
+    net_params2.append(["Vervaeke_2010_multi_compartment",20,[["dendrite_group"],[1]],[["dendrite_group"],[1]],["testing",4],["maximal connection length",None]])
+    net_params2.append(["testing",0.5,["20.0ms","200.0ms","4E-5uA"],["220.0ms","200.0ms","-0.5E-5uA"]])
+
+    net_params_multiple.append(net_params)
+    net_params_multiple.append(net_params2)
+    # check firstly randomization : no simulation
+    
+    run_simulations(net_params_multiple,450,0.005,"no simulation",["test_Lists_and_sync","test_Lists2_and_sync"],5,["seed specifier",False],["plot specifier",False],["save somata positions","Yes"],"list")
+
+    #run_simulations(net_params_multiple,450,0.005,"jNeuroML_NEURON",["test_Lists_and_sync","test_Lists2_and_sync"],5,["seed specifier",False],["plot specifier",False],["save somata positions","Yes"],"list")
     
 
 
