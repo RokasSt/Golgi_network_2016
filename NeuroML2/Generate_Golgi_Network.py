@@ -821,7 +821,7 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                              offset=random.uniform(pop_offset_left_bound[pop],pop_offset_right_bound[pop])
                           if offset_constant_model:
                              offset=pop_offset[pop]
-                          Pulse_generator_variable=neuroml.PulseGenerator(id="Input_%d%d"%(pop,cell),delay="%f%s"%(offset,offset_units),duration="%f%s"%(simulation_parameters[1]-offset,offset_units),amplitude="%f%s"%(amp,units))
+                          Pulse_generator_variable=neuroml.PulseGenerator(id="Input_%d%d"%(pop,cell),delay="%f%s"%(offset,offset_units),duration="%f%s"%((simulation_parameters[0]-offset),offset_units),amplitude="%f%s"%(amp,units))
 	                  nml_doc.pulse_generators.append(Pulse_generator_variable)
 	                  Input_list=neuroml.InputList(id="Input_list%d%d"%(pop,cell),component="Input_%d%d"%(pop,cell),populations="%s"%Golgi_pop_index_array[pop])
 	                  net.input_lists.append(Input_list)
@@ -967,7 +967,7 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                              offset=random.uniform(pop_offset_left_bound[pop],pop_offset_right_bound[pop])
                           if offset_constant_model:
                              offset=pop_offset[pop]
-                          Pulse_generator_variable=neuroml.PulseGenerator(id="Input_%d%d"%(pop,cell),delay="%f%s"%(offset,offset_units),duration="%f%s"%(simulation_parameters[1]-offset,offset_units),amplitude="%f%s"%(amp,units))
+                          Pulse_generator_variable=neuroml.PulseGenerator(id="Input_%d%d"%(pop,cell),delay="%f%s"%(offset,offset_units),duration="%f%s"%((simulation_parameters[0]-offset),offset_units),amplitude="%f%s"%(amp,units))
 	                  nml_doc.pulse_generators.append(Pulse_generator_variable)
 	                  Inp = neuroml.ExplicitInput(target="%s[%d]"%(Golgi_pop_index_array[pop],cell),input="Input_%d%d"%(pop,cell),destination="synapses")
                           net.explicit_inputs.append(Inp)

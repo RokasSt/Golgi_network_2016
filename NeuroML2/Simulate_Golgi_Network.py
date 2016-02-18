@@ -204,7 +204,7 @@ if __name__ == "__main__":
     net_params_test_2012_multiple.append(net_params_2012_net2)
     
 
-    run_simulations(net_params_test_2012_multiple,450,0.005,"jNeuroML_NEURON",["2012based_test_1","2012based_test_2"],2,["seed specifier",False,"trial seed",True],["plot specifier",False],["save somata positions","Yes"],"list")
+    run_simulations(net_params_test_2012_multiple,450,0.005,"no simulation",["2012based_test_1","2012based_test_2"],2,["seed specifier",False,"trial seed",True],["plot specifier",False],["save somata positions","Yes"],"list")
 
 
 
