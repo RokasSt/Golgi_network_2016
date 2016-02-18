@@ -14,8 +14,7 @@ from mpl_toolkits.mplot3d import Axes3D
 
 
 def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_specify,spike_plot_parameters,general_plot_parameters):
-
-
+    
     cell_no_array=[]
     for exp_id in range(0,len(exp_specify[0]) ):
         if exp_specify[1][1]==True:
@@ -38,7 +37,7 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
 
     lines = []
     lines_sep=[]
-    
+    experiment_seed=random.sample(range(0,15000),1)[0]
     for exp_id in range(0,len(exp_specify[0])):
         #get target ids
         experiment_parameters=[]
@@ -46,7 +45,7 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
         experiment_parameters.append(exp_specify[1])
         experiment_parameters.append(exp_specify[2])
        
-        target_cell_array=get_cell_ids_for_sync_analysis(specify_targets,no_of_groups,experiment_parameters)
+        target_cell_array=get_cell_ids_for_sync_analysis(specify_targets,no_of_groups,experiment_parameters,experiment_seed)
         test_array=target_cell_array
         
         if exp_id==0:
@@ -673,15 +672,15 @@ if __name__=="__main__":
 
    #Synchronization_analysis(450,["3D region specific",[[0,100],[0,100],[0,100]],[[0,100],[0,100],[0,100]] ],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",False],5],spike_plot_params,plot_params)
 
-   
-   Synchronization_analysis(450,["3D region specific",[[0,50],[0,50],[0,50]],[[80,100],[80,100],[80,100]] ],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",False],5],spike_plot_params,plot_params)
+   ##### the below command will plot correctly rasters only if a given pair of target trials from different experiments contain the same target populations; this might be extended in the future to account for differences in cell no or density if experiments are testing these parameters.
+   #Synchronization_analysis(450,["3D region specific",[[0,50],[0,50],[0,50]],[[80,100],[80,100],[80,100]] ],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",False],5],spike_plot_params,plot_params)
    
    
 
 
    #target_cell_array=get_cell_ids_for_sync_analysis(["3D region specific",[[0,50],[0,50],[0,50]],"subtype specific","random fraction",[ 0,1 ] ],2, ["test_Lists_and_sync",["seed specifier",False],5])
 
-   #Synchronization_analysis(450,["3D region specific",[[0,50],[0,50],[0,50]],"subtype specific","random fraction",[ 0,1 ] ],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",False],5],spike_plot_params,plot_params)
+   Synchronization_analysis(450,["3D region specific",[[0,50],[0,50],[0,50]],"subtype specific","random fraction",[ 0,1 ] ],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",False],5],spike_plot_params,plot_params)
   
  
    #Synchronization_analysis(450,["3D region specific",[[0,50],[0,50],[0,50]],"subtype specific","random fraction","randomly set target ids only once",[ 0,1 ] ],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",True],5],spike_plot_params,plot_params)
