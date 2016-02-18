@@ -646,11 +646,11 @@ if __name__=="__main__":
    
    #spike_plot_params=["2D raster plots",3,"save all trials to separate files","save sync plot to a separate file","pdf"]  
 
-   spike_plot_params=["2D raster plots",2,"save all trials to one separate file","save sync plot to a separate file","pdf"]  
+   spike_plot_params=["2D raster plots",1,"save all trials to one separate file","save sync plot to a separate file","pdf"]  
 
 
 
-   plot_params=["test_iterations","Golgi pop 0 and pop1","Spatial scale",["1","20"],3,3]   
+   plot_params=["2012based_test","Golgi pop 0 and pop1","Spatial scale",["1","20"],3,3]   
 
    # template: Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_specify,spike_plot_parameters,general_plot_parameters)
 
@@ -685,8 +685,10 @@ if __name__=="__main__":
    #Synchronization_analysis(450,["3D region specific",[[0,50],[0,50],[0,50]],"subtype specific","random fraction",[ 0,1 ] ],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",False],5],spike_plot_params,plot_params)
 
 
-   Synchronization_analysis(450,["3D region specific",[[0,50],[0,50],[0,50]],"subtype specific","random fraction",[ 0,1 ] ],2,[["test_iteration_1","test_iteration_2"],["seed specifier",False],5],spike_plot_params,plot_params)
-  
+   #Synchronization_analysis(450,["3D region specific",[[0,50],[0,50],[0,50]],"subtype specific","random fraction",[ 0,1 ] ],2,[["test_iteration_1","test_iteration_2"],["seed specifier",False],5],spike_plot_params,plot_params)
+
+   Synchronization_analysis(450,["3D region specific",[[0,50],[0,50],[0,50]],"subtype specific","random fraction",[ 0,1 ] ],2,[["2012based_test_1","2012based_test_2"],["seed specifier",False],2],spike_plot_params,plot_params)
+ 
  
    #Synchronization_analysis(450,["3D region specific",[[0,50],[0,50],[0,50]],"subtype specific","random fraction","randomly set target ids only once",[ 0,1 ] ],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",True],5],spike_plot_params,plot_params)
 
