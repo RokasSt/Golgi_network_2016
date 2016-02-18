@@ -138,7 +138,7 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
                  
 
                     
-        non_empty_trial_counter=0
+        non_empty_non_unitary_trial_counter=0
         distances = []
         
         color = sns.color_palette()[exp_id+1]
@@ -161,18 +161,15 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
                target_cell_array_per_trial=target_cell_array
             
             if target_cell_array_per_trial !=[]:
-               non_empty_non_unitary_trial_counter+=1
                spike_trains = []
                target_pop_index_array_per_trial=[]
                print(" Trial %d is not empty"%(trial))
-               print non_empty_trial_counter
                for target_pop in range(0,len(target_cell_array_per_trial)):
                    for pop in range(0,no_of_groups):
                        if ('pop%d'%(pop)) in target_cell_array_per_trial[target_pop]:
                           target_pop_index_array_per_trial.append(pop)
                           target_cells = [x for x in target_cell_array_per_trial[target_pop] if isinstance(x,int)]
                           print target_cells
-                          if
                           for cell in range(0,len(target_cells)):
                               #create target txt file containing spike times
                               if not os.path.isfile('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cells[cell])):
@@ -224,15 +221,21 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
 
                target_pop_index_array.append(target_pop_index_array_per_trial)
                ########   
-                    
-               distances.append(pyspike.spike_profile_multi(spike_trains))
+               print("Length of spike_trains is %d"%len(spike_trains))
+               if len(spike_trains) >1:
+                  print("Trial %d contains more than one cell; Synchrony metric will be computed for this trial"%(trial))
+                  non_empty_non_unitary_trial_counter+=1
+                  print non_empty_non_unitary_trial_counter
+                  distances.append(pyspike.spike_profile_multi(spike_trains))
+               else:
+                  print("Trial %d contains one cell; Synchrony metric will not be computed for this trial"%(trial))
                ######## 
                
         # average synchrony index across "non empty" trials
         average_distance = distances[0]
         for distance in distances[1:]:
             average_distance.add(distance)
-        average_distance.mul_scalar(1./non_empty_trial_counter)
+        average_distance.mul_scalar(1./non_empty_non_unitary_trial_counter)
 
         # below blocks for saving synchrony and spike raster plots
         
@@ -345,13 +348,12 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
               fig_stack.savefig('simulations/%s.%s'%(general_plot_parameters[0],spike_plot_parameters[-1]))
 
        if "save all trials to one separate file" in spike_plot_parameters:
-          print pop_no_array
           print target_pop_index_array
           if total_no_of_rows >1:
              row_counter=0
              for trial in range(0,len(non_empty_trial_indices)):
-                 if pop_no_array[trial] >1:
-                    for pop in range(0,pop_no_array[trial]):
+                 if len(target_pop_index_array[trial]) >1:
+                    for pop in range(0,len(target_pop_index_array[trial])):
                         label_array=[]
                         ytick_array=[]
                         for exp in range(0,len(general_plot_parameters[3])):
@@ -643,7 +645,7 @@ if __name__=="__main__":
    
    #spike_plot_params=["2D raster plots",3,"save all trials to separate files","save sync plot to a separate file","pdf"]  
 
-   spike_plot_params=["no 2D raster plots",3,"save all trials to one separate file","save sync plot to a separate file","pdf"]  
+   spike_plot_params=["2D raster plots",3,"save all trials to one separate file","save sync plot to a separate file","pdf"]  
 
 
 
@@ -671,19 +673,18 @@ if __name__=="__main__":
 
    #Synchronization_analysis(450,["3D region specific",[[0,100],[0,100],[0,100]],[[0,100],[0,100],[0,100]] ],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",False],5],spike_plot_params,plot_params)
 
-   ##### the below command will only work if a given pair of trials from two experiments are identical in topology; might extend this script in the future to account
-   ### for differences in cell no or density if experiments are testing these parameters.
-   #Synchronization_analysis(450,["3D region specific",[[0,50],[0,50],[0,50]],[[80,100],[80,100],[80,100]] ],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",False],5],spike_plot_params,plot_params)
+   
+   Synchronization_analysis(450,["3D region specific",[[0,50],[0,50],[0,50]],[[80,100],[80,100],[80,100]] ],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",False],5],spike_plot_params,plot_params)
    
    
 
 
    #target_cell_array=get_cell_ids_for_sync_analysis(["3D region specific",[[0,50],[0,50],[0,50]],"subtype specific","random fraction",[ 0,1 ] ],2, ["test_Lists_and_sync",["seed specifier",False],5])
 
-   Synchronization_analysis(450,["3D region specific",[[0,50],[0,50],[0,50]],"subtype specific","random fraction",[ 0,1 ] ],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",False],5],spike_plot_params,plot_params)
+   #Synchronization_analysis(450,["3D region specific",[[0,50],[0,50],[0,50]],"subtype specific","random fraction",[ 0,1 ] ],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",False],5],spike_plot_params,plot_params)
   
  
-  #Synchronization_analysis(450,["3D region specific",[[0,50],[0,50],[0,50]],"subtype specific","random fraction","randomly set target ids only once",[ 0,1 ] ],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",True],5],spike_plot_params,plot_params)
+   #Synchronization_analysis(450,["3D region specific",[[0,50],[0,50],[0,50]],"subtype specific","random fraction","randomly set target ids only once",[ 0,1 ] ],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",True],5],spike_plot_params,plot_params)
 
 
   #target_cell_array=get_cell_ids_for_sync_analysis(["subtype specific","explicit list",[ [],[5,6,7,8,9] ] ],2, ["test_Lists_and_sync",["seed specifier",False],5])
