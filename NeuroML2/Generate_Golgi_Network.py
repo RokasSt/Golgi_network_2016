@@ -74,8 +74,24 @@ def generate_golgi_cell_net(ref,cell_array,location_array, connectivity_informat
                  no_density_model=False
                  for cell_group in range(0,len(localization_type[2])):
                      ### assuming that Y_values returned by load_density_data represent the depth with zero indicating Purkinje cell level
-                     X_array,Z_array,density_values=load_density_data(localization_type[2][cell_group],localization_type[1])
-                     
+                     X_array,Y_array,density_values=load_density_data(localization_type[2][cell_group],localization_type[1])
+                     dim_X_array=np.shape(X_array)
+                     dim_Y_array=np.shape(Y_array)
+                     ## assume meshgrid
+                     if dim_X_array==dim_Y_array:
+                        ## assume that data is not normalized; double-check, though
+                        X_max=np.nanmax(X_array)
+                        Y_max=np.nanmax(Y_array)
+                        X_array=np.divide(X_array,X_max,dtype=float)
+                        Y_array=np.divide(Y_array,Y_max,dtype=float)
+                        cell_diameter=get_soma_diameter(cell_names[cell_group])
+                        if string.lower(localization_type[4])=="minimal distance":
+                           if string.lower(localization_type[5])=="uniform":
+                              minimal_distance=localization_type[6]
+                              
+                        if string.lower(localization_type[4])=="random no overlap":
+                           cell_diameter=get_soma_diameter(cell_names[cell_group])
+                        
            if no_density_model:
               for cell_population in range(cell_array[0]):
                   cell_position_array.append(np.zeros([cell_array[cell_population+1][1],3]))

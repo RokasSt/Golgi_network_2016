@@ -62,7 +62,12 @@ if __name__ == "__main__":
     #net_params.append(input_array)
     ########
     #### try to introduce density models
-    #  net_params.append([ ["density based","relative path\",['GlyT2 density matrix of shape 35 152.txt'] ],100, 100, 100,"minimal distance",25])
+    #  net_params.append([ ["density based","relative path\",['GlyT2 density matrix of shape 35 152.txt'] ],100, 100, 100,"minimal distance","uniform",30])
+    # also no overlap or minimal distance:
+    # net_params.append(["random no overlap",100, 100, 100])
+    # net_params.append(["minimal distance","uniform",30],100, 100, 100])
+    # check also 2012-based generation after all those changes; it has not been tested; also max connection length other than None
+    
     net_params=[]
     net_params.append([2,["Very_Simple_Golgi_test_morph",10],["Very_Simple_Golgi_test_morph",10]])
     net_params.append(["random",100, 100, 100])
