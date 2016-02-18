@@ -288,9 +288,10 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
        print("saved %s in simulations"%'sync_only_%s.%s'%(general_plot_parameters[0],spike_plot_parameters[-1]))
        
     if spike_plot_parameters[0]=="2D raster plots":    
+       print("Intend to plot a main figure with representative 2D raster plots")
        #create label array
        if trial_indicator_target:
-          print("plot procedures started")
+          print("2D raster plot procedures started")
           for pop in range(0,no_of_rasters):
               label_array=[]
               ytick_array=[]
@@ -345,7 +346,8 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
               plt.setp(l.get_title(),fontsize=6)
               plt.setp(l.get_texts(), fontsize=6)
               fig_stack.savefig('simulations/%s.%s'%(general_plot_parameters[0],spike_plot_parameters[-1]))
-
+       else:
+          print("Intended to plot raster plots for trial %d, but specified region-specific selection of cells produces an empty target array.\nThus a main figure with a representative raster will not be produced.\nHowever, synchrony plot can be saved in a separate file.\nAlternatively, plot a non-empty trial"%(spike_plot_parameters[1]))
        if "save all trials to one separate file" in spike_plot_parameters:
           print target_pop_index_array
           if total_no_of_rows >1:
@@ -644,11 +646,11 @@ if __name__=="__main__":
    
    #spike_plot_params=["2D raster plots",3,"save all trials to separate files","save sync plot to a separate file","pdf"]  
 
-   spike_plot_params=["2D raster plots",3,"save all trials to one separate file","save sync plot to a separate file","pdf"]  
+   spike_plot_params=["2D raster plots",2,"save all trials to one separate file","save sync plot to a separate file","pdf"]  
 
 
 
-   plot_params=["test_lists_5trials","Golgi pop 0 and pop1","Spatial scale",["1","20"],3,3]   
+   plot_params=["test_iterations","Golgi pop 0 and pop1","Spatial scale",["1","20"],3,3]   
 
    # template: Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_specify,spike_plot_parameters,general_plot_parameters)
 
@@ -680,7 +682,10 @@ if __name__=="__main__":
 
    #target_cell_array=get_cell_ids_for_sync_analysis(["3D region specific",[[0,50],[0,50],[0,50]],"subtype specific","random fraction",[ 0,1 ] ],2, ["test_Lists_and_sync",["seed specifier",False],5])
 
-   Synchronization_analysis(450,["3D region specific",[[0,50],[0,50],[0,50]],"subtype specific","random fraction",[ 0,1 ] ],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",False],5],spike_plot_params,plot_params)
+   #Synchronization_analysis(450,["3D region specific",[[0,50],[0,50],[0,50]],"subtype specific","random fraction",[ 0,1 ] ],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",False],5],spike_plot_params,plot_params)
+
+
+   Synchronization_analysis(450,["3D region specific",[[0,50],[0,50],[0,50]],"subtype specific","random fraction",[ 0,1 ] ],2,[["test_iteration_1","test_iteration_2"],["seed specifier",False],5],spike_plot_params,plot_params)
   
  
    #Synchronization_analysis(450,["3D region specific",[[0,50],[0,50],[0,50]],"subtype specific","random fraction","randomly set target ids only once",[ 0,1 ] ],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",True],5],spike_plot_params,plot_params)

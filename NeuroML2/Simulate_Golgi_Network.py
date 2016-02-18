@@ -15,7 +15,7 @@ def run_simulations(network_parameters,sim_duration,time_step,simulator,experime
                newpath = r'simulations/%s/sim%d'%(experiment_identifier[exp_i],simulation_trial)
                if not os.path.exists(newpath):
                   os.makedirs(newpath)
-               sim_params,pop_params=generate_golgi_cell_net("Golgi%s"%(experiment_identifier[exp_i]),Cell_array,Position_array,Conn_array,Input_array,Sim_array,list_or_not,["output",True])
+               sim_params,pop_params=generate_golgi_cell_net("Golgi_%s"%(experiment_identifier[exp_i]),Cell_array,Position_array,Conn_array,Input_array,Sim_array,list_or_not,["output",True])
                if save_soma_specifier[1]=="Yes":
                   save_soma_positions(pop_params,r'simulations/%s'%(experiment_identifier[exp_i]))
                   print("saved soma positions in the experiment directory %s"%r'simulations/%s'%(experiment_identifier))
@@ -23,17 +23,16 @@ def run_simulations(network_parameters,sim_duration,time_step,simulator,experime
     else:
        for simulation_trial in range(0,no_of_trials):
            seed_number=random.sample(range(0,15000),1)[0]
-           random.seed(seed_number)
            for exp_i in range(0,len(experiment_identifier)):
                Cell_array=network_parameters[exp_i][0]
                Position_array=network_parameters[exp_i][1]
                Conn_array=network_parameters[exp_i][2]
                Input_array=network_parameters[exp_i][3]
-               Sim_array=[sim_duration,time_step,simulator,experiment_identifier[exp_i],simulation_trial,["seed",seed_specifier[1]],["plot",plot_specifier[1]]]
+               Sim_array=[sim_duration,time_step,simulator,experiment_identifier[exp_i],simulation_trial,["seed",seed_specifier[1],"trial seed",seed_specifier[3],seed_number],["plot",plot_specifier[1]]]
                newpath = r'simulations/%s/sim%d'%(experiment_identifier[exp_i],simulation_trial)
                if not os.path.exists(newpath):
                   os.makedirs(newpath)
-               sim_params,pop_params=generate_golgi_cell_net("Golgi%s_trial%d"%(experiment_identifier[exp_i],simulation_trial),Cell_array,Position_array,Conn_array,Input_array,Sim_array,list_or_not,["output",True])
+               sim_params,pop_params=generate_golgi_cell_net("Golgi_%s_trial%d"%(experiment_identifier[exp_i],simulation_trial),Cell_array,Position_array,Conn_array,Input_array,Sim_array,list_or_not,["output",True])
                if save_soma_specifier[1]=="Yes":
                   save_soma_positions(pop_params,r'simulations/%s/sim%d'%(experiment_identifier[exp_i],simulation_trial))
                   print("saved soma positions in the experiment directory %s"%r'simulations/%s/sim%d'%(experiment_identifier[exp_i],simulation_trial))
@@ -67,24 +66,65 @@ if __name__ == "__main__":
     # net_params.append(["random no overlap",100, 100, 100])
     # net_params.append(["minimal distance","uniform",30],100, 100, 100])
     # check also 2012-based generation after all those changes; it has not been tested; also max connection length other than None
-    
-    net_params=[]
-    net_params.append([2,["Very_Simple_Golgi_test_morph",10],["Very_Simple_Golgi_test_morph",10]])
-    net_params.append(["random",100, 100, 100])
-    net_params.append(["Vervaeke_2010_multi_compartment",1,[["dendrite_group"],[1]],[["dendrite_group"],[1]],["testing",4],["maximal connection length",None]])
-    net_params.append(["testing",0.5,["20.0ms","200.0ms","4E-5uA"],["220.0ms","200.0ms","-0.5E-5uA"]])
-   
-    net_params2=[]
-    net_params2.append([2,["Very_Simple_Golgi_test_morph",10],["Very_Simple_Golgi_test_morph",10]])
-    net_params2.append(["random",100, 100, 100])
-    net_params2.append(["Vervaeke_2010_multi_compartment",20,[["dendrite_group"],[1]],[["dendrite_group"],[1]],["testing",4],["maximal connection length",None]])
-    net_params2.append(["testing",0.5,["20.0ms","200.0ms","4E-5uA"],["220.0ms","200.0ms","-0.5E-5uA"]])
 
-    net_params_multiple.append(net_params)
-    net_params_multiple.append(net_params2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ######### The block below was used for testing 2010based-generation of Golgi cell networks
+
+
+    
+    #net_params_multiple=[]
+    #net_params=[]
+    #net_params.append([2,["Very_Simple_Golgi_test_morph",10],["Very_Simple_Golgi_test_morph",10]])
+    #net_params.append(["random",100, 100, 100])
+    #net_params.append(["Vervaeke_2010_multi_compartment",1,[["dendrite_group"],[1]],[["dendrite_group"],[1]],["testing",4],["maximal connection length",200]])
+    #net_params.append(["testing",0.5,["20.0ms","200.0ms","4E-5uA"],["220.0ms","200.0ms","-0.5E-5uA"]])
+   
+    #net_params2=[]
+    #net_params2.append([2,["Very_Simple_Golgi_test_morph",10],["Very_Simple_Golgi_test_morph",10]])
+    #net_params2.append(["random",100, 100, 100])
+    #net_params2.append(["Vervaeke_2010_multi_compartment",20,[["dendrite_group"],[1]],[["dendrite_group"],[1]],["testing",4],["maximal connection length",200]])
+    #net_params2.append(["testing",0.5,["20.0ms","200.0ms","4E-5uA"],["220.0ms","200.0ms","-0.5E-5uA"]])
+
+    #net_params_multiple.append(net_params)
+    #net_params_multiple.append(net_params2)
     # check firstly randomization : no simulation
     
-    run_simulations(net_params_multiple,450,0.005,"no simulation",["test_Lists_and_sync","test_Lists2_and_sync"],5,["seed specifier",False],["plot specifier",False],["save somata positions","Yes"],"list")
+    #run_simulations(net_params_multiple,450,0.005,"jNeuroML_NEURON",["test_iteration_1","test_iteration_2"],5,["seed specifier",False,"trial seed",True],["plot specifier",False],["save somata positions","Yes"],"list")
+
+
+
+
+    ##############
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
 
     #run_simulations(net_params_multiple,450,0.005,"jNeuroML_NEURON",["test_Lists_and_sync","test_Lists2_and_sync"],5,["seed specifier",False],["plot specifier",False],["save somata positions","Yes"],"list")
     
@@ -128,9 +168,63 @@ if __name__ == "__main__":
     #Conn_array=["Vervaeke_2012_based",spatial scale,["homogeneous or heterogeneous conductance",a value of a discrete GJ conductance,"units e.g. pS or nS"],["level of applying probabilities: segment/segment groups and subsegment"],\
     #[list of segments with their respective probabilities for each cell or list of segments each with list of subsegment probabilities
     #testing case 1 with segment probabilities (note that appropriate names of segment groups are passed); either constant or variable conductance:
+
+
+
+
+
+
+
+
+    ######### the block below is used to test 2012based- generation of Golgi networks
+
+
+
+
+
+
+    net_params_test_2012_multiple=[]
+
+
+
+
     
-    #one cell group
-    #Conn_array=["Vervaeke_2012_based",1,["constant conductance",2000,"pS"],["segment groups and segments"],[["Section_1","dend_1"],[0.7,0.3]]]
+    net_params_2012_net1=[]
+    net_params_2012_net2=[]
+    net_params_2012_net1.append([2,["Very_Simple_Golgi_test_morph",15],["Very_Simple_Golgi_test_morph",15]])
+    net_params_2012_net1.append(["random no overlap",100, 100, 100])
+    net_params_2012_net1.append( ["Vervaeke_2012_based",1,[["Very_Simple_Golgi_test_morph","Very_Simple_Golgi_test_morph","constant conductance",426,"pS"]],["segment groups and segments","segment groups and segments"],[  [["Section_1","dend_1"],[0.7,0.3]],  [["Section_1","dend_1"],[0.7,0.3]]    ],[["Very_Simple_Golgi_test_morph","Very_Simple_Golgi_test_morph","constant number of GJ contacts per pair", 8]],["testing",4],["maximal connection length",150]                    ]                          )
+    net_params_2012_net1.append([  ["variable basal firing rate",["amplitude distribution","gaussian",[100,100],[20,20],"nA"],["offset distribution","constant",[50,50],"ms"]]            ] )
+    net_params_test_2012_multiple.append(net_params_2012_net1)
+  
+    net_params_2012_net2.append([2,["Very_Simple_Golgi_test_morph",15],["Very_Simple_Golgi_test_morph",15]])
+    net_params_2012_net2.append(["random no overlap",100, 100, 100])
+    net_params_2012_net2.append( ["Vervaeke_2012_based",1,[["Very_Simple_Golgi_test_morph","Very_Simple_Golgi_test_morph","constant conductance",426,"pS"]],["segment groups and segments","segment groups and segments"],[  [["Section_1","dend_1"],[0.7,0.3]],  [["Section_1","dend_1"],[0.7,0.3]]    ],[["Very_Simple_Golgi_test_morph","Very_Simple_Golgi_test_morph","constant number of GJ contacts per pair", 8]],["testing",4],["maximal connection length",150]                    ]                          )
+    net_params_2012_net2.append([  ["variable basal firing rate",["amplitude distribution","constant",[100,100],"nA"],["offset distribution","constant",[50,50],"ms"]]            ] )
+    net_params_test_2012_multiple.append(net_params_2012_net2)
+    
+
+    run_simulations(net_params_test_2012_multiple,450,0.005,"jNeuroML_NEURON",["2012based_test_1","2012based_test_2"],2,["seed specifier",False,"trial seed",True],["plot specifier",False],["save somata positions","Yes"],"list")
+
+
+
+
+
+
+   
+   ######### the block below is used to test 2012based- generation of Golgi networks
+
+
+
+
+
+
+
+
+
+
+
+    
     #two cell groups
     #Conn_array=["Vervaeke_2012_based",1,[["Very_Simple_Golgi_test_morph","Very_Simple_Golgi_test_morph","constant conductance",426,"pS"]],["segment groups and segments","segment groups and segments"],\
                       #[  [["Section_1","dend_1"],[0.7,0.3]],  [["Section_1","dend_1"],[0.7,0.3]]    ],[["Very_Simple_Golgi_test_morph","Very_Simple_Golgi_test_morph","constant number of GJ contacts per pair", 8] or ["variable number of GJ contacts per pair","binomial",..,..,4,8]],\
