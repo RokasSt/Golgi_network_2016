@@ -103,7 +103,8 @@ def load_density_data(file_name,relative_path):
     print X, Y, Val1
     return X, Y, Val1
 
-def get_cell_ids_for_sync_analysis(target_specifications,no_of_cell_groups,experiment_specifiers):
+def get_cell_ids_for_sync_analysis(target_specifications,no_of_cell_groups,experiment_specifiers,experiment_seed):
+    random.seed(experiment_seed)
     target_cells=[]
     #########
     if target_specifications[0]=="all":
@@ -757,6 +758,7 @@ def get_unique_target_points(seg_specifications,mode_of_targeting,targeting_spec
     return target_points_per_cell
 
 def get_3D_connection_length(cell_array,cell_position_array,pre_pop,post_pop,pre_cell_ID,post_cell_ID,pre_segment_ID,post_segment_ID,pre_fraction_Along,post_fraction_Along):
+
     #cell_array variable has to contain cell component names
     loaded_cell_array={}
     for cell_pop in range(0,len(cell_array)):
@@ -772,69 +774,71 @@ def get_3D_connection_length(cell_array,cell_position_array,pre_pop,post_pop,pre
            document_cell = neuroml.loaders.NeuroMLLoader.load(post_cell_nml_file)
            loaded_cell_array[cell_array[post_pop]]=document_cell.cells[0]
            post_cell_position=cell_position_array[post_pop][post_cell_ID]
-        for pre_segment in loaded_cell_array[Pre_cell_name].morphology.segments:
-            if pre_segment.id==pre_segment_ID:
-               xd=pre_segment.distal.x
-               yd=pre_segment.distal.y
-               zd=pre_segment.distal.z
-               print xd, yd, zd
-               if pre_segment_ID !=0:
-                  get_segment_parent=pre_segment.parent
-                  get_segment_parent_id=get_segment_parent.segments
-                  for pre_segment_parent in loaded_cell_array[Pre_cell_name].morphology.segments:
-                      if pre_segment_parent.id==get_segment_parent_id:
-                         xp=pre_segment_parent.distal.x
-                         yp=pre_segment_parent.distal.y
-                         zp=pre_segment_parent.distal.z
+    for pre_segment in loaded_cell_array[Pre_cell_name].morphology.segments:
+        if pre_segment.id==pre_segment_ID:
+           xd=pre_segment.distal.x
+           yd=pre_segment.distal.y
+           zd=pre_segment.distal.z
+           print xd, yd, zd
+           if pre_segment_ID !=0:
+              get_segment_parent=pre_segment.parent
+              get_segment_parent_id=get_segment_parent.segments
+              for pre_segment_parent in loaded_cell_array[Pre_cell_name].morphology.segments:
+                  if pre_segment_parent.id==get_segment_parent_id:
+                     xp=pre_segment_parent.distal.x
+                     yp=pre_segment_parent.distal.y
+                     zp=pre_segment_parent.distal.z
                          
-               else:
-                  xp=pre_segment.proximal.x
-                  yp=pre_segment.proximal.y
-                  zp=pre_segment.proximal.z
-               print xp, yp, zp
+           else:
+              xp=pre_segment.proximal.x
+              yp=pre_segment.proximal.y
+              zp=pre_segment.proximal.z
+              print xp, yp, zp
                # translate the points by soma location vector
-               xd=xd+pre_cell_position[0]
-               yd=yd+pre_cell_position[1]
-               zd=zd+pre_cell_position[2]
-               xp=xp+pre_cell_position[0]
-               yp=yp+pre_cell_position[1]
-               zp=zp+pre_cell_position[2]
-               pre_target_point=[]
-               pre_target_point.append(pre_fraction_Along*(xd-xp)+xp)
-               pre_target_point.append(pre_fraction_Along*(yd-yp)+yp)
-               pre_target_point.append(pre_fraction_Along*(zd-zp)+zp)
-        for post_segment in loaded_cell_array[Post_cell_name].morphology.segments:
-            if post_segment.id==post_segment_ID:
-               xd=post_segment.distal.x
-               yd=post_segment.distal.y
-               zd=post_segment.distal.z
-               print xd,yd,zd
-               if pre_segment_ID !=0:
-                  get_segment_parent=post_segment.parent
-                  get_segment_parent_id=get_segment_parent.segments
-                  for post_segment_parent in loaded_cell_array[Pre_cell_name].morphology.segments:
-                      if post_segment_parent.id==get_segment_parent_id:
-                         xp=post_segment_parent.distal.x
-                         yp=post_segment_parent.distal.y
-                         zp=post_segment_parent.distal.z
+           xd=xd+pre_cell_position[0]
+           yd=yd+pre_cell_position[1]
+           zd=zd+pre_cell_position[2]
+           xp=xp+pre_cell_position[0]
+           yp=yp+pre_cell_position[1]
+           zp=zp+pre_cell_position[2]
+           pre_target_point=[]
+           pre_target_point.append(pre_fraction_Along*(xd-xp)+xp)
+           pre_target_point.append(pre_fraction_Along*(yd-yp)+yp)
+           pre_target_point.append(pre_fraction_Along*(zd-zp)+zp)
+    for post_segment in loaded_cell_array[Post_cell_name].morphology.segments:
+        if post_segment.id==post_segment_ID:
+           xd=post_segment.distal.x
+           yd=post_segment.distal.y
+           zd=post_segment.distal.z
+           print xd,yd,zd
+           if pre_segment_ID !=0:
+              get_segment_parent=post_segment.parent
+              get_segment_parent_id=get_segment_parent.segments
+              for post_segment_parent in loaded_cell_array[Pre_cell_name].morphology.segments:
+                  if post_segment_parent.id==get_segment_parent_id:
+                     xp=post_segment_parent.distal.x
+                     yp=post_segment_parent.distal.y
+                     zp=post_segment_parent.distal.z
                          
-               else:
-                  xp=post_segment.proximal.x
-                  yp=post_segment.proximal.y
-                  zp=post_segment.proximal.z
-               print xp,yp,zp
-               # translate the points by soma location vector
-               xd=xd+post_cell_position[0]
-               yd=yd+post_cell_position[1]
-               zd=zd+post_cell_position[2]
-               xp=xp+post_cell_position[0]
-               yp=yp+post_cell_position[1]
-               zp=zp+post_cell_position[2]
-               post_target_point=[]
-               post_target_point.append(post_fraction_Along*(xd-xp)+xp)
-               post_target_point.append(post_fraction_Along*(yd-yp)+yp)
-               post_target_point.append(post_fraction_Along*(zd-zp)+zp)
-        connection_length=distance(pre_target_point,post_target_point)
+           else:
+              xp=post_segment.proximal.x
+              yp=post_segment.proximal.y
+              zp=post_segment.proximal.z
+           print xp,yp,zp
+           # translate the points by soma location vector
+           xd=xd+post_cell_position[0]
+           yd=yd+post_cell_position[1]
+           zd=zd+post_cell_position[2]
+           xp=xp+post_cell_position[0]
+           yp=yp+post_cell_position[1]
+           zp=zp+post_cell_position[2]
+           post_target_point=[]
+           post_target_point.append(post_fraction_Along*(xd-xp)+xp)
+           post_target_point.append(post_fraction_Along*(yd-yp)+yp)
+           post_target_point.append(post_fraction_Along*(zd-zp)+zp)
+           print pre_target_point
+           print post_target_point
+    connection_length=distance(pre_target_point,post_target_point)
     print connection_length    
     return connection_length      
         
@@ -933,7 +937,7 @@ def extract_morphology_information(cell_array,target_array):
 
 
 
-#if __name__ == "__main__":
+if __name__ == "__main__":
 
 
   #these are for testing and debugging !!!!!
@@ -947,7 +951,7 @@ def extract_morphology_information(cell_array,target_array):
 
 
 
-  #get_3D_connection_length(["Very_Simple_Golgi_test_morph"],[np.array([[1,2,3],[4,5,6]])],0,0,0,1,1,2,0.456,0.789)
+  get_3D_connection_length(["Very_Simple_Golgi_test_morph"],[np.array([[1,2,3],[4,5,6]])],0,0,0,1,1,2,0.456,0.789)
 
 
   
