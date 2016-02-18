@@ -378,7 +378,7 @@ def get_cell_ids_for_sync_analysis(target_specifications,no_of_cell_groups,exper
                       random_targets_per_cell_group=[]
                       if region_specific_target_cells[trial][cell_group] != []:
                          no_of_cells_per_region=len(region_specific_target_cells[trial][cell_group])
-                         random_targets_per_cell_group=random.sample(region_specific_target_cells[trial][cell_group],int(round(target_specifications[subtype_specifier_position+3][cell_group]*no_of_cells_per_region)))
+                         random_targets_per_cell_group=random.sample(region_specific_target_cells[trial][cell_group],int(round(target_specifications[subtype_specifier_position+2][cell_group]*no_of_cells_per_region)))
                       if random_targets_per_cell_group !=[]:
                          random_targets_per_cell_group.append('pop%d'%cell_group)
                          random_targets_per_trial.append(random_targets_per_cell_group)
@@ -933,7 +933,7 @@ def extract_morphology_information(cell_array,target_array):
 
 
 
-if __name__ == "__main__":
+#if __name__ == "__main__":
 
 
   #these are for testing and debugging !!!!!
@@ -975,6 +975,6 @@ if __name__ == "__main__":
   #target_cell_array=get_cell_ids_for_sync_analysis(["subtype specific","random fraction","randomize each trial individually",[ 0,1 ] ],2, ["test_Lists_and_sync",["seed specifier",False],5])
 
  #test load_density_data:
- # X,Y,ro_value=load_density_data(file_name,relative_path)
+ #X,Y,ro_value=load_density_data(file_name,relative_path)
  
  
