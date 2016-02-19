@@ -304,10 +304,10 @@ def generate_golgi_cell_net(ref,cell_array,location_array, connectivity_informat
                                      if random.random() <connection_probability_vervaeke_2010(distance_between_cells):
                                         if connectivity_information[3][pre_pop_index]=="segment groups and segments":
                                            pre_target_points=get_unique_target_points(pre_pop_target_segment_array,"segment groups and segments",\
-                                                                                   connectivity_information[4][post_pop_index],no_of_GJcon_per_pair)
+                                                                                   connectivity_information[4][pre_pop_index],no_of_GJcon_per_pair)
                                         if connectivity_information[3][pre_pop_index]=="segments and subsegments":
                                            pre_target_points=get_unique_target_points(pre_pop_target_segment_array,"segments and subsegments",\
-                                                                                connectivity_information[4][post_pop_index],no_of_GJcon_per_pair) 
+                                                                                connectivity_information[4][pre_pop_index],no_of_GJcon_per_pair) 
        
                                         if connectivity_information[3][post_pop_index]=="segment groups and segments":
                                            post_targeting_mode="segment groups and segments"
@@ -331,7 +331,12 @@ def generate_golgi_cell_net(ref,cell_array,location_array, connectivity_informat
 
                                                   if connectivity_information[2][pair_index][2]=="variable conductance":
                                                      if string.lower(connectivity_information[2][pair][2])=="gaussian":
-                                                        gap_junction = neuroml.GapJunction(id="gap_junction%d"%gap_counter, conductance="%f%s"%(connectivity_information[2][pair_index][3]*conductance_scaling,connectivity_information[2][pair_index][4]))
+                                                        ## here is a bug; use random.gauss
+                                                        conductance=random.gauss(connectivity_information[2][pair_index][3],\
+                                                        connectivity_information[2][pair_index][4])
+                                                        conductanceUnits=connectivity_information[2][pair_index][5]
+                                                        gap_junction = neuroml.GapJunction(id="gap_junction%d"%gap_counter, conductance="%f%s"%(conductance*conductance_scaling,conductanceUnits)
+                                                        
                                                         nml_doc.gap_junctions.append(gap_junction)
 		                                        gap_counter+=1
                                                         #other options can be added such as gamma distribution
@@ -339,7 +344,7 @@ def generate_golgi_cell_net(ref,cell_array,location_array, connectivity_informat
 pre_cell="../%s/%d/%s"%(Golgi_pop_index_array[pre_pop_index],Pre_cell,cell_array[pre_pop_index+1][0]),\
 post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_array[post_pop_index+1][0]),synapse=gap,\
                                                              pre_segment="%d"%Pre_segment_id,post_segment="%d"%Post_segment_id,\
-                                                             pre_fraction_along="%f"%random.random(),post_fraction_along="%f"%random.random())
+                                                             pre_fraction_along="%f"%Pre_fraction,post_fraction_along="%f"%Post_fraction)
                                             
 		                                     if projection_counter==0:
                                                         net.electrical_projections.append(proj)
@@ -347,7 +352,7 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                                                
 		                                     proj.electrical_connection_instances.append(conn)
 		                                     conn_count+=1
-                                                     x=1
+                                                     
                                                   if connectivity_information[2][pair_index][2]=="constant conductance":
                                                      conn =neuroml.ElectricalConnectionInstance(id=conn_count,\
 pre_cell="../%s/%d/%s"%(Golgi_pop_index_array[pre_pop_index],Pre_cell,cell_array[pre_pop_index+1][0]),\
@@ -361,7 +366,7 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                                                
 		                                     proj.electrical_connection_instances.append(conn)
 		                                     conn_count+=1
-                                                     x=1
+                                                     
                                             else:
                                                post_target_point=get_unique_target_points(post_pop_target_segment_array,post_targeting_mode,\
                                                                                 connectivity_information[4][post_pop_index],1) 
@@ -372,7 +377,11 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
 
                                                if connectivity_information[2][pair_index][2]=="variable conductance":
                                                   if string.lower(connectivity_information[2][pair][2])=="gaussian":
-                                                     gap_junction = neuroml.GapJunction(id="gap_junction%d"%gap_counter, conductance="%f%s"%(connectivity_information[2][pair_index][3]*conductance_scaling,connectivity_information[2][pair_index][4]))
+                                                     conductance=random.gauss(connectivity_information[2][pair_index][3],\
+                                                     connectivity_information[2][pair_index][4])
+                                                     conductanceUnits=connectivity_information[2][pair_index][5]
+                                                     gap_junction = neuroml.GapJunction(id="gap_junction%d"%gap_counter, conductance="%f%s"%(conductance*conductance_scaling,conductanceUnits)
+                                                     
                                                      nml_doc.gap_junctions.append(gap_junction)
 		                                     gap_counter+=1
                                                      #other options can be added such as gamma distribution
@@ -388,7 +397,7 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                                                
 		                                  proj.electrical_connection_instances.append(conn)
 		                                  conn_count+=1
-                                                  x=1
+                                                  
 
                                                if connectivity_information[2][pair_index][2]=="constant conductance":
                                                   conn =neuroml.ElectricalConnectionInstance(id=conn_count,\
@@ -403,7 +412,7 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                                                
 		                                  proj.electrical_connection_instances.append(conn)
 		                                  conn_count+=1
-                                                  x=1
+                                                  
 
            if connectivity_information[0]=="Vervaeke_2010_one_compartment":
                gap_counter=0
@@ -1054,10 +1063,10 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                                      if random.random() <connection_probability_vervaeke_2010(distance_between_cells):
                                         if connectivity_information[3][pre_pop_index]=="segment groups and segments":
                                            pre_target_points=get_unique_target_points(pre_pop_target_segment_array,"segment groups and segments",\
-                                                                                   connectivity_information[4][post_pop_index],no_of_GJcon_per_pair)
+                                                                                   connectivity_information[4][pre_pop_index],no_of_GJcon_per_pair)
                                         if connectivity_information[3][pre_pop_index]=="segments and subsegments":
                                            pre_target_points=get_unique_target_points(pre_pop_target_segment_array,"segments and subsegments",\
-                                                                                connectivity_information[4][post_pop_index],no_of_GJcon_per_pair) 
+                                                                                connectivity_information[4][pre_pop_index],no_of_GJcon_per_pair) 
        
                                         if connectivity_information[3][post_pop_index]=="segment groups and segments":
                                            post_targeting_mode="segment groups and segments"
@@ -1081,7 +1090,10 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
 
                                                   if connectivity_information[2][pair_index][2]=="variable conductance":
                                                      if string.lower(connectivity_information[2][pair][2])=="gaussian":
-                                                        gap_junction = neuroml.GapJunction(id="gap_junction%d"%gap_counter, conductance="%f%s"%(connectivity_information[2][pair_index][3]*conductance_scaling,connectivity_information[2][pair_index][4]))
+                                                        conductance=random.gauss(connectivity_information[2][pair_index][3],\
+                                                        connectivity_information[2][pair_index][4])
+                                                        conductanceUnits=connectivity_information[2][pair_index][5]
+                                                        gap_junction = neuroml.GapJunction(id="gap_junction%d"%gap_counter, conductance="%f%s"%(conductance*conductance_scaling,conductanceUnits)
                                                         nml_doc.gap_junctions.append(gap_junction)
 		                                        gap_counter+=1
                                                         #other options can be added such as gamma distribution
@@ -1095,7 +1107,7 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                                                
 		                                     proj.electrical_connections.append(conn)
 		                                     conn_count+=1
-                                                     x=1
+                                                     
                                                   if connectivity_information[2][pair_index][2]=="constant conductance":
                                                      conn =neuroml.ElectricalConnection(id=conn_count,pre_cell="%d"%Pre_cell,post_cell="%d"%Post_cell,synapse=gap_id_per_pair,\
                                                               pre_segment="%d"%Pre_segment_id,post_segment="%d"%Post_segment_id,\
@@ -1107,7 +1119,7 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                                                
 		                                     proj.electrical_connections.append(conn)
 		                                     conn_count+=1
-                                                     x=1
+                                                     
                                                   else:
                                                      post_target_point=get_unique_target_points(post_pop_target_segment_array,post_targeting_mode,\
                                                                                 connectivity_information[4][post_pop_index],1) 
@@ -1118,7 +1130,10 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
 
                                                      if connectivity_information[2][pair_index][2]=="variable conductance":
                                                         if string.lower(connectivity_information[2][pair][2])=="gaussian":
-                                                           gap_junction = neuroml.GapJunction(id="gap_junction%d"%gap_counter, conductance="%f%s"%(connectivity_information[2][pair_index][3]*conductance_scaling,connectivity_information[2][pair_index][4]))
+                                                           conductance=random.gauss(connectivity_information[2][pair_index][3],\
+                                                           connectivity_information[2][pair_index][4])
+                                                           conductanceUnits=connectivity_information[2][pair_index][5]
+                                                           gap_junction = neuroml.GapJunction(id="gap_junction%d"%gap_counter, conductance="%f%s"%(conductance*conductance_scaling,conductanceUnits)
                                                            nml_doc.gap_junctions.append(gap_junction)
 		                                           gap_counter+=1
                                                         #other options can be added such as gamma distribution
@@ -1132,7 +1147,7 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                                                
 		                                        proj.electrical_connections.append(conn)
 		                                        conn_count+=1
-                                                        x=1
+                                                        
 
                                                      if connectivity_information[2][pair_index][2]=="constant conductance":
                                                         conn =neuroml.ElectricalConnection(id=conn_count,pre_cell="%d"%Pre_cell,post_cell="%d"%Post_cell,synapse=gap_id_per_pair,\
@@ -1145,7 +1160,7 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                                                
 		                                        proj.electrical_connections.append(conn)
 		                                        conn_count+=1
-                                                        x=1
+                                                        
 
            if connectivity_information[0]=="Vervaeke_2010_multi_compartment":
                cell_names=[]

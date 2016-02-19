@@ -275,6 +275,7 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
        ax_sync.locator_params(axis='y', tight=True, nbins=10)
        ax_sync.set_xlabel('Time (ms)',fontsize=4)
        ax_sync.set_ylabel('Synchrony index',size=4)
+       ax_sync.set_ylim(0,1)
        ax_sync.set_xticks(marks)
        ax_sync.set_title('Synchronization between %s'%general_plot_parameters[1],size=4)
        fig_sync.tight_layout()
@@ -335,6 +336,7 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
               ax_stack[no_of_rasters].locator_params(axis='y', tight=True, nbins=10)
               ax_stack[no_of_rasters].set_xlabel('Time (ms)',fontsize=6)
               ax_stack[no_of_rasters].set_ylabel('Synchrony index',size=4)
+              ax_stack[no_of_rasters].set_ylim(0,1)
               ax_stack[no_of_rasters].set_xticks(marks)
               ax_stack[no_of_rasters].set_title('Synchronization between %s'%general_plot_parameters[1],size=6)
               fig_stack.tight_layout()
@@ -685,9 +687,9 @@ if __name__=="__main__":
    #Synchronization_analysis(450,["3D region specific",[[0,50],[0,50],[0,50]],"subtype specific","random fraction",[ 0,1 ] ],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",False],5],spike_plot_params,plot_params)
 
 
-   #Synchronization_analysis(450,["3D region specific",[[0,50],[0,50],[0,50]],"subtype specific","random fraction",[ 0,1 ] ],2,[["test_iteration_1","test_iteration_2"],["seed specifier",False],5],spike_plot_params,plot_params)
+   #Synchronization_analysis(450,["3D region specific",[[0,100],[0,100],[0,100]],"subtype specific","random fraction",[ 1,1 ] ],2,[["test_iteration_1","test_iteration_2"],["seed specifier",False],5],spike_plot_params,plot_params)
 
-   Synchronization_analysis(450,["3D region specific",[[0,50],[0,50],[0,50]],"subtype specific","random fraction",[ 0,1 ] ],2,[["2012based_test_1","2012based_test_2"],["seed specifier",False],2],spike_plot_params,plot_params)
+   Synchronization_analysis(450,["3D region specific",[[0,100],[0,100],[0,100]],"subtype specific","random fraction",[ 1,1 ] ],2,[["2012based_test_1","2012based_test_2"],["seed specifier",False],2],spike_plot_params,plot_params)
  
  
    #Synchronization_analysis(450,["3D region specific",[[0,50],[0,50],[0,50]],"subtype specific","random fraction","randomly set target ids only once",[ 0,1 ] ],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",True],5],spike_plot_params,plot_params)
