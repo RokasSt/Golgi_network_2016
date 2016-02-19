@@ -194,13 +194,13 @@ if __name__ == "__main__":
     net_params_2012_net1.append([2,["Very_Simple_Golgi_test_morph",15],["Very_Simple_Golgi_test_morph",15]])
     net_params_2012_net1.append(["random no overlap",100, 100, 100])
     net_params_2012_net1.append( ["Vervaeke_2012_based",1,[["Very_Simple_Golgi_test_morph","Very_Simple_Golgi_test_morph","constant conductance",426,"pS"]],["segment groups and segments","segment groups and segments"],[  [["Section_1","dend_1"],[0.7,0.3]],  [["Section_1","dend_1"],[0.7,0.3]]    ],[["Very_Simple_Golgi_test_morph","Very_Simple_Golgi_test_morph","constant number of GJ contacts per pair", 8]],["testing",4],["maximal connection length",150]                    ]                          )
-    net_params_2012_net1.append([  ["variable basal firing rate",["amplitude distribution","gaussian",[10,10],[2,2],"pA"],["offset distribution","constant",[50,50],"ms"]]            ] )
+    net_params_2012_net1.append([  ["variable basal firing rate",["amplitude distribution","gaussian",[10,10],[5,5],"pA"],["offset distribution","uniform",[0,0],[100,100],"ms"]]            ] )
     net_params_test_2012_multiple.append(net_params_2012_net1)
   
     net_params_2012_net2.append([2,["Very_Simple_Golgi_test_morph",15],["Very_Simple_Golgi_test_morph",15]])
     net_params_2012_net2.append(["random no overlap",100, 100, 100])
     net_params_2012_net2.append( ["Vervaeke_2012_based",1,[["Very_Simple_Golgi_test_morph","Very_Simple_Golgi_test_morph","constant conductance",426,"pS"]],["segment groups and segments","segment groups and segments"],[  [["Section_1","dend_1"],[0.7,0.3]],  [["Section_1","dend_1"],[0.7,0.3]]    ],[["Very_Simple_Golgi_test_morph","Very_Simple_Golgi_test_morph","constant number of GJ contacts per pair", 8]],["testing",4],["maximal connection length",150]                    ]                          )
-    net_params_2012_net2.append([  ["variable basal firing rate",["amplitude distribution","constant",[10,10],"pA"],["offset distribution","constant",[50,50],"ms"]]            ] )
+    net_params_2012_net2.append([  ["variable basal firing rate",["amplitude distribution","gaussian",[10,10],[5,5],"pA"],["offset distribution","constant",[50,50],"ms"]]            ] )
     net_params_test_2012_multiple.append(net_params_2012_net2)
     
 

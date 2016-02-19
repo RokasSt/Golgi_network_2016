@@ -335,7 +335,7 @@ def generate_golgi_cell_net(ref,cell_array,location_array, connectivity_informat
                                                         conductance=random.gauss(connectivity_information[2][pair_index][3],\
                                                         connectivity_information[2][pair_index][4])
                                                         conductanceUnits=connectivity_information[2][pair_index][5]
-                                                        gap_junction = neuroml.GapJunction(id="gap_junction%d"%gap_counter, conductance="%f%s"%(conductance*conductance_scaling,conductanceUnits)
+                                                        gap_junction = neuroml.GapJunction(id="gap_junction%d"%gap_counter, conductance="%f%s"%(conductance*conductance_scaling,conductanceUnits))
                                                         
                                                         nml_doc.gap_junctions.append(gap_junction)
 		                                        gap_counter+=1
@@ -380,7 +380,7 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                                                      conductance=random.gauss(connectivity_information[2][pair_index][3],\
                                                      connectivity_information[2][pair_index][4])
                                                      conductanceUnits=connectivity_information[2][pair_index][5]
-                                                     gap_junction = neuroml.GapJunction(id="gap_junction%d"%gap_counter, conductance="%f%s"%(conductance*conductance_scaling,conductanceUnits)
+                                                     gap_junction = neuroml.GapJunction(id="gap_junction%d"%gap_counter, conductance="%f%s"%(conductance*conductance_scaling,conductanceUnits))
                                                      
                                                      nml_doc.gap_junctions.append(gap_junction)
 		                                     gap_counter+=1
@@ -1093,7 +1093,7 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                                                         conductance=random.gauss(connectivity_information[2][pair_index][3],\
                                                         connectivity_information[2][pair_index][4])
                                                         conductanceUnits=connectivity_information[2][pair_index][5]
-                                                        gap_junction = neuroml.GapJunction(id="gap_junction%d"%gap_counter, conductance="%f%s"%(conductance*conductance_scaling,conductanceUnits)
+                                                        gap_junction = neuroml.GapJunction(id="gap_junction%d"%gap_counter, conductance="%f%s"%(conductance*conductance_scaling,conductanceUnits))
                                                         nml_doc.gap_junctions.append(gap_junction)
 		                                        gap_counter+=1
                                                         #other options can be added such as gamma distribution
@@ -1133,7 +1133,7 @@ post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_ar
                                                            conductance=random.gauss(connectivity_information[2][pair_index][3],\
                                                            connectivity_information[2][pair_index][4])
                                                            conductanceUnits=connectivity_information[2][pair_index][5]
-                                                           gap_junction = neuroml.GapJunction(id="gap_junction%d"%gap_counter, conductance="%f%s"%(conductance*conductance_scaling,conductanceUnits)
+                                                           gap_junction = neuroml.GapJunction(id="gap_junction%d"%gap_counter, conductance="%f%s"%(conductance*conductance_scaling,conductanceUnits))
                                                            nml_doc.gap_junctions.append(gap_junction)
 		                                           gap_counter+=1
                                                         #other options can be added such as gamma distribution
