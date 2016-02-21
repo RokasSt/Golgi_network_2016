@@ -195,7 +195,7 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
                    print cell_position_array[cell_array[cell_pop]['popID']][cell,0], cell_position_array[cell_array[cell_pop]['popID']][cell,1], cell_position_array[cell_array[cell_pop]['popID']][cell,2]
                  
 	########## 2012 publication based generation of model connectivity
-        if connectivity_information['connModel']=="Vervaeke_2012_based":
+        if connectivity_information['connModel']=="Vervaeke_2012_based" or connectivity_information['connModel']=="explicit probabilities":
            gap_counter=0
            initial_projection_counter=0                                                 
            for pair in range(0,len(connectivity_information['populationPairs']) ):
@@ -210,7 +210,7 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
                       postPopSize=cell_array[pop]['size']
 
                if connectivity_information['populationPairs'][pair]['targetingModelprePop']['model']=="segment groups and segments":
-                      pre_pop_target_segment_array=extract_morphology_information([cell_array[prePop_listIndex]['cellType']],\
+                  pre_pop_target_segment_array=extract_morphology_information([cell_array[prePop_listIndex]['cellType']],\
                                                                                           ["segment groups",  \
 connectivity_information['populationPairs'][pair]['targetingModelprePop']['segmentGroupList']])
 
@@ -219,11 +219,11 @@ connectivity_information['populationPairs'][pair]['targetingModelprePop']['segme
                                                   ["segments",connectivity_information['populationPairs'][pair]['targetingModelprePop']['segmentList']])
 
                if connectivity_information['populationPairs'][pair]['targetingModelpostPop']['model']=="segment groups and segments":
-                          post_pop_target_segment_array=extract_morphology_information([cell_array[postPop_listIndex]['cellType']  ],\
+                  post_pop_target_segment_array=extract_morphology_information([cell_array[postPop_listIndex]['cellType']  ],\
                                   ["segment groups",connectivity_information['populationPairs'][pair]['targetingModelpostPop']['segmentGroupList'] ] )
 
                if connectivity_information['populationPairs'][pair]['targetingModelpostPop']['model']=="segments and subsegments":
-                          post_pop_target_segment_array=extract_morphology_information([cell_array[postPop_listIndex]['cellType']],\
+                  post_pop_target_segment_array=extract_morphology_information([cell_array[postPop_listIndex]['cellType']],\
             ["segments",connectivity_information['populationPairs'][pair]['targetingModelpostPop']['segmentGroupList']])  
                                             
                proj = neuroml.ElectricalProjection(id="proj%d"%initial_projection_counter,\
@@ -263,8 +263,15 @@ connectivity_information['populationPairs'][pair]['targetingModelprePop']['segme
                                     
                for Pre_cell in range(0,prePopSize):
                    for Post_cell in range(0,postPopSize):
-                       distance_between_cells=distance(pre_cell_positions[Pre_cell],post_cell_positions[Post_cell])/spatial_scale
-                       if random.random() <connection_probability_vervaeke_2010(distance_between_cells):
+                       
+                       if connectivity_information['connModel']=="explicit_connection_probabilities":
+                          connection_probability=connectivity_information['populationPairs'][pair]['connProbabilities']
+                          
+                       if connectivity_information['connModel']=="Vervaeke_2012_based":
+                          distance_between_cells=distance(pre_cell_positions[Pre_cell],post_cell_positions[Post_cell])/spatial_scale
+                          connection_probability=connection_probability_vervaeke_2010(distance_between_cells)
+                          
+                       if random.random() < connection_probability:
 
                           if connectivity_information['populationPairs'][pair]['targetingModelprePop']['model']=="segment groups and segments":
                              pre_target_points=get_unique_target_points(pre_pop_target_segment_array,"segment groups and segments",\
@@ -274,7 +281,7 @@ connectivity_information['populationPairs'][pair]['targetingModelprePop']['segme
                           if connectivity_information['populationPairs'][pair]['targetingModelprePop']['model']=="segments and subsegments":
                              pre_target_points=get_unique_target_points(pre_pop_target_segment_array,"segments and subsegments",\
  [connectivity_information['populationPairs'][pair]['targetingModelprePop']['segmentList'],\
- [connectivity_information['populationPairs'][pair]['targetingModelprePop']['segmentProbabilities'],[connectivity_information['populationPairs'][pair]['targetingModelprePop']['fractionAlongANDsubsegProbabilities']],no_of_GJcon_per_pair)
+ connectivity_information['populationPairs'][pair]['targetingModelprePop']['segmentProbabilities'],[connectivity_information['populationPairs'][pair]['targetingModelprePop']['fractionAlongANDsubsegProbabilities']],no_of_GJcon_per_pair)
        
                           if connectivity_information['populationPairs'][pair]['targetingModelpostPop']['model']=="segment groups and segments":
 
@@ -288,7 +295,7 @@ connectivity_information['populationPairs'][pair]['targetingModelpostPop']['segm
                              post_targeting_mode="segments and subsegments"
 
                              post_targeting_parameters=[connectivity_information['populationPairs'][pair]['targetingModelpostPop']['segmentList'],\
- [connectivity_information['populationPairs'][pair]['targetingModelpostPop']['segmentProbabilities'],[connectivity_information['populationPairs'][pair]['targetingModelpostPop']['fractionAlongANDsubsegProbabilities']]
+ connectivity_information['populationPairs'][pair]['targetingModelpostPop']['segmentProbabilities'],[connectivity_information['populationPairs'][pair]['targetingModelpostPop']['fractionAlongANDsubsegProbabilities']]
 
                           for pre_target_point in range(0,len(pre_target_points)):
                               if 'maximalConnDistance' in connectivity_information['populationPairs'][pair]:
@@ -319,7 +326,7 @@ connectivity_information['populationPairs'][pair]['targetingModelpostPop']['segm
                                     #other options can be added such as gamma distribution
                                  conn =neuroml.ElectricalConnectionInstance(id=conn_count,\
 pre_cell="../%s/%d/%s"%(prePop,Pre_cell,cell_array[prePop_listIndex]['cellType']),\
-post_cell="../%s/%d/%s"%(postPop,Post_cell,cell_array[postPop_listIndex]['cellType']),synapse=gap,\
+post_cell="../%s/%d/%s"%(postPop,Post_cell,cell_array[postPop_listIndex]['cellType']),synapse=gap_junction.id,\
                                                              pre_segment="%d"%Pre_segment_id,post_segment="%d"%Post_segment_id,\
                                                              pre_fraction_along="%f"%Pre_fraction,post_fraction_along="%f"%Post_fraction)
                                             
@@ -344,419 +351,293 @@ post_cell="../%s/%d/%s"%(postPop,Post_cell,cell_array[postPop_listIndex]['cellTy
 		                 proj.electrical_connection_instances.append(conn)
 		                 conn_count+=1
                                        
-                              
-                                                 
-        ####################
-        if connectivity_information[0]=="Vervaeke_2010_based":
-               cell_names=[]
-               
-               for cell in range(cell_array[0]):
-                   cell_names.append(cell_array[cell+1][0])
-               
+        #############                     
+        if connectivity_information['connModel']=="Vervaeke_2010_based":
+           initial_projection_counter=0                                                 
+           for pair in range(0,len(connectivity_information['populationPairs'])):
                gap_counter=0
-               initial_projection_counter=0
-               segment_group_list=[]
-               segment_group_list.append("segment groups")
-               for cell_population in range(0,len(Golgi_pop_index_array)):
-                   segment_group_list.append(connectivity_information[cell_population+2][0])
-               target_segment_array=extract_morphology_information(cell_names,segment_group_list)
-               for pre_pop_index in range(0,len(Golgi_pop_index_array)):
-                   for post_pop_index in range(0,len(Golgi_pop_index_array)):
-                       if pre_pop_index<=post_pop_index:
-                          proj = neuroml.ElectricalProjection(id="proj%d"%initial_projection_counter,
-		                presynaptic_population=Golgi_pop_index_array[pre_pop_index], 
-		                postsynaptic_population=Golgi_pop_index_array[post_pop_index])
-                          
-                          initial_projection_counter+=1
-                          projection_counter=0
-	                  conn_count = 0
-                          pre_cell_positions=cell_position_array[pre_pop_index]
-                          post_cell_positions=cell_position_array[post_pop_index]
-                          for Pre_cell in range(cell_array[pre_pop_index+1][1]):
-                          #scripted so that to avoid inclusion of projection and gap_junction/synapse components if there are no connections; otherwise the mod files are not compiled.
-                                  for Post_cell in range(cell_array[post_pop_index+1][1]):
-                                      if pre_pop_index==post_pop_index:
-                                         compare_ids=Pre_cell <Post_cell
-                                      if pre_pop_index<post_pop_index:
-                                         compare_ids=Pre_cell<=Post_cell                        
-                                      if compare_ids:
-                                         distance_between_cells=distance(pre_cell_positions[Pre_cell],post_cell_positions[Post_cell])/connectivity_information[1]
-                                         if random.random() <connection_probability_vervaeke_2010(distance_between_cells):
-                                            if connectivity_information[-1][0]== "maximal connection length":
-                                               if connectivity_information[-1][1] != None:
-                                                  z=0
-                                                  while z==0:
-                                                      x=0
-                                                      while x==0:
-                                                          pre_segment_group=random.sample(range(0,len(connectivity_information[pre_pop_index+2][0])),1)
-                                                          pre_segment_group=pre_segment_group[0]
-                                                          if random.random() < connectivity_information[pre_pop_index+2][1][pre_segment_group]:
-                                                             pre_group=connectivity_information[pre_pop_index+2][0][pre_segment_group]
-                                                             x=1
-                                                      y=0
-                                                      while y==0:
-                                                          post_segment_group=random.sample(range(0,len(connectivity_information[post_pop_index+2][0])),1)
-                                                          post_segment_group=post_segment_group[0]
-                                                          if random.random() < connectivity_information[post_pop_index+2][1][post_segment_group]:
-                                                             post_group=connectivity_information[post_pop_index+2][0][post_segment_group]
-                                                             y=1
-                                                      for segment_group in range(0,len(target_segment_array[pre_pop_index])):
-                                                          if target_segment_array[pre_pop_index][segment_group+1][0]==pre_group:
-                                                             pre_segment_ids=target_segment_array[pre_pop_index][segment_group+1][1:]
-                                                             break
-                                                      for segment_group in range(0,len(target_segment_array[post_pop_index])):
-                                                          if target_segment_array[post_pop_index][segment_group+1][0]==post_group:
-                                                             post_segment_ids=target_segment_array[post_pop_index][segment_group+1][1:]
-                                                             break
+               prePop=connectivity_information['populationPairs']['prePopID'])  
+               postPop=connectivity_information['populationPairs']['postPopID'])
+               for pop in range(0,len(cell_array)):
+                   if cell_array[pop]['popID']==prePop
+                      prePop_listIndex=pop
+                      prePopSize=cell_array[pop]['size']
+                   if cell_array[pop]['popID']==postPop:
+                      postPop_listIndex=pop
+                      postPopSize=cell_array[pop]['size']
+
+               if 'prePoptargetGroup' in connectivity_information['populationPairs'][pair]:
+                  pre_pop_target_segment_array=extract_morphology_information([cell_array[prePop_listIndex]['cellType']],\
+                                                                                          ["segment groups",  \
+connectivity_information['populationPairs'][pair]['prePoptargetGroup']['segmentGroupList']])
+
+               if 'postPoptargetGroup' in connectivity_information['populationPairs'][pair]:
+                  post_pop_target_segment_array=extract_morphology_information([cell_array[postPop_listIndex]['cellType']  ],\
+                                  ["segment groups",connectivity_information['populationPairs'][pair]['postPoptargetGroup']['segmentGroupList'] ] )
+
                                             
-                                                      Pre_segment_id=random.sample(pre_segment_ids,1)
-                                                      Pre_segment_id=Pre_segment_id[0]
-                                                      Post_segment_id=random.sample(post_segment_ids,1)
-                                                      Post_segment_id=Post_segment_id[0]
-                                                      Pre_fraction=random.random()
-                                                      Post_fraction=random.random()
-                                                      if get_3D_connection_length(cell_names,cell_position_array,pre_pop_index,post_pop_index,Pre_cell,\
-                                                         Post_cell,Pre_segment_id,Post_segment_id,Pre_fraction,Post_fraction) <=connectivity_information[-1][1]:
-                                                         z=1
-                                               else:
-                                                  x=0
-                                                  while x==0:
-                                                      pre_segment_group=random.sample(range(0,len(connectivity_information[pre_pop_index+2][0])),1)
-                                                      pre_segment_group=pre_segment_group[0]
-                                                      if random.random() < connectivity_information[pre_pop_index+2][1][pre_segment_group]:
-                                                         pre_group=connectivity_information[pre_pop_index+2][0][pre_segment_group]
-                                                         x=1
-                                                   
-                                                  y=0
-                                                  while y==0:
-                                                      post_segment_group=random.sample(range(0,len(connectivity_information[post_pop_index+2][0])),1)
-                                                      post_segment_group=post_segment_group[0]
-                                                      if random.random() < connectivity_information[post_pop_index+2][1][post_segment_group]:
-                                                         post_group=connectivity_information[post_pop_index+2][0][post_segment_group]
-                                                         y=1
-                                                                   
-                                                  for segment_group in range(0,len(target_segment_array[pre_pop_index])):
-                                                      if target_segment_array[pre_pop_index][segment_group+1][0]==pre_group:
-                                                         pre_segment_ids=target_segment_array[pre_pop_index][segment_group+1][1:]
-                                                         break
-                                                  for segment_group in range(0,len(target_segment_array[post_pop_index])):
-                                                      if target_segment_array[post_pop_index][segment_group+1][0]==post_group:
-                                                         post_segment_ids=target_segment_array[post_pop_index][segment_group+1][1:]
-                                                         break
-                                            
-                                                  Pre_segment_id=random.sample(pre_segment_ids,1)
-                                                  Pre_segment_id=Pre_segment_id[0]
-                                                  Post_segment_id=random.sample(post_segment_ids,1)
-                                                  Post_segment_id=Post_segment_id[0]
-                                                  Pre_fraction=random.random()
-                                                  Post_fraction=random.random()
-                                            
-                                            if connectivity_information[-2][0]=="testing":
-                                               gap_junction = neuroml.GapJunction(id="gap_junction%d"%gap_counter, conductance="%fpS"%(synaptic_weight_vervaeke_2010(distance_between_cells)*connectivity_information[-2][1]))
-                                            else:
-                                               gap_junction = neuroml.GapJunction(id="gap_junction%d"%gap_counter, conductance="%fpS"%synaptic_weight_vervaeke_2010(distance_between_cells))
-                                               gap_junction = neuroml.GapJunction(id="gap_junction%d"%gap_counter, conductance="%fpS"%synaptic_weight_vervaeke_2010(distance_between_cells)*connectivity_information[-1][1])
-                                            conn =neuroml.ElectricalConnectionInstance(id=conn_count,\
-                                                                                pre_cell="../%s/%d/%s"%(Golgi_pop_index_array[pre_pop_index],Pre_cell,cell_array[pre_pop_index+1][0]),\
-                                                                              post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_array[post_pop_index+1][0]),\
-                                                                               synapse=gap_junction.id,pre_segment="%d"%Pre_segment_id,post_segment="%d"%Post_segment_id,\
-                                                                               pre_fraction_along="%f"%Pre_fraction,post_fraction_along="%f"%Post_fraction)
-		                            nml_doc.gap_junctions.append(gap_junction)
-		                            gap_counter+=1
-		                            if projection_counter==0:
-                                               net.electrical_projections.append(proj)
-                                               projection_counter+=1
-                                               
-		                            proj.electrical_connection_instances.append(conn)
-		                            conn_count+=1
+               proj = neuroml.ElectricalProjection(id="proj%d"%initial_projection_counter,\
+		                presynaptic_population=prePop,\ 
+		                postsynaptic_population=postPop)
+               initial_projection_counter+=1
+               projection_counter=0
+	       conn_count = 0
+               pre_cell_positions=cell_position_array[prePop]
+               post_cell_positions=cell_position_array[postPop]
+                                                                              
+               conductance_scaling=1
+                                                        
+               conductance_array=[]
+               conductance_array_spatial_scale1=[]
+               make_conductance_array_no_spatial_scale=False
+
               
-        ############                                                                   
-           if connectivity_information[0]=="uniform random":
-               gap_junction0 = neuroml.GapJunction(id="gap_junction0", conductance=connectivity_information[1][1])
-               gap_counter=0
-               initial_projection_counter=0
-               for pre_pop_index in range(0,len(Golgi_pop_index_array)):
-                   for post_pop_index in range(0,len(Golgi_pop_index_array)):
-                       if pre_pop_index<=post_pop_index:
-                          proj = neuroml.ElectricalProjection(id="proj%d"%initial_projection_counter,
-		                presynaptic_population=Golgi_pop_index_array[pre_pop_index], 
-		                postsynaptic_population=Golgi_pop_index_array[post_pop_index])
-                          
-                          initial_projection_counter+=1
-                          projection_counter=0
-	                  conn_count = 0
-                          for Pre_cell in range(cell_array[pre_pop_index+1][1]):
-                          # randomly Connect cells with defined probability for now; scripted so that to avoid inclusion of projection and gap_junction/synapse components if there are no connections; otherwise the mod files are not compiled.
-                                  for Post_cell in range(cell_array[post_pop_index+1][1]):
-                                      if pre_pop_index==post_pop_index:
-                                         compare_ids=Pre_cell <Post_cell
-                                      if pre_pop_index<post_pop_index:
-                                         compare_ids=Pre_cell<=Post_cell                   
-                                      if compare_ids:
-                                         if random.random() < connectivity_information[1][0]:
-                                            conn =neuroml.ElectricalConnectionInstance(id=conn_count, \
-				   pre_cell="../%s/%d/%s"%(Golgi_pop_index_array[pre_pop_index],Pre_cell,cell_array[pre_pop_index+1][0]),
-				   post_cell="../%s/%d/%s"%(Golgi_pop_index_array[post_pop_index],Post_cell,cell_array[post_pop_index+1][0]),synapse=gap_junction0.id)
-                                            if gap_counter==0:
-		                               nml_doc.gap_junctions.append(gap_junction0)
-		                               gap_counter+=1
-		                            if projection_counter==0:
-                                               net.electrical_projections.append(proj)
-                                               projection_counter+=1
-                                               
-		                            proj.electrical_connection_instances.append(conn)
-		                            conn_count+=1
-           
-           # use below as a template : 
-           # input_information=[["MF",[pop0_array,pop1_array,pop2_array]],["PF",[pop0_array,pop1_array,pop2_array]]]
-           # all pop_arrays have to be of the following form:
-           # first_array=["uniform" or "3D region specific", if "uniform" fraction to target, if "3D region specific",[[40,80],[40,80],[40,80]]],all or random frac
-           # pop0_array=[pop_index,first_array,synapse_array_per_pop,[[synapse average_rate_list]]["constant number of inputs per cell" or "variable number of inputs per cell"
-           # if variable then "binomial",average_no_of_inputs,max_no_of_inputs    ]   then
-           # for each different synapse     "segment groups and segments",[["Section_1","dend_1"],[0.7,0.3]]
-           # "segments and subsegments"
-           # [["Section_1"],[1],[ [   [0.25,0.2],[0.25,0.4],[0.25,0.4],[0.25,0]  ]         ]             ]          (note nesting  - four brackets at the end)
-           #make InputList for MF and PF synapses
-           if "testing" not in input_information:
-              for input_group in input_information:
-                 if type(input_group) is list:
-                    for var in range(0,len(input_group)):
-                      #more options can be added in the future
-                      if "MF"==input_group[var][0] or "PF"==input_group[var][0]:
-                          inp_group_specifier=input_group[var][0]
-                          synapse_name_array=[]
-                          for pop in range(0,len(input_group[var][1])):
-                              names_of_synapses=input_group[var][1][pop][2]
-                              for name in names_of_synapses:
-                                  synapse_name_array.append(name)
-                              unique_synapse_names=np.unique(synapse_name_array)
-                          for unique_synapse in unique_synapse_names:
-                              include_synapse=neuroml.IncludeType(href="%s.synapse.nml"%unique_synapse)
-                              nml_doc.includes.append(include_synapse)
-                          for pop in range(0,len(input_group[var][1])):
-                              genuine_pop_index=input_group[var][1][pop][0]
-                              segment_group_list=[]
-                              if input_group[var][1][pop][5]=="segment groups and segments":
-                                 segment_group_list.append("segment groups")
-                              if input_group[var][1][pop][5]=="segments and subsegments":
-                                 segment_group_list.append("segments")
-                              for poisson_synapse_list in range(0,len(input_group[var][1][pop][3])):
-                                  segment_group_list.append(input_group[var][1][pop][6][poisson_synapse_list][0])
-                                  segment_target_array=extract_morphology_information([cell_array[genuine_pop_index+1][0]],segment_group_list)
-                                  targeting_parameters=input_group[var][1][pop][6][poisson_synapse_list]
-                                  
-                                  if input_group[var][1][pop][3][poisson_synapse_list][1]=="persistent":
-                                     poisson_syn=neuroml.PoissonFiringSynapse(id="%s_pop%dsyn%d"%(inp_group_specifier,genuine_pop_index,poisson_synapse_list),\
-                                                       average_rate="%f per_s"%input_group[var][1][pop][3][poisson_synapse_list][2],\
-                                            synapse=input_group[var][1][pop][3][poisson_synapse_list][0] ,\
-                                            spike_target="./%s"%input_group[var][1][pop][3][poisson_synapse_list][0])
-                                     
-                                  if input_group[var][1][pop][3][poisson_synapse_list][1]=="transient":
-                                     poisson_syn=neuroml.TransientPoissonFiringSynapse(id="%s_pop%dsyn%d"%(inp_group_specifier,genuine_pop_index,poisson_synapse_list),\
-                                            average_rate="%f per_s"%input_group[var][1][pop][3][poisson_synapse_list][2],\
-                                            synapse=input_group[var][1][pop][3][poisson_synapse_list][0] ,\
-                                            spike_target="./%s"%input_group[var][1][pop][3][poisson_synapse_list][0],\
-                                            delay="%f%s"%(input_group[var][1][pop][3][poisson_synapse_list][3],input_group[var][1][pop][3][poisson_synapse_list][5]),\
-                                            duration="%f%s"%(input_group[var][1][pop][3][poisson_synapse_list][4] ,input_group[var][1][pop][3][poisson_synapse_list][5])  )
-                                  
-                                  nml_doc.poisson_firing_synapses.append(poisson_syn)
+               if 'testingConductanceScale' in connectivity_information['populationPairs'][pair]:
+                  conductance_scaling=connectivity_information['populationPairs'][pair]['testingConductanceScale']
+ 
 
-                                  input_list =neuroml.InputList(id="%s_Input_pop%dsyn%d"%(inp_group_specifier,genuine_pop_index,poisson_synapse_list),\
-                                             component=poisson_syn.id,populations="%s"%Golgi_pop_index_array[genuine_pop_index])
+               spatial_scale=1
+               if 'spatialScale' in connectivity_information['populationPairs'][pair]:
+                  spatial_scale=connectivity_information['populationPairs'][pair]['spatialScale']
 
-                                  net.input_lists.append(input_list)
-                                  which_cells_to_target_array=input_group[var][1][pop][1]
-                                  if which_cells_to_target_array[0]=="uniform":
-                                     fraction_to_target_per_pop=which_cells_to_target_array[1]
-                                     target_cells=random.sample(range(cell_array[genuine_pop_index+1][1]),int(round(fraction_to_target_per_pop*cell_array[genuine_pop_index+1][1])))
-                                     count=0                           
-                                     for target_cell in target_cells:
-                                         if input_group[var][1][pop][4][0]=="constant number of inputs per cell":
-                                             no_of_inputs=input_group[var][1][pop][4][1]
-                                         if input_group[var][1][pop][4][0]=="variable number of inputs per cell":
-                                            if input_group[var][1][pop][4][1]=="binomial":
-                                               no_of_inputs=np.random.binomial(input_group[var][1][pop][4][3],\
-                                                      input_group[var][1][pop][4][2]/input_group[var][1][pop][4][3])
-                                            ### other options can be added
+               if connectivity_information['populationPairs'][pair]['normalizeConductances']:
+                                                        
+                  if spatial_scale != 1:
+                     
+                     make_conductance_array_no_spatial_scale=True
+                                 
+               for Pre_cell in range(0,prePopSize):
+                   for Post_cell in range(0,postPopSize):
+                                                        
+                       distance_between_cells=distance(pre_cell_positions[Pre_cell],post_cell_positions[Post_cell])/spatial_scale
 
-                                         if input_group[var][1][pop][5]=="segment groups and segments":
-                                            target_points=get_unique_target_points(segment_target_array,"segment groups and segments",targeting_parameters,no_of_inputs)
-                                         if input_group[var][1][pop][5]=="segments and subsegments":
-                                            target_points=get_unique_target_points(segment_target_array,"segments and subsegments",targeting_parameters,no_of_inputs)
-                                         #count_point=0
-                                         for target_point in range(0,len(target_points)):                     
-                                             syn_input = neuroml.Input(id="%d"%(count),target="../%s/%i/%s"%(Golgi_pop_index_array[genuine_pop_index],\
-                                                                  target_cell,cell_array[genuine_pop_index+1][0] ),destination="synapses",\
-                                                                  segment_id="%d"%target_points[target_point,0],fraction_along="%f"%target_points[target_point,1]) 
-                                             
-                                             input_list.input.append(syn_input)
-                                             #count_point=count_point+1
+                       if connectivity_information['populationPairs'][pair]['normalizeConductances']:
+                                                        
+                          if make_conductance_array_no_spatial_scale:
+                             distance_between_cells_spatial_scale1=spatial_scale*distance_between_cells
+                             
+                                                        
+                       if random.random() <connection_probability_vervaeke_2010(distance_between_cells):
 
-                                             count=count+1
-
-                                  if which_cells_to_target_array[0]=="3D region specific":
-                                     cell_positions=cell_position_array[genuine_pop_index]
-                                     dim_array=np.shape(cell_positions)
-                                     region_specific_targets_per_cell_group=[]
-                                     for region in range(1,len(which_cells_to_target_array[1])):
-                                         for cell in range(0,dim_array[0]):
-                                             if (which_cells_to_target_array[1][region][0][0] <  cell_positions[cell,0]) and (cell_positions[cell,0] < which_cells_to_target_array[1][region][0][1]):
-                                                if (which_cells_to_target_array[1][region][1][0] <  cell_positions[cell,1]) and (cell_positions[cell,1] <which_cells_to_target_array[1][region][1][1]) :
-                                                   if (which_cells_to_target_array[1][region][2][0] <  cell_positions[cell,2]) and (cell_positions[cell,2] < which_cells_to_target_array[1][region][2][1]):
-                                                      region_specific_targets_per_cell_group.append(cell)  
-   
-                                     if which_cells_to_target_array[2]=="all":
-                                        count=0
-                                        for target_cell in region_specific_targets_per_cell_group:
-                                            if input_group[var][1][pop][4][0]=="constant number of inputs per cell":
-                                               no_of_inputs=input_group[var][1][pop][4][1]
-                                            if input_group[var][1][pop][4][0]=="variable number of inputs per cell":
-                                               if input_group[var][1][pop][4][1]=="binomial":
-                                                  no_of_inputs=np.random.binomial(input_group[var][1][pop][4][3],input_group[var][1][pop][4][2]/input_group[var][1][pop][4][3])
-                                            if input_group[var][1][pop][5]=="segment groups and segments":
-                                               target_points=get_unique_target_points(segment_target_array,"segment groups and segments",targeting_parameters,no_of_inputs)
-                                            if input_group[var][1][pop][5]=="segments and subsegments":
-                                               target_points=get_unique_target_points(segment_target_array,"segments and subsegments",targeting_parameters,no_of_inputs)
-                                            #count_point=0
-                                            for target_point in range(0,len(target_points)):       
-                                                syn_input = neuroml.Input(id="%d"%(count),target="../%s/%i/%s"%(Golgi_pop_index_array[genuine_pop_index],\
-                                                                  target_cell,cell_array[genuine_pop_index+1][0] ),destination="synapses",\
-                                                                  segmentId="%d"%target_points[target_point,0],fraction_along="%f"%target_points[target_point,1]) 
-                                                input_list.input.append(syn_input)
-                                                #count_point=count_point+1
-                                                count=count+1
-                                      #  now coded so that the same fraction applies to all 3D regions
-                                     if which_cells_to_target_array[2]=="random fraction":
-                                        random_targets_per_cell_group=random.sample(region_specific_targets_per_cell_group,\
-                                                int(round(which_cells_to_target_array[3]*len(region_specific_targets_per_cell_group))))
-                                        count=0
-                                        for target_cell in random_targets_per_cell_group:
-                                            if input_group[var][1][pop][4][0]=="constant number of inputs per cell":
-                                               no_of_inputs=input_group[var][1][pop][4][1]
-                                            if input_group[var][1][pop][4][0]=="variable number of inputs per cell":
-                                               if input_group[var][1][pop][4][1]=="binomial":
-                                                  no_of_inputs=np.random.binomial(input_group[var][1][pop][4][3],input_group[var][1][pop][4][2]/input_group[var][1][pop][4][3])
-                                            if input_group[var][1][pop][5]=="segment groups and segments":
-                                               target_points=get_unique_target_points(segment_target_array,"segment groups and segments",targeting_parameters,no_of_inputs)
-                                            if input_group[var][1][pop][5]=="segments and subsegments":
-                                               target_points=get_unique_target_points(segment_target_array,"segments and subsegments",targeting_parameters,no_of_inputs)
-                                            #count_point=0
-                                            for target_point in range(0,len(target_points)):       
-                                                syn_input = neuroml.Input(id="%d"%(count),target="../%s/%i/%s"%(Golgi_pop_index_array[genuine_pop_index],\
-                                                                  target_cell,cell_array[genuine_pop_index+1][0] ),destination="synapses",\
-                                                                  segment_id="%d"%target_points[target_point,0],fraction_along="%f"%target_points[target_point,1]) 
-                                                
-                                                input_list.input.append(syn_input)
-                                                #count_point=count_point+1
-                                                count=count+1       
-        
-	   ###### implementing physiological heterogeneity between cells with variations in a basal firing rate
-           if "testing" not in input_information:
-             for input_group in input_information:
-                if "variable basal firing rate"==input_group[0]:
-                  for var in input_group:
-                      if type(var) is list:
-                         if var[0]=="amplitude distribution":
-                            gaussian_model=False
-                            uniform_model=False
-                            constant_model=False
-                            if "gaussian" in var:
-                                pop_average_array=[]
-                                pop_variance_array=[]
-                                gaussian_model=True
-                                for pop_var in range(0,len(var[2])):
-                                    pop_average_array.append(var[2][pop_var])
-                                    pop_variance_array.append(var[3][pop_var])
-                                units=var[4]
-                            if "constant" in var:
-                               pop_amplitude=[]
-                               constant_model=True
-                               for pop_var in range(0,len(var[2])):
-                                   pop_amplitude.append(var[2][pop_var])
-                               units=var[3]  
-                            if "uniform" in var:
-                               pop_left_bound=[]
-                               pop_right_bound=[]
-                               uniform_model=True
-                               for pop_var in range(0,len(var[2])):
-                                   pop_left_bound.append(var[2][pop_var])
-                                   pop_right_bound.append(var[3][pop_var])
-                               units=var[4]
-                         if var[0]=="offset distribution":
-                            offset_gaussian_model=False
-                            offset_uniform_model=False
-                            offset_constant_model=False
-                            if "gaussian" in var:
-                                offset_gaussian_model=True
-                                pop_offset_average=[]
-                                pop_offset_variance=[]
-                                for pop_var in range(0,len(var[2])):
-                                    pop_offset_average.append(var[2][pop_var])
-                                    pop_offset_variance.append(var[3][pop_var])
-                                offset_units=var[4]
-                            if "constant" in var:
-                                pop_offset=[]
-                                offset_constant_model=True
-                                for pop_var in range(0,len(var[2])):
-                                    pop_offset.append(var[2][pop_var])
-                                offset_units=var[3]   
-                            if "uniform" in var:
-                                offset_uniform_model=True
-                                pop_offset_left_bound=[]
-                                pop_offset_right_bound=[]
-                                for pop_var in range(0,len(var[2])):
-                                    pop_offset_left_bound.append(var[2][pop_var])
-                                    pop_offset_right_bound.append(var[3][pop_var])
-                                offset_units=var[4]
-                  for pop in range(0,len(Golgi_pop_index_array)):
-                      for cell in range(cell_array[pop+1][1]):
-                          if gaussian_model:
-                             amp=random.gauss(pop_average_array[pop],pop_variance_array[pop])
-                          if uniform_model:
-                             amp=random.uniform(pop_left_bound[pop],pop_right_bound[pop])
-                          if constant_model:
-                             amp=pop_amplitude[pop] 
-                          if offset_gaussian_model:
-                             offset=random.gauss(pop_offset_average[pop],pop_offset_variance[pop])
-                          if offset_uniform_model:
-                             offset=random.uniform(pop_offset_left_bound[pop],pop_offset_right_bound[pop])
-                          if offset_constant_model:
-                             offset=pop_offset[pop]
-                          Pulse_generator_variable=neuroml.PulseGenerator(id="Input_%d%d"%(pop,cell),delay="%f%s"%(offset,offset_units),duration="%f%s"%((simulation_parameters[0]-offset),offset_units),amplitude="%f%s"%(amp,units))
-	                  nml_doc.pulse_generators.append(Pulse_generator_variable)
-	                  Input_list=neuroml.InputList(id="Input_list%d%d"%(pop,cell),component="Input_%d%d"%(pop,cell),populations="%s"%Golgi_pop_index_array[pop])
-	                  net.input_lists.append(Input_list)
-	                  Inp = neuroml.Input(target="../%s/%d/%s"%(Golgi_pop_index_array[pop],cell,cell_array[pop+1][0]),id="%d"%cell,destination="synapses")
-	                  Input_list.input.append(Inp)
-	                  
-	   if input_information[0]=="testing":
-              fraction_of_cells_to_target_in_pop=input_information[1]
-              #tests only with PulseGenerators for the time being; can be coded for other eligible inputs too
-
-              for pulse_x in range(0,len(input_information)-2):
-
-           
-	          Pulse_generator_x=neuroml.PulseGenerator(id="Input_%d"%pulse_x,delay=input_information[pulse_x+2][0],duration=input_information[pulse_x+2][1],amplitude=input_information[pulse_x+2][2])
-	          nml_doc.pulse_generators.append(Pulse_generator_x)
-                  #Pulse_generator2=neuroml.PulseGenerator(id="Input_2",delay=testing_inputs[4], duration=testing_inputs[5], amplitude=testing_inputs[6])
-	          #nml_doc.pulse_generators.append(Pulse_generator2)           
-           if input_information[0]=="testing":
-              neuroml_input_array=[]
-              for pop in range(0,len(Golgi_pop_index_array)):
-                  for pulse_x in range(0,len(input_information)-2):
-                      Input_list=neuroml.InputList(id="Input_list%d"%pulse_x, component="Input_%d"%pulse_x,populations="%s"%Golgi_pop_index_array[pop])
-                      neuroml_input_array.append(Input_list)
-                      net.input_lists.append(Input_list)
-                      randomly_select_target_cells=random.sample(range(cell_array[pop+1][1]),int(round(fraction_of_cells_to_target_in_pop*cell_array[pop+1][1])))
-                      for input_list in neuroml_input_array:
-                          for i in randomly_select_target_cells:
-                              Inp = neuroml.Input(target="../%s/%d/%s"%(Golgi_pop_index_array[pop],i,cell_array[pop+1][0]),id="%d"%i,destination="synapses")
-                              input_list.input.append(Inp)
-                      
+                          conductanceValue=synaptic_weight_vervaeke_2010(distance_between_cells)
+                          conductance_array.append(conductanceValue)
+                                                        
+                          if make_conductance_array_no_spatial_scale:
+                             conductanceValueN=synaptic_weight_vervaeke_2010(distance_between_cells_spatial_scale1)
+                             conductance_array_spatial_scale1.append(conductanceValueN)
+                                                        
+                          if 'prePoptargetGroup' in connectivity_information['populationPairs'][pair]:
+                             pre_target_points=get_unique_target_points(pre_pop_target_segment_array,"segment groups and segments",\
+                             [connectivity_information['populationPairs'][pair]['targetingModelprePop']['segmentGroupList'],\
+connectivity_information['populationPairs'][pair]['targetingModelprePop']['segmentGroupProbabilities']],1)
 
        
-	  
+                          if 'postPoptargetGroup' in connectivity_information['populationPairs'][pair]:
 
+                             post_targeting_mode="segment groups and segments"
+
+                             post_targeting_parameters=[connectivity_information['populationPairs'][pair]['targetingModelpostPop']['segmentGroupList'],\
+connectivity_information['populationPairs'][pair]['targetingModelpostPop']['segmentGroupProbabilities']]
+
+                          
+                          if 'maximalConnDistance' in connectivity_information['populationPairs'][pair]:
+                             x=0
+                             while x==0:
+                                 post_target_point=get_unique_target_points(post_pop_target_segment_array,post_targeting_mode,post_targeting_parameters,1) 
+                                 if get_3D_connection_length(cell_names,cell_position_array,pre_pop_index,post_pop_index,Pre_cell,\
+                                     Post_cell,pre_target_points[0,0],post_target_point[0,0],\
+                                     pre_target_points[0,1],post_target_point[0,1]) <=connectivity_information['populationPairs'][pair]['maximalConnDistance']:
+                                     x=1
+                          else:
+                             post_target_point=get_unique_target_points(post_pop_target_segment_array,post_targeting_mode,\
+                                                                             post_targeting_parameters,1)
+
+                          Pre_segment_id=pre_target_points[pre_target_point,0]
+                          Post_segment_id=post_target_point[0,0]
+                          Pre_fraction=pre_target_points[pre_target_point,1]
+                          Post_fraction=post_target_point[0,1]
+
+                          #other options can be added such as gamma distribution
+                          conn =neuroml.ElectricalConnectionInstance(id=conn_count,\
+pre_cell="../%s/%d/%s"%(prePop,Pre_cell,cell_array[prePop_listIndex]['cellType']),\
+post_cell="../%s/%d/%s"%(postPop,Post_cell,cell_array[postPop_listIndex]['cellType']),synapse="gap_junction%d"%(pair,gap_counter),\
+                                                             pre_segment="%d"%Pre_segment_id,post_segment="%d"%Post_segment_id,\
+                                                             pre_fraction_along="%f"%Pre_fraction,post_fraction_along="%f"%Post_fraction)
+                          gap_counter+=1               
+		          if projection_counter==0:
+                             net.electrical_projections.append(proj)
+                             projection_counter+=1
+
+                          proj.electrical_connection_instances.append(conn)
+		          conn_count+=1
+               ########
+               conductanceUnits=connectivity_information['populationPairs'][pair]['units']
+               if len(conductance_array)==gap_counter:
+                   for GJ in range(0,len(conductance_array)):
+                       if make_conductance_array_no_spatial_scale:
+                          conductanceValue=conductance_array[GJ]*(sum(conductance_array_spatial_scale1)/sum(conductance_array))
+                          gap_junction = neuroml.GapJunction(id="gap_junction%d"%(pair,GJ), conductance="%f%s"%(conductanceValue*conductance_scaling,conductanceUnits) )
+                          nml_doc.gap_junctions.append(gap_junction)
+                       else:
+                          conductanceValue=conductance_array[GJ]
+                          gap_junction = neuroml.GapJunction(id="gap_junction%d"%(pair,GJ), conductance="%f%s"%(conductanceValue*conductance_scaling,conductanceUnits) )
+                          nml_doc.gap_junctions.append(gap_junction)
+                                                        
+        ####################                                                                   
+        # use below as a template : 
+        # input_information=[["MF",[pop0_array,pop1_array,pop2_array]],["PF",[pop0_array,pop1_array,pop2_array]]]
+        # all pop_arrays have to be of the following form:
+        # first_array=["uniform" or "3D region specific", if "uniform" fraction to target, if "3D region specific",[[40,80],[40,80],[40,80]]],all or random frac
+        # pop0_array=[pop_index,first_array,synapse_array_per_pop,[[synapse average_rate_list]]["constant number of inputs per cell" or "variable number of inputs per cell"
+        # if variable then "binomial",average_no_of_inputs,max_no_of_inputs    ]   then
+        # for each different synapse     "segment groups and segments",[["Section_1","dend_1"],[0.7,0.3]]
+        # "segments and subsegments"
+        # [["Section_1"],[1],[ [   [0.25,0.2],[0.25,0.4],[0.25,0.4],[0.25,0]  ]         ]             ]          (note nesting  - four brackets at the end)
+        #make InputList for MF and PF synapses
+        synapse_name_array=[]
+        for pop in range(0,len(input_information)):
+            popID=input_information[pop]['popName']
+            for pop in range(0,len(cell_array)):
+                if cell_array[pop]['popID']==popID:
+                   pop_listIndex=pop
+                   popSize=cell_array[pop]['size']
+            input_group_array=input_information[pop]['inputGroups']
+            for input_group in range(0,len(input_group_array)):
+                if input_group_array[input_group]['inputModel']=='XF':
+                                                                        
+                   fraction_to_target_per_pop=input_group_array[input_group]['fractionToTarget']
+                                                                        
+                   if input_group_array[input_group]['targetingRegime']=="uniform":
+                      
+                      target_cells=random.sample(range(popSize),int(round(fraction_to_target_per_pop*popSize)   )   )
+                                                                        
+                   if input_group_array[input_group]['targetingRegime']=="3D region specific":
+                      cell_positions=cell_position_array[popID]
+                      dim_array=np.shape(cell_positions)
+                      region_specific_targets_per_cell_group=[]
+                      for region in range(1,len(which_cells_to_target_array[1])):
+                          for cell in range(0,dim_array[0]):
+                              if (which_cells_to_target_array[1][region][0][0] <  cell_positions[cell,0]) and (cell_positions[cell,0] < which_cells_to_target_array[1][region][0][1]):
+                                  if (which_cells_to_target_array[1][region][1][0] <  cell_positions[cell,1]) and (cell_positions[cell,1] <which_cells_to_target_array[1][region][1][1]) :
+                                     if (which_cells_to_target_array[1][region][2][0] <  cell_positions[cell,2]) and (cell_positions[cell,2] < which_cells_to_target_array[1][region][2][1]):
+                                        region_specific_targets_per_cell_group.append(cell)
+                                                                        
+                      target_cells=random.sample(region_specific_targets_per_cell_group,\
+                                                int(round(fraction_to_target_per_pop*len(region_specific_targets_per_cell_group))))
+                                                                        
+                   inp_group_specifier=input_group_array[input_group]['inputLabel']
+                   synapse_list=input_group_array[input_group]['synapseList']
+                   for synapse_index in range(0,len(synapse_list)):
+                       synapse_name_array.append(synapse_list[synapse_index]['synapseType'])
+                                                        
+                       if synapse_list[synapse_index]['targetingModel']=="segments and subsegments":
+                          segment_target_array=extract_morphology_information([cell_array[pop_listIndex]['cellType']],\
+                ["segments",synapse_list[synapse_index]['segmentList']])
+                                                        
+                       if synapse_list[synapse_index]['targetingModel']=="segment groups and segments":
+                          segment_target_array =extract_morphology_information([cell_array[pop_listIndex]['cellType']],\
+        ["segment groups",synapse_list[synapse_index]['segmentGroupList']])
+                                                        
+                       if  synapse_list[synapse_index]['synapseMode']=="persistent":
+                           poisson_syn=neuroml.PoissonFiringSynapse(id="%s_pop%dsyn%d"%(inp_group_specifier,popID,synapse_index),\
+                           average_rate="%f per_s"%synapse_list[synapse_index]['averageRate'],\
+                           synapse=synapse_list[synapse_index]['synapseType'],\
+                           spike_target="./%s"%synapse_list[synapse_index]['synapseType'])
+                                     
+                       if synapse_list[synapse_index]['synapseMode']=="transient":
+                          poisson_syn=neuroml.TransientPoissonFiringSynapse(id="%s_%s_syn%d"%(inp_group_specifier,popID,synapse_index),\
+                          average_rate="%f per_s"%synapse_list[synapse_index]['averageRate'],\
+                          synapse=synapse_list[synapse_index]['synapseType'] ,\
+                          spike_target="./%s"%synapse_list[synapse_index]['synapseType'],\
+                          delay="%f%s"%(synapse_list[synapse_index]['delay'],synapse_list[synapse_index]['units']),\
+                          duration="%f%s"%(synapse_list[synapse_index]['duration'],synapse_list[synapse_index]['units'] )  )
+                                  
+                       nml_doc.poisson_firing_synapses.append(poisson_syn)
+
+                       input_list =neuroml.InputList(id="Input%s_%s_syn%d"%(inp_group_specifier,popID,synapse_index),\
+                       component=poisson_syn.id,populations="%s"%popID)
+
+                       net.input_lists.append(input_list)
+                                                                        
+                       count=0                               
+                       for target_cell in target_cells:
+                           if synapse_list[synapse_index]['numberModel']=="constant number of inputs per cell":
+                              no_of_inputs=synapse_list[synapse_index]['noInputs']
+                           if synapse_list[synapse_index]['numberModel']=="variable number of inputs per cell":
+                              if synapse_list[synapse_index]['distribution']=="binomial":
+                                  no_of_inputs=np.random.binomial(synapse_list[synapse_index]['maxNoInputs'],\
+                                  synapse_list[synapse_index]['averageNoInputs']/synapse_list[synapse_index]['maxNoInputs'])
+                              ### other options can be added
+                           if synapse_list[synapse_index]['targetingModel']=="segment groups and segments":
+                              target_points=get_unique_target_points(segment_target_array,"segment groups and segments",\
+                                        [synapse_list[synapse_index]['segmentGroupList'],synapse_list[synapse_index]['segmentGroupProbabilities']],no_of_inputs)
+                           if synapse_list[synapse_index]['targetingModel']=="segments and subsegments":
+                              target_points=get_unique_target_points(segment_target_array,"segments and subsegments",\
+                                 [synapse_list[synapse_index]['segmentList'],synapse_list[synapse_index]['segmentProbabilities'],\
+                                 synapse_list[synapse_index]['fractionAlongANDsubsegProbabilities']],no_of_inputs)
+                           for target_point in range(0,len(target_points)):                     
+                               syn_input = neuroml.Input(id="%d"%(count),target="../%s/%i/%s"%(popID,target_cell,cell_array[pop_listIndex['cellType']),\
+                               destination="synapses",segment_id="%d"%target_points[target_point,0],fraction_along="%f"%target_points[target_point,1]) 
+                                             
+                               input_list.input.append(syn_input)
+                               count=count+1
+
+                                  
+        
+	        ###### implementing physiological heterogeneity between cells with variations in a basal firing rate
+                if input_group_array[input_group]['inputModel']=="variable_basal_firing_rate":
+                   offset_units=input_group_array[input_group]['offsetUnits']
+                   units=input_group_array[input_group]['ampUnits']
+                   label=input_group_array[input_group]['inputLabel']
+                   for cell in range(0,popSize):
+                       if "gaussian"==input_group_array[input_group]["amplitudeDistribution"]:
+                          amp=random.gauss(input_group_array[input_group]['averageAmp'],input_group_array[input_group]['stDevAmp'])
+                       if "uniform"==input_group_array[input_group]["amplitudeDistribution"]:
+                          amp=random.uniform(input_group_array[input_group]['leftAmpBound'],input_group_array[input_group]['rightAmpBound'])
+                       if "constant"==input_group_array[input_group]["amplitudeDistribution"]:
+                          amp=input_group_array[input_group]['valueAmp']
+                       if "gaussian"==input_group_array[input_group]["offsetDistribution"]:
+                          offset=random.gauss(input_group_array[input_group]['averageOffset'],input_group_array[input_group]['stDevOffset'])
+                       if offset_uniform_model:
+                          offset=random.uniform(pop_offset_left_bound[pop],pop_offset_right_bound[pop])
+                       if "constant"==input_group_array[input_group]["offsetDistribution"]:
+                          offset=input_group_array[input_group]["valueOffset"]
+                       Pulse_generator_variable=neuroml.PulseGenerator(id="%s_%d"%(label,cell),delay="%f%s"%(offset,offset_units),\
+                                duration="%f%s"%((simulation_parameters[0]-offset),offset_units),amplitude="%f%s"%(amp,units))
+	               nml_doc.pulse_generators.append(Pulse_generator_variable)
+	               Input_list=neuroml.InputList(id="Input_%s%d"%(label,cell),component="%s_%d"%(label,cell),populations="%s"%popID)
+	               net.input_lists.append(Input_list)
+	               Inp = neuroml.Input(target="../%s/%d/%s"%(popID,cell,cell_array[pop_listIndex]['cellType']),id="%d"%cell,destination="synapses")
+	               Input_list.input.append(Inp)
+	                  
+	        ##############
+                if input_group_array[input_group]['inputModel']=="testing":
+                   label=input_group_array[input_group]['inputLabel']
+                   amp_units=input_group_array[input_group]['ampUnits']
+                   time_units=input_group_array[input_group]['timeUnit']
+                   randomly_select_target_cells=random.sample(range(popSize),int(round(input_group_array[input_group]['cellFractionToTarget'])))
+                   for pulse_x in range(0,len(input_group_array[input_group]['pulseParameters'])):
+                       Pulse_generator_x=neuroml.PulseGenerator(id="Input_%s_%d"%(label,pulse_x),\
+                       delay="%f%s"%(input_group_array[input_group]['pulseParameters'][pulse_x]['delay'],time_units),\
+                       duration="%f%s"%(input_group_array[input_group]['pulseParameters'][pulse_x]['duration'],time_units),\
+                       amplitude="%f%s"%(input_group_array[input_group]['pulseParameters'][pulse_x]['amplitude'],amp_units))
+	               nml_doc.pulse_generators.append(Pulse_generator_x)
+                                                         
+                       Input_list=neuroml.InputList(id="Input_list%d"%pulse_x, component="Input_%s_%d"%(label,pulse_x),populations="%s"%popID)
+                       neuroml_input_array.append(Input_list)
+                       net.input_lists.append(Input_list)
+                       for i in randomly_select_target_cells:
+                           Inp = neuroml.Input(target="../%s/%d/%s"%(popID,i,cell_array[pop_listIndex]['cellType']),id="%d"%i,destination="synapses")
+                           input_list.input.append(Inp)
+                      
+
+        ##############       
+	unique_synapse_names=np.unique(synapse_name_array)
+        for unique_synapse in unique_synapse_names:
+            include_synapse=neuroml.IncludeType(href="%s.synapse.nml"%unique_synapse)
+            nml_doc.includes.append(include_synapse)
+                                                 
+  
         nml_file = '%s.net.nml'%ref
 
        
@@ -806,74 +687,51 @@ def generate_LEMS_and_run(sim_array,pop_array):
         
 
         # Specify Displays and Output Files
-        
-	if string.lower(population_type) =="list":
-	   for x in range(cell_array[0]):
-	       disp = "display_voltages%d"%x
-	       ls.create_display(disp, "Voltages Golgi_pop%d"%x, "-75", "50")
+	for x in range(0,len(cell_array)):
+	    disp = "display_voltages%s"%(cell_array[x]['popID'])
+	    ls.create_display(disp, "Voltages %s"%(cell_array[x]['popID']), "-75", "50")
 	       
-	       max_traces = 20
-	       if cell_array[x+1][1]<=max_traces:
-	          for i in range(cell_array[x+1][1]):
-		      quantity = "%s/%i/%s/v"%(Golgi_pop_index_array[x], i,cell_array[x+1][0])
-	              ls.add_line_to_display(disp, "../%s/%i: Vm"%(Golgi_pop_index_array[x],i), quantity, "1mV", pynml.get_next_hex_color())
-                      of0 = 'Volts%d_file0_%d'%(x,i)
-                      ls.create_output_file(of0, "simulations/%s/sim%d/Golgi_pop%d_cell%d.dat"%(simulation_parameters[3],simulation_parameters[4],x,i))
-		      ls.add_column_to_output_file(of0, 'v%i'%i, quantity)
+	    max_traces = 20
+	    if cell_array[x]['size']<=max_traces:
+	       for i in range(cell_array[x]['size']):
+		   quantity = "%s/%i/%s/v"%(cell_array[x]['popID'], i,cell_array[x]['cellType'])
+	           ls.add_line_to_display(disp, "../%s/%i: Vm"%(cell_array[x]['popID'],i), quantity, "1mV", pynml.get_next_hex_color())
+                   of0 = 'Volts%d_file0_%d'%(x,i)
+                   ls.create_output_file(of0, "simulations/%s/sim%d/%s_cell%d.dat"%(simulation_parameters['experimentID'],simulation_parameters['simID'],\
+                                                                                    cell_array[x]['popID'],i))
+		   ls.add_column_to_output_file(of0, 'v%i'%i, quantity)
 					   
-	       else:
-		  randomly_select_displayed_cells=random.sample(range(cell_array[x+1][1]),max_traces)
-		  for y in randomly_select_displayed_cells:
-		      quantity = "%s/%i/%s/v"%(Golgi_pop_index_array[x], y,cell_array[x+1][0])
-		      ls.add_line_to_display(disp, "../%s/%i: Vm"%(Golgi_pop_index_array[x],y), quantity, "1mV", pynml.get_next_hex_color())
+	    else:
+	       randomly_select_displayed_cells=random.sample(range(cell_array[x]['size']),max_traces)
+	       for y in randomly_select_displayed_cells:
+                   quantity = "%s/%i/%s/v"%(cell_array[x]['popID'], y, cell_array[x]['cellType'])
+		   ls.add_line_to_display(disp, "../%s/%i: Vm"%(cell_array[x]['popID'],y), quantity, "1mV", pynml.get_next_hex_color())
 					      
 		  for i in range(cell_array[x+1][1]):
-		      quantity = "%s/%i/%s/v"%(Golgi_pop_index_array[x], i,cell_array[x+1][0])
+		      quantity = "%s/%i/%s/v"%(cell_array[x]['popID'], i,cell_array[x]['cellType'])
                       of0 = 'Volts%d_file0_%d'%(x,i)
-                      ls.create_output_file(of0, "simulations/%s/sim%d/Golgi_pop%d_cell%d.dat"%(simulation_parameters[3],simulation_parameters[4],x,i))
+                      ls.create_output_file(of0, "simulations/%s/sim%d/%s_cell%d.dat"%(simulation_parameters['experimentID'],\
+                      simulation_parameters['simID'],x,i))
 		      ls.add_column_to_output_file(of0, 'v%i'%i, quantity)
-        else:
-	    for x in range(cell_array[0]):
-	        disp = "display_voltages%d"%x
-	        ls.create_display(disp, "Voltages Golgi_pop%d"%x, "-75", "50")
-	        max_traces = 20
-	        if cell_array[x+1][1]<=max_traces:
-		   for i in range(cell_array[x+1][1]):
-		       quantity = "%s[%i]/v"%(Golgi_pop_index_array[x], i)
-		       ls.add_line_to_display(disp, "%s[%i]: Vm"%(Golgi_pop_index_array[x],i), quantity, "1mV", pynml.get_next_hex_color())
-                       of0 = 'Volts%d_file0_%d'%(x,i)
-	               ls.create_output_file(of0, "simulations/%s/sim%d/Golgi_pop%d_cell%d.dat"%(simulation_parameters[3],simulation_parameters[4],x,i))
-		       ls.add_column_to_output_file(of0, 'v%i'%i, quantity)
-	        else:
-		   randomly_select_displayed_cells=random.sample(range(cell_array[x+1][1]),max_traces)
-		   for y in randomly_select_displayed_cells:
-		       quantity = "%s[%i]/v"%(Golgi_pop_index_array[x], y)
-		       ls.add_line_to_display(disp, "%s[%i]: Vm"%(Golgi_pop_index_array[x],y), quantity, "1mV", pynml.get_next_hex_color())
-					      
-		   for i in range(cell_array[x+1][1]):
-		       quantity = "%s[%i]/v"%(Golgi_pop_index_array[x], i)
-		       of0 = 'Volts%d_file0_%d'%(x,i)
-		       ls.create_output_file(of0, "simulations/%s/sim%d/Golgi_pop%d_cell%d.dat"%(simulation_parameters[3],simulation_parameters[4],x,i))
-		       ls.add_column_to_output_file(of0, 'v%i'%i, quantity)
+       
 	# save LEMS file
         lems_file_name = ls.save_to_file()
-        if string.lower(simulation_parameters[6][0])=="plot":
-           if simulation_parameters[6][1]==True:
-              if simulation_parameters[2]=="jNeuroML":
-	         results1 = pynml.run_lems_with_jneuroml(lems_file_name, nogui=True, load_saved_data=True, plot=True)
-                 print("Finished building network and running simulation with %s"%simulation_parameters[2])
-              elif simulation_parameters[2]=="jNeuroML_NEURON":
-                 results1 = pynml.run_lems_with_jneuroml_neuron(lems_file_name, nogui=True, load_saved_data=True, plot=True)
-                 print("Finished building a network and running simulation with %s"%simulation_parameters[2])
-              else:
-                 print("Finished building a network")
+        if simulation_parameters['plotSpecifier']:
+           if simulation_parameters['simulator']=="jNeuroML":
+	      results1 = pynml.run_lems_with_jneuroml(lems_file_name, nogui=True, load_saved_data=True, plot=True)
+              print("Finished building network and running simulation with jNeuroML")
+           elif simulation_parameters['simulator']=="jNeuroML_NEURON":
+              results1 = pynml.run_lems_with_jneuroml_neuron(lems_file_name, nogui=True, load_saved_data=True, plot=True)
+              print("Finished building a network and running simulation with jNeuroML_NEURON")
            else:
-              if simulation_parameters[2]=="jNeuroML":
-	         results1 = pynml.run_lems_with_jneuroml(lems_file_name, nogui=True, load_saved_data=False, plot=False)
-                 print("Finished building a network and running simulation with %s"%simulation_parameters[2])
-              elif simulation_parameters[2]=="jNeuroML_NEURON":
-                 results1 = pynml.run_lems_with_jneuroml_neuron(lems_file_name, nogui=True, load_saved_data=False, plot=False)
-                 print("Finished building a network and running simulation with %s"%simulation_parameters[2])
-              else:
-                 print("Finished building a network")
+              print("Finished building a network")
+        else:
+           if simulation_parameters['simulator']=="jNeuroML":
+	      results1 = pynml.run_lems_with_jneuroml(lems_file_name, nogui=True, load_saved_data=False, plot=False)
+              print("Finished building a network and running simulation with jNeuroML")
+           elif simulation_parameters['simulator']=="jNeuroML_NEURON":
+              results1 = pynml.run_lems_with_jneuroml_neuron(lems_file_name, nogui=True, load_saved_data=False, plot=False)
+              print("Finished building a network and running simulation with jNeuroML_NEURON")
+           else:
+              print("Finished building a network")
          
