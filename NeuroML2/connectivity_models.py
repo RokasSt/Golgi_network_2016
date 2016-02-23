@@ -14,8 +14,8 @@ from methods import *
 
 
 
-def Vervaeke_2012_AND_explicit_conn_prob_model(pair,initial_projection_count,gap_count,prePop,prePop_listIndex,postPop,postPop_listIndex,cell_array,\
-                                                                         connectivity_information,cell_position_array):
+def Vervaeke_2012_AND_explicit_conn_prob_model(pair,initial_projection_count,gap_count,prePop,prePop_listIndex,prePopSize,postPop,postPop_listIndex,postPopSize,\
+                                               cell_array,connectivity_information,cell_position_array):
     nonempty_projection=False
     gapJ_object_array=[]
     gap_counter=gap_count
