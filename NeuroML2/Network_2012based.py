@@ -19,9 +19,8 @@ if __name__ == "__main__":
     net_params_test_2012_multiple['experiment1']['distributionParams']['yDim']=100
     net_params_test_2012_multiple['experiment1']['distributionParams']['yDim']=100
     net_params_test_2012_multiple['experiment1']['connParams']={}
-    net_params_test_2012_multiple['experiment1']['connParams']['connModel']="Vervaeke_2012_based"
     net_params_test_2012_multiple['experiment1']['connParams']['populationPairs']=[]
-    net_params_test_2012_multiple['experiment1']['connParams']['populationPairs'].append({'prePopID':'Golgi_pop0',\
+    net_params_test_2012_multiple['experiment1']['connParams']['populationPairs'].append({'connModel':"Vervaeke_2012_based",'prePopID':'Golgi_pop0',\
                                                     'postPopID':'Golgi_pop1','conductanceModel':"constant",\
                                                     'conductanceValue':426,'units':"pS",\
                                                      'gapJunctionModel':"constant number of GJ contacts per pair",'numberGJ':8,\
@@ -78,9 +77,8 @@ if __name__ == "__main__":
     net_params_test_2012_multiple['experiment2']['distributionParams']['yDim']=100
     
     net_params_test_2012_multiple['experiment2']['connParams']={}
-    net_params_test_2012_multiple['experiment2']['connParams']['connModel']="Vervaeke_2012_based"
     net_params_test_2012_multiple['experiment2']['connParams']['populationPairs']=[]
-    net_params_test_2012_multiple['experiment2']['connParams']['populationPairs'].append({'prePopID':'Golgi_pop0',\
+    net_params_test_2012_multiple['experiment2']['connParams']['populationPairs'].append({'connModel':"Vervaeke_2012_based",'prePopID':'Golgi_pop0',\
                                                     'postPopID':'Golgi_pop1','conductanceModel':"constant",\
                                                     'conductanceValue':426,'units':"pS",\
                                                      'gapJunctionModel':"constant number of GJ contacts per pair",'numberGJ':8,\
