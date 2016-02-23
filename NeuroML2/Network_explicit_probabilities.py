@@ -21,14 +21,37 @@ if __name__ == "__main__":
     net_params_multiple['experiment1']['distributionParams']['yDim']=100
     net_params_multiple['experiment1']['connParams']={}
     net_params_multiple['experiment1']['connParams']['populationPairs']=[]
-    net_params_multiple['experiment1']['connParams']['populationPairs'].append({'connModel':"explicit_connection_probabilities",'prePopID':'Golgi_pop0',\
+    net_params_multiple['experiment1']['connParams']['populationPairs'].append({'electricalConnModel':"explicit_connection_probabilities",'prePopID':'Golgi_pop0',\
                                                     'postPopID':'Golgi_pop1','conductanceModel':"constant",\
                                                     'conductanceValue':426,'units':"pS",\
                                                      'gapJunctionModel':"constant number of GJ contacts per pair",'numberGJ':8,\
-                                                    'connProbabilities':0.5,'testingConductanceScale':4,'maximalConnDistance':150,\
+                                                    'connProbability':0.5,'testingConductanceScale':4,'maximalConnDistance':150,\
                             'targetingModelprePop':{'model':"segment groups and segments",'segmentGroupList':["Section_1","dend_1"],'segmentGroupProbabilities':[0.7,0.3]},\
                             'targetingModelpostPop':{'model':"segment groups and segments",\
                                                 'segmentGroupList':["Section_1","dend_1"],'segmentGroupProbabilities':[0.7,0.3]}})
+
+
+    #############
+    #below lines to make a reference template for the chemical connections:
+    # net_params_test_2012_multiple['experiment1']['connParams']['populationPairs'].append({'chemicalConnModel':"explicit_connection_probabilities",\
+        #'prePopID':'Golgi_pop1','postPopID':'Golgi_pop2','synapse':'Golgi_to_gran_cell','connProb_from_PreCell_to_PostCell':0.5,'number_of_PostCellSynapses_per_PreCell':1,\
+         # ,'targetingModelpostPop':{'model':"segment groups and segments",'segmentGroupList':["Section_1","dend_1"],'segmentGroupProbabilities':[0.7,0.3]}})
+  
+    #below lines to make a reference template for the chemical connections:
+    # net_params_test_2012_multiple['experiment1']['connParams']['populationPairs'].append({'chemicalConnModel':"fixedNo_of_PostTargetCells",\
+        #'prePopID':'Golgi_pop1','postPopID':'Golgi_pop2','synapse':'Golgi_to_gran_cell','number_of_PostTargetCells_per_PreCell':10,\
+        # 'number_of_PostCellSynapses_per_PreCell':1,\
+        #  'targetingModelpostPop':{'model':"segment groups and segments",'segmentGroupList':["Section_1","dend_1"],'segmentGroupProbabilities':[0.7,0.3]}})
+   
+    # net_params_test_2012_multiple['experiment1']['connParams']['populationPairs'].append({'chemicalConnModel':"variableNo_of_PostTargetCells",\
+        #'prePopID':'Golgi_pop1','postPopID':'Golgi_pop2','synapse':'Golgi_to_gran_cell','model':{'modelType':'poisson','average':15},\
+        # 'number_of_PostCellSynapses_per_PreCell':1,\
+        #  'targetingModelpostPop':{'model':"segment groups and segments",'segmentGroupList':["Section_1","dend_1"],'segmentGroupProbabilities':[0.7,0.3]}})
+    ##############
+
+
+
+
     
     
     net_params_multiple['experiment1']['inputParams']=[]
@@ -79,7 +102,7 @@ if __name__ == "__main__":
     
     net_params_multiple['experiment2']['connParams']={}
     net_params_multiple['experiment2']['connParams']['populationPairs']=[]
-    net_params_multiple['experiment2']['connParams']['populationPairs'].append({'connModel':"explicit_connection_probabilities",'prePopID':'Golgi_pop0',\
+    net_params_multiple['experiment2']['connParams']['populationPairs'].append({'electricalConnModel':"explicit_connection_probabilities",'prePopID':'Golgi_pop0',\
                                                     'postPopID':'Golgi_pop1','conductanceModel':"constant",\
                                                     'conductanceValue':426,'units':"pS",\
                                                      'gapJunctionModel':"constant number of GJ contacts per pair",'numberGJ':8,\

@@ -34,10 +34,11 @@ if __name__ == "__main__":
     ##### no need to have explicit subcellular targeting in the case of soma-to-soma distance dependent conductance mode ("Vervaeke_2010_based")
     net_params_test_2010_multiple['experiment1']['connParams']={}
     net_params_test_2010_multiple['experiment1']['connParams']['populationPairs']=[]
-    net_params_test_2010_multiple['experiment1']['connParams']['populationPairs'].append({'connModel':"Vervaeke_2010_based",'prePopID':'Golgi_pop0',\
+    net_params_test_2010_multiple['experiment1']['connParams']['populationPairs'].append({'electricalConnModel':"Vervaeke_2010_based",'prePopID':'Golgi_pop0',\
                                                     'postPopID':'Golgi_pop1','spatialScale':1,'testingConductanceScale':4,'units':'nS','maximalConnDistance':200,'normalizeConductances':True,\
                             'prePoptargetGroup':{'segmentGroupList':["dendrite_group"],'segmentGroupProbabilities':[1]},\
                             'postPoptargetGroup':{'segmentGroupList':["dendrite_group"],'segmentGroupProbabilities':[1]}})
+
 
     net_params_test_2010_multiple['experiment1']['inputParams']=[]
 
@@ -73,7 +74,7 @@ if __name__ == "__main__":
     ##### as conductance levels are soma-to-soma distance-dependent in a Vervaeke_2010_based model, subcellular targeting is not implemented in this configuration. If   one wants to specify multiple GJs per cell pair with constant or heterogeneous conductances one can use Vervaeke_2012_based connModel
     net_params_test_2010_multiple['experiment2']['connParams']={}
     net_params_test_2010_multiple['experiment2']['connParams']['populationPairs']=[]
-    net_params_test_2010_multiple['experiment2']['connParams']['populationPairs'].append({'connModel':"Vervaeke_2010_based",'prePopID':'Golgi_pop0',\
+    net_params_test_2010_multiple['experiment2']['connParams']['populationPairs'].append({'electricalConnModel':"Vervaeke_2010_based",'prePopID':'Golgi_pop0',\
                                                     'postPopID':'Golgi_pop1','spatialScale':20,'testingConductanceScale':4,'maximalConnDistance':200,'normalizeConductances':True,\
                             'prePoptargetGroup':{'segmentGroupList':["dendrite_group"],'segmentGroupProbabilities':[1]},\
                             'postPoptargetGroup':{'segmentGroupList':["dendrite_group"],'segmentGroupProbabilities':[1]}})

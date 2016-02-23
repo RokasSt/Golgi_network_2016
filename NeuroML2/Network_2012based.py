@@ -20,7 +20,7 @@ if __name__ == "__main__":
     net_params_test_2012_multiple['experiment1']['distributionParams']['yDim']=100
     net_params_test_2012_multiple['experiment1']['connParams']={}
     net_params_test_2012_multiple['experiment1']['connParams']['populationPairs']=[]
-    net_params_test_2012_multiple['experiment1']['connParams']['populationPairs'].append({'connModel':"Vervaeke_2012_based",'prePopID':'Golgi_pop0',\
+    net_params_test_2012_multiple['experiment1']['connParams']['populationPairs'].append({'electricalConnModel':"Vervaeke_2012_based",'prePopID':'Golgi_pop0',\
                                                     'postPopID':'Golgi_pop1','conductanceModel':"constant",\
                                                     'conductanceValue':426,'units':"pS",\
                                                      'gapJunctionModel':"constant number of GJ contacts per pair",'numberGJ':8,\
@@ -29,6 +29,9 @@ if __name__ == "__main__":
                             'targetingModelpostPop':{'model':"segment groups and segments",\
                                                 'segmentGroupList':["Section_1","dend_1"],'segmentGroupProbabilities':[0.7,0.3]}})
     
+
+    
+
     
     net_params_test_2012_multiple['experiment1']['inputParams']=[]
     inputGroups_pop0_exp1=[]
@@ -78,7 +81,7 @@ if __name__ == "__main__":
     
     net_params_test_2012_multiple['experiment2']['connParams']={}
     net_params_test_2012_multiple['experiment2']['connParams']['populationPairs']=[]
-    net_params_test_2012_multiple['experiment2']['connParams']['populationPairs'].append({'connModel':"Vervaeke_2012_based",'prePopID':'Golgi_pop0',\
+    net_params_test_2012_multiple['experiment2']['connParams']['populationPairs'].append({'electricalConnModel':"Vervaeke_2012_based",'prePopID':'Golgi_pop0',\
                                                     'postPopID':'Golgi_pop1','conductanceModel':"constant",\
                                                     'conductanceValue':426,'units':"pS",\
                                                      'gapJunctionModel':"constant number of GJ contacts per pair",'numberGJ':8,\
