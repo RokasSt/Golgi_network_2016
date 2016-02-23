@@ -28,7 +28,7 @@ def synaptic_weight_vervaeke_2010(r):
     cc = coupling_coefficient_vervaeke_2010(r)
     return (0.576 * math.exp(cc / 12.4) + 0.000590 * math.exp(cc / 2.79) - 0.564)
 
-###################
+################### a list of methods for building networks and extracting required network parameters
 
 def get_spike_times(dat_file_name,exp_id,sim_id):
 

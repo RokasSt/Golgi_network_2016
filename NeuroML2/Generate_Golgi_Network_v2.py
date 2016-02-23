@@ -10,7 +10,7 @@ import numpy as np
 import string
 import collections
 
-from methods import *
+from methods_v2 import *
 
 
 
@@ -247,35 +247,24 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
 
             #######  introduce chemical connections into network building    
             if 'chemicalConnModel' in connectivity_information['populationPairs'][pair]:    
-               if connectivity_information['populationPairs'][pair]['chemicalConnModel']=="chemical_connections":
-                  pair_connectivity_parameters=connectivity_information['populationPairs'][pair]
-                  pre_pop_cell_component=cell_array[prePop_listIndex]['cellType']
-                  post_pop_cell_component=cell_array[postPop_listIndex]['cellType']
-                  pre_pop_cell_positions=cell_position_array[prePop]
-                  post_pop_cell_positions=cell_position_array[postPop]
+               pair_connectivity_parameters=connectivity_information['populationPairs'][pair]
+               pre_pop_cell_component=cell_array[prePop_listIndex]['cellType']
+               post_pop_cell_component=cell_array[postPop_listIndex]['cellType']
+               pre_pop_cell_positions=cell_position_array[prePop]
+               post_pop_cell_positions=cell_position_array[postPop]
 
-                  proj, nonempty_projection,gap_junction_array,synapse_name=chemical_connection_model(pair,initial_projection_counter,prePop,prePop_listIndex,prePopSize,pre_pop_cell_component,pre_pop_cell_positions,\
+               proj, nonempty_projection,gap_junction_array,synapse_name=chemical_connection_model(pair,initial_projection_counter,prePop,prePop_listIndex,prePopSize,pre_pop_cell_component,pre_pop_cell_positions,\
                                 postPop,postPop_listIndex,postPopSize,post_pop_cell_component,post_pop_cell_positions,pair_connectivity_parameters)
 
-                  synapse_name_array.append(synapse_name)
-                  if nonempty_projection:
-                     initial_projection_counter+=1
-                     net.electrical_projections.append(proj)
-                     for gapJ in range(0,len(gap_junction_array)):
-                         nml_doc.gap_junctions.append(gap_junction_array[gapJ])
+               synapse_name_array.append(synapse_name)
+               if nonempty_projection:
+                  initial_projection_counter+=1
+                  net.electrical_projections.append(proj)
+                  for gapJ in range(0,len(gap_junction_array)):
+                      nml_doc.gap_junctions.append(gap_junction_array[gapJ])
             
                                                      
         ####################                                                                   
-        # use below as a template : 
-        # input_information=[["MF",[pop0_array,pop1_array,pop2_array]],["PF",[pop0_array,pop1_array,pop2_array]]]
-        # all pop_arrays have to be of the following form:
-        # first_array=["uniform" or "3D region specific", if "uniform" fraction to target, if "3D region specific",[[40,80],[40,80],[40,80]]],all or random frac
-        # pop0_array=[pop_index,first_array,synapse_array_per_pop,[[synapse average_rate_list]]["constant number of inputs per cell" or "variable number of inputs per cell"
-        # if variable then "binomial",average_no_of_inputs,max_no_of_inputs    ]   then
-        # for each different synapse     "segment groups and segments",[["Section_1","dend_1"],[0.7,0.3]]
-        # "segments and subsegments"
-        # [["Section_1"],[1],[ [   [0.25,0.2],[0.25,0.4],[0.25,0.4],[0.25,0]  ]         ]             ]          (note nesting  - four brackets at the end)
-        #make InputList for MF and PF synapses
         
         for pop in range(0,len(input_information)):
             popID=input_information[pop]['popName']
@@ -284,133 +273,59 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
                    pop_listIndex=pop
                    popSize=cell_array[pop]['size']
             input_group_array=input_information[pop]['inputGroups']
+            cellType=cell_array[pop_listIndex]['cellType']
             for input_group in range(0,len(input_group_array)):
-                if input_group_array[input_group]['inputModel']=='XF':
-                                                                        
+                if input_group_array[input_group]['inputModel']=='XF' and input_group_array[input_group]['targetingRegime']=="uniform":
+
+                   input_list,poisson_synapse_array,synapse_name_list=XF_input_model_uniform(popID,popSize,cellType,input_group_array[input_group])                                          
                    fraction_to_target_per_pop=input_group_array[input_group]['fractionToTarget']
-                                                                        
-                   if input_group_array[input_group]['targetingRegime']=="uniform":
-                      
-                      target_cells=random.sample(range(popSize),int(round(fraction_to_target_per_pop*popSize)   )   )
-                                                                        
-                   if input_group_array[input_group]['targetingRegime']=="3D region specific":
-                      cell_positions=cell_position_array[popID]
-                      dim_array=np.shape(cell_positions)
-                      region_specific_targets_per_cell_group=[]
-                      for region in range(1,len(which_cells_to_target_array[1])):
-                          for cell in range(0,dim_array[0]):
-                              if (which_cells_to_target_array[1][region][0][0] <  cell_positions[cell,0]) and (cell_positions[cell,0] < which_cells_to_target_array[1][region][0][1]):
-                                  if (which_cells_to_target_array[1][region][1][0] <  cell_positions[cell,1]) and (cell_positions[cell,1] <which_cells_to_target_array[1][region][1][1]) :
-                                     if (which_cells_to_target_array[1][region][2][0] <  cell_positions[cell,2]) and (cell_positions[cell,2] < which_cells_to_target_array[1][region][2][1]):
-                                        region_specific_targets_per_cell_group.append(cell)
-                                                                        
-                      target_cells=random.sample(region_specific_targets_per_cell_group,\
-                                                int(round(fraction_to_target_per_pop*len(region_specific_targets_per_cell_group))))
-                                                                        
-                   inp_group_specifier=input_group_array[input_group]['inputLabel']
-                   synapse_list=input_group_array[input_group]['synapseList']
-                   for synapse_index in range(0,len(synapse_list)):
-                       synapse_name_array.append(synapse_list[synapse_index]['synapseType'])
-                                                        
-                       if synapse_list[synapse_index]['targetingModel']=="segments and subsegments":
-                          segment_target_array=extract_morphology_information([cell_array[pop_listIndex]['cellType']],\
-                ["segments",synapse_list[synapse_index]['segmentList']])
-                                                        
-                       if synapse_list[synapse_index]['targetingModel']=="segment groups and segments":
-                          segment_target_array =extract_morphology_information([cell_array[pop_listIndex]['cellType']],\
-        ["segment groups",synapse_list[synapse_index]['segmentGroupList']])
-                                                        
-                       if  synapse_list[synapse_index]['synapseMode']=="persistent":
-                           poisson_syn=neuroml.PoissonFiringSynapse(id="%s_pop%dsyn%d"%(inp_group_specifier,popID,synapse_index),\
-                           average_rate="%f per_s"%synapse_list[synapse_index]['averageRate'],\
-                           synapse=synapse_list[synapse_index]['synapseType'],\
-                           spike_target="./%s"%synapse_list[synapse_index]['synapseType'])
-                                     
-                       if synapse_list[synapse_index]['synapseMode']=="transient":
-                          poisson_syn=neuroml.TransientPoissonFiringSynapse(id="%s_%s_syn%d"%(inp_group_specifier,popID,synapse_index),\
-                          average_rate="%f per_s"%synapse_list[synapse_index]['averageRate'],\
-                          synapse=synapse_list[synapse_index]['synapseType'] ,\
-                          spike_target="./%s"%synapse_list[synapse_index]['synapseType'],\
-                          delay="%f%s"%(synapse_list[synapse_index]['delay'],synapse_list[synapse_index]['units']),\
-                          duration="%f%s"%(synapse_list[synapse_index]['duration'],synapse_list[synapse_index]['units'] )  )
-                                  
-                       nml_doc.poisson_firing_synapses.append(poisson_syn)
 
-                       input_list =neuroml.InputList(id="Input%s_%s_syn%d"%(inp_group_specifier,popID,synapse_index),\
-                       component=poisson_syn.id,populations="%s"%popID)
+                   synapse_name_array.extend(synapse_name_list)
 
-                       net.input_lists.append(input_list)
-                                                                        
-                       count=0                               
-                       for target_cell in target_cells:
-                           if synapse_list[synapse_index]['numberModel']=="constant number of inputs per cell":
-                              no_of_inputs=synapse_list[synapse_index]['noInputs']
-                           if synapse_list[synapse_index]['numberModel']=="variable number of inputs per cell":
-                              if synapse_list[synapse_index]['distribution']=="binomial":
-                                  no_of_inputs=np.random.binomial(synapse_list[synapse_index]['maxNoInputs'],\
-                                  synapse_list[synapse_index]['averageNoInputs']/synapse_list[synapse_index]['maxNoInputs'])
-                              ### other options can be added
-                           if synapse_list[synapse_index]['targetingModel']=="segment groups and segments":
-                              target_points=get_unique_target_points(segment_target_array,"segment groups and segments",\
-                                        [synapse_list[synapse_index]['segmentGroupList'],synapse_list[synapse_index]['segmentGroupProbabilities']],no_of_inputs)
-                           if synapse_list[synapse_index]['targetingModel']=="segments and subsegments":
-                              target_points=get_unique_target_points(segment_target_array,"segments and subsegments",\
-                                 [synapse_list[synapse_index]['segmentList'],synapse_list[synapse_index]['segmentProbabilities'],\
-                                 synapse_list[synapse_index]['fractionAlongANDsubsegProbabilities']],no_of_inputs)
-                           for target_point in range(0,len(target_points)):                     
-                               syn_input = neuroml.Input(id="%d"%(count),target="../%s/%i/%s"%(popID,target_cell,cell_array[pop_listIndex['cellType']),\
-                               destination="synapses",segment_id="%d"%target_points[target_point,0],fraction_along="%f"%target_points[target_point,1]) 
-                                             
-                               input_list.input.append(syn_input)
-                               count=count+1
+                   net.input_lists.append(input_list)
 
-                                  
+                   for poisson_syn in range(0,len(poisson_synapse_array)):
+          
+                       nml_doc.poisson_firing_synapses.append(poisson_synapse_array[poisson_syn])
+
+                if input_group_array[input_group]['inputModel']=='XF' and input_group_array[input_group]['targetingRegime']=="3D region specific":
+
+                   input_list,poisson_synapse_array,synapse_name_list=XF_input_model_3D_region_specific(popID,cellType,input_group_array[input_group],\
+                   cell_position_array[popID])                                          
+                   fraction_to_target_per_pop=input_group_array[input_group]['fractionToTarget']
+
+                   synapse_name_array.extend(synapse_name_list)
+
+                   net.input_lists.append(input_list)
+
+                   for poisson_syn in range(0,len(poisson_synapse_array)):
+          
+                       nml_doc.poisson_firing_synapses.append(poisson_synapse_array[poisson_syn])                
         
 	        ###### implementing physiological heterogeneity between cells with variations in a basal firing rate
                 if input_group_array[input_group]['inputModel']=="variable_basal_firing_rate":
-                   offset_units=input_group_array[input_group]['offsetUnits']
-                   units=input_group_array[input_group]['ampUnits']
-                   label=input_group_array[input_group]['inputLabel']
-                   for cell in range(0,popSize):
-                       if "gaussian"==input_group_array[input_group]["amplitudeDistribution"]:
-                          amp=random.gauss(input_group_array[input_group]['averageAmp'],input_group_array[input_group]['stDevAmp'])
-                       if "uniform"==input_group_array[input_group]["amplitudeDistribution"]:
-                          amp=random.uniform(input_group_array[input_group]['leftAmpBound'],input_group_array[input_group]['rightAmpBound'])
-                       if "constant"==input_group_array[input_group]["amplitudeDistribution"]:
-                          amp=input_group_array[input_group]['valueAmp']
-                       if "gaussian"==input_group_array[input_group]["offsetDistribution"]:
-                          offset=random.gauss(input_group_array[input_group]['averageOffset'],input_group_array[input_group]['stDevOffset'])
-                       if offset_uniform_model:
-                          offset=random.uniform(pop_offset_left_bound[pop],pop_offset_right_bound[pop])
-                       if "constant"==input_group_array[input_group]["offsetDistribution"]:
-                          offset=input_group_array[input_group]["valueOffset"]
-                       Pulse_generator_variable=neuroml.PulseGenerator(id="%s_%d"%(label,cell),delay="%f%s"%(offset,offset_units),\
-                                duration="%f%s"%((simulation_parameters[0]-offset),offset_units),amplitude="%f%s"%(amp,units))
-	               nml_doc.pulse_generators.append(Pulse_generator_variable)
-	               Input_list=neuroml.InputList(id="Input_%s%d"%(label,cell),component="%s_%d"%(label,cell),populations="%s"%popID)
-	               net.input_lists.append(Input_list)
-	               Inp = neuroml.Input(target="../%s/%d/%s"%(popID,cell,cell_array[pop_listIndex]['cellType']),id="%d"%cell,destination="synapses")
-	               Input_list.input.append(Inp)
-	                  
+
+                   input_list_array,pulseGenerator_array=variable_basal_firing_rate(popID,popSize,cellType,input_group_array[input_group],\
+                   simulation_parameters['duration'])                                          
+
+                   for input_list in range(0,len(input_list_array)):
+          
+                       net.input_lists.append(input_list_array[input_list])
+                       nml_doc.pulse_generators.append(pulseGenerator_array[input_list])
+                   
+	               
 	        ##############
                 if input_group_array[input_group]['inputModel']=="testing":
-                   label=input_group_array[input_group]['inputLabel']
-                   amp_units=input_group_array[input_group]['ampUnits']
-                   time_units=input_group_array[input_group]['timeUnit']
-                   randomly_select_target_cells=random.sample(range(popSize),int(round(input_group_array[input_group]['cellFractionToTarget'])))
-                   for pulse_x in range(0,len(input_group_array[input_group]['pulseParameters'])):
-                       Pulse_generator_x=neuroml.PulseGenerator(id="Input_%s_%d"%(label,pulse_x),\
-                       delay="%f%s"%(input_group_array[input_group]['pulseParameters'][pulse_x]['delay'],time_units),\
-                       duration="%f%s"%(input_group_array[input_group]['pulseParameters'][pulse_x]['duration'],time_units),\
-                       amplitude="%f%s"%(input_group_array[input_group]['pulseParameters'][pulse_x]['amplitude'],amp_units))
-	               nml_doc.pulse_generators.append(Pulse_generator_x)
-                                                         
-                       Input_list=neuroml.InputList(id="Input_list%d"%pulse_x, component="Input_%s_%d"%(label,pulse_x),populations="%s"%popID)
-                       neuroml_input_array.append(Input_list)
-                       net.input_lists.append(Input_list)
-                       for i in randomly_select_target_cells:
-                           Inp = neuroml.Input(target="../%s/%d/%s"%(popID,i,cell_array[pop_listIndex]['cellType']),id="%d"%i,destination="synapses")
-                           input_list.input.append(Inp)
+
+                   input_list_array,pulseGenerator_array=testing(popID,popSize,cellType,input_group_array[input_group],\
+                   simulation_parameters['duration'])                                          
+
+                   for input_list in range(0,len(input_list_array)):
+          
+                       net.input_lists.append(input_list_array[input_list])
+                       nml_doc.pulse_generators.append(pulseGenerator_array[input_list])
+
+                
                       
 
         ##############       

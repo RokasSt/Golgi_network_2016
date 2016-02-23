@@ -121,7 +121,15 @@ if __name__ == "__main__":
 
 
     inputGroups_pop1_exp2.append({'inputModel':'XF','inputLabel':'MFpop1','targetingRegime':"uniform",'fractionToTarget':0.5,'synapseList':synapseList_pop1_exp2})
-    
+     
+
+
+    ####### format for 3D region specific targeting:
+    #inputGroups_pop1_exp2.append({'inputModel':'XF','inputLabel':'MFpop1','targetingRegime':"uniform",'fractionToTarget':0.5,'synapseList':synapseList_pop1_exp2}) 
+    #inputGroups_pop1_exp2.append({'inputModel':'XF','inputLabel':'MFpop1','targetingRegime':"3D region specific",\
+    #       'regionList':[ {'xVector':[0,100],'yVector':[0,100],'zVector':[0,100]} ],'fractionToTarget':0.5,'synapseList':synapseList_pop1_exp2}) 
+    # 
+    #
                              
     net_params_test_2012_multiple['experiment1']['inputParams'].append({'popName':'Golgi_pop0','inputGroups':inputGroups_pop0_exp2})
     net_params_test_2012_multiple['experiment1']['inputParams'].append({'popName':'Golgi_pop1','inputGroups':inputGroups_pop1_exp2})
