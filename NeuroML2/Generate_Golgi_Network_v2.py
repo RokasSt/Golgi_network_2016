@@ -58,14 +58,26 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
 	cell_position_array={}
 	   
         no_density_model=True
-        #################    
+        #################  
+         ##### below lines to make a reference template for the density based model:
+    #   net_params_test_2010_multiple['experiment1']['distributionParams']={}
+    #   net_params_test_2010_multiple['experiment1']['distributionParams']['distributionModel']="density based"
+    #   net_params_test_2010_multiple['experiment1']['distributionParams']['populationList']=[]
+    #   net_params_test_2010_multiple['experiment1']['distributionParams']['populationList'].append({'popID':'Golgi_pop0','densityFilePath':'/home/rokas/Golgi_data/GlyT2 density matrix of shape 35 152.txt',\
+    #   'planeDimensions':{'dim1':'x','dim2':'z'},'dim1CoordinateVector':[1300,1500],'dim2CoordinateVector':[0,50]})
+    #   net_params_test_2010_multiple['experiment1']['distributionParams']['populationList'].append({'popID':'Golgi_pop1','densityFilePath':'/home/rokas/Golgi_data/GlyT2 density matrix of shape 35 152.txt',\
+    #   'planeDimensions':{'dim1':'x','dim2':'z'},'dim1CoordinateVector':[1300,1500],'dim2CoordinateVector':[0,50],'distanceModel':'minimal_distance',\
+    #     'minimalDistance':25})  
 	if string.lower(location_array['distributionModel'])=="density based":
            ### will override cell numbers in cell_array if specified
            no_density_model=False
-           for cell_group in range(0,len(location_array['densityFiles'])):
+           for cell_group in range(0,len(location_array['populationList'])):
+               cellPopName=location_array['populationList'][cell_group]['popID']
+               for pop in range(0,len(cell_array)):
+                   if cellPopName==cell_array[pop]['popID']:
+                      cell_type_name=cell_array[pop]['cellType']
                ### assuming that Y_values returned by load_density_data represent the depth with zero indicating Purkinje cell level
-               cellpopName=location_array['densityFiles'][cell_group]['popID']
-               X_array,Y_array,density_values=load_density_data(location_array['densityFiles'][cell_group]['fileName'],location_array['relativePath'])
+               X_array,Y_array,density_values=load_density_data(location_array['populationList'][cell_group]['densityFilePath'])
                dim_X_array=np.shape(X_array)
                dim_Y_array=np.shape(Y_array)
                ## assume meshgrid
@@ -73,15 +85,14 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
                   ## assume that data is not normalized and distribute cells on a density sheet
                   X_max=np.nanmax(X_array)
                   Y_max=np.nanmax(Y_array)
-                  X_array=np.divide(X_array,X_max,dtype=float)
-                  Y_array=np.divide(Y_array,Y_max,dtype=float)
-                  cell_diameter=get_soma_diameter(cell_names[cell_group])
-                  if string.lower(localization_type[4])=="minimal distance":
-                     if string.lower(localization_type[5])=="uniform":
-                        minimal_distance=localization_type[6]
+                  X_min=np.nanmin(X_array)
+                  Y_min=np.nanmin(Y_array)
+
+                  if location_array['populationList'][cell_group]['distanceModel']=="minimal_distance":
+                     
                               
-                     if string.lower(localization_type[4])=="random no overlap":
-                        cell_diameter=get_soma_diameter(cell_names[cell_group])
+                  if location_array['populationList'][cell_group]['distanceModel']=="random_no_overlap":
+                     
 
 
   
