@@ -2,31 +2,31 @@
 
 
 
-/Examples/simulator.props
-/Examples/
-/Examples/*.mod
-/Examples/*.hoc
-/Examples/*.dat
-/Examples/*_nrn.py 
+simulator.props
 
-/Examples/*.mod
-/Examples/*.hoc
-/Examples/*.dat
-/Examples/*_nrn.py 
-/Examples/*.props
-/Examples/*.net.nml
-/Examples/*.xml
+*.mod
+*.hoc
+*.dat
+*_nrn.py 
+
+*.mod
+*.hoc
+*.dat
+*_nrn.py 
+*.props
+*.net.nml
+*.xml
 
 
-/Examples/*.pyc
-/Examples/*i686
-/Examples/*x86_64
-/Examples/generatedNEURON
-/Examples/generatedGENESIS
-/Examples/generatedMOOSE
-/Examples/generatedPSICS
-/Examples/simulations
-/Examples/*.bak
-/Examples/*py.class
-/Examples/*~
+*.pyc
+*i686
+*x86_64
+generatedNEURON
+generatedGENESIS
+generatedMOOSE
+generatedPSICS
+simulations
+*.bak
+*py.class
+*~
 
