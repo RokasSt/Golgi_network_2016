@@ -12,7 +12,7 @@
 /NeuroML2/*.dat
 /NeuroML2/*_nrn.py 
 /NeuroML2/*.props
-/NeuroML2/*.nml
+/NeuroML2/*.net.nml
 /NeuroML2/*.xml
 
 
