@@ -56,13 +56,11 @@ def get_spike_times(dat_file_name,exp_id,sim_id):
 
 
 def save_soma_positions(population_params,save_to_path):
-    population_type=population_params[0]
-    cell_array=population_params[1]
-    Golgi_pop_index_array=population_params[2]
-    soma_position_array=population_params[3]
-    for cell_group in range(0,cell_array[0]):
-        soma_positions=soma_position_array[cell_group]
-        np.savetxt('%s/%s.txt'%(save_to_path,Golgi_pop_index_array[cell_group]),soma_positions,fmt='%f')
+    cell_array=population_params['popParams']
+    soma_position_array=population_params['cellPositionArray']
+    for cell_group in range(0,len(cell_array)):
+        soma_positions=soma_position_array[cell_array[cell_group]['popID']]
+        np.savetxt('%s/%s.txt'%(save_to_path,cell_array[cell_group]['popID']),soma_positions,fmt='%f')
 
 
 def get_soma_diameter(cell_type):
@@ -761,7 +759,7 @@ def get_3D_connection_length(preCellType,postCellType,pre_pop_cell_positions,pos
     #cell_array variable has to contain cell component names
     loaded_cell_array={}
     Pre_cell_name=preCellType
-    pre_cell_nml_file = '%s.cell.nml'Pre_cell_name
+    pre_cell_nml_file = '%s.cell.nml'%Pre_cell_name
     document_cell = neuroml.loaders.NeuroMLLoader.load(pre_cell_nml_file)
     loaded_cell_array[Pre_cell_name]=document_cell.cells[0]
     pre_cell_position=pre_pop_cell_positions[pre_cell_ID]

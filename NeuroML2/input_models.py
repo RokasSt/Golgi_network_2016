@@ -15,7 +15,10 @@ from methods_v2 import *
 
 
 
-def XF_input_models_uniform(popID,popSize,cellType,input_group_parameters):
+def XF_input_models_uniform(popID,popSize,cellType,input_group_parameters,seed_number):
+
+
+    random.seed(seed_number)
 
     fraction_to_target_per_pop=input_group_parameters['fractionToTarget']
                                                                         
@@ -84,7 +87,10 @@ def XF_input_models_uniform(popID,popSize,cellType,input_group_parameters):
     return input_list, poisson_synapse_array,synapse_name_array
 
 
-def XF_input_models_3D_region_specific(popID,cellType,input_group_parameters,cell_positions):
+def XF_input_models_3D_region_specific(popID,cellType,input_group_parameters,cell_positions,seed_number):
+
+
+    random.seed(seed_number)
 
     fraction_to_target_per_pop=input_group_parameters['fractionToTarget']
                                                                        
@@ -164,7 +170,9 @@ def XF_input_models_3D_region_specific(popID,cellType,input_group_parameters,cel
 
 
 
-def variable_basal_firing_rate(popID,popSize,cellType,input_group_parameters):
+def variable_basal_firing_rate(popID,popSize,cellType,input_group_parameters,simulation_duration,seed_number):
+
+   random.seed(seed_number)
 
 
    offset_units=input_group_parameters['offsetUnits']
@@ -193,7 +201,7 @@ def variable_basal_firing_rate(popID,popSize,cellType,input_group_parameters):
           offset=input_group_array[input_group]["valueOffset"]
 
        Pulse_generator_variable=neuroml.PulseGenerator(id="%s_%d"%(label,cell),delay="%f%s"%(offset,offset_units),\
-       duration="%f%s"%((simulation_parameters-offset),offset_units),amplitude="%f%s"%(amp,units))
+       duration="%f%s"%((simulation_duration-offset),offset_units),amplitude="%f%s"%(amp,units))
        pulse_generator_array.append(Pulse_generator_variable)
        Input_list=neuroml.InputList(id="Input_%s%d"%(label,cell),component="%s_%d"%(label,cell),populations="%s"%popID)
        Inp = neuroml.Input(target="../%s/%d/%s"%(popID,cell,cellType),id="%d"%cell,destination="synapses")
@@ -201,30 +209,34 @@ def variable_basal_firing_rate(popID,popSize,cellType,input_group_parameters):
        input_list_array.append(Input_list)
 
 
-    return input_list_array,pulse_generator_array
+   return input_list_array,pulse_generator_array
 
-def testing(popID,popSize,cellType,input_group_parameters):
+def testing(popID,popSize,cellType,input_group_parameters,seed_number):
 
-
-     label=input_group_parameters['inputLabel']
+     random.seed(seed_number)
+     
      amp_units=input_group_parameters['ampUnits']
-     time_units=input_group_parameters['timeUnit']
-     randomly_select_target_cells=random.sample(range(popSize),int(round(input_group_parameters['cellFractionToTarget'])))
+     time_units=input_group_parameters['timeUnits']
+     randomly_select_target_cells=random.sample(range(popSize),int(round(popSize*input_group_parameters['cellFractionToTarget'])))
      pulseGenerator_array=[]
      input_list_array=[]
      for pulse_x in range(0,len(input_group_parameters['pulseParameters'])):
-         Pulse_generator_x=neuroml.PulseGenerator(id="Input_%s_%d"%(label,pulse_x),\
+         Pulse_generator_x=neuroml.PulseGenerator(id="Input_%s_%d"%(popID,pulse_x),\
          delay="%f%s"%(input_group_parameters['pulseParameters'][pulse_x]['delay'],time_units),\
          duration="%f%s"%(input_group_parameters['pulseParameters'][pulse_x]['duration'],time_units),\
          amplitude="%f%s"%(input_group_parameters['pulseParameters'][pulse_x]['amplitude'],amp_units))
 	 pulseGenerator_array.append(Pulse_generator_x)
                                                          
-         Input_list=neuroml.InputList(id="Input_list%d"%pulse_x, component="Input_%s_%d"%(label,pulse_x),populations="%s"%popID)
-         neuroml_input_array.append(Input_list)
-         input_list_array.append(Input_list)
+         Input_list=neuroml.InputList(id="Input_list_%s_%d"%(popID,pulse_x), component="Input_%s_%d"%(popID,pulse_x),populations="%s"%popID)
+         
          for i in randomly_select_target_cells:
              Inp = neuroml.Input(target="../%s/%d/%s"%(popID,i,cellType),id="%d"%i,destination="synapses")
-             input_list.input.append(Inp)
+             Input_list.input.append(Inp)
+
+         input_list_array.append(Input_list)
+
+
+     return input_list_array,pulseGenerator_array
                       
 
 

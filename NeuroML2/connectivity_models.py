@@ -14,9 +14,10 @@ from methods_v2 import *
 
 
 
-def Vervaeke_2012_AND_explicit_conn_prob_model(pair_id,projection_id,prePop,prePop_listIndex,prePopSize,preCellType,pre_cell_positions\
+def Vervaeke_2012_AND_explicit_conn_prob_model(pair_id,projection_id,prePop,prePop_listIndex,prePopSize,preCellType,pre_cell_positions,\
                                                postPop,postPop_listIndex,postPopSize,postCellType,post_cell_positions,\
-                                               connectivity_parameters):
+                                               connectivity_parameters,seed_number):
+    random.seed(seed_number)
     nonempty_projection=False
     gapJ_object_array=[]
     gap_counter=0
@@ -38,9 +39,7 @@ def Vervaeke_2012_AND_explicit_conn_prob_model(pair_id,projection_id,prePop,preP
        post_pop_target_segment_array=extract_morphology_information([postCellType],\
             ["segments",connectivity_parameters['targetingModelpostPop']['segmentGroupList']])  
                                             
-    proj = neuroml.ElectricalProjection(id="proj%d"%projection_id,\
-		                presynaptic_population=prePop,\ 
-		                postsynaptic_population=postPop)
+    proj = neuroml.ElectricalProjection(id="proj%d"%projection_id,presynaptic_population=prePop,postsynaptic_population=postPop)
     
     
     conn_count = 0
@@ -92,7 +91,8 @@ connectivity_parameters['targetingModelprePop']['segmentGroupProbabilities']],no
                if connectivity_parameters['targetingModelprePop']['model']=="segments and subsegments":
                   pre_target_points=get_unique_target_points(pre_pop_target_segment_array,"segments and subsegments",\
  [connectivity_parameters['targetingModelprePop']['segmentList'],\
- connectivity_parameters['targetingModelprePop']['segmentProbabilities'],[connectivity_parameters['targetingModelprePop']['fractionAlongANDsubsegProbabilities']],no_of_GJcon_per_pair)
+ connectivity_parameters['targetingModelprePop']['segmentProbabilities'],\
+ connectivity_parameters['targetingModelprePop']['fractionAlongANDsubsegProbabilities']],no_of_GJcon_per_pair)
        
                if connectivity_parameters['targetingModelpostPop']['model']=="segment groups and segments":
 
@@ -106,7 +106,7 @@ connectivity_parameters['targetingModelprePop']['segmentGroupProbabilities']],no
                   post_targeting_mode="segments and subsegments"
 
                   post_targeting_parameters=[connectivity_parameters['targetingModelpostPop']['segmentList'],\
- connectivity_parameters['targetingModelpostPop']['segmentProbabilities'],[connectivity_parameters['targetingModelpostPop']['fractionAlongANDsubsegProbabilities']]
+ connectivity_parameters['targetingModelpostPop']['segmentProbabilities'],connectivity_parameters['targetingModelpostPop']['fractionAlongANDsubsegProbabilities']]
 
                   for pre_target_point in range(0,len(pre_target_points)):
                       if 'maximalConnDistance' in connectivity_parameters:
@@ -153,10 +153,11 @@ post_cell="../%s/%d/%s"%(postPop,Post_cell,postCellType),synapse=gap_junction.id
 
 
 
-def Vervaeke_2010_model(pair_id,projection_id,prePop,prePop_listIndex,prePopSize,preCellType,pre_cell_positions\
+def Vervaeke_2010_model(pair_id,projection_id,prePop,prePop_listIndex,prePopSize,preCellType,pre_cell_positions,\
                                                postPop,postPop_listIndex,postPopSize,postCellType,post_cell_positions,\
-                                               connectivity_parameters):
+                                               connectivity_parameters,seed_number):
 
+    random.seed(seed_number)
     nonempty_projection=False
     gapJ_object_array=[]
     gap_counter=0
@@ -171,9 +172,7 @@ connectivity_parameters['prePoptargetGroup']['segmentGroupList']])
                                   ["segment groups",connectivity_parameters['postPoptargetGroup']['segmentGroupList'] ] )
 
                                             
-    proj = neuroml.ElectricalProjection(id="proj%d"%projection_id,\
-		                presynaptic_population=prePop,\ 
-		                postsynaptic_population=postPop)
+    proj = neuroml.ElectricalProjection(id="proj%d"%projection_id,presynaptic_population=prePop,postsynaptic_population=postPop)
     
     conn_count = 0
                                                                               
@@ -221,16 +220,16 @@ connectivity_parameters['prePoptargetGroup']['segmentGroupList']])
                                                         
                if 'prePoptargetGroup' in connectivity_parameters:
                   pre_target_points=get_unique_target_points(pre_pop_target_segment_array,"segment groups and segments",\
-                             [connectivity_parameters['targetingModelprePop']['segmentGroupList'],\
-connectivity_parameters['targetingModelprePop']['segmentGroupProbabilities']],1)
+                             [connectivity_parameters['prePoptargetGroup' ]['segmentGroupList'],\
+connectivity_parameters['prePoptargetGroup']['segmentGroupProbabilities']],1)
 
        
                if 'postPoptargetGroup' in connectivity_parameters:
 
                   post_targeting_mode="segment groups and segments"
 
-                  post_targeting_parameters=[connectivity_parameters['targetingModelpostPop']['segmentGroupList'],\
-connectivity_parameters['targetingModelpostPop']['segmentGroupProbabilities']]
+                  post_targeting_parameters=[connectivity_parameters['postPoptargetGroup']['segmentGroupList'],\
+connectivity_parameters['postPoptargetGroup']['segmentGroupProbabilities']]
 
                           
                if 'maximalConnDistance' in connectivity_parameters:
@@ -245,15 +244,15 @@ connectivity_parameters['targetingModelpostPop']['segmentGroupProbabilities']]
                   post_target_point=get_unique_target_points(post_pop_target_segment_array,post_targeting_mode,\
                                                                              post_targeting_parameters,1)
 
-               Pre_segment_id=pre_target_points[pre_target_point,0]
+               Pre_segment_id=pre_target_points[0,0]
                Post_segment_id=post_target_point[0,0]
-               Pre_fraction=pre_target_points[pre_target_point,1]
+               Pre_fraction=pre_target_points[0,1]
                Post_fraction=post_target_point[0,1]
 
                           
                conn =neuroml.ElectricalConnectionInstance(id=conn_count,\
 pre_cell="../%s/%d/%s"%(prePop,Pre_cell,preCellType),\
-post_cell="../%s/%d/%s"%(postPop,Post_cell,postCellType),synapse="gap_junction%d"%(pair,gap_counter),\
+post_cell="../%s/%d/%s"%(postPop,Post_cell,postCellType),synapse="gap_junction%d%d"%(pair_id,gap_counter),\
                                                              pre_segment="%d"%Pre_segment_id,post_segment="%d"%Post_segment_id,\
                                                              pre_fraction_along="%f"%Pre_fraction,post_fraction_along="%f"%Post_fraction)
                gap_counter+=1                         
@@ -276,7 +275,7 @@ post_cell="../%s/%d/%s"%(postPop,Post_cell,postCellType),synapse="gap_junction%d
                            
 
 
-    return proj, nonempty_projection, gap_counter,gapJ_object_array
+    return proj, nonempty_projection,gapJ_object_array
 
 
 
@@ -303,9 +302,10 @@ post_cell="../%s/%d/%s"%(postPop,Post_cell,postCellType),synapse="gap_junction%d
     ##############
 
 
-def chemical_connection_model(pair_id,projection_id,prePop,prePop_listIndex,prePopSize,preCellType,pre_cell_positions\
+def chemical_connection_model(pair_id,projection_id,prePop,prePop_listIndex,prePopSize,preCellType,pre_cell_positions,\
                                                postPop,postPop_listIndex,postPopSize,postCellType,post_cell_positions,\
-                                               connectivity_parameters):
+                                               connectivity_parameters,seed_number):
+    random.seed(seed_number)
     nonempty_projection=False
     gapJ_object_array=[]
     gap_counter=0
@@ -328,9 +328,7 @@ def chemical_connection_model(pair_id,projection_id,prePop,prePop_listIndex,preP
        post_pop_target_segment_array=extract_morphology_information([postCellType],\
             ["segments",connectivity_parameters['targetingModelpostPop']['segmentGroupList']])  
                                             
-    proj = neuroml.Projection(id="proj%d"%projection_id,\
-		                presynaptic_population=prePop,\ 
-		                postsynaptic_population=postPop,synapse=connectivity_parameters['synapse'])
+    proj = neuroml.Projection(id="proj%d"%projection_id,presynaptic_population=prePop,postsynaptic_population=postPop,synapse=connectivity_parameters['synapse'])
     
     synapse_name=connectivity_parameters['synapse']
 
@@ -354,7 +352,7 @@ connectivity_parameters['targetingModelprePop']['segmentGroupProbabilities']],no
            if connectivity_parameters['targetingModelprePop']['model']=="segments and subsegments":
               pre_target_points=get_unique_target_points(pre_pop_target_segment_array,"segments and subsegments",\
  [connectivity_parameters['targetingModelprePop']['segmentList'],\
- connectivity_parameters['targetingModelprePop']['segmentProbabilities'],[connectivity_parameters['targetingModelprePop']['fractionAlongANDsubsegProbabilities']],\
+ connectivity_parameters['targetingModelprePop']['segmentProbabilities'],connectivity_parameters['targetingModelprePop']['fractionAlongANDsubsegProbabilities']],\
                                        no_of_Synapses_Onto_TargetCell)
 
            for Post_cell in range(0,postPopSize):
@@ -373,7 +371,7 @@ connectivity_parameters['targetingModelprePop']['segmentGroupProbabilities']],no
                      post_targeting_mode="segments and subsegments"
 
                      post_targeting_parameters=[connectivity_parameters['targetingModelpostPop']['segmentList'],\
- connectivity_parameters['targetingModelpostPop']['segmentProbabilities'],[connectivity_parameters['targetingModelpostPop']['fractionAlongANDsubsegProbabilities']]
+ connectivity_parameters['targetingModelpostPop']['segmentProbabilities'],connectivity_parameters['targetingModelpostPop']['fractionAlongANDsubsegProbabilities']]
 
                   for pre_target_point in range(0,no_of_Synapses_Onto_TargetCell):
                       if 'maximalConnDistance' in connectivity_parameters:
@@ -424,7 +422,7 @@ connectivity_parameters['targetingModelprePop']['segmentGroupProbabilities']],no
            if connectivity_parameters['targetingModelprePop']['model']=="segments and subsegments":
               pre_target_points=get_unique_target_points(pre_pop_target_segment_array,"segments and subsegments",\
  [connectivity_parameters['targetingModelprePop']['segmentList'],\
- connectivity_parameters['targetingModelprePop']['segmentProbabilities'],[connectivity_parameters['targetingModelprePop']['fractionAlongANDsubsegProbabilities']],\
+ connectivity_parameters['targetingModelprePop']['segmentProbabilities'],connectivity_parameters['targetingModelprePop']['fractionAlongANDsubsegProbabilities']],\
                                        no_of_Synapses_Onto_TargetCell)
 
            for Post_cell in randomly_selected_target_cells:
@@ -441,7 +439,7 @@ connectivity_parameters['targetingModelprePop']['segmentGroupProbabilities']],no
                   post_targeting_mode="segments and subsegments"
 
                   post_targeting_parameters=[connectivity_parameters['targetingModelpostPop']['segmentList'],\
- connectivity_parameters['targetingModelpostPop']['segmentProbabilities'],[connectivity_parameters['targetingModelpostPop']['fractionAlongANDsubsegProbabilities']]
+ connectivity_parameters['targetingModelpostPop']['segmentProbabilities'],connectivity_parameters['targetingModelpostPop']['fractionAlongANDsubsegProbabilities']]
 
                for pre_target_point in range(0,no_of_Synapses_Onto_TargetCell):
                    if 'maximalConnDistance' in connectivity_parameters:
@@ -467,9 +465,9 @@ connectivity_parameters['targetingModelprePop']['segmentGroupProbabilities']],no
                          pre_segment="%d"%Pre_segment_id,post_segment="%d"%Post_segment_id,\
                          pre_fraction_along="%f"%Pre_fraction,post_fraction_along="%f"%Post_fraction)
                                             
-		      nonempty_projection=True
-                      proj.connections.append(conn)
-		      conn_count+=1
+		   nonempty_projection=True
+                   proj.connections.append(conn)
+		   conn_count+=1
    
     ############ projection in which each presynaptic cell of a given presynaptic population has a variable number of postsynaptic targets according to a given statistical distribution
     if connectivity_parameters['chemicalConnModel']=="variableNo_of_PostTargetCells":  
@@ -499,7 +497,7 @@ connectivity_parameters['targetingModelprePop']['segmentGroupProbabilities']],no
            if connectivity_parameters['targetingModelprePop']['model']=="segments and subsegments":
               pre_target_points=get_unique_target_points(pre_pop_target_segment_array,"segments and subsegments",\
  [connectivity_parameters['targetingModelprePop']['segmentList'],\
- connectivity_parameters['targetingModelprePop']['segmentProbabilities'],[connectivity_parameters['targetingModelprePop']['fractionAlongANDsubsegProbabilities']],\
+ connectivity_parameters['targetingModelprePop']['segmentProbabilities'],connectivity_parameters['targetingModelprePop']['fractionAlongANDsubsegProbabilities']],\
                                        no_of_Synapses_Onto_TargetCell)
 
            for Post_cell in randomly_selected_target_cells:
@@ -516,7 +514,7 @@ connectivity_parameters['targetingModelprePop']['segmentGroupProbabilities']],no
                   post_targeting_mode="segments and subsegments"
 
                   post_targeting_parameters=[connectivity_parameters['targetingModelpostPop']['segmentList'],\
- connectivity_parameters['targetingModelpostPop']['segmentProbabilities'],[connectivity_parameters['targetingModelpostPop']['fractionAlongANDsubsegProbabilities']]
+ connectivity_parameters['targetingModelpostPop']['segmentProbabilities'],connectivity_parameters['targetingModelpostPop']['fractionAlongANDsubsegProbabilities']]
 
                for pre_target_point in range(0,no_of_Synapses_Onto_TargetCell):
                    if 'maximalConnDistance' in connectivity_parameters:
@@ -542,9 +540,9 @@ connectivity_parameters['targetingModelprePop']['segmentGroupProbabilities']],no
                          pre_segment="%d"%Pre_segment_id,post_segment="%d"%Post_segment_id,\
                          pre_fraction_along="%f"%Pre_fraction,post_fraction_along="%f"%Post_fraction)
                                             
-		      nonempty_projection=True
-                      proj.connections.append(conn)
-		      conn_count+=1
+		   nonempty_projection=True
+                   proj.connections.append(conn)
+		   conn_count+=1
    
 
 
