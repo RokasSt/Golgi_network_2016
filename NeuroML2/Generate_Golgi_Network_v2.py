@@ -64,34 +64,126 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
     #   net_params_test_2010_multiple['experiment1']['distributionParams']['distributionModel']="density based"
     #   net_params_test_2010_multiple['experiment1']['distributionParams']['populationList']=[]
     #   net_params_test_2010_multiple['experiment1']['distributionParams']['populationList'].append({'popID':'Golgi_pop0','densityFilePath':'/home/rokas/Golgi_data/GlyT2 density matrix of shape 35 152.txt',\
-    #   'planeDimensions':{'dim1':'x','dim2':'z'},'dim1CoordinateVector':[1300,1500],'dim2CoordinateVector':[0,50]})
-    #   net_params_test_2010_multiple['experiment1']['distributionParams']['populationList'].append({'popID':'Golgi_pop1','densityFilePath':'/home/rokas/Golgi_data/GlyT2 density matrix of shape 35 152.txt',\
     #   'planeDimensions':{'dim1':'x','dim2':'z'},'dim1CoordinateVector':[1300,1500],'dim2CoordinateVector':[0,50],'distanceModel':'minimal_distance',\
-    #     'minimalDistance':25})  
+    #   'minimalDistance':25})
+    #   net_params_test_2010_multiple['experiment1']['distributionParams']['populationList'].append({'popID':'Golgi_pop1','densityFilePath':'/home/rokas/Golgi_data/GlyT2 density matrix of shape 35 152.txt',\
+    #   'planeDimensions':{'dim1':'x','dim2':'z'},'dim1CoordinateVector':[1300,1500],'dim2CoordinateVector':[0,50],'dim3':'y','dim3Boundary':200,\
+    #   'distanceModel':'minimal_distance/random/random_no_overlap','minimalDistance':25,'canonicalVolumeBaseArea':54})  
 	if string.lower(location_array['distributionModel'])=="density based":
            ### will override cell numbers in cell_array if specified
            no_density_model=False
            for cell_group in range(0,len(location_array['populationList'])):
+               total_no_of_cells=0
                cellPopName=location_array['populationList'][cell_group]['popID']
                for pop in range(0,len(cell_array)):
                    if cellPopName==cell_array[pop]['popID']:
                       cell_type_name=cell_array[pop]['cellType']
+                      pop_index_popParams=pop
                ### assuming that Y_values returned by load_density_data represent the depth with zero indicating Purkinje cell level
                X_array,Y_array,density_values=load_density_data(location_array['populationList'][cell_group]['densityFilePath'])
                dim_X_array=np.shape(X_array)
                dim_Y_array=np.shape(Y_array)
                ## assume meshgrid
                if dim_X_array==dim_Y_array:
-                  ## assume that data is not normalized and distribute cells on a density sheet
+                  ## assume that data is not normalized and distribute cells on a specific region on a density sheet
                   X_max=np.nanmax(X_array)
                   Y_max=np.nanmax(Y_array)
-                  X_min=np.nanmin(X_array)
-                  Y_min=np.nanmin(Y_array)
+                  X_vector=X_array[0]
+                  Y_vector=Y_array[0]
+                  left_x_index=None
+                  right_x_index=None
+                  low_y_index=None
+                  high_y_index=None
 
-                  if location_array['populationList'][cell_group]['distanceModel']=="minimal_distance":
+                  left_x_found=False
+                  right_x_found=False
+                  low_y_found=False
+                  high_y_found=False
+                  for X_value in range(0,len(X_vector)):
+                      if left_x_found==False:
+                         if X_vector[X_value] > location_array['populationList'][cell_group]['dim1CoordinateVector'][0]:
+                            left_x_index=X_value
+                            left_x_found=True
+                      if right_x_found==False:
+                         if X_vector[X_value] > location_array['populationList'][cell_group]['dim1CoordinateVector'][1]:
+                            right_x_index=X_value-1
+                  for Y_value in range(0,len(Y_vector)):
+                      if low_y_found==False: 
+                         if Y_vector[Y_value] > location_array['populationList'][cell_group]['dim2CoordinateVector'][0]:
+                            low_y_index=Y_value
+                            low_y_found=True
+                      if high_y_found==False:
+                         if Y_vector[Y_value] > location_array['populationList'][cell_group]['dim2CoordinateVector'][1]:
+                            high_y_index=Y_value-1
+                            high_y_found=True
+                  if left_x_found and right_x_found and low_y_found and high_y_found:
+                     X_index_array=range(left_x_index,right_x_index+1)
+                     Y_index_array=range(low_y_index,high_y_index+1)
+                     cell_diameter=get_soma_diameter(cell_type_name)
+                     ##### assume that discrete density sheet is in mmm3. thus convert cell_diameter and dim3 to mm:
+                     dim3Boundary=location_array['populationList'][cell_group]['dim3Boundary']/1000
+                     ### find density points that fall within a region specified by 'dim1CoordinateVector' and 'dim2CoordinateVector'
+                     
+                     
+                     base_area=location_array['populationList'][cell_group]['canonicalVolumeBaseArea']
+                     canonical_volume=math.pi*((base_area/2)**2)*dim3Boundary
+                        
+                     for X_index in range(0,len(X_index_array)):
+                         for Y_index in range(0,len(Y_index_array)):
+                             density_value=density_values[X_index_array[X_index],Y_index_array[Y_index]]
+                             no_of_cells_per_density_point=density_value*canonical_volume
+                             total_no_of_cells=total_no_of_cells+no_of_cells_per_density_point
+                             X_square_centre=X_array[X_index_array[X_index],Y_index_array[Y_index]]
+                             Y_square_centre=Y_array[X_index_array[X_index],Y_index_array[Y_index]]
+                             X_left_corner=X_square_centre-(math.sqrt(base_area)/2)
+                             Y_left_corner=Y_square_centre-(math.sqrt(base_area)/2)
+                             if location_array['populationList'][cell_group]['distanceModel']=="minimal_distance":
                      
                               
-                  if location_array['populationList'][cell_group]['distanceModel']=="random_no_overlap":
+                             if location_array['populationList'][cell_group]['distanceModel']=="random_no_overlap":
+
+                             if location_array['populationList'][cell_group]['distanceModel']=="random":
+                                for cell in range(0,no_of_cells_per_density_point):
+	                            Golgi_cell=neuroml.Instance(id="%d"%cell)
+	                            golgi_pop.instances.append(Golgi_cell)
+	                            X=random.random()
+	                            Y=random.random()
+	                            Z=random.random()
+	                            
+	                            if location_array['populationList'][cell_group]['planeDimensions']['dim1']=='x' and location_array['populationList'][cell_group]['planeDimensions']['dim2']!='x':
+                                       cell_position_array[cell_array[pop_index_popParams]['popID']][cell,0]=X_left_corner*X
+                                       
+                                    if location_array['populationList'][cell_group]['planeDimensions']['dim1']=='y' and location_array['populationList'][cell_group]['planeDimensions']['dim2']!='y':
+                                       cell_position_array[cell_array[pop_index_popParams]['popID']][cell,1]=X_left_corner*X
+                                       
+                                    if location_array['populationList'][cell_group]['planeDimensions']['dim1']=='z' and location_array['populationList'][cell_group]['planeDimensions']['dim2']!='z':
+
+                                       cell_position_array[cell_array[pop_index_popParams]['popID']][cell,2]=X_left_corner*X
+                                       
+                                    if location_array['populationList'][cell_group]['planeDimensions']['dim2']=='x' and location_array['populationList'][cell_group]['planeDimensions']['dim1']!='x':
+                                       cell_position_array[cell_array[pop_index_popParams]['popID']][cell,0]=Y_left_corner*Y
+                                    if location_array['populationList'][cell_group]['planeDimensions']['dim2']=='y' and location_array['populationList'][cell_group]['planeDimensions']['dim1']!='y':
+                                       cell_position_array[cell_array[pop_index_popParams]['popID']][cell,1]=Y_left_corner*Y
+                                    if location_array['populationList'][cell_group]['planeDimensions']['dim2']=='z' and location_array['populationList'][cell_group]['planeDimensions']['dim1']!='z':
+                                       cell_position_array[cell_array[pop_index_popParams]['popID']][cell,2]=Y_left_corner*Y
+                                       
+                                    if location_array['populationList'][cell_group]['dim3']=='z' and location_array['populationList'][cell_group]['planeDimensions']['dim2'] !='z'\
+                                       and location_array['populationList'][cell_group]['planeDimensions']['dim1'] !='z':
+                                       cell_position_array[cell_array[pop_index_popParams]['popID']][cell,2]=dim3Boundary*Z
+                                    if location_array['populationList'][cell_group]['dim3']=='y' and location_array['populationList'][cell_group]['planeDimensions']['dim2'] !='y'\
+                                       and location_array['populationList'][cell_group]['planeDimensions']['dim1'] !='y':
+                                       cell_position_array[cell_array[pop_index_popParams]['popID']][cell,1]=dim3Boundary*Z
+                                    if location_array['populationList'][cell_group]['dim3']=='x' and location_array['populationList'][cell_group]['planeDimensions']['dim2'] !='x'\
+                                       and location_array['populationList'][cell_group]['planeDimensions']['dim1'] !='x':
+                                       cell_position_array[cell_array[pop_index_popParams]['popID']][cell,0]=dim3Boundary*Z
+                                    Golgi_cell.location=neuroml.Location(x=X_left_corner*X, y=Y_left_corner*Y, z=dim3Boundary*Z)
+                                    print cell_position_array[cell_array[pop_index_popParams]['popID']][cell,0],\
+                                          cell_position_array[cell_array[pop_index_popParams]['popID']][cell,1],\
+                                          cell_position_array[cell_array[pop_index_popParams]['popID']][cell,2]
+                                                                                                                          
+                     ### override any specified value of population Size
+                                                                                                                          
+                     cell_array[pop_index_popParams]['size']=total_no_of_cells
                      
 
 

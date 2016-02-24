@@ -28,7 +28,8 @@ if __name__ == "__main__":
     #   net_params_test_2010_multiple['experiment1']['distributionParams']['populationList'].append({'popID':'Golgi_pop0','densityFilePath':'/home/rokas/Golgi_data/GlyT2 density matrix of shape 35 152.txt',\
     #   'planeDimensions':{'dim1':'x','dim2':'z'},'dim1CoordinateVector':[1300,1500],'dim2CoordinateVector':[0,50]})
     #   net_params_test_2010_multiple['experiment1']['distributionParams']['populationList'].append({'popID':'Golgi_pop1','densityFilePath':'/home/rokas/Golgi_data/GlyT2 density matrix of shape 35 152.txt',\
-    #   'planeDimensions':{'dim1':'x','dim2':'z'},'dim1CoordinateVector':[1300,1500],'dim2CoordinateVector':[0,50],'distanceModel':'minimal_distance' or 'random_no_overlap', if 'minimal_distance' then 'minimalDistance':25})
+    #   'planeDimensions':{'dim1':'x','dim2':'z'},'dim1CoordinateVector':[1300,1500],'dim2CoordinateVector':[0,50],'dim3':'y','dim3CoordinateVector':[0,200],\
+    #   'distanceModel':'minimal_distance','minimalDistance':25})
     
 
     ##### no need to have explicit subcellular targeting in the case of soma-to-soma distance dependent conductance mode ("Vervaeke_2010_based")
