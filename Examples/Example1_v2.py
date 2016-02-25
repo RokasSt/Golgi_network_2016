@@ -3,7 +3,6 @@ import os,sys,inspect
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parentdir = os.path.dirname(currentdir)
 sys.path.insert(0,parentdir) 
-print parentdir
 
 from Simulate_Golgi_Network_v2 import *
 
@@ -106,7 +105,8 @@ if __name__ == "__main__":
 
     ####### change 'simulator' to "jNeuroML_NEURON" in order to run simulations in NEURON
 
-    sim_params={'simulator':"no simulation",'duration':450,'timeStep':0.005,'numTrials':5,'globalSeed':False,'trialSeed':True,'plotSpecifier':False,'saveSomataPositions':True}
+    sim_params={'simulator':"no simulation",'duration':450,'timeStep':0.005,'numTrials':5,'globalSeed':False,'trialSeed':True,'plotSpecifier':False,\
+    'saveSomataPositions':True,'parentDirRequired':True,'parentDir':parentdir}
     
     ##### run all simulations
     run_simulations(net_params_test_2010_multiple,sim_params)
