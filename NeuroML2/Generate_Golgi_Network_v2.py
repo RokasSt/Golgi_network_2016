@@ -40,8 +40,10 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
         unique_cell_names=np.unique(cell_type_list)
 
         for unique_cell in unique_cell_names:
-     
-            include_cell=neuroml.IncludeType(href="%s.cell.nml"%unique_cell)
+            if simulation_parameters['parentDirRequired']:
+               include_cell=neuroml.IncludeType(href=+"/%s.cell.nml"%unique_cell)
+            else:
+               include_cell=neuroml.IncludeType(href="%s.cell.nml"%unique_cell)
 
             nml_doc.includes.append(include_cell)
 
@@ -50,7 +52,9 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
 	net = neuroml.Network(id=ref+"_network",type="networkWithTemperature",temperature="23 degC")
 	nml_doc.networks.append(net)
 
+        Note_string="Parameter arrays for building this network are listed below:\n"
 
+        
         Golgi_pop_index_array=[]
         neuroml_Golgi_pop_array={}
 
@@ -64,7 +68,9 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
         
         
 	cell_position_array={}
-	   
+	
+	Note_string=Note_string+"Cell distribution parameters:\n"
+	
         no_density_model=True
         #################  
          ##### below lines to make a reference template for the density based model:
@@ -80,13 +86,19 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
 	if string.lower(location_array['distributionModel'])=="density based":
            ### will override cell numbers in cell_array if specified
            no_density_model=False
+    
+           Note_string=Note_string+"Model: density based\n"
+           Note_string=Note_string+"Model parameters:\n"
            for cell_group in range(0,len(location_array['populationList'])):
                total_no_of_cells=0
                cellPopName=location_array['populationList'][cell_group]['popID']
                golgi_pop=neuroml_Golgi_pop_array[cellPopName]
                for pop in range(0,len(cell_array)):
                    if cellPopName==cell_array[pop]['popID']:
-                      cell_type_name=cell_array[pop]['cellType']
+                      if simulation_parameters['parentDirRequired']:
+                         cell_type_name=simulation_parameters['parentDir']+"/"+cell_array[pop]['cellType']
+                      else:
+                         cell_type_name=cell_array[pop]['cellType']
                       pop_index_popParams=pop
 
                densityFilePath=location_array['populationList'][cell_group]['densityFilePath']
@@ -94,7 +106,7 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
                golgi_pop_object=neuroml_Golgi_pop_array[cellPopName]
                
 
-               pop_position_array, total_no_of_cells,Golgi_pop=density_model(densityFilePath,location_parameters,golgi_pop_object,seed)
+               pop_position_array, total_no_of_cells,Golgi_pop=density_model(densityFilePath,location_parameters,cell_type_name,golgi_pop_object,seed)
 
 
                cell_array[pop_index_popParams]['size']=total_no_of_cells
@@ -103,6 +115,8 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
                cell_position_array[cell_array[pop_index_popParams]['popID']]=pop_position_array
           
                net.populations.append(Golgi_pop)
+
+               Note_string=Note_string+"%s"%location_array['populationList'][cell_group]+"\n"
                
         if no_density_model:
            ###### if no_density model it assumes that dimensions of a cubic environment are specified
@@ -114,6 +128,8 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
               
         ##############
         if string.lower(location_array['distributionModel'])=="random_minimal_distance":
+           Note_string=Note_string+"Model: random with global minimal distance between cell bodies\n"
+           Note_string=Note_string+"Model parameters:\n"
            for cell_pop in range(0,len(cell_array)):
                golgi_pop_object=neuroml_Golgi_pop_array[cell_array[cell_pop]['popID']]
                cell_position_array,Golgi_pop=random_minimal_distance(cell_position_array,cell_array,location_array,\
@@ -121,26 +137,34 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
 
                net.populations.append(Golgi_pop)
                
-        ############  random positioning but approximately no overlap between somata                  
+           Note_string=Note_string+"%s"%location_array+"\n"
+        ############  random positioning but no overlap between somata                  
         if string.lower(location_array['distributionModel'])=="random_no_overlap":
+           Note_string=Note_string+"Model: random with no overlap of cell bodies\n"
+           Note_string=Note_string+"Model parameters:\n"
            cell_diameter_array={}
            for cell_pop in range(0,len(cell_array)):
-               cell_diameter=get_soma_diameter(cell_array[cell_pop]['cellType'])
+               if simulation_parameters['parentDirRequired']:
+                  cell_diameter=get_soma_diameter(simulation_parameters['parentDir']+"/"+cell_array[cell_pop]['cellType'])
+               else:
+                  cell_diameter=get_soma_diameter(cell_array[cell_pop]['cellType'])
                cell_diameter_array[cell_array[cell_pop]['popID']]=cell_diameter
 
            for cell_pop in range(0,len(cell_array)):
 
                golgi_pop_object=neuroml_Golgi_pop_array[cell_array[cell_pop]['popID']]
-               cell_diameter=get_soma_diameter(cell_array[cell_pop]['cellType'])
-
-               cell_position_array,Golgi_pop=random_no_overlap(cell_position_array,cell_array,cell_diameter,cell_diameter_array,\
+               
+               cell_position_array,Golgi_pop=random_no_overlap(cell_position_array,cell_array,cell_array[cell_pop]['popID'],cell_diameter_array,\
                cell_pop,cell_array[cell_pop]['size'],golgi_pop_object,x_dim,y_dim,z_dim,seed)
 
                net.populations.append(Golgi_pop)
                
+           Note_string=Note_string+"%s"%location_array+"\n"
 
         ###### simply random positioning in a cubic environment               
         if string.lower(location_array['distributionModel'])=="random":
+           Note_string=Note_string+"Model: random positions with cell bodies overlaping"
+           Note_string=Note_string+"Model parameters:\n"
            for cell_pop in range(0,len(cell_array)):
                golgi_pop=neuroml_Golgi_pop_array[cell_array[cell_pop]['popID']]
                for cell in range(0,cell_array[cell_pop]['size']):
@@ -155,7 +179,12 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
                    Golgi_cell.location=neuroml.Location(x=x_dim*X, y=y_dim*Y, z=z_dim*Z)
                    print cell_position_array[cell_array[cell_pop]['popID']][cell,0], cell_position_array[cell_array[cell_pop]['popID']][cell,1], cell_position_array[cell_array[cell_pop]['popID']][cell,2]
                net.populations.append(golgi_pop)
-
+           Note_string=Note_string+"%s"%location_array+"\n"
+           
+        ##### include cell_array into notes once the final pop sizes are known
+        for cell_pop in range(0,len(cell_array)):
+            Note_string=Note_string+"%s"%cell_array[cell_pop]+"\n"
+        Note_string=Note_string+"Connectivity parameters for a list of population pairs:"+"\n" 
         ############################################ connectivity block
         synapse_name_array=[]        
         connMatrix_array=[]
@@ -180,8 +209,12 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
                   post_pop_cell_component=cell_array[postPop_listIndex]['cellType']
                   pre_pop_cell_positions=cell_position_array[prePop]
                   post_pop_cell_positions=cell_position_array[postPop]
-
-                  proj, nonempty_projection,gap_junction_array=Vervaeke_2012_AND_explicit_conn_prob_model(pair,initial_projection_counter,prePop,prePop_listIndex,prePopSize,pre_pop_cell_component,pre_pop_cell_positions,\
+                  if simulation_parameters['parentDirRequired']:
+                     proj, nonempty_projection,gap_junction_array=Vervaeke_2012_AND_explicit_conn_prob_model(pair,initial_projection_counter,prePop,prePop_listIndex,prePopSize,pre_pop_cell_component,pre_pop_cell_positions,\
+                                postPop,postPop_listIndex,postPopSize,post_pop_cell_component,post_pop_cell_positions,pair_connectivity_parameters,seed,\
+                                simulation_parameters['parentDir'])
+                  else:
+                     proj, nonempty_projection,gap_junction_array=Vervaeke_2012_AND_explicit_conn_prob_model(pair,initial_projection_counter,prePop,prePop_listIndex,prePopSize,pre_pop_cell_component,pre_pop_cell_positions,\
                                 postPop,postPop_listIndex,postPopSize,post_pop_cell_component,post_pop_cell_positions,pair_connectivity_parameters,seed)
                 
                   if nonempty_projection:
@@ -198,8 +231,13 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
                   post_pop_cell_component=cell_array[postPop_listIndex]['cellType']
                   pre_pop_cell_positions=cell_position_array[prePop]
                   post_pop_cell_positions=cell_position_array[postPop]
-
-                  proj, nonempty_projection,gap_junction_array=Vervaeke_2010_model(pair,initial_projection_counter,prePop,prePop_listIndex,prePopSize,pre_pop_cell_component,pre_pop_cell_positions,\
+                  
+                  if simulation_parameters['parentDirRequired']:
+                     proj, nonempty_projection,gap_junction_array=Vervaeke_2010_model(pair,initial_projection_counter,prePop,prePop_listIndex,prePopSize,pre_pop_cell_component,pre_pop_cell_positions,\
+                                postPop,postPop_listIndex,postPopSize,post_pop_cell_component,post_pop_cell_positions,pair_connectivity_parameters,seed,\
+                                simulation_parameters['parentDir'])
+                  else:
+                     proj, nonempty_projection,gap_junction_array=Vervaeke_2010_model(pair,initial_projection_counter,prePop,prePop_listIndex,prePopSize,pre_pop_cell_component,pre_pop_cell_positions,\
                                 postPop,postPop_listIndex,postPopSize,post_pop_cell_component,post_pop_cell_positions,pair_connectivity_parameters,seed)
 
                   if nonempty_projection:
@@ -215,8 +253,13 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
                post_pop_cell_component=cell_array[postPop_listIndex]['cellType']
                pre_pop_cell_positions=cell_position_array[prePop]
                post_pop_cell_positions=cell_position_array[postPop]
-
-               proj, nonempty_projection,gap_junction_array,synapse_name=chemical_connection_model(pair,initial_projection_counter,prePop,prePop_listIndex,prePopSize,pre_pop_cell_component,pre_pop_cell_positions,\
+               
+               if simulation_parameters['parentDirRequired']:
+                  proj, nonempty_projection,gap_junction_array,synapse_name=chemical_connection_model(pair,initial_projection_counter,prePop,prePop_listIndex,prePopSize,pre_pop_cell_component,pre_pop_cell_positions,\
+                                postPop,postPop_listIndex,postPopSize,post_pop_cell_component,post_pop_cell_positions,pair_connectivity_parameters,seed,\
+                                simulation_parameters['parentDir'])
+               else:
+                  proj, nonempty_projection,gap_junction_array,synapse_name=chemical_connection_model(pair,initial_projection_counter,prePop,prePop_listIndex,prePopSize,pre_pop_cell_component,pre_pop_cell_positions,\
                                 postPop,postPop_listIndex,postPopSize,post_pop_cell_component,post_pop_cell_positions,pair_connectivity_parameters,seed)
 
                synapse_name_array.append(synapse_name)
@@ -226,11 +269,12 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
                   for gapJ in range(0,len(gap_junction_array)):
                       nml_doc.gap_junctions.append(gap_junction_array[gapJ])
             
-                                                     
+            Note_string=Note_string+"%s"%connectivity_information['populationPairs'][pair]+"\n"                                      
         ####################        input block                                                           
-        
+        Note_string=Note_string+"Input parameters for a list of populations:"+"\n" 
         for pop in range(0,len(input_information)):
             popID=input_information[pop]['popName']
+            Note_string=Note_string+"Input group parameters for %s:"%popID+"\n" 
             for pop in range(0,len(cell_array)):
                 if cell_array[pop]['popID']==popID:
                    pop_listIndex=pop
@@ -239,9 +283,12 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
             cellType=cell_array[pop_listIndex]['cellType']
             for input_group in range(0,len(input_group_array)):
                 if input_group_array[input_group]['inputModel']=='XF' and input_group_array[input_group]['targetingRegime']=="uniform":
-
-                   input_list,poisson_synapse_array,synapse_name_list=XF_input_model_uniform(popID,popSize,cellType,input_group_array[input_group],seed)                                          
-                   fraction_to_target_per_pop=input_group_array[input_group]['fractionToTarget']
+                   if simulation_parameters['parentDirRequired']:
+                      input_list,poisson_synapse_array,synapse_name_list=XF_input_model_uniform(popID,popSize,cellType,input_group_array[input_group],seed,\
+                      simulation_parameters['parentDir'])
+                   else:
+                      input_list,poisson_synapse_array,synapse_name_list=XF_input_model_uniform(popID,popSize,cellType,input_group_array[input_group],seed)                                          
+                   
 
                    synapse_name_array.extend(synapse_name_list)
 
@@ -252,10 +299,16 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
                        nml_doc.poisson_firing_synapses.append(poisson_synapse_array[poisson_syn])
 
                 if input_group_array[input_group]['inputModel']=='XF' and input_group_array[input_group]['targetingRegime']=="3D_region_specific":
+                        
+                   if simulation_parameters['parentDirRequired']:
+                           
+                      input_list,poisson_synapse_array,synapse_name_list=XF_input_model_3D_region_specific(popID,cellType,input_group_array[input_group],\
+                      cell_position_array[popID],seed,simulation_parameters['parentDir'])   
 
-                   input_list,poisson_synapse_array,synapse_name_list=XF_input_model_3D_region_specific(popID,cellType,input_group_array[input_group],\
-                   cell_position_array[popID],seed)                                          
-                   fraction_to_target_per_pop=input_group_array[input_group]['fractionToTarget']
+                   else:
+                      input_list,poisson_synapse_array,synapse_name_list=XF_input_model_3D_region_specific(popID,cellType,input_group_array[input_group],\
+                      cell_position_array[popID],seed)                                          
+                   
 
                    synapse_name_array.extend(synapse_name_list)
 
@@ -288,7 +341,7 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
                        nml_doc.pulse_generators.append(pulseGenerator_array[input_list])
 
                 
-                      
+                Note_string=Note_string+"%s"%input_group_array[input_group]+"\n"            
 
         ##############       
 	unique_synapse_names=np.unique(synapse_name_array)
@@ -296,10 +349,9 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
             include_synapse=neuroml.IncludeType(href="%s.synapse.nml"%unique_synapse)
             nml_doc.includes.append(include_synapse)
                                                  
-  
-        nml_file = '%s.net.nml'%ref
-
-       
+        net.notes=Note_string
+        
+        nml_file ='simulations/'+simulation_parameters['experimentID']+"/"+"sim%d"%simulation_parameters['simID']+"/"+'%s.net.nml'%ref
 
         writers.NeuroMLWriter.write(nml_doc,nml_file)
 
@@ -371,7 +423,7 @@ def generate_LEMS_and_run(sim_array,pop_array):
 		   ls.add_column_to_output_file(of0, 'v%i'%i, quantity)
        
 	# save LEMS file
-        lems_file_name = ls.save_to_file()
+        lems_file_name = ls.save_to_file('simulations/'+simulation_parameters['experimentID']+"/"+"sim%d"%simulation_parameters['simID']+"/"+"LEMS_%s.xml"%ref)
         if simulation_parameters['plotSpecifier']:
            if simulation_parameters['simulator']=="jNeuroML":
 	      results1 = pynml.run_lems_with_jneuroml(lems_file_name, nogui=True, load_saved_data=True, plot=True)

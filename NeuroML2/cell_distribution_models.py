@@ -15,7 +15,7 @@ from methods_v2 import *
 
 
 
-def density_model(densityFilePath,location_parameters,golgi_pop_object,seed_number):
+def density_model(densityFilePath,location_parameters,cell_type_name,golgi_pop_object,seed_number):
     random.seed(seed_number)
     X_array,Y_array,density_values=load_density_data(densityFilePath)
     dim_X_array=np.shape(X_array)
@@ -182,9 +182,11 @@ def random_minimal_distance(cell_position_array,cell_array,location_array,popInd
     return cell_position_array,golgi_pop_object
 
 
-def random_no_overlap(cell_position_array,cell_array,cell_diameter,cell_diameter_array,popIndex,popSize,golgi_pop_object,x_dim,y_dim,z_dim,seed_number):
+def random_no_overlap(cell_position_array,cell_array,popID,cell_diameter_array,popIndex,popSize,golgi_pop_object,x_dim,y_dim,z_dim,seed_number):
 
     random.seed(seed_number)
+
+    cell_diameter=cell_diameter_array[popID]
     for cell in range(0,popSize):
 	Golgi_cell=neuroml.Instance(id="%d"%cell)
 	golgi_pop_object.instances.append(Golgi_cell)

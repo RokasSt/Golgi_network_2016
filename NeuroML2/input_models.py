@@ -15,10 +15,15 @@ from methods_v2 import *
 
 
 
-def XF_input_models_uniform(popID,popSize,cellType,input_group_parameters,seed_number):
+def XF_input_models_uniform(popID,popSize,cellType,input_group_parameters,seed_number,parentDir=None):
 
 
     random.seed(seed_number)
+
+    if parentDir !=None:
+       cellTypeFile=parentDir+"/"+cellType
+    else:
+       cellTypeFile=cellType
 
     fraction_to_target_per_pop=input_group_parameters['fractionToTarget']
                                                                         
@@ -33,11 +38,11 @@ def XF_input_models_uniform(popID,popSize,cellType,input_group_parameters,seed_n
         synapse_name=synapse_list[synapse_index]['synapseType']
         synapse_name_array.append(synapse_name)                                            
         if synapse_list[synapse_index]['targetingModel']=="segments and subsegments":
-           segment_target_array=extract_morphology_information([cellType],\
+           segment_target_array=extract_morphology_information([cellTypeFile],\
                 ["segments",synapse_list[synapse_index]['segmentList']])
                                                         
         if synapse_list[synapse_index]['targetingModel']=="segment groups and segments":
-           segment_target_array =extract_morphology_information([cellType],\
+           segment_target_array =extract_morphology_information([cellTypeFile],\
         ["segment groups",synapse_list[synapse_index]['segmentGroupList']])
                                                         
         if  synapse_list[synapse_index]['synapseMode']=="persistent":
@@ -87,10 +92,14 @@ def XF_input_models_uniform(popID,popSize,cellType,input_group_parameters,seed_n
     return input_list, poisson_synapse_array,synapse_name_array
 
 
-def XF_input_models_3D_region_specific(popID,cellType,input_group_parameters,cell_positions,seed_number):
-
+def XF_input_models_3D_region_specific(popID,cellType,input_group_parameters,cell_positions,seed_number,parentDir=None):
 
     random.seed(seed_number)
+
+    if parentDir !=None:
+       cellTypeFile=parentDir+"/"+cellType
+    else:
+       cellTypeFile=cellType
 
     fraction_to_target_per_pop=input_group_parameters['fractionToTarget']
                                                                        
@@ -113,11 +122,11 @@ def XF_input_models_3D_region_specific(popID,cellType,input_group_parameters,cel
         synapse_name=synapse_list[synapse_index]['synapseType']
         synapse_name_array.append(synapse_name)                                            
         if synapse_list[synapse_index]['targetingModel']=="segments and subsegments":
-           segment_target_array=extract_morphology_information([cellType],\
+           segment_target_array=extract_morphology_information([cellTypeFile],\
                 ["segments",synapse_list[synapse_index]['segmentList']])
                                                         
         if synapse_list[synapse_index]['targetingModel']=="segment groups and segments":
-           segment_target_array =extract_morphology_information([cellType],\
+           segment_target_array =extract_morphology_information([cellTypeFile],\
         ["segment groups",synapse_list[synapse_index]['segmentGroupList']])
                                                         
         if  synapse_list[synapse_index]['synapseMode']=="persistent":
@@ -173,7 +182,6 @@ def XF_input_models_3D_region_specific(popID,cellType,input_group_parameters,cel
 def variable_basal_firing_rate(popID,popSize,cellType,input_group_parameters,simulation_duration,seed_number):
 
    random.seed(seed_number)
-
 
    offset_units=input_group_parameters['offsetUnits']
    units=input_group_parameters['ampUnits']
