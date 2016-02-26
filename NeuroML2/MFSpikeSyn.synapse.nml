@@ -3,9 +3,9 @@
 
     
 
-<expTwoSynapseTwoComponents id="MFSpikeSyn" gbase1="0.7nS" tauRise="0.1ms" tauDecay1="0.7ms" gbase2="0.2nS" tauDecay2="2.5ms"  erev="0mV"> 
+<expThreeSynapse id="MFSpikeSyn" gbase1="0.7nS" tauRise="0.1ms" tauDecay1="0.7ms" gbase2="0.2nS" tauDecay2="2.5ms"  erev="0mV"> 
 
 <notes>Fast spiking synapse, used for Mossy Fibre inputs to Golgi cells</notes>
-</expTwoSynapseTwoComponents>
+</expThreeSynapse>
 
 </neuroml>
