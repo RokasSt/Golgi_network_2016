@@ -5,7 +5,7 @@
 
 
     <ComponentType name="baseConductanceBasedSynapseTwoComponents"
-                   extends="baseSynapse"
+                   extends="baseVoltageDepSynapse"
                    description="Synapse model which exposes a conductance _g in addition to producing a current. Not necessarily ohmic!! cno_0000027">
 
         <Parameter name="gbase1" dimension="conductance" description="Baseline conductance, generally the maximum conductance following a single spike"/>
