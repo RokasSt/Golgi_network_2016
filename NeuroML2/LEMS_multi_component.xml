@@ -5,7 +5,7 @@
 
 
     <ComponentType name="baseConductanceBasedSynapseTwoComponents"
-                   extends="baseVoltageDepSynapse"
+                   extends="baseSynapse"
                    description="Synapse model which exposes a conductance _g in addition to producing a current. Not necessarily ohmic!! cno_0000027">
 
         <Parameter name="gbase1" dimension="conductance" description="Baseline conductance, generally the maximum conductance following a single spike"/>
@@ -19,7 +19,7 @@
 
 
     
-    <ComponentType name="expTwoSynapseTwoComponents"
+    <ComponentType name="expThreeSynapse"
                    extends="baseConductanceBasedSynapseTwoComponents"
                    description="Ohmic synapse similar to expTwoSynapse but consisting of two components that differ in decay times and max conductances but share the same rise time.">
 

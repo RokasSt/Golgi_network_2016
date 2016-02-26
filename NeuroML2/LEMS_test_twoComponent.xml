@@ -8,15 +8,17 @@
     <Include file="Cells.xml"/>
     <Include file="Networks.xml"/>
     <Include file="Simulation.xml"/>
-    <Include file="../LEMS_multi_component.xml"/>
+    <Include file="LEMS_multi_component.xml"/>
+    
+   <!-- <expTwoSynapse id="syn0" erev="0mV" gbase="1nS" tauDecay="10ms" tauRise="0.5ms"/>-->
+    
+    <expThreeSynapse id="MFSpikeSyn" gbase1="0.7nS" tauRise="0.1ms" tauDecay1="0.7ms" gbase2="0.2nS" tauDecay2="2.5ms"  erev="0mV"/> 
 
-    <expTwoSynapseTwoComponents id="MFSpikeSyn" gbase1="0.7nS" tauRise="0.1ms" tauDecay1="0.7ms" gbase2="0.2nS" tauDecay2="2.5ms"  erev="0mV"/> 
-
-    <pulseGenerator id="pulseGen0" delay="50ms" duration="500ms" amplitude="0.5E-5uA" />
+    <pulseGenerator id="pulseGen0" delay="50ms" duration="500ms" amplitude="1E-5uA" />
 
 
-    <iafCell id="iaf1" leakReversal="-60mV" thresh="-35mV" reset="-65mV" C="1e-5uF" leakConductance="5e-7mS"/>
-    <iafCell id="iaf2" leakReversal="-60mV" thresh="-35mV" reset="-70mV" C="1e-5uF" leakConductance="5.2e-7mS"/>
+    <iafCell id="iaf1" leakReversal="-60mV" thresh="-40mV" reset="-65mV" C="1e-5uF" leakConductance="5e-7mS"/>
+    <iafCell id="iaf2" leakReversal="-60mV" thresh="-40mV" reset="-70mV" C="1e-5uF" leakConductance="5.2e-7mS"/>
 
     <network id="net2">
 
@@ -28,7 +30,7 @@
 
        
 
-        <projection id="projection1" presynapticPopulation="Pop0" postsynapticPopulation="Pop1" synapse="MFSpikeSyn">
+     <projection id="projection1" presynapticPopulation="Pop0" postsynapticPopulation="Pop1" synapse="MFSpikeSyn">
             <connection preCellId="../Pop0[0]" postCellId="../Pop1[0]"/>
         </projection>
         
