@@ -10,11 +10,13 @@
     <Include file="Simulation.xml"/>
     <Include file="LEMS_multi_component.xml"/>
     
-   <expTwoSynapse id="MFSpikeSyn" erev="0mV" gbase="1nS" tauDecay="10ms" tauRise="0.5ms"/>
+   
     
-   <!-- <expThreeSynapse id="MFSpikeSyn" gbase1="0.7nS" tauRise="0.1ms" tauDecay1="0.7ms" gbase2="0.2nS" tauDecay2="2.5ms"  erev="0mV"/> -->
+   <expThreeSynapse id="MFSpikeSyn" gbase1="1.5nS" tauRise="0.1ms" tauDecay1="0.7ms" gbase2="0.5nS" tauDecay2="2.5ms"  erev="0mV"/> 
 
-    <pulseGenerator id="pulseGen0" delay="50ms" duration="500ms" amplitude="1E-5uA" />
+   <!--<pulseGenerator id="input0" delay="50ms" duration="500ms" amplitude="1E-5uA" />-->
+
+   <transientPoissonFiringSynapse id="input0" delay="50ms" duration="50ms" averageRate="300 Hz" synapse="MFSpikeSyn" spikeTarget="./MFSpikeSyn"/>
 
 
     <iafCell id="iaf1" leakReversal="-60mV" thresh="-40mV" reset="-65mV" C="1e-5uF" leakConductance="5e-7mS"/>
@@ -30,13 +32,13 @@
 
        
 
-     <projection id="projection1" presynapticPopulation="Pop0" postsynapticPopulation="Pop1" synapse="MFSpikeSyn">
+     <projection id="projection1" presynapticPopulation="Pop0" postsynapticPopulation="Pop1" synapse="input0">
             <connection preCellId="../Pop0[0]" postCellId="../Pop1[0]"/>
         </projection>
         
         
 
-         <inputList id="stimInput" component="pulseGen0" population="Pop0">
+         <inputList id="stimInput" component="input0" population="Pop0">
            
             <input id="0" target="../Pop0[0]" destination="synapses"/>
         </inputList>
