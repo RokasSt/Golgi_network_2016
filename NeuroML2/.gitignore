@@ -52,41 +52,41 @@
 
 !/*/
 
-/*/*.mod
-/*/*.hoc
-/*/*.dat
-/*/*_nrn.py 
-/*/*.props
+/*/*/*/*.mod
+/*/*/*/*.hoc
+/*/*/*/*.dat
+/*/*/*/*_nrn.py 
+/*/*/*/*.props
 
 
 
-/*/*.pyc
-/*/*i686
-/*/*x86_64
-/*/generatedNEURON
-/*/generatedGENESIS
-/*/generatedMOOSE
-/*/generatedPSICS
-/*/simulations
-/*/*.bak
-/*/*py.class
-/*/*~
+/*/*/*/*.pyc
+/*/*/*/*i686
+/*/*/*/*x86_64
+/*/*/*/generatedNEURON
+/*/*/*/generatedGENESIS
+/*/*/*/generatedMOOSE
+/*/*/*/generatedPSICS
+/*/*/*/simulations
+/*/*/*/*.bak
+/*/*/*/*py.class
+/*/*/*/*~
 
-/*/simulator.props
+/*/*/*/simulator.props
 
 
 
-/*/*.pyc
-/*/*i686
-/*/*x86_64
-/*/generatedNEURON
-/*/generatedGENESIS
-/*/generatedMOOSE
-/*/generatedPSICS
-/*/simulations
-/*/*.bak
-/*/*py.class
-/*/*~
+/*/*/*/*.pyc
+/*/*/*/*i686
+/*/*/*/*x86_64
+/*/*/*/generatedNEURON
+/*/*/*/generatedGENESIS
+/*/*/*/generatedMOOSE
+/*/*/*/generatedPSICS
+/*/*/*/simulations
+/*/*/*/*.bak
+/*/*/*/*py.class
+/*/*/*/*~
 
 
 
