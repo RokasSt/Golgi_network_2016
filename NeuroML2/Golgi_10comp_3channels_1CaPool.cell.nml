@@ -16,7 +16,7 @@
         <notes> 10 compartment Golgi cell in NeuroML2 based on https://github.com/epiasini/GJGolgi_ReducedMorph/blob/master/neuroConstruct/morphologies/GJGolgi_Reduced.nml1. For segments 1,2,7 and 8 original NeuroML1 version contains fractionAlong=0.5. However, currently it is not implemented in NeuroML2:
 org.neuroml.model.util.NeuroMLException: Cannot yet handle fractionAlong being neither 0 or 1 </notes>
 
-        <morphology id="morphology_Simple_CML_test">
+        <morphology id="10compartments">
 
                 <segment id="0" name="Soma">
                     <proximal x="0.0" y="0.0" z="0.0" diameter="20.0"/>
@@ -218,7 +218,7 @@ org.neuroml.model.util.NeuroMLException: Cannot yet handle fractionAlong being n
                 <include segmentGroup="Soma"/>
             </segmentGroup>
 
-            <segmentGroup id="apical_dendrite_group" neuroLexId="GO:0030425">    <!--Dendrite group-->
+            <segmentGroup id="dendrite_group" neuroLexId="GO:0030425">    <!--Dendrite group-->
 
                 <include segmentGroup="Dend_ap_1_first"/>
                 <include segmentGroup="Dend_ap_2_first"/>
@@ -226,10 +226,24 @@ org.neuroml.model.util.NeuroMLException: Cannot yet handle fractionAlong being n
                 <include segmentGroup="Dend_ap_2_third"/>   
                 <include segmentGroup="Dend_ap_1_second"/>
                 <include segmentGroup="Dend_ap_1_third"/>
+                <include segmentGroup="Dend_bl_1_first"/>
+                <include segmentGroup="Dend_bl_2_first"/>
             </segmentGroup>
 
 
-            <segmentGroup id="basal_dendrite_group" neuroLexId="GO:0030425">    <!--Dendrite group-->
+           <segmentGroup id="apical_dendrite_group" >    
+
+                <include segmentGroup="Dend_ap_1_first"/>
+                <include segmentGroup="Dend_ap_2_first"/>
+                <include segmentGroup="Dend_ap_2_second"/>
+                <include segmentGroup="Dend_ap_2_third"/>   
+                <include segmentGroup="Dend_ap_1_second"/>
+                <include segmentGroup="Dend_ap_1_third"/>
+                
+            </segmentGroup>
+
+
+            <segmentGroup id="basal_dendrite_group" >    
 
                 <include segmentGroup="Dend_bl_1_first"/>
                 <include segmentGroup="Dend_bl_2_first"/>

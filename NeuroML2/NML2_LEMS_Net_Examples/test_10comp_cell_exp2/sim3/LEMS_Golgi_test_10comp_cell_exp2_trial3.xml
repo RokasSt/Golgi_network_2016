@@ -23,29 +23,29 @@
     <Simulation id="Golgi_test_10comp_cell_exp2_trial3" length="450ms" step="0.005ms" target="Golgi_test_10comp_cell_exp2_trial3_network">
         
         <Display id="display_voltagesGolgi_pop0" title="Voltages Golgi_pop0" timeScale="1ms" xmin="-45.0" xmax="495.0" ymin="-75" ymax="50">
-            <Line id="../Golgi_pop0/0: Vm" quantity="Golgi_pop0/0/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#2d2c2e" timeScale="1ms"/>
-            <Line id="../Golgi_pop0/1: Vm" quantity="Golgi_pop0/1/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#2c4cc3" timeScale="1ms"/>
-            <Line id="../Golgi_pop0/2: Vm" quantity="Golgi_pop0/2/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#4510d4" timeScale="1ms"/>
-            <Line id="../Golgi_pop0/3: Vm" quantity="Golgi_pop0/3/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#a63b07" timeScale="1ms"/>
-            <Line id="../Golgi_pop0/4: Vm" quantity="Golgi_pop0/4/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#354c2f" timeScale="1ms"/>
-            <Line id="../Golgi_pop0/5: Vm" quantity="Golgi_pop0/5/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#331c26" timeScale="1ms"/>
-            <Line id="../Golgi_pop0/6: Vm" quantity="Golgi_pop0/6/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#9a5057" timeScale="1ms"/>
-            <Line id="../Golgi_pop0/7: Vm" quantity="Golgi_pop0/7/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#ddfcb4" timeScale="1ms"/>
-            <Line id="../Golgi_pop0/8: Vm" quantity="Golgi_pop0/8/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#dee5eb" timeScale="1ms"/>
-            <Line id="../Golgi_pop0/9: Vm" quantity="Golgi_pop0/9/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#b8e1e4" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/0: Vm" quantity="Golgi_pop0/0/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#87b2d0" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/1: Vm" quantity="Golgi_pop0/1/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#9d441b" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/2: Vm" quantity="Golgi_pop0/2/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#1f393f" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/3: Vm" quantity="Golgi_pop0/3/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#6b89ce" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/4: Vm" quantity="Golgi_pop0/4/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#c9dac2" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/5: Vm" quantity="Golgi_pop0/5/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#3b0c41" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/6: Vm" quantity="Golgi_pop0/6/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#d381e5" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/7: Vm" quantity="Golgi_pop0/7/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#96d22e" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/8: Vm" quantity="Golgi_pop0/8/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#087541" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/9: Vm" quantity="Golgi_pop0/9/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#a2cb9e" timeScale="1ms"/>
         </Display>
         
         <Display id="display_voltagesGolgi_pop1" title="Voltages Golgi_pop1" timeScale="1ms" xmin="-45.0" xmax="495.0" ymin="-75" ymax="50">
-            <Line id="../Golgi_pop1/0: Vm" quantity="Golgi_pop1/0/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#fa9fa6" timeScale="1ms"/>
-            <Line id="../Golgi_pop1/1: Vm" quantity="Golgi_pop1/1/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#137147" timeScale="1ms"/>
-            <Line id="../Golgi_pop1/2: Vm" quantity="Golgi_pop1/2/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#e755eb" timeScale="1ms"/>
-            <Line id="../Golgi_pop1/3: Vm" quantity="Golgi_pop1/3/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#ae88d9" timeScale="1ms"/>
-            <Line id="../Golgi_pop1/4: Vm" quantity="Golgi_pop1/4/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#acd6b1" timeScale="1ms"/>
-            <Line id="../Golgi_pop1/5: Vm" quantity="Golgi_pop1/5/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#029349" timeScale="1ms"/>
-            <Line id="../Golgi_pop1/6: Vm" quantity="Golgi_pop1/6/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#7c638b" timeScale="1ms"/>
-            <Line id="../Golgi_pop1/7: Vm" quantity="Golgi_pop1/7/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#574f74" timeScale="1ms"/>
-            <Line id="../Golgi_pop1/8: Vm" quantity="Golgi_pop1/8/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#46b7e7" timeScale="1ms"/>
-            <Line id="../Golgi_pop1/9: Vm" quantity="Golgi_pop1/9/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#b2cdbe" timeScale="1ms"/>
+            <Line id="../Golgi_pop1/0: Vm" quantity="Golgi_pop1/0/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#43b6c8" timeScale="1ms"/>
+            <Line id="../Golgi_pop1/1: Vm" quantity="Golgi_pop1/1/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#984d85" timeScale="1ms"/>
+            <Line id="../Golgi_pop1/2: Vm" quantity="Golgi_pop1/2/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#6d524e" timeScale="1ms"/>
+            <Line id="../Golgi_pop1/3: Vm" quantity="Golgi_pop1/3/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#21a134" timeScale="1ms"/>
+            <Line id="../Golgi_pop1/4: Vm" quantity="Golgi_pop1/4/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#45a626" timeScale="1ms"/>
+            <Line id="../Golgi_pop1/5: Vm" quantity="Golgi_pop1/5/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#344b8c" timeScale="1ms"/>
+            <Line id="../Golgi_pop1/6: Vm" quantity="Golgi_pop1/6/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#d51a91" timeScale="1ms"/>
+            <Line id="../Golgi_pop1/7: Vm" quantity="Golgi_pop1/7/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#8f587a" timeScale="1ms"/>
+            <Line id="../Golgi_pop1/8: Vm" quantity="Golgi_pop1/8/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#3b79ab" timeScale="1ms"/>
+            <Line id="../Golgi_pop1/9: Vm" quantity="Golgi_pop1/9/Golgi_10comp_3channels_1CaPool/v" scale="1mV" color="#39e985" timeScale="1ms"/>
         </Display>
         
         <OutputFile id="Volts0_file0_0" fileName="simulations/test_10comp_cell_exp2/sim3/Golgi_pop0_cell0.dat">
