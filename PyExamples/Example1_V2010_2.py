@@ -94,7 +94,7 @@ if __name__ == "__main__":
 
     ####### change 'simulator' to "jNeuroML_NEURON" in order to run simulations in NEURON
 
-    sim_params={'simulator':"no simulation",'duration':450,'timeStep':0.005,'numTrials':5,'globalSeed':False,'trialSeed':True,'plotSpecifier':False,\
+    sim_params={'simulator':"jNeuroML_NEURON",'duration':450,'timeStep':0.005,'numTrials':5,'globalSeed':False,'trialSeed':True,'plotSpecifier':False,\
     'saveSomataPositions':True,'parentDirRequired':True,'parentDir':parentdir,'networkDir':'example'}
     
     ##### run all simulations
