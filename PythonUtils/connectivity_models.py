@@ -14,8 +14,8 @@ from methods_v2 import *
 
 
 
-def Vervaeke_2012_AND_explicit_conn_prob_model(pair_id,projection_id,prePop,prePop_listIndex,prePopSize,preCellType,pre_cell_positions,\
-                                               postPop,postPop_listIndex,postPopSize,postCellType,post_cell_positions,\
+def Vervaeke_2012_AND_explicit_conn_prob_model(pair_id,projection_id,prePop,prePop_listIndex,prePopSize,preCellType,preNML2Type,pre_cell_positions,\
+                                               postPop,postPop_listIndex,postPopSize,postCellType,postNML2Type,post_cell_positions,\
                                                connectivity_parameters,seed_number,parentDir=None):
     random.seed(seed_number)
     nonempty_projection=False
@@ -30,20 +30,20 @@ def Vervaeke_2012_AND_explicit_conn_prob_model(pair_id,projection_id,prePop,preP
        postCellTypeFile=postCellType
        
     if connectivity_parameters['targetingModelprePop']['model']=="segment groups and segments":
-       pre_pop_target_segment_array=extract_morphology_information([preCellTypeFile],\
+       pre_pop_target_segment_array=extract_morphology_information([preCellTypeFile],{preCellTypeFile:preNML2Type},\
                                                                                           ["segment groups",  \
                           connectivity_parameters['targetingModelprePop']['segmentGroupList']])
 
     if connectivity_parameters['targetingModelprePop']['model']=="segments and subsegments":
-       pre_pop_target_segment_array=extract_morphology_information([preCellTypeFile],\
+       pre_pop_target_segment_array=extract_morphology_information([preCellTypeFile],{preCellTypeFile:preNML2Type}, \
                                                   ["segments",connectivity_parameters['targetingModelprePop']['segmentList']])
 
     if connectivity_parameters['targetingModelpostPop']['model']=="segment groups and segments":
-       post_pop_target_segment_array=extract_morphology_information([postCellTypeFile],\
+       post_pop_target_segment_array=extract_morphology_information([postCellTypeFile],{postCellTypeFile:postNML2Type},\
                                   ["segment groups",connectivity_parameters['targetingModelpostPop']['segmentGroupList'] ] )
 
     if connectivity_parameters['targetingModelpostPop']['model']=="segments and subsegments":
-       post_pop_target_segment_array=extract_morphology_information([postCellTypeFile],\
+       post_pop_target_segment_array=extract_morphology_information([postCellTypeFile],{postCellTypeFile:postNML2Type}, \
             ["segments",connectivity_parameters['targetingModelpostPop']['segmentGroupList']])  
                                             
     proj = neuroml.ElectricalProjection(id="proj%d"%projection_id,presynaptic_population=prePop,postsynaptic_population=postPop)
@@ -121,7 +121,7 @@ connectivity_parameters['targetingModelprePop']['segmentGroupProbabilities']],no
                          while x==0:
                              post_target_point=get_unique_target_points(post_pop_target_segment_array,post_targeting_mode,post_targeting_parameters,1) 
 
-                             if get_3D_connection_length(preCellTypeFile,postCellTypeFile,pre_cell_positions,post_cell_positions,Pre_cell,\
+                             if get_3D_connection_length(preCellTypeFile,postCellTypeFile,preNML2Type,postNML2Type,pre_cell_positions,post_cell_positions,Pre_cell,\
                                 Post_cell,pre_target_points[pre_target_point,0],post_target_point[0,0],\
                                 pre_target_points[pre_target_point,1],post_target_point[0,1]) <=connectivity_parameters['maximalConnDistance']:
                                 x=1
@@ -160,8 +160,8 @@ post_cell="../%s/%d/%s"%(postPop,Post_cell,postCellType),synapse=gap_junction.id
 
 
 
-def Vervaeke_2010_model(pair_id,projection_id,prePop,prePop_listIndex,prePopSize,preCellType,pre_cell_positions,\
-                                               postPop,postPop_listIndex,postPopSize,postCellType,post_cell_positions,\
+def Vervaeke_2010_model(pair_id,projection_id,prePop,prePop_listIndex,prePopSize,preCellType,preNML2Type,pre_cell_positions,\
+                                               postPop,postPop_listIndex,postPopSize,postCellType,postNML2Type,post_cell_positions,\
                                                connectivity_parameters,seed_number,parentDir=None):
 
     random.seed(seed_number)
@@ -178,12 +178,12 @@ def Vervaeke_2010_model(pair_id,projection_id,prePop,prePop_listIndex,prePopSize
     gap_counter=0
     #######
     if 'prePoptargetGroup' in connectivity_parameters:
-       pre_pop_target_segment_array=extract_morphology_information([preCellTypeFile],\
+       pre_pop_target_segment_array=extract_morphology_information([preCellTypeFile],{preCellTypeFile:preNML2Type},\
                                                                                           ["segment groups",  \
 connectivity_parameters['prePoptargetGroup']['segmentGroupList']])
 
     if 'postPoptargetGroup' in connectivity_parameters:
-       post_pop_target_segment_array=extract_morphology_information([postCellTypeFile],\
+       post_pop_target_segment_array=extract_morphology_information([postCellTypeFile],{postCellTypeFile:postNML2Type},\
                                   ["segment groups",connectivity_parameters['postPoptargetGroup']['segmentGroupList'] ] )
 
                                             
@@ -251,7 +251,7 @@ connectivity_parameters['postPoptargetGroup']['segmentGroupProbabilities']]
                   x=0
                   while x==0:
                      post_target_point=get_unique_target_points(post_pop_target_segment_array,post_targeting_mode,post_targeting_parameters,1) 
-                     if get_3D_connection_length(preCellTypeFile,postCellTypeFile,pre_cell_positions,post_cell_positions,Pre_cell,\
+                     if get_3D_connection_length(preCellTypeFile,postCellTypeFile,preNML2Type,postNML2Type,pre_cell_positions,post_cell_positions,Pre_cell,\
                         Post_cell,pre_target_points[0,0],post_target_point[0,0],\
                         pre_target_points[0,1],post_target_point[0,1]) <=connectivity_parameters['maximalConnDistance']:
                         x=1
@@ -317,8 +317,8 @@ post_cell="../%s/%d/%s"%(postPop,Post_cell,postCellType),synapse="gap_junction%d
     ##############
 
 
-def chemical_connection_model(pair_id,projection_id,prePop,prePop_listIndex,prePopSize,preCellType,pre_cell_positions,\
-                                               postPop,postPop_listIndex,postPopSize,postCellType,post_cell_positions,\
+def chemical_connection_model(pair_id,projection_id,prePop,prePop_listIndex,prePopSize,preCellType,preNML2Type,pre_cell_positions,\
+                                               postPop,postPop_listIndex,postPopSize,postCellType,postNML2Type,post_cell_positions,\
                                                connectivity_parameters,seed_number,parentDir=None):
     random.seed(seed_number)
 
@@ -334,21 +334,21 @@ def chemical_connection_model(pair_id,projection_id,prePop,prePop_listIndex,preP
     gap_counter=0
     #######
     if connectivity_parameters['targetingModelprePop']['model']=="segment groups and segments":
-       pre_pop_target_segment_array=extract_morphology_information([preCellTypeFile],\
+       pre_pop_target_segment_array=extract_morphology_information([preCellTypeFile],{preCellTypeFile:preNML2Type},\
                                                                                           ["segment groups",  \
                           connectivity_parameters['targetingModelprePop']['segmentGroupList']])
 
     if connectivity_parameters['targetingModelprePop']['model']=="segments and subsegments":
-       pre_pop_target_segment_array=extract_morphology_information([preCellTypeFile],\
+       pre_pop_target_segment_array=extract_morphology_information([preCellTypeFile],{preCellTypeFile:preNML2Type},\
                                                   ["segments",connectivity_parameters['targetingModelprePop']['segmentList']])
 
  
     if connectivity_parameters['targetingModelpostPop']['model']=="segment groups and segments":
-       post_pop_target_segment_array=extract_morphology_information([postCellTypeFile],\
+       post_pop_target_segment_array=extract_morphology_information([postCellTypeFile],{postCellTypeFile:postNML2Type},\
                                   ["segment groups",connectivity_parameters['targetingModelpostPop']['segmentGroupList'] ] )
 
     if connectivity_parameters['targetingModelpostPop']['model']=="segments and subsegments":
-       post_pop_target_segment_array=extract_morphology_information([postCellTypeFile],\
+       post_pop_target_segment_array=extract_morphology_information([postCellTypeFile],{postCellTypeFile:postNML2Type},\
             ["segments",connectivity_parameters['targetingModelpostPop']['segmentGroupList']])  
                                             
     proj = neuroml.Projection(id="proj%d"%projection_id,presynaptic_population=prePop,postsynaptic_population=postPop,synapse=connectivity_parameters['synapse'])
@@ -402,7 +402,7 @@ connectivity_parameters['targetingModelprePop']['segmentGroupProbabilities']],no
                          while x==0:
                             post_target_points=get_unique_target_points(post_pop_target_segment_array,post_targeting_mode,post_targeting_parameters,1) 
 
-                            if get_3D_connection_length(preCellTypeFile,postCellTypeFile,pre_cell_positions,post_cell_positions,Pre_cell,\
+                            if get_3D_connection_length(preCellTypeFile,postCellTypeFile,preNML2Type,postNML2Type,pre_cell_positions,post_cell_positions,Pre_cell,\
                                Post_cell,pre_target_points[pre_target_point,0],post_target_point[0,0],\
                                pre_target_points[pre_target_point,1],post_target_point[0,1]) <=connectivity_parameters['maximalConnDistance']:
                                x=1
@@ -470,7 +470,7 @@ connectivity_parameters['targetingModelprePop']['segmentGroupProbabilities']],no
                       while x==0:
                          post_target_points=get_unique_target_points(post_pop_target_segment_array,post_targeting_mode,post_targeting_parameters,1) 
 
-                         if get_3D_connection_length(preCellTypeFile,postCellTypeFile,pre_cell_positions,post_cell_positions,Pre_cell,\
+                         if get_3D_connection_length(preCellTypeFile,postCellTypeFile,preNML2Type,postNML2Type,pre_cell_positions,post_cell_positions,Pre_cell,\
                             Post_cell,pre_target_points[pre_target_point,0],post_target_point[0,0],\
                             pre_target_points[pre_target_point,1],post_target_point[0,1]) <=connectivity_parameters['maximalConnDistance']:
                             x=1
@@ -545,7 +545,7 @@ connectivity_parameters['targetingModelprePop']['segmentGroupProbabilities']],no
                       while x==0:
                          post_target_points=get_unique_target_points(post_pop_target_segment_array,post_targeting_mode,post_targeting_parameters,1) 
 
-                         if get_3D_connection_length(preCellTypeFile,postCellTypeFile,pre_cell_positions,post_cell_positions,Pre_cell,\
+                         if get_3D_connection_length(preCellTypeFile,postCellTypeFile,preNML2Type,postNML2Type,pre_cell_positions,post_cell_positions,Pre_cell,\
                             Post_cell,pre_target_points[pre_target_point,0],post_target_point[0,0],\
                             pre_target_points[pre_target_point,1],post_target_point[0,1]) <=connectivity_parameters['maximalConnDistance']:
                             x=1

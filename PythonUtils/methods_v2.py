@@ -63,14 +63,18 @@ def save_soma_positions(population_params,save_to_path):
         np.savetxt('%s/%s.txt'%(save_to_path,cell_array[cell_group]['popID']),soma_positions,fmt='%f')
 
 
-def get_soma_diameter(cell_type):
+def get_soma_diameter(cell_name,cell_type=None):
     loaded_cell_array={}
-    cell_nml_file = '%s.cell.nml'%cell_type
+    cell_nml_file = '%s.cell.nml'%cell_name
     print cell_nml_file
     document_cell = neuroml.loaders.NeuroMLLoader.load(cell_nml_file)
-    loaded_cell_array[cell_type]=document_cell.cells[0]
+    if cell_type !=None:
+       if cell_type=="cell2CaPools":
+          loaded_cell_array[cell_name]=document_cell.cell2_ca_poolses[0]
+    else:
+       loaded_cell_array[cell_name]=document_cell.cells[0]
     cell_diameter=0
-    for segment in loaded_cell_array[cell_type].morphology.segments:
+    for segment in loaded_cell_array[cell_name].morphology.segments:
         #for now assumes that a soma segment has id=0 in each cell type
         if segment.id==0:
            
@@ -755,19 +759,31 @@ def get_unique_target_points(seg_specifications,mode_of_targeting,targeting_spec
     print target_points_per_cell
     return target_points_per_cell
 
-def get_3D_connection_length(preCellType,postCellType,pre_pop_cell_positions,post_pop_cell_positions,pre_cell_ID,post_cell_ID,pre_segment_ID,post_segment_ID,pre_fraction_Along,post_fraction_Along):
+def get_3D_connection_length(preCellType,postCellType,preNML2Type,postNML2Type,pre_pop_cell_positions,post_pop_cell_positions,pre_cell_ID,post_cell_ID,pre_segment_ID,post_segment_ID,pre_fraction_Along,post_fraction_Along):
 
     #cell_array variable has to contain cell component names
     loaded_cell_array={}
+
     Pre_cell_name=preCellType
     pre_cell_nml_file = '%s.cell.nml'%Pre_cell_name
     document_cell = neuroml.loaders.NeuroMLLoader.load(pre_cell_nml_file)
-    loaded_cell_array[Pre_cell_name]=document_cell.cells[0]
+    if preNML2Type !=None:
+       if preNML2Type=="cell2CaPools":
+          loaded_cell_array[Pre_cell_name]=document_cell.cell2_ca_poolses[0]
+       #if new componentType is developed in the future it can be added here
+    else:
+       loaded_cell_array[Pre_cell_name]=document_cell.cells[0]
     pre_cell_position=pre_pop_cell_positions[pre_cell_ID]
+    
     Post_cell_name=postCellType
     post_cell_nml_file = '%s.cell.nml'%Post_cell_name
     document_cell = neuroml.loaders.NeuroMLLoader.load(post_cell_nml_file)
-    loaded_cell_array[Post_cell_name]=document_cell.cells[0]
+    if postNML2Type !=None:
+       if postNML2Type=="cell2CaPools":
+          loaded_cell_array[Post_cell_name]=document_cell.cell2_ca_poolses[0]
+       #if new componentType is developed in the future it can be added here
+    else:
+       loaded_cell_array[Post_cell_name]=document_cell.cells[0]
     post_cell_position=pre_pop_cell_positions[post_cell_ID]
     
     for pre_segment in loaded_cell_array[Pre_cell_name].morphology.segments:
@@ -838,14 +854,18 @@ def get_3D_connection_length(preCellType,postCellType,pre_pop_cell_positions,pos
     print connection_length    
     return connection_length      
         
-def extract_morphology_information(cell_array,target_array):
+def extract_morphology_information(cell_array,NML2cellType_dictionary,target_array,cell_type_array=None):
     loaded_cell_array={}
     cell_segment_group_array=[]
     segment_array=[]
     for cell in cell_array:
         cell_nml_file = '%s.cell.nml'%cell
         document_cell = neuroml.loaders.NeuroMLLoader.load(cell_nml_file)
-        loaded_cell_array[cell]=document_cell.cells[0]
+        if NML2cellType_dictionary[cell] !=None:
+           if NML2cellType_dictionary[cell]=="cell2CaPools":
+              loaded_cell_array[cell]=document_cell.cell2_ca_poolses[0]
+        else:
+           loaded_cell_array[cell]=document_cell.cells[0]
         print("Loaded morphology file from: %s, with id: %s"%(cell_nml_file, loaded_cell_array[cell].id))
         segment_id_array=[]
         segment_group_array={}

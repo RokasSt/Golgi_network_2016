@@ -14,12 +14,13 @@ if __name__ == "__main__":
     net_params_test_2010_multiple['experiment1']={}
     net_params_test_2010_multiple['experiment2']={}
     
-    net_params_test_2010_multiple['experiment1']['experimentID']="test_v2_exp1"
-    net_params_test_2010_multiple['experiment2']['experimentID']="test_v2_exp2"
+    net_params_test_2010_multiple['experiment1']['experimentID']="test_full_morph_all_channels_exp1"
+    net_params_test_2010_multiple['experiment2']['experimentID']="test_full_morph_all_channels_exp2"
     #exp1
     net_params_test_2010_multiple['experiment1']['popParams']=[]
-    net_params_test_2010_multiple['experiment1']['popParams'].append({'popID':'Golgi_pop0','cellType':"Golgi_5comp_3channels_1CaPool",'size':10})
-    net_params_test_2010_multiple['experiment1']['popParams'].append({'popID':'Golgi_pop1','cellType':"Golgi_5comp_3channels_1CaPool",'size':10})
+    # by default "cell" componentType is used if "NeuroML2CellType" is not in the popParams array
+    net_params_test_2010_multiple['experiment1']['popParams'].append({'popID':'Golgi_pop0','cellType':"Golgi_040408_C1",'size':10,"NeuroML2CellType":"cell2CaPools"})
+    net_params_test_2010_multiple['experiment1']['popParams'].append({'popID':'Golgi_pop1','cellType':"Golgi_040408_C1",'size':10,"NeuroML2CellType":"cell2CaPools"})
 
     net_params_test_2010_multiple['experiment1']['distributionParams']={}
     net_params_test_2010_multiple['experiment1']['distributionParams']['distributionModel']="random_no_overlap"
@@ -32,8 +33,8 @@ if __name__ == "__main__":
     net_params_test_2010_multiple['experiment1']['connParams']['populationPairs']=[]
     net_params_test_2010_multiple['experiment1']['connParams']['populationPairs'].append({'electricalConnModel':"Vervaeke_2010_based",'prePopID':'Golgi_pop0',\
                                                     'postPopID':'Golgi_pop1','spatialScale':1,'testingConductanceScale':1,'units':'nS','maximalConnDistance':200,'normalizeConductances':False,\
-                            'prePoptargetGroup':{'segmentGroupList':["dendrite_group"],'segmentGroupProbabilities':[1]},\
-                            'postPoptargetGroup':{'segmentGroupList':["dendrite_group"],'segmentGroupProbabilities':[1]}})
+                            'prePoptargetGroup':{'segmentGroupList':["apical"],'segmentGroupProbabilities':[1]},\
+                            'postPoptargetGroup':{'segmentGroupList':["apical"],'segmentGroupProbabilities':[1]}})
 
 
     net_params_test_2010_multiple['experiment1']['inputParams']=[]
@@ -58,8 +59,8 @@ if __name__ == "__main__":
 
     #exp2
     net_params_test_2010_multiple['experiment2']['popParams']=[]
-    net_params_test_2010_multiple['experiment2']['popParams'].append({'popID':'Golgi_pop0','cellType':"Golgi_5comp_3channels_1CaPool",'size':10})
-    net_params_test_2010_multiple['experiment2']['popParams'].append({'popID':'Golgi_pop1','cellType':"Golgi_5comp_3channels_1CaPool",'size':10})
+    net_params_test_2010_multiple['experiment2']['popParams'].append({'popID':'Golgi_pop0','cellType':"Golgi_040408_C1",'size':10,"NeuroML2CellType":"cell2CaPools"})
+    net_params_test_2010_multiple['experiment2']['popParams'].append({'popID':'Golgi_pop1','cellType':"Golgi_040408_C1",'size':10,"NeuroML2CellType":"cell2CaPools"})
 
     net_params_test_2010_multiple['experiment2']['distributionParams']={}
     net_params_test_2010_multiple['experiment2']['distributionParams']['distributionModel']="random_no_overlap"
@@ -72,8 +73,8 @@ if __name__ == "__main__":
     net_params_test_2010_multiple['experiment2']['connParams']['populationPairs']=[]
     net_params_test_2010_multiple['experiment2']['connParams']['populationPairs'].append({'electricalConnModel':"Vervaeke_2010_based",'prePopID':'Golgi_pop0',\
                                                     'postPopID':'Golgi_pop1','spatialScale':20,'testingConductanceScale':1,'maximalConnDistance':200,'units':'nS','normalizeConductances':True,\
-                            'prePoptargetGroup':{'segmentGroupList':["dendrite_group"],'segmentGroupProbabilities':[1]},\
-                            'postPoptargetGroup':{'segmentGroupList':["dendrite_group"],'segmentGroupProbabilities':[1]}})
+                            'prePoptargetGroup':{'segmentGroupList':["apical"],'segmentGroupProbabilities':[1]},\
+                            'postPoptargetGroup':{'segmentGroupList':["apical"],'segmentGroupProbabilities':[1]}})
 
     net_params_test_2010_multiple['experiment2']['inputParams']=[]
     inputGroups_pop0_2010exp2=[]
@@ -94,7 +95,7 @@ if __name__ == "__main__":
 
     ####### change 'simulator' to "jNeuroML_NEURON" in order to run simulations in NEURON
 
-    sim_params={'simulator':"no simulation",'duration':450,'timeStep':0.005,'numTrials':5,'globalSeed':False,'trialSeed':True,'plotSpecifier':False,\
+    sim_params={'simulator':"no simulation",'duration':450,'timeStep':0.001,'numTrials':1,'globalSeed':False,'trialSeed':True,'plotSpecifier':False,\
     'saveSomataPositions':True,'parentDirRequired':True,'parentDir':parentdir,'networkDir':'example'}
     
     ##### run all simulations

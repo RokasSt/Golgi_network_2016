@@ -146,9 +146,20 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
            cell_diameter_array={}
            for cell_pop in range(0,len(cell_array)):
                if simulation_parameters['parentDirRequired']:
-                  cell_diameter=get_soma_diameter(simulation_parameters['parentDir']+"/NeuroML2"+"/"+cell_array[cell_pop]['cellType'])
+
+                  print simulation_parameters['parentDir']+"/NeuroML2"+"/"+cell_array[cell_pop]['cellType']
+
+                  if "NeuroML2CellType" in cell_array[cell_pop]:
+                     cell_diameter=get_soma_diameter(simulation_parameters['parentDir']+"/NeuroML2"+"/"+cell_array[cell_pop]['cellType'],cell_array[cell_pop]["NeuroML2CellType"])
+                  else:
+                     cell_diameter=get_soma_diameter(simulation_parameters['parentDir']+"/NeuroML2"+"/"+cell_array[cell_pop]['cellType'])
                else:
-                  cell_diameter=get_soma_diameter(cell_array[cell_pop]['cellType'])
+
+                  if "NeuroML2CellType" in cell_array[cell_pop]:
+                     cell_diameter=get_soma_diameter(cell_array[cell_pop]['cellType'],cell_array[cell_pop]["NeuroML2CellType"])
+                  else:
+                     cell_diameter=get_soma_diameter(cell_array[cell_pop]['cellType'])
+
                cell_diameter_array[cell_array[cell_pop]['popID']]=cell_diameter
 
            for cell_pop in range(0,len(cell_array)):
@@ -195,6 +206,8 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
         for pair in range(0,len(connectivity_information['populationPairs']) ):
             prePop=connectivity_information['populationPairs'][pair]['prePopID']  
             postPop=connectivity_information['populationPairs'][pair]['postPopID']
+            preCell_NML2type=None
+            postCellNML2ype=None
             for pop in range(0,len(cell_array)):
                 if cell_array[pop]['popID']==prePop:
                    prePop_listIndex=pop
@@ -202,6 +215,12 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
                 if cell_array[pop]['popID']==postPop:
                    postPop_listIndex=pop
                    postPopSize=cell_array[pop]['size']
+
+            if "NeuroML2CellType" in cell_array[prePop_listIndex]:
+               preCell_NML2type=cell_array[prePop_listIndex]["NeuroML2CellType"]
+
+            if "NeuroML2CellType" in cell_array[postPop_listIndex]:
+               postCell_NML2type=cell_array[postPop_listIndex]["NeuroML2CellType"]
             
             if 'electricalConnModel' in connectivity_information['populationPairs'][pair]:
                ########## 2012 publication-based generation of model connectivity 
@@ -212,12 +231,11 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
                   pre_pop_cell_positions=cell_position_array[prePop]
                   post_pop_cell_positions=cell_position_array[postPop]
                   if simulation_parameters['parentDirRequired']:
-                     proj, nonempty_projection,gap_junction_array=Vervaeke_2012_AND_explicit_conn_prob_model(pair,initial_projection_counter,prePop,prePop_listIndex,prePopSize,pre_pop_cell_component,pre_pop_cell_positions,\
-                                postPop,postPop_listIndex,postPopSize,post_pop_cell_component,post_pop_cell_positions,pair_connectivity_parameters,seed,\
-                                simulation_parameters['parentDir'])
+                     proj, nonempty_projection,gap_junction_array=Vervaeke_2012_AND_explicit_conn_prob_model(pair,initial_projection_counter,prePop,prePop_listIndex,prePopSize,pre_pop_cell_component,preCell_NML2type,pre_pop_cell_positions,\
+                             postPop,postPop_listIndex,postPopSize,post_pop_cell_component,postCell_NML2type,post_pop_cell_positions,pair_connectivity_parameters,seed,simulation_parameters['parentDir'])
                   else:
-                     proj, nonempty_projection,gap_junction_array=Vervaeke_2012_AND_explicit_conn_prob_model(pair,initial_projection_counter,prePop,prePop_listIndex,prePopSize,pre_pop_cell_component,pre_pop_cell_positions,\
-                                postPop,postPop_listIndex,postPopSize,post_pop_cell_component,post_pop_cell_positions,pair_connectivity_parameters,seed)
+                     proj, nonempty_projection,gap_junction_array=Vervaeke_2012_AND_explicit_conn_prob_model(pair,initial_projection_counter,prePop,prePop_listIndex,prePopSize,pre_pop_cell_component,preCell_NML2type,pre_pop_cell_positions,\
+         postPop,postPop_listIndex,postPopSize,post_pop_cell_component,postCell_NML2type,post_pop_cell_positions,pair_connectivity_parameters,seed)
                 
                   if nonempty_projection:
                      initial_projection_counter+=1
@@ -235,13 +253,12 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
                   post_pop_cell_positions=cell_position_array[postPop]
                   
                   if simulation_parameters['parentDirRequired']:
-                     proj, nonempty_projection,gap_junction_array=Vervaeke_2010_model(pair,initial_projection_counter,prePop,prePop_listIndex,prePopSize,pre_pop_cell_component,pre_pop_cell_positions,\
-                                postPop,postPop_listIndex,postPopSize,post_pop_cell_component,post_pop_cell_positions,pair_connectivity_parameters,seed,\
-                                simulation_parameters['parentDir'])
+                     proj, nonempty_projection,gap_junction_array=Vervaeke_2010_model(pair,initial_projection_counter,prePop,prePop_listIndex,prePopSize,pre_pop_cell_component,preCell_NML2type,pre_pop_cell_positions,\
+postPop,postPop_listIndex,postPopSize,post_pop_cell_component,postCell_NML2type,post_pop_cell_positions,pair_connectivity_parameters,seed,simulation_parameters['parentDir'])
                   else:
-                     proj, nonempty_projection,gap_junction_array=Vervaeke_2010_model(pair,initial_projection_counter,prePop,prePop_listIndex,prePopSize,pre_pop_cell_component,pre_pop_cell_positions,\
-                                postPop,postPop_listIndex,postPopSize,post_pop_cell_component,post_pop_cell_positions,pair_connectivity_parameters,seed)
-
+                     proj, nonempty_projection,gap_junction_array=Vervaeke_2010_model(pair,initial_projection_counter,prePop,prePop_listIndex,prePopSize,pre_pop_cell_component,preCell_NML2type,pre_pop_cell_positions,\
+ postPop,postPop_listIndex,postPopSize,post_pop_cell_component,postCell_NML2type,post_pop_cell_positions,pair_connectivity_parameters,seed)
+  
                   if nonempty_projection:
                      initial_projection_counter+=1
                      net.electrical_projections.append(proj)
@@ -257,12 +274,11 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
                post_pop_cell_positions=cell_position_array[postPop]
                
                if simulation_parameters['parentDirRequired']:
-                  proj, nonempty_projection,gap_junction_array,synapse_name=chemical_connection_model(pair,initial_projection_counter,prePop,prePop_listIndex,prePopSize,pre_pop_cell_component,pre_pop_cell_positions,\
-                                postPop,postPop_listIndex,postPopSize,post_pop_cell_component,post_pop_cell_positions,pair_connectivity_parameters,seed,\
-                                simulation_parameters['parentDir'])
+                  proj, nonempty_projection,gap_junction_array,synapse_name=chemical_connection_model(pair,initial_projection_counter,prePop,prePop_listIndex,prePopSize,pre_pop_cell_component,preCell_NML2type,pre_pop_cell_positions,\
+postPop,postPop_listIndex,postPopSize,post_pop_cell_component,postCell_NML2type,post_pop_cell_positions,pair_connectivity_parameters,seed,simulation_parameters['parentDir'])
                else:
-                  proj, nonempty_projection,gap_junction_array,synapse_name=chemical_connection_model(pair,initial_projection_counter,prePop,prePop_listIndex,prePopSize,pre_pop_cell_component,pre_pop_cell_positions,\
-                                postPop,postPop_listIndex,postPopSize,post_pop_cell_component,post_pop_cell_positions,pair_connectivity_parameters,seed)
+                  proj, nonempty_projection,gap_junction_array,synapse_name=chemical_connection_model(pair,initial_projection_counter,prePop,prePop_listIndex,prePopSize,pre_pop_cell_component,preCell_NML2type,pre_pop_cell_positions,\
+postPop,postPop_listIndex,postPopSize,post_pop_cell_component,postCell_NML2type,post_pop_cell_positions,pair_connectivity_parameters,seed)
 
                synapse_name_array.append(synapse_name)
                if nonempty_projection:
