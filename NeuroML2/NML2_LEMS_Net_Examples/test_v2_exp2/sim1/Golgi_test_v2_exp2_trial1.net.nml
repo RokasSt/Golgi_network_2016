@@ -1,0 +1,299 @@
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2beta4.xsd" id="Golgi_test_v2_exp2_trial1">
+    <include href="/../../../Very_Simple_Golgi_test_morph.cell.nml"></include>
+    <gapJunction id="gap_junction00" conductance="0.844458nS"/>
+    <gapJunction id="gap_junction01" conductance="0.658770nS"/>
+    <gapJunction id="gap_junction02" conductance="0.737836nS"/>
+    <gapJunction id="gap_junction03" conductance="0.733252nS"/>
+    <gapJunction id="gap_junction04" conductance="0.645520nS"/>
+    <gapJunction id="gap_junction05" conductance="0.809229nS"/>
+    <gapJunction id="gap_junction06" conductance="0.596215nS"/>
+    <gapJunction id="gap_junction07" conductance="0.563687nS"/>
+    <gapJunction id="gap_junction08" conductance="0.801057nS"/>
+    <gapJunction id="gap_junction09" conductance="0.743166nS"/>
+    <gapJunction id="gap_junction010" conductance="0.753299nS"/>
+    <gapJunction id="gap_junction011" conductance="0.716363nS"/>
+    <gapJunction id="gap_junction012" conductance="0.719948nS"/>
+    <gapJunction id="gap_junction013" conductance="0.641056nS"/>
+    <gapJunction id="gap_junction014" conductance="0.760221nS"/>
+    <gapJunction id="gap_junction015" conductance="0.746688nS"/>
+    <gapJunction id="gap_junction016" conductance="0.784674nS"/>
+    <gapJunction id="gap_junction017" conductance="0.656347nS"/>
+    <gapJunction id="gap_junction018" conductance="0.873800nS"/>
+    <gapJunction id="gap_junction019" conductance="0.802300nS"/>
+    <gapJunction id="gap_junction020" conductance="0.794377nS"/>
+    <gapJunction id="gap_junction021" conductance="0.807550nS"/>
+    <gapJunction id="gap_junction022" conductance="0.773877nS"/>
+    <gapJunction id="gap_junction023" conductance="0.675794nS"/>
+    <gapJunction id="gap_junction024" conductance="0.898615nS"/>
+    <gapJunction id="gap_junction025" conductance="0.716665nS"/>
+    <gapJunction id="gap_junction026" conductance="0.692393nS"/>
+    <gapJunction id="gap_junction027" conductance="0.767615nS"/>
+    <gapJunction id="gap_junction028" conductance="0.886163nS"/>
+    <gapJunction id="gap_junction029" conductance="0.736316nS"/>
+    <gapJunction id="gap_junction030" conductance="0.895917nS"/>
+    <gapJunction id="gap_junction031" conductance="0.894959nS"/>
+    <gapJunction id="gap_junction032" conductance="0.792038nS"/>
+    <gapJunction id="gap_junction033" conductance="0.726013nS"/>
+    <gapJunction id="gap_junction034" conductance="0.792239nS"/>
+    <gapJunction id="gap_junction035" conductance="0.721245nS"/>
+    <gapJunction id="gap_junction036" conductance="0.664835nS"/>
+    <gapJunction id="gap_junction037" conductance="0.866997nS"/>
+    <gapJunction id="gap_junction038" conductance="0.664619nS"/>
+    <gapJunction id="gap_junction039" conductance="0.678864nS"/>
+    <gapJunction id="gap_junction040" conductance="0.568725nS"/>
+    <gapJunction id="gap_junction041" conductance="0.621018nS"/>
+    <gapJunction id="gap_junction042" conductance="0.649537nS"/>
+    <gapJunction id="gap_junction043" conductance="0.573881nS"/>
+    <gapJunction id="gap_junction044" conductance="0.653552nS"/>
+    <gapJunction id="gap_junction045" conductance="0.708858nS"/>
+    <gapJunction id="gap_junction046" conductance="0.581612nS"/>
+    <gapJunction id="gap_junction047" conductance="0.740238nS"/>
+    <gapJunction id="gap_junction048" conductance="0.639027nS"/>
+    <gapJunction id="gap_junction049" conductance="0.874739nS"/>
+    <gapJunction id="gap_junction050" conductance="0.824049nS"/>
+    <gapJunction id="gap_junction051" conductance="0.699771nS"/>
+    <gapJunction id="gap_junction052" conductance="0.667268nS"/>
+    <gapJunction id="gap_junction053" conductance="0.595562nS"/>
+    <gapJunction id="gap_junction054" conductance="0.852107nS"/>
+    <gapJunction id="gap_junction055" conductance="0.599099nS"/>
+    <gapJunction id="gap_junction056" conductance="0.719754nS"/>
+    <gapJunction id="gap_junction057" conductance="0.861881nS"/>
+    <gapJunction id="gap_junction058" conductance="0.729104nS"/>
+    <gapJunction id="gap_junction059" conductance="0.647680nS"/>
+    <gapJunction id="gap_junction060" conductance="0.657235nS"/>
+    <gapJunction id="gap_junction061" conductance="0.750735nS"/>
+    <gapJunction id="gap_junction062" conductance="0.725580nS"/>
+    <gapJunction id="gap_junction063" conductance="0.913657nS"/>
+    <gapJunction id="gap_junction064" conductance="0.763182nS"/>
+    <gapJunction id="gap_junction065" conductance="0.671966nS"/>
+    <gapJunction id="gap_junction066" conductance="0.626041nS"/>
+    <gapJunction id="gap_junction067" conductance="0.766502nS"/>
+    <gapJunction id="gap_junction068" conductance="0.716579nS"/>
+    <gapJunction id="gap_junction069" conductance="0.677921nS"/>
+    <gapJunction id="gap_junction070" conductance="0.715473nS"/>
+    <gapJunction id="gap_junction071" conductance="0.840009nS"/>
+    <gapJunction id="gap_junction072" conductance="0.671280nS"/>
+    <gapJunction id="gap_junction073" conductance="0.676015nS"/>
+    <gapJunction id="gap_junction074" conductance="0.660229nS"/>
+    <gapJunction id="gap_junction075" conductance="0.582484nS"/>
+    <gapJunction id="gap_junction076" conductance="0.828053nS"/>
+    <gapJunction id="gap_junction077" conductance="0.673457nS"/>
+    <gapJunction id="gap_junction078" conductance="0.686790nS"/>
+    <gapJunction id="gap_junction079" conductance="0.627222nS"/>
+    <gapJunction id="gap_junction080" conductance="0.729506nS"/>
+    <gapJunction id="gap_junction081" conductance="0.771562nS"/>
+    <gapJunction id="gap_junction082" conductance="0.693741nS"/>
+    <gapJunction id="gap_junction083" conductance="0.775500nS"/>
+    <gapJunction id="gap_junction084" conductance="0.718056nS"/>
+    <gapJunction id="gap_junction085" conductance="0.676873nS"/>
+    <gapJunction id="gap_junction086" conductance="0.708124nS"/>
+    <gapJunction id="gap_junction087" conductance="0.860605nS"/>
+    <gapJunction id="gap_junction088" conductance="0.860822nS"/>
+    <gapJunction id="gap_junction089" conductance="0.678204nS"/>
+    <pulseGenerator id="Input_Golgi_pop0_0" delay="0.000000ms" duration="100.000000ms" amplitude="0.000040uA"/>
+    <pulseGenerator id="Input_Golgi_pop0_1" delay="220.000000ms" duration="200.000000ms" amplitude="-0.000005uA"/>
+    <pulseGenerator id="Input_Golgi_pop1_0" delay="0.000000ms" duration="100.000000ms" amplitude="0.000040uA"/>
+    <pulseGenerator id="Input_Golgi_pop1_1" delay="220.000000ms" duration="200.000000ms" amplitude="-0.000005uA"/>
+    <network id="Golgi_test_v2_exp2_trial1_network" type="networkWithTemperature" temperature="23 degC">
+        <notes>Parameter arrays for building this network are listed below:
+Cell distribution parameters:
+Model: random with no overlap of cell bodies
+Model parameters:
+{'zDim': 100, 'distributionModel': 'random_no_overlap', 'yDim': 100, 'xDim': 100}
+Population parameters:
+{'popID': 'Golgi_pop0', 'cellType': 'Very_Simple_Golgi_test_morph', 'size': 10}
+{'popID': 'Golgi_pop1', 'cellType': 'Very_Simple_Golgi_test_morph', 'size': 10}
+Connectivity parameters for a list of population pairs:
+{'testingConductanceScale': 1, 'maximalConnDistance': 200, 'electricalConnModel': 'Vervaeke_2010_based', 'postPoptargetGroup': {'segmentGroupList': ['dendrite_group'], 'segmentGroupProbabilities': [1]}, 'units': 'nS', 'normalizeConductances': True, 'spatialScale': 20, 'prePopID': 'Golgi_pop0', 'postPopID': 'Golgi_pop1', 'prePoptargetGroup': {'segmentGroupList': ['dendrite_group'], 'segmentGroupProbabilities': [1]}}
+Input parameters for a list of populations:
+Input group parameters for Golgi_pop0:
+{'ampUnits': 'uA', 'testingModel': 'pulseGenerators', 'timeUnits': 'ms', 'inputModel': 'testing', 'pulseParameters': [{'delay': 0, 'duration': 100, 'amplitude': 4e-05}, {'delay': 220, 'duration': 200, 'amplitude': -5e-06}], 'cellFractionToTarget': 0.5}
+Input group parameters for Golgi_pop1:
+{'ampUnits': 'uA', 'testingModel': 'pulseGenerators', 'timeUnits': 'ms', 'inputModel': 'testing', 'pulseParameters': [{'delay': 0, 'duration': 100, 'amplitude': 4e-05}, {'delay': 220, 'duration': 200, 'amplitude': -5e-06}], 'cellFractionToTarget': 0.5}
+</notes>
+        <population id="Golgi_pop0" type="populationList" component="Very_Simple_Golgi_test_morph" size="10">
+            <instance id="0">
+                <location y="95.978042410588316" x="74.631930297352909" z="22.770452713356171"/>
+            </instance>
+            <instance id="1">
+                <location y="19.302422279729704" x="70.399086672645751" z="78.298240003626375"/>
+            </instance>
+            <instance id="2">
+                <location y="49.34719579418546" x="68.533946324585187" z="44.181185775941366"/>
+            </instance>
+            <instance id="3">
+                <location y="66.917284301161274" x="45.398787173357682" z="29.903667823624513"/>
+            </instance>
+            <instance id="4">
+                <location y="10.546338876127436" x="92.768632374383856" z="97.533309035635455"/>
+            </instance>
+            <instance id="5">
+                <location y="81.787517287663633" x="13.856035002286927" z="7.103981795797488"/>
+            </instance>
+            <instance id="6">
+                <location y="84.960695534885261" x="75.215241654526636" z="92.71698197907449"/>
+            </instance>
+            <instance id="7">
+                <location y="15.414087175767133" x="51.003976613895674" z="30.564498980640508"/>
+            </instance>
+            <instance id="8">
+                <location y="14.015940119851233" x="88.548512424860618" z="55.235587357586546"/>
+            </instance>
+            <instance id="9">
+                <location y="13.327992741710027" x="41.278129848068424" z="65.50752489520076"/>
+            </instance>
+        </population>
+        <population id="Golgi_pop1" type="populationList" component="Very_Simple_Golgi_test_morph" size="10">
+            <instance id="0">
+                <location y="80.244843566122569" x="57.528883515339594" z="57.24716569140719"/>
+            </instance>
+            <instance id="1">
+                <location y="6.547159401916613" x="72.571870041787463" z="16.507827568206611"/>
+            </instance>
+            <instance id="2">
+                <location y="58.972795601031734" x="39.768538549965328" z="0.721678329433051"/>
+            </instance>
+            <instance id="3">
+                <location y="64.869280444697679" x="21.389961688781856" z="49.339235211969914"/>
+            </instance>
+            <instance id="4">
+                <location y="84.24621300250935" x="39.522470132366784" z="80.236664303820561"/>
+            </instance>
+            <instance id="5">
+                <location y="86.297438450706835" x="2.815951192731847" z="82.365510136270288"/>
+            </instance>
+            <instance id="6">
+                <location y="53.441915383347038" x="96.954074335230445" z="34.759068721113238"/>
+            </instance>
+            <instance id="7">
+                <location y="25.670988840186205" x="6.079721369280344" z="73.227134634012316"/>
+            </instance>
+            <instance id="8">
+                <location y="15.384021209257991" x="17.961180767269269" z="95.498096193409253"/>
+            </instance>
+            <instance id="9">
+                <location y="94.644865659843944" x="30.184400500092035" z="48.588209667930663"/>
+            </instance>
+        </population>
+        <electricalProjection id="proj0" postsynapticPopulation="Golgi_pop1" presynapticPopulation="Golgi_pop0">
+            <electricalConnectionInstance id="0" synapse="gap_junction00" preFractionAlong="0.193024" preSegment="5" postFractionAlong="0.441812" postSegment="2" postCell="../Golgi_pop1/0/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/0/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="1" synapse="gap_junction01" preFractionAlong="0.105463" preSegment="5" postFractionAlong="0.071040" postSegment="5" postCell="../Golgi_pop1/1/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/0/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="2" synapse="gap_junction02" preFractionAlong="0.927170" preSegment="5" postFractionAlong="0.510040" postSegment="1" postCell="../Golgi_pop1/3/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/0/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="3" synapse="gap_junction03" preFractionAlong="0.552356" preSegment="1" postFractionAlong="0.755383" postSegment="2" postCell="../Golgi_pop1/4/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/0/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="4" synapse="gap_junction04" preFractionAlong="0.572472" preSegment="5" postFractionAlong="0.397685" postSegment="1" postCell="../Golgi_pop1/5/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/0/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="5" synapse="gap_junction05" preFractionAlong="0.421877" preSegment="5" postFractionAlong="0.765874" postSegment="2" postCell="../Golgi_pop1/6/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/0/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="6" synapse="gap_junction06" preFractionAlong="0.802367" preSegment="5" postFractionAlong="0.232900" postSegment="1" postCell="../Golgi_pop1/7/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/0/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="7" synapse="gap_junction07" preFractionAlong="0.220369" preSegment="2" postFractionAlong="0.107405" postSegment="5" postCell="../Golgi_pop1/8/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/0/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="8" synapse="gap_junction08" preFractionAlong="0.020889" preSegment="2" postFractionAlong="0.859944" postSegment="2" postCell="../Golgi_pop1/9/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/0/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="9" synapse="gap_junction09" preFractionAlong="0.396345" preSegment="2" postFractionAlong="0.060797" postSegment="1" postCell="../Golgi_pop1/0/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/1/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="10" synapse="gap_junction010" preFractionAlong="0.954981" preSegment="1" postFractionAlong="0.301844" postSegment="5" postCell="../Golgi_pop1/1/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/1/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="11" synapse="gap_junction011" preFractionAlong="0.760022" preSegment="5" postFractionAlong="0.642254" postSegment="1" postCell="../Golgi_pop1/3/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/1/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="12" synapse="gap_junction012" preFractionAlong="0.195226" preSegment="2" postFractionAlong="0.851046" postSegment="1" postCell="../Golgi_pop1/4/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/1/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="13" synapse="gap_junction013" preFractionAlong="0.072882" preSegment="1" postFractionAlong="0.761996" postSegment="2" postCell="../Golgi_pop1/5/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/1/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="14" synapse="gap_junction014" preFractionAlong="0.232867" preSegment="1" postFractionAlong="0.940249" postSegment="1" postCell="../Golgi_pop1/6/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/1/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="15" synapse="gap_junction015" preFractionAlong="0.717439" preSegment="2" postFractionAlong="0.297041" postSegment="5" postCell="../Golgi_pop1/7/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/1/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="16" synapse="gap_junction016" preFractionAlong="0.173881" preSegment="1" postFractionAlong="0.056187" postSegment="5" postCell="../Golgi_pop1/8/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/1/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="17" synapse="gap_junction017" preFractionAlong="0.033887" preSegment="5" postFractionAlong="0.864428" postSegment="1" postCell="../Golgi_pop1/9/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/1/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="18" synapse="gap_junction018" preFractionAlong="0.223248" preSegment="2" postFractionAlong="0.807811" postSegment="5" postCell="../Golgi_pop1/0/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/2/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="19" synapse="gap_junction019" preFractionAlong="0.417106" preSegment="1" postFractionAlong="0.378241" postSegment="2" postCell="../Golgi_pop1/1/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/2/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="20" synapse="gap_junction020" preFractionAlong="0.149982" preSegment="1" postFractionAlong="0.548998" postSegment="5" postCell="../Golgi_pop1/2/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/2/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="21" synapse="gap_junction021" preFractionAlong="0.436582" preSegment="5" postFractionAlong="0.691928" postSegment="1" postCell="../Golgi_pop1/3/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/2/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="22" synapse="gap_junction022" preFractionAlong="0.976975" preSegment="1" postFractionAlong="0.944212" postSegment="1" postCell="../Golgi_pop1/4/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/2/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="23" synapse="gap_junction023" preFractionAlong="0.417400" preSegment="1" postFractionAlong="0.962374" postSegment="1" postCell="../Golgi_pop1/5/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/2/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="24" synapse="gap_junction024" preFractionAlong="0.296016" preSegment="2" postFractionAlong="0.139396" postSegment="5" postCell="../Golgi_pop1/6/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/2/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="25" synapse="gap_junction025" preFractionAlong="0.959529" preSegment="2" postFractionAlong="0.115258" postSegment="1" postCell="../Golgi_pop1/7/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/2/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="26" synapse="gap_junction026" preFractionAlong="0.743831" preSegment="2" postFractionAlong="0.155356" postSegment="2" postCell="../Golgi_pop1/8/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/2/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="27" synapse="gap_junction027" preFractionAlong="0.224798" preSegment="1" postFractionAlong="0.533032" postSegment="2" postCell="../Golgi_pop1/9/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/2/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="28" synapse="gap_junction028" preFractionAlong="0.080908" preSegment="1" postFractionAlong="0.745439" postSegment="1" postCell="../Golgi_pop1/0/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/3/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="29" synapse="gap_junction029" preFractionAlong="0.923331" preSegment="5" postFractionAlong="0.427567" postSegment="1" postCell="../Golgi_pop1/1/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/3/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="30" synapse="gap_junction030" preFractionAlong="0.890161" preSegment="1" postFractionAlong="0.307449" postSegment="2" postCell="../Golgi_pop1/2/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/3/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="31" synapse="gap_junction031" preFractionAlong="0.768445" preSegment="2" postFractionAlong="0.816634" postSegment="5" postCell="../Golgi_pop1/3/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/3/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="32" synapse="gap_junction032" preFractionAlong="0.229651" preSegment="1" postFractionAlong="0.497656" postSegment="1" postCell="../Golgi_pop1/4/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/3/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="33" synapse="gap_junction033" preFractionAlong="0.575790" preSegment="2" postFractionAlong="0.871570" postSegment="5" postCell="../Golgi_pop1/5/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/3/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="34" synapse="gap_junction034" preFractionAlong="0.360100" preSegment="2" postFractionAlong="0.495517" postSegment="5" postCell="../Golgi_pop1/6/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/3/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="35" synapse="gap_junction035" preFractionAlong="0.236695" preSegment="1" postFractionAlong="0.638351" postSegment="2" postCell="../Golgi_pop1/7/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/3/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="36" synapse="gap_junction036" preFractionAlong="0.358647" preSegment="1" postFractionAlong="0.137856" postSegment="1" postCell="../Golgi_pop1/8/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/3/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="37" synapse="gap_junction037" preFractionAlong="0.520252" preSegment="5" postFractionAlong="0.811425" postSegment="5" postCell="../Golgi_pop1/9/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/3/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="38" synapse="gap_junction038" preFractionAlong="0.453535" preSegment="2" postFractionAlong="0.749406" postSegment="5" postCell="../Golgi_pop1/0/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/4/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="39" synapse="gap_junction039" preFractionAlong="0.104303" preSegment="5" postFractionAlong="0.054265" postSegment="5" postCell="../Golgi_pop1/1/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/4/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="40" synapse="gap_junction040" preFractionAlong="0.676142" preSegment="1" postFractionAlong="0.422659" postSegment="2" postCell="../Golgi_pop1/2/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/4/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="41" synapse="gap_junction041" preFractionAlong="0.927184" preSegment="1" postFractionAlong="0.229769" postSegment="2" postCell="../Golgi_pop1/3/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/4/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="42" synapse="gap_junction042" preFractionAlong="0.627888" preSegment="5" postFractionAlong="0.965917" postSegment="5" postCell="../Golgi_pop1/4/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/4/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="43" synapse="gap_junction043" preFractionAlong="0.627545" preSegment="1" postFractionAlong="0.810061" postSegment="5" postCell="../Golgi_pop1/5/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/4/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="44" synapse="gap_junction044" preFractionAlong="0.501985" preSegment="5" postFractionAlong="0.596396" postSegment="5" postCell="../Golgi_pop1/7/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/4/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="45" synapse="gap_junction045" preFractionAlong="0.551438" preSegment="1" postFractionAlong="0.556373" postSegment="5" postCell="../Golgi_pop1/8/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/4/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="46" synapse="gap_junction046" preFractionAlong="0.977569" preSegment="5" postFractionAlong="0.868427" postSegment="1" postCell="../Golgi_pop1/9/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/4/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="47" synapse="gap_junction047" preFractionAlong="0.088149" preSegment="2" postFractionAlong="0.435666" postSegment="5" postCell="../Golgi_pop1/0/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/5/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="48" synapse="gap_junction048" preFractionAlong="0.989662" preSegment="1" postFractionAlong="0.758882" postSegment="2" postCell="../Golgi_pop1/1/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/5/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="49" synapse="gap_junction049" preFractionAlong="0.410223" preSegment="1" postFractionAlong="0.630626" postSegment="2" postCell="../Golgi_pop1/2/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/5/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="50" synapse="gap_junction050" preFractionAlong="0.215367" preSegment="2" postFractionAlong="0.079254" postSegment="2" postCell="../Golgi_pop1/3/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/5/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="51" synapse="gap_junction051" preFractionAlong="0.280639" preSegment="5" postFractionAlong="0.884905" postSegment="2" postCell="../Golgi_pop1/4/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/5/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="52" synapse="gap_junction052" preFractionAlong="0.469696" preSegment="5" postFractionAlong="0.415310" postSegment="1" postCell="../Golgi_pop1/7/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/5/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="53" synapse="gap_junction053" preFractionAlong="0.185435" preSegment="5" postFractionAlong="0.849590" postSegment="1" postCell="../Golgi_pop1/8/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/5/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="54" synapse="gap_junction054" preFractionAlong="0.698108" preSegment="1" postFractionAlong="0.197155" postSegment="1" postCell="../Golgi_pop1/0/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/6/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="55" synapse="gap_junction055" preFractionAlong="0.393790" preSegment="5" postFractionAlong="0.532833" postSegment="2" postCell="../Golgi_pop1/1/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/6/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="56" synapse="gap_junction056" preFractionAlong="0.120972" preSegment="1" postFractionAlong="0.367345" postSegment="2" postCell="../Golgi_pop1/3/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/6/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="57" synapse="gap_junction057" preFractionAlong="0.896569" preSegment="5" postFractionAlong="0.452452" postSegment="1" postCell="../Golgi_pop1/4/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/6/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="58" synapse="gap_junction058" preFractionAlong="0.067150" preSegment="5" postFractionAlong="0.196343" postSegment="5" postCell="../Golgi_pop1/6/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/6/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="59" synapse="gap_junction059" preFractionAlong="0.286626" preSegment="2" postFractionAlong="0.828555" postSegment="1" postCell="../Golgi_pop1/7/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/6/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="60" synapse="gap_junction060" preFractionAlong="0.325248" preSegment="2" postFractionAlong="0.977412" postSegment="2" postCell="../Golgi_pop1/8/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/6/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="61" synapse="gap_junction061" preFractionAlong="0.981093" preSegment="2" postFractionAlong="0.228101" postSegment="1" postCell="../Golgi_pop1/9/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/6/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="62" synapse="gap_junction062" preFractionAlong="0.815006" preSegment="1" postFractionAlong="0.802584" postSegment="5" postCell="../Golgi_pop1/0/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/7/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="63" synapse="gap_junction063" preFractionAlong="0.343918" preSegment="2" postFractionAlong="0.887803" postSegment="5" postCell="../Golgi_pop1/1/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/7/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="64" synapse="gap_junction064" preFractionAlong="0.423700" preSegment="1" postFractionAlong="0.462520" postSegment="1" postCell="../Golgi_pop1/3/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/7/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="65" synapse="gap_junction065" preFractionAlong="0.911838" preSegment="2" postFractionAlong="0.726672" postSegment="5" postCell="../Golgi_pop1/4/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/7/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="66" synapse="gap_junction066" preFractionAlong="0.768096" preSegment="2" postFractionAlong="0.205589" postSegment="5" postCell="../Golgi_pop1/5/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/7/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="67" synapse="gap_junction067" preFractionAlong="0.065408" preSegment="2" postFractionAlong="0.352383" postSegment="5" postCell="../Golgi_pop1/6/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/7/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="68" synapse="gap_junction068" preFractionAlong="0.445114" preSegment="5" postFractionAlong="0.301791" postSegment="1" postCell="../Golgi_pop1/8/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/7/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="69" synapse="gap_junction069" preFractionAlong="0.061657" preSegment="5" postFractionAlong="0.572460" postSegment="1" postCell="../Golgi_pop1/9/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/7/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="70" synapse="gap_junction070" preFractionAlong="0.308969" preSegment="1" postFractionAlong="0.013202" postSegment="1" postCell="../Golgi_pop1/0/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/8/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="71" synapse="gap_junction071" preFractionAlong="0.005918" preSegment="1" postFractionAlong="0.479657" postSegment="2" postCell="../Golgi_pop1/1/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/8/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="72" synapse="gap_junction072" preFractionAlong="0.269178" preSegment="2" postFractionAlong="0.568591" postSegment="2" postCell="../Golgi_pop1/2/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/8/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="73" synapse="gap_junction073" preFractionAlong="0.892172" preSegment="2" postFractionAlong="0.625008" postSegment="1" postCell="../Golgi_pop1/3/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/8/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="74" synapse="gap_junction074" preFractionAlong="0.274677" preSegment="1" postFractionAlong="0.148631" postSegment="2" postCell="../Golgi_pop1/4/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/8/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="75" synapse="gap_junction075" preFractionAlong="0.545528" preSegment="1" postFractionAlong="0.205206" postSegment="2" postCell="../Golgi_pop1/5/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/8/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="76" synapse="gap_junction076" preFractionAlong="0.077675" preSegment="2" postFractionAlong="0.956548" postSegment="2" postCell="../Golgi_pop1/6/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/8/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="77" synapse="gap_junction077" preFractionAlong="0.712289" preSegment="5" postFractionAlong="0.716233" postSegment="2" postCell="../Golgi_pop1/7/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/8/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="78" synapse="gap_junction078" preFractionAlong="0.126250" preSegment="1" postFractionAlong="0.529656" postSegment="2" postCell="../Golgi_pop1/8/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/8/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="79" synapse="gap_junction079" preFractionAlong="0.443102" preSegment="1" postFractionAlong="0.895408" postSegment="5" postCell="../Golgi_pop1/9/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/8/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="80" synapse="gap_junction080" preFractionAlong="0.496940" preSegment="1" postFractionAlong="0.364182" postSegment="2" postCell="../Golgi_pop1/0/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/9/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="81" synapse="gap_junction081" preFractionAlong="0.226866" preSegment="1" postFractionAlong="0.768689" postSegment="5" postCell="../Golgi_pop1/1/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/9/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="82" synapse="gap_junction082" preFractionAlong="0.876133" preSegment="1" postFractionAlong="0.307734" postSegment="5" postCell="../Golgi_pop1/2/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/9/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="83" synapse="gap_junction083" preFractionAlong="0.409653" preSegment="1" postFractionAlong="0.253771" postSegment="1" postCell="../Golgi_pop1/3/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/9/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="84" synapse="gap_junction084" preFractionAlong="0.593143" preSegment="2" postFractionAlong="0.877992" postSegment="5" postCell="../Golgi_pop1/4/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/9/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="85" synapse="gap_junction085" preFractionAlong="0.927853" preSegment="5" postFractionAlong="0.108767" postSegment="5" postCell="../Golgi_pop1/5/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/9/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="86" synapse="gap_junction086" preFractionAlong="0.177028" preSegment="5" postFractionAlong="0.317582" postSegment="5" postCell="../Golgi_pop1/6/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/9/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="87" synapse="gap_junction087" preFractionAlong="0.380222" preSegment="2" postFractionAlong="0.271660" postSegment="5" postCell="../Golgi_pop1/7/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/9/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="88" synapse="gap_junction088" preFractionAlong="0.364950" preSegment="1" postFractionAlong="0.681122" postSegment="5" postCell="../Golgi_pop1/8/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/9/Very_Simple_Golgi_test_morph"/>
+            <electricalConnectionInstance id="89" synapse="gap_junction089" preFractionAlong="0.003619" preSegment="1" postFractionAlong="0.813399" postSegment="1" postCell="../Golgi_pop1/9/Very_Simple_Golgi_test_morph" preCell="../Golgi_pop0/9/Very_Simple_Golgi_test_morph"/>
+        </electricalProjection>
+        <inputList id="Input_list_Golgi_pop0_0" component="Input_Golgi_pop0_0" population="Golgi_pop0">
+            <input destination="synapses" id="7" target="../Golgi_pop0/7/Very_Simple_Golgi_test_morph"/>
+            <input destination="synapses" id="8" target="../Golgi_pop0/8/Very_Simple_Golgi_test_morph"/>
+            <input destination="synapses" id="1" target="../Golgi_pop0/1/Very_Simple_Golgi_test_morph"/>
+            <input destination="synapses" id="4" target="../Golgi_pop0/4/Very_Simple_Golgi_test_morph"/>
+            <input destination="synapses" id="9" target="../Golgi_pop0/9/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+        <inputList id="Input_list_Golgi_pop0_1" component="Input_Golgi_pop0_1" population="Golgi_pop0">
+            <input destination="synapses" id="7" target="../Golgi_pop0/7/Very_Simple_Golgi_test_morph"/>
+            <input destination="synapses" id="8" target="../Golgi_pop0/8/Very_Simple_Golgi_test_morph"/>
+            <input destination="synapses" id="1" target="../Golgi_pop0/1/Very_Simple_Golgi_test_morph"/>
+            <input destination="synapses" id="4" target="../Golgi_pop0/4/Very_Simple_Golgi_test_morph"/>
+            <input destination="synapses" id="9" target="../Golgi_pop0/9/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+        <inputList id="Input_list_Golgi_pop1_0" component="Input_Golgi_pop1_0" population="Golgi_pop1">
+            <input destination="synapses" id="7" target="../Golgi_pop1/7/Very_Simple_Golgi_test_morph"/>
+            <input destination="synapses" id="8" target="../Golgi_pop1/8/Very_Simple_Golgi_test_morph"/>
+            <input destination="synapses" id="1" target="../Golgi_pop1/1/Very_Simple_Golgi_test_morph"/>
+            <input destination="synapses" id="4" target="../Golgi_pop1/4/Very_Simple_Golgi_test_morph"/>
+            <input destination="synapses" id="9" target="../Golgi_pop1/9/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+        <inputList id="Input_list_Golgi_pop1_1" component="Input_Golgi_pop1_1" population="Golgi_pop1">
+            <input destination="synapses" id="7" target="../Golgi_pop1/7/Very_Simple_Golgi_test_morph"/>
+            <input destination="synapses" id="8" target="../Golgi_pop1/8/Very_Simple_Golgi_test_morph"/>
+            <input destination="synapses" id="1" target="../Golgi_pop1/1/Very_Simple_Golgi_test_morph"/>
+            <input destination="synapses" id="4" target="../Golgi_pop1/4/Very_Simple_Golgi_test_morph"/>
+            <input destination="synapses" id="9" target="../Golgi_pop1/9/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+    </network>
+</neuroml>
