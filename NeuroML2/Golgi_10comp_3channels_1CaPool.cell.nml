@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2  https://raw.githubusercontent.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2beta4.xsd" 
+         id="Golgi_10comp_3channels_1CaPool">
+
+    
+    
+      <include href="Golgi_NaT.channel.nml"/>
+      <include href="Golgi_KV.channel.nml"/>
+      <include href="LeakCond.channel.nml"/>
+      
+
+
+    <cell id="Golgi_10comp_3channels_1CaPool">
+
+        <notes> 10 compartment Golgi cell in NeuroML2 based on https://github.com/epiasini/GJGolgi_ReducedMorph/blob/master/neuroConstruct/morphologies/GJGolgi_Reduced.nml1. For segments 1,2,7 and 8 original NeuroML1 version contains fractionAlong=0.5. However, currently it is not implemented in NeuroML2:
+org.neuroml.model.util.NeuroMLException: Cannot yet handle fractionAlong being neither 0 or 1 </notes>
+
+        <morphology id="morphology_Simple_CML_test">
+
+                <segment id="0" name="Soma">
+                    <proximal x="0.0" y="0.0" z="0.0" diameter="20.0"/>
+                    <distal x="0.0" y="0.0" z="0.0" diameter="20.0"/>
+                </segment>
+
+                <segment id="1" name="Dend_ap_1_1">
+                    <parent segment="0" fractionAlong="0"/>
+                    <proximal x="0.0" y="0.0" z="0.0" diameter="1.1"/>
+                    <distal x="-50.0" y="50.0" z="0.0" diameter="0.9"/>
+                </segment>
+
+                <segment id="2" name="Dend_ap_2_1" >
+                    <parent segment="0" fractionAlong="0"/>
+                    <proximal x="0.0" y="0.0" z="0.0" diameter="1.1"/>
+                    <distal x="50.0" y="50.0" z="0.0" diameter="0.9"/>
+                </segment>
+
+                <segment id="3" name="Dend_ap_2_2">
+                   <parent segment="4" fractionAlong="0"/>
+                  <proximal x="50.0" y="50.0" z="0.0" diameter="0.9"/>
+                  <distal x="100.0" y="100.0" z="0.0" diameter="0.7"/>
+                </segment>
+
+                <segment id="4" name="Dend_ap_2_3" >
+                    <parent segment="5" fractionAlong="0"/>
+                    <proximal x="100.0" y="100.0" z="0.0" diameter="0.7"/>
+                    <distal x="150.0" y="150.0" z="0.0" diameter="0.7"/>
+                </segment>
+
+                <segment id="5" name="Dend_ap_1_2" >
+                    <parent segment="3" fractionAlong="0"/>
+                    <proximal x="-50.0" y="50.0" z="0.0" diameter="0.9"/>
+                    <distal x="-100.0" y="100.0" z="0.0" diameter="0.7"/>
+                </segment>
+
+                <segment id="6" name="Dend_ap_1_3">
+                    <parent segment="7" fractionAlong="0"/>
+                    <proximal x="-100.0" y="100.0" z="0.0" diameter="0.7"/>
+                    <distal x="-150.0" y="150.0" z="0.0" diameter="0.7"/>
+                </segment>
+
+                <segment id="7" name="Dend_bl_1">
+                    <parent segment="0" fractionAlong="0"/>
+                    <proximal x="0.0" y="0.0" z="0.0" diameter="1.0"/>
+                    <distal x="30.0" y="-20.0" z="0.0" diameter="1.0"/>
+                </segment>
+
+                <segment id="8" name="Dend_bl_2">
+                    <parent segment="0" fractionAlong="0"/>
+                    <proximal x="0.0" y="0.0" z="0.0" diameter="1.0"/>
+                    <distal x="-30.0" y="-20.0" z="0.0" diameter="1.0"/>
+                </segment>
+
+                <segment id="9" name="Axon">
+                    <parent segment="0" fractionAlong="0"/>
+                    <proximal x="0.0" y="0.0" z="0.0" diameter="1.4"/>
+                    <distal x="0.0" y="-200.0" z="0.0" diameter="1.4"/>
+                </segment>
+
+                
+           
+            <segmentGroup id="Soma" neuroLexId="sao864921383">    <!--
+                This group contains an unbranched set of segments, and all of the segmentGroups marked with
+                neuroLexId = sao864921383 form a non-overlapping set of all of the segments. 
+                These segmentGroups correspond to the 'cables' of NeuroML v1.8.1. -->
+
+                <member segment="0"/>
+            </segmentGroup>
+
+            <segmentGroup id="Dend_ap_1_first" neuroLexId="sao864921383">    <!--
+                This group contains an unbranched set of segments, and all of the segmentGroups marked with
+                neuroLexId = sao864921383 form a non-overlapping set of all of the segments. 
+                These segmentGroups correspond to the 'cables' of NeuroML v1.8.1. -->
+
+                <!--This 'Section' has number of internal divisions (nseg) = 10-->
+
+                <property tag="numberInternalDivisions" value="100"/>
+
+                <member segment="1"/>
+            </segmentGroup>
+
+            <segmentGroup id="Dend_ap_2_first" neuroLexId="sao864921383">    <!--
+                This group contains an unbranched set of segments, and all of the segmentGroups marked with
+                neuroLexId = sao864921383 form a non-overlapping set of all of the segments. 
+                These segmentGroups correspond to the 'cables' of NeuroML v1.8.1. -->
+
+                <!--This 'Section' has number of internal divisions (nseg) = 10-->
+
+                <property tag="numberInternalDivisions" value="100"/>
+
+                <member segment="2"/>
+            </segmentGroup>
+
+            <segmentGroup id="Dend_ap_2_second" neuroLexId="sao864921383">    <!--
+                This group contains an unbranched set of segments, and all of the segmentGroups marked with
+                neuroLexId = sao864921383 form a non-overlapping set of all of the segments. 
+                These segmentGroups correspond to the 'cables' of NeuroML v1.8.1. -->
+
+                <!--This 'Section' has number of internal divisions (nseg) = 10-->
+
+                <property tag="numberInternalDivisions" value="100"/>
+
+                <member segment="3"/>
+            </segmentGroup>
+
+            <segmentGroup id="Dend_ap_2_third" neuroLexId="sao864921383">    <!--
+                This group contains an unbranched set of segments, and all of the segmentGroups marked with
+                neuroLexId = sao864921383 form a non-overlapping set of all of the segments. 
+                These segmentGroups correspond to the 'cables' of NeuroML v1.8.1. -->
+
+                <!--This 'Section' has number of internal divisions (nseg) = 100-->
+
+                <property tag="numberInternalDivisions" value="100"/>
+
+                <member segment="4"/>
+            </segmentGroup>
+ 
+            
+            <segmentGroup id="Dend_ap_1_second" neuroLexId="sao864921383">    <!--
+                This group contains an unbranched set of segments, and all of the segmentGroups marked with
+                neuroLexId = sao864921383 form a non-overlapping set of all of the segments. 
+                These segmentGroups correspond to the 'cables' of NeuroML v1.8.1. -->
+
+                <!--This 'Section' has number of internal divisions (nseg) = 100-->
+
+                <property tag="numberInternalDivisions" value="100"/>
+
+                <member segment="5"/>
+            </segmentGroup>
+
+            <segmentGroup id="Dend_ap_1_third" neuroLexId="sao864921383">    <!--
+                This group contains an unbranched set of segments, and all of the segmentGroups marked with
+                neuroLexId = sao864921383 form a non-overlapping set of all of the segments. 
+                These segmentGroups correspond to the 'cables' of NeuroML v1.8.1. -->
+
+                <!--This 'Section' has number of internal divisions (nseg) = 100-->
+
+                <property tag="numberInternalDivisions" value="100"/>
+
+                <member segment="6"/>
+            </segmentGroup>
+
+            
+          
+             <segmentGroup id="Dend_bl_1_first" neuroLexId="sao864921383">    <!--
+                This group contains an unbranched set of segments, and all of the segmentGroups marked with
+                neuroLexId = sao864921383 form a non-overlapping set of all of the segments. 
+                These segmentGroups correspond to the 'cables' of NeuroML v1.8.1. -->
+
+                <!--This 'Section' has number of internal divisions (nseg) = 100-->
+
+                <property tag="numberInternalDivisions" value="100"/>
+
+                <member segment="7"/>
+            </segmentGroup>
+          
+
+             <segmentGroup id="Dend_bl_2_first" neuroLexId="sao864921383">    <!--
+                This group contains an unbranched set of segments, and all of the segmentGroups marked with
+                neuroLexId = sao864921383 form a non-overlapping set of all of the segments. 
+                These segmentGroups correspond to the 'cables' of NeuroML v1.8.1. -->
+
+                <!--This 'Section' has number of internal divisions (nseg) = 100-->
+
+                <property tag="numberInternalDivisions" value="100"/>
+
+                <member segment="8"/>
+            </segmentGroup>
+          
+             
+             <segmentGroup id="only_axon" neuroLexId="sao864921383">    <!--
+                This group contains an unbranched set of segments, and all of the segmentGroups marked with
+                neuroLexId = sao864921383 form a non-overlapping set of all of the segments. 
+                These segmentGroups correspond to the 'cables' of NeuroML v1.8.1. -->
+
+                <!--This 'Section' has number of internal divisions (nseg) = 100-->
+
+                <property tag="numberInternalDivisions" value="100"/>
+
+                <member segment="9"/>
+            </segmentGroup>
+          
+            <segmentGroup id="all">
+                <include segmentGroup="Soma"/>
+                <include segmentGroup="Dend_ap_1_first"/>
+                <include segmentGroup="Dend_ap_2_first"/>
+                <include segmentGroup="Dend_ap_2_second"/>
+                <include segmentGroup="Dend_ap_2_third"/>
+                <include segmentGroup="Dend_ap_1_second"/>
+                <include segmentGroup="Dend_ap_1_third"/>
+                <include segmentGroup="Dend_bl_1_first"/>
+                <include segmentGroup="Dend_bl_2_first"/>
+                <include segmentGroup="only_axon"/>
+            </segmentGroup>
+
+            <segmentGroup id="soma_group" neuroLexId="GO:0043025">    <!--Soma group-->
+
+                <include segmentGroup="Soma"/>
+            </segmentGroup>
+
+            <segmentGroup id="apical_dendrite_group" neuroLexId="GO:0030425">    <!--Dendrite group-->
+
+                <include segmentGroup="Dend_ap_1_first"/>
+                <include segmentGroup="Dend_ap_2_first"/>
+                <include segmentGroup="Dend_ap_2_second"/>
+                <include segmentGroup="Dend_ap_2_third"/>   
+                <include segmentGroup="Dend_ap_1_second"/>
+                <include segmentGroup="Dend_ap_1_third"/>
+            </segmentGroup>
+
+
+            <segmentGroup id="basal_dendrite_group" neuroLexId="GO:0030425">    <!--Dendrite group-->
+
+                <include segmentGroup="Dend_bl_1_first"/>
+                <include segmentGroup="Dend_bl_2_first"/>
+            </segmentGroup>
+             
+
+            <segmentGroup id="axon_group" neuroLexId="GO:0030424">    <!--Axon group-->
+
+                <include segmentGroup="only_axon"/>
+            </segmentGroup>
+
+            
+        </morphology> 
+
+            <!--Adding the biophysical parameters-->
+
+        <biophysicalProperties id="biophys">
+
+            <membraneProperties>
+                
+                <channelDensity condDensity="0.021 mS_per_cm2" id="LeakCond_all" ionChannel="LeakCond" erev="-55.0 mV" ion="non_specific"/>
+                
+                
+                <channelDensity condDensity="48.0 mS_per_cm2" id="Na_all" ionChannel="Golgi_NaT" ion="na" erev="87.39 mV" segmentGroup="soma_group"/>
+
+                
+              <channelDensity condDensity="32.0 mS_per_cm2" id="KV_all" ionChannel="Golgi_KV" ion="k" erev="-84.69 mV" segmentGroup="soma_group"/>
+
+
+                <spikeThresh value="0 mV"/>
+
+                <specificCapacitance value="1 uF_per_cm2"/>
+
+                <initMembPotential value="-65.0 mV"/>
+
+            </membraneProperties>
+
+         
+
+         
+           <intracellularProperties>
+
+
+                <resistivity value="0.1 kohm_cm"/>
+
+            </intracellularProperties>
+
+
+
+
+       </biophysicalProperties>
+
+    </cell>
+    
+    
+
+  </neuroml>
+

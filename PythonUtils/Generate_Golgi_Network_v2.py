@@ -42,7 +42,7 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
         for unique_cell in unique_cell_names:
             if 'networkDir' in simulation_parameters and 'parentDirRequired' in simulation_parameters:
                if simulation_parameters['parentDirRequired'] and (simulation_parameters['networkDir']=="example" or simulation_parameters['networkDir']=="experiment"):
-                  include_cell=neuroml.IncludeType(href="../../../"+"%s.cell.nml"%unique_cell)
+                  include_cell=neuroml.IncludeType(href="/../../../"+"%s.cell.nml"%unique_cell)
             else:
                include_cell=neuroml.IncludeType(href="%s.cell.nml"%unique_cell)
 
@@ -181,7 +181,7 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
                    print cell_position_array[cell_array[cell_pop]['popID']][cell,0], cell_position_array[cell_array[cell_pop]['popID']][cell,1], cell_position_array[cell_array[cell_pop]['popID']][cell,2]
                net.populations.append(golgi_pop)
            Note_string=Note_string+"%s"%location_array+"\n"
-           
+   
         ##### include cell_array into notes once the final pop sizes are known
         Note_string=Note_string+"Population parameters:"+"\n"
         for cell_pop in range(0,len(cell_array)):
@@ -350,7 +350,7 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
         for unique_synapse in unique_synapse_names:
             if 'networkDir' in simulation_parameters and 'parentDirRequired' in simulation_parameters:
                if simulation_parameters['parentDirRequired'] and ( simulation_parameters['networkDir']=="example" or simulation_parameters['networkDir']=="experiment"):
-                  include_synapse=neuroml.IncludeType(href="../../../"+"%s.synapse.nml"%unique_synapse)
+                  include_synapse=neuroml.IncludeType(href="/../../../"+"%s.synapse.nml"%unique_synapse)
             else:
                include_synapse=neuroml.IncludeType(href="%s.synapse.nml"%unique_synapse)
             nml_doc.includes.append(include_synapse)
@@ -361,10 +361,10 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
 
            if 'networkDir' in simulation_parameters:
                if  simulation_parameters['networkDir']=="example":
-                   nml_file =simulation_parameters['parentDir']+"/NeuroML2/NML2_LEMS_Net_Examples/"+simulation_parameters['experimentID']+"/"+"sim%d"%simulation_parameters['simID']+"/"+'%s.net.nml'%ref
+                   nml_file_dir =simulation_parameters['parentDir']+"/NeuroML2/NML2_LEMS_Net_Examples/"+simulation_parameters['experimentID']+"/"+"sim%d"%simulation_parameters['simID']+"/"+'%s.net.nml'%ref
                    path=simulation_parameters['parentDir']+"/NeuroML2/NML2_LEMS_Net_Examples/"+simulation_parameters['experimentID']+"/"+"sim%d"%simulation_parameters['simID']
                if simulation_parameters['networkDir']=="experiment":
-                  nml_file =simulation_parameters['parentDir']+"/NeuroML2/NML2_LEMS_Experiments/"+simulation_parameters['experimentID']+"/"+"sim%d"%simulation_parameters['simID']+"/"+'%s.net.nml'%ref
+                  nml_file_dir =simulation_parameters['parentDir']+"/NeuroML2/NML2_LEMS_Experiments/"+simulation_parameters['experimentID']+"/"+"sim%d"%simulation_parameters['simID']+"/"+'%s.net.nml'%ref
                   path=simulation_parameters['parentDir']+"/NeuroML2/NML2_LEMS_Experiments/"+simulation_parameters['experimentID']+"/"+"sim%d"%simulation_parameters['simID']
 
         
@@ -372,21 +372,25 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
                if not os.path.exists(path):
                   os.makedirs(path)
         else:
-           nml_file ='%s.net.nml'%ref
+           nml_file_dir ='%s.net.nml'%ref
         
-        writers.NeuroMLWriter.write(nml_doc,nml_file)
+        writers.NeuroMLWriter.write(nml_doc,nml_file_dir)
 
-        print("Written network file to: "+nml_file)
+
+        nml_file='%s.net.nml'%ref
+
+        print("Written network file to: "+nml_file_dir)
     
         ###### Validate the NeuroML2 ######   
 
-        validate_neuroml2(nml_file)
+        validate_neuroml2(nml_file_dir)
 
         sim_info_array={}
         sim_info_array['ref']=ref
         sim_info_array['netID']=net.id
         sim_info_array['simParams']=simulation_parameters
         sim_info_array['nmlFile']=nml_file
+        sim_info_array['nmlPath']=path
 
         cell_info_array={}
         cell_info_array['popParams']=cell_array
@@ -399,7 +403,7 @@ def generate_LEMS_and_run(sim_array,pop_array):
         net_id=sim_array['netID']
         simulation_parameters=sim_array['simParams']
         nml_file=sim_array['nmlFile']
-        print nml_file
+        path=sim_array['nmlPath']
 
         cell_array=pop_array['popParams']
         
@@ -412,7 +416,7 @@ def generate_LEMS_and_run(sim_array,pop_array):
     
         ls.assign_simulation_target(net_id)
         print simulation_parameters['parentDir']
-        ls.include_neuroml2_file("../../../../"+nml_file)
+        ls.include_neuroml2_file(nml_file,True,path)
         #ls.include_neuroml2_file("/home/rokas/Golgi_network_2016/NeuroML2/Very_Simple_Golgi_test_morph.cell.nml")
         
 
@@ -447,28 +451,37 @@ def generate_LEMS_and_run(sim_array,pop_array):
 	# save LEMS file
         if simulation_parameters['parentDirRequired']:
            if simulation_parameters['networkDir']=="example":
-              lems_file_name = ls.save_to_file(simulation_parameters['parentDir']+"/NeuroML2/NML2_LEMS_Net_Examples/"+simulation_parameters['experimentID']+"/"+"sim%d"%simulation_parameters['simID']+"/"+"LEMS_%s.xml"%ref)
+              lems_file_name_dir=simulation_parameters['parentDir']+"/NeuroML2/NML2_LEMS_Net_Examples/"+simulation_parameters['experimentID']+"/"+"sim%d"%simulation_parameters['simID']+"/"+"LEMS_%s.xml"%ref
+              lems_file_name = ls.save_to_file(lems_file_name_dir)
+              
 
            if simulation_parameters['networkDir']=="experiment":
-              lems_file_name = ls.save_to_file(simulation_parameters['parentDir']+"/NeuroML2/NML2_LEMS_Experiments/"+simulation_parameters['experimentID']+"/"+"sim%d"%simulation_parameters['simID']+"/"+"LEMS_%s.xml"%ref)
+              lems_file_name_dir=simulation_parameters['parentDir']+"/NeuroML2/NML2_LEMS_Experiments/"+simulation_parameters['experimentID']+"/"+"sim%d"%simulation_parameters['simID']+"/"+"LEMS_%s.xml"%ref
+              lems_file_name = ls.save_to_file(lems_file_name_dir)
         else:
            lems_file_name = ls.save_to_file()
+           lems_file_name_dir="LEMS_%s.xml"%ref
+
         if simulation_parameters['plotSpecifier']:
            if simulation_parameters['simulator']=="jNeuroML":
+              print("Finished building a network. Starts running a simulation with jNeuroML for %s"%lems_file_name_dir)
 	      results1 = pynml.run_lems_with_jneuroml(lems_file_name, nogui=True, load_saved_data=True, plot=True)
-              print("Finished building network and running simulation with jNeuroML")
+              print("Finished running simulation with jNeuroML")
            elif simulation_parameters['simulator']=="jNeuroML_NEURON":
+              print("Finished building a network. Starts running a simulation with NEURON for %s"%lems_file_name_dir)
               results1 = pynml.run_lems_with_jneuroml_neuron(lems_file_name, nogui=True, load_saved_data=True, plot=True)
-              print("Finished building a network and running simulation with jNeuroML_NEURON")
+              print("Finished running simulation with jNeuroML_NEURON")
            else:
               print("Finished building a network")
         else:
            if simulation_parameters['simulator']=="jNeuroML":
+              print("Finished building a network. Starts running a simulation with jNeuroML for %s"%lems_file_name_dir)
 	      results1 = pynml.run_lems_with_jneuroml(lems_file_name, nogui=True, load_saved_data=False, plot=False)
-              print("Finished building a network and running simulation with jNeuroML")
+              print("Finished running simulation with jNeuroML")
            elif simulation_parameters['simulator']=="jNeuroML_NEURON":
+              print("Finished building a network. Starts running a simulation with NEURON for %s"%lems_file_name_dir)
               results1 = pynml.run_lems_with_jneuroml_neuron(lems_file_name, nogui=True, load_saved_data=False, plot=False)
-              print("Finished building a network and running simulation with jNeuroML_NEURON")
+              print("Finished running simulation with jNeuroML_NEURON")
            else:
               print("Finished building a network")
          
