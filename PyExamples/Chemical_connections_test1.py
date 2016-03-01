@@ -14,11 +14,10 @@ if __name__ == "__main__":
     net_params_multiple['experiment1']['popParams']=[]
     net_params_multiple['experiment1']['popParams'].append({'popID':'Golgi_pop0','cellType':"Very_Simple_Golgi_test_morph",'size':15})
     net_params_multiple['experiment1']['popParams'].append({'popID':'Golgi_pop1','cellType':"Very_Simple_Golgi_test_morph",'size':15})
-    net_params_multiple['experiment1']['distributionParams']={}
-    net_params_multiple['experiment1']['distributionParams']['distributionModel']="random no overlap"
-    net_params_multiple['experiment1']['distributionParams']['xDim']=100
-    net_params_multiple['experiment1']['distributionParams']['yDim']=100
-    net_params_multiple['experiment1']['distributionParams']['yDim']=100
+    net_params_test_2010_multiple['experiment1']['distributionParams']={}
+    net_params_test_2010_multiple['experiment1']['distributionParams']['populationList']=[]
+    net_params_test_2010_multiple['experiment1']['distributionParams']['populationList'].append({'popID':'Golgi_pop0','distributionModel':'explicit_cell_numbers','distanceModel':'random_minimal_distance','minimal_distance':25,'xDim':100,'yDim':100,'zDim':100})
+    net_params_test_2010_multiple['experiment1']['distributionParams']['populationList'].append({'popID':'Golgi_pop1','distributionModel':'explicit_cell_numbers','distanceModel':'random_minimal_distance','minimal_distance':25,'xDim':100,'yDim':100,'zDim':100})
     net_params_multiple['experiment1']['connParams']={}
     net_params_multiple['experiment1']['connParams']['populationPairs']=[]
     net_params_multiple['experiment1']['connParams']['populationPairs'].append({'electricalConnModel':"explicit_connection_probabilities",'prePopID':'Golgi_pop0',\
@@ -32,6 +31,7 @@ if __name__ == "__main__":
 
 
     #############
+    ##### not yet tested
     #below lines to make a reference template for the chemical connections:
     # net_params_test_2012_multiple['experiment1']['connParams']['populationPairs'].append({'chemicalConnModel':"explicit_connection_probabilities",\
         #'prePopID':'Golgi_pop1','postPopID':'Golgi_pop2','synapse':'Golgi_to_gran_cell','connProb_from_PreCell_to_PostCell':0.5,'number_of_PostCellSynapses_per_PreCell':1,\
@@ -51,12 +51,7 @@ if __name__ == "__main__":
 
 
     # 'maximalConnDistance' can also be included
-    ##############
-
-
-
-
-    
+    ############## 
     
     net_params_multiple['experiment1']['inputParams']=[]
     inputGroups_pop0_exp1=[]
@@ -98,11 +93,10 @@ if __name__ == "__main__":
     net_params_multiple['experiment2']['popParams'].append({'popID':'Golgi_pop0','cellType':"Very_Simple_Golgi_test_morph",'size':15})
     net_params_multiple['experiment2']['popParams'].append({'popID':'Golgi_pop1','cellType':"Very_Simple_Golgi_test_morph",'size':15})
     
-    net_params_multiple['experiment2']['distributionParams']={}
-    net_params_multiple['experiment2']['distributionParams']['distributionModel']="random no overlap"
-    net_params_multiple['experiment2']['distributionParams']['xDim']=100
-    net_params_multiple['experiment2']['distributionParams']['yDim']=100
-    net_params_multiple['experiment2']['distributionParams']['yDim']=100
+    net_params_test_2010_multiple['experiment2']['distributionParams']={}
+    net_params_test_2010_multiple['experiment2']['distributionParams']['populationList']=[]
+    net_params_test_2010_multiple['experiment2']['distributionParams']['populationList'].append({'popID':'Golgi_pop0','distributionModel':'explicit_cell_numbers','distanceModel':'random_minimal_distance','minimal_distance':25,'xDim':100,'yDim':100,'zDim':100})
+    net_params_test_2010_multiple['experiment2']['distributionParams']['populationList'].append({'popID':'Golgi_pop1','distributionModel':'explicit_cell_numbers','distanceModel':'random_minimal_distance','minimal_distance':25,'xDim':100,'yDim':100,'zDim':100})
     
     net_params_multiple['experiment2']['connParams']={}
     net_params_multiple['experiment2']['connParams']['populationPairs']=[]

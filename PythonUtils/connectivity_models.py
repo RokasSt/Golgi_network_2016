@@ -77,10 +77,18 @@ def Vervaeke_2012_AND_explicit_conn_prob_model(pair_id,projection_id,prePop,preP
     spatial_scale=1
     if 'spatialScale' in connectivity_parameters:
        spatial_scale=connectivity_parameters['spatialScale']
+
+    one_population=False
+    if prePop==postPop:
+       one_population=True
                                     
     for Pre_cell in range(0,prePopSize):
-        for Post_cell in range(0,postPopSize):
-                       
+        if one_population:
+           post_index_array=range(0,postPopSize)
+           post_index_array.remove(Pre_cell)
+        else:
+           post_index_array=range(0,postPopSize)
+        for Post_cell in post_index_array:        
             if connectivity_parameters['electricalConnModel']=="explicit_connection_probabilities":
                connection_probability=connectivity_parameters['connProbability']
                           
@@ -212,9 +220,18 @@ connectivity_parameters['prePoptargetGroup']['segmentGroupList']])
        if spatial_scale != 1:
                      
           make_conductance_array_no_spatial_scale=True
-                                 
+    
+    one_population=False
+    if prePop==postPop:
+       one_population=True
+                          
     for Pre_cell in range(0,prePopSize):
-        for Post_cell in range(0,postPopSize):
+        if one_population:
+           post_index_array=range(0,postPopSize)
+           post_index_array.remove(Pre_cell)
+        else:
+           post_index_array=range(0,postPopSize)
+        for Post_cell in post_index_array:
                                                         
             distance_between_cells=distance(pre_cell_positions[Pre_cell],post_cell_positions[Post_cell])/spatial_scale
 
@@ -333,6 +350,10 @@ def chemical_connection_model(pair_id,projection_id,prePop,prePop_listIndex,preP
     gapJ_object_array=[]
     gap_counter=0
     #######
+    one_population=False
+    if prePop==postPop:
+       one_population=True
+
     if connectivity_parameters['targetingModelprePop']['model']=="segment groups and segments":
        pre_pop_target_segment_array=extract_morphology_information([preCellTypeFile],{preCellTypeFile:preNML2Type},\
                                                                                           ["segment groups",  \
@@ -364,7 +385,11 @@ def chemical_connection_model(pair_id,projection_id,prePop,prePop_listIndex,preP
        connection_probability=connectivity_parameters['connProb_from_PreCell_to_PostCell']   
                           
        for Pre_cell in range(0,prePopSize):
-
+           if one_population:
+              post_index_array=range(0,postPopSize)
+              post_index_array.remove(Pre_cell)
+           else:
+              post_index_array=range(0,postPopSize)
            
 
            if connectivity_parameters['targetingModelprePop']['model']=="segment groups and segments":
@@ -378,7 +403,7 @@ connectivity_parameters['targetingModelprePop']['segmentGroupProbabilities']],no
  connectivity_parameters['targetingModelprePop']['segmentProbabilities'],connectivity_parameters['targetingModelprePop']['fractionAlongANDsubsegProbabilities']],\
                                        no_of_Synapses_Onto_TargetCell)
 
-           for Post_cell in range(0,postPopSize):
+           for Post_cell in post_index_array:
                           
                if random.random() < connection_probability:
                   
@@ -429,10 +454,17 @@ connectivity_parameters['targetingModelprePop']['segmentGroupProbabilities']],no
     if connectivity_parameters['chemicalConnModel']=="fixedNo_of_PostTargetCells":  
                           
        for Pre_cell in range(0,prePopSize):
+           if one_population:
+              post_index_array=range(0,postPopSize)
+              post_index_array.remove(Pre_cell)
+           else:
+              post_index_array=range(0,postPopSize)
+
+
 
            if connectivity_parameters['chooseTargetMode']=='random':
   
-              randomly_selected_target_cells=random.sample(range(postPopSize),int(round(connectivity_parameters['number_of_PostTargetCells_per_PreCell'])))
+              randomly_selected_target_cells=random.sample(range(post_index_array),int(round(connectivity_parameters['number_of_PostTargetCells_per_PreCell'])))
               
            ###### other chooseTargetModes can be added in the future
 
@@ -496,6 +528,12 @@ connectivity_parameters['targetingModelprePop']['segmentGroupProbabilities']],no
     if connectivity_parameters['chemicalConnModel']=="variableNo_of_PostTargetCells":  
                           
        for Pre_cell in range(0,prePopSize):
+           if one_population:
+              post_index_array=range(0,postPopSize)
+              post_index_array.remove(Pre_cell)
+           else:
+              post_index_array=range(0,postPopSize)
+
 
            if connectivity_parameters['targetNoModel']['modelType']=='binomial':
 
@@ -507,7 +545,7 @@ connectivity_parameters['targetingModelprePop']['segmentGroupProbabilities']],no
               
            if connectivity_parameters['chooseTargetMode']=='random':
   
-              randomly_selected_target_cells=random.sample(range(postPopSize),int(round(no_of_targets)))
+              randomly_selected_target_cells=random.sample(post_index_array,int(round(no_of_targets)))
               
            ###### other chooseTargetModes can be added in the future
 

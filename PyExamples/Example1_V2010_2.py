@@ -22,10 +22,9 @@ if __name__ == "__main__":
     net_params_test_2010_multiple['experiment1']['popParams'].append({'popID':'Golgi_pop1','cellType':"Golgi_10comp_3channels_1CaPool",'size':10})
 
     net_params_test_2010_multiple['experiment1']['distributionParams']={}
-    net_params_test_2010_multiple['experiment1']['distributionParams']['distributionModel']="random_no_overlap"
-    net_params_test_2010_multiple['experiment1']['distributionParams']['xDim']=100
-    net_params_test_2010_multiple['experiment1']['distributionParams']['yDim']=100
-    net_params_test_2010_multiple['experiment1']['distributionParams']['zDim']=100
+    net_params_test_2010_multiple['experiment1']['distributionParams']['populationList']=[]
+    net_params_test_2010_multiple['experiment1']['distributionParams']['populationList'].append({'popID':'Golgi_pop0','distributionModel':'explicit_cell_numbers','distanceModel':'random_no_overlap','xDim':100,'yDim':100,'zDim':100})
+    net_params_test_2010_multiple['experiment1']['distributionParams']['populationList'].append({'popID':'Golgi_pop1','distributionModel':'explicit_cell_numbers','distanceModel':'random_no_overlap','xDim':100,'yDim':100,'zDim':100})
 
    
     net_params_test_2010_multiple['experiment1']['connParams']={}
@@ -61,11 +60,10 @@ if __name__ == "__main__":
     net_params_test_2010_multiple['experiment2']['popParams'].append({'popID':'Golgi_pop0','cellType':"Golgi_10comp_3channels_1CaPool",'size':10})
     net_params_test_2010_multiple['experiment2']['popParams'].append({'popID':'Golgi_pop1','cellType':"Golgi_10comp_3channels_1CaPool",'size':10})
 
-    net_params_test_2010_multiple['experiment2']['distributionParams']={}
-    net_params_test_2010_multiple['experiment2']['distributionParams']['distributionModel']="random_no_overlap"
-    net_params_test_2010_multiple['experiment2']['distributionParams']['xDim']=100
-    net_params_test_2010_multiple['experiment2']['distributionParams']['yDim']=100
-    net_params_test_2010_multiple['experiment2']['distributionParams']['zDim']=100
+    net_params_test_2010_multiple['experiment1']['distributionParams']={}
+    net_params_test_2010_multiple['experiment1']['distributionParams']['populationList']=[]
+    net_params_test_2010_multiple['experiment1']['distributionParams']['populationList'].append({'popID':'Golgi_pop0','distributionModel':'explicit_cell_numbers','distanceModel':'random_no_overlap','xDim':100,'yDim':100,'zDim':100})
+    net_params_test_2010_multiple['experiment1']['distributionParams']['populationList'].append({'popID':'Golgi_pop1','distributionModel':'explicit_cell_numbers','distanceModel':'random_no_overlap','xDim':100,'yDim':100,'zDim':100})
 
     ##### as conductance levels are soma-to-soma distance-dependent in a Vervaeke_2010_based model, subcellular targeting is not implemented in this configuration. If   one wants to specify multiple GJs per cell pair with constant or heterogeneous conductances one can use Vervaeke_2012_based connModel
     net_params_test_2010_multiple['experiment2']['connParams']={}

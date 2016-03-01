@@ -93,17 +93,7 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
 	Note_string=Note_string+"Cell distribution parameters:\n"
 	
         no_density_model=True
-        #################  
-         ##### below lines to make a reference template for the density based model:
-    #   net_params_test_2010_multiple['experiment1']['distributionParams']={}
-    #   net_params_test_2010_multiple['experiment1']['distributionParams']['distributionModel']="density based"
-    #   net_params_test_2010_multiple['experiment1']['distributionParams']['populationList']=[]
-    #   net_params_test_2010_multiple['experiment1']['distributionParams']['populationList'].append({'distributionModel':"density_profile_based",'popID':'Golgi_pop0','densityFilePath':'/home/rokas/Golgi_data/GlyT2 density matrix of shape 35 152.txt',\
-    #   'planeDimensions':{'dim1':'x','dim2':'z'},'dim1CoordinateVector':[1300,1500],'dim2CoordinateVector':[0,50],'distanceModel':'minimal_distance',\
-    #   'minimalDistance':25})
-    #   net_params_test_2010_multiple['experiment1']['distributionParams']['populationList'].append({'distributionModel':"density_profile_based",'popID':'Golgi_pop1','densityFilePath':'/home/rokas/Golgi_data/GlyT2 density matrix of shape 35 152.txt',\
-    #   'planeDimensions':{'dim1':'x','dim2':'z'},'dim1CoordinateVector':[1300,1500],'dim2CoordinateVector':[0,50],'dim3':'y','dim3Boundary':200,\
-    #   'distanceModel':'minimal_distance/random/random_no_overlap','minimalDistance':25,'canonicalVolumeBaseArea':54})
+        ################# 
         for pop in range(0,len(location_array['populationList'])):
             Note_string=Note_string+"%s\n"%location_array['populationList'][pop]
             if location_array['populationList'][pop]['distanceModel']=="random_no_overlap":
@@ -140,15 +130,68 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
             if location_array['populationList'][pop]['distanceModel']=="random_minimal_disance":
 
                if location_array['populationList'][pop]['distributionModel']=="density_profile":
-                       
+
+                  location_parameters=location_array['populationList'][pop]
+                  golgi_pop_object=neuroml_Golgi_pop_array[location_parameters['popID']]
+                  pop_position_array, total_no_of_cells,Golgi_pop=density_model(pop,location_parameters,golgi_pop_object,cell_position_array,cell_array,seed)
+
+                  cell_array[pop]['size']=total_no_of_cells
+
+                  cell_position_array[cell_array[pop]['popID']]=np.vstack((cell_position_array[cell_array[pop]['popID']],pop_position_array))
+          
+                  net.populations.append(Golgi_pop)
+                  
                if location_array['populationList'][pop]['distributionModel']=="explicit_cell_numbers":
+                  minimal_distance=location_array['populationList'][pop]['minimal_distance']
+                  golgi_pop_object=neuroml_Golgi_pop_array[cell_array[pop]['popID']]
+                  dim_dict_max_values={}
+                  dim_dict_max_values['x_dim']=location_array['populationList'][pop]['xDim']
+                  dim_dict_max_values['y_dim']=location_array['populationList'][pop]['yDim']
+                  dim_dict_max_values['z_dim']=location_array['populationList'][pop]['zDim']
+                          
+                  pop_position_array,Golgi_pop=random_no_overlap(cell_position_array,cell_array,minimal_distance,pop,golgi_pop_object,dim_dict_max_values,seed)
+
+                  cell_position_array[cell_array[pop]['popID']]=np.vstack((cell_position_array[cell_array[pop]['popID']],pop_position_array))
+                  
+
+                  net.populations.append(Golgi_pop)
                     
             if location_array['populationList'][pop]['distanceModel']=="random":
 
                if location_array['populationList'][pop]['distributionModel']=="density_profile":
-                       
+
+                  location_parameters=location_array['populationList'][pop]
+                  golgi_pop_object=neuroml_Golgi_pop_array[location_parameters['popID']]
+
+                  pop_position_array, total_no_of_cells,Golgi_pop=density_model(location_parameters,golgi_pop_object,seed)
+
+                  cell_array[pop]['size']=total_no_of_cells
+
+                  cell_position_array[cell_array[pop]['popID']]=np.vstack((cell_position_array[cell_array[pop]['popID']],pop_position_array))
+          
+                  net.populations.append(Golgi_pop)
+
+
+
                if location_array['populationList'][pop]['distributionModel']=="explicit_cell_numbers":
-                       
+                  Golgi_pop=neuroml_Golgi_pop_array[cell_array[pop]['popID']]  
+                  for cell in range(0,cell_array[cell_pop]['size']):
+	              Golgi_cell=neuroml.Instance(id="%d"%cell)
+	              Golgi_pop.instances.append(Golgi_cell)
+	              X=random.random()
+	              Y=random.random()
+	              Z=random.random()
+                      x_dim=location_array['populationList'][pop]['xDim']
+                      y_dim=location_array['populationList'][pop]['yDim']
+                      z_dim=location_array['populationList'][pop]['zDim']
+                      Golgi_cell.location=neuroml.Location(x=x_dim*X, y=y_dim*Y, z=z_dim*Z)
+                      cell_position_array[cell_array[pop]['popID']]=np.vstack((cell_position_array[cell_array[pop]['popID']],[x_dim*X,y_dim*Y,z_dim*Z]))
+                      print cell_position_array[cell_array[cell_pop]['popID']][cell,0], cell_position_array[cell_array[cell_pop]['popID']][cell,1], cell_position_array[cell_array[cell_pop]['popID']][cell,2]
+                  net.populations.append(Golgi_pop)
+
+
+
+
 	if string.lower(location_array['distributionModel'])=="density_profile_based":
            ### will override cell numbers in cell_array if specified
            no_density_model=False
