@@ -14,8 +14,8 @@ if __name__ == "__main__":
     net_params_test_2010_multiple['experiment1']={}
     net_params_test_2010_multiple['experiment2']={}
     
-    net_params_test_2010_multiple['experiment1']['experimentID']="test_v2_exp1"
-    net_params_test_2010_multiple['experiment2']['experimentID']="test_v2_exp2"
+    net_params_test_2010_multiple['experiment1']['experimentID']="test_V2010_exp1"
+    net_params_test_2010_multiple['experiment2']['experimentID']="test_V2010_exp2"
     #exp1
     net_params_test_2010_multiple['experiment1']['popParams']=[]
     net_params_test_2010_multiple['experiment1']['popParams'].append({'popID':'Golgi_pop0','cellType':"Golgi_5comp_3channels_1CaPool",'size':10})
@@ -39,13 +39,14 @@ if __name__ == "__main__":
     net_params_test_2010_multiple['experiment1']['inputParams']=[]
 
     inputGroups_pop0_2010exp1=[]
+    #### note that a series of pulses can be specified for each population: 'pulseParameters' points to a list than can contain multiple dictionaries
     inputGroups_pop0_2010exp1.append({'inputModel':"testing",'testingModel':"pulseGenerators",'cellFractionToTarget':0.5,\
-                                      'pulseParameters':[{'delay':20,'duration':200,'amplitude':4E-5},{'delay':220,'duration':200,'amplitude':-0.5E-5}],\
+                                      'pulseParameters':[{'delay':20,'duration':200,'amplitude':4E-5}],\
                          'ampUnits':"uA",'timeUnits':'ms'})
 
     inputGroups_pop1_2010exp1=[]
     inputGroups_pop1_2010exp1.append({'inputModel':"testing",'testingModel':"pulseGenerators",'cellFractionToTarget':0.5,\
-                            'pulseParameters':[{'delay':0,'duration':100,'amplitude':4E-5},{'delay':220,'duration':200,'amplitude':-0.5E-5}],\
+                            'pulseParameters':[{'delay':0,'duration':100,'amplitude':4E-5}],\
                          'ampUnits':"uA",'timeUnits':'ms'})
 
 
@@ -77,12 +78,12 @@ if __name__ == "__main__":
     net_params_test_2010_multiple['experiment2']['inputParams']=[]
     inputGroups_pop0_2010exp2=[]
     inputGroups_pop0_2010exp2.append({'inputModel':"testing",'testingModel':"pulseGenerators",'cellFractionToTarget':0.5,\
-                    'pulseParameters':[{'delay':20,'duration':200,'amplitude':4E-5},{'delay':220,'duration':200,'amplitude':-0.5E-5}],\
+                    'pulseParameters':[{'delay':20,'duration':200,'amplitude':4E-5}],\
                          'ampUnits':"uA",'timeUnits':'ms'})
 
     inputGroups_pop1_2010exp2=[]
     inputGroups_pop1_2010exp2.append({'inputModel':"testing",'testingModel':"pulseGenerators",'cellFractionToTarget':0.5,\
-                        'pulseParameters':[{'delay':0,'duration':100,'amplitude':4E-5},{'delay':220,'duration':200,'amplitude':-0.5E-5}],\
+                        'pulseParameters':[{'delay':0,'duration':100,'amplitude':4E-5}],\
                          'ampUnits':"uA",'timeUnits':'ms'})
 
 
@@ -94,7 +95,7 @@ if __name__ == "__main__":
     ####### change 'simulator' to "jNeuroML_NEURON" in order to run simulations in NEURON
 
     sim_params={'simulator':"no simulation",'duration':450,'timeStep':0.005,'numTrials':5,'globalSeed':False,'trialSeed':True,'plotSpecifier':False,\
-    'saveSomataPositions':True,'parentDirRequired':True,'parentDir':parentdir,'networkDir':'example'}
+    'saveSomataPositions':True,'parentDirRequired':True,'parentDir':parentdir,'currentDirRequired':True,'currentDir':currentdir,'networkDir':'example'}
     
     ##### run all simulations
     run_simulations(net_params_test_2010_multiple,sim_params)

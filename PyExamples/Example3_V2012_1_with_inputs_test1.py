@@ -13,8 +13,8 @@ if __name__ == "__main__":
     net_params_test_2012_multiple['experiment1']={}
     net_params_test_2012_multiple['experiment2']={}
     
-    net_params_test_2012_multiple['experiment1']['experimentID']="2012based_test_1"
-    net_params_test_2012_multiple['experiment2']['experimentID']="2012based_test_2"
+    net_params_test_2012_multiple['experiment1']['experimentID']="V2012_test_1"
+    net_params_test_2012_multiple['experiment2']['experimentID']="V2012_test_2"
     #exp1
     net_params_test_2012_multiple['experiment1']['popParams']=[]
     net_params_test_2012_multiple['experiment1']['popParams'].append({'popID':'Golgi_pop0','cellType':"Very_Simple_Golgi_test_morph",'size':15})
@@ -49,7 +49,7 @@ if __name__ == "__main__":
                              'numberModel':"constant number of inputs per cell",'noInputs':8,'targetingModel':"segment groups and segments",\
                              'segmentGroupList':["Section_1","dend_1"],'segmentGroupProbabilities':[0.7,0.3]})
                             
-    synapseList_pop0_exp1.append({'synapseType':"MFSpikeSyn",'synapseMode':"persistent",'averageRate':100,\
+    synapseList_pop0_exp1.append({'synapseType':"PFSpikeSyn",'synapseMode':"persistent",'averageRate':100,\
                              'numberModel':"constant number of inputs per cell",'noInputs':8,'targetingModel':"segment groups and segments",\
                              'segmentGroupList':["Section_1","dend_1"],'segmentGroupProbabilities':[0.7,0.3]})
 ####### change 'simulator' to "jNeuroML_NEURON" in order to run simulations in NEURON
@@ -66,11 +66,11 @@ if __name__ == "__main__":
     inputGroups_pop1_exp1.append({'inputModel':"variable_basal_firing_rate",'inputLabel':'vbpop1','amplitudeDistribution':"gaussian",'averageAmp':100,'stDevAmp':20,'ampUnits':"nA",\
                              'offsetDistribution':"constant",'valueOffset':50,'offsetUnits':"ms"})
     synapseList_pop1_exp1=[]
-    synapseList_pop1_exp1.append({'synapseType':"MFSpikeSyn",'synapseMode':"transient",'averageRate':50,'delay':80,'duration':100,'units':'ms',  \
+    synapseList_pop1_exp1.append({'synapseType':"PFSpikeSyn",'synapseMode':"transient",'averageRate':50,'delay':80,'duration':100,'units':'ms',  \
                              'numberModel':"constant number of inputs per cell",'noInputs':8,'targetingModel':"segments and subsegments",\
                              'segmentList':["Soma","dend_3"],'segmentProbabilities':[0.7,0.3],'fractionAlongANDsubsegProbabilities':[[[0.5,1],[0.5,0]],[[0.5,0.7],[0.5,0.3]]]})
                             
-    synapseList_pop1_exp1.append({'synapseType':"MFSpikeSyn",'synapseMode':"persistent",'averageRate':100,\
+    synapseList_pop1_exp1.append({'synapseType':"PFSpikeSyn",'synapseMode':"persistent",'averageRate':100,\
                              'numberModel':"constant number of inputs per cell",'noInputs':8,'targetingModel':"segments and subsegments",\
                              'segmentList':["Soma","dend_3"],'segmentProbabilities':[0.7,0.3],'fractionAlongANDsubsegProbabilities':[[[0.5,1],[0.5,1]],[[0.5,0.7],[0.5,0.3]]] })
 
@@ -108,11 +108,11 @@ if __name__ == "__main__":
     inputGroups_pop0_exp2.append({'inputModel':"variable_basal_firing_rate",'inputLabel':'vbpop0','amplitudeDistribution':"constant",'valueAmp':100,'ampUnits':"nA",\
                              'offsetDistribution':"constant",'valueOffset':50,'offsetUnits':"ms"})
     synapseList_pop0_exp2=[]
-    synapseList_pop0_exp2.append({'synapseType':"MFSpikeSyn",'synapseMode':"persistent",'averageRate':50,\
+    synapseList_pop0_exp2.append({'synapseType':"PFSpikeSyn",'synapseMode':"persistent",'averageRate':50,\
                              'numberModel':"constant number of inputs per cell",'noInputs':8,'targetingModel':"segment groups and segments",\
                              'segmentGroupList':["Section_1","dend_1"],'segmentGroupProbabilities':[0.7,0.3]})
                             
-    synapseList_pop0_exp2.append({'synapseType':"MFSpikeSyn",'synapseMode':"persistent",'averageRate':100,\
+    synapseList_pop0_exp2.append({'synapseType':"PFSpikeSyn",'synapseMode':"persistent",'averageRate':100,\
                              'numberModel':"constant number of inputs per cell",'noInputs':8,'targetingModel':"segment groups and segments",\
                              'segmentGroupList':["Section_1","dend_1"],'segmentGroupProbabilities':[0.7,0.3]})
 
@@ -123,11 +123,11 @@ if __name__ == "__main__":
     inputGroups_pop1_exp2.append({'inputModel':"variable_basal_firing_rate",'inputLabel':'vbpop1','amplitudeDistribution':"constant",'valueAmp':100,'ampUnits':"nA",\
                              'offsetDistribution':"constant",'valueOffset':50,'offsetUnits':"ms"})
     synapseList_pop1_exp2=[]
-    synapseList_pop1_exp2.append({'synapseType':"MFSpikeSyn",'synapseMode':"transient",'averageRate':50,'delay':80,'duration':100,'units':'ms',  \
+    synapseList_pop1_exp2.append({'synapseType':"PFSpikeSyn",'synapseMode':"transient",'averageRate':50,'delay':80,'duration':100,'units':'ms',  \
                              'numberModel':"constant number of inputs per cell",'noInputs':8,'targetingModel':"segments and subsegments",\
                              'segmentList':["Soma","dend_3"],'segmentProbabilities':[0.7,0.3],'fractionAlongANDsubsegProbabilities':[[[0.5,1],[0.5,0]],[[0.5,0.7],[0.5,0.3]]]})
                             
-    synapseList_pop1_exp2.append({'synapseType':"MFSpikeSyn",'synapseMode':"persistent",'averageRate':100,\
+    synapseList_pop1_exp2.append({'synapseType':"PFSpikeSyn",'synapseMode':"persistent",'averageRate':100,\
                              'numberModel':"constant number of inputs per cell",'noInputs':8,'targetingModel':"segments and subsegments",\
                              'segmentList':["Soma","dend_3"],'segmentProbabilities':[0.7,0.3],'fractionAlongANDsubsegProbabilities':[[[0.5,1],[0.5,1]],[[0.5,0.7],[0.5,0.3]]] })
 

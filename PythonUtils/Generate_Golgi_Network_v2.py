@@ -92,7 +92,7 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
 	
 	Note_string=Note_string+"Cell distribution parameters:\n"
 	
-        no_density_model=True
+        
         ################# 
         for pop in range(0,len(location_array['populationList'])):
             Note_string=Note_string+"%s\n"%location_array['populationList'][pop]
@@ -101,9 +101,9 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
                if location_array['populationList'][pop]['distributionModel']=="density_profile":
                   location_parameters=location_array['populationList'][pop]
                   golgi_pop_object=neuroml_Golgi_pop_array[location_parameters['popID']]
-
-                  pop_position_array, total_no_of_cells,Golgi_pop=density_model(pop,location_parameters,golgi_pop_object,cell_position_array,cell_array,\
-                  cell_diameter_array,seed)
+                  
+                  pop_position_array, total_no_of_cells,Golgi_pop=density_model(location_parameters,golgi_pop_object,seed,pop,cell_position_array,cell_array,\
+                  cell_diameter_array)
 
                   cell_array[pop]['size']=total_no_of_cells
 
@@ -118,9 +118,9 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
                   dim_dict_max_values['x_dim']=location_array['populationList'][pop]['xDim']
                   dim_dict_max_values['y_dim']=location_array['populationList'][pop]['yDim']
                   dim_dict_max_values['z_dim']=location_array['populationList'][pop]['zDim']
-                          
+                  
                   pop_position_array,Golgi_pop=random_no_overlap(cell_position_array,cell_array,cell_diameter_array,\
-                  pop,golgi_pop_object,dim_dict_max_values,seed)
+                  pop,seed,golgi_pop_object,dim_dict_max_values)
 
                   cell_position_array[cell_array[pop]['popID']]=np.vstack((cell_position_array[cell_array[pop]['popID']],pop_position_array))
                   
@@ -133,7 +133,7 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
 
                   location_parameters=location_array['populationList'][pop]
                   golgi_pop_object=neuroml_Golgi_pop_array[location_parameters['popID']]
-                  pop_position_array, total_no_of_cells,Golgi_pop=density_model(pop,location_parameters,golgi_pop_object,cell_position_array,cell_array,seed)
+                  pop_position_array, total_no_of_cells,Golgi_pop=density_model(location_parameters,golgi_pop_object,seed,pop,cell_position_array,cell_array)
 
                   cell_array[pop]['size']=total_no_of_cells
 
@@ -148,8 +148,9 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
                   dim_dict_max_values['x_dim']=location_array['populationList'][pop]['xDim']
                   dim_dict_max_values['y_dim']=location_array['populationList'][pop]['yDim']
                   dim_dict_max_values['z_dim']=location_array['populationList'][pop]['zDim']
-                          
-                  pop_position_array,Golgi_pop=random_no_overlap(cell_position_array,cell_array,minimal_distance,pop,golgi_pop_object,dim_dict_max_values,seed)
+                         
+                  pop_position_array,Golgi_pop=random_minimal_distance(cell_position_array,cell_array,\
+minimal_distance,pop,seed_number,golgi_pop_object,dim_dict_max_values)
 
                   cell_position_array[cell_array[pop]['popID']]=np.vstack((cell_position_array[cell_array[pop]['popID']],pop_position_array))
                   
@@ -190,121 +191,6 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
                   net.populations.append(Golgi_pop)
 
 
-
-
-	if string.lower(location_array['distributionModel'])=="density_profile_based":
-           ### will override cell numbers in cell_array if specified
-           no_density_model=False
-    
-           Note_string=Note_string+"Model: density based\n"
-           Note_string=Note_string+"Model parameters:\n"
-           for cell_group in range(0,len(location_array['populationList'])):
-               total_no_of_cells=0
-               cellPopName=location_array['populationList'][cell_group]['popID']
-               golgi_pop=neuroml_Golgi_pop_array[cellPopName]
-               for pop in range(0,len(cell_array)):
-                   if cellPopName==cell_array[pop]['popID']:
-                      if simulation_parameters['parentDirRequired']:
-                         cell_type_name=simulation_parameters['parentDir']+"/NeuroML2"+"/"+cell_array[pop]['cellType']
-                      else:
-                         cell_type_name=cell_array[pop]['cellType']
-                      pop_index_popParams=pop
-
-               densityFilePath=location_array['populationList'][cell_group]['densityFilePath']
-               location_parameters=location_array['populationList'][cell_group]
-               golgi_pop_object=neuroml_Golgi_pop_array[cellPopName]
-
-               pop_position_array, total_no_of_cells,Golgi_pop=density_model(densityFilePath,location_parameters,golgi_pop_object,cell_diameter_array,seed)
-
-
-               cell_array[pop_index_popParams]['size']=total_no_of_cells
-
-
-               cell_position_array[cell_array[pop_index_popParams]['popID']]=pop_position_array
-          
-               net.populations.append(Golgi_pop)
-
-               Note_string=Note_string+"%s"%location_array['populationList'][cell_group]+"\n"
-               
-        if no_density_model:
-           ###### if no_density model it assumes that dimensions of a cubic environment are specified
-           x_dim=location_array['xDim']
-           y_dim=location_array['yDim']
-           z_dim=location_array['zDim']
-           for cell_population in range(0,len(cell_array)):
-               cell_position_array[ cell_array[cell_population]['popID'] ]=np.zeros([cell_array[cell_population]['size'],3])
-              
-        ##############
-        if string.lower(location_array['distributionModel'])=="random_minimal_distance":
-           Note_string=Note_string+"Model: random with global minimal distance between cell bodies\n"
-           Note_string=Note_string+"Model parameters:\n"
-           for cell_pop in range(0,len(cell_array)):
-               golgi_pop_object=neuroml_Golgi_pop_array[cell_array[cell_pop]['popID']]
-               cell_position_array,Golgi_pop=random_minimal_distance(cell_position_array,cell_array,location_array,\
-               cell_pop,cell_array[cell_pop]['size'],golgi_pop_object,x_dim,y_dim,z_dim,seed)
-
-               net.populations.append(Golgi_pop)
-               
-           Note_string=Note_string+"%s"%location_array+"\n"
-        ############  random positioning but no overlap between somata                  
-        if string.lower(location_array['distributionModel'])=="random_no_overlap":
-           Note_string=Note_string+"Model: random with no overlap of cell bodies\n"
-           Note_string=Note_string+"Model parameters:\n"
-           cell_diameter_array={}
-           for cell_pop in range(0,len(cell_array)):
-               if simulation_parameters['parentDirRequired']:
-
-                  print simulation_parameters['parentDir']+"/NeuroML2"+"/"+cell_array[cell_pop]['cellType']
-
-                  if "NeuroML2CellType" in cell_array[cell_pop]:
-                     cell_diameter=get_soma_diameter(simulation_parameters['parentDir']+"/NeuroML2"+"/"+cell_array[cell_pop]['cellType'],cell_array[cell_pop]["NeuroML2CellType"])
-                  else:
-                     cell_diameter=get_soma_diameter(simulation_parameters['parentDir']+"/NeuroML2"+"/"+cell_array[cell_pop]['cellType'])
-               else:
-
-                  if "NeuroML2CellType" in cell_array[cell_pop]:
-                     cell_diameter=get_soma_diameter(cell_array[cell_pop]['cellType'],cell_array[cell_pop]["NeuroML2CellType"])
-                  else:
-                     cell_diameter=get_soma_diameter(cell_array[cell_pop]['cellType'])
-
-               cell_diameter_array[cell_array[cell_pop]['popID']]=cell_diameter
-
-           for cell_pop in range(0,len(cell_array)):
-
-               golgi_pop_object=neuroml_Golgi_pop_array[cell_array[cell_pop]['popID']]
-               
-               cell_position_array,Golgi_pop=random_no_overlap(cell_position_array,cell_array,cell_array[cell_pop]['popID'],cell_diameter_array,\
-               cell_pop,cell_array[cell_pop]['size'],golgi_pop_object,x_dim,y_dim,z_dim,seed)
-
-               net.populations.append(Golgi_pop)
-               
-           Note_string=Note_string+"%s"%location_array+"\n"
-
-        ###### simply random positioning in a cubic environment               
-        if string.lower(location_array['distributionModel'])=="random":
-           Note_string=Note_string+"Model: random positions with cell bodies overlaping"
-           Note_string=Note_string+"Model parameters:\n"
-           for cell_pop in range(0,len(cell_array)):
-               golgi_pop=neuroml_Golgi_pop_array[cell_array[cell_pop]['popID']]
-               for cell in range(0,cell_array[cell_pop]['size']):
-	           Golgi_cell=neuroml.Instance(id="%d"%cell)
-	           golgi_pop.instances.append(Golgi_cell)
-	           X=random.random()
-	           Y=random.random()
-	           Z=random.random()
-                   cell_position_array[cell_array[cell_pop]['popID']][cell,0]=x_dim*X
-                   cell_position_array[cell_array[cell_pop]['popID']][cell,1]=y_dim*Y
-                   cell_position_array[cell_array[cell_pop]['popID']][cell,2]=z_dim*Z
-                   Golgi_cell.location=neuroml.Location(x=x_dim*X, y=y_dim*Y, z=z_dim*Z)
-                   print cell_position_array[cell_array[cell_pop]['popID']][cell,0], cell_position_array[cell_array[cell_pop]['popID']][cell,1], cell_position_array[cell_array[cell_pop]['popID']][cell,2]
-               net.populations.append(golgi_pop)
-           Note_string=Note_string+"%s"%location_array+"\n"
-   
-        ##### include cell_array into notes once the final pop sizes are known
-        Note_string=Note_string+"Population parameters:"+"\n"
-        for cell_pop in range(0,len(cell_array)):
-            Note_string=Note_string+"%s"%cell_array[cell_pop]+"\n"
-        Note_string=Note_string+"Connectivity parameters for a list of population pairs:"+"\n" 
         ############################################ connectivity block
         synapse_name_array=[]        
         connMatrix_array=[]
@@ -314,7 +200,7 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
             prePop=connectivity_information['populationPairs'][pair]['prePopID']  
             postPop=connectivity_information['populationPairs'][pair]['postPopID']
             preCell_NML2type=None
-            postCellNML2ype=None
+            postCell_NML2type=None
             for pop in range(0,len(cell_array)):
                 if cell_array[pop]['popID']==prePop:
                    prePop_listIndex=pop
@@ -554,7 +440,11 @@ def generate_LEMS_and_run(sim_array,pop_array):
 		   quantity = "%s/%i/%s/v"%(cell_array[x]['popID'], i,cell_array[x]['cellType'])
 	           ls.add_line_to_display(disp, "../%s/%i: Vm"%(cell_array[x]['popID'],i), quantity, "1mV", pynml.get_next_hex_color())
                    of0 = 'Volts%d_file0_%d'%(x,i)
-                   ls.create_output_file(of0, "simulations/%s/sim%d/%s_cell%d.dat"%(simulation_parameters['experimentID'],simulation_parameters['simID'],\
+                   if simulation_parameters['currentDirRequired']:
+                      ls.create_output_file(of0,simulation_parameters['currentDir']+"/simulations/%s/sim%d/%s_cell%d.dat"%(simulation_parameters['experimentID'],simulation_parameters['simID'],\
+                                                                                    cell_array[x]['popID'],i))
+                   else:
+                      ls.create_output_file(of0,"simulations/%s/sim%d/%s_cell%d.dat"%(simulation_parameters['experimentID'],simulation_parameters['simID'],\
                                                                                     cell_array[x]['popID'],i))
 		   ls.add_column_to_output_file(of0, 'v%i'%i, quantity)
 					   
@@ -567,8 +457,10 @@ def generate_LEMS_and_run(sim_array,pop_array):
 	       for i in range(cell_array[x]['size']):
 		   quantity = "%s/%i/%s/v"%(cell_array[x]['popID'], i,cell_array[x]['cellType'])
                    of0 = 'Volts%d_file0_%d'%(x,i)
-                   ls.create_output_file(of0, "simulations/%s/sim%d/%s_cell%d.dat"%(simulation_parameters['experimentID'],\
-                   simulation_parameters['simID'],x,i))
+                   if simulation_parameters['currentDirRequired']:
+                      ls.create_output_file(of0,simulation_parameters['currentDir']+"/simulations/%s/sim%d/%s_cell%d.dat"%(simulation_parameters['experimentID'],simulation_parameters['simID'],x,i))
+                   else:
+                      ls.create_output_file(of0,"simulations/%s/sim%d/%s_cell%d.dat"%(simulation_parameters['experimentID'],simulation_parameters['simID'],x,i))
 		   ls.add_column_to_output_file(of0, 'v%i'%i, quantity)
        
 	# save LEMS file

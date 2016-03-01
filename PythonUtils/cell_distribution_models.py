@@ -15,7 +15,7 @@ from methods_v2 import *
 
 
 
-def density_model(popIndex=None,location_parameters,golgi_pop_object,cell_position_array=None,cell_array=None,cell_diameter_array=None,seed_number):
+def density_model(location_parameters,golgi_pop_object,seed_number,popIndex=None,cell_position_array=None,cell_array=None,cell_diameter_array=None):
     random.seed(seed_number)
     densityFilePath=location_parameters['densityFilePath']
     X_array,Y_array,density_values=load_density_data(densityFilePath)
@@ -91,9 +91,9 @@ def density_model(popIndex=None,location_parameters,golgi_pop_object,cell_positi
                      dim_dict_mappings['dim1']=location_parameters['planeDimensions']['dim1']
                      dim_dict_mappings['dim2']=location_parameters['planeDimensions']['dim2']
                      dim_dict_mappings['dim3']=location_parameters['planeDimensions']['dim3']
-                     
-                     pop_position_array_internal ,golgi_pop_object=random_minimal_distance(cell_position_array,cell_array,minimal_distance,popIndex,total_no_of_cells,\
-                     golgi_pop_object,dim_dict_max_values,dim_dict_mappings,dim_dict_offsets,seed_number)
+
+                     pop_position_array_internal ,golgi_pop_object=random_minimal_distance(cell_position_array,cell_array,minimal_distance,popIndex,seed_number,\
+                     golgi_pop_object,dim_dict_max_values,dim_dict_offsets,total_no_of_cells,dim_dict_mappings)
                      
                      pop_position_array=np.vstack((pop_position_array,pop_position_array_internal))
                               
@@ -108,8 +108,8 @@ def density_model(popIndex=None,location_parameters,golgi_pop_object,cell_positi
                      dim_dict_mappings['dim2']=location_parameters['planeDimensions']['dim2']
                      dim_dict_mappings['dim3']=location_parameters['planeDimensions']['dim3']
                      
-                     pop_position_array_internal ,golgi_pop_object=random_no_overlap(cell_position_array,cell_array,cell_diameter_array,popIndex,total_no_of_cells,\
-                     golgi_pop_object,dim_dict_max_values,dim_dict_mappings,dim_dict_offsets,seed_number)
+                     pop_position_array_internal ,golgi_pop_object=random_no_overlap(cell_position_array,cell_array,cell_diameter_array,popIndex,\
+seed_number,golgi_pop_object,dim_dict_max_values,dim_dict_offsets,total_no_of_cells,dim_dict_mappings)
                      
                      pop_position_array=np.vstack((pop_position_array,pop_position_array_internal))
                      
@@ -140,8 +140,8 @@ def density_model(popIndex=None,location_parameters,golgi_pop_object,cell_positi
                                                                                                                           
     return pop_position_array, total_no_of_cells,golgi_pop_object
 
-def random_minimal_distance(cell_position_array,cell_array,minimal_distance,popIndex,popSize=None,golgi_pop_object,dim_dict_max_values,dim_dict_mappings=None,\
-                      dim_dict_offsets={'x_dim_offset':0,'y_dim_offset':0,'z_dim_offset':0},seed_number):
+def random_minimal_distance(cell_position_array,cell_array,minimal_distance,popIndex,seed_number,golgi_pop_object,dim_dict_max_values,\
+                      dim_dict_offsets={'x_dim_offset':0,'y_dim_offset':0,'z_dim_offset':0},popSize=None,dim_dict_mappings=None):
 
     random.seed(seed_number)
     if popSize ==None:
@@ -204,8 +204,8 @@ def random_minimal_distance(cell_position_array,cell_array,minimal_distance,popI
     return pop_position_array,golgi_pop_object
 
 
-def random_no_overlap(cell_position_array,cell_array,cell_diameter_array,popIndex,popSize=None,golgi_pop_object,dim_dict_max_values,dim_dict_mappings=None,\
-                      dim_dict_offsets={'x_dim_offset':0,'y_dim_offset':0,'z_dim_offset':0},seed_number):
+def random_no_overlap(cell_position_array,cell_array,cell_diameter_array,popIndex,seed_number,golgi_pop_object,dim_dict_max_values,\
+                      dim_dict_offsets={'x_dim_offset':0,'y_dim_offset':0,'z_dim_offset':0},popSize=None,dim_dict_mappings=None):
 
     random.seed(seed_number)
     cell_diameter=cell_diameter_array[cell_array[popIndex]['popID']]
@@ -247,7 +247,7 @@ def random_no_overlap(cell_position_array,cell_array,cell_diameter_array,popInde
               Zcoordinate=dim_dict_offsets['z_dim_offset']+dim_dict_max_values['z_dim']*Z
               for cell_pop_x in range(0,len(cell_array)):
                   pop_cell_positions=cell_position_array[cell_array[cell_pop_x]['popID']]
-                  for cell_x in range(0,len(pop_cell_positions):
+                  for cell_x in range(0,len(pop_cell_positions)):
                       if pop_cell_positions[cell_x,0]+pop_cell_positions[cell_x,1]+pop_cell_positions[cell_x,2] >0:
                          if distance([Xcoordinate,Ycoordinate,Zcoordinate],pop_cell_positions[cell_x]) < (cell_diameter_array[cell_array[popIndex]['popID']]+cell_diameter_array[cell_array[cell_pop_x]['popID']])/2:
                             overlap_counter+=1
@@ -265,7 +265,7 @@ def random_no_overlap(cell_position_array,cell_array,cell_diameter_array,popInde
                     
                  Golgi_cell.location=neuroml.Location(x=Xcoordinate, y=Ycoordinate, z=Zcoordinate)
                                
-                 print pop_position_array[cell,0], cell_position_array[cell,1], cell_position_array[cell,2]
+                 print pop_position_array[cell,0], pop_position_array[cell,1], pop_position_array[cell,2]
                  x=1   
 
 

@@ -16,7 +16,7 @@
         <notes> 10 compartment Golgi cell in NeuroML2 based on https://github.com/epiasini/GJGolgi_ReducedMorph/blob/master/neuroConstruct/morphologies/GJGolgi_Reduced.nml1. For segments 1,2,7 and 8 original NeuroML1 version contains fractionAlong=0.5. However, currently it is not implemented in NeuroML2:
 org.neuroml.model.util.NeuroMLException: Cannot yet handle fractionAlong being neither 0 or 1 </notes>
 
-        <morphology id="10compartments">
+        <morphology id="reduced_Golgi10comp">
 
                 <segment id="0" name="Soma">
                     <proximal x="0.0" y="0.0" z="0.0" diameter="20.0"/>
