@@ -294,6 +294,7 @@ postPop,postPop_listIndex,postPopSize,post_pop_cell_component,postCell_NML2type,
             cellType=cell_array[pop_listIndex]['cellType']
             for input_group in range(0,len(input_group_array)):
                 if input_group_array[input_group]['inputModel']=='XF' and input_group_array[input_group]['targetingRegime']=="uniform":
+                   
                    if simulation_parameters['parentDirRequired']:
                       input_list,poisson_synapse_array,synapse_name_list=XF_input_model_uniform(popID,popSize,cellType,input_group_array[input_group],seed,\
                       simulation_parameters['parentDir'])

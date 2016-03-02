@@ -47,33 +47,29 @@ if __name__ == "__main__":
     inputGroups_pop0_exp1.append({'inputModel':"variable_basal_firing_rate",'inputLabel':'vbpop0','amplitudeDistribution':"gaussian",'averageAmp':100,'stDevAmp':20,'ampUnits':"nA",\
                              'offsetDistribution':"constant",'valueOffset':50,'offsetUnits':"ms"})
     synapseList_pop0_exp1=[]
-    synapseList_pop0_exp1.append({'synapseType':"PFSpikeSyn",'synapseMode':"persistent",'averageRate':50,\
-                             'numberModel':"constant number of inputs per cell",'noInputs':8,'targetingModel':"segment groups and segments",\
-                             'segmentGroupList':["Section_1","dend_1"],'segmentGroupProbabilities':[0.7,0.3]})
+    synapseList_pop0_exp1.append({'synapseType':"PFSpikeSyn",'synapseMode':"persistent",'averageRate':50})
                             
-    synapseList_pop0_exp1.append({'synapseType':"PFSpikeSyn",'synapseMode':"persistent",'averageRate':100,\
-                             'numberModel':"constant number of inputs per cell",'noInputs':8,'targetingModel':"segment groups and segments",\
-                             'segmentGroupList':["Section_1","dend_1"],'segmentGroupProbabilities':[0.7,0.3]})
+    synapseList_pop0_exp1.append({'synapseType':"PFSpikeSyn",'synapseMode':"persistent",'averageRate':100})
     
-
+    targeting_params0_pop0={'numberModel':"constant number of inputs per cell",'noInputs':8,'targetingModel':"segment groups and segments",\
+    'segmentGroupList':["Section_1","dend_1"],'segmentGroupProbabilities':[0.7,0.3]}
+    
     inputGroups_pop0_exp1.append({'inputModel':'XF','inputLabel':'MFpop0','targetingRegime':"uniform",'fractionToTarget':0.5,\
-                                  'synapseList':synapseList_pop0_exp1,'colocalizeSynapses':False})
+                                  'synapseList':synapseList_pop0_exp1,'colocalizeSynapses':True,'sharedTargetingParameters':targeting_params0_pop0})
 
     inputGroups_pop1_exp1=[]
     inputGroups_pop1_exp1.append({'inputModel':"variable_basal_firing_rate",'inputLabel':'vbpop1','amplitudeDistribution':"gaussian",'averageAmp':100,'stDevAmp':20,'ampUnits':"nA",\
                              'offsetDistribution':"constant",'valueOffset':50,'offsetUnits':"ms"})
     synapseList_pop1_exp1=[]
-    synapseList_pop1_exp1.append({'synapseType':"PFSpikeSyn",'synapseMode':"transient",'averageRate':50,'delay':80,'duration':100,'units':'ms',  \
-                             'numberModel':"constant number of inputs per cell",'noInputs':8,'targetingModel':"segments and subsegments",\
-                             'segmentList':["Soma","dend_3"],'segmentProbabilities':[0.7,0.3],'fractionAlongANDsubsegProbabilities':[[[0.5,1],[0.5,0]],[[0.5,0.7],[0.5,0.3]]]})
+    synapseList_pop1_exp1.append({'synapseType':"PFSpikeSyn",'synapseMode':"transient",'averageRate':50,'delay':80,'duration':100,'units':'ms')
                             
-    synapseList_pop1_exp1.append({'synapseType':"PFSpikeSyn",'synapseMode':"persistent",'averageRate':100,\
-                             'numberModel':"constant number of inputs per cell",'noInputs':8,'targetingModel':"segments and subsegments",\
-                             'segmentList':["Soma","dend_3"],'segmentProbabilities':[0.7,0.3],'fractionAlongANDsubsegProbabilities':[[[0.5,1],[0.5,1]],[[0.5,0.7],[0.5,0.3]]] })
+    synapseList_pop1_exp1.append({'synapseType':"PFSpikeSyn",'synapseMode':"persistent",'averageRate':100})
 
+    targeting_params0_pop1={'numberModel':"constant number of inputs per cell",'noInputs':8,'targetingModel':"segments and subsegments",\
+                             'segmentList':["Soma","dend_3"],'segmentProbabilities':[0.7,0.3],'fractionAlongANDsubsegProbabilities':[[[0.5,1],[0.5,0]],[[0.5,0.7],[0.5,0.3]]]}
 
     inputGroups_pop1_exp1.append({'inputModel':'XF','inputLabel':'MFpop1','targetingRegime':"uniform",'fractionToTarget':0.5,\
-                                  'synapseList':synapseList_pop1_exp1,'colocalizeSynapses':False})
+                                  'synapseList':synapseList_pop1_exp1,'colocalizeSynapses':True,'sharedTargetingParameters':targeting_params0_pop1})
     
                              
     net_params_test_2012_multiple['experiment1']['inputParams'].append({'popName':'Golgi_pop0','inputGroups':inputGroups_pop0_exp1})
@@ -108,33 +104,29 @@ if __name__ == "__main__":
     inputGroups_pop0_exp2.append({'inputModel':"variable_basal_firing_rate",'inputLabel':'vbpop0','amplitudeDistribution':"constant",'valueAmp':100,'ampUnits':"nA",\
                              'offsetDistribution':"constant",'valueOffset':50,'offsetUnits':"ms"})
     synapseList_pop0_exp2=[]
-    synapseList_pop0_exp2.append({'synapseType':"PFSpikeSyn",'synapseMode':"persistent",'averageRate':50,\
-                             'numberModel':"constant number of inputs per cell",'noInputs':8,'targetingModel':"segment groups and segments",\
-                             'segmentGroupList':["Section_1","dend_1"],'segmentGroupProbabilities':[0.7,0.3]})
+    synapseList_pop0_exp2.append({'synapseType':"PFSpikeSyn",'synapseMode':"persistent",'averageRate':50})
                             
-    synapseList_pop0_exp2.append({'synapseType':"PFSpikeSyn",'synapseMode':"persistent",'averageRate':100,\
-                             'numberModel':"constant number of inputs per cell",'noInputs':8,'targetingModel':"segment groups and segments",\
-                             'segmentGroupList':["Section_1","dend_1"],'segmentGroupProbabilities':[0.7,0.3]})
+    synapseList_pop0_exp2.append({'synapseType':"PFSpikeSyn",'synapseMode':"persistent",'averageRate':100})
 
+    targeting_params1_pop0={'numberModel':"constant number of inputs per cell",'noInputs':8,'targetingModel':"segment groups and segments",\
+                            'segmentGroupList':["Section_1","dend_1"],'segmentGroupProbabilities':[0.7,0.3]}
 
     inputGroups_pop0_exp2.append({'inputModel':'XF','inputLabel':'MFpop0','targetingRegime':"uniform",'fractionToTarget':0.5,\
-                                  'synapseList':synapseList_pop0_exp2,'colocalizeSynapses':False})
+                                  'synapseList':synapseList_pop0_exp2,'colocalizeSynapses':True,'sharedTargetingParameters':targeting_params1_pop0})
 
     inputGroups_pop1_exp2=[]
     inputGroups_pop1_exp2.append({'inputModel':"variable_basal_firing_rate",'inputLabel':'vbpop1','amplitudeDistribution':"constant",'valueAmp':100,'ampUnits':"nA",\
                              'offsetDistribution':"constant",'valueOffset':50,'offsetUnits':"ms"})
     synapseList_pop1_exp2=[]
-    synapseList_pop1_exp2.append({'synapseType':"PFSpikeSyn",'synapseMode':"transient",'averageRate':50,'delay':80,'duration':100,'units':'ms',  \
-                             'numberModel':"constant number of inputs per cell",'noInputs':8,'targetingModel':"segments and subsegments",\
-                             'segmentList':["Soma","dend_3"],'segmentProbabilities':[0.7,0.3],'fractionAlongANDsubsegProbabilities':[[[0.5,1],[0.5,0]],[[0.5,0.7],[0.5,0.3]]]})
+    synapseList_pop1_exp2.append({'synapseType':"PFSpikeSyn",'synapseMode':"transient",'averageRate':50,'delay':80,'duration':100,'units':'ms'})
                             
-    synapseList_pop1_exp2.append({'synapseType':"PFSpikeSyn",'synapseMode':"persistent",'averageRate':100,\
-                             'numberModel':"constant number of inputs per cell",'noInputs':8,'targetingModel':"segments and subsegments",\
-                             'segmentList':["Soma","dend_3"],'segmentProbabilities':[0.7,0.3],'fractionAlongANDsubsegProbabilities':[[[0.5,1],[0.5,1]],[[0.5,0.7],[0.5,0.3]]] })
+    synapseList_pop1_exp2.append({'synapseType':"PFSpikeSyn",'synapseMode':"persistent",'averageRate':100})
 
+    targeting_params1_pop1={'numberModel':"constant number of inputs per cell",'noInputs':8,'targetingModel':"segments and subsegments",\
+                             'segmentList':["Soma","dend_3"],'segmentProbabilities':[0.7,0.3],'fractionAlongANDsubsegProbabilities':[[[0.5,1],[0.5,1]],[[0.5,0.7],[0.5,0.3]]]}
 
     inputGroups_pop1_exp2.append({'inputModel':'XF','inputLabel':'MFpop1','targetingRegime':"uniform",'fractionToTarget':0.5,\
-                                  'synapseList':synapseList_pop1_exp2,'colocalizeSynapses':False})
+                                  'synapseList':synapseList_pop1_exp2,'colocalizeSynapses':True,'sharedTargetingParameters':targeting_params1_pop1})
      
 
 
