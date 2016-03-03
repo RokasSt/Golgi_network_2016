@@ -190,12 +190,16 @@ minimal_distance,pop,seed,golgi_pop_object,dim_dict_max_values)
                       print cell_position_array[cell_array[cell_pop]['popID']][cell,0], cell_position_array[cell_array[cell_pop]['popID']][cell,1], cell_position_array[cell_array[cell_pop]['popID']][cell,2]
                   net.populations.append(Golgi_pop)
 
-        
+        Note_string=Note_string+"Cell population parameters:\n"
+        for population in range(0,len(cell_array)):
+            Note_string=Note_string+"Cell population parameters for %s:\n"%cell_array[population]['popID']
+            Note_string=Note_string+"%s\n"%cell_array[population]
         ############################################ connectivity block
         synapse_name_array=[]        
         connMatrix_array=[]
         initial_projection_counter=0
         synapse_counter=0
+        Note_string=Note_string+"Cell connectivity parameters:\n"
         for pair in range(0,len(connectivity_information['populationPairs']) ):
             prePop=connectivity_information['populationPairs'][pair]['prePopID']  
             postPop=connectivity_information['populationPairs'][pair]['postPopID']
@@ -288,18 +292,20 @@ postPop,postPop_listIndex,postPopSize,post_pop_cell_component,postCell_NML2type,
         for pop in range(0,len(input_information)):
             popID=input_information[pop]['popName']
             Note_string=Note_string+"Input group parameters for %s:"%popID+"\n" 
-            for pop in range(0,len(cell_array)):
-                if cell_array[pop]['popID']==popID:
-                   pop_listIndex=pop
-                   popSize=cell_array[pop]['size']
+            for pop_in in range(0,len(cell_array)):
+                if cell_array[pop_in]['popID']==popID:
+                   pop_listIndex=pop_in
+                   popSize=cell_array[pop_in]['size']
             input_group_array=input_information[pop]['inputGroups']
             cellType=cell_array[pop_listIndex]['cellType']
             cellNML2Type=None
+
             if "NeuroML2CellType" in cell_array[pop_listIndex]:
                cellNML2Type=cell_array[pop_listIndex]["NeuroML2CellType"]
 
             if "NeuroML2CellType" in cell_array[postPop_listIndex]:
                cellNML2Type=cell_array[postPop_listIndex]["NeuroML2CellType"]
+
             for input_group in range(0,len(input_group_array)):
                 if input_group_array[input_group]['inputModel']=='XF' and input_group_array[input_group]['targetingRegime']=="uniform":
                    

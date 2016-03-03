@@ -39,17 +39,15 @@ def XF_input_models_uniform(popID,popSize,cellType,cellNML2Type,input_group_para
        print("testing Synapses")
     else:
        for synapse_index in range(0,len(synapse_list)):
-           synapse_array=synapse_list['synInput%d'%synapse_index]
+           synapse_array=synapse_list[synapse_index]
            synapse_name=synapse_array['synapseType']
            synapse_name_array.append(synapse_name)  
            synapse_dict={}                                         
            if synapse_array['targetingModel']=="segments and subsegments":
-              segment_target_array=extract_morphology_information([cellTypeFile],{cellTypeFile:cellNML2Type},\
-              ["segments",synapse_array['segmentList']])
+              segment_target_array=extract_morphology_information([cellTypeFile],{cellTypeFile:cellNML2Type},["segments",synapse_array['segmentList']])
                                                         
            if synapse_array['targetingModel']=="segment groups and segments":
-              segment_target_array =extract_morphology_information([cellTypeFile],{cellTypeFile:cellNML2Type}, \
-              ["segment groups",synapse_array['segmentGroupList']])
+              segment_target_array =extract_morphology_information([cellTypeFile],{cellTypeFile:cellNML2Type},["segment groups",synapse_array['segmentGroupList']])
                                                         
            if synapse_array['synapseMode']=="persistent":
               poisson_syn=neuroml.PoissonFiringSynapse(id="%s_%ssyn%d"%(synapse_name,popID,synapse_index),\
