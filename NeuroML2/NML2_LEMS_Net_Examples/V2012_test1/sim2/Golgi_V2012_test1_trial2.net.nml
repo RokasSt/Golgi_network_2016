@@ -1,0 +1,507 @@
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2beta4.xsd" id="Golgi_V2012_test1_trial2">
+    <include href="/../../../Very_Simple_Golgi_test_morph.cell.nml"></include>
+    <include href="/../../../PFSpikeSyn.synapse.nml"></include>
+    <pulseGenerator id="Pulse_Golgi_pop0_0" delay="50.000000ms" duration="400.000000ms" amplitude="115.860307nA"/>
+    <pulseGenerator id="Pulse_Golgi_pop0_1" delay="50.000000ms" duration="400.000000ms" amplitude="95.098203nA"/>
+    <pulseGenerator id="Pulse_Golgi_pop0_2" delay="50.000000ms" duration="400.000000ms" amplitude="82.798293nA"/>
+    <pulseGenerator id="Pulse_Golgi_pop0_3" delay="50.000000ms" duration="400.000000ms" amplitude="108.600953nA"/>
+    <pulseGenerator id="Pulse_Golgi_pop0_4" delay="50.000000ms" duration="400.000000ms" amplitude="79.329680nA"/>
+    <pulseGenerator id="Pulse_Golgi_pop0_5" delay="50.000000ms" duration="400.000000ms" amplitude="127.993774nA"/>
+    <pulseGenerator id="Pulse_Golgi_pop0_6" delay="50.000000ms" duration="400.000000ms" amplitude="116.182401nA"/>
+    <pulseGenerator id="Pulse_Golgi_pop0_7" delay="50.000000ms" duration="400.000000ms" amplitude="97.732791nA"/>
+    <pulseGenerator id="Pulse_Golgi_pop0_8" delay="50.000000ms" duration="400.000000ms" amplitude="121.438699nA"/>
+    <pulseGenerator id="Pulse_Golgi_pop0_9" delay="50.000000ms" duration="400.000000ms" amplitude="69.287223nA"/>
+    <pulseGenerator id="Pulse_Golgi_pop0_10" delay="50.000000ms" duration="400.000000ms" amplitude="86.861731nA"/>
+    <pulseGenerator id="Pulse_Golgi_pop0_11" delay="50.000000ms" duration="400.000000ms" amplitude="90.804095nA"/>
+    <pulseGenerator id="Pulse_Golgi_pop0_12" delay="50.000000ms" duration="400.000000ms" amplitude="64.239916nA"/>
+    <pulseGenerator id="Pulse_Golgi_pop0_13" delay="50.000000ms" duration="400.000000ms" amplitude="98.033947nA"/>
+    <pulseGenerator id="Pulse_Golgi_pop0_14" delay="50.000000ms" duration="400.000000ms" amplitude="87.915619nA"/>
+    <pulseGenerator id="Pulse_Golgi_pop1_0" delay="50.000000ms" duration="400.000000ms" amplitude="115.860307nA"/>
+    <pulseGenerator id="Pulse_Golgi_pop1_1" delay="50.000000ms" duration="400.000000ms" amplitude="95.098203nA"/>
+    <pulseGenerator id="Pulse_Golgi_pop1_2" delay="50.000000ms" duration="400.000000ms" amplitude="82.798293nA"/>
+    <pulseGenerator id="Pulse_Golgi_pop1_3" delay="50.000000ms" duration="400.000000ms" amplitude="108.600953nA"/>
+    <pulseGenerator id="Pulse_Golgi_pop1_4" delay="50.000000ms" duration="400.000000ms" amplitude="79.329680nA"/>
+    <pulseGenerator id="Pulse_Golgi_pop1_5" delay="50.000000ms" duration="400.000000ms" amplitude="127.993774nA"/>
+    <pulseGenerator id="Pulse_Golgi_pop1_6" delay="50.000000ms" duration="400.000000ms" amplitude="116.182401nA"/>
+    <pulseGenerator id="Pulse_Golgi_pop1_7" delay="50.000000ms" duration="400.000000ms" amplitude="97.732791nA"/>
+    <pulseGenerator id="Pulse_Golgi_pop1_8" delay="50.000000ms" duration="400.000000ms" amplitude="121.438699nA"/>
+    <pulseGenerator id="Pulse_Golgi_pop1_9" delay="50.000000ms" duration="400.000000ms" amplitude="69.287223nA"/>
+    <pulseGenerator id="Pulse_Golgi_pop1_10" delay="50.000000ms" duration="400.000000ms" amplitude="86.861731nA"/>
+    <pulseGenerator id="Pulse_Golgi_pop1_11" delay="50.000000ms" duration="400.000000ms" amplitude="90.804095nA"/>
+    <pulseGenerator id="Pulse_Golgi_pop1_12" delay="50.000000ms" duration="400.000000ms" amplitude="64.239916nA"/>
+    <pulseGenerator id="Pulse_Golgi_pop1_13" delay="50.000000ms" duration="400.000000ms" amplitude="98.033947nA"/>
+    <pulseGenerator id="Pulse_Golgi_pop1_14" delay="50.000000ms" duration="400.000000ms" amplitude="87.915619nA"/>
+    <poissonFiringSynapse id="PFSpikeSyn_Golgi_pop0syn1" synapse="PFSpikeSyn" averageRate="100.000000 per_s" spikeTarget="./PFSpikeSyn"/>
+    <poissonFiringSynapse id="PFSpikeSyn_Golgi_pop1syn1" synapse="PFSpikeSyn" averageRate="100.000000 per_s" spikeTarget="./PFSpikeSyn"/>
+    <transientPoissonFiringSynapse id="PFSpikeSyn_Golgi_pop0syn0" delay="80.000000ms" duration="100.000000ms" synapse="PFSpikeSyn" averageRate="300.000000 per_s" spikeTarget="./PFSpikeSyn"/>
+    <transientPoissonFiringSynapse id="PFSpikeSyn_Golgi_pop1syn0" delay="80.000000ms" duration="100.000000ms" synapse="PFSpikeSyn" averageRate="150.000000 per_s" spikeTarget="./PFSpikeSyn"/>
+    <network id="Golgi_V2012_test1_trial2_network" type="networkWithTemperature" temperature="23 degC">
+        <notes>Parameter arrays for building this network are listed below:
+Cell distribution parameters:
+{'yDim': 100, 'popID': 'Golgi_pop0', 'zDim': 100, 'xDim': 100, 'distributionModel': 'explicit_cell_numbers', 'minimal_distance': 25, 'distanceModel': 'random_minimal_distance'}
+{'yDim': 100, 'popID': 'Golgi_pop1', 'zDim': 100, 'xDim': 100, 'distributionModel': 'explicit_cell_numbers', 'minimal_distance': 25, 'distanceModel': 'random_minimal_distance'}
+Cell population parameters:
+Cell population parameters for Golgi_pop0:
+{'popID': 'Golgi_pop0', 'cellType': 'Very_Simple_Golgi_test_morph', 'size': 15}
+Cell population parameters for Golgi_pop1:
+{'popID': 'Golgi_pop1', 'cellType': 'Very_Simple_Golgi_test_morph', 'size': 15}
+Cell connectivity parameters:
+{'targetingModelprePop': {'segmentGroupList': ['Section_1', 'dend_1'], 'model': 'segment groups and segments', 'segmentGroupProbabilities': [0.7, 0.3]}, 'gapJunctionModel': 'constant number of GJ contacts per pair', 'testingConductanceScale': 1, 'prePopID': 'Golgi_pop0', 'conductanceValue': 426, 'targetingModelpostPop': {'segmentGroupList': ['Section_1', 'dend_1'], 'model': 'segment groups and segments', 'segmentGroupProbabilities': [0.7, 0.3]}, 'postPopID': 'Golgi_pop1', 'numberGJ': 8, 'conductanceModel': 'constant', 'electricalConnModel': 'Vervaeke_2012_based', 'units': 'pS', 'spatialScale': 1}
+Input parameters for a list of populations:
+Input group parameters for Golgi_pop0:
+{'stDevAmp': 20, 'inputModel': 'variable_basal_firing_rate', 'ampUnits': 'nA', 'amplitudeDistribution': 'gaussian', 'averageAmp': 100, 'valueOffset': 50, 'offsetDistribution': 'constant', 'offsetUnits': 'ms'}
+{'inputModel': 'XF', 'targetingRegime': 'uniform', 'synapseList': [{'noInputs': 8, 'synapseMode': 'transient', 'segmentGroupProbabilities': [0.7, 0.3], 'synapseType': 'PFSpikeSyn', 'duration': 100, 'segmentGroupList': ['Section_1', 'dend_1'], 'targetingModel': 'segment groups and segments', 'averageRate': 300, 'delay': 80, 'units': 'ms', 'numberModel': 'constant number of inputs per cell'}, {'segmentGroupList': ['Section_1', 'dend_1'], 'targetingModel': 'segment groups and segments', 'synapseMode': 'persistent', 'averageRate': 100, 'noInputs': 8, 'synapseType': 'PFSpikeSyn', 'numberModel': 'constant number of inputs per cell', 'segmentGroupProbabilities': [0.7, 0.3]}], 'fractionToTarget': 0.5, 'colocalizeSynapses': False}
+Input group parameters for Golgi_pop1:
+{'stDevAmp': 20, 'inputModel': 'variable_basal_firing_rate', 'ampUnits': 'nA', 'amplitudeDistribution': 'gaussian', 'averageAmp': 100, 'valueOffset': 50, 'offsetDistribution': 'constant', 'offsetUnits': 'ms'}
+{'inputModel': 'XF', 'targetingRegime': 'uniform', 'synapseList': [{'fractionAlongANDsubsegProbabilities': [[[0.25, 1], [0.25, 0]], [[0.25, 0.7], [0.25, 0.3]]], 'noInputs': 8, 'synapseMode': 'transient', 'synapseType': 'PFSpikeSyn', 'duration': 100, 'segmentList': ['Soma', 'dend_3'], 'segmentProbabilities': [0.7, 0.3], 'targetingModel': 'segments and subsegments', 'averageRate': 150, 'delay': 80, 'units': 'ms', 'numberModel': 'constant number of inputs per cell'}, {'segmentProbabilities': [0.7, 0.3], 'targetingModel': 'segments and subsegments', 'synapseMode': 'persistent', 'averageRate': 100, 'noInputs': 8, 'synapseType': 'PFSpikeSyn', 'segmentList': ['Soma', 'dend_3'], 'numberModel': 'constant number of inputs per cell', 'fractionAlongANDsubsegProbabilities': [[[0.25, 1], [0.25, 0]], [[0.25, 0.7], [0.25, 0.3]]]}], 'fractionToTarget': 0.5, 'colocalizeSynapses': False}
+</notes>
+        <population id="Golgi_pop0" type="populationList" component="Very_Simple_Golgi_test_morph" size="15">
+            <instance id="0">
+                <location y="29.140502472523522" x="95.229355056434898" z="42.62074552863703"/>
+            </instance>
+            <instance id="1">
+                <location y="35.122717995212852" x="37.019427110416977" z="77.9893088470414"/>
+            </instance>
+            <instance id="2">
+                <location y="28.37764487562433" x="97.784605949505007" z="84.699034011838208"/>
+            </instance>
+            <instance id="3">
+                <location y="59.719288025394448" x="82.685322458236072" z="27.492013418894658"/>
+            </instance>
+            <instance id="4">
+                <location y="79.877089483986225" x="50.874137531241928" z="36.713298667224592"/>
+            </instance>
+            <instance id="5">
+                <location y="55.124049998807003" x="33.306294459879759" z="69.462804135907291"/>
+            </instance>
+            <instance id="6">
+                <location y="61.728857555394576" x="90.727756116559945" z="57.917293403155057"/>
+            </instance>
+            <instance id="7">
+                <location y="41.631915062992583" x="60.543320956463674" z="84.817224466410238"/>
+            </instance>
+            <instance id="8">
+                <location y="2.254374260438474" x="50.099256854381224" z="62.914428958096593"/>
+            </instance>
+            <instance id="9">
+                <location y="24.197629847178025" x="86.602579105101185" z="6.888316933414429"/>
+            </instance>
+            <instance id="10">
+                <location y="4.929451616699387" x="75.560336178528985" z="57.147505369745218"/>
+            </instance>
+            <instance id="11">
+                <location y="55.296714755157502" x="40.462740604558277" z="97.564930181285561"/>
+            </instance>
+            <instance id="12">
+                <location y="57.407429918696984" x="5.723316086919628" z="74.068618009567984"/>
+            </instance>
+            <instance id="13">
+                <location y="42.787013601756016" x="1.797855274111038" z="25.088727753907371"/>
+            </instance>
+            <instance id="14">
+                <location y="35.454903186767993" x="67.496526742260926" z="35.913918699654815"/>
+            </instance>
+        </population>
+        <population id="Golgi_pop1" type="populationList" component="Very_Simple_Golgi_test_morph" size="15">
+            <instance id="0">
+                <location y="2.015109383157754" x="20.851441791016999" z="51.51612576432224"/>
+            </instance>
+            <instance id="1">
+                <location y="83.578911623233694" x="18.968832921020141" z="7.593593044516044"/>
+            </instance>
+            <instance id="2">
+                <location y="73.259385525637839" x="70.272310072682444" z="71.687864005244293"/>
+            </instance>
+            <instance id="3">
+                <location y="2.189003815021251" x="89.495881526603881" z="36.185551258056968"/>
+            </instance>
+            <instance id="4">
+                <location y="61.145601662602175" x="56.250987273943068" z="20.377830190173352"/>
+            </instance>
+            <instance id="5">
+                <location y="2.773259246628579" x="61.036181194594242" z="88.829302104413145"/>
+            </instance>
+            <instance id="6">
+                <location y="77.654732992333635" x="16.632774076460343" z="84.264384612176059"/>
+            </instance>
+            <instance id="7">
+                <location y="11.946784826793188" x="47.109723528813149" z="91.22079788168304"/>
+            </instance>
+            <instance id="8">
+                <location y="92.600565264138467" x="63.090679358633707" z="63.518849712722123"/>
+            </instance>
+            <instance id="9">
+                <location y="29.554899067336805" x="11.568430731223678" z="44.796795493973519"/>
+            </instance>
+            <instance id="10">
+                <location y="76.647377004905195" x="11.93573065570288" z="33.459148562184794"/>
+            </instance>
+            <instance id="11">
+                <location y="78.833661463596954" x="3.139045157325249" z="24.070340471356666"/>
+            </instance>
+            <instance id="12">
+                <location y="65.474394448325754" x="24.303045271431046" z="32.492369616557625"/>
+            </instance>
+            <instance id="13">
+                <location y="92.664038671934392" x="46.030324891617347" z="0.659418499718389"/>
+            </instance>
+            <instance id="14">
+                <location y="19.345869410768056" x="33.540956212670793" z="41.799064112975074"/>
+            </instance>
+        </population>
+        <inputList id="Input_Golgi_pop0_0" component="Pulse_Golgi_pop0_0" population="Golgi_pop0">
+            <input destination="synapses" id="0" target="../Golgi_pop0/0/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+        <inputList id="Input_Golgi_pop0_1" component="Pulse_Golgi_pop0_1" population="Golgi_pop0">
+            <input destination="synapses" id="1" target="../Golgi_pop0/1/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+        <inputList id="Input_Golgi_pop0_2" component="Pulse_Golgi_pop0_2" population="Golgi_pop0">
+            <input destination="synapses" id="2" target="../Golgi_pop0/2/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+        <inputList id="Input_Golgi_pop0_3" component="Pulse_Golgi_pop0_3" population="Golgi_pop0">
+            <input destination="synapses" id="3" target="../Golgi_pop0/3/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+        <inputList id="Input_Golgi_pop0_4" component="Pulse_Golgi_pop0_4" population="Golgi_pop0">
+            <input destination="synapses" id="4" target="../Golgi_pop0/4/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+        <inputList id="Input_Golgi_pop0_5" component="Pulse_Golgi_pop0_5" population="Golgi_pop0">
+            <input destination="synapses" id="5" target="../Golgi_pop0/5/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+        <inputList id="Input_Golgi_pop0_6" component="Pulse_Golgi_pop0_6" population="Golgi_pop0">
+            <input destination="synapses" id="6" target="../Golgi_pop0/6/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+        <inputList id="Input_Golgi_pop0_7" component="Pulse_Golgi_pop0_7" population="Golgi_pop0">
+            <input destination="synapses" id="7" target="../Golgi_pop0/7/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+        <inputList id="Input_Golgi_pop0_8" component="Pulse_Golgi_pop0_8" population="Golgi_pop0">
+            <input destination="synapses" id="8" target="../Golgi_pop0/8/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+        <inputList id="Input_Golgi_pop0_9" component="Pulse_Golgi_pop0_9" population="Golgi_pop0">
+            <input destination="synapses" id="9" target="../Golgi_pop0/9/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+        <inputList id="Input_Golgi_pop0_10" component="Pulse_Golgi_pop0_10" population="Golgi_pop0">
+            <input destination="synapses" id="10" target="../Golgi_pop0/10/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+        <inputList id="Input_Golgi_pop0_11" component="Pulse_Golgi_pop0_11" population="Golgi_pop0">
+            <input destination="synapses" id="11" target="../Golgi_pop0/11/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+        <inputList id="Input_Golgi_pop0_12" component="Pulse_Golgi_pop0_12" population="Golgi_pop0">
+            <input destination="synapses" id="12" target="../Golgi_pop0/12/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+        <inputList id="Input_Golgi_pop0_13" component="Pulse_Golgi_pop0_13" population="Golgi_pop0">
+            <input destination="synapses" id="13" target="../Golgi_pop0/13/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+        <inputList id="Input_Golgi_pop0_14" component="Pulse_Golgi_pop0_14" population="Golgi_pop0">
+            <input destination="synapses" id="14" target="../Golgi_pop0/14/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+        <inputList id="Input_listPFSpikeSyn_Golgi_pop0_syn0" component="PFSpikeSyn_Golgi_pop0syn0" population="Golgi_pop0">
+            <input fractionAlong="0.798771" destination="synapses" id="0" segmentId="2" target="../Golgi_pop0/14/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.694628" destination="synapses" id="1" segmentId="1" target="../Golgi_pop0/14/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.866026" destination="synapses" id="2" segmentId="2" target="../Golgi_pop0/14/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.049295" destination="synapses" id="3" segmentId="1" target="../Golgi_pop0/14/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.017979" destination="synapses" id="4" segmentId="1" target="../Golgi_pop0/14/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.354549" destination="synapses" id="5" segmentId="1" target="../Golgi_pop0/14/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.671312" destination="synapses" id="6" segmentId="1" target="../Golgi_pop0/14/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.612099" destination="synapses" id="7" segmentId="1" target="../Golgi_pop0/14/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.189688" destination="synapses" id="8" segmentId="1" target="../Golgi_pop0/4/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.732594" destination="synapses" id="9" segmentId="2" target="../Golgi_pop0/4/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.754082" destination="synapses" id="10" segmentId="1" target="../Golgi_pop0/4/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.027733" destination="synapses" id="11" segmentId="2" target="../Golgi_pop0/4/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.842644" destination="synapses" id="12" segmentId="2" target="../Golgi_pop0/4/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.471097" destination="synapses" id="13" segmentId="2" target="../Golgi_pop0/4/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.614523" destination="synapses" id="14" segmentId="2" target="../Golgi_pop0/4/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.635188" destination="synapses" id="15" segmentId="1" target="../Golgi_pop0/4/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.447968" destination="synapses" id="16" segmentId="2" target="../Golgi_pop0/5/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.240703" destination="synapses" id="17" segmentId="1" target="../Golgi_pop0/5/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.243030" destination="synapses" id="18" segmentId="2" target="../Golgi_pop0/5/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.946763" destination="synapses" id="19" segmentId="2" target="../Golgi_pop0/5/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.926640" destination="synapses" id="20" segmentId="2" target="../Golgi_pop0/5/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.209788" destination="synapses" id="21" segmentId="1" target="../Golgi_pop0/5/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.601161" destination="synapses" id="22" segmentId="1" target="../Golgi_pop0/5/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.279886" destination="synapses" id="23" segmentId="2" target="../Golgi_pop0/5/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.916936" destination="synapses" id="24" segmentId="1" target="../Golgi_pop0/13/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.697374" destination="synapses" id="25" segmentId="1" target="../Golgi_pop0/13/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.517830" destination="synapses" id="26" segmentId="2" target="../Golgi_pop0/13/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.633840" destination="synapses" id="27" segmentId="1" target="../Golgi_pop0/13/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.017615" destination="synapses" id="28" segmentId="2" target="../Golgi_pop0/13/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.942055" destination="synapses" id="29" segmentId="1" target="../Golgi_pop0/13/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.057666" destination="synapses" id="30" segmentId="1" target="../Golgi_pop0/13/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.571207" destination="synapses" id="31" segmentId="2" target="../Golgi_pop0/13/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.228297" destination="synapses" id="32" segmentId="1" target="../Golgi_pop0/3/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.763996" destination="synapses" id="33" segmentId="2" target="../Golgi_pop0/3/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.223287" destination="synapses" id="34" segmentId="1" target="../Golgi_pop0/3/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.236032" destination="synapses" id="35" segmentId="1" target="../Golgi_pop0/3/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.643018" destination="synapses" id="36" segmentId="2" target="../Golgi_pop0/3/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.641149" destination="synapses" id="37" segmentId="1" target="../Golgi_pop0/3/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.657922" destination="synapses" id="38" segmentId="2" target="../Golgi_pop0/3/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.474144" destination="synapses" id="39" segmentId="1" target="../Golgi_pop0/3/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.718225" destination="synapses" id="40" segmentId="1" target="../Golgi_pop0/7/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.534029" destination="synapses" id="41" segmentId="2" target="../Golgi_pop0/7/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.034026" destination="synapses" id="42" segmentId="1" target="../Golgi_pop0/7/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.598927" destination="synapses" id="43" segmentId="1" target="../Golgi_pop0/7/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.435403" destination="synapses" id="44" segmentId="1" target="../Golgi_pop0/7/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.246289" destination="synapses" id="45" segmentId="1" target="../Golgi_pop0/7/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.648181" destination="synapses" id="46" segmentId="1" target="../Golgi_pop0/7/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.242565" destination="synapses" id="47" segmentId="1" target="../Golgi_pop0/7/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.813509" destination="synapses" id="48" segmentId="1" target="../Golgi_pop0/8/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.356397" destination="synapses" id="49" segmentId="1" target="../Golgi_pop0/8/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.362444" destination="synapses" id="50" segmentId="2" target="../Golgi_pop0/8/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.494612" destination="synapses" id="51" segmentId="1" target="../Golgi_pop0/8/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.862156" destination="synapses" id="52" segmentId="2" target="../Golgi_pop0/8/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.029378" destination="synapses" id="53" segmentId="1" target="../Golgi_pop0/8/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.654131" destination="synapses" id="54" segmentId="1" target="../Golgi_pop0/8/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.785501" destination="synapses" id="55" segmentId="1" target="../Golgi_pop0/8/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.752994" destination="synapses" id="56" segmentId="1" target="../Golgi_pop0/2/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.009311" destination="synapses" id="57" segmentId="1" target="../Golgi_pop0/2/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.944372" destination="synapses" id="58" segmentId="1" target="../Golgi_pop0/2/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.634545" destination="synapses" id="59" segmentId="1" target="../Golgi_pop0/2/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.416962" destination="synapses" id="60" segmentId="1" target="../Golgi_pop0/2/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.379929" destination="synapses" id="61" segmentId="2" target="../Golgi_pop0/2/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.497722" destination="synapses" id="62" segmentId="1" target="../Golgi_pop0/2/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.302127" destination="synapses" id="63" segmentId="2" target="../Golgi_pop0/2/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+        <inputList id="Input_listPFSpikeSyn_Golgi_pop0_syn1" component="PFSpikeSyn_Golgi_pop0syn1" population="Golgi_pop0">
+            <input fractionAlong="0.070903" destination="synapses" id="0" segmentId="1" target="../Golgi_pop0/14/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.118671" destination="synapses" id="1" segmentId="2" target="../Golgi_pop0/14/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.454498" destination="synapses" id="2" segmentId="2" target="../Golgi_pop0/14/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.663800" destination="synapses" id="3" segmentId="1" target="../Golgi_pop0/14/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.825235" destination="synapses" id="4" segmentId="2" target="../Golgi_pop0/14/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.909623" destination="synapses" id="5" segmentId="1" target="../Golgi_pop0/14/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.681097" destination="synapses" id="6" segmentId="1" target="../Golgi_pop0/14/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.539194" destination="synapses" id="7" segmentId="1" target="../Golgi_pop0/14/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.396836" destination="synapses" id="8" segmentId="1" target="../Golgi_pop0/4/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.240947" destination="synapses" id="9" segmentId="1" target="../Golgi_pop0/4/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.875074" destination="synapses" id="10" segmentId="2" target="../Golgi_pop0/4/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.407239" destination="synapses" id="11" segmentId="1" target="../Golgi_pop0/4/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.920277" destination="synapses" id="12" segmentId="1" target="../Golgi_pop0/4/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.368538" destination="synapses" id="13" segmentId="2" target="../Golgi_pop0/4/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.583695" destination="synapses" id="14" segmentId="1" target="../Golgi_pop0/4/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.068751" destination="synapses" id="15" segmentId="1" target="../Golgi_pop0/4/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.747660" destination="synapses" id="16" segmentId="1" target="../Golgi_pop0/5/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.726334" destination="synapses" id="17" segmentId="1" target="../Golgi_pop0/5/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.628134" destination="synapses" id="18" segmentId="1" target="../Golgi_pop0/5/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.418240" destination="synapses" id="19" segmentId="2" target="../Golgi_pop0/5/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.626147" destination="synapses" id="20" segmentId="1" target="../Golgi_pop0/5/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.374461" destination="synapses" id="21" segmentId="1" target="../Golgi_pop0/5/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.690604" destination="synapses" id="22" segmentId="1" target="../Golgi_pop0/5/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.885953" destination="synapses" id="23" segmentId="2" target="../Golgi_pop0/5/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.129626" destination="synapses" id="24" segmentId="1" target="../Golgi_pop0/13/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.661984" destination="synapses" id="25" segmentId="2" target="../Golgi_pop0/13/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.029710" destination="synapses" id="26" segmentId="1" target="../Golgi_pop0/13/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.837906" destination="synapses" id="27" segmentId="1" target="../Golgi_pop0/13/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.077019" destination="synapses" id="28" segmentId="2" target="../Golgi_pop0/13/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.537145" destination="synapses" id="29" segmentId="2" target="../Golgi_pop0/13/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.866815" destination="synapses" id="30" segmentId="1" target="../Golgi_pop0/13/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.041284" destination="synapses" id="31" segmentId="1" target="../Golgi_pop0/13/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.073345" destination="synapses" id="32" segmentId="1" target="../Golgi_pop0/3/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.882655" destination="synapses" id="33" segmentId="1" target="../Golgi_pop0/3/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.376205" destination="synapses" id="34" segmentId="1" target="../Golgi_pop0/3/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.079462" destination="synapses" id="35" segmentId="2" target="../Golgi_pop0/3/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.552188" destination="synapses" id="36" segmentId="1" target="../Golgi_pop0/3/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.215649" destination="synapses" id="37" segmentId="1" target="../Golgi_pop0/3/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.821608" destination="synapses" id="38" segmentId="1" target="../Golgi_pop0/3/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.011658" destination="synapses" id="39" segmentId="2" target="../Golgi_pop0/3/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.843762" destination="synapses" id="40" segmentId="1" target="../Golgi_pop0/7/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.495078" destination="synapses" id="41" segmentId="1" target="../Golgi_pop0/7/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.885028" destination="synapses" id="42" segmentId="1" target="../Golgi_pop0/7/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.595145" destination="synapses" id="43" segmentId="1" target="../Golgi_pop0/7/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.323468" destination="synapses" id="44" segmentId="1" target="../Golgi_pop0/7/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.020143" destination="synapses" id="45" segmentId="1" target="../Golgi_pop0/7/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.117729" destination="synapses" id="46" segmentId="2" target="../Golgi_pop0/7/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.720384" destination="synapses" id="47" segmentId="2" target="../Golgi_pop0/7/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.126754" destination="synapses" id="48" segmentId="1" target="../Golgi_pop0/8/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.205164" destination="synapses" id="49" segmentId="1" target="../Golgi_pop0/8/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.969173" destination="synapses" id="50" segmentId="1" target="../Golgi_pop0/8/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.950865" destination="synapses" id="51" segmentId="2" target="../Golgi_pop0/8/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.770686" destination="synapses" id="52" segmentId="1" target="../Golgi_pop0/8/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.243355" destination="synapses" id="53" segmentId="1" target="../Golgi_pop0/8/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.738003" destination="synapses" id="54" segmentId="2" target="../Golgi_pop0/8/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.994729" destination="synapses" id="55" segmentId="1" target="../Golgi_pop0/8/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.741939" destination="synapses" id="56" segmentId="2" target="../Golgi_pop0/2/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.497827" destination="synapses" id="57" segmentId="2" target="../Golgi_pop0/2/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.483837" destination="synapses" id="58" segmentId="2" target="../Golgi_pop0/2/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.921358" destination="synapses" id="59" segmentId="1" target="../Golgi_pop0/2/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.455954" destination="synapses" id="60" segmentId="2" target="../Golgi_pop0/2/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.836046" destination="synapses" id="61" segmentId="2" target="../Golgi_pop0/2/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.617845" destination="synapses" id="62" segmentId="1" target="../Golgi_pop0/2/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.375330" destination="synapses" id="63" segmentId="2" target="../Golgi_pop0/2/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+        <inputList id="Input_Golgi_pop1_0" component="Pulse_Golgi_pop1_0" population="Golgi_pop1">
+            <input destination="synapses" id="0" target="../Golgi_pop1/0/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+        <inputList id="Input_Golgi_pop1_1" component="Pulse_Golgi_pop1_1" population="Golgi_pop1">
+            <input destination="synapses" id="1" target="../Golgi_pop1/1/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+        <inputList id="Input_Golgi_pop1_2" component="Pulse_Golgi_pop1_2" population="Golgi_pop1">
+            <input destination="synapses" id="2" target="../Golgi_pop1/2/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+        <inputList id="Input_Golgi_pop1_3" component="Pulse_Golgi_pop1_3" population="Golgi_pop1">
+            <input destination="synapses" id="3" target="../Golgi_pop1/3/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+        <inputList id="Input_Golgi_pop1_4" component="Pulse_Golgi_pop1_4" population="Golgi_pop1">
+            <input destination="synapses" id="4" target="../Golgi_pop1/4/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+        <inputList id="Input_Golgi_pop1_5" component="Pulse_Golgi_pop1_5" population="Golgi_pop1">
+            <input destination="synapses" id="5" target="../Golgi_pop1/5/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+        <inputList id="Input_Golgi_pop1_6" component="Pulse_Golgi_pop1_6" population="Golgi_pop1">
+            <input destination="synapses" id="6" target="../Golgi_pop1/6/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+        <inputList id="Input_Golgi_pop1_7" component="Pulse_Golgi_pop1_7" population="Golgi_pop1">
+            <input destination="synapses" id="7" target="../Golgi_pop1/7/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+        <inputList id="Input_Golgi_pop1_8" component="Pulse_Golgi_pop1_8" population="Golgi_pop1">
+            <input destination="synapses" id="8" target="../Golgi_pop1/8/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+        <inputList id="Input_Golgi_pop1_9" component="Pulse_Golgi_pop1_9" population="Golgi_pop1">
+            <input destination="synapses" id="9" target="../Golgi_pop1/9/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+        <inputList id="Input_Golgi_pop1_10" component="Pulse_Golgi_pop1_10" population="Golgi_pop1">
+            <input destination="synapses" id="10" target="../Golgi_pop1/10/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+        <inputList id="Input_Golgi_pop1_11" component="Pulse_Golgi_pop1_11" population="Golgi_pop1">
+            <input destination="synapses" id="11" target="../Golgi_pop1/11/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+        <inputList id="Input_Golgi_pop1_12" component="Pulse_Golgi_pop1_12" population="Golgi_pop1">
+            <input destination="synapses" id="12" target="../Golgi_pop1/12/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+        <inputList id="Input_Golgi_pop1_13" component="Pulse_Golgi_pop1_13" population="Golgi_pop1">
+            <input destination="synapses" id="13" target="../Golgi_pop1/13/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+        <inputList id="Input_Golgi_pop1_14" component="Pulse_Golgi_pop1_14" population="Golgi_pop1">
+            <input destination="synapses" id="14" target="../Golgi_pop1/14/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+        <inputList id="Input_listPFSpikeSyn_Golgi_pop1_syn0" component="PFSpikeSyn_Golgi_pop1syn0" population="Golgi_pop1">
+            <input fractionAlong="0.173657" destination="synapses" id="0" segmentId="5" target="../Golgi_pop1/14/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.267221" destination="synapses" id="1" segmentId="5" target="../Golgi_pop1/14/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.243912" destination="synapses" id="2" segmentId="5" target="../Golgi_pop1/14/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.062722" destination="synapses" id="3" segmentId="0" target="../Golgi_pop1/14/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.153025" destination="synapses" id="4" segmentId="0" target="../Golgi_pop1/14/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.018984" destination="synapses" id="5" segmentId="0" target="../Golgi_pop1/14/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.006933" destination="synapses" id="6" segmentId="0" target="../Golgi_pop1/14/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.117774" destination="synapses" id="7" segmentId="5" target="../Golgi_pop1/14/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.028921" destination="synapses" id="8" segmentId="5" target="../Golgi_pop1/4/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.060176" destination="synapses" id="9" segmentId="0" target="../Golgi_pop1/4/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.081231" destination="synapses" id="10" segmentId="5" target="../Golgi_pop1/4/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.231660" destination="synapses" id="11" segmentId="5" target="../Golgi_pop1/4/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.048365" destination="synapses" id="12" segmentId="0" target="../Golgi_pop1/4/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.069972" destination="synapses" id="13" segmentId="0" target="../Golgi_pop1/4/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.174343" destination="synapses" id="14" segmentId="0" target="../Golgi_pop1/4/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.339101" destination="synapses" id="15" segmentId="5" target="../Golgi_pop1/4/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.244574" destination="synapses" id="16" segmentId="0" target="../Golgi_pop1/5/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.232373" destination="synapses" id="17" segmentId="5" target="../Golgi_pop1/5/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.014416" destination="synapses" id="18" segmentId="0" target="../Golgi_pop1/5/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.266180" destination="synapses" id="19" segmentId="5" target="../Golgi_pop1/5/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.190999" destination="synapses" id="20" segmentId="5" target="../Golgi_pop1/5/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.219746" destination="synapses" id="21" segmentId="0" target="../Golgi_pop1/5/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.059578" destination="synapses" id="22" segmentId="0" target="../Golgi_pop1/5/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.160287" destination="synapses" id="23" segmentId="0" target="../Golgi_pop1/5/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.286722" destination="synapses" id="24" segmentId="5" target="../Golgi_pop1/13/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.094783" destination="synapses" id="25" segmentId="0" target="../Golgi_pop1/13/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.133507" destination="synapses" id="26" segmentId="0" target="../Golgi_pop1/13/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.214918" destination="synapses" id="27" segmentId="0" target="../Golgi_pop1/13/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.225742" destination="synapses" id="28" segmentId="0" target="../Golgi_pop1/13/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.110850" destination="synapses" id="29" segmentId="0" target="../Golgi_pop1/13/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.077526" destination="synapses" id="30" segmentId="0" target="../Golgi_pop1/13/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.089099" destination="synapses" id="31" segmentId="0" target="../Golgi_pop1/13/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.469650" destination="synapses" id="32" segmentId="5" target="../Golgi_pop1/3/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.107807" destination="synapses" id="33" segmentId="0" target="../Golgi_pop1/3/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.163533" destination="synapses" id="34" segmentId="5" target="../Golgi_pop1/3/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.053382" destination="synapses" id="35" segmentId="0" target="../Golgi_pop1/3/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.236093" destination="synapses" id="36" segmentId="0" target="../Golgi_pop1/3/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.104240" destination="synapses" id="37" segmentId="0" target="../Golgi_pop1/3/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.093920" destination="synapses" id="38" segmentId="5" target="../Golgi_pop1/3/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.079804" destination="synapses" id="39" segmentId="0" target="../Golgi_pop1/3/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.189140" destination="synapses" id="40" segmentId="5" target="../Golgi_pop1/7/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.061645" destination="synapses" id="41" segmentId="0" target="../Golgi_pop1/7/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.035577" destination="synapses" id="42" segmentId="0" target="../Golgi_pop1/7/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.206309" destination="synapses" id="43" segmentId="0" target="../Golgi_pop1/7/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.170274" destination="synapses" id="44" segmentId="0" target="../Golgi_pop1/7/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.161102" destination="synapses" id="45" segmentId="0" target="../Golgi_pop1/7/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.073146" destination="synapses" id="46" segmentId="0" target="../Golgi_pop1/7/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.060735" destination="synapses" id="47" segmentId="0" target="../Golgi_pop1/7/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.058085" destination="synapses" id="48" segmentId="5" target="../Golgi_pop1/8/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.160909" destination="synapses" id="49" segmentId="0" target="../Golgi_pop1/8/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.157033" destination="synapses" id="50" segmentId="0" target="../Golgi_pop1/8/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.240360" destination="synapses" id="51" segmentId="5" target="../Golgi_pop1/8/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.093615" destination="synapses" id="52" segmentId="0" target="../Golgi_pop1/8/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.221488" destination="synapses" id="53" segmentId="0" target="../Golgi_pop1/8/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.062686" destination="synapses" id="54" segmentId="0" target="../Golgi_pop1/8/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.244395" destination="synapses" id="55" segmentId="0" target="../Golgi_pop1/8/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.019255" destination="synapses" id="56" segmentId="0" target="../Golgi_pop1/2/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.296709" destination="synapses" id="57" segmentId="5" target="../Golgi_pop1/2/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.217640" destination="synapses" id="58" segmentId="0" target="../Golgi_pop1/2/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.231328" destination="synapses" id="59" segmentId="0" target="../Golgi_pop1/2/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.191088" destination="synapses" id="60" segmentId="0" target="../Golgi_pop1/2/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.231000" destination="synapses" id="61" segmentId="0" target="../Golgi_pop1/2/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.259949" destination="synapses" id="62" segmentId="5" target="../Golgi_pop1/2/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.053912" destination="synapses" id="63" segmentId="0" target="../Golgi_pop1/2/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+        <inputList id="Input_listPFSpikeSyn_Golgi_pop1_syn1" component="PFSpikeSyn_Golgi_pop1syn1" population="Golgi_pop1">
+            <input fractionAlong="0.002914" destination="synapses" id="0" segmentId="0" target="../Golgi_pop1/14/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.115390" destination="synapses" id="1" segmentId="0" target="../Golgi_pop1/14/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.148786" destination="synapses" id="2" segmentId="0" target="../Golgi_pop1/14/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.214327" destination="synapses" id="3" segmentId="0" target="../Golgi_pop1/14/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.063178" destination="synapses" id="4" segmentId="0" target="../Golgi_pop1/14/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.180096" destination="synapses" id="5" segmentId="5" target="../Golgi_pop1/14/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.175651" destination="synapses" id="6" segmentId="0" target="../Golgi_pop1/14/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.139409" destination="synapses" id="7" segmentId="0" target="../Golgi_pop1/14/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.460275" destination="synapses" id="8" segmentId="5" target="../Golgi_pop1/4/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.049745" destination="synapses" id="9" segmentId="0" target="../Golgi_pop1/4/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.066200" destination="synapses" id="10" segmentId="0" target="../Golgi_pop1/4/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.177589" destination="synapses" id="11" segmentId="5" target="../Golgi_pop1/4/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.113989" destination="synapses" id="12" segmentId="0" target="../Golgi_pop1/4/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.154461" destination="synapses" id="13" segmentId="5" target="../Golgi_pop1/4/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.178018" destination="synapses" id="14" segmentId="5" target="../Golgi_pop1/4/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.188179" destination="synapses" id="15" segmentId="0" target="../Golgi_pop1/4/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.139383" destination="synapses" id="16" segmentId="5" target="../Golgi_pop1/5/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.142318" destination="synapses" id="17" segmentId="5" target="../Golgi_pop1/5/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.121393" destination="synapses" id="18" segmentId="0" target="../Golgi_pop1/5/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.232100" destination="synapses" id="19" segmentId="0" target="../Golgi_pop1/5/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.062726" destination="synapses" id="20" segmentId="0" target="../Golgi_pop1/5/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.014719" destination="synapses" id="21" segmentId="0" target="../Golgi_pop1/5/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.141314" destination="synapses" id="22" segmentId="0" target="../Golgi_pop1/5/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.045749" destination="synapses" id="23" segmentId="0" target="../Golgi_pop1/5/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.342789" destination="synapses" id="24" segmentId="5" target="../Golgi_pop1/13/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.007869" destination="synapses" id="25" segmentId="5" target="../Golgi_pop1/13/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.163777" destination="synapses" id="26" segmentId="0" target="../Golgi_pop1/13/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.022798" destination="synapses" id="27" segmentId="5" target="../Golgi_pop1/13/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.120163" destination="synapses" id="28" segmentId="0" target="../Golgi_pop1/13/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.034598" destination="synapses" id="29" segmentId="0" target="../Golgi_pop1/13/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.202095" destination="synapses" id="30" segmentId="0" target="../Golgi_pop1/13/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.132410" destination="synapses" id="31" segmentId="5" target="../Golgi_pop1/13/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.200244" destination="synapses" id="32" segmentId="0" target="../Golgi_pop1/3/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.155268" destination="synapses" id="33" segmentId="0" target="../Golgi_pop1/3/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.162347" destination="synapses" id="34" segmentId="5" target="../Golgi_pop1/3/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.021488" destination="synapses" id="35" segmentId="0" target="../Golgi_pop1/3/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.166625" destination="synapses" id="36" segmentId="5" target="../Golgi_pop1/3/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.031344" destination="synapses" id="37" segmentId="0" target="../Golgi_pop1/3/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.171958" destination="synapses" id="38" segmentId="0" target="../Golgi_pop1/3/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.010588" destination="synapses" id="39" segmentId="0" target="../Golgi_pop1/3/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.216400" destination="synapses" id="40" segmentId="0" target="../Golgi_pop1/7/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.202900" destination="synapses" id="41" segmentId="5" target="../Golgi_pop1/7/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.054503" destination="synapses" id="42" segmentId="0" target="../Golgi_pop1/7/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.126361" destination="synapses" id="43" segmentId="0" target="../Golgi_pop1/7/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.045045" destination="synapses" id="44" segmentId="5" target="../Golgi_pop1/7/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.259223" destination="synapses" id="45" segmentId="5" target="../Golgi_pop1/7/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.199324" destination="synapses" id="46" segmentId="0" target="../Golgi_pop1/7/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.235550" destination="synapses" id="47" segmentId="0" target="../Golgi_pop1/7/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.222330" destination="synapses" id="48" segmentId="5" target="../Golgi_pop1/8/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.178463" destination="synapses" id="49" segmentId="0" target="../Golgi_pop1/8/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.052189" destination="synapses" id="50" segmentId="0" target="../Golgi_pop1/8/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.029151" destination="synapses" id="51" segmentId="0" target="../Golgi_pop1/8/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.187238" destination="synapses" id="52" segmentId="0" target="../Golgi_pop1/8/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.013305" destination="synapses" id="53" segmentId="0" target="../Golgi_pop1/8/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.187202" destination="synapses" id="54" segmentId="0" target="../Golgi_pop1/8/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.082977" destination="synapses" id="55" segmentId="5" target="../Golgi_pop1/8/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.131843" destination="synapses" id="56" segmentId="5" target="../Golgi_pop1/2/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.048678" destination="synapses" id="57" segmentId="5" target="../Golgi_pop1/2/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.049890" destination="synapses" id="58" segmentId="0" target="../Golgi_pop1/2/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.044398" destination="synapses" id="59" segmentId="0" target="../Golgi_pop1/2/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.128584" destination="synapses" id="60" segmentId="0" target="../Golgi_pop1/2/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.076700" destination="synapses" id="61" segmentId="0" target="../Golgi_pop1/2/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.186016" destination="synapses" id="62" segmentId="0" target="../Golgi_pop1/2/Very_Simple_Golgi_test_morph"/>
+            <input fractionAlong="0.204263" destination="synapses" id="63" segmentId="0" target="../Golgi_pop1/2/Very_Simple_Golgi_test_morph"/>
+        </inputList>
+    </network>
+</neuroml>
