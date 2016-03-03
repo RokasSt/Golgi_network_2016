@@ -1,0 +1,133 @@
+<Lems>
+    
+    <!-- 
+
+        This LEMS file has been automatically generated using PyNeuroML v0.1.7 (libNeuroML v0.2.11)
+
+     -->
+    
+    <!-- Specify which component to run -->
+    <Target component="Golgi_test_v2_exp1_trial0"/>
+
+    <!-- Include core NeuroML2 ComponentType definitions -->
+    <Include file="Cells.xml"/>
+    <Include file="Networks.xml"/>
+    <Include file="Simulation.xml"/>
+    
+    <Include file="Golgi_test_v2_exp1_trial0.net.nml"/>
+    <Include file="Very_Simple_Golgi_test_morph.cell.nml"/>
+    <Include file="Golgi_NaT.channel.nml"/>
+    <Include file="Golgi_KV.channel.nml"/>
+    <Include file="LeakCond.channel.nml"/>
+   
+    <Simulation id="Golgi_test_v2_exp1_trial0" length="450ms" step="0.005ms" target="Golgi_test_v2_exp1_trial0_network">
+        
+        <Display id="display_voltagesGolgi_pop0" title="Voltages Golgi_pop0" timeScale="1ms" xmin="-45.0" xmax="495.0" ymin="-75" ymax="50">
+            <Line id="../Golgi_pop0/0: Vm" quantity="Golgi_pop0/0/Very_Simple_Golgi_test_morph/v" scale="1mV" color="#abeca6" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/1: Vm" quantity="Golgi_pop0/1/Very_Simple_Golgi_test_morph/v" scale="1mV" color="#768c89" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/2: Vm" quantity="Golgi_pop0/2/Very_Simple_Golgi_test_morph/v" scale="1mV" color="#320cd8" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/3: Vm" quantity="Golgi_pop0/3/Very_Simple_Golgi_test_morph/v" scale="1mV" color="#29005a" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/4: Vm" quantity="Golgi_pop0/4/Very_Simple_Golgi_test_morph/v" scale="1mV" color="#0cc2b9" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/5: Vm" quantity="Golgi_pop0/5/Very_Simple_Golgi_test_morph/v" scale="1mV" color="#e39587" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/6: Vm" quantity="Golgi_pop0/6/Very_Simple_Golgi_test_morph/v" scale="1mV" color="#d4ef1c" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/7: Vm" quantity="Golgi_pop0/7/Very_Simple_Golgi_test_morph/v" scale="1mV" color="#ae666c" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/8: Vm" quantity="Golgi_pop0/8/Very_Simple_Golgi_test_morph/v" scale="1mV" color="#19d08d" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/9: Vm" quantity="Golgi_pop0/9/Very_Simple_Golgi_test_morph/v" scale="1mV" color="#27e0c6" timeScale="1ms"/>
+        </Display>
+        
+        <Display id="display_voltagesGolgi_pop1" title="Voltages Golgi_pop1" timeScale="1ms" xmin="-45.0" xmax="495.0" ymin="-75" ymax="50">
+            <Line id="../Golgi_pop1/0: Vm" quantity="Golgi_pop1/0/Very_Simple_Golgi_test_morph/v" scale="1mV" color="#8fbd13" timeScale="1ms"/>
+            <Line id="../Golgi_pop1/1: Vm" quantity="Golgi_pop1/1/Very_Simple_Golgi_test_morph/v" scale="1mV" color="#76a4e3" timeScale="1ms"/>
+            <Line id="../Golgi_pop1/2: Vm" quantity="Golgi_pop1/2/Very_Simple_Golgi_test_morph/v" scale="1mV" color="#b78216" timeScale="1ms"/>
+            <Line id="../Golgi_pop1/3: Vm" quantity="Golgi_pop1/3/Very_Simple_Golgi_test_morph/v" scale="1mV" color="#f19205" timeScale="1ms"/>
+            <Line id="../Golgi_pop1/4: Vm" quantity="Golgi_pop1/4/Very_Simple_Golgi_test_morph/v" scale="1mV" color="#d3a662" timeScale="1ms"/>
+            <Line id="../Golgi_pop1/5: Vm" quantity="Golgi_pop1/5/Very_Simple_Golgi_test_morph/v" scale="1mV" color="#672217" timeScale="1ms"/>
+            <Line id="../Golgi_pop1/6: Vm" quantity="Golgi_pop1/6/Very_Simple_Golgi_test_morph/v" scale="1mV" color="#0105f9" timeScale="1ms"/>
+            <Line id="../Golgi_pop1/7: Vm" quantity="Golgi_pop1/7/Very_Simple_Golgi_test_morph/v" scale="1mV" color="#ec2f3b" timeScale="1ms"/>
+            <Line id="../Golgi_pop1/8: Vm" quantity="Golgi_pop1/8/Very_Simple_Golgi_test_morph/v" scale="1mV" color="#173566" timeScale="1ms"/>
+            <Line id="../Golgi_pop1/9: Vm" quantity="Golgi_pop1/9/Very_Simple_Golgi_test_morph/v" scale="1mV" color="#4cdae2" timeScale="1ms"/>
+        </Display>
+        
+        <OutputFile id="Volts0_file0_0" fileName="simulations/test_v2_exp1/sim0/Golgi_pop0_cell0.dat">
+            <OutputColumn id="v0" quantity="Golgi_pop0/0/Very_Simple_Golgi_test_morph/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_1" fileName="simulations/test_v2_exp1/sim0/Golgi_pop0_cell1.dat">
+            <OutputColumn id="v1" quantity="Golgi_pop0/1/Very_Simple_Golgi_test_morph/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_2" fileName="simulations/test_v2_exp1/sim0/Golgi_pop0_cell2.dat">
+            <OutputColumn id="v2" quantity="Golgi_pop0/2/Very_Simple_Golgi_test_morph/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_3" fileName="simulations/test_v2_exp1/sim0/Golgi_pop0_cell3.dat">
+            <OutputColumn id="v3" quantity="Golgi_pop0/3/Very_Simple_Golgi_test_morph/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_4" fileName="simulations/test_v2_exp1/sim0/Golgi_pop0_cell4.dat">
+            <OutputColumn id="v4" quantity="Golgi_pop0/4/Very_Simple_Golgi_test_morph/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_5" fileName="simulations/test_v2_exp1/sim0/Golgi_pop0_cell5.dat">
+            <OutputColumn id="v5" quantity="Golgi_pop0/5/Very_Simple_Golgi_test_morph/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_6" fileName="simulations/test_v2_exp1/sim0/Golgi_pop0_cell6.dat">
+            <OutputColumn id="v6" quantity="Golgi_pop0/6/Very_Simple_Golgi_test_morph/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_7" fileName="simulations/test_v2_exp1/sim0/Golgi_pop0_cell7.dat">
+            <OutputColumn id="v7" quantity="Golgi_pop0/7/Very_Simple_Golgi_test_morph/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_8" fileName="simulations/test_v2_exp1/sim0/Golgi_pop0_cell8.dat">
+            <OutputColumn id="v8" quantity="Golgi_pop0/8/Very_Simple_Golgi_test_morph/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_9" fileName="simulations/test_v2_exp1/sim0/Golgi_pop0_cell9.dat">
+            <OutputColumn id="v9" quantity="Golgi_pop0/9/Very_Simple_Golgi_test_morph/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts1_file0_0" fileName="simulations/test_v2_exp1/sim0/Golgi_pop1_cell0.dat">
+            <OutputColumn id="v0" quantity="Golgi_pop1/0/Very_Simple_Golgi_test_morph/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts1_file0_1" fileName="simulations/test_v2_exp1/sim0/Golgi_pop1_cell1.dat">
+            <OutputColumn id="v1" quantity="Golgi_pop1/1/Very_Simple_Golgi_test_morph/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts1_file0_2" fileName="simulations/test_v2_exp1/sim0/Golgi_pop1_cell2.dat">
+            <OutputColumn id="v2" quantity="Golgi_pop1/2/Very_Simple_Golgi_test_morph/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts1_file0_3" fileName="simulations/test_v2_exp1/sim0/Golgi_pop1_cell3.dat">
+            <OutputColumn id="v3" quantity="Golgi_pop1/3/Very_Simple_Golgi_test_morph/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts1_file0_4" fileName="simulations/test_v2_exp1/sim0/Golgi_pop1_cell4.dat">
+            <OutputColumn id="v4" quantity="Golgi_pop1/4/Very_Simple_Golgi_test_morph/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts1_file0_5" fileName="simulations/test_v2_exp1/sim0/Golgi_pop1_cell5.dat">
+            <OutputColumn id="v5" quantity="Golgi_pop1/5/Very_Simple_Golgi_test_morph/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts1_file0_6" fileName="simulations/test_v2_exp1/sim0/Golgi_pop1_cell6.dat">
+            <OutputColumn id="v6" quantity="Golgi_pop1/6/Very_Simple_Golgi_test_morph/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts1_file0_7" fileName="simulations/test_v2_exp1/sim0/Golgi_pop1_cell7.dat">
+            <OutputColumn id="v7" quantity="Golgi_pop1/7/Very_Simple_Golgi_test_morph/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts1_file0_8" fileName="simulations/test_v2_exp1/sim0/Golgi_pop1_cell8.dat">
+            <OutputColumn id="v8" quantity="Golgi_pop1/8/Very_Simple_Golgi_test_morph/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts1_file0_9" fileName="simulations/test_v2_exp1/sim0/Golgi_pop1_cell9.dat">
+            <OutputColumn id="v9" quantity="Golgi_pop1/9/Very_Simple_Golgi_test_morph/v"/> 
+        </OutputFile>
+        
+    </Simulation>
+
+</Lems>

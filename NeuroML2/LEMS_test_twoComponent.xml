@@ -1,0 +1,60 @@
+<Lems>
+
+    
+
+    <Target component="sim1"/>
+
+    <Include file="NeuroMLCoreDimensions.xml"/>
+    <Include file="Cells.xml"/>
+    <Include file="Networks.xml"/>
+    <Include file="Simulation.xml"/>
+    <Include file="LEMS_multi_component.xml"/>
+    
+   <expThreeSynapse id="MFSpikeSyn" gbase1="1.5nS" tauRise="0.1ms" tauDecay1="0.7ms" gbase2="0.5nS" tauDecay2="2.5ms"  erev="0mV"/> 
+   
+   <transientPoissonFiringSynapse id="input0" delay="50ms" duration="500ms" averageRate="10 Hz" synapse="MFSpikeSyn" spikeTarget="./MFSpikeSyn"/>
+
+
+    <iafCell id="iaf1" leakReversal="-60mV" thresh="-40mV" reset="-65mV" C="1e-5uF" leakConductance="5e-7mS"/>
+    <iafCell id="iaf2" leakReversal="-60mV" thresh="-40mV" reset="-70mV" C="1e-5uF" leakConductance="5.2e-7mS"/>
+
+    <network id="net2">
+
+       
+
+        <population id="Pop0" component="iaf1" size="1"/>
+        
+        
+
+         <inputList id="stimInput" component="input0" population="Pop0">
+           
+            <input id="0" target="../Pop0[0]" destination="synapses"/>
+        </inputList>
+
+
+
+    </network>
+
+   
+
+    <Simulation id="sim1" length="600ms" step="0.005ms" target="net2">
+
+        
+
+        <Display id="d2" title="Test TwoExponential Two Component Synapse" timeScale="1ms" xmin="0" xmax="600" ymin="-100" ymax="20">
+            
+            <Line id="pop0" quantity="Pop0[0]/v" scale="1mV" color="#00ff00" timeScale="1ms"/>
+            
+        </Display>
+
+        
+        
+       
+    </Simulation>
+
+
+</Lems>
+
+  
+
+
