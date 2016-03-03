@@ -33,7 +33,7 @@ if __name__ == "__main__":
     net_params_test_2010_multiple['experiment1']['connParams']={}
     net_params_test_2010_multiple['experiment1']['connParams']['populationPairs']=[]
     net_params_test_2010_multiple['experiment1']['connParams']['populationPairs'].append({'electricalConnModel':"Vervaeke_2010_based",'prePopID':'Golgi_pop0',\
-                                                    'postPopID':'Golgi_pop1','spatialScale':1,'testingConductanceScale':1,'units':'nS','maximalConnDistance':200,'normalizeConductances':False,\
+                                                    'postPopID':'Golgi_pop1','spatialScale':1,'testingConductanceScale':1,'units':'nS','maximalConnDistance':200,'normalizeConductances':True,\
                             'prePoptargetGroup':{'segmentGroupList':["apical"],'segmentGroupProbabilities':[1]},\
                             'postPoptargetGroup':{'segmentGroupList':["apical"],'segmentGroupProbabilities':[1]}})
 

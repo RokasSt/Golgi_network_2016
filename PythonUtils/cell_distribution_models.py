@@ -153,6 +153,9 @@ def random_minimal_distance(cell_position_array,cell_array,minimal_distance,popI
 	Golgi_cell=neuroml.Instance(id="%d"%cell)
 	golgi_pop_object.instances.append(Golgi_cell)
         if popIndex==0 and cell==0:
+           X=random.random()
+	   Y=random.random()
+	   Z=random.random()
            Xcoordinate=dim_dict_offsets['x_dim_offset']+dim_dict_max_values['x_dim']*X
            Ycoordinate=dim_dict_offsets['y_dim_offset']+dim_dict_max_values['y_dim']*Y
            Zcoordinate=dim_dict_offsets['z_dim_offset']+dim_dict_max_values['z_dim']*Z
@@ -178,7 +181,7 @@ def random_minimal_distance(cell_position_array,cell_array,minimal_distance,popI
                 Zcoordinate=dim_dict_offsets['z_dim_offset']+dim_dict_max_values['z_dim']*Z
                 for cell_pop_x in range(0,len(cell_array)):
                     pop_cell_positions=cell_position_array[cell_array[cell_pop_x]['popID']]
-                    for cell_x in range(0,cell_array[cell_pop_x]['size']):
+                    for cell_x in range(0,len(pop_cell_positions)):
                         if pop_cell_positions[cell_x,0]+pop_cell_positions[cell_x,1]+pop_cell_positions[cell_x,2] >0:
                            if distance([Xcoordinate,Ycoordinate,Zcoordinate],pop_cell_positions[cell_x]) < minimal_distance:
                               overlap_counter+=1
@@ -196,7 +199,7 @@ def random_minimal_distance(cell_position_array,cell_array,minimal_distance,popI
                     
                    Golgi_cell.location=neuroml.Location(x=Xcoordinate, y=Ycoordinate, z=Zcoordinate)
                                
-                   print pop_position_array[cell,0], cell_position_array[cell,1], cell_position_array[cell,2]
+                   print pop_position_array[cell,0], pop_position_array[cell,1], pop_position_array[cell,2]
                    x=1   
 
 

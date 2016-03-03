@@ -127,8 +127,8 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
 
                   net.populations.append(Golgi_pop)
                   
-            if location_array['populationList'][pop]['distanceModel']=="random_minimal_disance":
-
+            if location_array['populationList'][pop]['distanceModel']=="random_minimal_distance":
+               
                if location_array['populationList'][pop]['distributionModel']=="density_profile":
 
                   location_parameters=location_array['populationList'][pop]
@@ -150,7 +150,7 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
                   dim_dict_max_values['z_dim']=location_array['populationList'][pop]['zDim']
                          
                   pop_position_array,Golgi_pop=random_minimal_distance(cell_position_array,cell_array,\
-minimal_distance,pop,seed_number,golgi_pop_object,dim_dict_max_values)
+minimal_distance,pop,seed,golgi_pop_object,dim_dict_max_values)
 
                   cell_position_array[cell_array[pop]['popID']]=np.vstack((cell_position_array[cell_array[pop]['popID']],pop_position_array))
                   
@@ -190,7 +190,7 @@ minimal_distance,pop,seed_number,golgi_pop_object,dim_dict_max_values)
                       print cell_position_array[cell_array[cell_pop]['popID']][cell,0], cell_position_array[cell_array[cell_pop]['popID']][cell,1], cell_position_array[cell_array[cell_pop]['popID']][cell,2]
                   net.populations.append(Golgi_pop)
 
-
+        
         ############################################ connectivity block
         synapse_name_array=[]        
         connMatrix_array=[]
@@ -222,7 +222,9 @@ minimal_distance,pop,seed_number,golgi_pop_object,dim_dict_max_values)
                   pre_pop_cell_component=cell_array[prePop_listIndex]['cellType']
                   post_pop_cell_component=cell_array[postPop_listIndex]['cellType']
                   pre_pop_cell_positions=cell_position_array[prePop]
+                  print pre_pop_cell_positions
                   post_pop_cell_positions=cell_position_array[postPop]
+                  print post_pop_cell_positions
                   if simulation_parameters['parentDirRequired']:
                      proj, nonempty_projection,gap_junction_array=Vervaeke_2012_AND_explicit_conn_prob_model(pair,initial_projection_counter,prePop,prePop_listIndex,prePopSize,pre_pop_cell_component,preCell_NML2type,pre_pop_cell_positions,\
                              postPop,postPop_listIndex,postPopSize,post_pop_cell_component,postCell_NML2type,post_pop_cell_positions,pair_connectivity_parameters,seed,simulation_parameters['parentDir'])
@@ -292,44 +294,53 @@ postPop,postPop_listIndex,postPopSize,post_pop_cell_component,postCell_NML2type,
                    popSize=cell_array[pop]['size']
             input_group_array=input_information[pop]['inputGroups']
             cellType=cell_array[pop_listIndex]['cellType']
+            cellNML2Type=None
+            if "NeuroML2CellType" in cell_array[pop_listIndex]:
+               cellNML2Type=cell_array[pop_listIndex]["NeuroML2CellType"]
+
+            if "NeuroML2CellType" in cell_array[postPop_listIndex]:
+               cellNML2Type=cell_array[postPop_listIndex]["NeuroML2CellType"]
             for input_group in range(0,len(input_group_array)):
                 if input_group_array[input_group]['inputModel']=='XF' and input_group_array[input_group]['targetingRegime']=="uniform":
                    
                    if simulation_parameters['parentDirRequired']:
-                      input_list,poisson_synapse_array,synapse_name_list=XF_input_model_uniform(popID,popSize,cellType,input_group_array[input_group],seed,\
-                      simulation_parameters['parentDir'])
+                      input_list_array,poisson_synapse_array,synapse_name_list=XF_input_models_uniform(popID,popSize,cellType,cellNML2Type,input_group_array[input_group],seed,simulation_parameters['parentDir'])
                    else:
-                      input_list,poisson_synapse_array,synapse_name_list=XF_input_model_uniform(popID,popSize,cellType,input_group_array[input_group],seed)                                          
+                      input_list,poisson_synapse_array,synapse_name_list=XF_input_models_uniform(popID,popSize,cellType,cellNML2Type,input_group_array[input_group],seed)                                          
                    
 
                    synapse_name_array.extend(synapse_name_list)
 
-                   net.input_lists.append(input_list)
+                   
 
                    for poisson_syn in range(0,len(poisson_synapse_array)):
-          
-                       nml_doc.poisson_firing_synapses.append(poisson_synapse_array[poisson_syn])
-
+                       if poisson_synapse_array[poisson_syn]['synapseMode']=="persistent":
+                          nml_doc.poisson_firing_synapses.append(poisson_synapse_array[poisson_syn]['synapse_object'])
+                       if poisson_synapse_array[poisson_syn]['synapseMode']=="transient":
+                          nml_doc.transient_poisson_firing_synapses.append(poisson_synapse_array[poisson_syn]['synapse_object'])
+                       net.input_lists.append(input_list_array[poisson_syn])
                 if input_group_array[input_group]['inputModel']=='XF' and input_group_array[input_group]['targetingRegime']=="3D_region_specific":
                         
                    if simulation_parameters['parentDirRequired']:
                            
-                      input_list,poisson_synapse_array,synapse_name_list=XF_input_model_3D_region_specific(popID,cellType,input_group_array[input_group],\
+                      input_list_array,poisson_synapse_array,synapse_name_list=XF_input_model_3D_region_specific(popID,cellType,cellNML2Type,input_group_array[input_group],\
                       cell_position_array[popID],seed,simulation_parameters['parentDir'])   
 
                    else:
-                      input_list,poisson_synapse_array,synapse_name_list=XF_input_model_3D_region_specific(popID,cellType,input_group_array[input_group],\
+                      input_list,poisson_synapse_array,synapse_name_list=XF_input_model_3D_region_specific(popID,cellType,cellNML2Type,input_group_array[input_group],\
                       cell_position_array[popID],seed)                                          
                    
 
                    synapse_name_array.extend(synapse_name_list)
 
-                   net.input_lists.append(input_list)
+                   
 
                    for poisson_syn in range(0,len(poisson_synapse_array)):
-          
-                       nml_doc.poisson_firing_synapses.append(poisson_synapse_array[poisson_syn])                
-        
+                       if poisson_synapse_array[poisson_syn]['synapseMode']=="persistent":
+                          nml_doc.poisson_firing_synapses.append(poisson_synapse_array[poisson_syn]['synapse_object'])
+                       if poisson_synapse_array[poisson_syn]['synapseMode']=="transient":
+                          nml_doc.transient_poisson_firing_synapses.append(poisson_synapse_array[poisson_syn]['synapse_object'])           
+                       net.input_lists.append(input_list_array)
 	        ###### implementing physiological heterogeneity between cells with variations in a basal firing rate
                 if input_group_array[input_group]['inputModel']=="variable_basal_firing_rate":
 
