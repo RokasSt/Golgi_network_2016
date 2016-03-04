@@ -89,38 +89,39 @@ def Vervaeke_2012_AND_explicit_conn_prob_model(pair_id,projection_id,prePop,preP
         else:
            post_index_array=range(0,postPopSize)
         for Post_cell in post_index_array:        
-            if connectivity_parameters['electricalConnModel']=="explicit_connection_probabilities":
-               connection_probability=connectivity_parameters['connProbability']
+            if Pre_cell <= Post_cell:
+               if connectivity_parameters['electricalConnModel']=="explicit_connection_probabilities":
+                  connection_probability=connectivity_parameters['connProbability']
                           
-            if connectivity_parameters['electricalConnModel']=="Vervaeke_2012_based":
-               distance_between_cells=distance(pre_cell_positions[Pre_cell],post_cell_positions[Post_cell])/spatial_scale
-               connection_probability=connection_probability_vervaeke_2010(distance_between_cells)
+               if connectivity_parameters['electricalConnModel']=="Vervaeke_2012_based":
+                  distance_between_cells=distance(pre_cell_positions[Pre_cell],post_cell_positions[Post_cell])/spatial_scale
+                  connection_probability=connection_probability_vervaeke_2010(distance_between_cells)
                           
-            if random.random() < connection_probability:
-
-               if connectivity_parameters['targetingModelprePop']['model']=="segment groups and segments":
-                  pre_target_points=get_unique_target_points(pre_pop_target_segment_array,"segment groups and segments",\
+               if random.random() < connection_probability:
+                  nonempty_projection=True
+                  if connectivity_parameters['targetingModelprePop']['model']=="segment groups and segments":
+                     pre_target_points=get_unique_target_points(pre_pop_target_segment_array,"segment groups and segments",\
                              [connectivity_parameters['targetingModelprePop']['segmentGroupList'],\
 connectivity_parameters['targetingModelprePop']['segmentGroupProbabilities']],no_of_GJcon_per_pair)
 
-               if connectivity_parameters['targetingModelprePop']['model']=="segments and subsegments":
-                  pre_target_points=get_unique_target_points(pre_pop_target_segment_array,"segments and subsegments",\
+                  if connectivity_parameters['targetingModelprePop']['model']=="segments and subsegments":
+                     pre_target_points=get_unique_target_points(pre_pop_target_segment_array,"segments and subsegments",\
  [connectivity_parameters['targetingModelprePop']['segmentList'],\
  connectivity_parameters['targetingModelprePop']['segmentProbabilities'],\
  connectivity_parameters['targetingModelprePop']['fractionAlongANDsubsegProbabilities']],no_of_GJcon_per_pair)
        
-               if connectivity_parameters['targetingModelpostPop']['model']=="segment groups and segments":
+                  if connectivity_parameters['targetingModelpostPop']['model']=="segment groups and segments":
 
-                  post_targeting_mode="segment groups and segments"
+                     post_targeting_mode="segment groups and segments"
 
-                  post_targeting_parameters=[connectivity_parameters['targetingModelpostPop']['segmentGroupList'],\
+                     post_targeting_parameters=[connectivity_parameters['targetingModelpostPop']['segmentGroupList'],\
                        connectivity_parameters['targetingModelpostPop']['segmentGroupProbabilities']]
 
-               if connectivity_parameters['targetingModelpostPop']['model']=="segments and subsegments":
+                  if connectivity_parameters['targetingModelpostPop']['model']=="segments and subsegments":
 
-                  post_targeting_mode="segments and subsegments"
+                     post_targeting_mode="segments and subsegments"
 
-                  post_targeting_parameters=[connectivity_parameters['targetingModelpostPop']['segmentList'],\
+                     post_targeting_parameters=[connectivity_parameters['targetingModelpostPop']['segmentList'],\
  connectivity_parameters['targetingModelpostPop']['segmentProbabilities'],connectivity_parameters['targetingModelpostPop']['fractionAlongANDsubsegProbabilities']]
 
                   for pre_target_point in range(0,len(pre_target_points)):
@@ -144,8 +145,7 @@ connectivity_parameters['targetingModelprePop']['segmentGroupProbabilities']],no
 
                       if connectivity_parameters['conductanceModel']=="variable":
                          if string.lower(connectivity_parameters['distribution'])=="gaussian":
-                            conductance=random.gauss(connectivity_parameters['averageConductance'],\
-                     connectivity_parameters['stdDev'])
+                            conductance=random.gauss(connectivity_parameters['averageConductance'],connectivity_parameters['stdDev'])
                             conductanceUnits=connectivity_parameters['units']
                             gap_junction = neuroml.GapJunction(id="gap_junction%d%d"%(pair_id,gap_counter), conductance="%f%s"%(conductance*conductance_scaling,conductanceUnits) )
                             gapJ_object_array.append(gap_junction)        
@@ -158,7 +158,7 @@ post_cell="../%s/%d/%s"%(postPop,Post_cell,postCellType),synapse=gap_junction.id
                                                              pre_segment="%d"%Pre_segment_id,post_segment="%d"%Post_segment_id,\
                                                              pre_fraction_along="%f"%Pre_fraction,post_fraction_along="%f"%Post_fraction)
                                             
-		      nonempty_projection=True
+		      
                       proj.electrical_connection_instances.append(conn)
 		      conn_count+=1
 
@@ -232,66 +232,66 @@ connectivity_parameters['prePoptargetGroup']['segmentGroupList']])
         else:
            post_index_array=range(0,postPopSize)
         for Post_cell in post_index_array:
-                                                        
-            distance_between_cells=distance(pre_cell_positions[Pre_cell],post_cell_positions[Post_cell])/spatial_scale
+            if Pre_cell <= Post_cell:                                     
+               distance_between_cells=distance(pre_cell_positions[Pre_cell],post_cell_positions[Post_cell])/spatial_scale
 
-            if connectivity_parameters['normalizeConductances']:
+               if connectivity_parameters['normalizeConductances']:
                                                         
-               if make_conductance_array_no_spatial_scale:
-                  distance_between_cells_spatial_scale1=spatial_scale*distance_between_cells
+                  if make_conductance_array_no_spatial_scale:
+                     distance_between_cells_spatial_scale1=spatial_scale*distance_between_cells
                              
                                                         
-            if random.random() <connection_probability_vervaeke_2010(distance_between_cells):
-
-               conductanceValue=synaptic_weight_vervaeke_2010(distance_between_cells)
-               conductance_array.append(conductanceValue)
+               if random.random() <connection_probability_vervaeke_2010(distance_between_cells):
+                  nonempty_projection=True
+                  conductanceValue=synaptic_weight_vervaeke_2010(distance_between_cells)
+                  conductance_array.append(conductanceValue)
+                                                         
+                  if make_conductance_array_no_spatial_scale:
+                     conductanceValueN=synaptic_weight_vervaeke_2010(distance_between_cells_spatial_scale1)
+                     conductance_array_spatial_scale1.append(conductanceValueN)
                                                         
-               if make_conductance_array_no_spatial_scale:
-                  conductanceValueN=synaptic_weight_vervaeke_2010(distance_between_cells_spatial_scale1)
-                  conductance_array_spatial_scale1.append(conductanceValueN)
-                                                        
-               if 'prePoptargetGroup' in connectivity_parameters:
-                  pre_target_points=get_unique_target_points(pre_pop_target_segment_array,"segment groups and segments",\
+                  if 'prePoptargetGroup' in connectivity_parameters:
+                     pre_target_points=get_unique_target_points(pre_pop_target_segment_array,"segment groups and segments",\
                              [connectivity_parameters['prePoptargetGroup' ]['segmentGroupList'],\
 connectivity_parameters['prePoptargetGroup']['segmentGroupProbabilities']],1)
 
        
-               if 'postPoptargetGroup' in connectivity_parameters:
+                  if 'postPoptargetGroup' in connectivity_parameters:
 
-                  post_targeting_mode="segment groups and segments"
+                      post_targeting_mode="segment groups and segments"
 
-                  post_targeting_parameters=[connectivity_parameters['postPoptargetGroup']['segmentGroupList'],\
+                      post_targeting_parameters=[connectivity_parameters['postPoptargetGroup']['segmentGroupList'],\
 connectivity_parameters['postPoptargetGroup']['segmentGroupProbabilities']]
 
                           
-               if 'maximalConnDistance' in connectivity_parameters:
-                  x=0
-                  while x==0:
-                     post_target_point=get_unique_target_points(post_pop_target_segment_array,post_targeting_mode,post_targeting_parameters,1) 
-                     if get_3D_connection_length(preCellTypeFile,postCellTypeFile,preNML2Type,postNML2Type,pre_cell_positions,post_cell_positions,Pre_cell,\
-                        Post_cell,pre_target_points[0,0],post_target_point[0,0],\
-                        pre_target_points[0,1],post_target_point[0,1]) <=connectivity_parameters['maximalConnDistance']:
-                        x=1
-               else:
-                  post_target_point=get_unique_target_points(post_pop_target_segment_array,post_targeting_mode,\
+                  if 'maximalConnDistance' in connectivity_parameters:
+                     x=0
+                     while x==0:
+                         post_target_point=get_unique_target_points(post_pop_target_segment_array,post_targeting_mode,post_targeting_parameters,1) 
+                         if get_3D_connection_length(preCellTypeFile,postCellTypeFile,preNML2Type,postNML2Type,pre_cell_positions,post_cell_positions,Pre_cell,\
+                            Post_cell,pre_target_points[0,0],post_target_point[0,0],\
+                            pre_target_points[0,1],post_target_point[0,1]) <=connectivity_parameters['maximalConnDistance']:
+                            x=1
+                  else:
+                     post_target_point=get_unique_target_points(post_pop_target_segment_array,post_targeting_mode,\
                                                                              post_targeting_parameters,1)
 
-               Pre_segment_id=pre_target_points[0,0]
-               Post_segment_id=post_target_point[0,0]
-               Pre_fraction=pre_target_points[0,1]
-               Post_fraction=post_target_point[0,1]
+                  Pre_segment_id=pre_target_points[0,0]
+                  Post_segment_id=post_target_point[0,0]
+                  Pre_fraction=pre_target_points[0,1]
+                  Post_fraction=post_target_point[0,1]
 
                           
-               conn =neuroml.ElectricalConnectionInstance(id=conn_count,\
+                  conn =neuroml.ElectricalConnectionInstance(id=conn_count,\
 pre_cell="../%s/%d/%s"%(prePop,Pre_cell,preCellType),\
 post_cell="../%s/%d/%s"%(postPop,Post_cell,postCellType),synapse="gap_junction%d%d"%(pair_id,gap_counter),\
                                                              pre_segment="%d"%Pre_segment_id,post_segment="%d"%Post_segment_id,\
                                                              pre_fraction_along="%f"%Pre_fraction,post_fraction_along="%f"%Post_fraction)
-               gap_counter+=1                         
-	       nonempty_projection=True
+                  gap_counter+=1                         
+	          
 
-               proj.electrical_connection_instances.append(conn)
-	       conn_count+=1
+                  proj.electrical_connection_instances.append(conn)
+	          conn_count+=1
     ########
     conductanceUnits=connectivity_parameters['units']
     if len(conductance_array)==gap_counter:

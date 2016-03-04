@@ -235,7 +235,7 @@ minimal_distance,pop,seed,golgi_pop_object,dim_dict_max_values)
                   else:
                      proj, nonempty_projection,gap_junction_array=Vervaeke_2012_AND_explicit_conn_prob_model(pair,initial_projection_counter,prePop,prePop_listIndex,prePopSize,pre_pop_cell_component,preCell_NML2type,pre_pop_cell_positions,\
          postPop,postPop_listIndex,postPopSize,post_pop_cell_component,postCell_NML2type,post_pop_cell_positions,pair_connectivity_parameters,seed)
-                
+                  
                   if nonempty_projection:
                      initial_projection_counter+=1
                      net.electrical_projections.append(proj)
@@ -411,14 +411,14 @@ postPop,postPop_listIndex,postPopSize,post_pop_cell_component,postCell_NML2type,
         ###### Validate the NeuroML2 ######   
 
         validate_neuroml2(nml_file_dir)
-
+        
         sim_info_array={}
         sim_info_array['ref']=ref
         sim_info_array['netID']=net.id
         sim_info_array['simParams']=simulation_parameters
         sim_info_array['nmlFile']=nml_file
         sim_info_array['nmlPath']=path
-
+       
         cell_info_array={}
         cell_info_array['popParams']=cell_array
         cell_info_array['cellPositionArray']=cell_position_array
@@ -434,7 +434,7 @@ def generate_LEMS_and_run(sim_array,pop_array):
 
         cell_array=pop_array['popParams']
         
-        
+       
         # Create a LEMSSimulation to manage creation of LEMS file
 
         ls = LEMSSimulation(ref, simulation_parameters['duration'], simulation_parameters['timeStep'])

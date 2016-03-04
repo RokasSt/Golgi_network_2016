@@ -1,33 +1,33 @@
-<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2beta4.xsd" id="Golgi_test_10comp_3channels_exp1_trial0">
-    <include href="/../../../Golgi_10comp_3channels_1CaPool.cell.nml"></include>
-    <gapJunction id="gap_junction00" conductance="1.191716nS"/>
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2beta4.xsd" id="Golgi_test_10comp_all_channels_twoCaPools_trial0">
+    <include href="/../../../Golgi_10comp_all_channels_twoCaPools.cell.nml"></include>
+    <gapJunction id="gap_junction00" conductance="1.564088nS"/>
     <pulseGenerator id="Input_Golgi_pop0_0" delay="20.000000ms" duration="200.000000ms" amplitude="0.000040uA"/>
-    <network id="Golgi_test_10comp_3channels_exp1_trial0_network" type="networkWithTemperature" temperature="23 degC">
+    <network id="Golgi_test_10comp_all_channels_twoCaPools_trial0_network" type="networkWithTemperature" temperature="23 degC">
         <notes>Parameter arrays for building this network are listed below:
 Cell distribution parameters:
 {'distanceModel': 'random_no_overlap', 'popID': 'Golgi_pop0', 'zDim': 50, 'xDim': 50, 'distributionModel': 'explicit_cell_numbers', 'yDim': 50}
 Cell population parameters:
 Cell population parameters for Golgi_pop0:
-{'popID': 'Golgi_pop0', 'cellType': 'Golgi_10comp_3channels_1CaPool', 'size': 2}
+{'NeuroML2CellType': 'cell2CaPools', 'popID': 'Golgi_pop0', 'cellType': 'Golgi_10comp_all_channels_twoCaPools', 'size': 2}
 Cell connectivity parameters:
 {'testingConductanceScale': 1, 'maximalConnDistance': 200, 'electricalConnModel': 'Vervaeke_2010_based', 'postPoptargetGroup': {'segmentGroupList': ['dendrite_group'], 'segmentGroupProbabilities': [1]}, 'units': 'nS', 'normalizeConductances': False, 'spatialScale': 1, 'prePopID': 'Golgi_pop0', 'postPopID': 'Golgi_pop0', 'prePoptargetGroup': {'segmentGroupList': ['dendrite_group'], 'segmentGroupProbabilities': [1]}}
 Input parameters for a list of populations:
 Input group parameters for Golgi_pop0:
 {'ampUnits': 'uA', 'testingModel': 'pulseGenerators', 'timeUnits': 'ms', 'inputModel': 'testing', 'pulseParameters': [{'delay': 20, 'duration': 200, 'amplitude': 4e-05}], 'cellFractionToTarget': 0.5}
 </notes>
-        <population id="Golgi_pop0" type="populationList" component="Golgi_10comp_3channels_1CaPool" size="2">
+        <population id="Golgi_pop0" type="populationList" component="Golgi_10comp_all_channels_twoCaPools" size="2">
             <instance id="0">
-                <location y="35.631934538506073" x="16.089459553089242" z="49.848634058810973"/>
+                <location y="48.04439363581853" x="3.526532249122099" z="29.422223203693999"/>
             </instance>
             <instance id="1">
-                <location y="21.4135768932418" x="11.398711723799632" z="7.14560134894715"/>
+                <location y="19.086857759280417" x="23.236607226364132" z="40.336081021732426"/>
             </instance>
         </population>
         <electricalProjection id="proj0" postsynapticPopulation="Golgi_pop0" presynapticPopulation="Golgi_pop0">
-            <electricalConnectionInstance id="0" synapse="gap_junction00" preFractionAlong="0.428272" preSegment="4" postFractionAlong="0.342770" postSegment="4" postCell="../Golgi_pop0/1/Golgi_10comp_3channels_1CaPool" preCell="../Golgi_pop0/0/Golgi_10comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="0" synapse="gap_junction00" preFractionAlong="0.381737" preSegment="6" postFractionAlong="0.034352" postSegment="3" postCell="../Golgi_pop0/1/Golgi_10comp_all_channels_twoCaPools" preCell="../Golgi_pop0/0/Golgi_10comp_all_channels_twoCaPools"/>
         </electricalProjection>
         <inputList id="Input_list_Golgi_pop0_0" component="Input_Golgi_pop0_0" population="Golgi_pop0">
-            <input destination="synapses" id="0" target="../Golgi_pop0/0/Golgi_10comp_3channels_1CaPool"/>
+            <input destination="synapses" id="0" target="../Golgi_pop0/0/Golgi_10comp_all_channels_twoCaPools"/>
         </inputList>
     </network>
 </neuroml>

@@ -30,17 +30,34 @@
 
     <network id="net2">
 
-       
+       <population id="Pop0" type="populationList" component="spkArr" size="1">
+            <instance id="0">
+                <location y="18.479072879420954" x="27.445488664662598" z="44.171494071238925"/>
+            </instance>
+       </population>
 
-        <population id="Pop0" component="spkArr" size="1"/>
-        <population id="Pop1" component="iaf1" size="1"/>
-        <population id="Pop2" component="iaf1" size="1"/>
+       <population id="Pop1" type="populationList" component="iaf1" size="1">
+            <instance id="0">
+                <location y="0.007500392240689" x="5.218493548048375" z="56.261704365605539"/>
+            </instance>
+       </population>
+
+       <!-- <population id="Pop0" component="spkArr" size="1"/>
+      
+        <population id="Pop1" component="iaf1" size="1"/>-->
+        <population id="Pop2" component="iaf1" size="3"/>
         
-         <synapticConnection from="Pop0[0]" to="Pop1[0]" synapse="MFSpikeSyn" destination="synapses"/>
+         <!--<synapticConnection from="Pop0[0]" to="Pop1[0]" synapse="MFSpikeSyn" destination="synapses"/>-->
 
+         <projection id="Proj0" postsynapticPopulation="Pop1" presynapticPopulation="Pop0" synapse="MFSpikeSyn">
+            <connection id="0" preCellId="../Pop0/0/spkArr" postCellId="../Pop1/0/iaf1"/>
+         </projection>
+          
          <inputList id="stimInput" component="input0" population="Pop2">
            
             <input id="0" target="../Pop2[0]" destination="synapses"/>
+            <input id="1" target="../Pop2[1]" destination="synapses"/>
+            <input id="1" target="../Pop2[2]" destination="synapses"/>
         </inputList>
 
 
@@ -55,7 +72,7 @@
 
         <Display id="d1" title="Test spike time inputs" timeScale="1ms" xmin="0" xmax="600" ymin="-100" ymax="20">
             
-            <Line id="pop1" quantity="Pop1[0]/v" scale="1mV" color="#00ff00" timeScale="1ms"/>
+            <Line id="pop1" quantity="Pop1/0/iaf1/v" scale="1mV" color="#00ff00" timeScale="1ms"/>
             
             
             
@@ -77,20 +94,25 @@
  
         
 
-        <EventOutputFile id="Input_spikes" fileName="results/Input_spikes" format="ID_TIME">
-            <EventSelection id="0" select="Pop0[0]" eventPort="spike"/>
-        </EventOutputFile>
-
        
-        <EventOutputFile id="Input_spikes" fileName="results/Input_spikesPoisson" format="ID_TIME">
+       
+        <EventOutputFile id="Input_spikes0" fileName="results/Input_spikesPoisson0" format="ID_TIME">
             <EventSelection id="0" select="Pop2[0]/input0" eventPort="spike"/>
         </EventOutputFile>
+
+        <EventOutputFile id="Input_spikes1" fileName="results/Input_spikesPoisson1" format="ID_TIME">
+            <EventSelection id="0" select="Pop2[1]/input0" eventPort="spike"/>
+        </EventOutputFile>
+
+         
+        <EventOutputFile id="Input_spikes2" fileName="results/Input_spikesPoisson2" format="ID_TIME">
+            <EventSelection id="0" select="Pop2[2]/input0" eventPort="spike"/>
+        </EventOutputFile>
+
+         
        
     </Simulation>
 
 
 </Lems>
-
-  
-
 
