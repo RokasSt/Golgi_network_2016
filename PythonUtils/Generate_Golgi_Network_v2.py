@@ -311,8 +311,25 @@ postPop,postPop_listIndex,postPopSize,post_pop_cell_component,postCell_NML2type,
                             
                    if 'importPoissonTrainLibraries' in simulation_parameters:
                       if simulation_parameters['importPoissonTrainLibraries']:
+                         libraryID=simulation_parameters['PoissonTrainLibraryID']
                          print("will test generation and import of spike trains")
-                         
+                         if simulation_parameters['parentDirRequired']:
+                            input_list_array,spike_arrays,synapse_name_list=XF_input_models_uniform_import(popID,popSize,cellType,cellNML2Type,input_group_array[input_group],seed,\
+                            simulation_parameters['saveInputReceivingCellID'],libraryID,simulation_parameters['parentDir'])
+                         else:
+                            input_list_array,spike_arrays,synapse_name_list=XF_input_models_uniform_import(popID,popSize,cellType,cellNML2Type,input_group_array[input_group],seed,\
+                            simulation_parameters['saveInputReceivingCellID'],libraryID)
+                        
+                         synapse_name_array.extend(synapse_name_list)
+
+                   
+
+                         for poisson_syn in range(0,len(poisson_synapse_array)):
+                             if poisson_synapse_array[poisson_syn]['synapseMode']=="persistent":
+                                nml_doc.poisson_firing_synapses.append(poisson_synapse_array[poisson_syn]['synapse_object'])
+                             if poisson_synapse_array[poisson_syn]['synapseMode']=="transient":
+                                nml_doc.transient_poisson_firing_synapses.append(poisson_synapse_array[poisson_syn]['synapse_object'])
+                             net.input_lists.append(input_list_array[poisson_syn])  
                    else:
                       if simulation_parameters['parentDirRequired']:
                          input_list_array,poisson_synapse_array,synapse_name_list=XF_input_models_uniform(popID,popSize,cellType,cellNML2Type,input_group_array[input_group],seed,\
@@ -337,8 +354,28 @@ postPop,postPop_listIndex,postPopSize,post_pop_cell_component,postCell_NML2type,
                                    
                    if 'importPoissonTrainLibraries' in simulation_parameters:
                       if simulation_parameters['importPoissonTrainLibraries']:
+                         libraryID=simulation_parameters['PoissonTrainLibraryID']
                          print("will test generation and import of spike trains")
-                         
+                         if simulation_parameters['parentDirRequired']:
+                           
+                            input_list_array,spike_arrays,synapse_name_list=XF_input_model_3D_region_specific_import(popID,cellType,cellNML2Type,input_group_array[input_group],\
+                            cell_position_array[popID],seed,simulation_parameters['saveInputReceivingCellID'],libraryID,simulation_parameters['parentDir'])   
+
+                         else:
+                            input_list_array,spike_arrays,synapse_name_list=XF_input_model_3D_region_specific_import(popID,cellType,cellNML2Type,input_group_array[input_group],\
+                            cell_position_array[popID],seed,simulation_parameters['saveInputReceivingCellID'],libraryID)                                        
+                   
+
+                         synapse_name_array.extend(synapse_name_list)
+
+                   
+
+                         for poisson_syn in range(0,len(poisson_synapse_array)):
+                             if poisson_synapse_array[poisson_syn]['synapseMode']=="persistent":
+                                nml_doc.poisson_firing_synapses.append(poisson_synapse_array[poisson_syn]['synapse_object'])
+                             if poisson_synapse_array[poisson_syn]['synapseMode']=="transient":
+                                nml_doc.transient_poisson_firing_synapses.append(poisson_synapse_array[poisson_syn]['synapse_object'])           
+                             net.input_lists.append(input_list_array[poisson_syn])
                    else:
                       if simulation_parameters['parentDirRequired']:
                            
@@ -354,12 +391,12 @@ postPop,postPop_listIndex,postPopSize,post_pop_cell_component,postCell_NML2type,
 
                    
 
-                   for poisson_syn in range(0,len(poisson_synapse_array)):
-                       if poisson_synapse_array[poisson_syn]['synapseMode']=="persistent":
-                          nml_doc.poisson_firing_synapses.append(poisson_synapse_array[poisson_syn]['synapse_object'])
-                       if poisson_synapse_array[poisson_syn]['synapseMode']=="transient":
-                          nml_doc.transient_poisson_firing_synapses.append(poisson_synapse_array[poisson_syn]['synapse_object'])           
-                       net.input_lists.append(input_list_array[poisson_syn])
+                      for poisson_syn in range(0,len(poisson_synapse_array)):
+                          if poisson_synapse_array[poisson_syn]['synapseMode']=="persistent":
+                             nml_doc.poisson_firing_synapses.append(poisson_synapse_array[poisson_syn]['synapse_object'])
+                          if poisson_synapse_array[poisson_syn]['synapseMode']=="transient":
+                             nml_doc.transient_poisson_firing_synapses.append(poisson_synapse_array[poisson_syn]['synapse_object'])           
+                          net.input_lists.append(input_list_array[poisson_syn])
 	        ###### implementing physiological heterogeneity between cells with variations in a basal firing rate
                 if input_group_array[input_group]['inputModel']=="variable_basal_firing_rate":
 
