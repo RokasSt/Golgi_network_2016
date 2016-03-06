@@ -691,7 +691,7 @@ def generate_PoissonInputNet(ref,cell_array,location_array,connectivity_informat
                             nml_doc.transient_poisson_firing_synapses.append(poisson_syn) 
                                                             
                          Poisson_syn_id_array.append("%s_%s_%s_syn%d"%(label,synapse_name,popID,synapse_index))
-                         input_list =neuroml.InputList(id="List_%s_%s_%s_syn%d"%(label,synapse_name,popID,synapse_index),component=poisson_syn.id,populations="%s"%popID)
+                         input_list =neuroml.InputList(id="List_%s_%s_%s_syn%d"%(label,synapse_name,popID,synapse_index),component=poisson_syn.id,populations=Input_Golgi_pop.id)
                          count=0
                          target_no_array.append(LibrarySize)
                          for target_point in range(0,no_of_inputs*popSize):                     
