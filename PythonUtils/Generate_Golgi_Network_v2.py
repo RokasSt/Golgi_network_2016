@@ -308,36 +308,49 @@ postPop,postPop_listIndex,postPopSize,post_pop_cell_component,postCell_NML2type,
 
             for input_group in range(0,len(input_group_array)):
                 if input_group_array[input_group]['inputModel']=='XF' and input_group_array[input_group]['targetingRegime']=="uniform":
-                   
-                   if simulation_parameters['parentDirRequired']:
-                      input_list_array,poisson_synapse_array,synapse_name_list=XF_input_models_uniform(popID,popSize,cellType,cellNML2Type,input_group_array[input_group],seed,simulation_parameters['parentDir'])
+                            
+                   if 'importPoissonTrainLibraries' in simulation_parameters:
+                      if simulation_parameters['importPoissonTrainLibraries']:
+                         print("will test generation and import of spike trains")
+                         
                    else:
-                      input_list,poisson_synapse_array,synapse_name_list=XF_input_models_uniform(popID,popSize,cellType,cellNML2Type,input_group_array[input_group],seed)                                          
+                      if simulation_parameters['parentDirRequired']:
+                         input_list_array,poisson_synapse_array,synapse_name_list=XF_input_models_uniform(popID,popSize,cellType,cellNML2Type,input_group_array[input_group],seed,\
+                         simulation_parameters['saveInputReceivingCellID'],simulation_parameters['parentDir'])
+                      else:
+                         input_list_array,poisson_synapse_array,synapse_name_list=XF_input_models_uniform(popID,popSize,cellType,cellNML2Type,input_group_array[input_group],seed,\
+                         simulation_parameters['saveInputReceivingCellID'])                                          
                    
 
-                   synapse_name_array.extend(synapse_name_list)
+                      synapse_name_array.extend(synapse_name_list)
 
                    
 
-                   for poisson_syn in range(0,len(poisson_synapse_array)):
-                       if poisson_synapse_array[poisson_syn]['synapseMode']=="persistent":
-                          nml_doc.poisson_firing_synapses.append(poisson_synapse_array[poisson_syn]['synapse_object'])
-                       if poisson_synapse_array[poisson_syn]['synapseMode']=="transient":
-                          nml_doc.transient_poisson_firing_synapses.append(poisson_synapse_array[poisson_syn]['synapse_object'])
-                       net.input_lists.append(input_list_array[poisson_syn])
+                      for poisson_syn in range(0,len(poisson_synapse_array)):
+                          if poisson_synapse_array[poisson_syn]['synapseMode']=="persistent":
+                             nml_doc.poisson_firing_synapses.append(poisson_synapse_array[poisson_syn]['synapse_object'])
+                          if poisson_synapse_array[poisson_syn]['synapseMode']=="transient":
+                             nml_doc.transient_poisson_firing_synapses.append(poisson_synapse_array[poisson_syn]['synapse_object'])
+                          net.input_lists.append(input_list_array[poisson_syn])
+                          
                 if input_group_array[input_group]['inputModel']=='XF' and input_group_array[input_group]['targetingRegime']=="3D_region_specific":
-                        
-                   if simulation_parameters['parentDirRequired']:
-                           
-                      input_list_array,poisson_synapse_array,synapse_name_list=XF_input_model_3D_region_specific(popID,cellType,cellNML2Type,input_group_array[input_group],\
-                      cell_position_array[popID],seed,simulation_parameters['parentDir'])   
-
+                                   
+                   if 'importPoissonTrainLibraries' in simulation_parameters:
+                      if simulation_parameters['importPoissonTrainLibraries']:
+                         print("will test generation and import of spike trains")
+                         
                    else:
-                      input_list,poisson_synapse_array,synapse_name_list=XF_input_model_3D_region_specific(popID,cellType,cellNML2Type,input_group_array[input_group],\
-                      cell_position_array[popID],seed)                                          
+                      if simulation_parameters['parentDirRequired']:
+                           
+                         input_list_array,poisson_synapse_array,synapse_name_list=XF_input_model_3D_region_specific(popID,cellType,cellNML2Type,input_group_array[input_group],\
+                         cell_position_array[popID],seed,simulation_parameters['saveInputReceivingCellID'],simulation_parameters['parentDir'])   
+
+                      else:
+                         input_list_array,poisson_synapse_array,synapse_name_list=XF_input_model_3D_region_specific(popID,cellType,cellNML2Type,input_group_array[input_group],\
+                         cell_position_array[popID],seed,simulation_parameters['saveInputReceivingCellID'])                                          
                    
 
-                   synapse_name_array.extend(synapse_name_list)
+                      synapse_name_array.extend(synapse_name_list)
 
                    
 
@@ -346,7 +359,7 @@ postPop,postPop_listIndex,postPopSize,post_pop_cell_component,postCell_NML2type,
                           nml_doc.poisson_firing_synapses.append(poisson_synapse_array[poisson_syn]['synapse_object'])
                        if poisson_synapse_array[poisson_syn]['synapseMode']=="transient":
                           nml_doc.transient_poisson_firing_synapses.append(poisson_synapse_array[poisson_syn]['synapse_object'])           
-                       net.input_lists.append(input_list_array)
+                       net.input_lists.append(input_list_array[poisson_syn])
 	        ###### implementing physiological heterogeneity between cells with variations in a basal firing rate
                 if input_group_array[input_group]['inputModel']=="variable_basal_firing_rate":
 
@@ -444,7 +457,7 @@ def generate_LEMS_and_run(sim_array,pop_array):
         ls.assign_simulation_target(net_id)
         print simulation_parameters['parentDir']
         ls.include_neuroml2_file(nml_file,True,path)
-        #ls.include_neuroml2_file("/home/rokas/Golgi_network_2016/NeuroML2/Very_Simple_Golgi_test_morph.cell.nml")
+        
         
 
         # Specify Displays and Output Files
@@ -518,3 +531,199 @@ def generate_LEMS_and_run(sim_array,pop_array):
            else:
               print("Finished building a network")
          
+### a main script for generating and running golgi cell network by Rokas Stanislovas (2016)
+def generate_PoissonInputNet(ref,cell_array,location_array,connectivity_information,input_information,simulation_parameters,library_params):
+        
+        
+        if simulation_parameters['globalSeed']:
+           random.seed(12345)
+           seed=12345
+        else:
+           if simulation_parameters["trialSeed"]:
+              random.seed(simulation_parameters["trialSeedNumber"])
+              seed=simulation_parameters["trialSeedNumber"]
+
+        nml_doc = neuroml.NeuroMLDocument(id=ref)
+        
+	# Create network
+	net = neuroml.Network(id=ref+"_network")
+	nml_doc.networks.append(net)
+        
+        Note_string="A simple network that generates Poisson input trains for Golgi_%s"%ref[9:]
+        net.notes=Note_string
+        
+        Golgi_pop_index_array=[]
+        neuroml_Golgi_pop_array={}
+
+	    
+        dummy_syn=neuroml.ExpOneSynapse(erev="0mV",gbase="5nS", tau_decay="2.5ms",id="syn0")
+        nml_doc.exp_one_synapses.append(dummy_syn)
+        dummy_cell=neuroml.IafCell(id='iaf0',leak_reversal="-60mV",thresh="-40mV",reset="-70mV" C="1e-5uF" leak_conductance="5.2e-7mS")
+        nml_doc.iaf_cells.append(dummy_cell)
+        popID_array=[]
+        target_no_array=[]
+        Poisson_syn_id_array=[]
+        for pop in range(0,len(input_information)):
+            popID=input_information[pop]['popName']
+            Note_string=Note_string+"Input group parameters for %s:"%popID+"\n" 
+            for pop_in in range(0,len(cell_array)):
+                if cell_array[pop_in]['popID']==popID:
+                   pop_listIndex=pop_in
+                   popSize=cell_array[pop_in]['size']
+            input_group_array=input_information[pop]['inputGroups']
+            for input_group in range(0,len(input_group_array)):
+                if input_group_array[input_group]['inputModel']=='XF':
+                   synapse_list=input_group_array['synapseList']
+                   for synapse_index in range(0,len(synapse_list)                
+                       synapse_array=synapse_list[synapse_index]
+                       synapse_name=synapse_array['synapseType']
+                       if synapse_array['numberModel']=="constant number of inputs per cell":
+                          no_of_inputs=synapse_array['noInputs']
+                       if synapse_array['numberModel']=="variable number of inputs per cell":
+                          if synapse_array['distribution']=="binomial":
+                             no_of_inputs=synapse_array['maxNoInputs']
+                          ### other options can be added
+                       LibrarySize=int(round(popSize*library_params['libraryScale']*no_of_inputs))
+                       Input_Golgi_pop=neuroml.Population(id="%s_syn%d"%(popID,synapse_index), size=LibrarySize,
+		                  component='iaf0')
+                       PopID_array.append("%s_syn%d"%(popID,synapse_index))
+                       net.populations.append(Input_Golgi_pop)
+                       if synapse_array['synapseMode']=="persistent":
+                          poisson_syn=neuroml.PoissonFiringSynapse(id="%s_%s_syn%d"%(synapse_name,popID,synapse_index),\
+                          average_rate="%f per_s"%synapse_array['averageRate'],\
+                          synapse="syn0",\
+                          spike_target="./syn0")
+                          nml_doc.poisson_firing_synapses.append(poisson_synapse)
+           
+   
+                       if synapse_array['synapseMode']=="transient":
+                          poisson_syn=neuroml.TransientPoissonFiringSynapse(id="%s_%s_syn%d"%(synapse_name,popID,synapse_index),\
+                          average_rate="%f per_s"%synapse_array['averageRate'],\
+                          synapse="syn0" ,\
+                          spike_target="./syn0",\
+                          delay="%f%s"%(synapse_array['delay'],synapse_array['units']),\
+                          duration="%f%s"%(synapse_array['duration'],synapse_array['units'] )  )
+                          nml_doc.transient_poisson_firing_synapses.append(poisson_syn) 
+                                                            
+                       Poisson_syn_id_array.append("%s_%s_syn%d"%(synapse_name,popID,synapse_index))
+                       input_list =neuroml.InputList(id="Input_list_%s_%s_syn%d"%(synapse_name,popID,synapse_index),component=poisson_syn.id,populations="%s"%popID)
+                       count=0
+                       target_no_array.append(LibrarySize)
+                       for target_point in range(0,no_of_inputs*popSize):                     
+                               syn_input = neuroml.Input(id="%d"%(count),target="../%s_syn%d[%i]"%(popID,synapse_index,target_point),destination="synapses") 
+                               input_list.input.append(syn_input)
+                               count=count+1
+                       net.input_lists.append(input_list)
+
+        
+
+        
+        if simulation_parameters['parentDirRequired']:
+
+           if 'networkDir' in simulation_parameters:
+               if  simulation_parameters['networkDir']=="example":
+                   nml_file_dir =simulation_parameters['parentDir']+"/NeuroML2/NML2_LEMS_Net_Examples/"+simulation_parameters['experimentID']+"/"+"sim%d"%simulation_parameters['simID']+"/"+'%s.net.nml'%ref
+                   path=simulation_parameters['parentDir']+"/NeuroML2/NML2_LEMS_Net_Examples/"+simulation_parameters['experimentID']+"/"+"sim%d"%simulation_parameters['simID']
+               if simulation_parameters['networkDir']=="experiment":
+                  nml_file_dir =simulation_parameters['parentDir']+"/NeuroML2/NML2_LEMS_Experiments/"+simulation_parameters['experimentID']+"/"+"sim%d"%simulation_parameters['simID']+"/"+'%s.net.nml'%ref
+                  path=simulation_parameters['parentDir']+"/NeuroML2/NML2_LEMS_Experiments/"+simulation_parameters['experimentID']+"/"+"sim%d"%simulation_parameters['simID']
+
+        
+
+               if not os.path.exists(path):
+                  os.makedirs(path)
+        else:
+           nml_file_dir ='%s.net.nml'%ref
+        
+        writers.NeuroMLWriter.write(nml_doc,nml_file_dir)
+
+
+        nml_file='%s.net.nml'%ref
+
+        print("Written network file to: "+nml_file_dir)
+    
+        ###### Validate the NeuroML2 ######   
+
+        validate_neuroml2(nml_file_dir)
+        
+        sim_info_array={}
+        sim_info_array['ref']=ref
+        sim_info_array['netID']=net.id
+        sim_info_array['simParams']=simulation_parameters
+        sim_info_array['nmlFile']=nml_file
+        sim_info_array['nmlPath']=path
+        sim_info_array['libraryParams']=library_params
+       
+        cell_info_array={}
+        cell_info_array['popParams']=cell_array
+        cell_info_array['popIDarray']=popID_array
+        cell_info_array['targetNoarray']=target_no_array
+        cell_info_array['PoissonSynIdarray']=Poisson_syn_id_array
+        
+        
+        return sim_info_array, cell_info_array
+
+
+
+def generate_input_library(sim_array,pop_array):
+        ref= sim_array['ref']
+        net_id=sim_array['netID']
+        simulation_parameters=sim_array['simParams']
+        nml_file=sim_array['nmlFile']
+        path=sim_array['nmlPath']
+        library_params=sim_array['libraryParams']
+        cell_array=pop_array['popParams']
+        popIDarray=pop_array['popIDarray']
+        targetNoarray=pop_array['targetNoarray']
+        PoissonSynIDarray=pop_array['PoissonSynIdarray']
+       
+        # Create a LEMSSimulation to manage creation of LEMS file
+
+        ls = LEMSSimulation(ref, simulation_parameters['duration'], simulation_parameters['timeStep'])
+        
+        # Point to network as target of simulation
+    
+        ls.assign_simulation_target(net_id)
+        print simulation_parameters['parentDir']
+        ls.include_neuroml2_file(nml_file,True,path)
+        
+        
+
+        # Specify Displays and Output Files
+	for x in range(0,len(popIDarray)):
+	    for i in range(targetNoarray[x]):
+		quantity = "%s[%i]/%s"%popIDarray[x], i,PoissonSynIDarray[x])
+                of0 = "0"
+                if simulation_parameters['currentDirRequired']:
+                   ls.create_event_output_file(of0,simulation_parameters['currentDir']+"/simulations/%s/sim%d/%s_PoissonTrain_%d.dat"%(simulation_parameters['experimentID'],simulation_parameters['simID'],\
+                                                                               popIDarray[x],i))
+                else:
+                   ls.create_event_output_file(of0,"simulations/%s/sim%d/%s_PoissonTrain_%d.dat"%(simulation_parameters['experimentID'],simulation_parameters['simID'],\
+                                                                                popIDarray[x],i))
+		ls.add_selection_to_event_output_file(of0, select=quantity, event_port="spike")
+       
+	# save LEMS file
+        if simulation_parameters['parentDirRequired']:
+           if simulation_parameters['networkDir']=="example":
+              lems_file_name_dir=simulation_parameters['parentDir']+"/NeuroML2/NML2_LEMS_Net_Examples/"+simulation_parameters['experimentID']+"/"+"sim%d"%simulation_parameters['simID']+"/"+"LEMS_%s.xml"%ref
+              lems_file_name = ls.save_to_file(lems_file_name_dir)
+              
+
+           if simulation_parameters['networkDir']=="experiment":
+              lems_file_name_dir=simulation_parameters['parentDir']+"/NeuroML2/NML2_LEMS_Experiments/"+simulation_parameters['experimentID']+"/"+"sim%d"%simulation_parameters['simID']+"/"+"LEMS_%s.xml"%ref
+              lems_file_name = ls.save_to_file(lems_file_name_dir)
+        else:
+           lems_file_name = ls.save_to_file()
+           lems_file_name_dir="LEMS_%s.xml"%ref
+
+        
+        if library_params['simulator']=="jNeuroML":
+            print("Finished building a network which generates input trains. Starts running a simulation with jNeuroML for %s"%lems_file_name_dir)
+	    results1 = pynml.run_lems_with_jneuroml(lems_file_name, nogui=True, load_saved_data=False, plot=False)
+            print("Finished running simulation with jNeuroML")
+        elif library_params['simulator']=="jNeuroML_NEURON":
+             print("Finished building a network which generates input trains. Starts running a simulation with NEURON for %s"%lems_file_name_dir)
+             results1 = pynml.run_lems_with_jneuroml_neuron(lems_file_name, nogui=True, load_saved_data=False, plot=False)
+             print("Finished building a network which generates input trains.")
+        else:
+              print("Finished building a network which generates input trains.")

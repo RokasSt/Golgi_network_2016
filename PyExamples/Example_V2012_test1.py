@@ -4,7 +4,7 @@ parentdir = os.path.dirname(currentdir)
 sys.path.insert(0,parentdir) 
 
 from PythonUtils.Simulate_Golgi_Network_v2 import *
-
+from PythonUtils.input_models import generatePoissonTrainLibraries
 ################ similar to Golgi_V2012_test2.py but contains two populations. Golgi_V2012_test2.py is used for testing and debugging
 
 if __name__ == "__main__":
@@ -81,9 +81,14 @@ if __name__ == "__main__":
 
    
     sim_params={'simulator':"no simulation",'duration':450,'timeStep':0.005,'numTrials':1,'globalSeed':False,'trialSeed':True,'plotSpecifier':False,\
-    'saveSomataPositions':True,'parentDirRequired':True,'parentDir':parentdir,'currentDirRequired':True,'currentDir':currentdir,'networkDir':'example'}
+    'saveSomataPositions':True,'parentDirRequired':True,'parentDir':parentdir,'currentDirRequired':True,'currentDir':currentdir,'networkDir':'example',\
+        'saveInputReceivingCellID':True,'importPoissonTrainLibraries':True,'PoissonTrainLibraryID':'newlyGenerated'}
     
     ##### run all simulations
+    library_params={'libraryScale':1,'simulator':'jNeuroML_NEURON'}
+    
+    generatePoissonTrainLibraries(net_params_test_2012_multiple,sim_params,library_params)
+    
     run_simulations(net_params_test_2012_multiple,sim_params)
 
    
