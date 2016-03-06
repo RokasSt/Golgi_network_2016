@@ -74,7 +74,18 @@ if __name__ == "__main__":
 
     inputGroups_pop1_exp1.append({'inputModel':'XF','targetingRegime':"uniform",'fractionToTarget':0.5,\
                                   'synapseList':synapseList_pop1_exp1,'colocalizeSynapses':False})
-    
+
+    ####### the below block applies if 'colocalizeSynapses' is True:
+    # synapseList_pop1_exp1=[]
+    # synapseList_pop1_exp1.append({'synapseType':"PFSpikeSyn"})
+    # synapseList_pop1_exp1.append({'synapseType':"PFSpikeSyn"})
+    # inputGroups_pop1_exp1.append({'inputModel':'XF','targetingRegime':"uniform",'fractionToTarget':0.5,\
+    #                            'synapseList':synapseList_pop1_exp1,'colocalizeSynapses':False,'synapseMode':"transient",'averageRate':150,'delay':80,'duration':100,'units':'ms',\
+    #                         'numberModel':"constant number of inputs per cell",'noInputs':8,'targetingModel':"segments and subsegments",\
+    #                           'segmentList':["Soma","dend_3"],'segmentProbabilities':[0.7,0.3],'fractionAlongANDsubsegProbabilities':[[[0.25,1],[0.25,0]],[[0.25,0.7],[0.25,0.3]]]})
+    #
+    #
+    #
                              
     net_params_test_2012_multiple['experiment1']['inputParams'].append({'popName':'Golgi_pop0','inputGroups':inputGroups_pop0_exp1})
     net_params_test_2012_multiple['experiment1']['inputParams'].append({'popName':'Golgi_pop1','inputGroups':inputGroups_pop1_exp1})
@@ -83,13 +94,14 @@ if __name__ == "__main__":
     sim_params={'simulator':"no simulation",'duration':450,'timeStep':0.005,'numTrials':1,'globalSeed':False,'trialSeed':True,'plotSpecifier':False,\
     'saveSomataPositions':True,'parentDirRequired':True,'parentDir':parentdir,'currentDirRequired':True,'currentDir':currentdir,'networkDir':'example',\
         'saveInputReceivingCellID':True,'importPoissonTrainLibraries':True,'PoissonTrainLibraryID':'newlyGenerated'}
-    
+    # alternatively, 'PoissonTrainLibraryID':'experimentID' but then requires the same number of trials.
     ##### run all simulations
+    # introduce group label
     library_params={'libraryScale':1,'simulator':'jNeuroML_NEURON'}
     
     generatePoissonTrainLibraries(net_params_test_2012_multiple,sim_params,library_params)
     
-    run_simulations(net_params_test_2012_multiple,sim_params)
+    #run_simulations(net_params_test_2012_multiple,sim_params)
 
    
    
