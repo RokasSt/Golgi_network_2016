@@ -321,7 +321,7 @@ postPop,postPop_listIndex,postPopSize,post_pop_cell_component,postCell_NML2type,
                             sim_params_dict['currentDir']=simulation_parameters['currentDir']
                          if simulation_parameters['parentDirRequired']:
                             sim_params_dict['parentDir']=simulation_parameters['parentDir']
-                         input_pops,spike_array_list,proj_arrays,synapse_name_list=XF_input_models_uniform_import(popID,popSize,cellType,cellNML2Type,input_group_array[input_group],seed,\
+                         input_pops,spike_array_list,proj_arrays,synapse_name_list,cells_with_inputs=XF_input_models_uniform_import(popID,popSize,cellType,cellNML2Type,input_group_array[input_group],seed,\
                          sim_params_dict)
                          
                          synapse_name_array.extend(synapse_name_list)
@@ -335,10 +335,10 @@ postPop,postPop_listIndex,postPopSize,post_pop_cell_component,postCell_NML2type,
                          
                    else:
                       if simulation_parameters['parentDirRequired']:
-                         input_list_array,poisson_synapse_array,synapse_name_list=XF_input_models_uniform(popID,popSize,cellType,cellNML2Type,input_group_array[input_group],seed,\
+                         input_list_array,poisson_synapse_array,synapse_name_list,cell_with_inputs=XF_input_models_uniform(popID,popSize,cellType,cellNML2Type,input_group_array[input_group],seed,\
                          simulation_parameters['saveInputReceivingCellID'],simulation_parameters['parentDir'])
                       else:
-                         input_list_array,poisson_synapse_array,synapse_name_list=XF_input_models_uniform(popID,popSize,cellType,cellNML2Type,input_group_array[input_group],seed,\
+                         input_list_array,poisson_synapse_array,synapse_name_list,cell_with_inputs=XF_input_models_uniform(popID,popSize,cellType,cellNML2Type,input_group_array[input_group],seed,\
                          simulation_parameters['saveInputReceivingCellID'])                                          
                    
 
@@ -366,7 +366,7 @@ postPop,postPop_listIndex,postPopSize,post_pop_cell_component,postCell_NML2type,
                             sim_params_dict['currentDir']=simulation_parameters['currentDir']
                          if simulation_parameters['parentDirRequired']:
                             sim_params_dict['parentDir']=simulation_parameters['parentDir']
-                         input_pops,spike_array_list,proj_arrays,synapse_name_list=XF_input_model_3D_region_specific_import(popID,cellType,cellNML2Type,input_group_array[input_group],\
+                         input_pops,spike_array_list,proj_arrays,synapse_name_list,cell_with_inputs=XF_input_model_3D_region_specific_import(popID,cellType,cellNML2Type,input_group_array[input_group],\
                          cell_position_array[popID],seed,sim_params_dict)                                       
                    
                          synapse_name_array.extend(synapse_name_list)
@@ -382,11 +382,11 @@ postPop,postPop_listIndex,postPopSize,post_pop_cell_component,postCell_NML2type,
                    else:
                       if simulation_parameters['parentDirRequired']:
                            
-                         input_list_array,poisson_synapse_array,synapse_name_list=XF_input_model_3D_region_specific(popID,cellType,cellNML2Type,input_group_array[input_group],\
+                         input_list_array,poisson_synapse_array,synapse_name_list,cell_with_inputs=XF_input_model_3D_region_specific(popID,cellType,cellNML2Type,input_group_array[input_group],\
                          cell_position_array[popID],seed,simulation_parameters['saveInputReceivingCellID'],simulation_parameters['parentDir'])   
 
                       else:
-                         input_list_array,poisson_synapse_array,synapse_name_list=XF_input_model_3D_region_specific(popID,cellType,cellNML2Type,input_group_array[input_group],\
+                         input_list_array,poisson_synapse_array,synapse_name_list,cell_with_inputs=XF_input_model_3D_region_specific(popID,cellType,cellNML2Type,input_group_array[input_group],\
                          cell_position_array[popID],seed,simulation_parameters['saveInputReceivingCellID'])                                          
                    
 
@@ -415,7 +415,7 @@ postPop,postPop_listIndex,postPopSize,post_pop_cell_component,postCell_NML2type,
 	        ##############
                 if input_group_array[input_group]['inputModel']=="testing":
 
-                   input_list_array,pulseGenerator_array=testing(popID,popSize,cellType,input_group_array[input_group],seed)                                          
+                   input_list_array,pulseGenerator_array,cell_with_inputs=testing(popID,popSize,cellType,input_group_array[input_group],seed,simulation_parameters['saveInputReceivingCellID'])                                          
 
                    for input_list in range(0,len(input_list_array)):
           
@@ -424,7 +424,13 @@ postPop,postPop_listIndex,postPopSize,post_pop_cell_component,postCell_NML2type,
 
                 
                 Note_string=Note_string+"%s"%input_group_array[input_group]+"\n"            
-
+                if simulation_parameters['saveInputReceivingCellID']:
+                   if simulation_parameters['currentDirRequired']:
+                      save_to_path=simulation_parameters['currentDir']+"/simulations/%s/sim%d"%(simulation_parameters['experimentID'],simulation_parameters['simID'])
+                   else:
+                      save_to_path="simulations/%s/sim%d"%(simulation_parameters['experimentID'],simulation_parameters['simID'])
+                   np.savetxt('%s/%s_%s.txt'%(save_to_path,cell_array[cell_group]['popID'],input_group_array[input_group]['inputLabel']),cell_with_inputs)
+                   
         ##############       
 	unique_synapse_names=np.unique(synapse_name_array)
         for unique_synapse in unique_synapse_names:
