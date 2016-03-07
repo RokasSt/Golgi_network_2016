@@ -73,7 +73,6 @@ def XF_input_models_uniform_import(popID,popSize,cellType,cellNML2Type,input_gro
                   else:
                      spike_times=np.loadtxt(currDir+"/simulations/%s/sim%d/%s_PoissonTrain_%d.dat"%(libID,simID,synapse_array['inputIdLibrary'],target_point))
                   spike_times=np.transpose(spike_times)
-                  spike_times=np.transpose(spike_times)
                   spike_times=spike_times[1]
                   spike_array=neuroml.SpikeArray(id="%s_%s_syn%d_%d"%(label,popID,synapse_index,target_point))
                                                   
@@ -235,7 +234,6 @@ def XF_input_models_3D_region_specific_import(popID,popSize,cellType,cellNML2Typ
                   else:
                      spike_times=np.loadtxt(currDir+"/simulations/%s/sim%d/%s_PoissonTrain_%d.dat"%(libID,simID,synapse_array['inputIdLibrary'],target_point))
                   spike_times=np.transpose(spike_times)
-                  spike_times=np.transpose(spike_times)
                   spike_times=spike_times[1]
                   spike_array=neuroml.SpikeArray(id="%s_%s_syn%d_%d"%(label,popID,synapse_index,target_point))
                                                   
@@ -243,7 +241,7 @@ def XF_input_models_3D_region_specific_import(popID,popSize,cellType,cellNML2Typ
                       spike_object=neuroml.Spike(id="%d"%spike,time="%fs"%spike_times[spike])
 	              spike_array.spikes.append(spike_object)
                   spike_arrays.append(spike_array)
-                                                  
+                                                 
                   Input_pop=neuroml.Population(id="InputPop_%s_%s_syn%d_%d"%(label,popID,synapse_index,target_point), size=1,component=spike_array.id)
                   input_pop_array.append(Input_pop)
                   for synapse_index in range(0,len(synapse_list)):
