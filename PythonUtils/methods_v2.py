@@ -394,10 +394,45 @@ def get_cell_ids_for_sync_analysis(target_specifications,no_of_cell_groups,exper
 
     return target_cells
 
-def plot_voltage_traces(no_of_cell_groups,experiment_id,trial_id,plot_specifying_array,seed_specifying_array,saving_option,legend=False):
+
+def plot_which_cells_with_inputs(ploting_params):
+    no_of_cell_groups=ploting_params['noOfPops']
+    experiment_id=ploting_params['expID']
+    trial_id=ploting_params['trialID']
+    pop_inputID_dict=ploting_params['inputIDdict']
+    saving_option=ploting_params['saveSpecifier']
+    seed_specifier=ploting_params['seedSpecifier']
+    legend=ploting_params['legendSpecifier']
+    cell_no_array={}
+    if seed_specifer:
+       for cell_group in range(0,len(pop_inputID_dict)):
+           cell_group_positions=np.loadtxt('simulations/%s/Golgi_pop%d.txt'%(experiment_id,pop_inputID_dict.keys()[cell_group]))
+           dim_array=np.shape(cell_group_positions)
+           cell_no_array.append(dim_array[0])
+    else:
+       for cell_group in range(0,no_of_cell_groups):
+           cell_group_positions=np.loadtxt('simulations/%s/sim%d/Golgi_pop%d.txt'%(experiment_id,trial_id,pop_inputID_dict.keys()[cell_group]))
+           dim_array=np.shape(cell_group_positions)
+           cell_no_array.append(dim_array[0])
+           
+    
+    fig, ax = plt.subplots()
+    ax.scatter(z, y)
+
+    for i, txt in enumerate(range(0,cell_no_array[pop_inputID_dict.keys()[cell_group]])):
+        ax.annotate(txt, (z[i],y[i]))
+    
+def plot_voltage_traces(ploting_params):
+    no_of_cell_groups=ploting_params['noOfPops']
+    experiment_id=ploting_params['expID']
+    trial_id=ploting_params['trialID']
+    plot_specifying_array=ploting_params['subplotParams']
+    seed_specifier=ploting_params['seedSpecifier']
+    saving_option=ploting_params['saveSpecifier']
+    legend=ploting_params['legendSpecifier']
     # no_of_cell_groups counts the number of cell groups per experiment
     cell_no_array=[]
-    if seed_specifying_array[1]==True:
+    if seed_specifer:
        for cell_group in range(0,no_of_cell_groups):
            cell_group_positions=np.loadtxt('simulations/%s/Golgi_pop%d.txt'%(experiment_id,cell_group))
            dim_array=np.shape(cell_group_positions)
@@ -476,8 +511,8 @@ def plot_voltage_traces(no_of_cell_groups,experiment_id,trial_id,plot_specifying
                  for tick in ax.xaxis.get_major_ticks():
                      tick.label.set_fontsize(9)  
           plt.tight_layout()
-          if saving_option[1]==True:
-             plt.savefig('simulations/%s'%(saving_option[2]))
+          if saving_option:
+             plt.savefig('simulations/%s'%(ploting_params['figureName']))
           plt.show() 
        
          
@@ -552,8 +587,8 @@ def plot_voltage_traces(no_of_cell_groups,experiment_id,trial_id,plot_specifying
                  for tick in ax.xaxis.get_major_ticks():
                      tick.label.set_fontsize(9)  
           plt.tight_layout()
-          if saving_option[1]==True:
-             plt.savefig('simulations/%s'%(saving_option[2]))
+          if saving_option:
+             plt.savefig('simulations/%s'%(ploting_params['figureName']))
           plt.show()    
           plt.clf()
     #identify Golgi cell populations with pop id (0,1,2,3....) in the input array (here internal variable is plot_specifying_array)
@@ -682,9 +717,86 @@ def plot_voltage_traces(no_of_cell_groups,experiment_id,trial_id,plot_specifying
               for tick in ax.xaxis.get_major_ticks():
                   tick.label.set_fontsize(9)   
        plt.tight_layout()
-       if saving_option[1]==True:
-          plt.savefig('simulations/%s'%(saving_option[2]))
-       plt.show()    
+       if saving_option:
+          plt.savefig('simulations/%s'%(ploting_params['figureName']))
+       plt.show()
+
+
+def get_unique_target_points_dict(seg_specifications,mode_of_targeting,targeting_specifications,no_of_points_per_cell):
+    target_points_per_cell=np.zeros([no_of_points_per_cell,2])
+    if mode_of_targeting=="segments and subsegments":
+       x=0
+       while x==0:
+          pre_seg_search_array=[]
+          pre_fraction_search_array=[]
+          y=0
+          while y != no_of_points_per_cell:
+             pre_segment=random.sample(range(0,len(targeting_specifications[0])),1)
+             pre_segment=pre_segment[0]
+             if random.random() < targeting_specifications[1][targeting_specifications[0][pre_segment]]:
+                pre_seg=targeting_specifications[0][pre_segment]
+                pre_seg_index=pre_segment
+                for segment in range(0,len(seg_specifications[0])-1):
+                    if seg_specifications[0][segment+1][0]==pre_seg:
+                       pre_segment_ids=seg_specifications[0][segment+1][1:]
+                       Pre_segment_id=random.sample(pre_segment_ids,1)
+                       Pre_segment_id=Pre_segment_id[0]
+                       pre_seg_search_array.append(Pre_segment_id)
+                       z=0
+                       while z==0:
+                          subseg=random.sample(range(0,len(targeting_specifications[2][pre_seg])),1)
+                          subseg=subseg[0]
+                          if random.random() < targeting_specifications[2][pre_seg][subseg]['Prob']:
+                             pre_subseg_id=subseg
+                             pre_subseg=targeting_specifications[2][pre_seg][subseg]['fractionAlong']
+                             print pre_subseg
+                             random_pre_fraction=random.uniform(0,pre_subseg)
+                             print random_pre_fraction
+                             pre_fraction_before_pre_subseg=0
+                             if pre_subseg_id !=0:
+                                for ind in range(0,pre_subseg_id):
+                                    pre_fraction_before_pre_subseg=pre_fraction_before_pre_subseg+targeting_specifications[2][pre_seg][ind]['fractionAlong']
+                             Pre_fraction_final=random_pre_fraction+pre_fraction_before_pre_subseg
+                          
+                             pre_fraction_search_array.append(Pre_fraction_final)
+                             z=1
+                       y=y+1
+                       break
+          if len(pre_fraction_search_array)==len(set(pre_fraction_search_array)):
+             x=1
+             
+    if mode_of_targeting=="segment groups and segments":
+       x=0
+       while x==0:
+          pre_seg_search_array=[]
+          pre_fraction_search_array=[]
+          y=0
+          while y != no_of_points_per_cell:
+             pre_segment_group=random.sample(range(0,len(targeting_specifications[0])),1)
+             pre_segment_group=pre_segment_group[0]
+             if random.random() <  targeting_specifications[1][targeting_specifications[0][pre_segment_group]]:
+                pre_group=targeting_specifications[0][pre_segment_group]
+                for segment_group in range(0,len(seg_specifications[0])-1):
+                    if seg_specifications[0][segment_group+1][0]==pre_group:
+                       pre_segment_ids=seg_specifications[0][segment_group+1][1:]
+                       Pre_segment_id=random.sample(pre_segment_ids,1)
+                       Pre_segment_id=Pre_segment_id[0]
+                       pre_seg_search_array.append(Pre_segment_id)
+                       pre_fraction_search_array.append(random.random())
+                       y=y+1
+                       break
+          if len(pre_fraction_search_array)==len(set(pre_fraction_search_array)):
+             x=1
+             
+    for point in range(0,no_of_points_per_cell):
+        target_points_per_cell[point,0]=pre_seg_search_array[point]
+        target_points_per_cell[point,1]=pre_fraction_search_array[point]
+    #below line of printing is for testing:
+    print target_points_per_cell
+    return target_points_per_cell
+
+
+       
            
 def get_unique_target_points(seg_specifications,mode_of_targeting,targeting_specifications,no_of_points_per_cell):
     target_points_per_cell=np.zeros([no_of_points_per_cell,2])
@@ -978,7 +1090,7 @@ if __name__ == "__main__":
 
 
  #target_points=get_unique_target_points([['Very_Simple_Golgi_test_morph', ['dend2', 1], ['dend_3', 5]]]
-   #  ,"segments and subsegments",[["dend2","dend_3"],[0.8,0.2],[ [[0.25,1],[0.25,0],[0.25,0],[0.25,0]  ] , [[0.25,0],[0.25,0.8],[0.25,0.2],[0.25,0]  ]                                                            ]    ]    ,8)
+   #  ,"segments and subsegments",[["dend2","dend_3"],[0.8,0.2],[ [[0.25,1],[0.25,0],[0.25,0],[0.25,0]  ] , [[0.25,0],[0.25,0.8],[0.25,0.2],[0.25,0]  ] ]    ]    ,8)
 
  #target_cell_array=get_cell_ids_for_sync_analysis(["3D region specific",[[0,100],[0,100],[0,100]],[[0,100],[0,100],[0,100]] ],2, ["test_Lists_and_sync",["seed specifier",False],5])
 
@@ -996,5 +1108,8 @@ if __name__ == "__main__":
 
  #test load_density_data:
  #X,Y,ro_value=load_density_data(file_name,relative_path)
- 
+ target_points=get_unique_target_points([ ['Golgi_5comp_3channels_1CaPool', ['dend2', 1], ['dend_3', 5] ] ],\
+                "segments and subsegments",[ ["dend2","dend_3"],{"dend2":0.8,"dend_3":0.2},\
+                {"dend2":[{'fractionAlong':0.25,'Prob':1},{'fractionAlong':0.25,'Prob':0},{'fractionAlong':0.25,'Prob':0},{'fractionAlong':0.25,'Prob':0}],\
+                "dend_3":[{'fractionAlong':0.25,'Prob':0},{'fractionAlong':0.25,'Prob':0.8},{'fractionAlong':0.25,'Prob': 0.2},{'fractionAlong':0.25,'Prob':0}] } ]  ,8)
 

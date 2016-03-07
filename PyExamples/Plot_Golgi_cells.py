@@ -1,4 +1,4 @@
-from methods import *
+from PythonUtils.methods_v2 methods import plot_voltage_traces, plot_which_cells_with_inputs
 
 
 if __name__ == "__main__":
@@ -21,5 +21,20 @@ if __name__ == "__main__":
    #plot_voltage_traces(2,"test_Lists2_and_sync",2,["one population one subplot","random fraction",[[1],[1]]],["seed specifier",False],["save specifier",False],False)  
 
   #plot_voltage_traces(2,"test_Lists_and_sync",1,["one population one subplot","explicit lists",[ [],[5,6,7,8,9] ] ],["seed specifier",False],["save specifier",False],True)  
- 
-   plot_voltage_traces(2,"2012based_test_1",0,["one population one subplot","explicit lists",[[0],[0]] ],["seed specifier",False],["save specifier",True,"2012based_test_1_plot.jpeg"],True)
+  plot_params={}
+  plot_params['noOfPops']=2
+  plot_params['expID']="2012based_test_1"
+  plot_params['trialID']=0
+  plot_params['subplotParams']=["one population one subplot","explicit lists",[[0],[0]] ]
+  plot_params['seedSpecifier']=False
+  plot_params['saveSpecifier']=True
+  plot_params['figureName']="2012based_test_1_plot.jpeg"
+  plot_params['legendSpecifier']=True
+  plot_params['inputIDdict']={'Golgi_pop0':['vrpop0','XFpop0'],'Golgi_pop1': ['vrpop1','XFpop1']}
+
+  plot_voltage_traces(plot_params)
+
+
+  plot_which_cells_with_inputs(plot_params)
+
+   
