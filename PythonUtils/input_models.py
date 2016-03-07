@@ -10,47 +10,7 @@ import string
 import collections
 
 from methods_v2 import *
-from PythonUtils.Generate_Golgi_Network_v2 import generate_PoissonInputNet, generate_input_library
 
-def generatePoissonTrainLibraries(network_parameters,simulation_parameters,library_params):
-    
-    if simulation_parameters['globalSeed']:
-       for simulation_trial in range(0,simulation_parameters['numTrials']):
-           for exp_id in range(1,len(network_parameters)+1):
-               Cell_array=network_parameters['experiment%d'%(exp_id)]['popParams']
-               Position_array=network_parameters['experiment%d'%(exp_id)]['distributionParams']
-               Conn_array=network_parameters['experiment%d'%(exp_id)]['connParams']
-               Input_array=network_parameters['experiment%d'%(exp_id)]['inputParams']
-               Sim_array=simulation_parameters
-               Sim_array['experimentID']=network_parameters['experiment%d'%(exp_id)]['experimentID']
-               Sim_array['simID']=simulation_trial
-               newpath = r'simulations/%s/sim%d'%(network_parameters['experiment%d'%(exp_id)]['experimentID'],simulation_trial)
-               if not os.path.exists(newpath):
-                  os.makedirs(newpath)
-               sim_params,pop_params=generate_PoissonInputNet("InputNet_%s"%(network_parameters['experiment%d'%(exp_id)]['experimentID']),\
-                                                    Cell_array,Position_array,Conn_array,Input_array,Sim_array,library_params)
-               
-               generate_input_library(sim_params,pop_params)
-    else:
-       if simulation_parameters['trialSeed']:
-          for simulation_trial in range(0,simulation_parameters['numTrials']):
-              seed_number=random.sample(range(0,15000),1)[0]
-              for exp_id in range(1,len(network_parameters)+1):
-                  Cell_array=network_parameters['experiment%d'%(exp_id)]['popParams']
-                  Position_array=network_parameters['experiment%d'%(exp_id)]['distributionParams']
-                  Conn_array=network_parameters['experiment%d'%(exp_id)]['connParams']
-                  Input_array=network_parameters['experiment%d'%(exp_id)]['inputParams']
-                  Sim_array=simulation_parameters
-                  Sim_array['experimentID']=network_parameters['experiment%d'%(exp_id)]['experimentID']
-                  Sim_array['simID']=simulation_trial
-                  Sim_array['trialSeedNumber']=seed_number
-                  newpath = r'simulations/%s/sim%d'%(network_parameters['experiment%d'%(exp_id)]['experimentID'],simulation_trial)
-                  if not os.path.exists(newpath):
-                     os.makedirs(newpath)
-                  sim_params,pop_params=generate_PoissonInputNet("InputNet_%s_trial%d"%(network_parameters['experiment%d'%(exp_id)]['experimentID'],simulation_trial),\
-                                            Cell_array,Position_array,Conn_array,Input_array,Sim_array,library_params)
-                  
-                  generate_input_library(sim_params,pop_params)
 
 
 def XF_input_models_uniform_import(popID,popSize,cellType,cellNML2Type,input_group_parameters,seed_number,sim_params):
@@ -115,7 +75,7 @@ def XF_input_models_uniform_import(popID,popSize,cellType,cellNML2Type,input_gro
                   spike_times=np.transpose(spike_times)
                   spike_times=np.transpose(spike_times)
                   spike_times=spike_times[1]
-                  spike_array=neuroml.SpikeArray(id="%s_%s_syn%d_%d"%(label,popID,synapse_index,target_point)
+                  spike_array=neuroml.SpikeArray(id="%s_%s_syn%d_%d"%(label,popID,synapse_index,target_point))
                                                   
                   for spike in range(0,len(spike_times)):
                       spike_object=neuroml.Spike(id="%d"%spike,time="%fs"%spike_times[spike])
@@ -134,7 +94,7 @@ def XF_input_models_uniform_import(popID,popSize,cellType,cellNML2Type,input_gro
                       conn = Connection(id=id, \
                             pre_cell_id="../%s[0]"%(Input_pop.id), \
                             pre_segment_id=0, \
-                            pre_fraction_along=0.5
+                            pre_fraction_along=0.5,\
                             post_cell_id="../%s/%i/%s"%(popID,target_cell,cellType), \
                             post_segment_id="%d"%target_points[target_point,0],
                             post_fraction_along="%f"%target_points[target_point,1])
@@ -178,7 +138,7 @@ def XF_input_models_uniform_import(popID,popSize,cellType,cellNML2Type,input_gro
                       spike_times=np.loadtxt(currDir+"/simulations/%s/sim%d/%s_PoissonTrain_%d.dat"%(libID,simID,synapse_array['inputIdLibrary'],target_point))
                    spike_times=np.transpose(spike_times)
                    spike_times=spike_times[1]
-                   spike_array=neuroml.SpikeArray(id="%s_%s_syn%d_%d"%(label,popID,synapse_index,target_point)
+                   spike_array=neuroml.SpikeArray(id="%s_%s_syn%d_%d"%(label,popID,synapse_index,target_point))
                                                   
                    for spike in range(0,len(spike_times)):
                        spike_object=neuroml.Spike(id="%d"%spike,time="%fs"%spike_times[spike])
@@ -194,7 +154,7 @@ def XF_input_models_uniform_import(popID,popSize,cellType,cellNML2Type,input_gro
                    conn = Connection(id=id, \
                             pre_cell_id="../%s[0]"%(Input_pop.id), \
                             pre_segment_id=0, \
-                            pre_fraction_along=0.5
+                            pre_fraction_along=0.5,\
                             post_cell_id="../%s/%i/%s"%(popID,target_cell,cellType), \
                             post_segment_id="%d"%target_points[target_point,0],
                             post_fraction_along="%f"%target_points[target_point,1])
@@ -277,7 +237,7 @@ def XF_input_models_3D_region_specific_import(popID,popSize,cellType,cellNML2Typ
                   spike_times=np.transpose(spike_times)
                   spike_times=np.transpose(spike_times)
                   spike_times=spike_times[1]
-                  spike_array=neuroml.SpikeArray(id="%s_%s_syn%d_%d"%(label,popID,synapse_index,target_point)
+                  spike_array=neuroml.SpikeArray(id="%s_%s_syn%d_%d"%(label,popID,synapse_index,target_point))
                                                   
                   for spike in range(0,len(spike_times)):
                       spike_object=neuroml.Spike(id="%d"%spike,time="%fs"%spike_times[spike])
@@ -296,7 +256,7 @@ def XF_input_models_3D_region_specific_import(popID,popSize,cellType,cellNML2Typ
                       conn = Connection(id=id, \
                             pre_cell_id="../%s[0]"%(Input_pop.id), \
                             pre_segment_id=0, \
-                            pre_fraction_along=0.5
+                            pre_fraction_along=0.5,\
                             post_cell_id="../%s/%i/%s"%(popID,target_cell,cellType), \
                             post_segment_id="%d"%target_points[target_point,0],
                             post_fraction_along="%f"%target_points[target_point,1])
@@ -340,7 +300,7 @@ def XF_input_models_3D_region_specific_import(popID,popSize,cellType,cellNML2Typ
                       spike_times=np.loadtxt(currDir+"/simulations/%s/sim%d/%s_PoissonTrain_%d.dat"%(libID,simID,synapse_array['inputIdLibrary'],target_point))
                    spike_times=np.transpose(spike_times)
                    spike_times=spike_times[1]
-                   spike_array=neuroml.SpikeArray(id="%s_%s_syn%d_%d"%(label,popID,synapse_index,target_point)
+                   spike_array=neuroml.SpikeArray(id="%s_%s_syn%d_%d"%(label,popID,synapse_index,target_point))
                                                   
                    for spike in range(0,len(spike_times)):
                        spike_object=neuroml.Spike(id="%d"%spike,time="%fs"%spike_times[spike])
@@ -356,7 +316,7 @@ def XF_input_models_3D_region_specific_import(popID,popSize,cellType,cellNML2Typ
                    conn = Connection(id=id, \
                             pre_cell_id="../%s[0]"%(Input_pop.id), \
                             pre_segment_id=0, \
-                            pre_fraction_along=0.5
+                            pre_fraction_along=0.5,\
                             post_cell_id="../%s/%i/%s"%(popID,target_cell,cellType), \
                             post_segment_id="%d"%target_points[target_point,0],
                             post_fraction_along="%f"%target_points[target_point,1])

@@ -604,9 +604,9 @@ def generate_PoissonInputNet(ref,cell_array,location_array,connectivity_informat
 	    
         dummy_syn=neuroml.ExpOneSynapse(erev="0mV",gbase="5nS", tau_decay="2.5ms",id="syn0")
         nml_doc.exp_one_synapses.append(dummy_syn)
-        dummy_cell=neuroml.IafCell(id='iaf0',leak_reversal="-60mV",thresh="-40mV",reset="-70mV" C="1e-5uF" leak_conductance="5.2e-7mS")
+        dummy_cell=neuroml.IafCell(id='iaf0',leak_reversal="-60mV",thresh="-40mV",reset="-70mV" ,C="1e-5uF", leak_conductance="5.2e-7mS")
         nml_doc.iaf_cells.append(dummy_cell)
-        popID_array=[]
+        PopID_array=[]
         target_no_array=[]
         Poisson_syn_id_array=[]
         for pop in range(0,len(input_information)):
@@ -619,48 +619,47 @@ def generate_PoissonInputNet(ref,cell_array,location_array,connectivity_informat
             input_group_array=input_information[pop]['inputGroups']
             for input_group in range(0,len(input_group_array)):
                 if input_group_array[input_group]['inputModel']=='XF':
-                   label=input_group_array['inputLabel']
-                   synapse_list=input_group_array['synapseList']
-                   if input_group_array['colocalizeSynapses']:
-                      if input_group_array['numberModel']=="constant number of inputs per cell":
-                            no_of_inputs=input_group_array['noInputs']
-                         if input_group_array['numberModel']=="variable number of inputs per cell":
-                            if input_group_array['distribution']=="binomial":
-                               no_of_inputs=input_group_array['maxNoInputs']
-                            ### other options can be added
-                         LibrarySize=int(round(popSize*library_params['libraryScale']*no_of_inputs))
-                         Input_Golgi_pop=neuroml.Population(id="%s_%s_syn0"%(label,popID), size=LibrarySize,
-		                  component='iaf0')
-                         PopID_array.append("%s_%s_syn0"%(label,popID))
-                         net.populations.append(Input_Golgi_pop)
-                         if input_group_array['synapseMode']=="persistent":
-                            poisson_syn=neuroml.PoissonFiringSynapse(id="%s_%s_syn0one"%(label,popID),\
-                            average_rate="%f per_s"%input_group_array['averageRate'],\
-                            synapse="syn0",spike_target="./syn0")
-                            nml_doc.poisson_firing_synapses.append(poisson_synapse)
+                   label=input_group_array[input_group]['inputLabel']
+                   synapse_list=input_group_array[input_group]['synapseList']
+                   if input_group_array[input_group]['colocalizeSynapses']:
+                      if input_group_array[input_group]['numberModel']=="constant number of inputs per cell":
+                          no_of_inputs=input_group_array[input_group]['noInputs']
+                      if input_group_array[input_group]['numberModel']=="variable number of inputs per cell":
+                         if input_group_array[input_group]['distribution']=="binomial":
+                            no_of_inputs=input_group_array[input_group]['maxNoInputs']
+                         ### other options can be added
+                      LibrarySize=int(round(popSize*library_params['libraryScale']*no_of_inputs))
+                      Input_Golgi_pop=neuroml.Population(id="%s_%s_syn0"%(label,popID), size=LibrarySize,component='iaf0')
+                      PopID_array.append("%s_%s_syn0"%(label,popID))
+                      net.populations.append(Input_Golgi_pop)
+                      if input_group_array['synapseMode']=="persistent":
+                         poisson_syn=neuroml.PoissonFiringSynapse(id="%s_%s_syn0one"%(label,popID),\
+                         average_rate="%f per_s"%input_group_array[input_group]['averageRate'],\
+                         synapse="syn0",spike_target="./syn0")
+                         nml_doc.poisson_firing_synapses.append(poisson_syn)
            
    
-                         if input_group_array['synapseMode']=="transient":
-                            poisson_syn=neuroml.TransientPoissonFiringSynapse(id="%s_%s_syn0one"%(label,popID),\
-                            average_rate="%f per_s"%input_group_array['averageRate'],\
-                            synapse="syn0" ,\
-                            spike_target="./syn0",\
-                            delay="%f%s"%(input_group_array['delay'],input_group_array['units']),\
-                            duration="%f%s"%(input_group_array['duration'],input_group_array['units'] )  )
-                            nml_doc.transient_poisson_firing_synapses.append(poisson_syn) 
+                      if input_group_array['synapseMode']=="transient":
+                         poisson_syn=neuroml.TransientPoissonFiringSynapse(id="%s_%s_syn0one"%(label,popID),\
+                         average_rate="%f per_s"%input_group_array[input_group]['averageRate'],\
+                         synapse="syn0" ,\
+                         spike_target="./syn0",\
+                         delay="%f%s"%(input_group_array[input_group]['delay'],input_group_array[input_group]['units']),\
+                         duration="%f%s"%(input_group_array[input_group]['duration'],input_group_array[input_group]['units'] )  )
+                         nml_doc.transient_poisson_firing_synapses.append(poisson_syn) 
                                                             
-                         Poisson_syn_id_array.append("%s_%s_syn0one"%(label,popID))
-                         input_list =neuroml.InputList(id="List%s_%s_syn0one"%(label,popID),component=poisson_syn.id,populations=Input_Golgi_pop.id)
-                         count=0
-                         target_no_array.append(LibrarySize)
-                         for target_point in range(0,no_of_inputs*popSize):                     
-                             syn_input = neuroml.Input(id="%d"%(count),target="../%s_%s_syn0[%i]"%(label,popID,target_point),destination="synapses") 
-                             input_list.input.append(syn_input)
-                             count=count+1
-                         net.input_lists.append(input_list)
+                      Poisson_syn_id_array.append("%s_%s_syn0one"%(label,popID))
+                      input_list =neuroml.InputList(id="List%s_%s_syn0one"%(label,popID),component=poisson_syn.id,populations=Input_Golgi_pop.id)
+                      count=0
+                      target_no_array.append(LibrarySize)
+                      for target_point in range(0,no_of_inputs*popSize):                     
+                          syn_input = neuroml.Input(id="%d"%(count),target="../%s_%s_syn0[%i]"%(label,popID,target_point),destination="synapses") 
+                          input_list.input.append(syn_input)
+                          count=count+1
+                      net.input_lists.append(input_list)
 
                    else:
-                     for synapse_index in range(0,len(synapse_list)                
+                     for synapse_index in range(0,len(synapse_list)):                
                          synapse_array=synapse_list[synapse_index]
                          synapse_name=synapse_array['synapseType']
                          if synapse_array['numberModel']=="constant number of inputs per cell":
@@ -678,7 +677,7 @@ def generate_PoissonInputNet(ref,cell_array,location_array,connectivity_informat
                             poisson_syn=neuroml.PoissonFiringSynapse(id="%s_%s_%s_syn%d"%(label,synapse_name,popID,synapse_index),\
                             average_rate="%f per_s"%synapse_array['averageRate'],\
                             synapse="syn0",spike_target="./syn0")
-                            nml_doc.poisson_firing_synapses.append(poisson_synapse)
+                            nml_doc.poisson_firing_synapses.append(poisson_syn)
            
    
                          if synapse_array['synapseMode']=="transient":
@@ -741,7 +740,7 @@ def generate_PoissonInputNet(ref,cell_array,location_array,connectivity_informat
        
         cell_info_array={}
         cell_info_array['popParams']=cell_array
-        cell_info_array['popIDarray']=popID_array
+        cell_info_array['popIDarray']=PopID_array
         cell_info_array['targetNoarray']=target_no_array
         cell_info_array['PoissonSynIdarray']=Poisson_syn_id_array
         
@@ -777,15 +776,16 @@ def generate_input_library(sim_array,pop_array):
         # Specify Displays and Output Files
 	for x in range(0,len(popIDarray)):
 	    for i in range(targetNoarray[x]):
-		quantity = "%s[%i]/%s"%popIDarray[x], i,PoissonSynIDarray[x])
-                of0 = "0"
+		quantity = "%s[%i]/%s"%(popIDarray[x], i,PoissonSynIDarray[x])
+                of0 = "eventFile%d%d"%(x,i)
+                of1="0"
                 if simulation_parameters['currentDirRequired']:
                    ls.create_event_output_file(of0,simulation_parameters['currentDir']+"/simulations/%s/sim%d/%s_PoissonTrain_%d.dat"%(simulation_parameters['experimentID'],simulation_parameters['simID'],\
                                                                                popIDarray[x],i))
                 else:
                    ls.create_event_output_file(of0,"simulations/%s/sim%d/%s_PoissonTrain_%d.dat"%(simulation_parameters['experimentID'],simulation_parameters['simID'],\
                                                                                 popIDarray[x],i))
-		ls.add_selection_to_event_output_file(of0, select=quantity, event_port="spike")
+		ls.add_selection_to_event_output_file(of0,of1,quantity,"spike")
        
 	# save LEMS file
         if simulation_parameters['parentDirRequired']:
@@ -805,10 +805,10 @@ def generate_input_library(sim_array,pop_array):
         if library_params['simulator']=="jNeuroML":
             print("Finished building a network which generates input trains. Starts running a simulation with jNeuroML for %s"%lems_file_name_dir)
 	    results1 = pynml.run_lems_with_jneuroml(lems_file_name, nogui=True, load_saved_data=False, plot=False)
-            print("Finished running simulation with jNeuroML")
+            print("Finished running simulations with jNeuroML")
         elif library_params['simulator']=="jNeuroML_NEURON":
              print("Finished building a network which generates input trains. Starts running a simulation with NEURON for %s"%lems_file_name_dir)
              results1 = pynml.run_lems_with_jneuroml_neuron(lems_file_name, nogui=True, load_saved_data=False, plot=False)
-             print("Finished building a network which generates input trains.")
+             print("Finished running simulations with NEURON.")
         else:
               print("Finished building a network which generates input trains.")

@@ -8,7 +8,7 @@
     <Include file="Cells.xml"/>
     <Include file="Networks.xml"/>
     <Include file="Simulation.xml"/>
-    <Include file="LEMS_blockingSynapse.xml"/>
+ <!--   <Include file="LEMS_blockingSynapse.xml"/>-->
 
 
     
