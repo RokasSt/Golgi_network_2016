@@ -12,7 +12,7 @@
 
     <expThreeSynapse id="MFSpikeSyn" gbase1="0.7nS" tauRise="0.1ms" tauDecay1="0.7ms" gbase2="0.2nS" tauDecay2="2.5ms"  erev="0mV"/> 
 
-    <pulseGenerator id="pulseGen0" delay="50ms" duration="500ms" amplitude="0 nA" />
+    <pulseGenerator id="pulseGen0" delay="50ms" duration="500ms" amplitude="40 pA" />
 
 
     <iafCell id="iaf1" leakReversal="-60mV" thresh="-35mV" reset="-65mV" C="1e-5uF" leakConductance="5e-7mS"/>
