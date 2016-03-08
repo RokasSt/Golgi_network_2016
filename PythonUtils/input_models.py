@@ -19,13 +19,14 @@ def XF_input_models_uniform_import(popID,popSize,cellType,cellNML2Type,input_gro
     parentDir=None
     simID=sim_params['simID']
     expID=sim_params['experimentID']
-    lbID=sim_params['libraryID']
+    libID=sim_params['libraryID']
     saveCellID=sim_params['saveCellID']
+    lib_params=sim_params['libraryParams']
     input_receiving_cells=[]
     if 'currentDir' in sim_params:
-        currDir=sim_params_dict['currentDir']
-    if 'parentDirRequired' in sim_params:
-        parentDir=sim_params_dict['parentDir']
+        currDir=sim_params['currentDir']
+    if 'parentDir' in sim_params:
+        parentDir=sim_params['parentDir']
     if parentDir !=None:
        cellTypeFile=parentDir+"/NeuroML2"+"/"+cellType
     else:
@@ -41,6 +42,8 @@ def XF_input_models_uniform_import(popID,popSize,cellType,cellNML2Type,input_gro
     input_pop_array=[]
     spike_arrays=[]
     proj_arrays=[]
+    synapse_name_array=[]
+    
     if input_group_parameters['colocalizeSynapses']:
        print("will add block for localizing synapses")
        if input_group_parameters['targetingModel']=="segments and subsegments":
@@ -49,7 +52,7 @@ def XF_input_models_uniform_import(popID,popSize,cellType,cellNML2Type,input_gro
        if input_group_parameters['targetingModel']=="segment groups and segments":
           segment_target_array =extract_morphology_information([cellTypeFile],{cellTypeFile:cellNML2Type},["segment groups",input_group_parameters['segmentGroupList']])
                                                                                                                                
-       count=0                               
+                                     
        for target_cell in target_cells:
            if saveCellID:
               input_receiving_cells.append(target_cell)
@@ -68,29 +71,31 @@ def XF_input_models_uniform_import(popID,popSize,cellType,cellNML2Type,input_gro
               [input_group_parameters['segmentList'],input_group_parameters['segmentProbabilities'],\
               input_group_parameters['fractionAlongANDsubsegProbabilities']],no_of_inputs)
               for target_point in range(0,len(target_points)):
+                  # later might implement random selection of unique subsets of spike trains from the library; currently reads the spike trains sequentially; however,
+                  # Poisson spike trains are different in any case. 
                   if libID=='newlyGenerated':
-                     spike_times=np.loadtxt(currDir+"/simulations/%s/sim%d/%s_%s_syn%d_PoissonTrain_%d.dat"%(expID,simID,label,popID,synapse_index,target_point))
+                     spike_times=np.loadtxt(currDir+"/simulations/%s/sim%d/%s_%s_syn0_PoissonTrain_%d.dat"%(expID,simID,label,popID,target_point))
                   else:
                      spike_times=np.loadtxt(currDir+"/simulations/%s/sim%d/%s_PoissonTrain_%d.dat"%(libID,simID,synapse_array['inputIdLibrary'],target_point))
                   spike_times=np.transpose(spike_times)
                   spike_times=spike_times[1]
-                  spike_array=neuroml.SpikeArray(id="%s_%s_syn%d_%d"%(label,popID,synapse_index,target_point))
+                  spike_array=neuroml.SpikeArray(id="%s_%s_cell%d_syn%d_%d"%(label,popID,target_cell,synapse_index,target_point))
                                                   
                   for spike in range(0,len(spike_times)):
                       spike_object=neuroml.Spike(id="%d"%spike,time="%fs"%spike_times[spike])
 	              spike_array.spikes.append(spike_object)
                   spike_arrays.append(spike_array)
                                                   
-                  Input_pop=neuroml.Population(id="InputPop_%s_%s_syn%d_%d"%(label,popID,synapse_index,target_point), size=1,component=spike_array.id)
+                  Input_pop=neuroml.Population(id="InputPop_%s_%s_cell%d_%d"%(label,popID,target_cell,target_point), size=1,component=spike_array.id)
                   input_pop_array.append(Input_pop)
                   for synapse_index in range(0,len(synapse_list)):
                       synapse_array=synapse_list[synapse_index]
                       synapse_name=synapse_array['synapseType']
                       synapse_name_array.append(synapse_name)
-                      proj = neuroml.Projection(id="InputProj_%s_%s_syn%d_%d"%(label,popID,synapse_index,target_point),presynaptic_population=Input_pop.id,\
+                      proj = neuroml.Projection(id="InputProj_%s_%s_cell%d_syn%d_%d"%(label,popID,target_cell,synapse_index,target_point),presynaptic_population=Input_pop.id,\
                           postsynaptic_population=popID,synapse=synapse_name)
                                                   
-                      conn = Connection(id=id, \
+                      conn = neuroml.Connection(id="0", \
                             pre_cell_id="../%s[0]"%(Input_pop.id), \
                             pre_segment_id=0, \
                             pre_fraction_along=0.5,\
@@ -137,20 +142,20 @@ def XF_input_models_uniform_import(popID,popSize,cellType,cellNML2Type,input_gro
                       spike_times=np.loadtxt(currDir+"/simulations/%s/sim%d/%s_PoissonTrain_%d.dat"%(libID,simID,synapse_array['inputIdLibrary'],target_point))
                    spike_times=np.transpose(spike_times)
                    spike_times=spike_times[1]
-                   spike_array=neuroml.SpikeArray(id="%s_%s_syn%d_%d"%(label,popID,synapse_index,target_point))
+                   spike_array=neuroml.SpikeArray(id="%s_%s_cell%d_syn%d_%d"%(label,popID,target_cell,synapse_index,target_point))
                                                   
                    for spike in range(0,len(spike_times)):
                        spike_object=neuroml.Spike(id="%d"%spike,time="%fs"%spike_times[spike])
 	               spike_array.spikes.append(spike_object)
                    spike_arrays.append(spike_array)
                                                   
-                   Input_pop=neuroml.Population(id="InputPop_%s_%s_syn%d_%d"%(label,popID,synapse_index,target_point), size=1,component=spike_array.id)
+                   Input_pop=neuroml.Population(id="InputPop_%s_%s_cell%d_syn%d_%d"%(label,popID,target_cell,synapse_index,target_point), size=1,component=spike_array.id)
                    input_pop_array.append(Input_pop)
                                                   
-                   proj = neuroml.Projection(id="InputProj_%s_%s_syn%d_%d"%(label,popID,synapse_index,target_point),presynaptic_population=Input_pop.id,\
+                   proj = neuroml.Projection(id="InputProj_%s_%s_cell%d_syn%d_%d"%(label,popID,target_cell,synapse_index,target_point),presynaptic_population=Input_pop.id,\
                           postsynaptic_population=popID,synapse=synapse_name)
                                                   
-                   conn = Connection(id=id, \
+                   conn = neuroml.Connection(id="0", \
                             pre_cell_id="../%s[0]"%(Input_pop.id), \
                             pre_segment_id=0, \
                             pre_fraction_along=0.5,\
@@ -160,7 +165,7 @@ def XF_input_models_uniform_import(popID,popSize,cellType,cellNML2Type,input_gro
                    
                    proj.connections.append(conn)
                    proj_arrays.append(proj)
-
+    
     return input_pop_array, spike_arrays,proj_arrays,synapse_name_array,input_receiving_cells
 
 
@@ -171,12 +176,13 @@ def XF_input_models_3D_region_specific_import(popID,popSize,cellType,cellNML2Typ
     parentDir=None
     simID=sim_params['simID']
     expID=sim_params['experimentID']
-    lbID=sim_params['libraryID']
+    libID=sim_params['libraryID']
     saveCellID=sim_params['saveCellID']
+    lib_params=sim_params['libraryParams']
     input_receiving_cells=[]                                         
     if 'currentDir' in sim_params:
         currDir=sim_params_dict['currentDir']
-    if 'parentDirRequired' in sim_params:
+    if 'parentDir' in sim_params:
         parentDir=sim_params_dict['parentDir']
     if parentDir !=None:
        cellTypeFile=parentDir+"/NeuroML2"+"/"+cellType
@@ -202,6 +208,7 @@ def XF_input_models_3D_region_specific_import(popID,popSize,cellType,cellNML2Typ
     input_pop_array=[]
     spike_arrays=[]
     proj_arrays=[]
+    synapse_name_array=[]
     if input_group_parameters['colocalizeSynapses']:
        print("will add block for localizing synapses")
        if input_group_parameters['targetingModel']=="segments and subsegments":
@@ -230,28 +237,28 @@ def XF_input_models_3D_region_specific_import(popID,popSize,cellType,cellNML2Typ
               input_group_parameters['fractionAlongANDsubsegProbabilities']],no_of_inputs)
               for target_point in range(0,len(target_points)):
                   if libID=='newlyGenerated':
-                     spike_times=np.loadtxt(currDir+"/simulations/%s/sim%d/%s_%s_syn%d_PoissonTrain_%d.dat"%(expID,simID,label,popID,synapse_index,target_point))
+                     spike_times=np.loadtxt(currDir+"/simulations/%s/sim%d/%s_%s_syn0_PoissonTrain_%d.dat"%(expID,simID,label,popID,target_point))
                   else:
                      spike_times=np.loadtxt(currDir+"/simulations/%s/sim%d/%s_PoissonTrain_%d.dat"%(libID,simID,synapse_array['inputIdLibrary'],target_point))
                   spike_times=np.transpose(spike_times)
                   spike_times=spike_times[1]
-                  spike_array=neuroml.SpikeArray(id="%s_%s_syn%d_%d"%(label,popID,synapse_index,target_point))
+                  spike_array=neuroml.SpikeArray(id="%s_%s_syn%d_%d"%(label,popID,target_cell,synapse_index,target_point))
                                                   
                   for spike in range(0,len(spike_times)):
                       spike_object=neuroml.Spike(id="%d"%spike,time="%fs"%spike_times[spike])
 	              spike_array.spikes.append(spike_object)
                   spike_arrays.append(spike_array)
                                                  
-                  Input_pop=neuroml.Population(id="InputPop_%s_%s_syn%d_%d"%(label,popID,synapse_index,target_point), size=1,component=spike_array.id)
+                  Input_pop=neuroml.Population(id="InputPop_%s_%s_cell%d_%d"%(label,popID,target_cell,target_point), size=1,component=spike_array.id)
                   input_pop_array.append(Input_pop)
                   for synapse_index in range(0,len(synapse_list)):
                       synapse_array=synapse_list[synapse_index]
                       synapse_name=synapse_array['synapseType']
                       synapse_name_array.append(synapse_name)
-                      proj = neuroml.Projection(id="InputProj_%s_%s_syn%d_%d"%(label,popID,synapse_index,target_point),presynaptic_population=Input_pop.id,\
+                      proj = neuroml.Projection(id="InputProj_%s_%s_cell%d_syn%d_%d"%(label,popID,target_cell,synapse_index,target_point),presynaptic_population=Input_pop.id,\
                           postsynaptic_population=popID,synapse=synapse_name)
                                                   
-                      conn = Connection(id=id, \
+                      conn = neuroml.Connection(id="0", \
                             pre_cell_id="../%s[0]"%(Input_pop.id), \
                             pre_segment_id=0, \
                             pre_fraction_along=0.5,\
@@ -298,7 +305,7 @@ def XF_input_models_3D_region_specific_import(popID,popSize,cellType,cellNML2Typ
                       spike_times=np.loadtxt(currDir+"/simulations/%s/sim%d/%s_PoissonTrain_%d.dat"%(libID,simID,synapse_array['inputIdLibrary'],target_point))
                    spike_times=np.transpose(spike_times)
                    spike_times=spike_times[1]
-                   spike_array=neuroml.SpikeArray(id="%s_%s_syn%d_%d"%(label,popID,synapse_index,target_point))
+                   spike_array=neuroml.SpikeArray(id="%s_%s_syn%d_%d"%(label,popID,target_cell,synapse_index,target_point))
                                                   
                    for spike in range(0,len(spike_times)):
                        spike_object=neuroml.Spike(id="%d"%spike,time="%fs"%spike_times[spike])
@@ -311,7 +318,7 @@ def XF_input_models_3D_region_specific_import(popID,popSize,cellType,cellNML2Typ
                    proj = neuroml.Projection(id="InputProj_%s_%s_syn%d_%d"%(label,popID,synapse_index,target_point),presynaptic_population=Input_pop.id,\
                           postsynaptic_population=popID,synapse=synapse_name)
                                                   
-                   conn = Connection(id=id, \
+                   conn = neuroml.Connection(id="0", \
                             pre_cell_id="../%s[0]"%(Input_pop.id), \
                             pre_segment_id=0, \
                             pre_fraction_along=0.5,\
