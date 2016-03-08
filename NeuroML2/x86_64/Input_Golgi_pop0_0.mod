@@ -1,1 +1,0 @@
-../Input_Golgi_pop0_0.mod

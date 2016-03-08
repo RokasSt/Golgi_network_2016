@@ -1,1 +1,0 @@
-../gap_junction00.mod
