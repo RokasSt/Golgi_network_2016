@@ -170,7 +170,7 @@ def XF_input_models_uniform_import(popID,popSize,cellType,cellNML2Type,input_gro
 
 
 
-def XF_input_models_3D_region_specific_import(popID,popSize,cellType,cellNML2Type,input_group_parameters,cell_positions,seed_number,sim_params):
+def XF_input_models_3D_region_specific_import(popID,cellType,cellNML2Type,input_group_parameters,cell_positions,seed_number,sim_params):
 
     random.seed(seed_number)
     parentDir=None
@@ -181,9 +181,9 @@ def XF_input_models_3D_region_specific_import(popID,popSize,cellType,cellNML2Typ
     lib_params=sim_params['libraryParams']
     input_receiving_cells=[]                                         
     if 'currentDir' in sim_params:
-        currDir=sim_params_dict['currentDir']
+        currDir=sim_params['currentDir']
     if 'parentDir' in sim_params:
-        parentDir=sim_params_dict['parentDir']
+        parentDir=sim_params['parentDir']
     if parentDir !=None:
        cellTypeFile=parentDir+"/NeuroML2"+"/"+cellType
     else:
@@ -193,11 +193,17 @@ def XF_input_models_3D_region_specific_import(popID,popSize,cellType,cellNML2Typ
                                                                        
     dim_array=np.shape(cell_positions)
     region_specific_targets_per_cell_group=[]
-    for region in range(1,len(input_group_parameters['regionList'])):
+    for region in range(0,len(input_group_parameters['regionList'])):
         for cell in range(0,dim_array[0]):
-            if (input_group_parameters['regionList'][region]['xVector'][0] <  cell_positions[cell,0]) and (cell_positions[cell,0] < input_group_parameters['regionList'][region]['xVector'][1]):
-               if (input_group_parameters['regionList'][region]['yVector'][0] <  cell_positions[cell,1]) and (cell_positions[cell,1] <input_group_parameters['regionList'][region]['yVector'][1]) :
-                  if (input_group_parameters['regionList'][region]['zVector'][0] <  cell_positions[cell,2]) and (cell_positions[cell,2] < input_group_parameters['regionList'][region]['zVector'][1]):
+            if input_group_parameters['regionList'][region]['xVector'][0] <  cell_positions[cell,0] \
+                and cell_positions[cell,0] < input_group_parameters['regionList'][region]['xVector'][1]:
+
+               if input_group_parameters['regionList'][region]['yVector'][0] <  cell_positions[cell,1] \
+                  and cell_positions[cell,1] < input_group_parameters['regionList'][region]['yVector'][1] :
+
+                  if input_group_parameters['regionList'][region]['zVector'][0] <  cell_positions[cell,2] \
+                      and cell_positions[cell,2] < input_group_parameters['regionList'][region]['zVector'][1]:
+
                      region_specific_targets_per_cell_group.append(cell)
                                                                         
     target_cells=random.sample(region_specific_targets_per_cell_group,int(round(fraction_to_target_per_pop*len(region_specific_targets_per_cell_group))))
@@ -305,7 +311,7 @@ def XF_input_models_3D_region_specific_import(popID,popSize,cellType,cellNML2Typ
                       spike_times=np.loadtxt(currDir+"/simulations/%s/sim%d/%s_PoissonTrain_%d.dat"%(libID,simID,synapse_array['inputIdLibrary'],target_point))
                    spike_times=np.transpose(spike_times)
                    spike_times=spike_times[1]
-                   spike_array=neuroml.SpikeArray(id="%s_%s_syn%d_%d"%(label,popID,target_cell,synapse_index,target_point))
+                   spike_array=neuroml.SpikeArray(id="%s_%s_cell%d_syn%d_%d"%(label,popID,target_cell,synapse_index,target_point))
                                                   
                    for spike in range(0,len(spike_times)):
                        spike_object=neuroml.Spike(id="%d"%spike,time="%fs"%spike_times[spike])
@@ -434,7 +440,7 @@ def XF_input_models_3D_region_specific(popID,cellType,cellNML2Type,input_group_p
                                                                        
     dim_array=np.shape(cell_positions)
     region_specific_targets_per_cell_group=[]
-    for region in range(1,len(input_group_parameters['regionList'])):
+    for region in range(0,len(input_group_parameters['regionList'])):
         for cell in range(0,dim_array[0]):
             if (input_group_parameters['regionList'][region]['xVector'][0] <  cell_positions[cell,0]) and (cell_positions[cell,0] < input_group_parameters['regionList'][region]['xVector'][1]):
                if (input_group_parameters['regionList'][region]['yVector'][0] <  cell_positions[cell,1]) and (cell_positions[cell,1] <input_group_parameters['regionList'][region]['yVector'][1]) :

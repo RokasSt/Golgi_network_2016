@@ -25,21 +25,8 @@
     <Simulation id="Golgi_V2012_test1_import_colocalize_trial0" length="450ms" step="0.005ms" target="Golgi_V2012_test1_import_colocalize_trial0_network">
         
         <Display id="display_voltagesGolgi_pop0" title="Voltages Golgi_pop0" timeScale="1ms" xmin="-45.0" xmax="495.0" ymin="-75" ymax="50">
-            <Line id="../Golgi_pop0/0: Vm" quantity="Golgi_pop0/0/Golgi_5comp_3channels_1CaPool/v" scale="1mV" color="#dd62e5" timeScale="1ms"/>
-            <Line id="../Golgi_pop0/1: Vm" quantity="Golgi_pop0/1/Golgi_5comp_3channels_1CaPool/v" scale="1mV" color="#b27c9c" timeScale="1ms"/>
-            <Line id="../Golgi_pop0/2: Vm" quantity="Golgi_pop0/2/Golgi_5comp_3channels_1CaPool/v" scale="1mV" color="#faf4de" timeScale="1ms"/>
-            <Line id="../Golgi_pop0/3: Vm" quantity="Golgi_pop0/3/Golgi_5comp_3channels_1CaPool/v" scale="1mV" color="#71835d" timeScale="1ms"/>
-            <Line id="../Golgi_pop0/4: Vm" quantity="Golgi_pop0/4/Golgi_5comp_3channels_1CaPool/v" scale="1mV" color="#03b429" timeScale="1ms"/>
-            <Line id="../Golgi_pop0/5: Vm" quantity="Golgi_pop0/5/Golgi_5comp_3channels_1CaPool/v" scale="1mV" color="#09bac0" timeScale="1ms"/>
-            <Line id="../Golgi_pop0/6: Vm" quantity="Golgi_pop0/6/Golgi_5comp_3channels_1CaPool/v" scale="1mV" color="#f8c92a" timeScale="1ms"/>
-            <Line id="../Golgi_pop0/7: Vm" quantity="Golgi_pop0/7/Golgi_5comp_3channels_1CaPool/v" scale="1mV" color="#5d79a7" timeScale="1ms"/>
-            <Line id="../Golgi_pop0/8: Vm" quantity="Golgi_pop0/8/Golgi_5comp_3channels_1CaPool/v" scale="1mV" color="#c73f6d" timeScale="1ms"/>
-            <Line id="../Golgi_pop0/9: Vm" quantity="Golgi_pop0/9/Golgi_5comp_3channels_1CaPool/v" scale="1mV" color="#f87ae9" timeScale="1ms"/>
-            <Line id="../Golgi_pop0/10: Vm" quantity="Golgi_pop0/10/Golgi_5comp_3channels_1CaPool/v" scale="1mV" color="#8c59d4" timeScale="1ms"/>
-            <Line id="../Golgi_pop0/11: Vm" quantity="Golgi_pop0/11/Golgi_5comp_3channels_1CaPool/v" scale="1mV" color="#ac61a4" timeScale="1ms"/>
-            <Line id="../Golgi_pop0/12: Vm" quantity="Golgi_pop0/12/Golgi_5comp_3channels_1CaPool/v" scale="1mV" color="#8fe477" timeScale="1ms"/>
-            <Line id="../Golgi_pop0/13: Vm" quantity="Golgi_pop0/13/Golgi_5comp_3channels_1CaPool/v" scale="1mV" color="#babfe3" timeScale="1ms"/>
-            <Line id="../Golgi_pop0/14: Vm" quantity="Golgi_pop0/14/Golgi_5comp_3channels_1CaPool/v" scale="1mV" color="#d27a33" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/0: Vm" quantity="Golgi_pop0/0/Golgi_5comp_3channels_1CaPool/v" scale="1mV" color="#ceadbd" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/1: Vm" quantity="Golgi_pop0/1/Golgi_5comp_3channels_1CaPool/v" scale="1mV" color="#05915e" timeScale="1ms"/>
         </Display>
         
         <OutputFile id="Volts0_file0_0" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/Golgi_pop0_cell0.dat">
@@ -48,58 +35,6 @@
         
         <OutputFile id="Volts0_file0_1" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/Golgi_pop0_cell1.dat">
             <OutputColumn id="v1" quantity="Golgi_pop0/1/Golgi_5comp_3channels_1CaPool/v"/> 
-        </OutputFile>
-        
-        <OutputFile id="Volts0_file0_2" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/Golgi_pop0_cell2.dat">
-            <OutputColumn id="v2" quantity="Golgi_pop0/2/Golgi_5comp_3channels_1CaPool/v"/> 
-        </OutputFile>
-        
-        <OutputFile id="Volts0_file0_3" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/Golgi_pop0_cell3.dat">
-            <OutputColumn id="v3" quantity="Golgi_pop0/3/Golgi_5comp_3channels_1CaPool/v"/> 
-        </OutputFile>
-        
-        <OutputFile id="Volts0_file0_4" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/Golgi_pop0_cell4.dat">
-            <OutputColumn id="v4" quantity="Golgi_pop0/4/Golgi_5comp_3channels_1CaPool/v"/> 
-        </OutputFile>
-        
-        <OutputFile id="Volts0_file0_5" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/Golgi_pop0_cell5.dat">
-            <OutputColumn id="v5" quantity="Golgi_pop0/5/Golgi_5comp_3channels_1CaPool/v"/> 
-        </OutputFile>
-        
-        <OutputFile id="Volts0_file0_6" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/Golgi_pop0_cell6.dat">
-            <OutputColumn id="v6" quantity="Golgi_pop0/6/Golgi_5comp_3channels_1CaPool/v"/> 
-        </OutputFile>
-        
-        <OutputFile id="Volts0_file0_7" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/Golgi_pop0_cell7.dat">
-            <OutputColumn id="v7" quantity="Golgi_pop0/7/Golgi_5comp_3channels_1CaPool/v"/> 
-        </OutputFile>
-        
-        <OutputFile id="Volts0_file0_8" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/Golgi_pop0_cell8.dat">
-            <OutputColumn id="v8" quantity="Golgi_pop0/8/Golgi_5comp_3channels_1CaPool/v"/> 
-        </OutputFile>
-        
-        <OutputFile id="Volts0_file0_9" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/Golgi_pop0_cell9.dat">
-            <OutputColumn id="v9" quantity="Golgi_pop0/9/Golgi_5comp_3channels_1CaPool/v"/> 
-        </OutputFile>
-        
-        <OutputFile id="Volts0_file0_10" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/Golgi_pop0_cell10.dat">
-            <OutputColumn id="v10" quantity="Golgi_pop0/10/Golgi_5comp_3channels_1CaPool/v"/> 
-        </OutputFile>
-        
-        <OutputFile id="Volts0_file0_11" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/Golgi_pop0_cell11.dat">
-            <OutputColumn id="v11" quantity="Golgi_pop0/11/Golgi_5comp_3channels_1CaPool/v"/> 
-        </OutputFile>
-        
-        <OutputFile id="Volts0_file0_12" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/Golgi_pop0_cell12.dat">
-            <OutputColumn id="v12" quantity="Golgi_pop0/12/Golgi_5comp_3channels_1CaPool/v"/> 
-        </OutputFile>
-        
-        <OutputFile id="Volts0_file0_13" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/Golgi_pop0_cell13.dat">
-            <OutputColumn id="v13" quantity="Golgi_pop0/13/Golgi_5comp_3channels_1CaPool/v"/> 
-        </OutputFile>
-        
-        <OutputFile id="Volts0_file0_14" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/Golgi_pop0_cell14.dat">
-            <OutputColumn id="v14" quantity="Golgi_pop0/14/Golgi_5comp_3channels_1CaPool/v"/> 
         </OutputFile>
         
     </Simulation>

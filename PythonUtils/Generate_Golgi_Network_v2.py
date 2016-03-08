@@ -376,8 +376,10 @@ input_group_array[input_group],seed,sim_params_dict)
                             sim_params_dict['currentDir']=simulation_parameters['currentDir']
                          if simulation_parameters['parentDirRequired']:
                             sim_params_dict['parentDir']=simulation_parameters['parentDir']
-                         input_pops,spike_array_list,proj_arrays,synapse_name_list,cells_with_inputs=XF_input_model_3D_region_specific_import(popID,cellType,cellNML2Type,input_group_array[input_group],\
-                         cell_position_array[popID],seed,sim_params_dict)                                       
+
+                         input_pops,spike_array_list,proj_arrays,synapse_name_list,cells_with_inputs=XF_input_models_3D_region_specific_import(popID,cellType,cellNML2Type,input_group_array[input_group],cell_position_array[popID],seed,sim_params_dict) 
+
+                         debugging=cell_position_array[popID]         
                    
                          synapse_name_array.extend(synapse_name_list)
                          
@@ -392,11 +394,11 @@ input_group_array[input_group],seed,sim_params_dict)
                    else:
                       if simulation_parameters['parentDirRequired']:
                            
-                         input_list_array,poisson_synapse_array,synapse_name_list,cells_with_inputs=XF_input_model_3D_region_specific(popID,cellType,cellNML2Type,input_group_array[input_group],\
+                         input_list_array,poisson_synapse_array,synapse_name_list,cells_with_inputs=XF_input_models_3D_region_specific(popID,cellType,cellNML2Type,input_group_array[input_group],\
                          cell_position_array[popID],seed,simulation_parameters['saveInputReceivingCellID'],simulation_parameters['parentDir'])   
 
                       else:
-                         input_list_array,poisson_synapse_array,synapse_name_list,cells_with_inputs=XF_input_model_3D_region_specific(popID,cellType,cellNML2Type,input_group_array[input_group],\
+                         input_list_array,poisson_synapse_array,synapse_name_list,cells_with_inputs=XF_input_models_3D_region_specific(popID,cellType,cellNML2Type,input_group_array[input_group],\
                          cell_position_array[popID],seed,simulation_parameters['saveInputReceivingCellID'])                                          
                    
 
@@ -487,7 +489,6 @@ input_group_array[input_group],seed,sim_params_dict)
         ###### Validate the NeuroML2 ######   
 
         validate_neuroml2(nml_file_dir)
-        
         sim_info_array={}
         sim_info_array['ref']=ref
         sim_info_array['netID']=net.id
