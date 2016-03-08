@@ -1,0 +1,75 @@
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2beta4.xsd" id="Golgi_V2012_test_transient_trial0">
+    <include href="/../../../Golgi_10comp_13channels_2CaPools.cell.nml"></include>
+    <include href="/../../../PFSpikeSyn.synapse.nml"></include>
+    <gapJunction id="gap_junction00" conductance="436.973926pS"/>
+    <gapJunction id="gap_junction01" conductance="471.677399pS"/>
+    <gapJunction id="gap_junction02" conductance="402.418988pS"/>
+    <gapJunction id="gap_junction03" conductance="431.534028pS"/>
+    <gapJunction id="gap_junction04" conductance="445.646404pS"/>
+    <gapJunction id="gap_junction05" conductance="398.629089pS"/>
+    <gapJunction id="gap_junction06" conductance="397.824799pS"/>
+    <gapJunction id="gap_junction07" conductance="402.989613pS"/>
+    <pulseGenerator id="Pulse_vrpop0_Golgi_pop0_0" delay="50.000000ms" duration="400.000000ms" amplitude="51.071154pA"/>
+    <pulseGenerator id="Pulse_vrpop0_Golgi_pop0_1" delay="50.000000ms" duration="400.000000ms" amplitude="64.374701pA"/>
+    <poissonFiringSynapse id="XFpop0_PFSpikeSyn_Golgi_pop0_syn1" synapse="PFSpikeSyn" averageRate="100.000000 per_s" spikeTarget="./PFSpikeSyn"/>
+    <transientPoissonFiringSynapse id="XFpop0_PFSpikeSyn_Golgi_pop0_syn0" delay="80.000000ms" duration="100.000000ms" synapse="PFSpikeSyn" averageRate="300.000000 per_s" spikeTarget="./PFSpikeSyn"/>
+    <network id="Golgi_V2012_test_transient_trial0_network" type="networkWithTemperature" temperature="23 degC">
+        <notes>Parameter arrays for building this network are listed below:
+Cell distribution parameters:
+{'yDim': 40, 'popID': 'Golgi_pop0', 'zDim': 40, 'xDim': 40, 'distributionModel': 'explicit_cell_numbers', 'minimal_distance': 10, 'distanceModel': 'random_minimal_distance'}
+Cell population parameters:
+Cell population parameters for Golgi_pop0:
+{'NeuroML2CellType': 'cell2CaPools', 'popID': 'Golgi_pop0', 'cellType': 'Golgi_10comp_13channels_2CaPools', 'size': 2}
+Cell connectivity parameters:
+{'targetingModelprePop': {'segmentGroupList': ['apical_dendrite_group', 'basal_dendrite_group'], 'model': 'segment groups and segments', 'segmentGroupProbabilities': {'basal_dendrite_group': 0.2, 'apical_dendrite_group': 0.8}}, 'gapJunctionModel': 'constant number of GJ contacts per pair', 'testingConductanceScale': 1, 'stdDev': 20, 'maximalConnDistance': 100, 'spatialScale': 1, 'prePopID': 'Golgi_pop0', 'averageConductance': 426, 'targetingModelpostPop': {'segmentGroupList': ['apical_dendrite_group', 'basal_dendrite_group'], 'model': 'segment groups and segments', 'segmentGroupProbabilities': {'basal_dendrite_group': 0.2, 'apical_dendrite_group': 0.8}}, 'postPopID': 'Golgi_pop0', 'numberGJ': 8, 'conductanceModel': 'variable', 'electricalConnModel': 'Vervaeke_2012_based', 'units': 'pS', 'distribution': 'gaussian'}
+Input parameters for a list of populations:
+Input group parameters for Golgi_pop0:
+{'stDevAmp': 25, 'inputModel': 'variable_basal_firing_rate', 'ampUnits': 'pA', 'amplitudeDistribution': 'gaussian', 'averageAmp': 50, 'valueOffset': 50, 'inputLabel': 'vrpop0', 'offsetDistribution': 'constant', 'offsetUnits': 'ms'}
+{'synapseList': [{'noInputs': 8, 'synapseMode': 'transient', 'segmentGroupProbabilities': {'apical_dendrite_group': 1}, 'synapseType': 'PFSpikeSyn', 'duration': 100, 'segmentGroupList': ['apical_dendrite_group'], 'targetingModel': 'segment groups and segments', 'averageRate': 300, 'delay': 80, 'units': 'ms', 'numberModel': 'constant number of inputs per cell'}, {'segmentGroupList': ['basal_dendrite_group'], 'targetingModel': 'segment groups and segments', 'synapseMode': 'persistent', 'averageRate': 100, 'noInputs': 8, 'synapseType': 'PFSpikeSyn', 'numberModel': 'constant number of inputs per cell', 'segmentGroupProbabilities': {'basal_dendrite_group': 1}}], 'inputLabel': 'XFpop0', 'inputModel': 'XF', 'fractionToTarget': 0.5, 'targetingRegime': 'uniform', 'colocalizeSynapses': False}
+</notes>
+        <population id="Golgi_pop0" type="populationList" component="Golgi_10comp_13channels_2CaPools" size="2">
+            <instance id="0">
+                <location y="6.125723089481045" x="9.526487492902568" z="30.796666918401897"/>
+            </instance>
+            <instance id="1">
+                <location y="19.648638955154251" x="9.138587401898359" z="9.920761902038894"/>
+            </instance>
+        </population>
+        <electricalProjection id="proj0" postsynapticPopulation="Golgi_pop0" presynapticPopulation="Golgi_pop0">
+            <electricalConnectionInstance id="0" synapse="gap_junction00" preFractionAlong="0.491216" preSegment="4" postFractionAlong="0.117842" postSegment="3" postCell="../Golgi_pop0/1/Golgi_10comp_13channels_2CaPools" preCell="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+            <electricalConnectionInstance id="1" synapse="gap_junction01" preFractionAlong="0.050075" preSegment="8" postFractionAlong="0.724758" postSegment="3" postCell="../Golgi_pop0/1/Golgi_10comp_13channels_2CaPools" preCell="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+            <electricalConnectionInstance id="2" synapse="gap_junction02" preFractionAlong="0.686035" preSegment="6" postFractionAlong="0.640857" postSegment="6" postCell="../Golgi_pop0/1/Golgi_10comp_13channels_2CaPools" preCell="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+            <electricalConnectionInstance id="3" synapse="gap_junction03" preFractionAlong="0.194902" preSegment="5" postFractionAlong="0.556440" postSegment="3" postCell="../Golgi_pop0/1/Golgi_10comp_13channels_2CaPools" preCell="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+            <electricalConnectionInstance id="4" synapse="gap_junction04" preFractionAlong="0.201199" preSegment="10" postFractionAlong="0.953482" postSegment="10" postCell="../Golgi_pop0/1/Golgi_10comp_13channels_2CaPools" preCell="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+            <electricalConnectionInstance id="5" synapse="gap_junction05" preFractionAlong="0.725469" preSegment="6" postFractionAlong="0.246795" postSegment="5" postCell="../Golgi_pop0/1/Golgi_10comp_13channels_2CaPools" preCell="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+            <electricalConnectionInstance id="6" synapse="gap_junction06" preFractionAlong="0.799455" preSegment="8" postFractionAlong="0.531679" postSegment="7" postCell="../Golgi_pop0/1/Golgi_10comp_13channels_2CaPools" preCell="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+            <electricalConnectionInstance id="7" synapse="gap_junction07" preFractionAlong="0.830038" preSegment="5" postFractionAlong="0.292145" postSegment="5" postCell="../Golgi_pop0/1/Golgi_10comp_13channels_2CaPools" preCell="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+        </electricalProjection>
+        <inputList id="vrpop0_Golgi_pop0_0" component="Pulse_vrpop0_Golgi_pop0_0" population="Golgi_pop0">
+            <input destination="synapses" id="0" target="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+        </inputList>
+        <inputList id="vrpop0_Golgi_pop0_1" component="Pulse_vrpop0_Golgi_pop0_1" population="Golgi_pop0">
+            <input destination="synapses" id="1" target="../Golgi_pop0/1/Golgi_10comp_13channels_2CaPools"/>
+        </inputList>
+        <inputList id="List_XFpop0_PFSpikeSyn_Golgi_pop0_syn0" component="XFpop0_PFSpikeSyn_Golgi_pop0_syn0" population="Golgi_pop0">
+            <input fractionAlong="0.491216" destination="synapses" id="0" segmentId="4" target="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+            <input fractionAlong="0.050075" destination="synapses" id="1" segmentId="8" target="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+            <input fractionAlong="0.686035" destination="synapses" id="2" segmentId="6" target="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+            <input fractionAlong="0.194902" destination="synapses" id="3" segmentId="5" target="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+            <input fractionAlong="0.736186" destination="synapses" id="4" segmentId="7" target="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+            <input fractionAlong="0.201199" destination="synapses" id="5" segmentId="6" target="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+            <input fractionAlong="0.902066" destination="synapses" id="6" segmentId="7" target="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+            <input fractionAlong="0.210716" destination="synapses" id="7" segmentId="3" target="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+        </inputList>
+        <inputList id="List_XFpop0_PFSpikeSyn_Golgi_pop0_syn1" component="XFpop0_PFSpikeSyn_Golgi_pop0_syn1" population="Golgi_pop0">
+            <input fractionAlong="0.327067" destination="synapses" id="0" segmentId="10" target="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+            <input fractionAlong="0.799455" destination="synapses" id="1" segmentId="10" target="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+            <input fractionAlong="0.382571" destination="synapses" id="2" segmentId="9" target="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+            <input fractionAlong="0.094253" destination="synapses" id="3" segmentId="9" target="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+            <input fractionAlong="0.936617" destination="synapses" id="4" segmentId="9" target="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+            <input fractionAlong="0.722317" destination="synapses" id="5" segmentId="10" target="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+            <input fractionAlong="0.724758" destination="synapses" id="6" segmentId="9" target="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+            <input fractionAlong="0.893785" destination="synapses" id="7" segmentId="10" target="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+        </inputList>
+    </network>
+</neuroml>

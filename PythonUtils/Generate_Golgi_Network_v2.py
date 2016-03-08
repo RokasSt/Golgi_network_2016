@@ -358,7 +358,8 @@ input_group_array[input_group],seed,sim_params_dict)
                       else:
                          save_to_path="simulations/%s/sim%d"%(simulation_parameters['experimentID'],simulation_parameters['simID'])
 
-                      np.savetxt('%s/%s_%s.txt'%(save_to_path,cell_array[pop_listIndex]['popID'],input_group_array[input_group]['inputLabel']),cells_with_inputs) 
+                      np.savetxt('%s/%s_%s.txt'%(save_to_path,cell_array[pop_listIndex]['popID'],input_group_array[input_group]['inputLabel']),cells_with_inputs,\
+                      fmt="%d" ) 
       
                 if input_group_array[input_group]['inputModel']=='XF' and input_group_array[input_group]['targetingRegime']=="3D_region_specific":
                                    
@@ -417,8 +418,10 @@ input_group_array[input_group],seed,sim_params_dict)
                       else:
                          save_to_path="simulations/%s/sim%d"%(simulation_parameters['experimentID'],simulation_parameters['simID'])
 
-                      np.savetxt('%s/%s_%s.txt'%(save_to_path,cell_array[pop_listIndex]['popID'],input_group_array[input_group]['inputLabel']),cells_with_inputs) 
+                      np.savetxt('%s/%s_%s.txt'%(save_to_path,cell_array[pop_listIndex]['popID'],input_group_array[input_group]['inputLabel']),cells_with_inputs,\
+                      fmt="%d" ) 
 	        ###### implementing physiological heterogeneity between cells with variations in a basal firing rate
+
                 if input_group_array[input_group]['inputModel']=="variable_basal_firing_rate":
 
                    input_list_array,pulseGenerator_array=variable_basal_firing_rate(popID,popSize,cellType,input_group_array[input_group],\
@@ -646,14 +649,14 @@ def generate_PoissonInputNet(ref,cell_array,location_array,connectivity_informat
                       Input_Golgi_pop=neuroml.Population(id="%s_%s_syn0"%(label,popID), size=LibrarySize,component='iaf0')
                       PopID_array.append("%s_%s_syn0"%(label,popID))
                       net.populations.append(Input_Golgi_pop)
-                      if input_group_array['synapseMode']=="persistent":
+                      if input_group_array[input_group]['synapseMode']=="persistent":
                          poisson_syn=neuroml.PoissonFiringSynapse(id="%s_%s_syn0one"%(label,popID),\
                          average_rate="%f per_s"%input_group_array[input_group]['averageRate'],\
                          synapse="syn0",spike_target="./syn0")
                          nml_doc.poisson_firing_synapses.append(poisson_syn)
            
    
-                      if input_group_array['synapseMode']=="transient":
+                      if input_group_array[input_group]['synapseMode']=="transient":
                          poisson_syn=neuroml.TransientPoissonFiringSynapse(id="%s_%s_syn0one"%(label,popID),\
                          average_rate="%f per_s"%input_group_array[input_group]['averageRate'],\
                          synapse="syn0" ,\

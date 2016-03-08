@@ -1,0 +1,929 @@
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2beta4.xsd" id="Golgi_V2012_test_import_diff_library_trial0">
+    <include href="/../../../Golgi_10comp_13channels_2CaPools.cell.nml"></include>
+    <include href="/../../../PFSpikeSyn.synapse.nml"></include>
+    <gapJunction id="gap_junction00" conductance="450.577308pS"/>
+    <gapJunction id="gap_junction01" conductance="441.981179pS"/>
+    <gapJunction id="gap_junction02" conductance="394.806145pS"/>
+    <gapJunction id="gap_junction03" conductance="444.494733pS"/>
+    <gapJunction id="gap_junction04" conductance="433.910982pS"/>
+    <gapJunction id="gap_junction05" conductance="431.632427pS"/>
+    <gapJunction id="gap_junction06" conductance="341.066895pS"/>
+    <gapJunction id="gap_junction07" conductance="424.269172pS"/>
+    <pulseGenerator id="Pulse_vrpop0_Golgi_pop0_0" delay="50.000000ms" duration="400.000000ms" amplitude="11.801586pA"/>
+    <pulseGenerator id="Pulse_vrpop0_Golgi_pop0_1" delay="50.000000ms" duration="400.000000ms" amplitude="69.993095pA"/>
+    <spikeArray id="XFpop0_Golgi_pop0_cell0_syn0_0">
+        <spike id="0" time="0.006315s"/>
+        <spike id="1" time="0.016800s"/>
+        <spike id="2" time="0.034455s"/>
+        <spike id="3" time="0.062810s"/>
+        <spike id="4" time="0.078490s"/>
+        <spike id="5" time="0.083960s"/>
+        <spike id="6" time="0.085025s"/>
+        <spike id="7" time="0.094065s"/>
+        <spike id="8" time="0.094260s"/>
+        <spike id="9" time="0.096765s"/>
+        <spike id="10" time="0.096840s"/>
+        <spike id="11" time="0.109390s"/>
+        <spike id="12" time="0.174480s"/>
+        <spike id="13" time="0.176085s"/>
+        <spike id="14" time="0.190870s"/>
+        <spike id="15" time="0.218620s"/>
+        <spike id="16" time="0.233515s"/>
+        <spike id="17" time="0.247220s"/>
+        <spike id="18" time="0.250425s"/>
+        <spike id="19" time="0.271315s"/>
+        <spike id="20" time="0.279490s"/>
+        <spike id="21" time="0.283125s"/>
+        <spike id="22" time="0.293275s"/>
+        <spike id="23" time="0.324240s"/>
+        <spike id="24" time="0.339450s"/>
+        <spike id="25" time="0.342730s"/>
+        <spike id="26" time="0.343265s"/>
+        <spike id="27" time="0.347475s"/>
+        <spike id="28" time="0.347645s"/>
+        <spike id="29" time="0.348660s"/>
+        <spike id="30" time="0.371260s"/>
+        <spike id="31" time="0.380905s"/>
+        <spike id="32" time="0.381180s"/>
+        <spike id="33" time="0.386615s"/>
+        <spike id="34" time="0.394935s"/>
+        <spike id="35" time="0.402785s"/>
+        <spike id="36" time="0.418270s"/>
+        <spike id="37" time="0.426965s"/>
+    </spikeArray>
+    <spikeArray id="XFpop0_Golgi_pop0_cell0_syn0_1">
+        <spike id="0" time="0.000190s"/>
+        <spike id="1" time="0.012725s"/>
+        <spike id="2" time="0.016585s"/>
+        <spike id="3" time="0.017710s"/>
+        <spike id="4" time="0.017725s"/>
+        <spike id="5" time="0.027525s"/>
+        <spike id="6" time="0.027765s"/>
+        <spike id="7" time="0.043460s"/>
+        <spike id="8" time="0.045005s"/>
+        <spike id="9" time="0.056860s"/>
+        <spike id="10" time="0.066405s"/>
+        <spike id="11" time="0.073325s"/>
+        <spike id="12" time="0.076915s"/>
+        <spike id="13" time="0.081760s"/>
+        <spike id="14" time="0.087525s"/>
+        <spike id="15" time="0.087735s"/>
+        <spike id="16" time="0.101795s"/>
+        <spike id="17" time="0.105400s"/>
+        <spike id="18" time="0.105460s"/>
+        <spike id="19" time="0.114120s"/>
+        <spike id="20" time="0.115230s"/>
+        <spike id="21" time="0.136925s"/>
+        <spike id="22" time="0.146815s"/>
+        <spike id="23" time="0.165630s"/>
+        <spike id="24" time="0.175800s"/>
+        <spike id="25" time="0.191275s"/>
+        <spike id="26" time="0.211425s"/>
+        <spike id="27" time="0.213300s"/>
+        <spike id="28" time="0.215135s"/>
+        <spike id="29" time="0.220100s"/>
+        <spike id="30" time="0.225385s"/>
+        <spike id="31" time="0.263855s"/>
+        <spike id="32" time="0.272690s"/>
+        <spike id="33" time="0.273595s"/>
+        <spike id="34" time="0.302320s"/>
+        <spike id="35" time="0.328575s"/>
+        <spike id="36" time="0.339120s"/>
+        <spike id="37" time="0.341690s"/>
+        <spike id="38" time="0.357990s"/>
+        <spike id="39" time="0.381265s"/>
+        <spike id="40" time="0.382830s"/>
+        <spike id="41" time="0.393300s"/>
+        <spike id="42" time="0.422330s"/>
+        <spike id="43" time="0.437450s"/>
+        <spike id="44" time="0.438915s"/>
+    </spikeArray>
+    <spikeArray id="XFpop0_Golgi_pop0_cell0_syn0_2">
+        <spike id="0" time="0.019855s"/>
+        <spike id="1" time="0.025095s"/>
+        <spike id="2" time="0.035115s"/>
+        <spike id="3" time="0.042360s"/>
+        <spike id="4" time="0.043705s"/>
+        <spike id="5" time="0.049380s"/>
+        <spike id="6" time="0.053570s"/>
+        <spike id="7" time="0.053925s"/>
+        <spike id="8" time="0.059905s"/>
+        <spike id="9" time="0.069825s"/>
+        <spike id="10" time="0.070660s"/>
+        <spike id="11" time="0.076850s"/>
+        <spike id="12" time="0.081795s"/>
+        <spike id="13" time="0.083000s"/>
+        <spike id="14" time="0.085705s"/>
+        <spike id="15" time="0.086410s"/>
+        <spike id="16" time="0.087020s"/>
+        <spike id="17" time="0.100500s"/>
+        <spike id="18" time="0.103775s"/>
+        <spike id="19" time="0.114035s"/>
+        <spike id="20" time="0.117780s"/>
+        <spike id="21" time="0.122325s"/>
+        <spike id="22" time="0.142840s"/>
+        <spike id="23" time="0.145005s"/>
+        <spike id="24" time="0.151365s"/>
+        <spike id="25" time="0.158930s"/>
+        <spike id="26" time="0.168140s"/>
+        <spike id="27" time="0.185305s"/>
+        <spike id="28" time="0.192485s"/>
+        <spike id="29" time="0.207065s"/>
+        <spike id="30" time="0.212670s"/>
+        <spike id="31" time="0.214970s"/>
+        <spike id="32" time="0.228545s"/>
+        <spike id="33" time="0.230500s"/>
+        <spike id="34" time="0.231775s"/>
+        <spike id="35" time="0.270510s"/>
+        <spike id="36" time="0.278305s"/>
+        <spike id="37" time="0.279010s"/>
+        <spike id="38" time="0.283075s"/>
+        <spike id="39" time="0.314325s"/>
+        <spike id="40" time="0.318460s"/>
+        <spike id="41" time="0.321090s"/>
+        <spike id="42" time="0.358210s"/>
+        <spike id="43" time="0.358745s"/>
+        <spike id="44" time="0.359625s"/>
+        <spike id="45" time="0.368375s"/>
+        <spike id="46" time="0.370215s"/>
+        <spike id="47" time="0.373230s"/>
+        <spike id="48" time="0.382665s"/>
+        <spike id="49" time="0.391140s"/>
+        <spike id="50" time="0.392340s"/>
+        <spike id="51" time="0.395835s"/>
+        <spike id="52" time="0.408985s"/>
+        <spike id="53" time="0.410090s"/>
+        <spike id="54" time="0.413465s"/>
+        <spike id="55" time="0.415545s"/>
+        <spike id="56" time="0.425125s"/>
+        <spike id="57" time="0.438955s"/>
+        <spike id="58" time="0.439230s"/>
+        <spike id="59" time="0.442155s"/>
+        <spike id="60" time="0.444175s"/>
+        <spike id="61" time="0.445080s"/>
+        <spike id="62" time="0.449065s"/>
+        <spike id="63" time="0.449820s"/>
+    </spikeArray>
+    <spikeArray id="XFpop0_Golgi_pop0_cell0_syn0_3">
+        <spike id="0" time="0.004025s"/>
+        <spike id="1" time="0.007510s"/>
+        <spike id="2" time="0.019465s"/>
+        <spike id="3" time="0.024900s"/>
+        <spike id="4" time="0.029865s"/>
+        <spike id="5" time="0.037140s"/>
+        <spike id="6" time="0.042765s"/>
+        <spike id="7" time="0.055440s"/>
+        <spike id="8" time="0.057590s"/>
+        <spike id="9" time="0.067800s"/>
+        <spike id="10" time="0.068790s"/>
+        <spike id="11" time="0.070565s"/>
+        <spike id="12" time="0.080640s"/>
+        <spike id="13" time="0.082635s"/>
+        <spike id="14" time="0.100765s"/>
+        <spike id="15" time="0.107050s"/>
+        <spike id="16" time="0.108505s"/>
+        <spike id="17" time="0.128435s"/>
+        <spike id="18" time="0.133325s"/>
+        <spike id="19" time="0.134550s"/>
+        <spike id="20" time="0.139740s"/>
+        <spike id="21" time="0.145830s"/>
+        <spike id="22" time="0.146025s"/>
+        <spike id="23" time="0.153155s"/>
+        <spike id="24" time="0.157845s"/>
+        <spike id="25" time="0.162990s"/>
+        <spike id="26" time="0.169845s"/>
+        <spike id="27" time="0.191145s"/>
+        <spike id="28" time="0.197840s"/>
+        <spike id="29" time="0.215255s"/>
+        <spike id="30" time="0.217390s"/>
+        <spike id="31" time="0.241605s"/>
+        <spike id="32" time="0.247470s"/>
+        <spike id="33" time="0.257690s"/>
+        <spike id="34" time="0.258580s"/>
+        <spike id="35" time="0.283360s"/>
+        <spike id="36" time="0.299840s"/>
+        <spike id="37" time="0.303565s"/>
+        <spike id="38" time="0.313740s"/>
+        <spike id="39" time="0.337300s"/>
+        <spike id="40" time="0.338800s"/>
+        <spike id="41" time="0.341720s"/>
+        <spike id="42" time="0.354045s"/>
+        <spike id="43" time="0.354225s"/>
+        <spike id="44" time="0.364445s"/>
+        <spike id="45" time="0.380375s"/>
+        <spike id="46" time="0.395795s"/>
+        <spike id="47" time="0.416260s"/>
+        <spike id="48" time="0.442985s"/>
+        <spike id="49" time="0.445545s"/>
+        <spike id="50" time="0.446260s"/>
+        <spike id="51" time="0.448905s"/>
+    </spikeArray>
+    <spikeArray id="XFpop0_Golgi_pop0_cell0_syn0_4">
+        <spike id="0" time="0.008755s"/>
+        <spike id="1" time="0.044155s"/>
+        <spike id="2" time="0.044920s"/>
+        <spike id="3" time="0.057545s"/>
+        <spike id="4" time="0.075970s"/>
+        <spike id="5" time="0.079580s"/>
+        <spike id="6" time="0.080510s"/>
+        <spike id="7" time="0.084805s"/>
+        <spike id="8" time="0.091335s"/>
+        <spike id="9" time="0.098020s"/>
+        <spike id="10" time="0.111760s"/>
+        <spike id="11" time="0.122860s"/>
+        <spike id="12" time="0.135770s"/>
+        <spike id="13" time="0.146895s"/>
+        <spike id="14" time="0.151030s"/>
+        <spike id="15" time="0.153075s"/>
+        <spike id="16" time="0.153165s"/>
+        <spike id="17" time="0.154205s"/>
+        <spike id="18" time="0.163130s"/>
+        <spike id="19" time="0.165690s"/>
+        <spike id="20" time="0.183840s"/>
+        <spike id="21" time="0.195265s"/>
+        <spike id="22" time="0.201195s"/>
+        <spike id="23" time="0.232490s"/>
+        <spike id="24" time="0.232500s"/>
+        <spike id="25" time="0.233090s"/>
+        <spike id="26" time="0.234840s"/>
+        <spike id="27" time="0.237705s"/>
+        <spike id="28" time="0.247570s"/>
+        <spike id="29" time="0.277070s"/>
+        <spike id="30" time="0.284355s"/>
+        <spike id="31" time="0.291745s"/>
+        <spike id="32" time="0.292690s"/>
+        <spike id="33" time="0.295730s"/>
+        <spike id="34" time="0.310710s"/>
+        <spike id="35" time="0.318020s"/>
+        <spike id="36" time="0.320370s"/>
+        <spike id="37" time="0.325350s"/>
+        <spike id="38" time="0.330515s"/>
+        <spike id="39" time="0.332860s"/>
+        <spike id="40" time="0.334520s"/>
+        <spike id="41" time="0.350400s"/>
+        <spike id="42" time="0.374205s"/>
+        <spike id="43" time="0.378920s"/>
+        <spike id="44" time="0.381735s"/>
+        <spike id="45" time="0.391710s"/>
+        <spike id="46" time="0.406045s"/>
+        <spike id="47" time="0.406875s"/>
+        <spike id="48" time="0.411755s"/>
+        <spike id="49" time="0.413000s"/>
+        <spike id="50" time="0.426250s"/>
+        <spike id="51" time="0.429590s"/>
+        <spike id="52" time="0.429850s"/>
+        <spike id="53" time="0.436155s"/>
+        <spike id="54" time="0.444810s"/>
+        <spike id="55" time="0.449290s"/>
+    </spikeArray>
+    <spikeArray id="XFpop0_Golgi_pop0_cell0_syn0_5">
+        <spike id="0" time="0.000465s"/>
+        <spike id="1" time="0.006835s"/>
+        <spike id="2" time="0.016965s"/>
+        <spike id="3" time="0.018645s"/>
+        <spike id="4" time="0.034915s"/>
+        <spike id="5" time="0.035865s"/>
+        <spike id="6" time="0.037080s"/>
+        <spike id="7" time="0.048070s"/>
+        <spike id="8" time="0.054625s"/>
+        <spike id="9" time="0.056480s"/>
+        <spike id="10" time="0.078520s"/>
+        <spike id="11" time="0.081375s"/>
+        <spike id="12" time="0.086675s"/>
+        <spike id="13" time="0.089890s"/>
+        <spike id="14" time="0.093705s"/>
+        <spike id="15" time="0.098440s"/>
+        <spike id="16" time="0.102440s"/>
+        <spike id="17" time="0.111790s"/>
+        <spike id="18" time="0.125495s"/>
+        <spike id="19" time="0.138295s"/>
+        <spike id="20" time="0.157395s"/>
+        <spike id="21" time="0.161940s"/>
+        <spike id="22" time="0.177050s"/>
+        <spike id="23" time="0.184080s"/>
+        <spike id="24" time="0.211695s"/>
+        <spike id="25" time="0.216285s"/>
+        <spike id="26" time="0.218425s"/>
+        <spike id="27" time="0.226455s"/>
+        <spike id="28" time="0.236830s"/>
+        <spike id="29" time="0.239790s"/>
+        <spike id="30" time="0.241780s"/>
+        <spike id="31" time="0.243385s"/>
+        <spike id="32" time="0.251390s"/>
+        <spike id="33" time="0.253250s"/>
+        <spike id="34" time="0.254505s"/>
+        <spike id="35" time="0.262835s"/>
+        <spike id="36" time="0.280535s"/>
+        <spike id="37" time="0.301215s"/>
+        <spike id="38" time="0.317700s"/>
+        <spike id="39" time="0.321190s"/>
+        <spike id="40" time="0.325085s"/>
+        <spike id="41" time="0.329900s"/>
+        <spike id="42" time="0.330425s"/>
+        <spike id="43" time="0.330445s"/>
+        <spike id="44" time="0.335145s"/>
+        <spike id="45" time="0.337150s"/>
+        <spike id="46" time="0.337165s"/>
+        <spike id="47" time="0.344320s"/>
+        <spike id="48" time="0.356125s"/>
+        <spike id="49" time="0.358135s"/>
+        <spike id="50" time="0.362595s"/>
+        <spike id="51" time="0.393390s"/>
+        <spike id="52" time="0.401895s"/>
+        <spike id="53" time="0.407730s"/>
+        <spike id="54" time="0.417565s"/>
+        <spike id="55" time="0.423120s"/>
+        <spike id="56" time="0.433485s"/>
+        <spike id="57" time="0.449750s"/>
+    </spikeArray>
+    <spikeArray id="XFpop0_Golgi_pop0_cell0_syn0_6">
+        <spike id="0" time="0.009025s"/>
+        <spike id="1" time="0.022910s"/>
+        <spike id="2" time="0.023885s"/>
+        <spike id="3" time="0.038425s"/>
+        <spike id="4" time="0.050940s"/>
+        <spike id="5" time="0.084185s"/>
+        <spike id="6" time="0.086075s"/>
+        <spike id="7" time="0.092335s"/>
+        <spike id="8" time="0.098330s"/>
+        <spike id="9" time="0.099190s"/>
+        <spike id="10" time="0.100060s"/>
+        <spike id="11" time="0.108870s"/>
+        <spike id="12" time="0.121065s"/>
+        <spike id="13" time="0.147955s"/>
+        <spike id="14" time="0.158605s"/>
+        <spike id="15" time="0.161505s"/>
+        <spike id="16" time="0.173880s"/>
+        <spike id="17" time="0.192815s"/>
+        <spike id="18" time="0.209625s"/>
+        <spike id="19" time="0.211855s"/>
+        <spike id="20" time="0.233325s"/>
+        <spike id="21" time="0.242385s"/>
+        <spike id="22" time="0.244860s"/>
+        <spike id="23" time="0.254455s"/>
+        <spike id="24" time="0.273995s"/>
+        <spike id="25" time="0.274595s"/>
+        <spike id="26" time="0.298430s"/>
+        <spike id="27" time="0.303055s"/>
+        <spike id="28" time="0.313940s"/>
+        <spike id="29" time="0.328815s"/>
+        <spike id="30" time="0.357380s"/>
+        <spike id="31" time="0.357575s"/>
+        <spike id="32" time="0.387915s"/>
+        <spike id="33" time="0.416100s"/>
+        <spike id="34" time="0.421295s"/>
+        <spike id="35" time="0.427825s"/>
+        <spike id="36" time="0.441565s"/>
+    </spikeArray>
+    <spikeArray id="XFpop0_Golgi_pop0_cell0_syn0_7">
+        <spike id="0" time="0.017580s"/>
+        <spike id="1" time="0.020250s"/>
+        <spike id="2" time="0.031805s"/>
+        <spike id="3" time="0.036590s"/>
+        <spike id="4" time="0.052375s"/>
+        <spike id="5" time="0.052690s"/>
+        <spike id="6" time="0.060150s"/>
+        <spike id="7" time="0.089475s"/>
+        <spike id="8" time="0.094475s"/>
+        <spike id="9" time="0.130380s"/>
+        <spike id="10" time="0.139005s"/>
+        <spike id="11" time="0.151185s"/>
+        <spike id="12" time="0.162720s"/>
+        <spike id="13" time="0.176705s"/>
+        <spike id="14" time="0.191385s"/>
+        <spike id="15" time="0.193170s"/>
+        <spike id="16" time="0.212120s"/>
+        <spike id="17" time="0.218140s"/>
+        <spike id="18" time="0.222575s"/>
+        <spike id="19" time="0.227920s"/>
+        <spike id="20" time="0.229980s"/>
+        <spike id="21" time="0.237690s"/>
+        <spike id="22" time="0.241285s"/>
+        <spike id="23" time="0.245010s"/>
+        <spike id="24" time="0.273505s"/>
+        <spike id="25" time="0.280950s"/>
+        <spike id="26" time="0.287070s"/>
+        <spike id="27" time="0.297545s"/>
+        <spike id="28" time="0.309045s"/>
+        <spike id="29" time="0.322245s"/>
+        <spike id="30" time="0.333630s"/>
+        <spike id="31" time="0.335015s"/>
+        <spike id="32" time="0.361240s"/>
+        <spike id="33" time="0.374580s"/>
+        <spike id="34" time="0.376050s"/>
+        <spike id="35" time="0.399345s"/>
+        <spike id="36" time="0.405910s"/>
+        <spike id="37" time="0.410080s"/>
+        <spike id="38" time="0.430025s"/>
+        <spike id="39" time="0.432345s"/>
+    </spikeArray>
+    <spikeArray id="XFpop0_Golgi_pop0_cell0_syn1_0">
+        <spike id="0" time="0.006315s"/>
+        <spike id="1" time="0.016800s"/>
+        <spike id="2" time="0.034455s"/>
+        <spike id="3" time="0.062810s"/>
+        <spike id="4" time="0.078490s"/>
+        <spike id="5" time="0.083960s"/>
+        <spike id="6" time="0.085025s"/>
+        <spike id="7" time="0.094065s"/>
+        <spike id="8" time="0.094260s"/>
+        <spike id="9" time="0.096765s"/>
+        <spike id="10" time="0.096840s"/>
+        <spike id="11" time="0.109390s"/>
+        <spike id="12" time="0.174480s"/>
+        <spike id="13" time="0.176085s"/>
+        <spike id="14" time="0.190870s"/>
+        <spike id="15" time="0.218620s"/>
+        <spike id="16" time="0.233515s"/>
+        <spike id="17" time="0.247220s"/>
+        <spike id="18" time="0.250425s"/>
+        <spike id="19" time="0.271315s"/>
+        <spike id="20" time="0.279490s"/>
+        <spike id="21" time="0.283125s"/>
+        <spike id="22" time="0.293275s"/>
+        <spike id="23" time="0.324240s"/>
+        <spike id="24" time="0.339450s"/>
+        <spike id="25" time="0.342730s"/>
+        <spike id="26" time="0.343265s"/>
+        <spike id="27" time="0.347475s"/>
+        <spike id="28" time="0.347645s"/>
+        <spike id="29" time="0.348660s"/>
+        <spike id="30" time="0.371260s"/>
+        <spike id="31" time="0.380905s"/>
+        <spike id="32" time="0.381180s"/>
+        <spike id="33" time="0.386615s"/>
+        <spike id="34" time="0.394935s"/>
+        <spike id="35" time="0.402785s"/>
+        <spike id="36" time="0.418270s"/>
+        <spike id="37" time="0.426965s"/>
+    </spikeArray>
+    <spikeArray id="XFpop0_Golgi_pop0_cell0_syn1_1">
+        <spike id="0" time="0.000190s"/>
+        <spike id="1" time="0.012725s"/>
+        <spike id="2" time="0.016585s"/>
+        <spike id="3" time="0.017710s"/>
+        <spike id="4" time="0.017725s"/>
+        <spike id="5" time="0.027525s"/>
+        <spike id="6" time="0.027765s"/>
+        <spike id="7" time="0.043460s"/>
+        <spike id="8" time="0.045005s"/>
+        <spike id="9" time="0.056860s"/>
+        <spike id="10" time="0.066405s"/>
+        <spike id="11" time="0.073325s"/>
+        <spike id="12" time="0.076915s"/>
+        <spike id="13" time="0.081760s"/>
+        <spike id="14" time="0.087525s"/>
+        <spike id="15" time="0.087735s"/>
+        <spike id="16" time="0.101795s"/>
+        <spike id="17" time="0.105400s"/>
+        <spike id="18" time="0.105460s"/>
+        <spike id="19" time="0.114120s"/>
+        <spike id="20" time="0.115230s"/>
+        <spike id="21" time="0.136925s"/>
+        <spike id="22" time="0.146815s"/>
+        <spike id="23" time="0.165630s"/>
+        <spike id="24" time="0.175800s"/>
+        <spike id="25" time="0.191275s"/>
+        <spike id="26" time="0.211425s"/>
+        <spike id="27" time="0.213300s"/>
+        <spike id="28" time="0.215135s"/>
+        <spike id="29" time="0.220100s"/>
+        <spike id="30" time="0.225385s"/>
+        <spike id="31" time="0.263855s"/>
+        <spike id="32" time="0.272690s"/>
+        <spike id="33" time="0.273595s"/>
+        <spike id="34" time="0.302320s"/>
+        <spike id="35" time="0.328575s"/>
+        <spike id="36" time="0.339120s"/>
+        <spike id="37" time="0.341690s"/>
+        <spike id="38" time="0.357990s"/>
+        <spike id="39" time="0.381265s"/>
+        <spike id="40" time="0.382830s"/>
+        <spike id="41" time="0.393300s"/>
+        <spike id="42" time="0.422330s"/>
+        <spike id="43" time="0.437450s"/>
+        <spike id="44" time="0.438915s"/>
+    </spikeArray>
+    <spikeArray id="XFpop0_Golgi_pop0_cell0_syn1_2">
+        <spike id="0" time="0.019855s"/>
+        <spike id="1" time="0.025095s"/>
+        <spike id="2" time="0.035115s"/>
+        <spike id="3" time="0.042360s"/>
+        <spike id="4" time="0.043705s"/>
+        <spike id="5" time="0.049380s"/>
+        <spike id="6" time="0.053570s"/>
+        <spike id="7" time="0.053925s"/>
+        <spike id="8" time="0.059905s"/>
+        <spike id="9" time="0.069825s"/>
+        <spike id="10" time="0.070660s"/>
+        <spike id="11" time="0.076850s"/>
+        <spike id="12" time="0.081795s"/>
+        <spike id="13" time="0.083000s"/>
+        <spike id="14" time="0.085705s"/>
+        <spike id="15" time="0.086410s"/>
+        <spike id="16" time="0.087020s"/>
+        <spike id="17" time="0.100500s"/>
+        <spike id="18" time="0.103775s"/>
+        <spike id="19" time="0.114035s"/>
+        <spike id="20" time="0.117780s"/>
+        <spike id="21" time="0.122325s"/>
+        <spike id="22" time="0.142840s"/>
+        <spike id="23" time="0.145005s"/>
+        <spike id="24" time="0.151365s"/>
+        <spike id="25" time="0.158930s"/>
+        <spike id="26" time="0.168140s"/>
+        <spike id="27" time="0.185305s"/>
+        <spike id="28" time="0.192485s"/>
+        <spike id="29" time="0.207065s"/>
+        <spike id="30" time="0.212670s"/>
+        <spike id="31" time="0.214970s"/>
+        <spike id="32" time="0.228545s"/>
+        <spike id="33" time="0.230500s"/>
+        <spike id="34" time="0.231775s"/>
+        <spike id="35" time="0.270510s"/>
+        <spike id="36" time="0.278305s"/>
+        <spike id="37" time="0.279010s"/>
+        <spike id="38" time="0.283075s"/>
+        <spike id="39" time="0.314325s"/>
+        <spike id="40" time="0.318460s"/>
+        <spike id="41" time="0.321090s"/>
+        <spike id="42" time="0.358210s"/>
+        <spike id="43" time="0.358745s"/>
+        <spike id="44" time="0.359625s"/>
+        <spike id="45" time="0.368375s"/>
+        <spike id="46" time="0.370215s"/>
+        <spike id="47" time="0.373230s"/>
+        <spike id="48" time="0.382665s"/>
+        <spike id="49" time="0.391140s"/>
+        <spike id="50" time="0.392340s"/>
+        <spike id="51" time="0.395835s"/>
+        <spike id="52" time="0.408985s"/>
+        <spike id="53" time="0.410090s"/>
+        <spike id="54" time="0.413465s"/>
+        <spike id="55" time="0.415545s"/>
+        <spike id="56" time="0.425125s"/>
+        <spike id="57" time="0.438955s"/>
+        <spike id="58" time="0.439230s"/>
+        <spike id="59" time="0.442155s"/>
+        <spike id="60" time="0.444175s"/>
+        <spike id="61" time="0.445080s"/>
+        <spike id="62" time="0.449065s"/>
+        <spike id="63" time="0.449820s"/>
+    </spikeArray>
+    <spikeArray id="XFpop0_Golgi_pop0_cell0_syn1_3">
+        <spike id="0" time="0.004025s"/>
+        <spike id="1" time="0.007510s"/>
+        <spike id="2" time="0.019465s"/>
+        <spike id="3" time="0.024900s"/>
+        <spike id="4" time="0.029865s"/>
+        <spike id="5" time="0.037140s"/>
+        <spike id="6" time="0.042765s"/>
+        <spike id="7" time="0.055440s"/>
+        <spike id="8" time="0.057590s"/>
+        <spike id="9" time="0.067800s"/>
+        <spike id="10" time="0.068790s"/>
+        <spike id="11" time="0.070565s"/>
+        <spike id="12" time="0.080640s"/>
+        <spike id="13" time="0.082635s"/>
+        <spike id="14" time="0.100765s"/>
+        <spike id="15" time="0.107050s"/>
+        <spike id="16" time="0.108505s"/>
+        <spike id="17" time="0.128435s"/>
+        <spike id="18" time="0.133325s"/>
+        <spike id="19" time="0.134550s"/>
+        <spike id="20" time="0.139740s"/>
+        <spike id="21" time="0.145830s"/>
+        <spike id="22" time="0.146025s"/>
+        <spike id="23" time="0.153155s"/>
+        <spike id="24" time="0.157845s"/>
+        <spike id="25" time="0.162990s"/>
+        <spike id="26" time="0.169845s"/>
+        <spike id="27" time="0.191145s"/>
+        <spike id="28" time="0.197840s"/>
+        <spike id="29" time="0.215255s"/>
+        <spike id="30" time="0.217390s"/>
+        <spike id="31" time="0.241605s"/>
+        <spike id="32" time="0.247470s"/>
+        <spike id="33" time="0.257690s"/>
+        <spike id="34" time="0.258580s"/>
+        <spike id="35" time="0.283360s"/>
+        <spike id="36" time="0.299840s"/>
+        <spike id="37" time="0.303565s"/>
+        <spike id="38" time="0.313740s"/>
+        <spike id="39" time="0.337300s"/>
+        <spike id="40" time="0.338800s"/>
+        <spike id="41" time="0.341720s"/>
+        <spike id="42" time="0.354045s"/>
+        <spike id="43" time="0.354225s"/>
+        <spike id="44" time="0.364445s"/>
+        <spike id="45" time="0.380375s"/>
+        <spike id="46" time="0.395795s"/>
+        <spike id="47" time="0.416260s"/>
+        <spike id="48" time="0.442985s"/>
+        <spike id="49" time="0.445545s"/>
+        <spike id="50" time="0.446260s"/>
+        <spike id="51" time="0.448905s"/>
+    </spikeArray>
+    <spikeArray id="XFpop0_Golgi_pop0_cell0_syn1_4">
+        <spike id="0" time="0.008755s"/>
+        <spike id="1" time="0.044155s"/>
+        <spike id="2" time="0.044920s"/>
+        <spike id="3" time="0.057545s"/>
+        <spike id="4" time="0.075970s"/>
+        <spike id="5" time="0.079580s"/>
+        <spike id="6" time="0.080510s"/>
+        <spike id="7" time="0.084805s"/>
+        <spike id="8" time="0.091335s"/>
+        <spike id="9" time="0.098020s"/>
+        <spike id="10" time="0.111760s"/>
+        <spike id="11" time="0.122860s"/>
+        <spike id="12" time="0.135770s"/>
+        <spike id="13" time="0.146895s"/>
+        <spike id="14" time="0.151030s"/>
+        <spike id="15" time="0.153075s"/>
+        <spike id="16" time="0.153165s"/>
+        <spike id="17" time="0.154205s"/>
+        <spike id="18" time="0.163130s"/>
+        <spike id="19" time="0.165690s"/>
+        <spike id="20" time="0.183840s"/>
+        <spike id="21" time="0.195265s"/>
+        <spike id="22" time="0.201195s"/>
+        <spike id="23" time="0.232490s"/>
+        <spike id="24" time="0.232500s"/>
+        <spike id="25" time="0.233090s"/>
+        <spike id="26" time="0.234840s"/>
+        <spike id="27" time="0.237705s"/>
+        <spike id="28" time="0.247570s"/>
+        <spike id="29" time="0.277070s"/>
+        <spike id="30" time="0.284355s"/>
+        <spike id="31" time="0.291745s"/>
+        <spike id="32" time="0.292690s"/>
+        <spike id="33" time="0.295730s"/>
+        <spike id="34" time="0.310710s"/>
+        <spike id="35" time="0.318020s"/>
+        <spike id="36" time="0.320370s"/>
+        <spike id="37" time="0.325350s"/>
+        <spike id="38" time="0.330515s"/>
+        <spike id="39" time="0.332860s"/>
+        <spike id="40" time="0.334520s"/>
+        <spike id="41" time="0.350400s"/>
+        <spike id="42" time="0.374205s"/>
+        <spike id="43" time="0.378920s"/>
+        <spike id="44" time="0.381735s"/>
+        <spike id="45" time="0.391710s"/>
+        <spike id="46" time="0.406045s"/>
+        <spike id="47" time="0.406875s"/>
+        <spike id="48" time="0.411755s"/>
+        <spike id="49" time="0.413000s"/>
+        <spike id="50" time="0.426250s"/>
+        <spike id="51" time="0.429590s"/>
+        <spike id="52" time="0.429850s"/>
+        <spike id="53" time="0.436155s"/>
+        <spike id="54" time="0.444810s"/>
+        <spike id="55" time="0.449290s"/>
+    </spikeArray>
+    <spikeArray id="XFpop0_Golgi_pop0_cell0_syn1_5">
+        <spike id="0" time="0.000465s"/>
+        <spike id="1" time="0.006835s"/>
+        <spike id="2" time="0.016965s"/>
+        <spike id="3" time="0.018645s"/>
+        <spike id="4" time="0.034915s"/>
+        <spike id="5" time="0.035865s"/>
+        <spike id="6" time="0.037080s"/>
+        <spike id="7" time="0.048070s"/>
+        <spike id="8" time="0.054625s"/>
+        <spike id="9" time="0.056480s"/>
+        <spike id="10" time="0.078520s"/>
+        <spike id="11" time="0.081375s"/>
+        <spike id="12" time="0.086675s"/>
+        <spike id="13" time="0.089890s"/>
+        <spike id="14" time="0.093705s"/>
+        <spike id="15" time="0.098440s"/>
+        <spike id="16" time="0.102440s"/>
+        <spike id="17" time="0.111790s"/>
+        <spike id="18" time="0.125495s"/>
+        <spike id="19" time="0.138295s"/>
+        <spike id="20" time="0.157395s"/>
+        <spike id="21" time="0.161940s"/>
+        <spike id="22" time="0.177050s"/>
+        <spike id="23" time="0.184080s"/>
+        <spike id="24" time="0.211695s"/>
+        <spike id="25" time="0.216285s"/>
+        <spike id="26" time="0.218425s"/>
+        <spike id="27" time="0.226455s"/>
+        <spike id="28" time="0.236830s"/>
+        <spike id="29" time="0.239790s"/>
+        <spike id="30" time="0.241780s"/>
+        <spike id="31" time="0.243385s"/>
+        <spike id="32" time="0.251390s"/>
+        <spike id="33" time="0.253250s"/>
+        <spike id="34" time="0.254505s"/>
+        <spike id="35" time="0.262835s"/>
+        <spike id="36" time="0.280535s"/>
+        <spike id="37" time="0.301215s"/>
+        <spike id="38" time="0.317700s"/>
+        <spike id="39" time="0.321190s"/>
+        <spike id="40" time="0.325085s"/>
+        <spike id="41" time="0.329900s"/>
+        <spike id="42" time="0.330425s"/>
+        <spike id="43" time="0.330445s"/>
+        <spike id="44" time="0.335145s"/>
+        <spike id="45" time="0.337150s"/>
+        <spike id="46" time="0.337165s"/>
+        <spike id="47" time="0.344320s"/>
+        <spike id="48" time="0.356125s"/>
+        <spike id="49" time="0.358135s"/>
+        <spike id="50" time="0.362595s"/>
+        <spike id="51" time="0.393390s"/>
+        <spike id="52" time="0.401895s"/>
+        <spike id="53" time="0.407730s"/>
+        <spike id="54" time="0.417565s"/>
+        <spike id="55" time="0.423120s"/>
+        <spike id="56" time="0.433485s"/>
+        <spike id="57" time="0.449750s"/>
+    </spikeArray>
+    <spikeArray id="XFpop0_Golgi_pop0_cell0_syn1_6">
+        <spike id="0" time="0.009025s"/>
+        <spike id="1" time="0.022910s"/>
+        <spike id="2" time="0.023885s"/>
+        <spike id="3" time="0.038425s"/>
+        <spike id="4" time="0.050940s"/>
+        <spike id="5" time="0.084185s"/>
+        <spike id="6" time="0.086075s"/>
+        <spike id="7" time="0.092335s"/>
+        <spike id="8" time="0.098330s"/>
+        <spike id="9" time="0.099190s"/>
+        <spike id="10" time="0.100060s"/>
+        <spike id="11" time="0.108870s"/>
+        <spike id="12" time="0.121065s"/>
+        <spike id="13" time="0.147955s"/>
+        <spike id="14" time="0.158605s"/>
+        <spike id="15" time="0.161505s"/>
+        <spike id="16" time="0.173880s"/>
+        <spike id="17" time="0.192815s"/>
+        <spike id="18" time="0.209625s"/>
+        <spike id="19" time="0.211855s"/>
+        <spike id="20" time="0.233325s"/>
+        <spike id="21" time="0.242385s"/>
+        <spike id="22" time="0.244860s"/>
+        <spike id="23" time="0.254455s"/>
+        <spike id="24" time="0.273995s"/>
+        <spike id="25" time="0.274595s"/>
+        <spike id="26" time="0.298430s"/>
+        <spike id="27" time="0.303055s"/>
+        <spike id="28" time="0.313940s"/>
+        <spike id="29" time="0.328815s"/>
+        <spike id="30" time="0.357380s"/>
+        <spike id="31" time="0.357575s"/>
+        <spike id="32" time="0.387915s"/>
+        <spike id="33" time="0.416100s"/>
+        <spike id="34" time="0.421295s"/>
+        <spike id="35" time="0.427825s"/>
+        <spike id="36" time="0.441565s"/>
+    </spikeArray>
+    <spikeArray id="XFpop0_Golgi_pop0_cell0_syn1_7">
+        <spike id="0" time="0.017580s"/>
+        <spike id="1" time="0.020250s"/>
+        <spike id="2" time="0.031805s"/>
+        <spike id="3" time="0.036590s"/>
+        <spike id="4" time="0.052375s"/>
+        <spike id="5" time="0.052690s"/>
+        <spike id="6" time="0.060150s"/>
+        <spike id="7" time="0.089475s"/>
+        <spike id="8" time="0.094475s"/>
+        <spike id="9" time="0.130380s"/>
+        <spike id="10" time="0.139005s"/>
+        <spike id="11" time="0.151185s"/>
+        <spike id="12" time="0.162720s"/>
+        <spike id="13" time="0.176705s"/>
+        <spike id="14" time="0.191385s"/>
+        <spike id="15" time="0.193170s"/>
+        <spike id="16" time="0.212120s"/>
+        <spike id="17" time="0.218140s"/>
+        <spike id="18" time="0.222575s"/>
+        <spike id="19" time="0.227920s"/>
+        <spike id="20" time="0.229980s"/>
+        <spike id="21" time="0.237690s"/>
+        <spike id="22" time="0.241285s"/>
+        <spike id="23" time="0.245010s"/>
+        <spike id="24" time="0.273505s"/>
+        <spike id="25" time="0.280950s"/>
+        <spike id="26" time="0.287070s"/>
+        <spike id="27" time="0.297545s"/>
+        <spike id="28" time="0.309045s"/>
+        <spike id="29" time="0.322245s"/>
+        <spike id="30" time="0.333630s"/>
+        <spike id="31" time="0.335015s"/>
+        <spike id="32" time="0.361240s"/>
+        <spike id="33" time="0.374580s"/>
+        <spike id="34" time="0.376050s"/>
+        <spike id="35" time="0.399345s"/>
+        <spike id="36" time="0.405910s"/>
+        <spike id="37" time="0.410080s"/>
+        <spike id="38" time="0.430025s"/>
+        <spike id="39" time="0.432345s"/>
+    </spikeArray>
+    <network id="Golgi_V2012_test_import_diff_library_trial0_network" type="networkWithTemperature" temperature="23 degC">
+        <notes>Parameter arrays for building this network are listed below:
+Cell distribution parameters:
+{'yDim': 40, 'popID': 'Golgi_pop0', 'zDim': 40, 'xDim': 40, 'distributionModel': 'explicit_cell_numbers', 'minimal_distance': 10, 'distanceModel': 'random_minimal_distance'}
+Cell population parameters:
+Cell population parameters for Golgi_pop0:
+{'NeuroML2CellType': 'cell2CaPools', 'popID': 'Golgi_pop0', 'cellType': 'Golgi_10comp_13channels_2CaPools', 'size': 2}
+Cell connectivity parameters:
+{'targetingModelprePop': {'segmentGroupList': ['apical_dendrite_group', 'basal_dendrite_group'], 'model': 'segment groups and segments', 'segmentGroupProbabilities': {'basal_dendrite_group': 0.2, 'apical_dendrite_group': 0.8}}, 'gapJunctionModel': 'constant number of GJ contacts per pair', 'testingConductanceScale': 1, 'stdDev': 20, 'maximalConnDistance': 100, 'spatialScale': 1, 'prePopID': 'Golgi_pop0', 'averageConductance': 426, 'targetingModelpostPop': {'segmentGroupList': ['apical_dendrite_group', 'basal_dendrite_group'], 'model': 'segment groups and segments', 'segmentGroupProbabilities': {'basal_dendrite_group': 0.2, 'apical_dendrite_group': 0.8}}, 'postPopID': 'Golgi_pop0', 'numberGJ': 8, 'conductanceModel': 'variable', 'electricalConnModel': 'Vervaeke_2012_based', 'units': 'pS', 'distribution': 'gaussian'}
+Input parameters for a list of populations:
+Input group parameters for Golgi_pop0:
+{'stDevAmp': 25, 'inputModel': 'variable_basal_firing_rate', 'ampUnits': 'pA', 'amplitudeDistribution': 'gaussian', 'averageAmp': 50, 'valueOffset': 50, 'inputLabel': 'vrpop0', 'offsetDistribution': 'constant', 'offsetUnits': 'ms'}
+{'synapseList': [{'segmentGroupList': ['apical_dendrite_group'], 'targetingModel': 'segment groups and segments', 'noInputs': 8, 'inputIdLibrary': 'XFpop0_Golgi_pop0_syn0', 'segmentGroupProbabilities': {'apical_dendrite_group': 1}, 'synapseType': 'PFSpikeSyn', 'numberModel': 'constant number of inputs per cell'}, {'segmentGroupList': ['basal_dendrite_group'], 'targetingModel': 'segment groups and segments', 'noInputs': 8, 'inputIdLibrary': 'XFpop0_Golgi_pop0_syn0', 'segmentGroupProbabilities': {'basal_dendrite_group': 1}, 'synapseType': 'PFSpikeSyn', 'numberModel': 'constant number of inputs per cell'}], 'inputLabel': 'XFpop0', 'inputModel': 'XF', 'fractionToTarget': 0.5, 'targetingRegime': 'uniform', 'colocalizeSynapses': False}
+</notes>
+        <population id="Golgi_pop0" type="populationList" component="Golgi_10comp_13channels_2CaPools" size="2">
+            <instance id="0">
+                <location y="30.9586787524497" x="16.930265173898562" z="11.973232269002207"/>
+            </instance>
+            <instance id="1">
+                <location y="26.757984144645356" x="22.327935807550109" z="38.827687155727247"/>
+            </instance>
+        </population>
+        <population id="InputPop_XFpop0_Golgi_pop0_cell0_syn0_0" component="XFpop0_Golgi_pop0_cell0_syn0_0" size="1"/>
+        <population id="InputPop_XFpop0_Golgi_pop0_cell0_syn0_1" component="XFpop0_Golgi_pop0_cell0_syn0_1" size="1"/>
+        <population id="InputPop_XFpop0_Golgi_pop0_cell0_syn0_2" component="XFpop0_Golgi_pop0_cell0_syn0_2" size="1"/>
+        <population id="InputPop_XFpop0_Golgi_pop0_cell0_syn0_3" component="XFpop0_Golgi_pop0_cell0_syn0_3" size="1"/>
+        <population id="InputPop_XFpop0_Golgi_pop0_cell0_syn0_4" component="XFpop0_Golgi_pop0_cell0_syn0_4" size="1"/>
+        <population id="InputPop_XFpop0_Golgi_pop0_cell0_syn0_5" component="XFpop0_Golgi_pop0_cell0_syn0_5" size="1"/>
+        <population id="InputPop_XFpop0_Golgi_pop0_cell0_syn0_6" component="XFpop0_Golgi_pop0_cell0_syn0_6" size="1"/>
+        <population id="InputPop_XFpop0_Golgi_pop0_cell0_syn0_7" component="XFpop0_Golgi_pop0_cell0_syn0_7" size="1"/>
+        <population id="InputPop_XFpop0_Golgi_pop0_cell0_syn1_0" component="XFpop0_Golgi_pop0_cell0_syn1_0" size="1"/>
+        <population id="InputPop_XFpop0_Golgi_pop0_cell0_syn1_1" component="XFpop0_Golgi_pop0_cell0_syn1_1" size="1"/>
+        <population id="InputPop_XFpop0_Golgi_pop0_cell0_syn1_2" component="XFpop0_Golgi_pop0_cell0_syn1_2" size="1"/>
+        <population id="InputPop_XFpop0_Golgi_pop0_cell0_syn1_3" component="XFpop0_Golgi_pop0_cell0_syn1_3" size="1"/>
+        <population id="InputPop_XFpop0_Golgi_pop0_cell0_syn1_4" component="XFpop0_Golgi_pop0_cell0_syn1_4" size="1"/>
+        <population id="InputPop_XFpop0_Golgi_pop0_cell0_syn1_5" component="XFpop0_Golgi_pop0_cell0_syn1_5" size="1"/>
+        <population id="InputPop_XFpop0_Golgi_pop0_cell0_syn1_6" component="XFpop0_Golgi_pop0_cell0_syn1_6" size="1"/>
+        <population id="InputPop_XFpop0_Golgi_pop0_cell0_syn1_7" component="XFpop0_Golgi_pop0_cell0_syn1_7" size="1"/>
+        <projection id="InputProj_XFpop0_Golgi_pop0_cell0_syn0_0" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_XFpop0_Golgi_pop0_cell0_syn0_0" synapse="PFSpikeSyn">
+            <connection id="0" preCellId="../InputPop_XFpop0_Golgi_pop0_cell0_syn0_0[0]" postFractionAlong="0.668950" postSegmentId="6" postCellId="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+        </projection>
+        <projection id="InputProj_XFpop0_Golgi_pop0_cell0_syn0_1" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_XFpop0_Golgi_pop0_cell0_syn0_1" synapse="PFSpikeSyn">
+            <connection id="0" preCellId="../InputPop_XFpop0_Golgi_pop0_cell0_syn0_1[0]" postFractionAlong="0.293512" postSegmentId="6" postCellId="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+        </projection>
+        <projection id="InputProj_XFpop0_Golgi_pop0_cell0_syn0_2" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_XFpop0_Golgi_pop0_cell0_syn0_2" synapse="PFSpikeSyn">
+            <connection id="0" preCellId="../InputPop_XFpop0_Golgi_pop0_cell0_syn0_2[0]" postFractionAlong="0.399212" postSegmentId="7" postCellId="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+        </projection>
+        <projection id="InputProj_XFpop0_Golgi_pop0_cell0_syn0_3" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_XFpop0_Golgi_pop0_cell0_syn0_3" synapse="PFSpikeSyn">
+            <connection id="0" preCellId="../InputPop_XFpop0_Golgi_pop0_cell0_syn0_3[0]" postFractionAlong="0.259443" postSegmentId="7" postCellId="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+        </projection>
+        <projection id="InputProj_XFpop0_Golgi_pop0_cell0_syn0_4" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_XFpop0_Golgi_pop0_cell0_syn0_4" synapse="PFSpikeSyn">
+            <connection id="0" preCellId="../InputPop_XFpop0_Golgi_pop0_cell0_syn0_4[0]" postFractionAlong="0.519519" postSegmentId="6" postCellId="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+        </projection>
+        <projection id="InputProj_XFpop0_Golgi_pop0_cell0_syn0_5" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_XFpop0_Golgi_pop0_cell0_syn0_5" synapse="PFSpikeSyn">
+            <connection id="0" preCellId="../InputPop_XFpop0_Golgi_pop0_cell0_syn0_5[0]" postFractionAlong="0.401772" postSegmentId="3" postCellId="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+        </projection>
+        <projection id="InputProj_XFpop0_Golgi_pop0_cell0_syn0_6" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_XFpop0_Golgi_pop0_cell0_syn0_6" synapse="PFSpikeSyn">
+            <connection id="0" preCellId="../InputPop_XFpop0_Golgi_pop0_cell0_syn0_6[0]" postFractionAlong="0.581761" postSegmentId="8" postCellId="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+        </projection>
+        <projection id="InputProj_XFpop0_Golgi_pop0_cell0_syn0_7" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_XFpop0_Golgi_pop0_cell0_syn0_7" synapse="PFSpikeSyn">
+            <connection id="0" preCellId="../InputPop_XFpop0_Golgi_pop0_cell0_syn0_7[0]" postFractionAlong="0.198161" postSegmentId="6" postCellId="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+        </projection>
+        <projection id="InputProj_XFpop0_Golgi_pop0_cell0_syn1_0" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_XFpop0_Golgi_pop0_cell0_syn1_0" synapse="PFSpikeSyn">
+            <connection id="0" preCellId="../InputPop_XFpop0_Golgi_pop0_cell0_syn1_0[0]" postFractionAlong="0.419233" postSegmentId="9" postCellId="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+        </projection>
+        <projection id="InputProj_XFpop0_Golgi_pop0_cell0_syn1_1" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_XFpop0_Golgi_pop0_cell0_syn1_1" synapse="PFSpikeSyn">
+            <connection id="0" preCellId="../InputPop_XFpop0_Golgi_pop0_cell0_syn1_1[0]" postFractionAlong="0.918996" postSegmentId="10" postCellId="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+        </projection>
+        <projection id="InputProj_XFpop0_Golgi_pop0_cell0_syn1_2" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_XFpop0_Golgi_pop0_cell0_syn1_2" synapse="PFSpikeSyn">
+            <connection id="0" preCellId="../InputPop_XFpop0_Golgi_pop0_cell0_syn1_2[0]" postFractionAlong="0.924742" postSegmentId="9" postCellId="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+        </projection>
+        <projection id="InputProj_XFpop0_Golgi_pop0_cell0_syn1_3" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_XFpop0_Golgi_pop0_cell0_syn1_3" synapse="PFSpikeSyn">
+            <connection id="0" preCellId="../InputPop_XFpop0_Golgi_pop0_cell0_syn1_3[0]" postFractionAlong="0.412630" postSegmentId="9" postCellId="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+        </projection>
+        <projection id="InputProj_XFpop0_Golgi_pop0_cell0_syn1_4" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_XFpop0_Golgi_pop0_cell0_syn1_4" synapse="PFSpikeSyn">
+            <connection id="0" preCellId="../InputPop_XFpop0_Golgi_pop0_cell0_syn1_4[0]" postFractionAlong="0.420946" postSegmentId="9" postCellId="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+        </projection>
+        <projection id="InputProj_XFpop0_Golgi_pop0_cell0_syn1_5" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_XFpop0_Golgi_pop0_cell0_syn1_5" synapse="PFSpikeSyn">
+            <connection id="0" preCellId="../InputPop_XFpop0_Golgi_pop0_cell0_syn1_5[0]" postFractionAlong="0.589471" postSegmentId="9" postCellId="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+        </projection>
+        <projection id="InputProj_XFpop0_Golgi_pop0_cell0_syn1_6" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_XFpop0_Golgi_pop0_cell0_syn1_6" synapse="PFSpikeSyn">
+            <connection id="0" preCellId="../InputPop_XFpop0_Golgi_pop0_cell0_syn1_6[0]" postFractionAlong="0.688262" postSegmentId="10" postCellId="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+        </projection>
+        <projection id="InputProj_XFpop0_Golgi_pop0_cell0_syn1_7" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_XFpop0_Golgi_pop0_cell0_syn1_7" synapse="PFSpikeSyn">
+            <connection id="0" preCellId="../InputPop_XFpop0_Golgi_pop0_cell0_syn1_7[0]" postFractionAlong="0.314900" postSegmentId="10" postCellId="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+        </projection>
+        <electricalProjection id="proj0" postsynapticPopulation="Golgi_pop0" presynapticPopulation="Golgi_pop0">
+            <electricalConnectionInstance id="0" synapse="gap_junction00" preFractionAlong="0.399212" preSegment="7" postFractionAlong="0.665755" postSegment="8" postCell="../Golgi_pop0/1/Golgi_10comp_13channels_2CaPools" preCell="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+            <electricalConnectionInstance id="1" synapse="gap_junction01" preFractionAlong="0.401772" preSegment="3" postFractionAlong="0.955800" postSegment="4" postCell="../Golgi_pop0/1/Golgi_10comp_13channels_2CaPools" preCell="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+            <electricalConnectionInstance id="2" synapse="gap_junction02" preFractionAlong="0.198161" preSegment="6" postFractionAlong="0.727000" postSegment="5" postCell="../Golgi_pop0/1/Golgi_10comp_13channels_2CaPools" preCell="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+            <electricalConnectionInstance id="3" synapse="gap_junction03" preFractionAlong="0.451232" preSegment="8" postFractionAlong="0.344985" postSegment="7" postCell="../Golgi_pop0/1/Golgi_10comp_13channels_2CaPools" preCell="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+            <electricalConnectionInstance id="4" synapse="gap_junction04" preFractionAlong="0.924742" preSegment="9" postFractionAlong="0.140842" postSegment="3" postCell="../Golgi_pop0/1/Golgi_10comp_13channels_2CaPools" preCell="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+            <electricalConnectionInstance id="5" synapse="gap_junction05" preFractionAlong="0.412630" preSegment="3" postFractionAlong="0.654848" postSegment="10" postCell="../Golgi_pop0/1/Golgi_10comp_13channels_2CaPools" preCell="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+            <electricalConnectionInstance id="6" synapse="gap_junction06" preFractionAlong="0.380853" preSegment="6" postFractionAlong="0.654762" postSegment="6" postCell="../Golgi_pop0/1/Golgi_10comp_13channels_2CaPools" preCell="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+            <electricalConnectionInstance id="7" synapse="gap_junction07" preFractionAlong="0.108449" preSegment="4" postFractionAlong="0.034692" postSegment="10" postCell="../Golgi_pop0/1/Golgi_10comp_13channels_2CaPools" preCell="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+        </electricalProjection>
+        <inputList id="vrpop0_Golgi_pop0_0" component="Pulse_vrpop0_Golgi_pop0_0" population="Golgi_pop0">
+            <input destination="synapses" id="0" target="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+        </inputList>
+        <inputList id="vrpop0_Golgi_pop0_1" component="Pulse_vrpop0_Golgi_pop0_1" population="Golgi_pop0">
+            <input destination="synapses" id="1" target="../Golgi_pop0/1/Golgi_10comp_13channels_2CaPools"/>
+        </inputList>
+    </network>
+</neuroml>

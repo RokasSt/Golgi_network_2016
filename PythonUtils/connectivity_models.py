@@ -51,13 +51,12 @@ def Vervaeke_2012_AND_explicit_conn_prob_model(pair_id,projection_id,prePop,preP
     
     conn_count = 0
     
-                                                                              
+    variable_No_of_GJs=False                                                                        
     if connectivity_parameters['gapJunctionModel']=="constant number of GJ contacts per pair":
        no_of_GJcon_per_pair=connectivity_parameters['numberGJ']
     if connectivity_parameters['gapJunctionModel']=="variable number of GJ contacts per pair":
-       if connectivity_parameters['distribution']=="binomial":
-          no_of_GJcon_per_pair=np.random.binomial(connectivity_parameters['maxNoGJs'],\
-          connectivity_parameters['averageNoGJs']/connectivity_parameters['maxNoGJs'])
+       variable_No_of_GJs=True
+      
        #### other models can be added in the future
 
     conductance_scaling=1
@@ -99,6 +98,10 @@ def Vervaeke_2012_AND_explicit_conn_prob_model(pair_id,projection_id,prePop,preP
                           
                if random.random() < connection_probability:
                   nonempty_projection=True
+                  if variable_No_of_GJs: 
+                     if connectivity_parameters['distributionGJ']=="binomial":
+                        no_of_GJcon_per_pair=np.random.binomial(connectivity_parameters['maxNoGJs'],\
+                        connectivity_parameters['averageNoGJs']/connectivity_parameters['maxNoGJs'])
                   if connectivity_parameters['targetingModelprePop']['model']=="segment groups and segments":
                      pre_target_points=get_unique_target_points(pre_pop_target_segment_array,"segment groups and segments",\
                              [connectivity_parameters['targetingModelprePop']['segmentGroupList'],\

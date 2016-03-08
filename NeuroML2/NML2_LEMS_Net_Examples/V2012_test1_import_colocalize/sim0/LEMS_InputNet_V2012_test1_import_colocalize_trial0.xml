@@ -1,0 +1,503 @@
+<Lems>
+    
+    <!-- 
+
+        This LEMS file has been automatically generated using PyNeuroML v0.1.7 (libNeuroML v0.2.11)
+
+     -->
+    
+    <!-- Specify which component to run -->
+    <Target component="InputNet_V2012_test1_import_colocalize_trial0"/>
+
+    <!-- Include core NeuroML2 ComponentType definitions -->
+    <Include file="Cells.xml"/>
+    <Include file="Networks.xml"/>
+    <Include file="Simulation.xml"/>
+    
+    <Include file="InputNet_V2012_test1_import_colocalize_trial0.net.nml"/>
+   
+    <Simulation id="InputNet_V2012_test1_import_colocalize_trial0" length="450ms" step="0.005ms" target="InputNet_V2012_test1_import_colocalize_trial0_network">
+        
+        <EventOutputFile id="eventFile00" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_0.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[0]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile01" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_1.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[1]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile02" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_2.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[2]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile03" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_3.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[3]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile04" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_4.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[4]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile05" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_5.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[5]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile06" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_6.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[6]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile07" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_7.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[7]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile08" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_8.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[8]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile09" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_9.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[9]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile010" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_10.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[10]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile011" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_11.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[11]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile012" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_12.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[12]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile013" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_13.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[13]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile014" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_14.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[14]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile015" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_15.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[15]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile016" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_16.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[16]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile017" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_17.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[17]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile018" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_18.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[18]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile019" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_19.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[19]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile020" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_20.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[20]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile021" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_21.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[21]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile022" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_22.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[22]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile023" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_23.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[23]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile024" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_24.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[24]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile025" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_25.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[25]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile026" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_26.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[26]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile027" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_27.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[27]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile028" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_28.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[28]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile029" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_29.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[29]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile030" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_30.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[30]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile031" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_31.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[31]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile032" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_32.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[32]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile033" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_33.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[33]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile034" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_34.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[34]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile035" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_35.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[35]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile036" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_36.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[36]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile037" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_37.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[37]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile038" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_38.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[38]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile039" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_39.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[39]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile040" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_40.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[40]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile041" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_41.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[41]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile042" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_42.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[42]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile043" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_43.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[43]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile044" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_44.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[44]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile045" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_45.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[45]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile046" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_46.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[46]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile047" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_47.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[47]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile048" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_48.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[48]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile049" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_49.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[49]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile050" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_50.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[50]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile051" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_51.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[51]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile052" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_52.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[52]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile053" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_53.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[53]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile054" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_54.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[54]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile055" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_55.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[55]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile056" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_56.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[56]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile057" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_57.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[57]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile058" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_58.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[58]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile059" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_59.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[59]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile060" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_60.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[60]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile061" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_61.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[61]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile062" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_62.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[62]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile063" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_63.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[63]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile064" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_64.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[64]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile065" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_65.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[65]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile066" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_66.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[66]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile067" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_67.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[67]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile068" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_68.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[68]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile069" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_69.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[69]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile070" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_70.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[70]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile071" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_71.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[71]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile072" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_72.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[72]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile073" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_73.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[73]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile074" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_74.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[74]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile075" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_75.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[75]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile076" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_76.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[76]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile077" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_77.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[77]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile078" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_78.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[78]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile079" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_79.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[79]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile080" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_80.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[80]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile081" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_81.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[81]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile082" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_82.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[82]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile083" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_83.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[83]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile084" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_84.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[84]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile085" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_85.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[85]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile086" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_86.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[86]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile087" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_87.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[87]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile088" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_88.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[88]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile089" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_89.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[89]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile090" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_90.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[90]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile091" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_91.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[91]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile092" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_92.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[92]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile093" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_93.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[93]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile094" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_94.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[94]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile095" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_95.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[95]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile096" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_96.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[96]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile097" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_97.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[97]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile098" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_98.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[98]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile099" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_99.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[99]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile0100" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_100.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[100]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile0101" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_101.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[101]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile0102" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_102.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[102]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile0103" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_103.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[103]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile0104" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_104.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[104]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile0105" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_105.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[105]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile0106" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_106.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[106]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile0107" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_107.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[107]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile0108" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_108.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[108]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile0109" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_109.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[109]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile0110" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_110.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[110]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile0111" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_111.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[111]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile0112" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_112.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[112]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile0113" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_113.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[113]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile0114" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_114.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[114]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile0115" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_115.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[115]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile0116" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_116.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[116]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile0117" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_117.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[117]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile0118" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_118.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[118]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile0119" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import_colocalize/sim0/MF_AMPA_NMDA_Golgi_pop0_syn0_PoissonTrain_119.dat" format="ID_TIME">
+            <EventSelection id="0" select="MF_AMPA_NMDA_Golgi_pop0_syn0[119]/MF_AMPA_NMDA_Golgi_pop0_syn0one" eventPort="spike"/> 
+        </EventOutputFile>
+        
+    </Simulation>
+
+</Lems>

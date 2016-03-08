@@ -58,8 +58,8 @@ def XF_input_models_uniform_import(popID,popSize,cellType,cellNML2Type,input_gro
               input_receiving_cells.append(target_cell)
            if input_group_parameters['numberModel']=="constant number of inputs per cell":
               no_of_inputs=input_group_parameters['noInputs']
-           if synapse_array['numberModel']=="variable number of inputs per cell":
-              if input_group_parameters['distribution']=="binomial":
+           if input_group_parameters['numberModel']=="variable number of inputs per cell":
+              if input_group_parameters['distributionGJ']=="binomial":
                   no_of_inputs=np.random.binomial(input_group_parameters['maxNoInputs'],\
                   input_group_parameters['averageNoInputs']/input_group_parameters['maxNoInputs'])
                ### other options can be added
@@ -79,7 +79,7 @@ def XF_input_models_uniform_import(popID,popSize,cellType,cellNML2Type,input_gro
                      spike_times=np.loadtxt(currDir+"/simulations/%s/sim%d/%s_PoissonTrain_%d.dat"%(libID,simID,synapse_array['inputIdLibrary'],target_point))
                   spike_times=np.transpose(spike_times)
                   spike_times=spike_times[1]
-                  spike_array=neuroml.SpikeArray(id="%s_%s_cell%d_syn%d_%d"%(label,popID,target_cell,synapse_index,target_point))
+                  spike_array=neuroml.SpikeArray(id="%s_%s_cell%d_%d"%(label,popID,target_cell,target_point))
                                                   
                   for spike in range(0,len(spike_times)):
                       spike_object=neuroml.Spike(id="%d"%spike,time="%fs"%spike_times[spike])
