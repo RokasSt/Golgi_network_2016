@@ -4,7 +4,7 @@
       description="A number of synaptic ComponentTypes for use in NeuroML 2 documents. These generally extend the _baseSynapse_ ComponentType.">
 
 
-    <ComponentType name="baseConductanceBasedSynapseTwo"
+    <ComponentType name="baseConductanceBasedSynapseTwoComponents"
                    extends="baseVoltageDepSynapse"
                    description="Synapse model which exposes a conductance _g in addition to producing a current. Not necessarily ohmic!! cno_0000027">
 
@@ -19,8 +19,8 @@
 
 
     
-    <ComponentType name="expThreeSynapse"
-                   extends="baseConductanceBasedSynapseTwo"
+    <ComponentType name="expTwoSynapseTwoComponents"
+                   extends="baseConductanceBasedSynapseTwoComponents"
                    description="Ohmic synapse similar to expTwoSynapse but consisting of two components that differ in decay times and max conductances but share the same rise time.">
 
         <Property name="weight" dimension="none" defaultValue="1"/> 
