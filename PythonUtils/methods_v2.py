@@ -92,11 +92,10 @@ def get_soma_diameter(cell_name,cell_type=None):
 
     return cell_diameter
 
-def load_density_data(file_name,relative_path):
-    ### based on Antoine's script load_matrix.py
-    filename=relative_path+file_name
-    X,Y,Val=np.loadtxt(filename,delimiter=',')
-    shape=filename.split('shape ')[-1].split('.txt')[0].split(' ')
+def load_density_data(file_name_path):
+    ### modified Antoine's script load_matrix.py
+    X,Y,Val=np.loadtxt(file_name_path,delimiter=',')
+    shape=file_name_path.split('shape ')[-1].split('.txt')[0].split(' ')
     xshape=int(shape[0])
     yshape=int(shape[1])
     X=X.reshape(xshape,yshape)

@@ -1,0 +1,1125 @@
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2beta4.xsd" id="Golgi_V2012_test1_import_colocalize_plus_regional_trial0">
+    <include href="/../../../Golgi_5comp_3channels_1CaPool.cell.nml"></include>
+    <include href="/../../../MFSpikeSyn.synapse.nml"></include>
+    <include href="/../../../MF_PF_SpikeSynNMDA.synapse.nml"></include>
+    <gapJunction id="gap_junction00" conductance="388.740905pS"/>
+    <gapJunction id="gap_junction01" conductance="441.967736pS"/>
+    <gapJunction id="gap_junction02" conductance="446.428431pS"/>
+    <gapJunction id="gap_junction03" conductance="408.994471pS"/>
+    <gapJunction id="gap_junction04" conductance="455.027382pS"/>
+    <gapJunction id="gap_junction05" conductance="424.384653pS"/>
+    <gapJunction id="gap_junction06" conductance="441.364880pS"/>
+    <gapJunction id="gap_junction07" conductance="413.470723pS"/>
+    <gapJunction id="gap_junction08" conductance="422.403870pS"/>
+    <gapJunction id="gap_junction09" conductance="404.202556pS"/>
+    <gapJunction id="gap_junction010" conductance="409.130102pS"/>
+    <gapJunction id="gap_junction011" conductance="439.145409pS"/>
+    <gapJunction id="gap_junction012" conductance="414.944917pS"/>
+    <gapJunction id="gap_junction013" conductance="433.852304pS"/>
+    <gapJunction id="gap_junction014" conductance="434.286055pS"/>
+    <gapJunction id="gap_junction015" conductance="427.890326pS"/>
+    <gapJunction id="gap_junction016" conductance="420.223692pS"/>
+    <gapJunction id="gap_junction017" conductance="419.706217pS"/>
+    <gapJunction id="gap_junction018" conductance="429.944032pS"/>
+    <gapJunction id="gap_junction019" conductance="400.895541pS"/>
+    <gapJunction id="gap_junction020" conductance="454.446015pS"/>
+    <gapJunction id="gap_junction021" conductance="437.278435pS"/>
+    <gapJunction id="gap_junction022" conductance="412.759801pS"/>
+    <gapJunction id="gap_junction023" conductance="418.503576pS"/>
+    <gapJunction id="gap_junction024" conductance="451.051186pS"/>
+    <gapJunction id="gap_junction025" conductance="439.584357pS"/>
+    <gapJunction id="gap_junction026" conductance="451.179538pS"/>
+    <gapJunction id="gap_junction027" conductance="410.951225pS"/>
+    <gapJunction id="gap_junction028" conductance="411.676975pS"/>
+    <gapJunction id="gap_junction029" conductance="444.641648pS"/>
+    <gapJunction id="gap_junction030" conductance="414.070917pS"/>
+    <gapJunction id="gap_junction031" conductance="411.244516pS"/>
+    <gapJunction id="gap_junction032" conductance="419.375272pS"/>
+    <gapJunction id="gap_junction033" conductance="468.585257pS"/>
+    <gapJunction id="gap_junction034" conductance="424.011596pS"/>
+    <gapJunction id="gap_junction035" conductance="460.657104pS"/>
+    <gapJunction id="gap_junction036" conductance="422.192377pS"/>
+    <gapJunction id="gap_junction037" conductance="427.470442pS"/>
+    <gapJunction id="gap_junction038" conductance="422.657741pS"/>
+    <gapJunction id="gap_junction039" conductance="407.893564pS"/>
+    <gapJunction id="gap_junction040" conductance="416.024904pS"/>
+    <gapJunction id="gap_junction041" conductance="451.262391pS"/>
+    <gapJunction id="gap_junction042" conductance="400.358040pS"/>
+    <gapJunction id="gap_junction043" conductance="413.204957pS"/>
+    <gapJunction id="gap_junction044" conductance="448.133064pS"/>
+    <gapJunction id="gap_junction045" conductance="417.097272pS"/>
+    <gapJunction id="gap_junction046" conductance="425.863449pS"/>
+    <gapJunction id="gap_junction047" conductance="446.198783pS"/>
+    <gapJunction id="gap_junction048" conductance="399.148059pS"/>
+    <gapJunction id="gap_junction049" conductance="415.205759pS"/>
+    <gapJunction id="gap_junction050" conductance="415.149569pS"/>
+    <gapJunction id="gap_junction051" conductance="415.080786pS"/>
+    <gapJunction id="gap_junction052" conductance="469.325515pS"/>
+    <gapJunction id="gap_junction053" conductance="433.100090pS"/>
+    <gapJunction id="gap_junction054" conductance="464.652040pS"/>
+    <gapJunction id="gap_junction055" conductance="423.224507pS"/>
+    <gapJunction id="gap_junction056" conductance="403.778440pS"/>
+    <gapJunction id="gap_junction057" conductance="407.143691pS"/>
+    <gapJunction id="gap_junction058" conductance="400.091042pS"/>
+    <gapJunction id="gap_junction059" conductance="454.994130pS"/>
+    <gapJunction id="gap_junction060" conductance="404.155073pS"/>
+    <gapJunction id="gap_junction061" conductance="451.215067pS"/>
+    <gapJunction id="gap_junction062" conductance="421.757178pS"/>
+    <gapJunction id="gap_junction063" conductance="418.461750pS"/>
+    <gapJunction id="gap_junction064" conductance="454.343681pS"/>
+    <gapJunction id="gap_junction065" conductance="400.484609pS"/>
+    <gapJunction id="gap_junction066" conductance="435.290575pS"/>
+    <gapJunction id="gap_junction067" conductance="433.755712pS"/>
+    <gapJunction id="gap_junction068" conductance="424.404942pS"/>
+    <gapJunction id="gap_junction069" conductance="426.105107pS"/>
+    <gapJunction id="gap_junction070" conductance="418.582179pS"/>
+    <pulseGenerator id="Pulse_vrpop0_Golgi_pop0_0" delay="50.000000ms" duration="400.000000ms" amplitude="22.354716pA"/>
+    <pulseGenerator id="Pulse_vrpop0_Golgi_pop0_1" delay="50.000000ms" duration="400.000000ms" amplitude="55.471898pA"/>
+    <pulseGenerator id="Pulse_vrpop0_Golgi_pop0_2" delay="50.000000ms" duration="400.000000ms" amplitude="54.712350pA"/>
+    <pulseGenerator id="Pulse_vrpop0_Golgi_pop0_3" delay="50.000000ms" duration="400.000000ms" amplitude="41.513084pA"/>
+    <pulseGenerator id="Pulse_vrpop0_Golgi_pop0_4" delay="50.000000ms" duration="400.000000ms" amplitude="72.518506pA"/>
+    <spikeArray id="MF_AMPA_NMDA_Golgi_pop0_cell1_0">
+        <spike id="0" time="0.006315s"/>
+        <spike id="1" time="0.016800s"/>
+        <spike id="2" time="0.034455s"/>
+        <spike id="3" time="0.062810s"/>
+        <spike id="4" time="0.078490s"/>
+        <spike id="5" time="0.083960s"/>
+        <spike id="6" time="0.085025s"/>
+        <spike id="7" time="0.094065s"/>
+        <spike id="8" time="0.094260s"/>
+        <spike id="9" time="0.096765s"/>
+        <spike id="10" time="0.096840s"/>
+        <spike id="11" time="0.109390s"/>
+        <spike id="12" time="0.174480s"/>
+        <spike id="13" time="0.176085s"/>
+        <spike id="14" time="0.190870s"/>
+        <spike id="15" time="0.218620s"/>
+        <spike id="16" time="0.233515s"/>
+        <spike id="17" time="0.247220s"/>
+        <spike id="18" time="0.250425s"/>
+        <spike id="19" time="0.271315s"/>
+        <spike id="20" time="0.279490s"/>
+        <spike id="21" time="0.283125s"/>
+        <spike id="22" time="0.293275s"/>
+        <spike id="23" time="0.324240s"/>
+        <spike id="24" time="0.339450s"/>
+        <spike id="25" time="0.342730s"/>
+        <spike id="26" time="0.343265s"/>
+        <spike id="27" time="0.347475s"/>
+        <spike id="28" time="0.347645s"/>
+        <spike id="29" time="0.348660s"/>
+        <spike id="30" time="0.371260s"/>
+        <spike id="31" time="0.380905s"/>
+        <spike id="32" time="0.381180s"/>
+        <spike id="33" time="0.386615s"/>
+        <spike id="34" time="0.394935s"/>
+        <spike id="35" time="0.402785s"/>
+        <spike id="36" time="0.418270s"/>
+        <spike id="37" time="0.426965s"/>
+    </spikeArray>
+    <spikeArray id="MF_AMPA_NMDA_Golgi_pop0_cell1_1">
+        <spike id="0" time="0.000190s"/>
+        <spike id="1" time="0.012725s"/>
+        <spike id="2" time="0.016585s"/>
+        <spike id="3" time="0.017710s"/>
+        <spike id="4" time="0.017725s"/>
+        <spike id="5" time="0.027525s"/>
+        <spike id="6" time="0.027765s"/>
+        <spike id="7" time="0.043460s"/>
+        <spike id="8" time="0.045005s"/>
+        <spike id="9" time="0.056860s"/>
+        <spike id="10" time="0.066405s"/>
+        <spike id="11" time="0.073325s"/>
+        <spike id="12" time="0.076915s"/>
+        <spike id="13" time="0.081760s"/>
+        <spike id="14" time="0.087525s"/>
+        <spike id="15" time="0.087735s"/>
+        <spike id="16" time="0.101795s"/>
+        <spike id="17" time="0.105400s"/>
+        <spike id="18" time="0.105460s"/>
+        <spike id="19" time="0.114120s"/>
+        <spike id="20" time="0.115230s"/>
+        <spike id="21" time="0.136925s"/>
+        <spike id="22" time="0.146815s"/>
+        <spike id="23" time="0.165630s"/>
+        <spike id="24" time="0.175800s"/>
+        <spike id="25" time="0.191275s"/>
+        <spike id="26" time="0.211425s"/>
+        <spike id="27" time="0.213300s"/>
+        <spike id="28" time="0.215135s"/>
+        <spike id="29" time="0.220100s"/>
+        <spike id="30" time="0.225385s"/>
+        <spike id="31" time="0.263855s"/>
+        <spike id="32" time="0.272690s"/>
+        <spike id="33" time="0.273595s"/>
+        <spike id="34" time="0.302320s"/>
+        <spike id="35" time="0.328575s"/>
+        <spike id="36" time="0.339120s"/>
+        <spike id="37" time="0.341690s"/>
+        <spike id="38" time="0.357990s"/>
+        <spike id="39" time="0.381265s"/>
+        <spike id="40" time="0.382830s"/>
+        <spike id="41" time="0.393300s"/>
+        <spike id="42" time="0.422330s"/>
+        <spike id="43" time="0.437450s"/>
+        <spike id="44" time="0.438915s"/>
+    </spikeArray>
+    <spikeArray id="MF_AMPA_NMDA_Golgi_pop0_cell1_2">
+        <spike id="0" time="0.019855s"/>
+        <spike id="1" time="0.025095s"/>
+        <spike id="2" time="0.035115s"/>
+        <spike id="3" time="0.042360s"/>
+        <spike id="4" time="0.043705s"/>
+        <spike id="5" time="0.049380s"/>
+        <spike id="6" time="0.053570s"/>
+        <spike id="7" time="0.053925s"/>
+        <spike id="8" time="0.059905s"/>
+        <spike id="9" time="0.069825s"/>
+        <spike id="10" time="0.070660s"/>
+        <spike id="11" time="0.076850s"/>
+        <spike id="12" time="0.081795s"/>
+        <spike id="13" time="0.083000s"/>
+        <spike id="14" time="0.085705s"/>
+        <spike id="15" time="0.086410s"/>
+        <spike id="16" time="0.087020s"/>
+        <spike id="17" time="0.100500s"/>
+        <spike id="18" time="0.103775s"/>
+        <spike id="19" time="0.114035s"/>
+        <spike id="20" time="0.117780s"/>
+        <spike id="21" time="0.122325s"/>
+        <spike id="22" time="0.142840s"/>
+        <spike id="23" time="0.145005s"/>
+        <spike id="24" time="0.151365s"/>
+        <spike id="25" time="0.158930s"/>
+        <spike id="26" time="0.168140s"/>
+        <spike id="27" time="0.185305s"/>
+        <spike id="28" time="0.192485s"/>
+        <spike id="29" time="0.207065s"/>
+        <spike id="30" time="0.212670s"/>
+        <spike id="31" time="0.214970s"/>
+        <spike id="32" time="0.228545s"/>
+        <spike id="33" time="0.230500s"/>
+        <spike id="34" time="0.231775s"/>
+        <spike id="35" time="0.270510s"/>
+        <spike id="36" time="0.278305s"/>
+        <spike id="37" time="0.279010s"/>
+        <spike id="38" time="0.283075s"/>
+        <spike id="39" time="0.314325s"/>
+        <spike id="40" time="0.318460s"/>
+        <spike id="41" time="0.321090s"/>
+        <spike id="42" time="0.358210s"/>
+        <spike id="43" time="0.358745s"/>
+        <spike id="44" time="0.359625s"/>
+        <spike id="45" time="0.368375s"/>
+        <spike id="46" time="0.370215s"/>
+        <spike id="47" time="0.373230s"/>
+        <spike id="48" time="0.382665s"/>
+        <spike id="49" time="0.391140s"/>
+        <spike id="50" time="0.392340s"/>
+        <spike id="51" time="0.395835s"/>
+        <spike id="52" time="0.408985s"/>
+        <spike id="53" time="0.410090s"/>
+        <spike id="54" time="0.413465s"/>
+        <spike id="55" time="0.415545s"/>
+        <spike id="56" time="0.425125s"/>
+        <spike id="57" time="0.438955s"/>
+        <spike id="58" time="0.439230s"/>
+        <spike id="59" time="0.442155s"/>
+        <spike id="60" time="0.444175s"/>
+        <spike id="61" time="0.445080s"/>
+        <spike id="62" time="0.449065s"/>
+        <spike id="63" time="0.449820s"/>
+    </spikeArray>
+    <spikeArray id="MF_AMPA_NMDA_Golgi_pop0_cell1_3">
+        <spike id="0" time="0.004025s"/>
+        <spike id="1" time="0.007510s"/>
+        <spike id="2" time="0.019465s"/>
+        <spike id="3" time="0.024900s"/>
+        <spike id="4" time="0.029865s"/>
+        <spike id="5" time="0.037140s"/>
+        <spike id="6" time="0.042765s"/>
+        <spike id="7" time="0.055440s"/>
+        <spike id="8" time="0.057590s"/>
+        <spike id="9" time="0.067800s"/>
+        <spike id="10" time="0.068790s"/>
+        <spike id="11" time="0.070565s"/>
+        <spike id="12" time="0.080640s"/>
+        <spike id="13" time="0.082635s"/>
+        <spike id="14" time="0.100765s"/>
+        <spike id="15" time="0.107050s"/>
+        <spike id="16" time="0.108505s"/>
+        <spike id="17" time="0.128435s"/>
+        <spike id="18" time="0.133325s"/>
+        <spike id="19" time="0.134550s"/>
+        <spike id="20" time="0.139740s"/>
+        <spike id="21" time="0.145830s"/>
+        <spike id="22" time="0.146025s"/>
+        <spike id="23" time="0.153155s"/>
+        <spike id="24" time="0.157845s"/>
+        <spike id="25" time="0.162990s"/>
+        <spike id="26" time="0.169845s"/>
+        <spike id="27" time="0.191145s"/>
+        <spike id="28" time="0.197840s"/>
+        <spike id="29" time="0.215255s"/>
+        <spike id="30" time="0.217390s"/>
+        <spike id="31" time="0.241605s"/>
+        <spike id="32" time="0.247470s"/>
+        <spike id="33" time="0.257690s"/>
+        <spike id="34" time="0.258580s"/>
+        <spike id="35" time="0.283360s"/>
+        <spike id="36" time="0.299840s"/>
+        <spike id="37" time="0.303565s"/>
+        <spike id="38" time="0.313740s"/>
+        <spike id="39" time="0.337300s"/>
+        <spike id="40" time="0.338800s"/>
+        <spike id="41" time="0.341720s"/>
+        <spike id="42" time="0.354045s"/>
+        <spike id="43" time="0.354225s"/>
+        <spike id="44" time="0.364445s"/>
+        <spike id="45" time="0.380375s"/>
+        <spike id="46" time="0.395795s"/>
+        <spike id="47" time="0.416260s"/>
+        <spike id="48" time="0.442985s"/>
+        <spike id="49" time="0.445545s"/>
+        <spike id="50" time="0.446260s"/>
+        <spike id="51" time="0.448905s"/>
+    </spikeArray>
+    <spikeArray id="MF_AMPA_NMDA_Golgi_pop0_cell1_4">
+        <spike id="0" time="0.008755s"/>
+        <spike id="1" time="0.044155s"/>
+        <spike id="2" time="0.044920s"/>
+        <spike id="3" time="0.057545s"/>
+        <spike id="4" time="0.075970s"/>
+        <spike id="5" time="0.079580s"/>
+        <spike id="6" time="0.080510s"/>
+        <spike id="7" time="0.084805s"/>
+        <spike id="8" time="0.091335s"/>
+        <spike id="9" time="0.098020s"/>
+        <spike id="10" time="0.111760s"/>
+        <spike id="11" time="0.122860s"/>
+        <spike id="12" time="0.135770s"/>
+        <spike id="13" time="0.146895s"/>
+        <spike id="14" time="0.151030s"/>
+        <spike id="15" time="0.153075s"/>
+        <spike id="16" time="0.153165s"/>
+        <spike id="17" time="0.154205s"/>
+        <spike id="18" time="0.163130s"/>
+        <spike id="19" time="0.165690s"/>
+        <spike id="20" time="0.183840s"/>
+        <spike id="21" time="0.195265s"/>
+        <spike id="22" time="0.201195s"/>
+        <spike id="23" time="0.232490s"/>
+        <spike id="24" time="0.232500s"/>
+        <spike id="25" time="0.233090s"/>
+        <spike id="26" time="0.234840s"/>
+        <spike id="27" time="0.237705s"/>
+        <spike id="28" time="0.247570s"/>
+        <spike id="29" time="0.277070s"/>
+        <spike id="30" time="0.284355s"/>
+        <spike id="31" time="0.291745s"/>
+        <spike id="32" time="0.292690s"/>
+        <spike id="33" time="0.295730s"/>
+        <spike id="34" time="0.310710s"/>
+        <spike id="35" time="0.318020s"/>
+        <spike id="36" time="0.320370s"/>
+        <spike id="37" time="0.325350s"/>
+        <spike id="38" time="0.330515s"/>
+        <spike id="39" time="0.332860s"/>
+        <spike id="40" time="0.334520s"/>
+        <spike id="41" time="0.350400s"/>
+        <spike id="42" time="0.374205s"/>
+        <spike id="43" time="0.378920s"/>
+        <spike id="44" time="0.381735s"/>
+        <spike id="45" time="0.391710s"/>
+        <spike id="46" time="0.406045s"/>
+        <spike id="47" time="0.406875s"/>
+        <spike id="48" time="0.411755s"/>
+        <spike id="49" time="0.413000s"/>
+        <spike id="50" time="0.426250s"/>
+        <spike id="51" time="0.429590s"/>
+        <spike id="52" time="0.429850s"/>
+        <spike id="53" time="0.436155s"/>
+        <spike id="54" time="0.444810s"/>
+        <spike id="55" time="0.449290s"/>
+    </spikeArray>
+    <spikeArray id="MF_AMPA_NMDA_Golgi_pop0_cell1_5">
+        <spike id="0" time="0.000465s"/>
+        <spike id="1" time="0.006835s"/>
+        <spike id="2" time="0.016965s"/>
+        <spike id="3" time="0.018645s"/>
+        <spike id="4" time="0.034915s"/>
+        <spike id="5" time="0.035865s"/>
+        <spike id="6" time="0.037080s"/>
+        <spike id="7" time="0.048070s"/>
+        <spike id="8" time="0.054625s"/>
+        <spike id="9" time="0.056480s"/>
+        <spike id="10" time="0.078520s"/>
+        <spike id="11" time="0.081375s"/>
+        <spike id="12" time="0.086675s"/>
+        <spike id="13" time="0.089890s"/>
+        <spike id="14" time="0.093705s"/>
+        <spike id="15" time="0.098440s"/>
+        <spike id="16" time="0.102440s"/>
+        <spike id="17" time="0.111790s"/>
+        <spike id="18" time="0.125495s"/>
+        <spike id="19" time="0.138295s"/>
+        <spike id="20" time="0.157395s"/>
+        <spike id="21" time="0.161940s"/>
+        <spike id="22" time="0.177050s"/>
+        <spike id="23" time="0.184080s"/>
+        <spike id="24" time="0.211695s"/>
+        <spike id="25" time="0.216285s"/>
+        <spike id="26" time="0.218425s"/>
+        <spike id="27" time="0.226455s"/>
+        <spike id="28" time="0.236830s"/>
+        <spike id="29" time="0.239790s"/>
+        <spike id="30" time="0.241780s"/>
+        <spike id="31" time="0.243385s"/>
+        <spike id="32" time="0.251390s"/>
+        <spike id="33" time="0.253250s"/>
+        <spike id="34" time="0.254505s"/>
+        <spike id="35" time="0.262835s"/>
+        <spike id="36" time="0.280535s"/>
+        <spike id="37" time="0.301215s"/>
+        <spike id="38" time="0.317700s"/>
+        <spike id="39" time="0.321190s"/>
+        <spike id="40" time="0.325085s"/>
+        <spike id="41" time="0.329900s"/>
+        <spike id="42" time="0.330425s"/>
+        <spike id="43" time="0.330445s"/>
+        <spike id="44" time="0.335145s"/>
+        <spike id="45" time="0.337150s"/>
+        <spike id="46" time="0.337165s"/>
+        <spike id="47" time="0.344320s"/>
+        <spike id="48" time="0.356125s"/>
+        <spike id="49" time="0.358135s"/>
+        <spike id="50" time="0.362595s"/>
+        <spike id="51" time="0.393390s"/>
+        <spike id="52" time="0.401895s"/>
+        <spike id="53" time="0.407730s"/>
+        <spike id="54" time="0.417565s"/>
+        <spike id="55" time="0.423120s"/>
+        <spike id="56" time="0.433485s"/>
+        <spike id="57" time="0.449750s"/>
+    </spikeArray>
+    <spikeArray id="MF_AMPA_NMDA_Golgi_pop0_cell1_6">
+        <spike id="0" time="0.009025s"/>
+        <spike id="1" time="0.022910s"/>
+        <spike id="2" time="0.023885s"/>
+        <spike id="3" time="0.038425s"/>
+        <spike id="4" time="0.050940s"/>
+        <spike id="5" time="0.084185s"/>
+        <spike id="6" time="0.086075s"/>
+        <spike id="7" time="0.092335s"/>
+        <spike id="8" time="0.098330s"/>
+        <spike id="9" time="0.099190s"/>
+        <spike id="10" time="0.100060s"/>
+        <spike id="11" time="0.108870s"/>
+        <spike id="12" time="0.121065s"/>
+        <spike id="13" time="0.147955s"/>
+        <spike id="14" time="0.158605s"/>
+        <spike id="15" time="0.161505s"/>
+        <spike id="16" time="0.173880s"/>
+        <spike id="17" time="0.192815s"/>
+        <spike id="18" time="0.209625s"/>
+        <spike id="19" time="0.211855s"/>
+        <spike id="20" time="0.233325s"/>
+        <spike id="21" time="0.242385s"/>
+        <spike id="22" time="0.244860s"/>
+        <spike id="23" time="0.254455s"/>
+        <spike id="24" time="0.273995s"/>
+        <spike id="25" time="0.274595s"/>
+        <spike id="26" time="0.298430s"/>
+        <spike id="27" time="0.303055s"/>
+        <spike id="28" time="0.313940s"/>
+        <spike id="29" time="0.328815s"/>
+        <spike id="30" time="0.357380s"/>
+        <spike id="31" time="0.357575s"/>
+        <spike id="32" time="0.387915s"/>
+        <spike id="33" time="0.416100s"/>
+        <spike id="34" time="0.421295s"/>
+        <spike id="35" time="0.427825s"/>
+        <spike id="36" time="0.441565s"/>
+    </spikeArray>
+    <spikeArray id="MF_AMPA_NMDA_Golgi_pop0_cell1_7">
+        <spike id="0" time="0.017580s"/>
+        <spike id="1" time="0.020250s"/>
+        <spike id="2" time="0.031805s"/>
+        <spike id="3" time="0.036590s"/>
+        <spike id="4" time="0.052375s"/>
+        <spike id="5" time="0.052690s"/>
+        <spike id="6" time="0.060150s"/>
+        <spike id="7" time="0.089475s"/>
+        <spike id="8" time="0.094475s"/>
+        <spike id="9" time="0.130380s"/>
+        <spike id="10" time="0.139005s"/>
+        <spike id="11" time="0.151185s"/>
+        <spike id="12" time="0.162720s"/>
+        <spike id="13" time="0.176705s"/>
+        <spike id="14" time="0.191385s"/>
+        <spike id="15" time="0.193170s"/>
+        <spike id="16" time="0.212120s"/>
+        <spike id="17" time="0.218140s"/>
+        <spike id="18" time="0.222575s"/>
+        <spike id="19" time="0.227920s"/>
+        <spike id="20" time="0.229980s"/>
+        <spike id="21" time="0.237690s"/>
+        <spike id="22" time="0.241285s"/>
+        <spike id="23" time="0.245010s"/>
+        <spike id="24" time="0.273505s"/>
+        <spike id="25" time="0.280950s"/>
+        <spike id="26" time="0.287070s"/>
+        <spike id="27" time="0.297545s"/>
+        <spike id="28" time="0.309045s"/>
+        <spike id="29" time="0.322245s"/>
+        <spike id="30" time="0.333630s"/>
+        <spike id="31" time="0.335015s"/>
+        <spike id="32" time="0.361240s"/>
+        <spike id="33" time="0.374580s"/>
+        <spike id="34" time="0.376050s"/>
+        <spike id="35" time="0.399345s"/>
+        <spike id="36" time="0.405910s"/>
+        <spike id="37" time="0.410080s"/>
+        <spike id="38" time="0.430025s"/>
+        <spike id="39" time="0.432345s"/>
+    </spikeArray>
+    <spikeArray id="MF_AMPA_NMDA_Golgi_pop0_cell3_0">
+        <spike id="0" time="0.006315s"/>
+        <spike id="1" time="0.016800s"/>
+        <spike id="2" time="0.034455s"/>
+        <spike id="3" time="0.062810s"/>
+        <spike id="4" time="0.078490s"/>
+        <spike id="5" time="0.083960s"/>
+        <spike id="6" time="0.085025s"/>
+        <spike id="7" time="0.094065s"/>
+        <spike id="8" time="0.094260s"/>
+        <spike id="9" time="0.096765s"/>
+        <spike id="10" time="0.096840s"/>
+        <spike id="11" time="0.109390s"/>
+        <spike id="12" time="0.174480s"/>
+        <spike id="13" time="0.176085s"/>
+        <spike id="14" time="0.190870s"/>
+        <spike id="15" time="0.218620s"/>
+        <spike id="16" time="0.233515s"/>
+        <spike id="17" time="0.247220s"/>
+        <spike id="18" time="0.250425s"/>
+        <spike id="19" time="0.271315s"/>
+        <spike id="20" time="0.279490s"/>
+        <spike id="21" time="0.283125s"/>
+        <spike id="22" time="0.293275s"/>
+        <spike id="23" time="0.324240s"/>
+        <spike id="24" time="0.339450s"/>
+        <spike id="25" time="0.342730s"/>
+        <spike id="26" time="0.343265s"/>
+        <spike id="27" time="0.347475s"/>
+        <spike id="28" time="0.347645s"/>
+        <spike id="29" time="0.348660s"/>
+        <spike id="30" time="0.371260s"/>
+        <spike id="31" time="0.380905s"/>
+        <spike id="32" time="0.381180s"/>
+        <spike id="33" time="0.386615s"/>
+        <spike id="34" time="0.394935s"/>
+        <spike id="35" time="0.402785s"/>
+        <spike id="36" time="0.418270s"/>
+        <spike id="37" time="0.426965s"/>
+    </spikeArray>
+    <spikeArray id="MF_AMPA_NMDA_Golgi_pop0_cell3_1">
+        <spike id="0" time="0.000190s"/>
+        <spike id="1" time="0.012725s"/>
+        <spike id="2" time="0.016585s"/>
+        <spike id="3" time="0.017710s"/>
+        <spike id="4" time="0.017725s"/>
+        <spike id="5" time="0.027525s"/>
+        <spike id="6" time="0.027765s"/>
+        <spike id="7" time="0.043460s"/>
+        <spike id="8" time="0.045005s"/>
+        <spike id="9" time="0.056860s"/>
+        <spike id="10" time="0.066405s"/>
+        <spike id="11" time="0.073325s"/>
+        <spike id="12" time="0.076915s"/>
+        <spike id="13" time="0.081760s"/>
+        <spike id="14" time="0.087525s"/>
+        <spike id="15" time="0.087735s"/>
+        <spike id="16" time="0.101795s"/>
+        <spike id="17" time="0.105400s"/>
+        <spike id="18" time="0.105460s"/>
+        <spike id="19" time="0.114120s"/>
+        <spike id="20" time="0.115230s"/>
+        <spike id="21" time="0.136925s"/>
+        <spike id="22" time="0.146815s"/>
+        <spike id="23" time="0.165630s"/>
+        <spike id="24" time="0.175800s"/>
+        <spike id="25" time="0.191275s"/>
+        <spike id="26" time="0.211425s"/>
+        <spike id="27" time="0.213300s"/>
+        <spike id="28" time="0.215135s"/>
+        <spike id="29" time="0.220100s"/>
+        <spike id="30" time="0.225385s"/>
+        <spike id="31" time="0.263855s"/>
+        <spike id="32" time="0.272690s"/>
+        <spike id="33" time="0.273595s"/>
+        <spike id="34" time="0.302320s"/>
+        <spike id="35" time="0.328575s"/>
+        <spike id="36" time="0.339120s"/>
+        <spike id="37" time="0.341690s"/>
+        <spike id="38" time="0.357990s"/>
+        <spike id="39" time="0.381265s"/>
+        <spike id="40" time="0.382830s"/>
+        <spike id="41" time="0.393300s"/>
+        <spike id="42" time="0.422330s"/>
+        <spike id="43" time="0.437450s"/>
+        <spike id="44" time="0.438915s"/>
+    </spikeArray>
+    <spikeArray id="MF_AMPA_NMDA_Golgi_pop0_cell3_2">
+        <spike id="0" time="0.019855s"/>
+        <spike id="1" time="0.025095s"/>
+        <spike id="2" time="0.035115s"/>
+        <spike id="3" time="0.042360s"/>
+        <spike id="4" time="0.043705s"/>
+        <spike id="5" time="0.049380s"/>
+        <spike id="6" time="0.053570s"/>
+        <spike id="7" time="0.053925s"/>
+        <spike id="8" time="0.059905s"/>
+        <spike id="9" time="0.069825s"/>
+        <spike id="10" time="0.070660s"/>
+        <spike id="11" time="0.076850s"/>
+        <spike id="12" time="0.081795s"/>
+        <spike id="13" time="0.083000s"/>
+        <spike id="14" time="0.085705s"/>
+        <spike id="15" time="0.086410s"/>
+        <spike id="16" time="0.087020s"/>
+        <spike id="17" time="0.100500s"/>
+        <spike id="18" time="0.103775s"/>
+        <spike id="19" time="0.114035s"/>
+        <spike id="20" time="0.117780s"/>
+        <spike id="21" time="0.122325s"/>
+        <spike id="22" time="0.142840s"/>
+        <spike id="23" time="0.145005s"/>
+        <spike id="24" time="0.151365s"/>
+        <spike id="25" time="0.158930s"/>
+        <spike id="26" time="0.168140s"/>
+        <spike id="27" time="0.185305s"/>
+        <spike id="28" time="0.192485s"/>
+        <spike id="29" time="0.207065s"/>
+        <spike id="30" time="0.212670s"/>
+        <spike id="31" time="0.214970s"/>
+        <spike id="32" time="0.228545s"/>
+        <spike id="33" time="0.230500s"/>
+        <spike id="34" time="0.231775s"/>
+        <spike id="35" time="0.270510s"/>
+        <spike id="36" time="0.278305s"/>
+        <spike id="37" time="0.279010s"/>
+        <spike id="38" time="0.283075s"/>
+        <spike id="39" time="0.314325s"/>
+        <spike id="40" time="0.318460s"/>
+        <spike id="41" time="0.321090s"/>
+        <spike id="42" time="0.358210s"/>
+        <spike id="43" time="0.358745s"/>
+        <spike id="44" time="0.359625s"/>
+        <spike id="45" time="0.368375s"/>
+        <spike id="46" time="0.370215s"/>
+        <spike id="47" time="0.373230s"/>
+        <spike id="48" time="0.382665s"/>
+        <spike id="49" time="0.391140s"/>
+        <spike id="50" time="0.392340s"/>
+        <spike id="51" time="0.395835s"/>
+        <spike id="52" time="0.408985s"/>
+        <spike id="53" time="0.410090s"/>
+        <spike id="54" time="0.413465s"/>
+        <spike id="55" time="0.415545s"/>
+        <spike id="56" time="0.425125s"/>
+        <spike id="57" time="0.438955s"/>
+        <spike id="58" time="0.439230s"/>
+        <spike id="59" time="0.442155s"/>
+        <spike id="60" time="0.444175s"/>
+        <spike id="61" time="0.445080s"/>
+        <spike id="62" time="0.449065s"/>
+        <spike id="63" time="0.449820s"/>
+    </spikeArray>
+    <spikeArray id="MF_AMPA_NMDA_Golgi_pop0_cell3_3">
+        <spike id="0" time="0.004025s"/>
+        <spike id="1" time="0.007510s"/>
+        <spike id="2" time="0.019465s"/>
+        <spike id="3" time="0.024900s"/>
+        <spike id="4" time="0.029865s"/>
+        <spike id="5" time="0.037140s"/>
+        <spike id="6" time="0.042765s"/>
+        <spike id="7" time="0.055440s"/>
+        <spike id="8" time="0.057590s"/>
+        <spike id="9" time="0.067800s"/>
+        <spike id="10" time="0.068790s"/>
+        <spike id="11" time="0.070565s"/>
+        <spike id="12" time="0.080640s"/>
+        <spike id="13" time="0.082635s"/>
+        <spike id="14" time="0.100765s"/>
+        <spike id="15" time="0.107050s"/>
+        <spike id="16" time="0.108505s"/>
+        <spike id="17" time="0.128435s"/>
+        <spike id="18" time="0.133325s"/>
+        <spike id="19" time="0.134550s"/>
+        <spike id="20" time="0.139740s"/>
+        <spike id="21" time="0.145830s"/>
+        <spike id="22" time="0.146025s"/>
+        <spike id="23" time="0.153155s"/>
+        <spike id="24" time="0.157845s"/>
+        <spike id="25" time="0.162990s"/>
+        <spike id="26" time="0.169845s"/>
+        <spike id="27" time="0.191145s"/>
+        <spike id="28" time="0.197840s"/>
+        <spike id="29" time="0.215255s"/>
+        <spike id="30" time="0.217390s"/>
+        <spike id="31" time="0.241605s"/>
+        <spike id="32" time="0.247470s"/>
+        <spike id="33" time="0.257690s"/>
+        <spike id="34" time="0.258580s"/>
+        <spike id="35" time="0.283360s"/>
+        <spike id="36" time="0.299840s"/>
+        <spike id="37" time="0.303565s"/>
+        <spike id="38" time="0.313740s"/>
+        <spike id="39" time="0.337300s"/>
+        <spike id="40" time="0.338800s"/>
+        <spike id="41" time="0.341720s"/>
+        <spike id="42" time="0.354045s"/>
+        <spike id="43" time="0.354225s"/>
+        <spike id="44" time="0.364445s"/>
+        <spike id="45" time="0.380375s"/>
+        <spike id="46" time="0.395795s"/>
+        <spike id="47" time="0.416260s"/>
+        <spike id="48" time="0.442985s"/>
+        <spike id="49" time="0.445545s"/>
+        <spike id="50" time="0.446260s"/>
+        <spike id="51" time="0.448905s"/>
+    </spikeArray>
+    <spikeArray id="MF_AMPA_NMDA_Golgi_pop0_cell3_4">
+        <spike id="0" time="0.008755s"/>
+        <spike id="1" time="0.044155s"/>
+        <spike id="2" time="0.044920s"/>
+        <spike id="3" time="0.057545s"/>
+        <spike id="4" time="0.075970s"/>
+        <spike id="5" time="0.079580s"/>
+        <spike id="6" time="0.080510s"/>
+        <spike id="7" time="0.084805s"/>
+        <spike id="8" time="0.091335s"/>
+        <spike id="9" time="0.098020s"/>
+        <spike id="10" time="0.111760s"/>
+        <spike id="11" time="0.122860s"/>
+        <spike id="12" time="0.135770s"/>
+        <spike id="13" time="0.146895s"/>
+        <spike id="14" time="0.151030s"/>
+        <spike id="15" time="0.153075s"/>
+        <spike id="16" time="0.153165s"/>
+        <spike id="17" time="0.154205s"/>
+        <spike id="18" time="0.163130s"/>
+        <spike id="19" time="0.165690s"/>
+        <spike id="20" time="0.183840s"/>
+        <spike id="21" time="0.195265s"/>
+        <spike id="22" time="0.201195s"/>
+        <spike id="23" time="0.232490s"/>
+        <spike id="24" time="0.232500s"/>
+        <spike id="25" time="0.233090s"/>
+        <spike id="26" time="0.234840s"/>
+        <spike id="27" time="0.237705s"/>
+        <spike id="28" time="0.247570s"/>
+        <spike id="29" time="0.277070s"/>
+        <spike id="30" time="0.284355s"/>
+        <spike id="31" time="0.291745s"/>
+        <spike id="32" time="0.292690s"/>
+        <spike id="33" time="0.295730s"/>
+        <spike id="34" time="0.310710s"/>
+        <spike id="35" time="0.318020s"/>
+        <spike id="36" time="0.320370s"/>
+        <spike id="37" time="0.325350s"/>
+        <spike id="38" time="0.330515s"/>
+        <spike id="39" time="0.332860s"/>
+        <spike id="40" time="0.334520s"/>
+        <spike id="41" time="0.350400s"/>
+        <spike id="42" time="0.374205s"/>
+        <spike id="43" time="0.378920s"/>
+        <spike id="44" time="0.381735s"/>
+        <spike id="45" time="0.391710s"/>
+        <spike id="46" time="0.406045s"/>
+        <spike id="47" time="0.406875s"/>
+        <spike id="48" time="0.411755s"/>
+        <spike id="49" time="0.413000s"/>
+        <spike id="50" time="0.426250s"/>
+        <spike id="51" time="0.429590s"/>
+        <spike id="52" time="0.429850s"/>
+        <spike id="53" time="0.436155s"/>
+        <spike id="54" time="0.444810s"/>
+        <spike id="55" time="0.449290s"/>
+    </spikeArray>
+    <spikeArray id="MF_AMPA_NMDA_Golgi_pop0_cell3_5">
+        <spike id="0" time="0.000465s"/>
+        <spike id="1" time="0.006835s"/>
+        <spike id="2" time="0.016965s"/>
+        <spike id="3" time="0.018645s"/>
+        <spike id="4" time="0.034915s"/>
+        <spike id="5" time="0.035865s"/>
+        <spike id="6" time="0.037080s"/>
+        <spike id="7" time="0.048070s"/>
+        <spike id="8" time="0.054625s"/>
+        <spike id="9" time="0.056480s"/>
+        <spike id="10" time="0.078520s"/>
+        <spike id="11" time="0.081375s"/>
+        <spike id="12" time="0.086675s"/>
+        <spike id="13" time="0.089890s"/>
+        <spike id="14" time="0.093705s"/>
+        <spike id="15" time="0.098440s"/>
+        <spike id="16" time="0.102440s"/>
+        <spike id="17" time="0.111790s"/>
+        <spike id="18" time="0.125495s"/>
+        <spike id="19" time="0.138295s"/>
+        <spike id="20" time="0.157395s"/>
+        <spike id="21" time="0.161940s"/>
+        <spike id="22" time="0.177050s"/>
+        <spike id="23" time="0.184080s"/>
+        <spike id="24" time="0.211695s"/>
+        <spike id="25" time="0.216285s"/>
+        <spike id="26" time="0.218425s"/>
+        <spike id="27" time="0.226455s"/>
+        <spike id="28" time="0.236830s"/>
+        <spike id="29" time="0.239790s"/>
+        <spike id="30" time="0.241780s"/>
+        <spike id="31" time="0.243385s"/>
+        <spike id="32" time="0.251390s"/>
+        <spike id="33" time="0.253250s"/>
+        <spike id="34" time="0.254505s"/>
+        <spike id="35" time="0.262835s"/>
+        <spike id="36" time="0.280535s"/>
+        <spike id="37" time="0.301215s"/>
+        <spike id="38" time="0.317700s"/>
+        <spike id="39" time="0.321190s"/>
+        <spike id="40" time="0.325085s"/>
+        <spike id="41" time="0.329900s"/>
+        <spike id="42" time="0.330425s"/>
+        <spike id="43" time="0.330445s"/>
+        <spike id="44" time="0.335145s"/>
+        <spike id="45" time="0.337150s"/>
+        <spike id="46" time="0.337165s"/>
+        <spike id="47" time="0.344320s"/>
+        <spike id="48" time="0.356125s"/>
+        <spike id="49" time="0.358135s"/>
+        <spike id="50" time="0.362595s"/>
+        <spike id="51" time="0.393390s"/>
+        <spike id="52" time="0.401895s"/>
+        <spike id="53" time="0.407730s"/>
+        <spike id="54" time="0.417565s"/>
+        <spike id="55" time="0.423120s"/>
+        <spike id="56" time="0.433485s"/>
+        <spike id="57" time="0.449750s"/>
+    </spikeArray>
+    <spikeArray id="MF_AMPA_NMDA_Golgi_pop0_cell3_6">
+        <spike id="0" time="0.009025s"/>
+        <spike id="1" time="0.022910s"/>
+        <spike id="2" time="0.023885s"/>
+        <spike id="3" time="0.038425s"/>
+        <spike id="4" time="0.050940s"/>
+        <spike id="5" time="0.084185s"/>
+        <spike id="6" time="0.086075s"/>
+        <spike id="7" time="0.092335s"/>
+        <spike id="8" time="0.098330s"/>
+        <spike id="9" time="0.099190s"/>
+        <spike id="10" time="0.100060s"/>
+        <spike id="11" time="0.108870s"/>
+        <spike id="12" time="0.121065s"/>
+        <spike id="13" time="0.147955s"/>
+        <spike id="14" time="0.158605s"/>
+        <spike id="15" time="0.161505s"/>
+        <spike id="16" time="0.173880s"/>
+        <spike id="17" time="0.192815s"/>
+        <spike id="18" time="0.209625s"/>
+        <spike id="19" time="0.211855s"/>
+        <spike id="20" time="0.233325s"/>
+        <spike id="21" time="0.242385s"/>
+        <spike id="22" time="0.244860s"/>
+        <spike id="23" time="0.254455s"/>
+        <spike id="24" time="0.273995s"/>
+        <spike id="25" time="0.274595s"/>
+        <spike id="26" time="0.298430s"/>
+        <spike id="27" time="0.303055s"/>
+        <spike id="28" time="0.313940s"/>
+        <spike id="29" time="0.328815s"/>
+        <spike id="30" time="0.357380s"/>
+        <spike id="31" time="0.357575s"/>
+        <spike id="32" time="0.387915s"/>
+        <spike id="33" time="0.416100s"/>
+        <spike id="34" time="0.421295s"/>
+        <spike id="35" time="0.427825s"/>
+        <spike id="36" time="0.441565s"/>
+    </spikeArray>
+    <spikeArray id="MF_AMPA_NMDA_Golgi_pop0_cell3_7">
+        <spike id="0" time="0.017580s"/>
+        <spike id="1" time="0.020250s"/>
+        <spike id="2" time="0.031805s"/>
+        <spike id="3" time="0.036590s"/>
+        <spike id="4" time="0.052375s"/>
+        <spike id="5" time="0.052690s"/>
+        <spike id="6" time="0.060150s"/>
+        <spike id="7" time="0.089475s"/>
+        <spike id="8" time="0.094475s"/>
+        <spike id="9" time="0.130380s"/>
+        <spike id="10" time="0.139005s"/>
+        <spike id="11" time="0.151185s"/>
+        <spike id="12" time="0.162720s"/>
+        <spike id="13" time="0.176705s"/>
+        <spike id="14" time="0.191385s"/>
+        <spike id="15" time="0.193170s"/>
+        <spike id="16" time="0.212120s"/>
+        <spike id="17" time="0.218140s"/>
+        <spike id="18" time="0.222575s"/>
+        <spike id="19" time="0.227920s"/>
+        <spike id="20" time="0.229980s"/>
+        <spike id="21" time="0.237690s"/>
+        <spike id="22" time="0.241285s"/>
+        <spike id="23" time="0.245010s"/>
+        <spike id="24" time="0.273505s"/>
+        <spike id="25" time="0.280950s"/>
+        <spike id="26" time="0.287070s"/>
+        <spike id="27" time="0.297545s"/>
+        <spike id="28" time="0.309045s"/>
+        <spike id="29" time="0.322245s"/>
+        <spike id="30" time="0.333630s"/>
+        <spike id="31" time="0.335015s"/>
+        <spike id="32" time="0.361240s"/>
+        <spike id="33" time="0.374580s"/>
+        <spike id="34" time="0.376050s"/>
+        <spike id="35" time="0.399345s"/>
+        <spike id="36" time="0.405910s"/>
+        <spike id="37" time="0.410080s"/>
+        <spike id="38" time="0.430025s"/>
+        <spike id="39" time="0.432345s"/>
+    </spikeArray>
+    <network id="Golgi_V2012_test1_import_colocalize_plus_regional_trial0_network" type="networkWithTemperature" temperature="23 degC">
+        <notes>Parameter arrays for building this network are listed below:
+Cell distribution parameters:
+{'yDim': 50, 'popID': 'Golgi_pop0', 'zDim': 50, 'xDim': 50, 'distributionModel': 'explicit_cell_numbers', 'minimal_distance': 25, 'distanceModel': 'random_minimal_distance'}
+Cell population parameters:
+Cell population parameters for Golgi_pop0:
+{'popID': 'Golgi_pop0', 'cellType': 'Golgi_5comp_3channels_1CaPool', 'size': 5}
+Cell connectivity parameters:
+{'maximalConnDistance': 150, 'conductanceModel': 'variable', 'targetingModelpostPop': {'segmentGroupList': ['Section_1', 'dend_1'], 'model': 'segment groups and segments', 'segmentGroupProbabilities': {'Section_1': 0.7, 'dend_1': 0.3}}, 'distributionGJ': 'binomial', 'targetingModelprePop': {'segmentGroupList': ['Section_1', 'dend_1'], 'model': 'segment groups and segments', 'segmentGroupProbabilities': {'Section_1': 0.7, 'dend_1': 0.3}}, 'postPopID': 'Golgi_pop0', 'averageNoGJs': 8, 'gapJunctionModel': 'variable number of GJ contacts per pair', 'averageConductance': 426, 'testingConductanceScale': 1, 'electricalConnModel': 'Vervaeke_2012_based', 'stdDev': 20, 'maxNoGJs': 10, 'units': 'pS', 'distribution': 'gaussian', 'prePopID': 'Golgi_pop0', 'spatialScale': 1}
+Input parameters for a list of populations:
+Input group parameters for Golgi_pop0:
+{'stDevAmp': 25, 'inputModel': 'variable_basal_firing_rate', 'ampUnits': 'pA', 'amplitudeDistribution': 'gaussian', 'averageAmp': 50, 'valueOffset': 50, 'inputLabel': 'vrpop0', 'offsetDistribution': 'constant', 'offsetUnits': 'ms'}
+{'segmentProbabilities': {'Soma': 0.7, 'dend_1': 0.3}, 'targetingModel': 'segments and subsegments', 'units': 'ms', 'averageRate': 150, 'noInputs': 8, 'synapseList': [{'synapseType': 'MFSpikeSyn'}, {'synapseType': 'MF_PF_SpikeSynNMDA'}], 'inputLabel': 'MF_AMPA_NMDA', 'delay': 80, 'inputModel': 'XF', 'inputIdLibrary': 'XFpop0_Golgi_pop0_syn0', 'synapseMode': 'transient', 'fractionToTarget': 1, 'segmentList': ['Soma', 'dend_1'], 'duration': 100, 'numberModel': 'constant number of inputs per cell', 'targetingRegime': '3D_region_specific', 'colocalizeSynapses': True, 'regionList': [{'zVector': [0, 40], 'xVector': [0, 40], 'yVector': [0, 40]}], 'fractionAlongANDsubsegProbabilities': {'Soma': [{'fractionAlong': 0.25, 'Prob': 1}, {'fractionAlong': 0.25, 'Prob': 0}], 'dend_1': [{'fractionAlong': 0.5, 'Prob': 0.7}, {'fractionAlong': 0.5, 'Prob': 0.3}]}}
+</notes>
+        <population id="Golgi_pop0" type="populationList" component="Golgi_5comp_3channels_1CaPool" size="5">
+            <instance id="0">
+                <location y="23.512834821661027" x="23.445002662665114" z="41.533496580891629"/>
+            </instance>
+            <instance id="1">
+                <location y="0.279477031485575" x="3.630782713296354" z="16.690064112945013"/>
+            </instance>
+            <instance id="2">
+                <location y="46.995760497534789" x="18.805175560395554" z="16.34188714026234"/>
+            </instance>
+            <instance id="3">
+                <location y="31.19582328650667" x="32.824359360504793" z="29.605148347366839"/>
+            </instance>
+            <instance id="4">
+                <location y="23.591117616265105" x="6.288154905162657" z="44.959512723460001"/>
+            </instance>
+        </population>
+        <population id="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_0" component="MF_AMPA_NMDA_Golgi_pop0_cell1_0" size="1"/>
+        <population id="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_1" component="MF_AMPA_NMDA_Golgi_pop0_cell1_1" size="1"/>
+        <population id="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_2" component="MF_AMPA_NMDA_Golgi_pop0_cell1_2" size="1"/>
+        <population id="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_3" component="MF_AMPA_NMDA_Golgi_pop0_cell1_3" size="1"/>
+        <population id="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_4" component="MF_AMPA_NMDA_Golgi_pop0_cell1_4" size="1"/>
+        <population id="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_5" component="MF_AMPA_NMDA_Golgi_pop0_cell1_5" size="1"/>
+        <population id="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_6" component="MF_AMPA_NMDA_Golgi_pop0_cell1_6" size="1"/>
+        <population id="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_7" component="MF_AMPA_NMDA_Golgi_pop0_cell1_7" size="1"/>
+        <population id="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_0" component="MF_AMPA_NMDA_Golgi_pop0_cell3_0" size="1"/>
+        <population id="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_1" component="MF_AMPA_NMDA_Golgi_pop0_cell3_1" size="1"/>
+        <population id="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_2" component="MF_AMPA_NMDA_Golgi_pop0_cell3_2" size="1"/>
+        <population id="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_3" component="MF_AMPA_NMDA_Golgi_pop0_cell3_3" size="1"/>
+        <population id="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_4" component="MF_AMPA_NMDA_Golgi_pop0_cell3_4" size="1"/>
+        <population id="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_5" component="MF_AMPA_NMDA_Golgi_pop0_cell3_5" size="1"/>
+        <population id="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_6" component="MF_AMPA_NMDA_Golgi_pop0_cell3_6" size="1"/>
+        <population id="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_7" component="MF_AMPA_NMDA_Golgi_pop0_cell3_7" size="1"/>
+        <projection id="InputProj_MF_AMPA_NMDA_Golgi_pop0_cell1_syn0_0" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_0" synapse="MFSpikeSyn">
+            <connection id="0" preCellId="../InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_0[0]" postFractionAlong="0.469958" postSegmentId="2" postCellId="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool"/>
+        </projection>
+        <projection id="InputProj_MF_AMPA_NMDA_Golgi_pop0_cell1_syn1_0" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_0" synapse="MF_PF_SpikeSynNMDA">
+            <connection id="0" preCellId="../InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_0[0]" postFractionAlong="0.469958" postSegmentId="2" postCellId="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool"/>
+        </projection>
+        <projection id="InputProj_MF_AMPA_NMDA_Golgi_pop0_cell1_syn0_1" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_1" synapse="MFSpikeSyn">
+            <connection id="0" preCellId="../InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_1[0]" postFractionAlong="0.092484" postSegmentId="0" postCellId="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool"/>
+        </projection>
+        <projection id="InputProj_MF_AMPA_NMDA_Golgi_pop0_cell1_syn1_1" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_1" synapse="MF_PF_SpikeSynNMDA">
+            <connection id="0" preCellId="../InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_1[0]" postFractionAlong="0.092484" postSegmentId="0" postCellId="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool"/>
+        </projection>
+        <projection id="InputProj_MF_AMPA_NMDA_Golgi_pop0_cell1_syn0_2" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_2" synapse="MFSpikeSyn">
+            <connection id="0" preCellId="../InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_2[0]" postFractionAlong="0.054124" postSegmentId="0" postCellId="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool"/>
+        </projection>
+        <projection id="InputProj_MF_AMPA_NMDA_Golgi_pop0_cell1_syn1_2" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_2" synapse="MF_PF_SpikeSynNMDA">
+            <connection id="0" preCellId="../InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_2[0]" postFractionAlong="0.054124" postSegmentId="0" postCellId="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool"/>
+        </projection>
+        <projection id="InputProj_MF_AMPA_NMDA_Golgi_pop0_cell1_syn0_3" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_3" synapse="MFSpikeSyn">
+            <connection id="0" preCellId="../InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_3[0]" postFractionAlong="0.198735" postSegmentId="0" postCellId="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool"/>
+        </projection>
+        <projection id="InputProj_MF_AMPA_NMDA_Golgi_pop0_cell1_syn1_3" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_3" synapse="MF_PF_SpikeSynNMDA">
+            <connection id="0" preCellId="../InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_3[0]" postFractionAlong="0.198735" postSegmentId="0" postCellId="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool"/>
+        </projection>
+        <projection id="InputProj_MF_AMPA_NMDA_Golgi_pop0_cell1_syn0_4" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_4" synapse="MFSpikeSyn">
+            <connection id="0" preCellId="../InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_4[0]" postFractionAlong="0.078503" postSegmentId="0" postCellId="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool"/>
+        </projection>
+        <projection id="InputProj_MF_AMPA_NMDA_Golgi_pop0_cell1_syn1_4" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_4" synapse="MF_PF_SpikeSynNMDA">
+            <connection id="0" preCellId="../InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_4[0]" postFractionAlong="0.078503" postSegmentId="0" postCellId="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool"/>
+        </projection>
+        <projection id="InputProj_MF_AMPA_NMDA_Golgi_pop0_cell1_syn0_5" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_5" synapse="MFSpikeSyn">
+            <connection id="0" preCellId="../InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_5[0]" postFractionAlong="0.323462" postSegmentId="2" postCellId="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool"/>
+        </projection>
+        <projection id="InputProj_MF_AMPA_NMDA_Golgi_pop0_cell1_syn1_5" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_5" synapse="MF_PF_SpikeSynNMDA">
+            <connection id="0" preCellId="../InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_5[0]" postFractionAlong="0.323462" postSegmentId="2" postCellId="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool"/>
+        </projection>
+        <projection id="InputProj_MF_AMPA_NMDA_Golgi_pop0_cell1_syn0_6" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_6" synapse="MFSpikeSyn">
+            <connection id="0" preCellId="../InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_6[0]" postFractionAlong="0.114467" postSegmentId="0" postCellId="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool"/>
+        </projection>
+        <projection id="InputProj_MF_AMPA_NMDA_Golgi_pop0_cell1_syn1_6" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_6" synapse="MF_PF_SpikeSynNMDA">
+            <connection id="0" preCellId="../InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_6[0]" postFractionAlong="0.114467" postSegmentId="0" postCellId="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool"/>
+        </projection>
+        <projection id="InputProj_MF_AMPA_NMDA_Golgi_pop0_cell1_syn0_7" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_7" synapse="MFSpikeSyn">
+            <connection id="0" preCellId="../InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_7[0]" postFractionAlong="0.022731" postSegmentId="2" postCellId="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool"/>
+        </projection>
+        <projection id="InputProj_MF_AMPA_NMDA_Golgi_pop0_cell1_syn1_7" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_7" synapse="MF_PF_SpikeSynNMDA">
+            <connection id="0" preCellId="../InputPop_MF_AMPA_NMDA_Golgi_pop0_cell1_7[0]" postFractionAlong="0.022731" postSegmentId="2" postCellId="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool"/>
+        </projection>
+        <projection id="InputProj_MF_AMPA_NMDA_Golgi_pop0_cell3_syn0_0" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_0" synapse="MFSpikeSyn">
+            <connection id="0" preCellId="../InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_0[0]" postFractionAlong="0.613693" postSegmentId="2" postCellId="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool"/>
+        </projection>
+        <projection id="InputProj_MF_AMPA_NMDA_Golgi_pop0_cell3_syn1_0" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_0" synapse="MF_PF_SpikeSynNMDA">
+            <connection id="0" preCellId="../InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_0[0]" postFractionAlong="0.613693" postSegmentId="2" postCellId="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool"/>
+        </projection>
+        <projection id="InputProj_MF_AMPA_NMDA_Golgi_pop0_cell3_syn0_1" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_1" synapse="MFSpikeSyn">
+            <connection id="0" preCellId="../InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_1[0]" postFractionAlong="0.201878" postSegmentId="0" postCellId="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool"/>
+        </projection>
+        <projection id="InputProj_MF_AMPA_NMDA_Golgi_pop0_cell3_syn1_1" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_1" synapse="MF_PF_SpikeSynNMDA">
+            <connection id="0" preCellId="../InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_1[0]" postFractionAlong="0.201878" postSegmentId="0" postCellId="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool"/>
+        </projection>
+        <projection id="InputProj_MF_AMPA_NMDA_Golgi_pop0_cell3_syn0_2" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_2" synapse="MFSpikeSyn">
+            <connection id="0" preCellId="../InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_2[0]" postFractionAlong="0.032101" postSegmentId="0" postCellId="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool"/>
+        </projection>
+        <projection id="InputProj_MF_AMPA_NMDA_Golgi_pop0_cell3_syn1_2" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_2" synapse="MF_PF_SpikeSynNMDA">
+            <connection id="0" preCellId="../InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_2[0]" postFractionAlong="0.032101" postSegmentId="0" postCellId="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool"/>
+        </projection>
+        <projection id="InputProj_MF_AMPA_NMDA_Golgi_pop0_cell3_syn0_3" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_3" synapse="MFSpikeSyn">
+            <connection id="0" preCellId="../InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_3[0]" postFractionAlong="0.140712" postSegmentId="2" postCellId="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool"/>
+        </projection>
+        <projection id="InputProj_MF_AMPA_NMDA_Golgi_pop0_cell3_syn1_3" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_3" synapse="MF_PF_SpikeSynNMDA">
+            <connection id="0" preCellId="../InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_3[0]" postFractionAlong="0.140712" postSegmentId="2" postCellId="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool"/>
+        </projection>
+        <projection id="InputProj_MF_AMPA_NMDA_Golgi_pop0_cell3_syn0_4" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_4" synapse="MFSpikeSyn">
+            <connection id="0" preCellId="../InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_4[0]" postFractionAlong="0.207743" postSegmentId="2" postCellId="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool"/>
+        </projection>
+        <projection id="InputProj_MF_AMPA_NMDA_Golgi_pop0_cell3_syn1_4" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_4" synapse="MF_PF_SpikeSynNMDA">
+            <connection id="0" preCellId="../InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_4[0]" postFractionAlong="0.207743" postSegmentId="2" postCellId="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool"/>
+        </projection>
+        <projection id="InputProj_MF_AMPA_NMDA_Golgi_pop0_cell3_syn0_5" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_5" synapse="MFSpikeSyn">
+            <connection id="0" preCellId="../InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_5[0]" postFractionAlong="0.108865" postSegmentId="0" postCellId="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool"/>
+        </projection>
+        <projection id="InputProj_MF_AMPA_NMDA_Golgi_pop0_cell3_syn1_5" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_5" synapse="MF_PF_SpikeSynNMDA">
+            <connection id="0" preCellId="../InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_5[0]" postFractionAlong="0.108865" postSegmentId="0" postCellId="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool"/>
+        </projection>
+        <projection id="InputProj_MF_AMPA_NMDA_Golgi_pop0_cell3_syn0_6" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_6" synapse="MFSpikeSyn">
+            <connection id="0" preCellId="../InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_6[0]" postFractionAlong="0.220095" postSegmentId="0" postCellId="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool"/>
+        </projection>
+        <projection id="InputProj_MF_AMPA_NMDA_Golgi_pop0_cell3_syn1_6" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_6" synapse="MF_PF_SpikeSynNMDA">
+            <connection id="0" preCellId="../InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_6[0]" postFractionAlong="0.220095" postSegmentId="0" postCellId="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool"/>
+        </projection>
+        <projection id="InputProj_MF_AMPA_NMDA_Golgi_pop0_cell3_syn0_7" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_7" synapse="MFSpikeSyn">
+            <connection id="0" preCellId="../InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_7[0]" postFractionAlong="0.160218" postSegmentId="0" postCellId="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool"/>
+        </projection>
+        <projection id="InputProj_MF_AMPA_NMDA_Golgi_pop0_cell3_syn1_7" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_7" synapse="MF_PF_SpikeSynNMDA">
+            <connection id="0" preCellId="../InputPop_MF_AMPA_NMDA_Golgi_pop0_cell3_7[0]" postFractionAlong="0.160218" postSegmentId="0" postCellId="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool"/>
+        </projection>
+        <electricalProjection id="proj0" postsynapticPopulation="Golgi_pop0" presynapticPopulation="Golgi_pop0">
+            <electricalConnectionInstance id="0" synapse="gap_junction00" preFractionAlong="0.376104" preSegment="1" postFractionAlong="0.586296" postSegment="1" postCell="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/0/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="1" synapse="gap_junction01" preFractionAlong="0.899190" preSegment="2" postFractionAlong="0.881248" postSegment="1" postCell="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/0/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="2" synapse="gap_junction02" preFractionAlong="0.246240" preSegment="1" postFractionAlong="0.246234" postSegment="1" postCell="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/0/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="3" synapse="gap_junction03" preFractionAlong="0.832506" preSegment="2" postFractionAlong="0.039302" postSegment="2" postCell="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/0/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="4" synapse="gap_junction04" preFractionAlong="0.962164" preSegment="1" postFractionAlong="0.180015" postSegment="1" postCell="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/0/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="5" synapse="gap_junction05" preFractionAlong="0.124798" preSegment="2" postFractionAlong="0.816688" postSegment="1" postCell="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/0/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="6" synapse="gap_junction06" preFractionAlong="0.281827" preSegment="1" postFractionAlong="0.100789" postSegment="1" postCell="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/0/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="7" synapse="gap_junction07" preFractionAlong="0.016814" preSegment="1" postFractionAlong="0.881027" postSegment="2" postCell="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/0/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="8" synapse="gap_junction08" preFractionAlong="0.269763" preSegment="1" postFractionAlong="0.834862" postSegment="1" postCell="../Golgi_pop0/2/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/0/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="9" synapse="gap_junction09" preFractionAlong="0.468066" preSegment="1" postFractionAlong="0.901872" postSegment="1" postCell="../Golgi_pop0/2/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/0/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="10" synapse="gap_junction010" preFractionAlong="0.833683" preSegment="1" postFractionAlong="0.046529" postSegment="1" postCell="../Golgi_pop0/2/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/0/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="11" synapse="gap_junction011" preFractionAlong="0.568475" preSegment="2" postFractionAlong="0.658199" postSegment="1" postCell="../Golgi_pop0/2/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/0/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="12" synapse="gap_junction012" preFractionAlong="0.971953" preSegment="2" postFractionAlong="0.693419" postSegment="1" postCell="../Golgi_pop0/2/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/0/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="13" synapse="gap_junction013" preFractionAlong="0.422466" preSegment="1" postFractionAlong="0.150119" postSegment="1" postCell="../Golgi_pop0/2/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/0/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="14" synapse="gap_junction014" preFractionAlong="0.281424" preSegment="2" postFractionAlong="0.437448" postSegment="1" postCell="../Golgi_pop0/2/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/0/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="15" synapse="gap_junction015" preFractionAlong="0.442597" preSegment="2" postFractionAlong="0.074082" postSegment="1" postCell="../Golgi_pop0/2/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/0/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="16" synapse="gap_junction016" preFractionAlong="0.025100" preSegment="1" postFractionAlong="0.106219" postSegment="2" postCell="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/0/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="17" synapse="gap_junction017" preFractionAlong="0.368566" preSegment="1" postFractionAlong="0.126077" postSegment="1" postCell="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/0/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="18" synapse="gap_junction018" preFractionAlong="0.675277" preSegment="2" postFractionAlong="0.110566" postSegment="1" postCell="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/0/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="19" synapse="gap_junction019" preFractionAlong="0.326098" preSegment="1" postFractionAlong="0.056241" postSegment="1" postCell="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/0/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="20" synapse="gap_junction020" preFractionAlong="0.877359" preSegment="1" postFractionAlong="0.716658" postSegment="1" postCell="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/0/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="21" synapse="gap_junction021" preFractionAlong="0.892620" preSegment="2" postFractionAlong="0.625231" postSegment="1" postCell="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/0/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="22" synapse="gap_junction022" preFractionAlong="0.762008" preSegment="1" postFractionAlong="0.589315" postSegment="2" postCell="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/0/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="23" synapse="gap_junction023" preFractionAlong="0.688451" preSegment="2" postFractionAlong="0.693142" postSegment="1" postCell="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/0/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="24" synapse="gap_junction024" preFractionAlong="0.287993" preSegment="1" postFractionAlong="0.870065" postSegment="1" postCell="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/0/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="25" synapse="gap_junction025" preFractionAlong="0.059400" preSegment="2" postFractionAlong="0.023943" postSegment="2" postCell="../Golgi_pop0/4/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/0/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="26" synapse="gap_junction026" preFractionAlong="0.559847" preSegment="1" postFractionAlong="0.937053" postSegment="1" postCell="../Golgi_pop0/4/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/0/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="27" synapse="gap_junction027" preFractionAlong="0.786020" preSegment="1" postFractionAlong="0.624980" postSegment="1" postCell="../Golgi_pop0/4/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/0/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="28" synapse="gap_junction028" preFractionAlong="0.178318" preSegment="1" postFractionAlong="0.048881" postSegment="1" postCell="../Golgi_pop0/4/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/0/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="29" synapse="gap_junction029" preFractionAlong="0.973523" preSegment="2" postFractionAlong="0.121707" postSegment="1" postCell="../Golgi_pop0/4/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/0/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="30" synapse="gap_junction030" preFractionAlong="0.915785" preSegment="2" postFractionAlong="0.581588" postSegment="1" postCell="../Golgi_pop0/4/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/0/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="31" synapse="gap_junction031" preFractionAlong="0.514705" preSegment="1" postFractionAlong="0.312403" postSegment="1" postCell="../Golgi_pop0/4/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/0/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="32" synapse="gap_junction032" preFractionAlong="0.159907" preSegment="2" postFractionAlong="0.520397" postSegment="1" postCell="../Golgi_pop0/2/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="33" synapse="gap_junction033" preFractionAlong="0.670247" preSegment="1" postFractionAlong="0.447977" postSegment="2" postCell="../Golgi_pop0/2/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="34" synapse="gap_junction034" preFractionAlong="0.595682" preSegment="1" postFractionAlong="0.412637" postSegment="1" postCell="../Golgi_pop0/2/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="35" synapse="gap_junction035" preFractionAlong="0.513675" preSegment="2" postFractionAlong="0.714536" postSegment="1" postCell="../Golgi_pop0/2/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="36" synapse="gap_junction036" preFractionAlong="0.431407" preSegment="2" postFractionAlong="0.664983" postSegment="2" postCell="../Golgi_pop0/2/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="37" synapse="gap_junction037" preFractionAlong="0.324556" preSegment="1" postFractionAlong="0.839750" postSegment="1" postCell="../Golgi_pop0/2/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="38" synapse="gap_junction038" preFractionAlong="0.878070" preSegment="1" postFractionAlong="0.815026" postSegment="1" postCell="../Golgi_pop0/2/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="39" synapse="gap_junction039" preFractionAlong="0.572681" preSegment="1" postFractionAlong="0.535080" postSegment="1" postCell="../Golgi_pop0/4/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="40" synapse="gap_junction040" preFractionAlong="0.441323" preSegment="1" postFractionAlong="0.577435" postSegment="2" postCell="../Golgi_pop0/4/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="41" synapse="gap_junction041" preFractionAlong="0.394822" preSegment="1" postFractionAlong="0.926552" postSegment="2" postCell="../Golgi_pop0/4/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="42" synapse="gap_junction042" preFractionAlong="0.513087" preSegment="1" postFractionAlong="0.112564" postSegment="2" postCell="../Golgi_pop0/4/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="43" synapse="gap_junction043" preFractionAlong="0.631405" preSegment="1" postFractionAlong="0.926158" postSegment="1" postCell="../Golgi_pop0/4/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="44" synapse="gap_junction044" preFractionAlong="0.900290" preSegment="2" postFractionAlong="0.008530" postSegment="2" postCell="../Golgi_pop0/4/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="45" synapse="gap_junction045" preFractionAlong="0.969595" preSegment="2" postFractionAlong="0.102727" postSegment="2" postCell="../Golgi_pop0/4/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="46" synapse="gap_junction046" preFractionAlong="0.910315" preSegment="1" postFractionAlong="0.395207" postSegment="2" postCell="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/2/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="47" synapse="gap_junction047" preFractionAlong="0.970380" preSegment="1" postFractionAlong="0.174104" postSegment="2" postCell="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/2/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="48" synapse="gap_junction048" preFractionAlong="0.169315" preSegment="2" postFractionAlong="0.073553" postSegment="1" postCell="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/2/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="49" synapse="gap_junction049" preFractionAlong="0.403308" preSegment="1" postFractionAlong="0.430250" postSegment="1" postCell="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/2/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="50" synapse="gap_junction050" preFractionAlong="0.063599" preSegment="1" postFractionAlong="0.302484" postSegment="1" postCell="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/2/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="51" synapse="gap_junction051" preFractionAlong="0.255537" preSegment="1" postFractionAlong="0.032807" postSegment="2" postCell="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/2/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="52" synapse="gap_junction052" preFractionAlong="0.128952" preSegment="2" postFractionAlong="0.660768" postSegment="1" postCell="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/2/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="53" synapse="gap_junction053" preFractionAlong="0.124284" preSegment="2" postFractionAlong="0.705314" postSegment="1" postCell="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/2/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="54" synapse="gap_junction054" preFractionAlong="0.343572" preSegment="2" postFractionAlong="0.461329" postSegment="1" postCell="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/2/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="55" synapse="gap_junction055" preFractionAlong="0.645347" preSegment="1" postFractionAlong="0.679652" postSegment="1" postCell="../Golgi_pop0/4/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/2/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="56" synapse="gap_junction056" preFractionAlong="0.388668" preSegment="2" postFractionAlong="0.095805" postSegment="2" postCell="../Golgi_pop0/4/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/2/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="57" synapse="gap_junction057" preFractionAlong="0.051288" preSegment="1" postFractionAlong="0.404926" postSegment="1" postCell="../Golgi_pop0/4/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/2/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="58" synapse="gap_junction058" preFractionAlong="0.247573" preSegment="2" postFractionAlong="0.980916" postSegment="1" postCell="../Golgi_pop0/4/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/2/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="59" synapse="gap_junction059" preFractionAlong="0.257922" preSegment="1" postFractionAlong="0.771316" postSegment="1" postCell="../Golgi_pop0/4/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/2/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="60" synapse="gap_junction060" preFractionAlong="0.529157" preSegment="1" postFractionAlong="0.838671" postSegment="1" postCell="../Golgi_pop0/4/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/2/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="61" synapse="gap_junction061" preFractionAlong="0.123614" preSegment="1" postFractionAlong="0.436689" postSegment="1" postCell="../Golgi_pop0/4/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/2/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="62" synapse="gap_junction062" preFractionAlong="0.956705" preSegment="1" postFractionAlong="0.194439" postSegment="2" postCell="../Golgi_pop0/4/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/2/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="63" synapse="gap_junction063" preFractionAlong="0.438404" preSegment="1" postFractionAlong="0.061772" postSegment="1" postCell="../Golgi_pop0/4/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/2/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="64" synapse="gap_junction064" preFractionAlong="0.705965" preSegment="2" postFractionAlong="0.720822" postSegment="1" postCell="../Golgi_pop0/4/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="65" synapse="gap_junction065" preFractionAlong="0.449437" preSegment="1" postFractionAlong="0.815869" postSegment="2" postCell="../Golgi_pop0/4/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="66" synapse="gap_junction066" preFractionAlong="0.727665" preSegment="1" postFractionAlong="0.249460" postSegment="1" postCell="../Golgi_pop0/4/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="67" synapse="gap_junction067" preFractionAlong="0.192140" preSegment="1" postFractionAlong="0.446366" postSegment="1" postCell="../Golgi_pop0/4/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="68" synapse="gap_junction068" preFractionAlong="0.933470" preSegment="1" postFractionAlong="0.444119" postSegment="2" postCell="../Golgi_pop0/4/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="69" synapse="gap_junction069" preFractionAlong="0.838092" preSegment="1" postFractionAlong="0.788352" postSegment="1" postCell="../Golgi_pop0/4/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool"/>
+            <electricalConnectionInstance id="70" synapse="gap_junction070" preFractionAlong="0.811710" preSegment="1" postFractionAlong="0.114994" postSegment="1" postCell="../Golgi_pop0/4/Golgi_5comp_3channels_1CaPool" preCell="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool"/>
+        </electricalProjection>
+        <inputList id="vrpop0_Golgi_pop0_0" component="Pulse_vrpop0_Golgi_pop0_0" population="Golgi_pop0">
+            <input destination="synapses" id="0" target="../Golgi_pop0/0/Golgi_5comp_3channels_1CaPool"/>
+        </inputList>
+        <inputList id="vrpop0_Golgi_pop0_1" component="Pulse_vrpop0_Golgi_pop0_1" population="Golgi_pop0">
+            <input destination="synapses" id="1" target="../Golgi_pop0/1/Golgi_5comp_3channels_1CaPool"/>
+        </inputList>
+        <inputList id="vrpop0_Golgi_pop0_2" component="Pulse_vrpop0_Golgi_pop0_2" population="Golgi_pop0">
+            <input destination="synapses" id="2" target="../Golgi_pop0/2/Golgi_5comp_3channels_1CaPool"/>
+        </inputList>
+        <inputList id="vrpop0_Golgi_pop0_3" component="Pulse_vrpop0_Golgi_pop0_3" population="Golgi_pop0">
+            <input destination="synapses" id="3" target="../Golgi_pop0/3/Golgi_5comp_3channels_1CaPool"/>
+        </inputList>
+        <inputList id="vrpop0_Golgi_pop0_4" component="Pulse_vrpop0_Golgi_pop0_4" population="Golgi_pop0">
+            <input destination="synapses" id="4" target="../Golgi_pop0/4/Golgi_5comp_3channels_1CaPool"/>
+        </inputList>
+    </network>
+</neuroml>

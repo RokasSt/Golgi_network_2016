@@ -76,7 +76,7 @@ def XF_input_models_uniform_import(popID,popSize,cellType,cellNML2Type,input_gro
                   if libID=='newlyGenerated':
                      spike_times=np.loadtxt(currDir+"/simulations/%s/sim%d/%s_%s_syn0_PoissonTrain_%d.dat"%(expID,simID,label,popID,target_point))
                   else:
-                     spike_times=np.loadtxt(currDir+"/simulations/%s/sim%d/%s_PoissonTrain_%d.dat"%(libID,simID,synapse_array['inputIdLibrary'],target_point))
+                     spike_times=np.loadtxt(currDir+"/simulations/%s/sim%d/%s_PoissonTrain_%d.dat"%(libID,simID,input_group_parameters['inputIdLibrary'],target_point))
                   spike_times=np.transpose(spike_times)
                   spike_times=spike_times[1]
                   spike_array=neuroml.SpikeArray(id="%s_%s_cell%d_%d"%(label,popID,target_cell,target_point))
@@ -229,7 +229,7 @@ def XF_input_models_3D_region_specific_import(popID,cellType,cellNML2Type,input_
               input_receiving_cells.append(target_cell)
            if input_group_parameters['numberModel']=="constant number of inputs per cell":
               no_of_inputs=input_group_parameters['noInputs']
-           if synapse_array['numberModel']=="variable number of inputs per cell":
+           if input_group_parameters['numberModel']=="variable number of inputs per cell":
               if input_group_parameters['distribution']=="binomial":
                   no_of_inputs=np.random.binomial(input_group_parameters['maxNoInputs'],\
                   input_group_parameters['averageNoInputs']/input_group_parameters['maxNoInputs'])
@@ -245,10 +245,10 @@ def XF_input_models_3D_region_specific_import(popID,cellType,cellNML2Type,input_
                   if libID=='newlyGenerated':
                      spike_times=np.loadtxt(currDir+"/simulations/%s/sim%d/%s_%s_syn0_PoissonTrain_%d.dat"%(expID,simID,label,popID,target_point))
                   else:
-                     spike_times=np.loadtxt(currDir+"/simulations/%s/sim%d/%s_PoissonTrain_%d.dat"%(libID,simID,synapse_array['inputIdLibrary'],target_point))
+                     spike_times=np.loadtxt(currDir+"/simulations/%s/sim%d/%s_PoissonTrain_%d.dat"%(libID,simID,input_group_parameters['inputIdLibrary'],target_point))
                   spike_times=np.transpose(spike_times)
                   spike_times=spike_times[1]
-                  spike_array=neuroml.SpikeArray(id="%s_%s_syn%d_%d"%(label,popID,target_cell,synapse_index,target_point))
+                  spike_array=neuroml.SpikeArray(id="%s_%s_cell%d_%d"%(label,popID,target_cell,target_point))
                                                   
                   for spike in range(0,len(spike_times)):
                       spike_object=neuroml.Spike(id="%d"%spike,time="%fs"%spike_times[spike])

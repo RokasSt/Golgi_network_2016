@@ -42,7 +42,7 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
         for unique_cell in unique_cell_names:
             if 'networkDir' in simulation_parameters and 'parentDirRequired' in simulation_parameters:
                if simulation_parameters['parentDirRequired'] and (simulation_parameters['networkDir']=="example" or simulation_parameters['networkDir']=="experiment"):
-                  include_cell=neuroml.IncludeType(href="/../../../"+"%s.cell.nml"%unique_cell)
+                  include_cell=neuroml.IncludeType(href="../../../"+"%s.cell.nml"%unique_cell)
             else:
                include_cell=neuroml.IncludeType(href="%s.cell.nml"%unique_cell)
 
@@ -88,7 +88,7 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
 	cell_position_array={}
 
 	for cell_population in range(0,len(cell_array)):
-            cell_position_array[ cell_array[cell_population]['popID']]=np.zeros([0,3])
+            cell_position_array[cell_array[cell_population]['popID']]=np.zeros([0,3])
 	
 	Note_string=Note_string+"Cell distribution parameters:\n"
 	
@@ -100,9 +100,12 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
                
                if location_array['populationList'][pop]['distributionModel']=="density_profile":
                   location_parameters=location_array['populationList'][pop]
-                  golgi_pop_object=neuroml_Golgi_pop_array[location_parameters['popID']]
+
+                  for pop_in in range(0,len(cell_array)):
+                      if cell_array[pop_in]['popID']==location_parameters['popID']:
+                         cellType=cell_array[pop_in]['cellType']
                   
-                  pop_position_array, total_no_of_cells,Golgi_pop=density_model(location_parameters,golgi_pop_object,seed,pop,cell_position_array,cell_array,\
+                  pop_position_array, total_no_of_cells,Golgi_pop=density_model(location_parameters,cellType,seed,pop,cell_position_array,cell_array,\
                   cell_diameter_array)
 
                   cell_array[pop]['size']=total_no_of_cells
@@ -162,9 +165,12 @@ minimal_distance,pop,seed,golgi_pop_object,dim_dict_max_values)
                if location_array['populationList'][pop]['distributionModel']=="density_profile":
 
                   location_parameters=location_array['populationList'][pop]
-                  golgi_pop_object=neuroml_Golgi_pop_array[location_parameters['popID']]
 
-                  pop_position_array, total_no_of_cells,Golgi_pop=density_model(location_parameters,golgi_pop_object,seed)
+                  for pop_in in range(0,len(cell_array)):
+                      if cell_array[pop_in]['popID']==location_parameters['popID']:
+                         cellType=cell_array[pop_in]['cellType']
+
+                  pop_position_array, total_no_of_cells,Golgi_pop=density_model(location_parameters,cellType,seed)
 
                   cell_array[pop]['size']=total_no_of_cells
 
@@ -194,6 +200,8 @@ minimal_distance,pop,seed,golgi_pop_object,dim_dict_max_values)
         for population in range(0,len(cell_array)):
             Note_string=Note_string+"Cell population parameters for %s:\n"%cell_array[population]['popID']
             Note_string=Note_string+"%s\n"%cell_array[population]
+
+
         ############################################ connectivity block
         synapse_name_array=[]        
         connMatrix_array=[]
@@ -242,7 +250,7 @@ minimal_distance,pop,seed,golgi_pop_object,dim_dict_max_values)
                      for gapJ in range(0,len(gap_junction_array)):
                          nml_doc.gap_junctions.append(gap_junction_array[gapJ])
                
-
+               
                ############# 2010, both connection probabilities and synaptic weights are distance-dependent              
                if connectivity_information['populationPairs'][pair]['electricalConnModel']=="Vervaeke_2010_based":
                   pair_connectivity_parameters=connectivity_information['populationPairs'][pair]
@@ -250,6 +258,7 @@ minimal_distance,pop,seed,golgi_pop_object,dim_dict_max_values)
                   post_pop_cell_component=cell_array[postPop_listIndex]['cellType']
                   pre_pop_cell_positions=cell_position_array[prePop]
                   post_pop_cell_positions=cell_position_array[postPop]
+                  
                   
                   if simulation_parameters['parentDirRequired']:
                      proj, nonempty_projection,gap_junction_array=Vervaeke_2010_model(pair,initial_projection_counter,prePop,prePop_listIndex,prePopSize,pre_pop_cell_component,preCell_NML2type,pre_pop_cell_positions,\
@@ -445,7 +454,19 @@ input_group_array[input_group],seed,sim_params_dict)
                        net.input_lists.append(input_list_array[input_list])
                        nml_doc.pulse_generators.append(pulseGenerator_array[input_list])
 
-                
+                   
+                   if simulation_parameters['saveInputReceivingCellID']:
+                   
+                      if simulation_parameters['currentDirRequired']:
+                         save_to_path=simulation_parameters['currentDir']+"/simulations/%s/sim%d"%(simulation_parameters['experimentID'],simulation_parameters['simID'])
+                      else:
+                         save_to_path="simulations/%s/sim%d"%(simulation_parameters['experimentID'],simulation_parameters['simID'])
+
+                      np.savetxt('%s/%s_%s.txt'%(save_to_path,cell_array[pop_listIndex]['popID'],input_group_array[input_group]['inputLabel']),cells_with_inputs,\
+                      fmt="%d" ) 
+
+
+
                 Note_string=Note_string+"%s"%input_group_array[input_group]+"\n"  
                 
                 
@@ -485,10 +506,12 @@ input_group_array[input_group],seed,sim_params_dict)
         nml_file='%s.net.nml'%ref
 
         print("Written network file to: "+nml_file_dir)
-    
+     
         ###### Validate the NeuroML2 ######   
-
+        
         validate_neuroml2(nml_file_dir)
+
+        
         sim_info_array={}
         sim_info_array['ref']=ref
         sim_info_array['netID']=net.id

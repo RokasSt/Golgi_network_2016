@@ -1,0 +1,624 @@
+<Lems>
+    
+    <!-- 
+
+        This LEMS file has been automatically generated using PyNeuroML v0.1.7 (libNeuroML v0.2.11)
+
+     -->
+    
+    <!-- Specify which component to run -->
+    <Target component="Golgi_test_density_3_trial0"/>
+
+    <!-- Include core NeuroML2 ComponentType definitions -->
+    <Include file="Cells.xml"/>
+    <Include file="Networks.xml"/>
+    <Include file="Simulation.xml"/>
+    
+    <Include file="Golgi_test_density_3_trial0.net.nml"/>
+    <Include file="../../../Golgi_040408_C1.cell.nml"/>
+    <Include file="Golgi_Ca_HVA.channel.nml"/>
+    <Include file="Golgi_Ca_LVA.channel.nml"/>
+    <Include file="Golgi_CALC.nml"/>
+    <Include file="Golgi_CALC_ca2.nml"/>
+    <Include file="Golgi_hcn1f.channel.nml"/>
+    <Include file="Golgi_hcn1s.channel.nml"/>
+    <Include file="Golgi_hcn2f.channel.nml"/>
+    <Include file="Golgi_hcn2s.channel.nml"/>
+    <Include file="Golgi_KA.channel.nml"/>
+    <Include file="Golgi_KC.channel.nml"/>
+    <Include file="Golgi_Kslow.channel.nml"/>
+    <Include file="Golgi_KAHP.channel.nml"/>
+    <Include file="Golgi_KV.channel.nml"/>
+    <Include file="LeakCond.channel.nml"/>
+    <Include file="Golgi_NaP.channel.nml"/>
+    <Include file="Golgi_NaR.channel.nml"/>
+    <Include file="Golgi_NaT.channel.nml"/>
+   
+    <Simulation id="Golgi_test_density_3_trial0" length="450ms" step="0.005ms" target="Golgi_test_density_3_trial0_network">
+        
+        <Display id="display_voltagesGolgi_pop0" title="Voltages Golgi_pop0" timeScale="1ms" xmin="-45.0" xmax="495.0" ymin="-75" ymax="50">
+            <Line id="../Golgi_pop0/27: Vm" quantity="Golgi_pop0/27/Golgi_040408_C1/v" scale="1mV" color="#755a1f" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/81: Vm" quantity="Golgi_pop0/81/Golgi_040408_C1/v" scale="1mV" color="#ab460b" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/84: Vm" quantity="Golgi_pop0/84/Golgi_040408_C1/v" scale="1mV" color="#4276a0" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/26: Vm" quantity="Golgi_pop0/26/Golgi_040408_C1/v" scale="1mV" color="#250e6e" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/47: Vm" quantity="Golgi_pop0/47/Golgi_040408_C1/v" scale="1mV" color="#de0ff0" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/23: Vm" quantity="Golgi_pop0/23/Golgi_040408_C1/v" scale="1mV" color="#4a6716" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/110: Vm" quantity="Golgi_pop0/110/Golgi_040408_C1/v" scale="1mV" color="#4abe19" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/43: Vm" quantity="Golgi_pop0/43/Golgi_040408_C1/v" scale="1mV" color="#221ae7" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/137: Vm" quantity="Golgi_pop0/137/Golgi_040408_C1/v" scale="1mV" color="#431005" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/7: Vm" quantity="Golgi_pop0/7/Golgi_040408_C1/v" scale="1mV" color="#98af23" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/136: Vm" quantity="Golgi_pop0/136/Golgi_040408_C1/v" scale="1mV" color="#3d3be4" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/122: Vm" quantity="Golgi_pop0/122/Golgi_040408_C1/v" scale="1mV" color="#c220a7" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/56: Vm" quantity="Golgi_pop0/56/Golgi_040408_C1/v" scale="1mV" color="#7f5473" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/79: Vm" quantity="Golgi_pop0/79/Golgi_040408_C1/v" scale="1mV" color="#796f83" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/63: Vm" quantity="Golgi_pop0/63/Golgi_040408_C1/v" scale="1mV" color="#b31ac1" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/4: Vm" quantity="Golgi_pop0/4/Golgi_040408_C1/v" scale="1mV" color="#abc8e0" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/14: Vm" quantity="Golgi_pop0/14/Golgi_040408_C1/v" scale="1mV" color="#6e1bf1" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/39: Vm" quantity="Golgi_pop0/39/Golgi_040408_C1/v" scale="1mV" color="#0fe499" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/125: Vm" quantity="Golgi_pop0/125/Golgi_040408_C1/v" scale="1mV" color="#eebfc7" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/45: Vm" quantity="Golgi_pop0/45/Golgi_040408_C1/v" scale="1mV" color="#b8411b" timeScale="1ms"/>
+        </Display>
+        
+        <OutputFile id="Volts0_file0_0" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell0.dat">
+            <OutputColumn id="v0" quantity="Golgi_pop0/0/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_1" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell1.dat">
+            <OutputColumn id="v1" quantity="Golgi_pop0/1/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_2" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell2.dat">
+            <OutputColumn id="v2" quantity="Golgi_pop0/2/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_3" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell3.dat">
+            <OutputColumn id="v3" quantity="Golgi_pop0/3/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_4" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell4.dat">
+            <OutputColumn id="v4" quantity="Golgi_pop0/4/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_5" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell5.dat">
+            <OutputColumn id="v5" quantity="Golgi_pop0/5/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_6" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell6.dat">
+            <OutputColumn id="v6" quantity="Golgi_pop0/6/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_7" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell7.dat">
+            <OutputColumn id="v7" quantity="Golgi_pop0/7/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_8" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell8.dat">
+            <OutputColumn id="v8" quantity="Golgi_pop0/8/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_9" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell9.dat">
+            <OutputColumn id="v9" quantity="Golgi_pop0/9/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_10" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell10.dat">
+            <OutputColumn id="v10" quantity="Golgi_pop0/10/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_11" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell11.dat">
+            <OutputColumn id="v11" quantity="Golgi_pop0/11/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_12" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell12.dat">
+            <OutputColumn id="v12" quantity="Golgi_pop0/12/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_13" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell13.dat">
+            <OutputColumn id="v13" quantity="Golgi_pop0/13/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_14" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell14.dat">
+            <OutputColumn id="v14" quantity="Golgi_pop0/14/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_15" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell15.dat">
+            <OutputColumn id="v15" quantity="Golgi_pop0/15/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_16" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell16.dat">
+            <OutputColumn id="v16" quantity="Golgi_pop0/16/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_17" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell17.dat">
+            <OutputColumn id="v17" quantity="Golgi_pop0/17/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_18" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell18.dat">
+            <OutputColumn id="v18" quantity="Golgi_pop0/18/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_19" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell19.dat">
+            <OutputColumn id="v19" quantity="Golgi_pop0/19/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_20" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell20.dat">
+            <OutputColumn id="v20" quantity="Golgi_pop0/20/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_21" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell21.dat">
+            <OutputColumn id="v21" quantity="Golgi_pop0/21/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_22" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell22.dat">
+            <OutputColumn id="v22" quantity="Golgi_pop0/22/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_23" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell23.dat">
+            <OutputColumn id="v23" quantity="Golgi_pop0/23/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_24" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell24.dat">
+            <OutputColumn id="v24" quantity="Golgi_pop0/24/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_25" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell25.dat">
+            <OutputColumn id="v25" quantity="Golgi_pop0/25/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_26" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell26.dat">
+            <OutputColumn id="v26" quantity="Golgi_pop0/26/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_27" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell27.dat">
+            <OutputColumn id="v27" quantity="Golgi_pop0/27/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_28" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell28.dat">
+            <OutputColumn id="v28" quantity="Golgi_pop0/28/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_29" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell29.dat">
+            <OutputColumn id="v29" quantity="Golgi_pop0/29/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_30" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell30.dat">
+            <OutputColumn id="v30" quantity="Golgi_pop0/30/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_31" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell31.dat">
+            <OutputColumn id="v31" quantity="Golgi_pop0/31/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_32" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell32.dat">
+            <OutputColumn id="v32" quantity="Golgi_pop0/32/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_33" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell33.dat">
+            <OutputColumn id="v33" quantity="Golgi_pop0/33/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_34" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell34.dat">
+            <OutputColumn id="v34" quantity="Golgi_pop0/34/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_35" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell35.dat">
+            <OutputColumn id="v35" quantity="Golgi_pop0/35/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_36" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell36.dat">
+            <OutputColumn id="v36" quantity="Golgi_pop0/36/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_37" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell37.dat">
+            <OutputColumn id="v37" quantity="Golgi_pop0/37/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_38" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell38.dat">
+            <OutputColumn id="v38" quantity="Golgi_pop0/38/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_39" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell39.dat">
+            <OutputColumn id="v39" quantity="Golgi_pop0/39/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_40" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell40.dat">
+            <OutputColumn id="v40" quantity="Golgi_pop0/40/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_41" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell41.dat">
+            <OutputColumn id="v41" quantity="Golgi_pop0/41/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_42" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell42.dat">
+            <OutputColumn id="v42" quantity="Golgi_pop0/42/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_43" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell43.dat">
+            <OutputColumn id="v43" quantity="Golgi_pop0/43/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_44" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell44.dat">
+            <OutputColumn id="v44" quantity="Golgi_pop0/44/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_45" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell45.dat">
+            <OutputColumn id="v45" quantity="Golgi_pop0/45/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_46" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell46.dat">
+            <OutputColumn id="v46" quantity="Golgi_pop0/46/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_47" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell47.dat">
+            <OutputColumn id="v47" quantity="Golgi_pop0/47/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_48" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell48.dat">
+            <OutputColumn id="v48" quantity="Golgi_pop0/48/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_49" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell49.dat">
+            <OutputColumn id="v49" quantity="Golgi_pop0/49/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_50" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell50.dat">
+            <OutputColumn id="v50" quantity="Golgi_pop0/50/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_51" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell51.dat">
+            <OutputColumn id="v51" quantity="Golgi_pop0/51/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_52" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell52.dat">
+            <OutputColumn id="v52" quantity="Golgi_pop0/52/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_53" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell53.dat">
+            <OutputColumn id="v53" quantity="Golgi_pop0/53/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_54" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell54.dat">
+            <OutputColumn id="v54" quantity="Golgi_pop0/54/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_55" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell55.dat">
+            <OutputColumn id="v55" quantity="Golgi_pop0/55/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_56" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell56.dat">
+            <OutputColumn id="v56" quantity="Golgi_pop0/56/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_57" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell57.dat">
+            <OutputColumn id="v57" quantity="Golgi_pop0/57/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_58" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell58.dat">
+            <OutputColumn id="v58" quantity="Golgi_pop0/58/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_59" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell59.dat">
+            <OutputColumn id="v59" quantity="Golgi_pop0/59/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_60" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell60.dat">
+            <OutputColumn id="v60" quantity="Golgi_pop0/60/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_61" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell61.dat">
+            <OutputColumn id="v61" quantity="Golgi_pop0/61/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_62" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell62.dat">
+            <OutputColumn id="v62" quantity="Golgi_pop0/62/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_63" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell63.dat">
+            <OutputColumn id="v63" quantity="Golgi_pop0/63/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_64" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell64.dat">
+            <OutputColumn id="v64" quantity="Golgi_pop0/64/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_65" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell65.dat">
+            <OutputColumn id="v65" quantity="Golgi_pop0/65/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_66" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell66.dat">
+            <OutputColumn id="v66" quantity="Golgi_pop0/66/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_67" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell67.dat">
+            <OutputColumn id="v67" quantity="Golgi_pop0/67/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_68" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell68.dat">
+            <OutputColumn id="v68" quantity="Golgi_pop0/68/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_69" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell69.dat">
+            <OutputColumn id="v69" quantity="Golgi_pop0/69/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_70" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell70.dat">
+            <OutputColumn id="v70" quantity="Golgi_pop0/70/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_71" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell71.dat">
+            <OutputColumn id="v71" quantity="Golgi_pop0/71/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_72" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell72.dat">
+            <OutputColumn id="v72" quantity="Golgi_pop0/72/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_73" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell73.dat">
+            <OutputColumn id="v73" quantity="Golgi_pop0/73/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_74" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell74.dat">
+            <OutputColumn id="v74" quantity="Golgi_pop0/74/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_75" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell75.dat">
+            <OutputColumn id="v75" quantity="Golgi_pop0/75/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_76" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell76.dat">
+            <OutputColumn id="v76" quantity="Golgi_pop0/76/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_77" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell77.dat">
+            <OutputColumn id="v77" quantity="Golgi_pop0/77/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_78" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell78.dat">
+            <OutputColumn id="v78" quantity="Golgi_pop0/78/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_79" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell79.dat">
+            <OutputColumn id="v79" quantity="Golgi_pop0/79/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_80" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell80.dat">
+            <OutputColumn id="v80" quantity="Golgi_pop0/80/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_81" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell81.dat">
+            <OutputColumn id="v81" quantity="Golgi_pop0/81/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_82" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell82.dat">
+            <OutputColumn id="v82" quantity="Golgi_pop0/82/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_83" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell83.dat">
+            <OutputColumn id="v83" quantity="Golgi_pop0/83/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_84" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell84.dat">
+            <OutputColumn id="v84" quantity="Golgi_pop0/84/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_85" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell85.dat">
+            <OutputColumn id="v85" quantity="Golgi_pop0/85/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_86" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell86.dat">
+            <OutputColumn id="v86" quantity="Golgi_pop0/86/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_87" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell87.dat">
+            <OutputColumn id="v87" quantity="Golgi_pop0/87/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_88" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell88.dat">
+            <OutputColumn id="v88" quantity="Golgi_pop0/88/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_89" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell89.dat">
+            <OutputColumn id="v89" quantity="Golgi_pop0/89/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_90" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell90.dat">
+            <OutputColumn id="v90" quantity="Golgi_pop0/90/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_91" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell91.dat">
+            <OutputColumn id="v91" quantity="Golgi_pop0/91/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_92" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell92.dat">
+            <OutputColumn id="v92" quantity="Golgi_pop0/92/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_93" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell93.dat">
+            <OutputColumn id="v93" quantity="Golgi_pop0/93/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_94" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell94.dat">
+            <OutputColumn id="v94" quantity="Golgi_pop0/94/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_95" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell95.dat">
+            <OutputColumn id="v95" quantity="Golgi_pop0/95/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_96" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell96.dat">
+            <OutputColumn id="v96" quantity="Golgi_pop0/96/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_97" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell97.dat">
+            <OutputColumn id="v97" quantity="Golgi_pop0/97/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_98" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell98.dat">
+            <OutputColumn id="v98" quantity="Golgi_pop0/98/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_99" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell99.dat">
+            <OutputColumn id="v99" quantity="Golgi_pop0/99/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_100" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell100.dat">
+            <OutputColumn id="v100" quantity="Golgi_pop0/100/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_101" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell101.dat">
+            <OutputColumn id="v101" quantity="Golgi_pop0/101/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_102" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell102.dat">
+            <OutputColumn id="v102" quantity="Golgi_pop0/102/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_103" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell103.dat">
+            <OutputColumn id="v103" quantity="Golgi_pop0/103/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_104" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell104.dat">
+            <OutputColumn id="v104" quantity="Golgi_pop0/104/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_105" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell105.dat">
+            <OutputColumn id="v105" quantity="Golgi_pop0/105/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_106" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell106.dat">
+            <OutputColumn id="v106" quantity="Golgi_pop0/106/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_107" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell107.dat">
+            <OutputColumn id="v107" quantity="Golgi_pop0/107/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_108" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell108.dat">
+            <OutputColumn id="v108" quantity="Golgi_pop0/108/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_109" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell109.dat">
+            <OutputColumn id="v109" quantity="Golgi_pop0/109/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_110" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell110.dat">
+            <OutputColumn id="v110" quantity="Golgi_pop0/110/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_111" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell111.dat">
+            <OutputColumn id="v111" quantity="Golgi_pop0/111/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_112" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell112.dat">
+            <OutputColumn id="v112" quantity="Golgi_pop0/112/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_113" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell113.dat">
+            <OutputColumn id="v113" quantity="Golgi_pop0/113/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_114" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell114.dat">
+            <OutputColumn id="v114" quantity="Golgi_pop0/114/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_115" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell115.dat">
+            <OutputColumn id="v115" quantity="Golgi_pop0/115/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_116" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell116.dat">
+            <OutputColumn id="v116" quantity="Golgi_pop0/116/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_117" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell117.dat">
+            <OutputColumn id="v117" quantity="Golgi_pop0/117/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_118" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell118.dat">
+            <OutputColumn id="v118" quantity="Golgi_pop0/118/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_119" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell119.dat">
+            <OutputColumn id="v119" quantity="Golgi_pop0/119/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_120" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell120.dat">
+            <OutputColumn id="v120" quantity="Golgi_pop0/120/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_121" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell121.dat">
+            <OutputColumn id="v121" quantity="Golgi_pop0/121/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_122" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell122.dat">
+            <OutputColumn id="v122" quantity="Golgi_pop0/122/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_123" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell123.dat">
+            <OutputColumn id="v123" quantity="Golgi_pop0/123/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_124" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell124.dat">
+            <OutputColumn id="v124" quantity="Golgi_pop0/124/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_125" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell125.dat">
+            <OutputColumn id="v125" quantity="Golgi_pop0/125/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_126" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell126.dat">
+            <OutputColumn id="v126" quantity="Golgi_pop0/126/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_127" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell127.dat">
+            <OutputColumn id="v127" quantity="Golgi_pop0/127/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_128" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell128.dat">
+            <OutputColumn id="v128" quantity="Golgi_pop0/128/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_129" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell129.dat">
+            <OutputColumn id="v129" quantity="Golgi_pop0/129/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_130" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell130.dat">
+            <OutputColumn id="v130" quantity="Golgi_pop0/130/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_131" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell131.dat">
+            <OutputColumn id="v131" quantity="Golgi_pop0/131/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_132" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell132.dat">
+            <OutputColumn id="v132" quantity="Golgi_pop0/132/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_133" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell133.dat">
+            <OutputColumn id="v133" quantity="Golgi_pop0/133/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_134" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell134.dat">
+            <OutputColumn id="v134" quantity="Golgi_pop0/134/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_135" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell135.dat">
+            <OutputColumn id="v135" quantity="Golgi_pop0/135/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_136" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell136.dat">
+            <OutputColumn id="v136" quantity="Golgi_pop0/136/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_137" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell137.dat">
+            <OutputColumn id="v137" quantity="Golgi_pop0/137/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_138" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell138.dat">
+            <OutputColumn id="v138" quantity="Golgi_pop0/138/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_139" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_density_3/sim0/0_cell139.dat">
+            <OutputColumn id="v139" quantity="Golgi_pop0/139/Golgi_040408_C1/v"/> 
+        </OutputFile>
+        
+    </Simulation>
+
+</Lems>
