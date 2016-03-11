@@ -96,14 +96,17 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
         ################# 
         for pop in range(0,len(location_array['populationList'])):
             Note_string=Note_string+"%s\n"%location_array['populationList'][pop]
-            if location_array['populationList'][pop]['distanceModel']=="random_no_overlap":
-               
-               if location_array['populationList'][pop]['distributionModel']=="density_profile":
-                  location_parameters=location_array['populationList'][pop]
 
-                  for pop_in in range(0,len(cell_array)):
-                      if cell_array[pop_in]['popID']==location_parameters['popID']:
-                         cellType=cell_array[pop_in]['cellType']
+            location_parameters=location_array['populationList'][pop]
+
+            for pop_in in range(0,len(cell_array)):
+                if cell_array[pop_in]['popID']==location_parameters['popID']:
+                   cellType=cell_array[pop_in]['cellType']
+
+            if location_parameters['distanceModel']=="random_no_overlap":
+               
+               if location_parameters['distributionModel']=="density_profile":
+                  
                   
                   pop_position_array, total_no_of_cells,Golgi_pop=density_model(location_parameters,cellType,seed,pop,cell_position_array,cell_array,\
                   cell_diameter_array)
@@ -114,13 +117,13 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
           
                   net.populations.append(Golgi_pop)
                   
-               if location_array['populationList'][pop]['distributionModel']=="explicit_cell_numbers":
+               if location_parameters['distributionModel']=="explicit_cell_numbers":
                        
                   golgi_pop_object=neuroml_Golgi_pop_array[cell_array[pop]['popID']]
                   dim_dict_max_values={}
-                  dim_dict_max_values['x_dim']=location_array['populationList'][pop]['xDim']
-                  dim_dict_max_values['y_dim']=location_array['populationList'][pop]['yDim']
-                  dim_dict_max_values['z_dim']=location_array['populationList'][pop]['zDim']
+                  dim_dict_max_values['x_dim']=location_parameters['xDim']
+                  dim_dict_max_values['y_dim']=location_parameters['yDim']
+                  dim_dict_max_values['z_dim']=location_parameters['zDim']
                   
                   pop_position_array,Golgi_pop=random_no_overlap(cell_position_array,cell_array,cell_diameter_array,\
                   pop,seed,golgi_pop_object,dim_dict_max_values)
@@ -130,13 +133,13 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
 
                   net.populations.append(Golgi_pop)
                   
-            if location_array['populationList'][pop]['distanceModel']=="random_minimal_distance":
+            if location_parameters['distanceModel']=="random_minimal_distance":
                
-               if location_array['populationList'][pop]['distributionModel']=="density_profile":
+               if location_parameters['distributionModel']=="density_profile":
 
-                  location_parameters=location_array['populationList'][pop]
+                  
                   golgi_pop_object=neuroml_Golgi_pop_array[location_parameters['popID']]
-                  pop_position_array, total_no_of_cells,Golgi_pop=density_model(location_parameters,golgi_pop_object,seed,pop,cell_position_array,cell_array)
+                  pop_position_array, total_no_of_cells,Golgi_pop=density_model(location_parameters,cellType,golgi_pop_object,seed,pop,cell_position_array,cell_array)
 
                   cell_array[pop]['size']=total_no_of_cells
 
@@ -144,13 +147,13 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
           
                   net.populations.append(Golgi_pop)
                   
-               if location_array['populationList'][pop]['distributionModel']=="explicit_cell_numbers":
-                  minimal_distance=location_array['populationList'][pop]['minimal_distance']
+               if location_parameters['distributionModel']=="explicit_cell_numbers":
+                  minimal_distance=location_parameters['minimal_distance']
                   golgi_pop_object=neuroml_Golgi_pop_array[cell_array[pop]['popID']]
                   dim_dict_max_values={}
-                  dim_dict_max_values['x_dim']=location_array['populationList'][pop]['xDim']
-                  dim_dict_max_values['y_dim']=location_array['populationList'][pop]['yDim']
-                  dim_dict_max_values['z_dim']=location_array['populationList'][pop]['zDim']
+                  dim_dict_max_values['x_dim']=location_parameters['xDim']
+                  dim_dict_max_values['y_dim']=location_parameters['yDim']
+                  dim_dict_max_values['z_dim']=location_parameters['zDim']
                          
                   pop_position_array,Golgi_pop=random_minimal_distance(cell_position_array,cell_array,\
 minimal_distance,pop,seed,golgi_pop_object,dim_dict_max_values)
@@ -160,11 +163,10 @@ minimal_distance,pop,seed,golgi_pop_object,dim_dict_max_values)
 
                   net.populations.append(Golgi_pop)
                     
-            if location_array['populationList'][pop]['distanceModel']=="random":
+            if location_parameters['distanceModel']=="random":
 
-               if location_array['populationList'][pop]['distributionModel']=="density_profile":
+               if location_parameters['distributionModel']=="density_profile":
 
-                  location_parameters=location_array['populationList'][pop]
 
                   for pop_in in range(0,len(cell_array)):
                       if cell_array[pop_in]['popID']==location_parameters['popID']:
@@ -180,7 +182,7 @@ minimal_distance,pop,seed,golgi_pop_object,dim_dict_max_values)
 
 
 
-               if location_array['populationList'][pop]['distributionModel']=="explicit_cell_numbers":
+               if location_parameters['distributionModel']=="explicit_cell_numbers":
                   Golgi_pop=neuroml_Golgi_pop_array[cell_array[pop]['popID']]  
                   for cell in range(0,cell_array[cell_pop]['size']):
 	              Golgi_cell=neuroml.Instance(id="%d"%cell)
@@ -188,9 +190,9 @@ minimal_distance,pop,seed,golgi_pop_object,dim_dict_max_values)
 	              X=random.random()
 	              Y=random.random()
 	              Z=random.random()
-                      x_dim=location_array['populationList'][pop]['xDim']
-                      y_dim=location_array['populationList'][pop]['yDim']
-                      z_dim=location_array['populationList'][pop]['zDim']
+                      x_dim=location_parameters['xDim']
+                      y_dim=location_parameters['yDim']
+                      z_dim=location_parameters['zDim']
                       Golgi_cell.location=neuroml.Location(x=x_dim*X, y=y_dim*Y, z=z_dim*Z)
                       cell_position_array[cell_array[pop]['popID']]=np.vstack((cell_position_array[cell_array[pop]['popID']],[x_dim*X,y_dim*Y,z_dim*Z]))
                       print cell_position_array[cell_array[cell_pop]['popID']][cell,0], cell_position_array[cell_array[cell_pop]['popID']][cell,1], cell_position_array[cell_array[cell_pop]['popID']][cell,2]
