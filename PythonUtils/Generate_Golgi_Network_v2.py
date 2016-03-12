@@ -108,12 +108,10 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
                if location_parameters['distributionModel']=="density_profile":
                   
                   
-                  pop_position_array, total_no_of_cells,Golgi_pop=density_model(location_parameters,cellType,seed,pop,cell_position_array,cell_array,\
+                  cell_position_array, total_no_of_cells,Golgi_pop=density_model(location_parameters,cell_position_array,cellType,seed,pop,cell_array,\
                   cell_diameter_array)
 
                   cell_array[pop]['size']=total_no_of_cells
-
-                  cell_position_array[cell_array[pop]['popID']]=np.vstack((cell_position_array[cell_array[pop]['popID']],pop_position_array))
           
                   net.populations.append(Golgi_pop)
                   
@@ -124,12 +122,12 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
                   dim_dict_max_values['x_dim']=location_parameters['xDim']
                   dim_dict_max_values['y_dim']=location_parameters['yDim']
                   dim_dict_max_values['z_dim']=location_parameters['zDim']
+                  distance_dict={}
+                  distance_dict['criterion']='no_overlap'
+                  distance_dict['cellDiameters']=cell_diameter_array
                   
-                  pop_position_array,Golgi_pop=random_no_overlap(cell_position_array,cell_array,cell_diameter_array,\
+                  cell_position_array,Golgi_pop=distance_dependent_positions(cell_position_array,cell_array,distance_dict,\
                   pop,seed,golgi_pop_object,dim_dict_max_values)
-
-                  cell_position_array[cell_array[pop]['popID']]=np.vstack((cell_position_array[cell_array[pop]['popID']],pop_position_array))
-                  
 
                   net.populations.append(Golgi_pop)
                   
@@ -138,28 +136,28 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
                if location_parameters['distributionModel']=="density_profile":
 
                   
-                  golgi_pop_object=neuroml_Golgi_pop_array[location_parameters['popID']]
-                  pop_position_array, total_no_of_cells,Golgi_pop=density_model(location_parameters,cellType,golgi_pop_object,seed,pop,cell_position_array,cell_array)
+                  
+                  cell_position_array, total_no_of_cells,Golgi_pop=density_model(location_parameters,cell_position_array,cellType,seed,pop,cell_array)
 
                   cell_array[pop]['size']=total_no_of_cells
-
-                  cell_position_array[cell_array[pop]['popID']]=np.vstack((cell_position_array[cell_array[pop]['popID']],pop_position_array))
           
                   net.populations.append(Golgi_pop)
                   
                if location_parameters['distributionModel']=="explicit_cell_numbers":
+                       
                   minimal_distance=location_parameters['minimal_distance']
                   golgi_pop_object=neuroml_Golgi_pop_array[cell_array[pop]['popID']]
+                  
                   dim_dict_max_values={}
                   dim_dict_max_values['x_dim']=location_parameters['xDim']
                   dim_dict_max_values['y_dim']=location_parameters['yDim']
                   dim_dict_max_values['z_dim']=location_parameters['zDim']
-                         
-                  pop_position_array,Golgi_pop=random_minimal_distance(cell_position_array,cell_array,\
-minimal_distance,pop,seed,golgi_pop_object,dim_dict_max_values)
-
-                  cell_position_array[cell_array[pop]['popID']]=np.vstack((cell_position_array[cell_array[pop]['popID']],pop_position_array))
                   
+                  distance_dict={}
+                  distance_dict['criterion']='minimal_distance'
+                  distance_dict['minimal_distance']=minimal_distance
+                  cell_position_array,Golgi_pop=distance_dependent_positions(cell_position_array,cell_array,\
+                  distance_dict,pop,seed,golgi_pop_object,dim_dict_max_values)
 
                   net.populations.append(Golgi_pop)
                     
@@ -172,14 +170,11 @@ minimal_distance,pop,seed,golgi_pop_object,dim_dict_max_values)
                       if cell_array[pop_in]['popID']==location_parameters['popID']:
                          cellType=cell_array[pop_in]['cellType']
 
-                  pop_position_array, total_no_of_cells,Golgi_pop=density_model(location_parameters,cellType,seed)
+                  cell_position_array,total_no_of_cells,Golgi_pop=density_model(location_parameters,cell_position_array,cellType,seed)
 
                   cell_array[pop]['size']=total_no_of_cells
-
-                  cell_position_array[cell_array[pop]['popID']]=np.vstack((cell_position_array[cell_array[pop]['popID']],pop_position_array))
           
                   net.populations.append(Golgi_pop)
-
 
 
                if location_parameters['distributionModel']=="explicit_cell_numbers":

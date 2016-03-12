@@ -15,7 +15,7 @@ from methods_v2 import *
 
 
 
-def density_model(location_parameters,cellType,seed_number,popIndex=None,cell_position_array=None,cell_array=None,cell_diameter_array=None):
+def density_model(location_parameters,cell_position_array,cellType,seed_number,popIndex=None,cell_array=None,cell_diameter_array=None):
     random.seed(seed_number)
     densityFilePath=location_parameters['densityFilePath']
     X_array,Y_array,density_values=load_density_data(densityFilePath)
@@ -85,12 +85,6 @@ def density_model(location_parameters,cellType,seed_number,popIndex=None,cell_po
           canonical_volume=base_area*dim3Boundary
 
 
-
-          #test_total_volume=dim3Boundary*((float(location_parameters['dim1CoordinateVector'][1])-float(location_parameters['dim1CoordinateVector'][0]))/1000)*((float(location_parameters['dim2CoordinateVector'][1])-float(location_parameters['dim2CoordinateVector'][0]))/1000)
-
-         # density_values=test_total_volume*density_values
-
-          #### as usuallly, will give cell positions in micro m, but with respect to density sheet:
           base_area_microns=float(location_parameters['canonicalVolumeBaseAreainMicrons'])
           dim3Boundary_microns=float(location_parameters['dim3Boundary'])
 
@@ -157,10 +151,13 @@ def density_model(location_parameters,cellType,seed_number,popIndex=None,cell_po
                         dim_dict_mappings['dim2']=dim_dict[location_parameters['planeDimensions']['dim2']]
                         dim_dict_mappings['dim3']=dim_dict[location_parameters['dim3']]
 
-                        pop_position_array_internal ,golgi_pop_object,cell_counter=random_minimal_distance(cell_position_array,cell_array,minimal_distance,popIndex,\
+                        distance_dict={}
+                        distance_dict['criterion']='minimal_distance'
+                        distance_dict['minimal_distance']=minimal_distance
+                        cell_position_array,golgi_pop_object,cell_counter=distance_dependent_positions(cell_position_array,cell_array,distance_dict,popIndex,\
                         seed_number,golgi_pop_object,dim_dict_max_values,dim_dict_offsets,no_of_cells_per_density_point,dim_dict_mappings,cell_counter)
                      
-                        pop_position_array=np.vstack((pop_position_array,pop_position_array_internal))
+                        
                               
                      if location_parameters['distanceModel']=="random_no_overlap":
                         dim_dict_max_values={}
@@ -172,13 +169,13 @@ def density_model(location_parameters,cellType,seed_number,popIndex=None,cell_po
                         dim_dict_mappings['dim1']=dim_dict[location_parameters['planeDimensions']['dim1']]
                         dim_dict_mappings['dim2']=dim_dict[location_parameters['planeDimensions']['dim2']]
                         dim_dict_mappings['dim3']=dim_dict[location_parameters['dim3']]
-                     
-                        pop_position_array_internal ,golgi_pop_object,cell_counter=random_no_overlap(cell_position_array,cell_array,cell_diameter_array,popIndex,\
+                        distance_dict={}
+                        distance_dict['criterion']='no_overlap'
+                        distance_dict['cellDiameters']=cell_diameter_array
+                        cell_position_array,golgi_pop_object,cell_counter=distance_dependent_positions(cell_position_array,cell_array,distance_dict,popIndex,\
 seed_number,golgi_pop_object,dim_dict_max_values,dim_dict_offsets,no_of_cells_per_density_point,dim_dict_mappings,cell_counter)
                      
-                        pop_position_array=np.vstack((pop_position_array,pop_position_array_internal))
-                     
-
+                        
                      if location_parameters['distanceModel']=="random":
                      
                         for cell in range(0,no_of_cells_per_density_point):
@@ -195,106 +192,36 @@ seed_number,golgi_pop_object,dim_dict_max_values,dim_dict_offsets,no_of_cells_pe
 
                             cell_position[0,dim_dict[location_parameters['dim3']]]=dim3Boundary_microns*Z
                          
-                            pop_position_array=np.vstack((pop_position_array,cell_position))
+                            cell_position_array[location_parameters['popID']]=np.vstack((cell_position_array[location_parameters['popID']],cell_position))
 
                             Golgi_cell.location=neuroml.Location(x=cell_position[0,0], y=cell_position[0,1], z=cell_position[0,2])
                             golgi_pop_object.instances.append(Golgi_cell)
-                            print pop_position_array[cell,0], pop_position_array[cell,1], pop_position_array[cell,2]
+                            print cell_position[cell,0], cell_position[cell,1], cell_position[cell,2]
                                                                                                                           
     ### override any specified value of population Size
                                                                                                                           
-    return pop_position_array, total_no_of_cells,golgi_pop_object
-
-def random_minimal_distance(cell_position_array,cell_array,minimal_distance,popIndex,seed_number,golgi_pop_object,dim_dict_max_values,\
-                      dim_dict_offsets={'x_dim_offset':0,'y_dim_offset':0,'z_dim_offset':0},popSize=None,dim_dict_mappings=None,cell_count=None):
-
-    random.seed(seed_number)
-    if popSize ==None:
-       popSize=cell_array[popIndex]['size']
-       pop_position_array=np.zeros([cell_array[popIndex]['size'],3])
-    else:
-       pop_position_array=np.zeros([popSize,3])
+    return cell_position_array, total_no_of_cells,golgi_pop_object
 
 
-    use_cell_count=False
-    if cell_count !=None:
-       use_cell_count=True
     
-    for cell in range(0,popSize):
-        if use_cell_count:
-           Golgi_cell=neuroml.Instance(id="%d"%cell_count)
-           cell_count+=1
-        else:
-	   Golgi_cell=neuroml.Instance(id="%d"%cell)
-	golgi_pop_object.instances.append(Golgi_cell)
-        if popIndex==0 and cell==0:
-           X=random.random()
-	   Y=random.random()
-	   Z=random.random()
-           Xcoordinate=dim_dict_offsets['x_dim_offset']+dim_dict_max_values['x_dim']*X
-           Ycoordinate=dim_dict_offsets['y_dim_offset']+dim_dict_max_values['y_dim']*Y
-           Zcoordinate=dim_dict_offsets['z_dim_offset']+dim_dict_max_values['z_dim']*Z
-	   if dim_dict_mappings != None:
-              pop_position_array[cell,dim_dict_mappings['dim1']]=Xcoordinate
-              pop_position_array[cell,dim_dict_mappings['dim2']]=Ycoordinate
-              pop_position_array[cell,dim_dict_mappings['dim3']]=Zcoordinate
-           else:
-             pop_position_array[cell,0]=Xcoordinate
-             pop_position_array[cell,1]=Ycoordinate
-             pop_position_array[cell,2]=Zcoordinate
-           Golgi_cell.location=neuroml.Location(x=pop_position_array[cell,0], y=pop_position_array[cell,1],z=pop_position_array[cell,2])
-           print pop_position_array[cell,0], pop_position_array[cell,1],pop_position_array[cell,2]
-        else:
-            x=0
-            while x==0:
-                overlap_counter=0
-                X=random.random()
-	        Y=random.random()
-	        Z=random.random()
-	        Xcoordinate=dim_dict_offsets['x_dim_offset']+dim_dict_max_values['x_dim']*X
-                Ycoordinate=dim_dict_offsets['y_dim_offset']+dim_dict_max_values['y_dim']*Y
-                Zcoordinate=dim_dict_offsets['z_dim_offset']+dim_dict_max_values['z_dim']*Z
-                for cell_pop_x in range(0,len(cell_array)):
-                    pop_cell_positions=cell_position_array[cell_array[cell_pop_x]['popID']]
-                    for cell_x in range(0,len(pop_cell_positions)):
-                        if pop_cell_positions[cell_x,0]+pop_cell_positions[cell_x,1]+pop_cell_positions[cell_x,2] >0:
-                           if distance([Xcoordinate,Ycoordinate,Zcoordinate],pop_cell_positions[cell_x]) < minimal_distance:
-                              overlap_counter+=1
-                                              
-                if overlap_counter==0:
-
-                   if dim_dict_mappings != None:
-                      pop_position_array[cell,dim_dict_mappings['dim1']]=Xcoordinate
-                      pop_position_array[cell,dim_dict_mappings['dim2']]=Ycoordinate
-                      pop_position_array[cell,dim_dict_mappings['dim3']]=Zcoordinate
-                   else:
-                      pop_position_array[cell,0]=Xcoordinate
-                      pop_position_array[cell,1]=Ycoordinate
-                      pop_position_array[cell,2]=Zcoordinate
-                    
-                   Golgi_cell.location=neuroml.Location(x=pop_position_array[cell,0], y=pop_position_array[cell,1], z=pop_position_array[cell,2])
-                               
-                   print pop_position_array[cell,0], pop_position_array[cell,1], pop_position_array[cell,2]
-                   x=1   
 
 
-    if use_cell_count:
-       return pop_position_array,golgi_pop_object,cell_count
-    else:
-       return pop_position_array,golgi_pop_object
-
-
-def random_no_overlap(cell_position_array,cell_array,cell_diameter_array,popIndex,seed_number,golgi_pop_object,dim_dict_max_values,\
+def distance_dependent_positions(cell_position_array,cell_array,distance_criterion_dict,popIndex,seed_number,golgi_pop_object,dim_dict_max_values,\
                       dim_dict_offsets={'x_dim_offset':0,'y_dim_offset':0,'z_dim_offset':0},popSize=None,dim_dict_mappings=None,cell_count=None):
 
     random.seed(seed_number)
-    cell_diameter=cell_diameter_array[cell_array[popIndex]['popID']]
+    
+    if distance_criterion_dict['criterion']=='no_overlap':
+       cell_diameter_array=distance_criterion_dict['cellDiameters']
+       cell_diameter=cell_diameter_array[cell_array[popIndex]['popID']]
+       
+    if distance_criterion_dict['criterion']=='minimal_distance':
+       minimal_distance=distance_criterion_dict['minimal_distance']
+       
     if popSize ==None:
        popSize=cell_array[popIndex]['size']
-       pop_position_array=np.zeros([cell_array[popIndex]['size'],3])
-    else:
-       pop_position_array=np.zeros([popSize,3])
-
+       
+    
     use_cell_count=False
     if cell_count !=None:
        use_cell_count=True
@@ -305,6 +232,7 @@ def random_no_overlap(cell_position_array,cell_array,cell_diameter_array,popInde
         else:
 	   Golgi_cell=neuroml.Instance(id="%d"%cell)
 	golgi_pop_object.instances.append(Golgi_cell)
+	cell_position=np.zeros([1,3])
 	if popIndex==0 and cell==0:
            X=random.random()
 	   Y=random.random()
@@ -313,15 +241,16 @@ def random_no_overlap(cell_position_array,cell_array,cell_diameter_array,popInde
            Ycoordinate=dim_dict_offsets['y_dim_offset']+dim_dict_max_values['y_dim']*Y
            Zcoordinate=dim_dict_offsets['z_dim_offset']+dim_dict_max_values['z_dim']*Z
 	   if dim_dict_mappings != None:
-              pop_position_array[cell,dim_dict_mappings['dim1']]=Xcoordinate
-              pop_position_array[cell,dim_dict_mappings['dim2']]=Ycoordinate
-              pop_position_array[cell,dim_dict_mappings['dim3']]=Zcoordinate
+              cell_position[0,dim_dict_mappings['dim1']]=Xcoordinate
+              cell_position[0,dim_dict_mappings['dim2']]=Ycoordinate
+              cell_position[0,dim_dict_mappings['dim3']]=Zcoordinate
            else:
-             pop_position_array[cell,0]=Xcoordinate
-             pop_position_array[cell,1]=Ycoordinate
-             pop_position_array[cell,2]=Zcoordinate
-           Golgi_cell.location=neuroml.Location(x=pop_position_array[cell,0], y=pop_position_array[cell,1],z=pop_position_array[cell,2])
-           print pop_position_array[cell,0], pop_position_array[cell,1],pop_position_array[cell,2]
+              cell_position[0,0]=Xcoordinate
+              cell_position[0,1]=Ycoordinate
+              cell_position[0,2]=Zcoordinate
+           cell_position_array[cell_array[popIndex]['popID']]=np.vstack((cell_position_array[cell_array[popIndex]['popID']],cell_position))
+           Golgi_cell.location=neuroml.Location(x=cell_position[0,0], y=cell_position[0,1],z=cell_position[0,2])
+           print cell_position[0,0], cell_position[0,1], cell_position[0,2]
            
         else:
            x=0
@@ -349,30 +278,29 @@ def random_no_overlap(cell_position_array,cell_array,cell_diameter_array,popInde
                   pop_cell_positions=cell_position_array[cell_array[cell_pop_x]['popID']]
                   for cell_x in range(0,len(pop_cell_positions)):
                       if pop_cell_positions[cell_x,0]+pop_cell_positions[cell_x,1]+pop_cell_positions[cell_x,2] >0:
-                         if distance([Xtry,Ytry,Ztry],pop_cell_positions[cell_x]) < (cell_diameter_array[cell_array[popIndex]['popID']]+cell_diameter_array[cell_array[cell_pop_x]['popID']])/2:
-                            overlap_counter+=1
+                          
+                         if distance_criterion_dict['criterion']=='no_overlap':
+                            if distance([Xtry,Ytry,Ztry],pop_cell_positions[cell_x]) < (cell_diameter_array[cell_array[popIndex]['popID']]+cell_diameter_array[cell_array[cell_pop_x]['popID']])/2:
+                               overlap_counter+=1
+                         else:
+                            if distance_criterion_dict['criterion']=='minimal_distance':
+                               if distance([Xtry,Ytry,Ztry],pop_cell_positions[cell_x]) < minimal_distance:
+                                  overlap_counter+=1
                             
               if overlap_counter==0:
-                 pop_position_array[cell,0]=Xtry
-                 pop_position_array[cell,1]=Ytry
-                 pop_position_array[cell,2]=Ztry
-                 #if dim_dict_mappings != None:
-                    #pop_position_array[cell,dim_dict_mappings['dim1']]=Xcoordinate
-                    #pop_position_array[cell,dim_dict_mappings['dim2']]=Ycoordinate
-                    #pop_position_array[cell,dim_dict_mappings['dim3']]=Zcoordinate
-                 #else:
-                    #pop_position_array[cell,0]=Xcoordinate
-                    #pop_position_array[cell,1]=Ycoordinate
-                    #pop_position_array[cell,2]=Zcoordinate
-                    
-                 Golgi_cell.location=neuroml.Location(x=pop_position_array[cell,0], y=pop_position_array[cell,1], z=pop_position_array[cell,2])
+                 cell_position[cell,0]=Xtry
+                 cell_position[cell,1]=Ytry
+                 cell_position[cell,2]=Ztry
+                 
+                 cell_position_array[cell_array[popIndex]['popID']]=np.vstack((cell_position_array[cell_array[popIndex]['popID']],cell_position))
+                 Golgi_cell.location=neuroml.Location(x=cell_position[0,0], y=cell_position[0,1], z=cell_position[0,2])
                                
-                 print pop_position_array[cell,0], pop_position_array[cell,1], pop_position_array[cell,2]
+                 print cell_position[0,0], cell_position[0,1], cell_position[0,2]
                  x=1   
 
     if use_cell_count:
-       return pop_position_array,golgi_pop_object,cell_count
+       return cell_position_array,golgi_pop_object,cell_count
     else:
-       return pop_position_array,golgi_pop_object
+       return cell_position_array,golgi_pop_object
 
                      
