@@ -76,7 +76,7 @@ def density_model(location_parameters,cell_position_array,cellType,seed_number,p
           print X_index_array
           print Y_index_array
           a="Region was found"
-          ##### assume that discrete density sheet is in mmm3. thus convert dim3 to mm:
+          ##### assume that the discrete density sheet is in mmm3. thus convert dim3 to mm:
           dim3Boundary=float(location_parameters['dim3Boundary'])/1000
         
 
@@ -286,17 +286,21 @@ def distance_dependent_positions(cell_position_array,cell_array,distance_criteri
                             if distance_criterion_dict['criterion']=='minimal_distance':
                                if distance([Xtry,Ytry,Ztry],pop_cell_positions[cell_x]) < minimal_distance:
                                   overlap_counter+=1
-                            
+
+                         
+              
               if overlap_counter==0:
-                 cell_position[cell,0]=Xtry
-                 cell_position[cell,1]=Ytry
-                 cell_position[cell,2]=Ztry
+                 cell_position[0,0]=Xtry
+                 cell_position[0,1]=Ytry
+                 cell_position[0,2]=Ztry
                  
                  cell_position_array[cell_array[popIndex]['popID']]=np.vstack((cell_position_array[cell_array[popIndex]['popID']],cell_position))
                  Golgi_cell.location=neuroml.Location(x=cell_position[0,0], y=cell_position[0,1], z=cell_position[0,2])
                                
                  print cell_position[0,0], cell_position[0,1], cell_position[0,2]
                  x=1   
+
+              
 
     if use_cell_count:
        return cell_position_array,golgi_pop_object,cell_count

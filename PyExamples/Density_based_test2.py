@@ -25,7 +25,7 @@ if __name__ == "__main__":
     net_params_test_2010_multiple['experiment1']['distributionParams']['populationList']=[]
     net_params_test_2010_multiple['experiment1']['distributionParams']['populationList'].append({'distributionModel':"density_profile",'popID':'Golgi_pop0','densityFilePath':'/home/rokas/Golgi_data/Pure NeuG density matrix of shape 69 630.txt',\
     'planeDimensions':{'dim1':'x','dim2':'y'},'dim1CoordinateVector':[0,3000],'dim2CoordinateVector':[0,110],'dim3':'z','dim3Boundary':300,\
-    'distanceModel':'random_no_overlap','canonicalVolumeBaseAreainMicrons':5.00318495*5.00318495 })
+    'distanceModel':'random','canonicalVolumeBaseAreainMicrons':5.00318495*5.00318495 })
 
     #'distanceModel':'random_minimal_distance','minimal_distance':30
     

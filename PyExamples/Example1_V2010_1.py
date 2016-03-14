@@ -23,7 +23,7 @@ if __name__ == "__main__":
 
     net_params_test_2010_multiple['experiment1']['distributionParams']={}
     net_params_test_2010_multiple['experiment1']['distributionParams']['populationList']=[]
-    net_params_test_2010_multiple['experiment1']['distributionParams']['populationList'].append({'popID':'Golgi_pop0','distributionModel':'explicit_cell_numbers','distanceModel':'random_no_overlap','xDim':700,'yDim':700,'zDim':80})
+    net_params_test_2010_multiple['experiment1']['distributionParams']['populationList'].append({'popID':'Golgi_pop0','distributionModel':'explicit_cell_numbers','distanceModel':'random_minimal_distance','minimal_distance':30,'xDim':700,'yDim':700,'zDim':80})
    
     
 
