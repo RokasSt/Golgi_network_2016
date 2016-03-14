@@ -595,22 +595,22 @@ def generate_LEMS_and_run(sim_array,pop_array):
         if simulation_parameters['plotSpecifier']:
            if simulation_parameters['simulator']=="jNeuroML":
               print("Finished building a network. Starts running a simulation with jNeuroML for %s"%lems_file_name_dir)
-	      results1 = pynml.run_lems_with_jneuroml(lems_file_name, nogui=True, load_saved_data=True, plot=True)
+	      results1 = pynml.run_lems_with_jneuroml(lems_file_name, nogui=True, load_saved_data=True, plot=True,verbose=True)
               print("Finished running simulation with jNeuroML")
            elif simulation_parameters['simulator']=="jNeuroML_NEURON":
               print("Finished building a network. Starts running a simulation with NEURON for %s"%lems_file_name_dir)
-              results1 = pynml.run_lems_with_jneuroml_neuron(lems_file_name, nogui=True, load_saved_data=True, plot=True)
+              results1 = pynml.run_lems_with_jneuroml_neuron(lems_file_name, nogui=True, load_saved_data=True, plot=True,verbose=True)
               print("Finished running simulation with jNeuroML_NEURON")
            else:
               print("Finished building a network")
         else:
            if simulation_parameters['simulator']=="jNeuroML":
               print("Finished building a network. Starts running a simulation with jNeuroML for %s"%lems_file_name_dir)
-	      results1 = pynml.run_lems_with_jneuroml(lems_file_name, nogui=True, load_saved_data=False, plot=False)
+	      results1 = pynml.run_lems_with_jneuroml(lems_file_name, nogui=True, load_saved_data=False, plot=False,verbose=True)
               print("Finished running simulation with jNeuroML")
            elif simulation_parameters['simulator']=="jNeuroML_NEURON":
               print("Finished building a network. Starts running a simulation with NEURON for %s"%lems_file_name_dir)
-              results1 = pynml.run_lems_with_jneuroml_neuron(lems_file_name,nogui=True, load_saved_data=False, plot=False)
+              results1 = pynml.run_lems_with_jneuroml_neuron(lems_file_name,nogui=True, load_saved_data=False, plot=False,verbose=True)
               print("Finished running simulation with jNeuroML_NEURON")
            else:
               print("Finished building a network")
@@ -642,7 +642,7 @@ def generate_PoissonInputNet(ref,cell_array,location_array,connectivity_informat
 	    
         dummy_syn=neuroml.ExpOneSynapse(erev="0mV",gbase="5nS", tau_decay="2.5ms",id="syn0")
         nml_doc.exp_one_synapses.append(dummy_syn)
-        dummy_cell=neuroml.IafCell(id='iaf0',leak_reversal="-60mV",thresh="-40mV",reset="-70mV" ,C="1e-5uF", leak_conductance="5.2e-7mS")
+        dummy_cell=neuroml.IafCell(id='iaf',leak_reversal="-60mV",thresh="-40mV",reset="-70mV" ,C="1e-5uF", leak_conductance="5.2e-7mS")
         nml_doc.iaf_cells.append(dummy_cell)
         PopID_array=[]
         target_no_array=[]
@@ -708,7 +708,7 @@ def generate_PoissonInputNet(ref,cell_array,location_array,connectivity_informat
                             ### other options can be added
                          LibrarySize=int(round(popSize*library_params['libraryScale']*no_of_inputs))
                          Input_Golgi_pop=neuroml.Population(id="%s_%s_syn%d"%(label,popID,synapse_index), size=LibrarySize,
-		                  component='iaf0')
+		                  component='iaf')
                          PopID_array.append("%s_%s_syn%d"%(label,popID,synapse_index))
                          net.populations.append(Input_Golgi_pop)
                          if synapse_array['synapseMode']=="persistent":
@@ -801,7 +801,7 @@ def generate_input_library(sim_array,pop_array):
        
         # Create a LEMSSimulation to manage creation of LEMS file
 
-        ls = LEMSSimulation(ref, simulation_parameters['duration'], simulation_parameters['timeStep'])
+        ls = LEMSSimulation(ref, simulation_parameters['duration'], library_params['timeStep'])
         
         # Point to network as target of simulation
     
@@ -828,6 +828,7 @@ def generate_input_library(sim_array,pop_array):
 	# save LEMS file
         if simulation_parameters['parentDirRequired']:
            if simulation_parameters['networkDir']=="example":
+              #os.chdir(simulation_parameters['parentDir']+"/NeuroML2/NML2_LEMS_Net_Examples/"+simulation_parameters['experimentID']+"/"+"sim%d"%simulation_parameters['simID'])
               lems_file_name_dir=simulation_parameters['parentDir']+"/NeuroML2/NML2_LEMS_Net_Examples/"+simulation_parameters['experimentID']+"/"+"sim%d"%simulation_parameters['simID']+"/"+"LEMS_%s.xml"%ref
               lems_file_name = ls.save_to_file(lems_file_name_dir)
               
@@ -842,11 +843,11 @@ def generate_input_library(sim_array,pop_array):
         
         if library_params['simulator']=="jNeuroML":
             print("Finished building a network which generates input trains. Starts running a simulation with jNeuroML for %s"%lems_file_name_dir)
-	    results1 = pynml.run_lems_with_jneuroml(lems_file_name, nogui=True, load_saved_data=False, plot=False)
+	    results1 = pynml.run_lems_with_jneuroml(lems_file_name, nogui=True, load_saved_data=False, plot=False,verbose=True)
             print("Finished running simulations with jNeuroML")
         elif library_params['simulator']=="jNeuroML_NEURON":
              print("Finished building a network which generates input trains. Starts running a simulation with NEURON for %s"%lems_file_name_dir)
-             results1 = pynml.run_lems_with_jneuroml_neuron(lems_file_name, nogui=True, load_saved_data=False, plot=False)
+             results1 = pynml.run_lems_with_jneuroml_neuron("LEMS_%s.xml"%ref, nogui=True, load_saved_data=False, plot=False,verbose=True)
              print("Finished running simulations with NEURON.")
         else:
               print("Finished building a network which generates input trains.")
