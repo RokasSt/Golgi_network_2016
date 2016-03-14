@@ -12,9 +12,10 @@
     
    <expOneSynapse id="MFSpikeSyn" gbase="1.5nS" tauDecay="0.7ms"  erev="0mV"/> 
    
-  <!-- <poissonFiringSynapse id="input0" averageRate="10 Hz" synapse="MFSpikeSyn" spikeTarget="./MFSpikeSyn"/>-->
+  <poissonFiringSynapse id="input0" averageRate="10 Hz" synapse="MFSpikeSyn" spikeTarget="./MFSpikeSyn"/>
 
 
+  <transientPoissonFiringSynapse id="input0" delay="600.000000ms" duration="10.000000ms" synapse="MFSpikeSyn" averageRate="200.000000 per_s" spikeTarget="./MFSpikeSyn"/>
     <iafCell id="iaf1" leakReversal="-60mV" thresh="-40mV" reset="-65mV" C="1e-5uF" leakConductance="5e-7mS"/>
     <iafCell id="iaf2" leakReversal="-60mV" thresh="-40mV" reset="-70mV" C="1e-5uF" leakConductance="5.2e-7mS"/>
 
@@ -55,12 +56,12 @@
             <connection id="0" preCellId="../Pop0[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="../Pop1/0/iaf1"/>
          </projection>
           
-        <!-- <inputList id="stimInput" component="input0" population="Pop2">
+        <inputList id="stimInput" component="input0" population="Pop2">
            
             <input id="0" target="../Pop2[0]" destination="synapses"/>
             <input id="1" target="../Pop2[1]" destination="synapses"/>
             <input id="1" target="../Pop2[2]" destination="synapses"/>
-        </inputList>-->
+        </inputList>
 
 
 
@@ -98,7 +99,7 @@
 
        
        
-      <!--  <EventOutputFile id="Input_spikes0" fileName="results/Input_spikesPoisson0" format="ID_TIME">
+      <EventOutputFile id="Input_spikes0" fileName="results/Input_spikesPoisson0" format="ID_TIME">
             <EventSelection id="0" select="Pop2[0]/input0" eventPort="spike"/>
         </EventOutputFile>
 
@@ -109,7 +110,7 @@
          
         <EventOutputFile id="Input_spikes2" fileName="results/Input_spikesPoisson2" format="ID_TIME">
             <EventSelection id="0" select="Pop2[2]/input0" eventPort="spike"/>
-        </EventOutputFile>-->
+        </EventOutputFile>
 
          
        

@@ -610,7 +610,7 @@ def generate_LEMS_and_run(sim_array,pop_array):
               print("Finished running simulation with jNeuroML")
            elif simulation_parameters['simulator']=="jNeuroML_NEURON":
               print("Finished building a network. Starts running a simulation with NEURON for %s"%lems_file_name_dir)
-              results1 = pynml.run_lems_with_jneuroml_neuron(lems_file_name, nogui=True, load_saved_data=False, plot=False)
+              results1 = pynml.run_lems_with_jneuroml_neuron(lems_file_name,nogui=True, load_saved_data=False, plot=False)
               print("Finished running simulation with jNeuroML_NEURON")
            else:
               print("Finished building a network")
@@ -731,7 +731,7 @@ def generate_PoissonInputNet(ref,cell_array,location_array,connectivity_informat
                          input_list =neuroml.InputList(id="List_%s_%s_%s_syn%d"%(label,synapse_name,popID,synapse_index),component=poisson_syn.id,populations=Input_Golgi_pop.id)
                          count=0
                          target_no_array.append(LibrarySize)
-                         for target_point in range(0,no_of_inputs*popSize):                     
+                         for target_point in range(0,LibrarySize):                     
                              syn_input = neuroml.Input(id="%d"%(count),target="../%s_%s_syn%d[%i]"%(label,popID,synapse_index,target_point),destination="synapses") 
                              input_list.input.append(syn_input)
                              count=count+1

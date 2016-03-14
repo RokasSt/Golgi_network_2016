@@ -84,7 +84,7 @@ if __name__ == "__main__":
     
     #######
     
-    library_params={'libraryScale':1,'simulator':'jNeuroML'}
+    library_params={'libraryScale':1,'simulator':'jNeuroML_NEURON'}
     sim_params={'simulator':"no simulation",'duration':2000,'timeStep':0.0003,'numTrials':1,'globalSeed':False,'trialSeed':True,'plotSpecifier':False,\
     'saveSomataPositions':True,'parentDirRequired':True,'parentDir':parentdir,'currentDirRequired':True,'currentDir':currentdir,'networkDir':'example',\
         'saveInputReceivingCellID':True,'importPoissonTrainLibraries':True,'PoissonTrainLibraryID':'newlyGenerated','libraryParams':library_params}

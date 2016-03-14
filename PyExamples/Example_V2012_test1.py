@@ -79,15 +79,15 @@ if __name__ == "__main__":
     net_params_test_2012_multiple['experiment1']['inputParams'].append({'popName':'Golgi_pop1','inputGroups':inputGroups_pop1_exp1})
 
     library_params={'libraryScale':1,'simulator':'jNeuroML'}
-    sim_params={'simulator':"no simulation",'duration':450,'timeStep':0.005,'numTrials':1,'globalSeed':False,'trialSeed':True,'plotSpecifier':False,\
+    sim_params={'simulator':"jNeuroML_NEURON",'duration':450,'timeStep':0.005,'numTrials':1,'globalSeed':False,'trialSeed':True,'plotSpecifier':False,\
     'saveSomataPositions':True,'parentDirRequired':True,'parentDir':parentdir,'currentDirRequired':True,'currentDir':currentdir,'networkDir':'example',\
         'saveInputReceivingCellID':True,'importPoissonTrainLibraries':True,'PoissonTrainLibraryID':'newlyGenerated','libraryParams':library_params}
     # alternatively, 'PoissonTrainLibraryID':'experimentID' but then requires the same number of trials.
     ##### run all simulations
     # introduce group label
-    library_params={'libraryScale':1,'simulator':'jNeuroML'}
     
-    #generatePoissonTrainLibraries(net_params_test_2012_multiple,sim_params,library_params)
+    
+    generatePoissonTrainLibraries(net_params_test_2012_multiple,sim_params,library_params)
     
     run_simulations(net_params_test_2012_multiple,sim_params)
 

@@ -1,0 +1,343 @@
+<Lems>
+    
+    <!-- 
+
+        This LEMS file has been automatically generated using PyNeuroML v0.1.7 (libNeuroML v0.2.11)
+
+     -->
+    
+    <!-- Specify which component to run -->
+    <Target component="InputNet_V2012_test1_import_trial0"/>
+
+    <!-- Include core NeuroML2 ComponentType definitions -->
+    <Include file="Cells.xml"/>
+    <Include file="Networks.xml"/>
+    <Include file="Simulation.xml"/>
+    
+    <Include file="InputNet_V2012_test1_import_trial0.net.nml"/>
+   
+    <Simulation id="InputNet_V2012_test1_import_trial0" length="450ms" step="0.005ms" target="InputNet_V2012_test1_import_trial0_network">
+        
+        <EventOutputFile id="eventFile00" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_0.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[0]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile01" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_1.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[1]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile02" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_2.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[2]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile03" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_3.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[3]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile04" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_4.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[4]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile05" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_5.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[5]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile06" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_6.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[6]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile07" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_7.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[7]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile08" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_8.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[8]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile09" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_9.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[9]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile010" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_10.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[10]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile011" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_11.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[11]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile012" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_12.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[12]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile013" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_13.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[13]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile014" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_14.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[14]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile015" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_15.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[15]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile016" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_16.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[16]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile017" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_17.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[17]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile018" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_18.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[18]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile019" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_19.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[19]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile020" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_20.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[20]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile021" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_21.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[21]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile022" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_22.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[22]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile023" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_23.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[23]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile024" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_24.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[24]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile025" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_25.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[25]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile026" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_26.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[26]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile027" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_27.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[27]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile028" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_28.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[28]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile029" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_29.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[29]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile030" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_30.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[30]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile031" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_31.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[31]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile032" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_32.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[32]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile033" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_33.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[33]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile034" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_34.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[34]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile035" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_35.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[35]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile036" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_36.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[36]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile037" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_37.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[37]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile038" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_38.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[38]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile039" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_39.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[39]/XFpop0_PFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile10" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_0.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[0]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile11" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_1.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[1]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile12" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_2.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[2]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile13" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_3.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[3]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile14" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_4.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[4]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile15" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_5.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[5]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile16" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_6.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[6]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile17" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_7.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[7]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile18" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_8.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[8]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile19" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_9.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[9]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile110" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_10.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[10]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile111" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_11.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[11]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile112" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_12.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[12]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile113" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_13.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[13]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile114" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_14.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[14]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile115" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_15.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[15]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile116" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_16.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[16]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile117" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_17.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[17]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile118" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_18.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[18]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile119" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_19.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[19]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile120" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_20.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[20]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile121" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_21.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[21]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile122" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_22.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[22]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile123" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_23.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[23]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile124" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_24.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[24]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile125" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_25.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[25]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile126" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_26.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[26]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile127" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_27.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[27]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile128" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_28.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[28]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile129" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_29.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[29]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile130" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_30.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[30]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile131" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_31.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[31]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile132" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_32.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[32]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile133" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_33.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[33]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile134" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_34.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[34]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile135" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_35.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[35]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile136" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_36.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[36]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile137" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_37.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[37]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile138" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_38.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[38]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="eventFile139" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/V2012_test1_import/sim0/XFpop1_Golgi_pop1_syn0_PoissonTrain_39.dat" format="ID_TIME">
+            <EventSelection id="0" select="XFpop1_Golgi_pop1_syn0[39]/XFpop1_PFSpikeSyn_Golgi_pop1_syn0" eventPort="spike"/> 
+        </EventOutputFile>
+        
+    </Simulation>
+
+</Lems>

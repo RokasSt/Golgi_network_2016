@@ -1,0 +1,95 @@
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2beta4.xsd" id="InputNet_V2012_test1_import_trial0">
+    <expOneSynapse id="syn0" erev="0mV" gbase="5nS" tauDecay="2.5ms"/>
+    <iafCell id="iaf0" reset="-70mV" C="1e-5uF" thresh="-40mV" leakConductance="5.2e-7mS" leakReversal="-60mV"/>
+    <poissonFiringSynapse id="XFpop0_PFSpikeSyn_Golgi_pop0_syn0" synapse="syn0" averageRate="100.000000 per_s" spikeTarget="./syn0"/>
+    <poissonFiringSynapse id="XFpop1_PFSpikeSyn_Golgi_pop1_syn0" synapse="syn0" averageRate="100.000000 per_s" spikeTarget="./syn0"/>
+    <network id="InputNet_V2012_test1_import_trial0_network">
+        <notes>A simple network that generates Poisson input trains for Golgi_V2012_test1_import_trial0</notes>
+        <population id="XFpop0_Golgi_pop0_syn0" component="iaf0" size="40"/>
+        <population id="XFpop1_Golgi_pop1_syn0" component="iaf0" size="40"/>
+        <inputList id="List_XFpop0_PFSpikeSyn_Golgi_pop0_syn0" component="XFpop0_PFSpikeSyn_Golgi_pop0_syn0" population="XFpop0_Golgi_pop0_syn0">
+            <input destination="synapses" id="0" target="../XFpop0_Golgi_pop0_syn0[0]"/>
+            <input destination="synapses" id="1" target="../XFpop0_Golgi_pop0_syn0[1]"/>
+            <input destination="synapses" id="2" target="../XFpop0_Golgi_pop0_syn0[2]"/>
+            <input destination="synapses" id="3" target="../XFpop0_Golgi_pop0_syn0[3]"/>
+            <input destination="synapses" id="4" target="../XFpop0_Golgi_pop0_syn0[4]"/>
+            <input destination="synapses" id="5" target="../XFpop0_Golgi_pop0_syn0[5]"/>
+            <input destination="synapses" id="6" target="../XFpop0_Golgi_pop0_syn0[6]"/>
+            <input destination="synapses" id="7" target="../XFpop0_Golgi_pop0_syn0[7]"/>
+            <input destination="synapses" id="8" target="../XFpop0_Golgi_pop0_syn0[8]"/>
+            <input destination="synapses" id="9" target="../XFpop0_Golgi_pop0_syn0[9]"/>
+            <input destination="synapses" id="10" target="../XFpop0_Golgi_pop0_syn0[10]"/>
+            <input destination="synapses" id="11" target="../XFpop0_Golgi_pop0_syn0[11]"/>
+            <input destination="synapses" id="12" target="../XFpop0_Golgi_pop0_syn0[12]"/>
+            <input destination="synapses" id="13" target="../XFpop0_Golgi_pop0_syn0[13]"/>
+            <input destination="synapses" id="14" target="../XFpop0_Golgi_pop0_syn0[14]"/>
+            <input destination="synapses" id="15" target="../XFpop0_Golgi_pop0_syn0[15]"/>
+            <input destination="synapses" id="16" target="../XFpop0_Golgi_pop0_syn0[16]"/>
+            <input destination="synapses" id="17" target="../XFpop0_Golgi_pop0_syn0[17]"/>
+            <input destination="synapses" id="18" target="../XFpop0_Golgi_pop0_syn0[18]"/>
+            <input destination="synapses" id="19" target="../XFpop0_Golgi_pop0_syn0[19]"/>
+            <input destination="synapses" id="20" target="../XFpop0_Golgi_pop0_syn0[20]"/>
+            <input destination="synapses" id="21" target="../XFpop0_Golgi_pop0_syn0[21]"/>
+            <input destination="synapses" id="22" target="../XFpop0_Golgi_pop0_syn0[22]"/>
+            <input destination="synapses" id="23" target="../XFpop0_Golgi_pop0_syn0[23]"/>
+            <input destination="synapses" id="24" target="../XFpop0_Golgi_pop0_syn0[24]"/>
+            <input destination="synapses" id="25" target="../XFpop0_Golgi_pop0_syn0[25]"/>
+            <input destination="synapses" id="26" target="../XFpop0_Golgi_pop0_syn0[26]"/>
+            <input destination="synapses" id="27" target="../XFpop0_Golgi_pop0_syn0[27]"/>
+            <input destination="synapses" id="28" target="../XFpop0_Golgi_pop0_syn0[28]"/>
+            <input destination="synapses" id="29" target="../XFpop0_Golgi_pop0_syn0[29]"/>
+            <input destination="synapses" id="30" target="../XFpop0_Golgi_pop0_syn0[30]"/>
+            <input destination="synapses" id="31" target="../XFpop0_Golgi_pop0_syn0[31]"/>
+            <input destination="synapses" id="32" target="../XFpop0_Golgi_pop0_syn0[32]"/>
+            <input destination="synapses" id="33" target="../XFpop0_Golgi_pop0_syn0[33]"/>
+            <input destination="synapses" id="34" target="../XFpop0_Golgi_pop0_syn0[34]"/>
+            <input destination="synapses" id="35" target="../XFpop0_Golgi_pop0_syn0[35]"/>
+            <input destination="synapses" id="36" target="../XFpop0_Golgi_pop0_syn0[36]"/>
+            <input destination="synapses" id="37" target="../XFpop0_Golgi_pop0_syn0[37]"/>
+            <input destination="synapses" id="38" target="../XFpop0_Golgi_pop0_syn0[38]"/>
+            <input destination="synapses" id="39" target="../XFpop0_Golgi_pop0_syn0[39]"/>
+        </inputList>
+        <inputList id="List_XFpop1_PFSpikeSyn_Golgi_pop1_syn0" component="XFpop1_PFSpikeSyn_Golgi_pop1_syn0" population="XFpop1_Golgi_pop1_syn0">
+            <input destination="synapses" id="0" target="../XFpop1_Golgi_pop1_syn0[0]"/>
+            <input destination="synapses" id="1" target="../XFpop1_Golgi_pop1_syn0[1]"/>
+            <input destination="synapses" id="2" target="../XFpop1_Golgi_pop1_syn0[2]"/>
+            <input destination="synapses" id="3" target="../XFpop1_Golgi_pop1_syn0[3]"/>
+            <input destination="synapses" id="4" target="../XFpop1_Golgi_pop1_syn0[4]"/>
+            <input destination="synapses" id="5" target="../XFpop1_Golgi_pop1_syn0[5]"/>
+            <input destination="synapses" id="6" target="../XFpop1_Golgi_pop1_syn0[6]"/>
+            <input destination="synapses" id="7" target="../XFpop1_Golgi_pop1_syn0[7]"/>
+            <input destination="synapses" id="8" target="../XFpop1_Golgi_pop1_syn0[8]"/>
+            <input destination="synapses" id="9" target="../XFpop1_Golgi_pop1_syn0[9]"/>
+            <input destination="synapses" id="10" target="../XFpop1_Golgi_pop1_syn0[10]"/>
+            <input destination="synapses" id="11" target="../XFpop1_Golgi_pop1_syn0[11]"/>
+            <input destination="synapses" id="12" target="../XFpop1_Golgi_pop1_syn0[12]"/>
+            <input destination="synapses" id="13" target="../XFpop1_Golgi_pop1_syn0[13]"/>
+            <input destination="synapses" id="14" target="../XFpop1_Golgi_pop1_syn0[14]"/>
+            <input destination="synapses" id="15" target="../XFpop1_Golgi_pop1_syn0[15]"/>
+            <input destination="synapses" id="16" target="../XFpop1_Golgi_pop1_syn0[16]"/>
+            <input destination="synapses" id="17" target="../XFpop1_Golgi_pop1_syn0[17]"/>
+            <input destination="synapses" id="18" target="../XFpop1_Golgi_pop1_syn0[18]"/>
+            <input destination="synapses" id="19" target="../XFpop1_Golgi_pop1_syn0[19]"/>
+            <input destination="synapses" id="20" target="../XFpop1_Golgi_pop1_syn0[20]"/>
+            <input destination="synapses" id="21" target="../XFpop1_Golgi_pop1_syn0[21]"/>
+            <input destination="synapses" id="22" target="../XFpop1_Golgi_pop1_syn0[22]"/>
+            <input destination="synapses" id="23" target="../XFpop1_Golgi_pop1_syn0[23]"/>
+            <input destination="synapses" id="24" target="../XFpop1_Golgi_pop1_syn0[24]"/>
+            <input destination="synapses" id="25" target="../XFpop1_Golgi_pop1_syn0[25]"/>
+            <input destination="synapses" id="26" target="../XFpop1_Golgi_pop1_syn0[26]"/>
+            <input destination="synapses" id="27" target="../XFpop1_Golgi_pop1_syn0[27]"/>
+            <input destination="synapses" id="28" target="../XFpop1_Golgi_pop1_syn0[28]"/>
+            <input destination="synapses" id="29" target="../XFpop1_Golgi_pop1_syn0[29]"/>
+            <input destination="synapses" id="30" target="../XFpop1_Golgi_pop1_syn0[30]"/>
+            <input destination="synapses" id="31" target="../XFpop1_Golgi_pop1_syn0[31]"/>
+            <input destination="synapses" id="32" target="../XFpop1_Golgi_pop1_syn0[32]"/>
+            <input destination="synapses" id="33" target="../XFpop1_Golgi_pop1_syn0[33]"/>
+            <input destination="synapses" id="34" target="../XFpop1_Golgi_pop1_syn0[34]"/>
+            <input destination="synapses" id="35" target="../XFpop1_Golgi_pop1_syn0[35]"/>
+            <input destination="synapses" id="36" target="../XFpop1_Golgi_pop1_syn0[36]"/>
+            <input destination="synapses" id="37" target="../XFpop1_Golgi_pop1_syn0[37]"/>
+            <input destination="synapses" id="38" target="../XFpop1_Golgi_pop1_syn0[38]"/>
+            <input destination="synapses" id="39" target="../XFpop1_Golgi_pop1_syn0[39]"/>
+        </inputList>
+    </network>
+</neuroml>
