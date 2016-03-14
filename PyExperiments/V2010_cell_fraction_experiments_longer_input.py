@@ -104,7 +104,7 @@ if __name__ == "__main__":
 
     
     
-    net_params_V2010_multiple['experiment1']['inputParams']=[]
+    net_params_V2010_multiple['experiment2']['inputParams']=[]
     inputGroups_pop0_exp2=[]
     inputGroups_pop0_exp2.append({'inputModel':"variable_basal_firing_rate",'inputLabel':'vrpop0','amplitudeDistribution':"gaussian",'averageAmp':0,\
     'stDevAmp':50,'ampUnits':"pA",'offsetDistribution':"constant",'valueOffset':0,'offsetUnits':"ms"})
@@ -331,7 +331,7 @@ if __name__ == "__main__":
 
     
     
-    net_params_V2010_multiple['experiment5']['inputParams']=[]
+    net_params_V2010_multiple['experiment6']['inputParams']=[]
     inputGroups_pop0_exp6=[]
     inputGroups_pop0_exp6.append({'inputModel':"variable_basal_firing_rate",'inputLabel':'vrpop0','amplitudeDistribution':"gaussian",'averageAmp':0,\
     'stDevAmp':50,'ampUnits':"pA",'offsetDistribution':"constant",'valueOffset':0,'offsetUnits':"ms"})
