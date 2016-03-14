@@ -16,7 +16,7 @@
     
     <Include file="InputNet_V2010_test_savings_trial0.net.nml"/>
    
-    <Simulation id="InputNet_V2010_test_savings_trial0" length="2000ms" step="0.01ms" target="InputNet_V2010_test_savings_trial0_network">
+    <Simulation id="InputNet_V2010_test_savings_trial0" length="450ms" step="0.005ms" target="InputNet_V2010_test_savings_trial0_network">
         
         <EventOutputFile id="eventFile00" fileName="/home/rokas/Golgi_network_2016/PyExperiments/simulations/V2010_test_savings/sim0/XFpop0_Golgi_pop0_syn0_PoissonTrain_0.dat" format="ID_TIME">
             <EventSelection id="0" select="XFpop0_Golgi_pop0_syn0[0]/XFpop0_MFSpikeSyn_Golgi_pop0_syn0" eventPort="spike"/> 
