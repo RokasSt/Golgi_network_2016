@@ -319,7 +319,8 @@ if __name__ == "__main__":
     library_params={'libraryScale':1,'simulator':'jNeuroML_NEURON'}
     sim_params={'simulator':"no_simulation",'duration':3000,'timeStep':0.0003,'numTrials':15,'globalSeed':False,'trialSeed':True,'plotSpecifier':False,\
     'saveSomataPositions':True,'parentDirRequired':True,'parentDir':parentdir,'currentDirRequired':True,'currentDir':currentdir,'networkDir':'example',\
-        'saveInputReceivingCellID':True,'importPoissonTrainLibraries':True,'PoissonTrainLibraryID':'newlyGenerated','libraryParams':library_params}
+        'saveInputReceivingCellID':True,'importPoissonTrainLibraries':True,'PoissonTrainLibraryID':'V2010_sp_scale_05_dens','libraryParams':library_params,\
+       'selectOneTrialFromLibrary':'0'}
     
     
     generatePoissonTrainLibraries(net_params_V2010_multiple,sim_params,library_params)

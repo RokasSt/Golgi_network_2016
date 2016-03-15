@@ -317,7 +317,10 @@ postPop,postPop_listIndex,postPopSize,post_pop_cell_component,postCell_NML2type,
                       if simulation_parameters['importPoissonTrainLibraries']:
                          print("will test generation and import of spike trains")
                          sim_params_dict={}
-                         sim_params_dict['simID']=simulation_parameters['simID']
+                         if 'selectOneTrialFromLibrary' in simulation_parameters:
+                           sim_params_dict['simID']=simulation_parameters['selectOneTrialFromLibrary']
+                         else:
+                           sim_params_dict['simID']=simulation_parameters['simID']
                          sim_params_dict['experimentID']=simulation_parameters['experimentID']
                          sim_params_dict['libraryID']=simulation_parameters['PoissonTrainLibraryID']
                          sim_params_dict['saveCellID']=simulation_parameters['saveInputReceivingCellID']
@@ -326,10 +329,10 @@ postPop,postPop_listIndex,postPopSize,post_pop_cell_component,postCell_NML2type,
                             sim_params_dict['currentDir']=simulation_parameters['currentDir']
                          if simulation_parameters['parentDirRequired']:
                             sim_params_dict['parentDir']=simulation_parameters['parentDir']
-
+                            
                          input_pops,spike_array_list,proj_arrays,synapse_name_list,cells_with_inputs=XF_input_models_uniform_import(popID,popSize,cellType,cellNML2Type,\
 input_group_array[input_group],seed,sim_params_dict)
-                         a=synapse_name_list
+                         
                          synapse_name_array.extend(synapse_name_list)
 
                          for input_pop in range(0,len(input_pops)):
@@ -373,7 +376,11 @@ input_group_array[input_group],seed,sim_params_dict)
                       if simulation_parameters['importPoissonTrainLibraries']:
                          print("will test generation and import of spike trains")
                          sim_params_dict={}
-                         sim_params_dict['simID']=simulation_parameters['simID']
+                         if 'selectOneTrialFromLibrary' in simulation_parameters:
+                            sim_params_dict['simID']=simulation_parameters['selectOneTrialFromLibrary']
+                         else:
+                            sim_params_dict['simID']=simulation_parameters['simID']
+
                          sim_params_dict['experimentID']=simulation_parameters['experimentID']
                          sim_params_dict['libraryID']=simulation_parameters['PoissonTrainLibraryID']
                          sim_params_dict['saveCellID']=simulation_parameters['saveInputReceivingCellID']

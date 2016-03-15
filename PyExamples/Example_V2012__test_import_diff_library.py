@@ -62,7 +62,7 @@ if __name__ == "__main__":
     
 
     library_params={'libraryScale':1,'simulator':'jNeuroML'}
-    sim_params={'simulator':"no simulation",'duration':450,'timeStep':0.0005,'numTrials':1,'globalSeed':False,'trialSeed':True,'plotSpecifier':False,\
+    sim_params={'simulator':"jNeuroML_NEURON",'duration':450,'timeStep':0.0005,'numTrials':1,'globalSeed':False,'trialSeed':True,'plotSpecifier':False,\
     'saveSomataPositions':True,'parentDirRequired':True,'parentDir':parentdir,'currentDirRequired':True,'currentDir':currentdir,'networkDir':'example',\
         'saveInputReceivingCellID':True,'importPoissonTrainLibraries':True,'PoissonTrainLibraryID':"V2012_test1_import",'libraryParams':library_params}
     # alternatively, 'PoissonTrainLibraryID':'experimentID' but then requires the same number of trials.

@@ -5,6 +5,7 @@ sys.path.insert(0,parentdir)
 
 from PythonUtils.Simulate_Golgi_Network_v2 import *
 
+
 ################ similar to Golgi_V2012_test2.py but contains two populations. Golgi_V2012_test2.py is used for testing and debugging
 
 if __name__ == "__main__":
@@ -80,8 +81,9 @@ if __name__ == "__main__":
     
     #######
     
-    library_params={'libraryScale':2,'simulator':'jNeuroML_NEURON','timeStep':0.005}
-    sim_params={'simulator':"jNeuroML_NEURON",'duration':3000,'timeStep':0.0003,'numTrials':1,'globalSeed':False,'trialSeed':True,'plotSpecifier':False,\
+    library_params={'libraryScale':2,'simulator':'jNeuroML_NEURON','timeStep':0.01}
+
+    sim_params={'simulator':"no simulation",'duration':3000,'timeStep':0.0003,'numTrials':1,'globalSeed':False,'trialSeed':True,'plotSpecifier':False,\
     'saveSomataPositions':True,'parentDirRequired':True,'parentDir':parentdir,'currentDirRequired':True,'currentDir':currentdir,'networkDir':'experiment',\
         'saveInputReceivingCellID':True,'importPoissonTrainLibraries':True,'PoissonTrainLibraryID':'newlyGenerated','libraryParams':library_params}
     

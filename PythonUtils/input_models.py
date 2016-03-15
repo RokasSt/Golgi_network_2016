@@ -53,7 +53,7 @@ def XF_input_models_uniform_import(popID,popSize,cellType,cellNML2Type,input_gro
        if input_group_parameters['targetingModel']=="segment groups and segments":
           segment_target_array =extract_morphology_information([cellTypeFile],{cellTypeFile:cellNML2Type},["segment groups",input_group_parameters['segmentGroupList']])
                                                                                                                                
-                                     
+       cell_counter=0                            
        for target_cell in target_cells:
            if saveCellID:
               input_receiving_cells.append(target_cell)
@@ -71,46 +71,49 @@ def XF_input_models_uniform_import(popID,popSize,cellType,cellNML2Type,input_gro
               target_points=get_unique_target_points(segment_target_array,"segments and subsegments",\
               [input_group_parameters['segmentList'],input_group_parameters['segmentProbabilities'],\
               input_group_parameters['fractionAlongANDsubsegProbabilities']],no_of_inputs)
-              for target_point in range(0,len(target_points)):
-                  # later might implement random selection of unique subsets of spike trains from the library; currently reads the spike trains sequentially; however,
-                  # Poisson spike trains are different in any case.
-                  spike_train_is_not_empty=True
+           target_point_counter=0
+           for target_point in range(0,len(target_points)):
+               # later might implement random selection of unique subsets of spike trains from the library; currently reads the spike trains sequentially; however,
+               # Poisson spike trains are different in any case.
                   
-                  if libID=='newlyGenerated':
-                     file_string=currDir+"/simulations/%s/sim%d/%s_%s_syn0_PoissonTrain_%d.dat"%(expID,simID,label,popID,target_point)
-                  else:
-                     file_string=currDir+"/simulations/%s/sim%d/%s_PoissonTrain_%d.dat"%(libID,simID,input_group_parameters['inputIdLibrary'],target_point)
-                  if os.path.getsize(file_string) > 0:
-                     spike_times=np.loadtxt(file_string)
-                     spike_times=np.transpose(spike_times)
-                     spike_times=spike_times[1]
-                     spike_array=neuroml.SpikeArray(id="%s_%s_cell%d_%d"%(label,popID,target_cell,target_point))
+               train_libID=cell_counter+target_point_counter
+               if libID=='newlyGenerated':
+                  file_string=currDir+"/simulations/%s/sim%d/%s_%s_syn0_PoissonTrain_%d.dat"%(expID,simID,label,popID,train_libID)
+               else:
+                  file_string=currDir+"/simulations/%s/sim%d/%s_PoissonTrain_%d.dat"%(libID,simID,input_group_parameters['inputIdLibrary'],train_libID)
+               if os.path.getsize(file_string) > 0:
+                  target_point_counter+=1
+                  spike_times=np.loadtxt(file_string)
+                  spike_times=np.transpose(spike_times)
+                  spike_times=spike_times[1]
+                  spike_array=neuroml.SpikeArray(id="%s_%s_cell%d_%d"%(label,popID,target_cell,target_point))
                                                   
-                     for spike in range(0,len(spike_times)):
-                         spike_object=neuroml.Spike(id="%d"%spike,time="%fs"%spike_times[spike])
-	                 spike_array.spikes.append(spike_object)
-                     spike_arrays.append(spike_array)
+                  for spike in range(0,len(spike_times)):
+                      spike_object=neuroml.Spike(id="%d"%spike,time="%fs"%spike_times[spike])
+	              spike_array.spikes.append(spike_object)
+                  spike_arrays.append(spike_array)
                                                   
-                     Input_pop=neuroml.Population(id="InputPop_%s_%s_cell%d_%d"%(label,popID,target_cell,target_point), size=1,component=spike_array.id)
-                     input_pop_array.append(Input_pop)
-                     for synapse_index in range(0,len(synapse_list)):
-                         synapse_array=synapse_list[synapse_index]
-                         synapse_name=synapse_array['synapseType']
-                         synapse_name_array.append(synapse_name)
-                         proj = neuroml.Projection(id="InputProj_%s_%s_cell%d_syn%d_%d"%(label,popID,target_cell,synapse_index,target_point),presynaptic_population=Input_pop.id,\
-                         postsynaptic_population=popID,synapse=synapse_name)
+                  Input_pop=neuroml.Population(id="InputPop_%s_%s_cell%d_%d"%(label,popID,target_cell,target_point), size=1,component=spike_array.id)
+                  input_pop_array.append(Input_pop)
+                  for synapse_index in range(0,len(synapse_list)):
+                      synapse_array=synapse_list[synapse_index]
+                      synapse_name=synapse_array['synapseType']
+                      synapse_name_array.append(synapse_name)
+                      proj = neuroml.Projection(id="InputProj_%s_%s_cell%d_syn%d_%d"%(label,popID,target_cell,synapse_index,target_point),presynaptic_population=Input_pop.id,\
+                      postsynaptic_population=popID,synapse=synapse_name)
                                                   
-                         conn = neuroml.Connection(id="0", \
-                              pre_cell_id="../%s[0]"%(Input_pop.id), \
-                              pre_segment_id=0, \
-                              pre_fraction_along=0.5,\
-                              post_cell_id="../%s/%i/%s"%(popID,target_cell,cellType), \
-                              post_segment_id="%d"%target_points[target_point,0],
-                              post_fraction_along="%f"%target_points[target_point,1])
+                      conn = neuroml.Connection(id="0", \
+                            pre_cell_id="../%s[0]"%(Input_pop.id), \
+                            pre_segment_id=0, \
+                            pre_fraction_along=0.5,\
+                            post_cell_id="../%s/%i/%s"%(popID,target_cell,cellType), \
+                            post_segment_id="%d"%target_points[target_point,0],
+                            post_fraction_along="%f"%target_points[target_point,1])
                    
-                         proj.connections.append(conn)
-                         proj_arrays.append(proj)
-                                                 
+                      proj.connections.append(conn)
+                      proj_arrays.append(proj)
+
+           cell_counter+=1                                      
     else:
        for synapse_index in range(0,len(synapse_list)):
            synapse_array=synapse_list[synapse_index]
@@ -122,7 +125,7 @@ def XF_input_models_uniform_import(popID,popSize,cellType,cellNML2Type,input_gro
            if synapse_array['targetingModel']=="segment groups and segments":
               segment_target_array =extract_morphology_information([cellTypeFile],{cellTypeFile:cellNML2Type},["segment groups",synapse_array['segmentGroupList']])
                                                                                                                                
-           count=0                               
+           cell_counter=0                               
            for target_cell in target_cells:
                if saveCellID:
                   input_receiving_cells.append(target_cell)                              
@@ -140,15 +143,16 @@ def XF_input_models_uniform_import(popID,popSize,cellType,cellNML2Type,input_gro
                   target_points=get_unique_target_points(segment_target_array,"segments and subsegments",\
                   [synapse_array['segmentList'],synapse_array['segmentProbabilities'],\
                   synapse_array['fractionAlongANDsubsegProbabilities']],no_of_inputs)
-                  
+               target_point_counter=0   
                for target_point in range(0,len(target_points)):
-                   
+                   train_libID=cell_counter+target_point_counter
                    if libID=='newlyGenerated':
-                      file_string=currDir+"/simulations/%s/sim%d/%s_%s_syn%d_PoissonTrain_%d.dat"%(expID,simID,label,popID,synapse_index,target_point)
+                      file_string=currDir+"/simulations/%s/sim%d/%s_%s_syn%d_PoissonTrain_%d.dat"%(expID,simID,label,popID,synapse_index,train_libID)
                    else:
-                      file_string=currDir+"/simulations/%s/sim%d/%s_PoissonTrain_%d.dat"%(libID,simID,synapse_array['inputIdLibrary'],target_point)
+                      file_string=currDir+"/simulations/%s/sim%d/%s_PoissonTrain_%d.dat"%(libID,simID,synapse_array['inputIdLibrary'],train_libID)
                       
-                   if os.path.getsize(file_string) > 0:  
+                   if os.path.getsize(file_string) > 0: 
+                      target_point_counter+=1 
                       spike_times=np.loadtxt(file_string)
                       spike_times=np.transpose(spike_times)
                       spike_times=spike_times[1]
@@ -175,6 +179,8 @@ def XF_input_models_uniform_import(popID,popSize,cellType,cellNML2Type,input_gro
                    
                       proj.connections.append(conn)
                       proj_arrays.append(proj)
+
+               cell_counter+=1 
     
     return input_pop_array, spike_arrays,proj_arrays,synapse_name_array,input_receiving_cells
 
@@ -233,7 +239,7 @@ def XF_input_models_3D_region_specific_import(popID,cellType,cellNML2Type,input_
        if input_group_parameters['targetingModel']=="segment groups and segments":
           segment_target_array =extract_morphology_information([cellTypeFile],{cellTypeFile:cellNML2Type},["segment groups",input_group_parameters['segmentGroupList']])
                                                                                                                                
-       count=0                               
+       cell_counter=0                               
        for target_cell in target_cells:
            if saveCellID:
               input_receiving_cells.append(target_cell)
@@ -251,42 +257,47 @@ def XF_input_models_3D_region_specific_import(popID,cellType,cellNML2Type,input_
               target_points=get_unique_target_points(segment_target_array,"segments and subsegments",\
               [input_group_parameters['segmentList'],input_group_parameters['segmentProbabilities'],\
               input_group_parameters['fractionAlongANDsubsegProbabilities']],no_of_inputs)
-              for target_point in range(0,len(target_points)):
-                  if libID=='newlyGenerated':
-                     file_string=currDir+"/simulations/%s/sim%d/%s_%s_syn0_PoissonTrain_%d.dat"%(expID,simID,label,popID,target_point) 
-                  else:
-                     file_string=currDir+"/simulations/%s/sim%d/%s_PoissonTrain_%d.dat"%(libID,simID,input_group_parameters['inputIdLibrary'],target_point)
+           target_point_counter=0  
+           for target_point in range(0,len(target_points)):
+               train_libID=cell_counter+target_point_counter
+               if libID=='newlyGenerated':
+                  file_string=currDir+"/simulations/%s/sim%d/%s_%s_syn0_PoissonTrain_%d.dat"%(expID,simID,label,popID,train_libID) 
+               else:
+                  file_string=currDir+"/simulations/%s/sim%d/%s_PoissonTrain_%d.dat"%(libID,simID,input_group_parameters['inputIdLibrary'],train_libID)
                      
-                  if os.path.getsize(file_string) > 0: 
-                     spike_times=np.loadtxt(file_string)
-                     spike_times=np.transpose(spike_times)
-                     spike_times=spike_times[1]
-                     spike_array=neuroml.SpikeArray(id="%s_%s_cell%d_%d"%(label,popID,target_cell,target_point))
+               if os.path.getsize(file_string) > 0: 
+                  target_point_counter+=1 
+                  spike_times=np.loadtxt(file_string)
+                  spike_times=np.transpose(spike_times)
+                  spike_times=spike_times[1]
+                  spike_array=neuroml.SpikeArray(id="%s_%s_cell%d_%d"%(label,popID,target_cell,target_point))
                                                   
-                     for spike in range(0,len(spike_times)):
-                         spike_object=neuroml.Spike(id="%d"%spike,time="%fs"%spike_times[spike])
-	                 spike_array.spikes.append(spike_object)
-                     spike_arrays.append(spike_array)
+                  for spike in range(0,len(spike_times)):
+                      spike_object=neuroml.Spike(id="%d"%spike,time="%fs"%spike_times[spike])
+	              spike_array.spikes.append(spike_object)
+                  spike_arrays.append(spike_array)
                                                  
-                     Input_pop=neuroml.Population(id="InputPop_%s_%s_cell%d_%d"%(label,popID,target_cell,target_point), size=1,component=spike_array.id)
-                     input_pop_array.append(Input_pop)
-                     for synapse_index in range(0,len(synapse_list)):
-                         synapse_array=synapse_list[synapse_index]
-                         synapse_name=synapse_array['synapseType']
-                         synapse_name_array.append(synapse_name)
-                         proj = neuroml.Projection(id="InputProj_%s_%s_cell%d_syn%d_%d"%(label,popID,target_cell,synapse_index,target_point),presynaptic_population=Input_pop.id,\
-                          postsynaptic_population=popID,synapse=synapse_name)
+                  Input_pop=neuroml.Population(id="InputPop_%s_%s_cell%d_%d"%(label,popID,target_cell,target_point), size=1,component=spike_array.id)
+                  input_pop_array.append(Input_pop)
+                  for synapse_index in range(0,len(synapse_list)):
+                      synapse_array=synapse_list[synapse_index]
+                      synapse_name=synapse_array['synapseType']
+                      synapse_name_array.append(synapse_name)
+                      proj = neuroml.Projection(id="InputProj_%s_%s_cell%d_syn%d_%d"%(label,popID,target_cell,synapse_index,target_point),presynaptic_population=Input_pop.id,\
+                      postsynaptic_population=popID,synapse=synapse_name)
                                                   
-                         conn = neuroml.Connection(id="0", \
-                            pre_cell_id="../%s[0]"%(Input_pop.id), \
-                            pre_segment_id=0, \
-                            pre_fraction_along=0.5,\
-                            post_cell_id="../%s/%i/%s"%(popID,target_cell,cellType), \
-                            post_segment_id="%d"%target_points[target_point,0],
-                            post_fraction_along="%f"%target_points[target_point,1])
+                      conn = neuroml.Connection(id="0", \
+                      pre_cell_id="../%s[0]"%(Input_pop.id), \
+                      pre_segment_id=0, \
+                      pre_fraction_along=0.5,\
+                      post_cell_id="../%s/%i/%s"%(popID,target_cell,cellType), \
+                      post_segment_id="%d"%target_points[target_point,0],
+                      post_fraction_along="%f"%target_points[target_point,1])
                    
-                         proj.connections.append(conn)
-                         proj_arrays.append(proj)
+                      proj.connections.append(conn)
+                      proj_arrays.append(proj)
+
+           cell_counter+=1 
                                                  
     else:
        for synapse_index in range(0,len(synapse_list)):
@@ -299,7 +310,7 @@ def XF_input_models_3D_region_specific_import(popID,cellType,cellNML2Type,input_
            if synapse_array['targetingModel']=="segment groups and segments":
               segment_target_array =extract_morphology_information([cellTypeFile],{cellTypeFile:cellNML2Type},["segment groups",synapse_array['segmentGroupList']])
                                                                                                                                
-           count=0                               
+           cell_counter=0                               
            for target_cell in target_cells:
                if saveCellID:
                   input_receiving_cells.append(target_cell)
@@ -317,16 +328,16 @@ def XF_input_models_3D_region_specific_import(popID,cellType,cellNML2Type,input_
                   target_points=get_unique_target_points(segment_target_array,"segments and subsegments",\
                   [synapse_array['segmentList'],synapse_array['segmentProbabilities'],\
                   synapse_array['fractionAlongANDsubsegProbabilities']],no_of_inputs)
-                  
+               target_point_counter=0   
                for target_point in range(0,len(target_points)):
-                   
+                   train_libID=cell_counter+target_point_counter
                    if libID=='newlyGenerated':
-                      file_string=currDir+"/simulations/%s/sim%d/%s_%s_syn%d_PoissonTrain_%d.dat"%(expID,simID,label,popID,synapse_index,target_point)   
+                      file_string=currDir+"/simulations/%s/sim%d/%s_%s_syn%d_PoissonTrain_%d.dat"%(expID,simID,label,popID,synapse_index,train_libID)   
                    else:
-                      file_string=currDir+"/simulations/%s/sim%d/%s_PoissonTrain_%d.dat"%(libID,simID,synapse_array['inputIdLibrary'],target_point)
+                      file_string=currDir+"/simulations/%s/sim%d/%s_PoissonTrain_%d.dat"%(libID,simID,synapse_array['inputIdLibrary'],train_libID)
                       
                    if os.path.getsize(file_string) > 0:
-                       
+                      target_point_counter+=1
                       spike_times=np.loadtxt(file_string)
                       spike_times=np.transpose(spike_times)
                       spike_times=spike_times[1]
@@ -353,6 +364,8 @@ def XF_input_models_3D_region_specific_import(popID,cellType,cellNML2Type,input_
                    
                       proj.connections.append(conn)
                       proj_arrays.append(proj)
+
+               cell_counter+=1 
 
     return input_pop_array, spike_arrays,proj_arrays,synapse_name_array,input_receiving_cells
 
