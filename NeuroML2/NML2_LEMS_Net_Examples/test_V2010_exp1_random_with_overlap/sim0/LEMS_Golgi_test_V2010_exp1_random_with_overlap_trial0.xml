@@ -1,0 +1,770 @@
+<Lems>
+    
+    <!-- 
+
+        This LEMS file has been automatically generated using PyNeuroML v0.1.7 (libNeuroML v0.2.11)
+
+     -->
+    
+    <!-- Specify which component to run -->
+    <Target component="Golgi_test_V2010_exp1_random_with_overlap_trial0"/>
+
+    <!-- Include core NeuroML2 ComponentType definitions -->
+    <Include file="Cells.xml"/>
+    <Include file="Networks.xml"/>
+    <Include file="Simulation.xml"/>
+    
+    <Include file="Golgi_test_V2010_exp1_random_with_overlap_trial0.net.nml"/>
+    <Include file="../../../Golgi_5comp_3channels_1CaPool.cell.nml"/>
+    <Include file="Golgi_NaT.channel.nml"/>
+    <Include file="Golgi_KV.channel.nml"/>
+    <Include file="LeakCond.channel.nml"/>
+   
+    <Simulation id="Golgi_test_V2010_exp1_random_with_overlap_trial0" length="450ms" step="0.005ms" target="Golgi_test_V2010_exp1_random_with_overlap_trial0_network">
+        
+        <Display id="display_voltagesGolgi_pop0" title="Voltages Golgi_pop0" timeScale="1ms" xmin="-45.0" xmax="495.0" ymin="-75" ymax="50">
+            <Line id="../Golgi_pop0/70: Vm" quantity="Golgi_pop0/70/Golgi_5comp_3channels_1CaPool/v" scale="1mV" color="#bfe44d" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/135: Vm" quantity="Golgi_pop0/135/Golgi_5comp_3channels_1CaPool/v" scale="1mV" color="#090bfb" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/26: Vm" quantity="Golgi_pop0/26/Golgi_5comp_3channels_1CaPool/v" scale="1mV" color="#e1d001" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/82: Vm" quantity="Golgi_pop0/82/Golgi_5comp_3channels_1CaPool/v" scale="1mV" color="#79c2da" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/123: Vm" quantity="Golgi_pop0/123/Golgi_5comp_3channels_1CaPool/v" scale="1mV" color="#b60113" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/107: Vm" quantity="Golgi_pop0/107/Golgi_5comp_3channels_1CaPool/v" scale="1mV" color="#3a0fb9" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/96: Vm" quantity="Golgi_pop0/96/Golgi_5comp_3channels_1CaPool/v" scale="1mV" color="#f606e1" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/25: Vm" quantity="Golgi_pop0/25/Golgi_5comp_3channels_1CaPool/v" scale="1mV" color="#d03d06" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/87: Vm" quantity="Golgi_pop0/87/Golgi_5comp_3channels_1CaPool/v" scale="1mV" color="#30e8c4" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/85: Vm" quantity="Golgi_pop0/85/Golgi_5comp_3channels_1CaPool/v" scale="1mV" color="#e9e4eb" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/88: Vm" quantity="Golgi_pop0/88/Golgi_5comp_3channels_1CaPool/v" scale="1mV" color="#1aa2a2" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/133: Vm" quantity="Golgi_pop0/133/Golgi_5comp_3channels_1CaPool/v" scale="1mV" color="#d93dbc" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/39: Vm" quantity="Golgi_pop0/39/Golgi_5comp_3channels_1CaPool/v" scale="1mV" color="#8cade1" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/104: Vm" quantity="Golgi_pop0/104/Golgi_5comp_3channels_1CaPool/v" scale="1mV" color="#d0388a" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/145: Vm" quantity="Golgi_pop0/145/Golgi_5comp_3channels_1CaPool/v" scale="1mV" color="#f991b8" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/67: Vm" quantity="Golgi_pop0/67/Golgi_5comp_3channels_1CaPool/v" scale="1mV" color="#c14ba3" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/2: Vm" quantity="Golgi_pop0/2/Golgi_5comp_3channels_1CaPool/v" scale="1mV" color="#ae77be" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/174: Vm" quantity="Golgi_pop0/174/Golgi_5comp_3channels_1CaPool/v" scale="1mV" color="#139845" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/156: Vm" quantity="Golgi_pop0/156/Golgi_5comp_3channels_1CaPool/v" scale="1mV" color="#eed9a2" timeScale="1ms"/>
+            <Line id="../Golgi_pop0/51: Vm" quantity="Golgi_pop0/51/Golgi_5comp_3channels_1CaPool/v" scale="1mV" color="#60de9e" timeScale="1ms"/>
+        </Display>
+        
+        <OutputFile id="Volts0_file0_0" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell0.dat">
+            <OutputColumn id="v0" quantity="Golgi_pop0/0/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_1" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell1.dat">
+            <OutputColumn id="v1" quantity="Golgi_pop0/1/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_2" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell2.dat">
+            <OutputColumn id="v2" quantity="Golgi_pop0/2/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_3" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell3.dat">
+            <OutputColumn id="v3" quantity="Golgi_pop0/3/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_4" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell4.dat">
+            <OutputColumn id="v4" quantity="Golgi_pop0/4/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_5" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell5.dat">
+            <OutputColumn id="v5" quantity="Golgi_pop0/5/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_6" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell6.dat">
+            <OutputColumn id="v6" quantity="Golgi_pop0/6/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_7" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell7.dat">
+            <OutputColumn id="v7" quantity="Golgi_pop0/7/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_8" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell8.dat">
+            <OutputColumn id="v8" quantity="Golgi_pop0/8/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_9" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell9.dat">
+            <OutputColumn id="v9" quantity="Golgi_pop0/9/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_10" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell10.dat">
+            <OutputColumn id="v10" quantity="Golgi_pop0/10/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_11" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell11.dat">
+            <OutputColumn id="v11" quantity="Golgi_pop0/11/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_12" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell12.dat">
+            <OutputColumn id="v12" quantity="Golgi_pop0/12/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_13" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell13.dat">
+            <OutputColumn id="v13" quantity="Golgi_pop0/13/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_14" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell14.dat">
+            <OutputColumn id="v14" quantity="Golgi_pop0/14/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_15" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell15.dat">
+            <OutputColumn id="v15" quantity="Golgi_pop0/15/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_16" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell16.dat">
+            <OutputColumn id="v16" quantity="Golgi_pop0/16/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_17" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell17.dat">
+            <OutputColumn id="v17" quantity="Golgi_pop0/17/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_18" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell18.dat">
+            <OutputColumn id="v18" quantity="Golgi_pop0/18/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_19" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell19.dat">
+            <OutputColumn id="v19" quantity="Golgi_pop0/19/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_20" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell20.dat">
+            <OutputColumn id="v20" quantity="Golgi_pop0/20/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_21" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell21.dat">
+            <OutputColumn id="v21" quantity="Golgi_pop0/21/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_22" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell22.dat">
+            <OutputColumn id="v22" quantity="Golgi_pop0/22/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_23" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell23.dat">
+            <OutputColumn id="v23" quantity="Golgi_pop0/23/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_24" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell24.dat">
+            <OutputColumn id="v24" quantity="Golgi_pop0/24/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_25" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell25.dat">
+            <OutputColumn id="v25" quantity="Golgi_pop0/25/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_26" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell26.dat">
+            <OutputColumn id="v26" quantity="Golgi_pop0/26/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_27" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell27.dat">
+            <OutputColumn id="v27" quantity="Golgi_pop0/27/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_28" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell28.dat">
+            <OutputColumn id="v28" quantity="Golgi_pop0/28/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_29" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell29.dat">
+            <OutputColumn id="v29" quantity="Golgi_pop0/29/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_30" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell30.dat">
+            <OutputColumn id="v30" quantity="Golgi_pop0/30/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_31" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell31.dat">
+            <OutputColumn id="v31" quantity="Golgi_pop0/31/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_32" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell32.dat">
+            <OutputColumn id="v32" quantity="Golgi_pop0/32/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_33" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell33.dat">
+            <OutputColumn id="v33" quantity="Golgi_pop0/33/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_34" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell34.dat">
+            <OutputColumn id="v34" quantity="Golgi_pop0/34/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_35" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell35.dat">
+            <OutputColumn id="v35" quantity="Golgi_pop0/35/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_36" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell36.dat">
+            <OutputColumn id="v36" quantity="Golgi_pop0/36/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_37" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell37.dat">
+            <OutputColumn id="v37" quantity="Golgi_pop0/37/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_38" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell38.dat">
+            <OutputColumn id="v38" quantity="Golgi_pop0/38/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_39" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell39.dat">
+            <OutputColumn id="v39" quantity="Golgi_pop0/39/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_40" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell40.dat">
+            <OutputColumn id="v40" quantity="Golgi_pop0/40/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_41" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell41.dat">
+            <OutputColumn id="v41" quantity="Golgi_pop0/41/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_42" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell42.dat">
+            <OutputColumn id="v42" quantity="Golgi_pop0/42/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_43" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell43.dat">
+            <OutputColumn id="v43" quantity="Golgi_pop0/43/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_44" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell44.dat">
+            <OutputColumn id="v44" quantity="Golgi_pop0/44/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_45" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell45.dat">
+            <OutputColumn id="v45" quantity="Golgi_pop0/45/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_46" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell46.dat">
+            <OutputColumn id="v46" quantity="Golgi_pop0/46/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_47" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell47.dat">
+            <OutputColumn id="v47" quantity="Golgi_pop0/47/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_48" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell48.dat">
+            <OutputColumn id="v48" quantity="Golgi_pop0/48/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_49" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell49.dat">
+            <OutputColumn id="v49" quantity="Golgi_pop0/49/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_50" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell50.dat">
+            <OutputColumn id="v50" quantity="Golgi_pop0/50/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_51" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell51.dat">
+            <OutputColumn id="v51" quantity="Golgi_pop0/51/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_52" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell52.dat">
+            <OutputColumn id="v52" quantity="Golgi_pop0/52/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_53" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell53.dat">
+            <OutputColumn id="v53" quantity="Golgi_pop0/53/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_54" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell54.dat">
+            <OutputColumn id="v54" quantity="Golgi_pop0/54/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_55" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell55.dat">
+            <OutputColumn id="v55" quantity="Golgi_pop0/55/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_56" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell56.dat">
+            <OutputColumn id="v56" quantity="Golgi_pop0/56/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_57" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell57.dat">
+            <OutputColumn id="v57" quantity="Golgi_pop0/57/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_58" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell58.dat">
+            <OutputColumn id="v58" quantity="Golgi_pop0/58/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_59" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell59.dat">
+            <OutputColumn id="v59" quantity="Golgi_pop0/59/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_60" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell60.dat">
+            <OutputColumn id="v60" quantity="Golgi_pop0/60/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_61" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell61.dat">
+            <OutputColumn id="v61" quantity="Golgi_pop0/61/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_62" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell62.dat">
+            <OutputColumn id="v62" quantity="Golgi_pop0/62/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_63" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell63.dat">
+            <OutputColumn id="v63" quantity="Golgi_pop0/63/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_64" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell64.dat">
+            <OutputColumn id="v64" quantity="Golgi_pop0/64/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_65" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell65.dat">
+            <OutputColumn id="v65" quantity="Golgi_pop0/65/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_66" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell66.dat">
+            <OutputColumn id="v66" quantity="Golgi_pop0/66/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_67" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell67.dat">
+            <OutputColumn id="v67" quantity="Golgi_pop0/67/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_68" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell68.dat">
+            <OutputColumn id="v68" quantity="Golgi_pop0/68/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_69" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell69.dat">
+            <OutputColumn id="v69" quantity="Golgi_pop0/69/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_70" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell70.dat">
+            <OutputColumn id="v70" quantity="Golgi_pop0/70/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_71" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell71.dat">
+            <OutputColumn id="v71" quantity="Golgi_pop0/71/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_72" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell72.dat">
+            <OutputColumn id="v72" quantity="Golgi_pop0/72/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_73" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell73.dat">
+            <OutputColumn id="v73" quantity="Golgi_pop0/73/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_74" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell74.dat">
+            <OutputColumn id="v74" quantity="Golgi_pop0/74/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_75" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell75.dat">
+            <OutputColumn id="v75" quantity="Golgi_pop0/75/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_76" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell76.dat">
+            <OutputColumn id="v76" quantity="Golgi_pop0/76/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_77" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell77.dat">
+            <OutputColumn id="v77" quantity="Golgi_pop0/77/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_78" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell78.dat">
+            <OutputColumn id="v78" quantity="Golgi_pop0/78/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_79" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell79.dat">
+            <OutputColumn id="v79" quantity="Golgi_pop0/79/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_80" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell80.dat">
+            <OutputColumn id="v80" quantity="Golgi_pop0/80/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_81" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell81.dat">
+            <OutputColumn id="v81" quantity="Golgi_pop0/81/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_82" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell82.dat">
+            <OutputColumn id="v82" quantity="Golgi_pop0/82/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_83" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell83.dat">
+            <OutputColumn id="v83" quantity="Golgi_pop0/83/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_84" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell84.dat">
+            <OutputColumn id="v84" quantity="Golgi_pop0/84/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_85" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell85.dat">
+            <OutputColumn id="v85" quantity="Golgi_pop0/85/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_86" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell86.dat">
+            <OutputColumn id="v86" quantity="Golgi_pop0/86/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_87" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell87.dat">
+            <OutputColumn id="v87" quantity="Golgi_pop0/87/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_88" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell88.dat">
+            <OutputColumn id="v88" quantity="Golgi_pop0/88/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_89" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell89.dat">
+            <OutputColumn id="v89" quantity="Golgi_pop0/89/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_90" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell90.dat">
+            <OutputColumn id="v90" quantity="Golgi_pop0/90/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_91" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell91.dat">
+            <OutputColumn id="v91" quantity="Golgi_pop0/91/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_92" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell92.dat">
+            <OutputColumn id="v92" quantity="Golgi_pop0/92/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_93" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell93.dat">
+            <OutputColumn id="v93" quantity="Golgi_pop0/93/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_94" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell94.dat">
+            <OutputColumn id="v94" quantity="Golgi_pop0/94/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_95" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell95.dat">
+            <OutputColumn id="v95" quantity="Golgi_pop0/95/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_96" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell96.dat">
+            <OutputColumn id="v96" quantity="Golgi_pop0/96/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_97" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell97.dat">
+            <OutputColumn id="v97" quantity="Golgi_pop0/97/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_98" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell98.dat">
+            <OutputColumn id="v98" quantity="Golgi_pop0/98/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_99" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell99.dat">
+            <OutputColumn id="v99" quantity="Golgi_pop0/99/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_100" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell100.dat">
+            <OutputColumn id="v100" quantity="Golgi_pop0/100/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_101" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell101.dat">
+            <OutputColumn id="v101" quantity="Golgi_pop0/101/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_102" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell102.dat">
+            <OutputColumn id="v102" quantity="Golgi_pop0/102/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_103" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell103.dat">
+            <OutputColumn id="v103" quantity="Golgi_pop0/103/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_104" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell104.dat">
+            <OutputColumn id="v104" quantity="Golgi_pop0/104/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_105" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell105.dat">
+            <OutputColumn id="v105" quantity="Golgi_pop0/105/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_106" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell106.dat">
+            <OutputColumn id="v106" quantity="Golgi_pop0/106/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_107" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell107.dat">
+            <OutputColumn id="v107" quantity="Golgi_pop0/107/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_108" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell108.dat">
+            <OutputColumn id="v108" quantity="Golgi_pop0/108/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_109" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell109.dat">
+            <OutputColumn id="v109" quantity="Golgi_pop0/109/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_110" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell110.dat">
+            <OutputColumn id="v110" quantity="Golgi_pop0/110/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_111" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell111.dat">
+            <OutputColumn id="v111" quantity="Golgi_pop0/111/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_112" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell112.dat">
+            <OutputColumn id="v112" quantity="Golgi_pop0/112/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_113" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell113.dat">
+            <OutputColumn id="v113" quantity="Golgi_pop0/113/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_114" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell114.dat">
+            <OutputColumn id="v114" quantity="Golgi_pop0/114/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_115" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell115.dat">
+            <OutputColumn id="v115" quantity="Golgi_pop0/115/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_116" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell116.dat">
+            <OutputColumn id="v116" quantity="Golgi_pop0/116/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_117" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell117.dat">
+            <OutputColumn id="v117" quantity="Golgi_pop0/117/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_118" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell118.dat">
+            <OutputColumn id="v118" quantity="Golgi_pop0/118/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_119" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell119.dat">
+            <OutputColumn id="v119" quantity="Golgi_pop0/119/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_120" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell120.dat">
+            <OutputColumn id="v120" quantity="Golgi_pop0/120/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_121" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell121.dat">
+            <OutputColumn id="v121" quantity="Golgi_pop0/121/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_122" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell122.dat">
+            <OutputColumn id="v122" quantity="Golgi_pop0/122/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_123" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell123.dat">
+            <OutputColumn id="v123" quantity="Golgi_pop0/123/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_124" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell124.dat">
+            <OutputColumn id="v124" quantity="Golgi_pop0/124/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_125" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell125.dat">
+            <OutputColumn id="v125" quantity="Golgi_pop0/125/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_126" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell126.dat">
+            <OutputColumn id="v126" quantity="Golgi_pop0/126/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_127" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell127.dat">
+            <OutputColumn id="v127" quantity="Golgi_pop0/127/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_128" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell128.dat">
+            <OutputColumn id="v128" quantity="Golgi_pop0/128/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_129" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell129.dat">
+            <OutputColumn id="v129" quantity="Golgi_pop0/129/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_130" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell130.dat">
+            <OutputColumn id="v130" quantity="Golgi_pop0/130/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_131" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell131.dat">
+            <OutputColumn id="v131" quantity="Golgi_pop0/131/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_132" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell132.dat">
+            <OutputColumn id="v132" quantity="Golgi_pop0/132/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_133" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell133.dat">
+            <OutputColumn id="v133" quantity="Golgi_pop0/133/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_134" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell134.dat">
+            <OutputColumn id="v134" quantity="Golgi_pop0/134/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_135" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell135.dat">
+            <OutputColumn id="v135" quantity="Golgi_pop0/135/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_136" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell136.dat">
+            <OutputColumn id="v136" quantity="Golgi_pop0/136/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_137" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell137.dat">
+            <OutputColumn id="v137" quantity="Golgi_pop0/137/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_138" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell138.dat">
+            <OutputColumn id="v138" quantity="Golgi_pop0/138/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_139" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell139.dat">
+            <OutputColumn id="v139" quantity="Golgi_pop0/139/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_140" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell140.dat">
+            <OutputColumn id="v140" quantity="Golgi_pop0/140/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_141" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell141.dat">
+            <OutputColumn id="v141" quantity="Golgi_pop0/141/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_142" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell142.dat">
+            <OutputColumn id="v142" quantity="Golgi_pop0/142/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_143" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell143.dat">
+            <OutputColumn id="v143" quantity="Golgi_pop0/143/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_144" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell144.dat">
+            <OutputColumn id="v144" quantity="Golgi_pop0/144/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_145" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell145.dat">
+            <OutputColumn id="v145" quantity="Golgi_pop0/145/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_146" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell146.dat">
+            <OutputColumn id="v146" quantity="Golgi_pop0/146/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_147" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell147.dat">
+            <OutputColumn id="v147" quantity="Golgi_pop0/147/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_148" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell148.dat">
+            <OutputColumn id="v148" quantity="Golgi_pop0/148/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_149" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell149.dat">
+            <OutputColumn id="v149" quantity="Golgi_pop0/149/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_150" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell150.dat">
+            <OutputColumn id="v150" quantity="Golgi_pop0/150/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_151" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell151.dat">
+            <OutputColumn id="v151" quantity="Golgi_pop0/151/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_152" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell152.dat">
+            <OutputColumn id="v152" quantity="Golgi_pop0/152/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_153" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell153.dat">
+            <OutputColumn id="v153" quantity="Golgi_pop0/153/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_154" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell154.dat">
+            <OutputColumn id="v154" quantity="Golgi_pop0/154/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_155" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell155.dat">
+            <OutputColumn id="v155" quantity="Golgi_pop0/155/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_156" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell156.dat">
+            <OutputColumn id="v156" quantity="Golgi_pop0/156/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_157" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell157.dat">
+            <OutputColumn id="v157" quantity="Golgi_pop0/157/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_158" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell158.dat">
+            <OutputColumn id="v158" quantity="Golgi_pop0/158/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_159" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell159.dat">
+            <OutputColumn id="v159" quantity="Golgi_pop0/159/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_160" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell160.dat">
+            <OutputColumn id="v160" quantity="Golgi_pop0/160/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_161" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell161.dat">
+            <OutputColumn id="v161" quantity="Golgi_pop0/161/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_162" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell162.dat">
+            <OutputColumn id="v162" quantity="Golgi_pop0/162/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_163" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell163.dat">
+            <OutputColumn id="v163" quantity="Golgi_pop0/163/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_164" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell164.dat">
+            <OutputColumn id="v164" quantity="Golgi_pop0/164/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_165" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell165.dat">
+            <OutputColumn id="v165" quantity="Golgi_pop0/165/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_166" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell166.dat">
+            <OutputColumn id="v166" quantity="Golgi_pop0/166/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_167" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell167.dat">
+            <OutputColumn id="v167" quantity="Golgi_pop0/167/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_168" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell168.dat">
+            <OutputColumn id="v168" quantity="Golgi_pop0/168/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_169" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell169.dat">
+            <OutputColumn id="v169" quantity="Golgi_pop0/169/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_170" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell170.dat">
+            <OutputColumn id="v170" quantity="Golgi_pop0/170/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_171" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell171.dat">
+            <OutputColumn id="v171" quantity="Golgi_pop0/171/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_172" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell172.dat">
+            <OutputColumn id="v172" quantity="Golgi_pop0/172/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_173" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell173.dat">
+            <OutputColumn id="v173" quantity="Golgi_pop0/173/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_174" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell174.dat">
+            <OutputColumn id="v174" quantity="Golgi_pop0/174/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_175" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell175.dat">
+            <OutputColumn id="v175" quantity="Golgi_pop0/175/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_176" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell176.dat">
+            <OutputColumn id="v176" quantity="Golgi_pop0/176/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_177" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell177.dat">
+            <OutputColumn id="v177" quantity="Golgi_pop0/177/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_178" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell178.dat">
+            <OutputColumn id="v178" quantity="Golgi_pop0/178/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+        <OutputFile id="Volts0_file0_179" fileName="/home/rokas/Golgi_network_2016/PyExamples/simulations/test_V2010_exp1_random_with_overlap/sim0/0_cell179.dat">
+            <OutputColumn id="v179" quantity="Golgi_pop0/179/Golgi_5comp_3channels_1CaPool/v"/> 
+        </OutputFile>
+        
+    </Simulation>
+
+</Lems>
