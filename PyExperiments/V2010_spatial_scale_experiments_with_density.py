@@ -52,21 +52,21 @@ if __name__ == "__main__":
     inputGroups_pop0_exp1.append({'inputModel':"variable_basal_firing_rate",'inputLabel':'vrpop0','amplitudeDistribution':"gaussian",'averageAmp':0,\
     'stDevAmp':50,'ampUnits':"pA",'offsetDistribution':"constant",'valueOffset':0,'offsetUnits':"ms"})
     synapseList0_pop0_exp1=[]
-    synapseList0_pop0_exp1.append({'synapseType':"MFSpikeSyn",'synapseMode':"transient",'averageRate':200,'delay':600,'duration':10,'units':'ms',\
+    synapseList0_pop0_exp1.append({'synapseType':"MFSpikeSyn",'inputIdLibrary':"XFpop0_Golgi_pop0_syn0", 'synapseMode':"transient",'averageRate':200,'delay':600,'duration':10,'units':'ms',\
                        'numberModel':"constant number of inputs per cell",'noInputs':8,'targetingModel':"segment groups and segments",\
                          'segmentGroupList':["basal_dendrite_group"],'segmentGroupProbabilities':{"basal_dendrite_group":1}})
 
-    synapseList0_pop0_exp1.append({'synapseType':"PFSpikeSyn",'synapseMode':"transient",'averageRate':350,'delay':610,'duration':15,'units':'ms',\
+    synapseList0_pop0_exp1.append({'synapseType':"PFSpikeSyn",'inputIdLibrary':"XFpop0_Golgi_pop0_syn1",            'synapseMode':"transient",'averageRate':350,'delay':610,'duration':15,'units':'ms',\
                        'numberModel':"constant number of inputs per cell",'noInputs':50,'targetingModel':"segment groups and segments",\
                          'segmentGroupList':["apical_dendrite_group"],'segmentGroupProbabilities':{"apical_dendrite_group":1}})
 
     synapseList1_pop0_exp1=[]
-    synapseList1_pop0_exp1.append({'synapseType':"MFSpikeSyn",'synapseMode':"persistent",'averageRate':2,\
+    synapseList1_pop0_exp1.append({'synapseType':"MFSpikeSyn",'inputIdLibrary':"XFpop0_background_Golgi_pop0_syn0",'synapseMode':"persistent",'averageRate':2,\
                        'numberModel':"constant number of inputs per cell",'noInputs':20,'targetingModel':"segment groups and segments",\
                          'segmentGroupList':["basal_dendrite_group"],'segmentGroupProbabilities':{"basal_dendrite_group":1}})
     
 
-    synapseList1_pop0_exp1.append({'synapseType':"PFSpikeSyn",'synapseMode':"persistent",'averageRate':0.5,\
+    synapseList1_pop0_exp1.append({'synapseType':"PFSpikeSyn",'inputIdLibrary':"XFpop0_background_Golgi_pop0_syn1",'synapseMode':"persistent",'averageRate':0.5,\
                        'numberModel':"constant number of inputs per cell",'noInputs':100,'targetingModel':"segment groups and segments",\
                          'segmentGroupList':["apical_dendrite_group"],'segmentGroupProbabilities':{"apical_dendrite_group":1}})
     
@@ -110,21 +110,21 @@ if __name__ == "__main__":
     inputGroups_pop0_exp2.append({'inputModel':"variable_basal_firing_rate",'inputLabel':'vrpop0','amplitudeDistribution':"gaussian",'averageAmp':0,\
     'stDevAmp':50,'ampUnits':"pA",'offsetDistribution':"constant",'valueOffset':0,'offsetUnits':"ms"})
     synapseList0_pop0_exp2=[]
-    synapseList0_pop0_exp2.append({'synapseType':"MFSpikeSyn",'synapseMode':"transient",'averageRate':200,'delay':600,'duration':10,'units':'ms',\
+    synapseList0_pop0_exp2.append({'synapseType':"MFSpikeSyn",'inputIdLibrary':"XFpop0_Golgi_pop0_syn0",     'synapseMode':"transient",'averageRate':200,'delay':600,'duration':10,'units':'ms',\
                        'numberModel':"constant number of inputs per cell",'noInputs':8,'targetingModel':"segment groups and segments",\
                          'segmentGroupList':["basal_dendrite_group"],'segmentGroupProbabilities':{"basal_dendrite_group":1}})
 
-    synapseList0_pop0_exp2.append({'synapseType':"PFSpikeSyn",'synapseMode':"transient",'averageRate':350,'delay':610,'duration':15,'units':'ms',\
+    synapseList0_pop0_exp2.append({'synapseType':"PFSpikeSyn",'inputIdLibrary':"XFpop0_Golgi_pop0_syn1",   'synapseMode':"transient",'averageRate':350,'delay':610,'duration':15,'units':'ms',\
                        'numberModel':"constant number of inputs per cell",'noInputs':50,'targetingModel':"segment groups and segments",\
                          'segmentGroupList':["apical_dendrite_group"],'segmentGroupProbabilities':{"apical_dendrite_group":1}})
 
     synapseList1_pop0_exp2=[]
-    synapseList1_pop0_exp2.append({'synapseType':"MFSpikeSyn",'synapseMode':"persistent",'averageRate':2,\
+    synapseList1_pop0_exp2.append({'synapseType':"MFSpikeSyn",'inputIdLibrary':"XFpop0_background_Golgi_pop0_syn0",'synapseMode':"persistent",'averageRate':2,\
                        'numberModel':"constant number of inputs per cell",'noInputs':20,'targetingModel':"segment groups and segments",\
                          'segmentGroupList':["basal_dendrite_group"],'segmentGroupProbabilities':{"basal_dendrite_group":1}})
     
 
-    synapseList1_pop0_exp2.append({'synapseType':"PFSpikeSyn",'synapseMode':"persistent",'averageRate':0.5,\
+    synapseList1_pop0_exp2.append({'synapseType':"PFSpikeSyn",'inputIdLibrary':"XFpop0_background_Golgi_pop0_syn1",'synapseMode':"persistent",'averageRate':0.5,\
                        'numberModel':"constant number of inputs per cell",'noInputs':100,'targetingModel':"segment groups and segments",\
                          'segmentGroupList':["apical_dendrite_group"],'segmentGroupProbabilities':{"apical_dendrite_group":1}})
     
@@ -169,21 +169,21 @@ if __name__ == "__main__":
     inputGroups_pop0_exp3.append({'inputModel':"variable_basal_firing_rate",'inputLabel':'vrpop0','amplitudeDistribution':"gaussian",'averageAmp':0,\
     'stDevAmp':50,'ampUnits':"pA",'offsetDistribution':"constant",'valueOffset':0,'offsetUnits':"ms"})
     synapseList0_pop0_exp3=[]
-    synapseList0_pop0_exp3.append({'synapseType':"MFSpikeSyn",'synapseMode':"transient",'averageRate':200,'delay':600,'duration':10,'units':'ms',\
+    synapseList0_pop0_exp3.append({'synapseType':"MFSpikeSyn",'inputIdLibrary':"XFpop0_Golgi_pop0_syn0",   'synapseMode':"transient",'averageRate':200,'delay':600,'duration':10,'units':'ms',\
                        'numberModel':"constant number of inputs per cell",'noInputs':8,'targetingModel':"segment groups and segments",\
                          'segmentGroupList':["basal_dendrite_group"],'segmentGroupProbabilities':{"basal_dendrite_group":1}})
 
-    synapseList0_pop0_exp3.append({'synapseType':"PFSpikeSyn",'synapseMode':"transient",'averageRate':350,'delay':610,'duration':15,'units':'ms',\
+    synapseList0_pop0_exp3.append({'synapseType':"PFSpikeSyn",'inputIdLibrary':"XFpop0_Golgi_pop0_syn1",     'synapseMode':"transient",'averageRate':350,'delay':610,'duration':15,'units':'ms',\
                        'numberModel':"constant number of inputs per cell",'noInputs':50,'targetingModel':"segment groups and segments",\
                          'segmentGroupList':["apical_dendrite_group"],'segmentGroupProbabilities':{"apical_dendrite_group":1}})
 
     synapseList1_pop0_exp3=[]
-    synapseList1_pop0_exp3.append({'synapseType':"MFSpikeSyn",'synapseMode':"persistent",'averageRate':2,\
+    synapseList1_pop0_exp3.append({'synapseType':"MFSpikeSyn",'inputIdLibrary':"XFpop0_background_Golgi_pop0_syn0",'synapseMode':"persistent",'averageRate':2,\
                        'numberModel':"constant number of inputs per cell",'noInputs':20,'targetingModel':"segment groups and segments",\
                          'segmentGroupList':["basal_dendrite_group"],'segmentGroupProbabilities':{"basal_dendrite_group":1}})
     
 
-    synapseList1_pop0_exp3.append({'synapseType':"PFSpikeSyn",'synapseMode':"persistent",'averageRate':0.5,\
+    synapseList1_pop0_exp3.append({'synapseType':"PFSpikeSyn",'inputIdLibrary':"XFpop0_background_Golgi_pop0_syn1",'synapseMode':"persistent",'averageRate':0.5,\
                        'numberModel':"constant number of inputs per cell",'noInputs':100,'targetingModel':"segment groups and segments",\
                          'segmentGroupList':["apical_dendrite_group"],'segmentGroupProbabilities':{"apical_dendrite_group":1}})
     
@@ -226,21 +226,21 @@ if __name__ == "__main__":
     inputGroups_pop0_exp4.append({'inputModel':"variable_basal_firing_rate",'inputLabel':'vrpop0','amplitudeDistribution':"gaussian",'averageAmp':0,\
     'stDevAmp':50,'ampUnits':"pA",'offsetDistribution':"constant",'valueOffset':0,'offsetUnits':"ms"})
     synapseList0_pop0_exp4=[]
-    synapseList0_pop0_exp4.append({'synapseType':"MFSpikeSyn",'synapseMode':"transient",'averageRate':200,'delay':600,'duration':10,'units':'ms',\
+    synapseList0_pop0_exp4.append({'synapseType':"MFSpikeSyn",'inputIdLibrary':"XFpop0_Golgi_pop0_syn0",      'synapseMode':"transient",'averageRate':200,'delay':600,'duration':10,'units':'ms',\
                        'numberModel':"constant number of inputs per cell",'noInputs':8,'targetingModel':"segment groups and segments",\
                          'segmentGroupList':["basal_dendrite_group"],'segmentGroupProbabilities':{"basal_dendrite_group":1}})
 
-    synapseList0_pop0_exp4.append({'synapseType':"PFSpikeSyn",'synapseMode':"transient",'averageRate':350,'delay':610,'duration':15,'units':'ms',\
+    synapseList0_pop0_exp4.append({'synapseType':"PFSpikeSyn",'inputIdLibrary':"XFpop0_Golgi_pop0_syn1",      'synapseMode':"transient",'averageRate':350,'delay':610,'duration':15,'units':'ms',\
                        'numberModel':"constant number of inputs per cell",'noInputs':50,'targetingModel':"segment groups and segments",\
                          'segmentGroupList':["apical_dendrite_group"],'segmentGroupProbabilities':{"apical_dendrite_group":1}})
 
     synapseList1_pop0_exp4=[]
-    synapseList1_pop0_exp4.append({'synapseType':"MFSpikeSyn",'synapseMode':"persistent",'averageRate':2,\
+    synapseList1_pop0_exp4.append({'synapseType':"MFSpikeSyn",'inputIdLibrary':"XFpop0_background_Golgi_pop0_syn0",'synapseMode':"persistent",'averageRate':2,\
                        'numberModel':"constant number of inputs per cell",'noInputs':20,'targetingModel':"segment groups and segments",\
                          'segmentGroupList':["basal_dendrite_group"],'segmentGroupProbabilities':{"basal_dendrite_group":1}})
     
 
-    synapseList1_pop0_exp4.append({'synapseType':"PFSpikeSyn",'synapseMode':"persistent",'averageRate':0.5,\
+    synapseList1_pop0_exp4.append({'synapseType':"PFSpikeSyn",'inputIdLibrary':"XFpop0_background_Golgi_pop0_syn1",'synapseMode':"persistent",'averageRate':0.5,\
                        'numberModel':"constant number of inputs per cell",'noInputs':100,'targetingModel':"segment groups and segments",\
                          'segmentGroupList':["apical_dendrite_group"],'segmentGroupProbabilities':{"apical_dendrite_group":1}})
     
@@ -284,21 +284,21 @@ if __name__ == "__main__":
     inputGroups_pop0_exp5.append({'inputModel':"variable_basal_firing_rate",'inputLabel':'vrpop0','amplitudeDistribution':"gaussian",'averageAmp':0,\
     'stDevAmp':50,'ampUnits':"pA",'offsetDistribution':"constant",'valueOffset':0,'offsetUnits':"ms"})
     synapseList0_pop0_exp5=[]
-    synapseList0_pop0_exp5.append({'synapseType':"MFSpikeSyn",'synapseMode':"transient",'averageRate':200,'delay':600,'duration':10,'units':'ms',\
+    synapseList0_pop0_exp5.append({'synapseType':"MFSpikeSyn",'inputIdLibrary':"XFpop0_Golgi_pop0_syn0",      'synapseMode':"transient",'averageRate':200,'delay':600,'duration':10,'units':'ms',\
                        'numberModel':"constant number of inputs per cell",'noInputs':8,'targetingModel':"segment groups and segments",\
                          'segmentGroupList':["basal_dendrite_group"],'segmentGroupProbabilities':{"basal_dendrite_group":1}})
 
-    synapseList0_pop0_exp5.append({'synapseType':"PFSpikeSyn",'synapseMode':"transient",'averageRate':350,'delay':610,'duration':15,'units':'ms',\
+    synapseList0_pop0_exp5.append({'synapseType':"PFSpikeSyn",'inputIdLibrary':"XFpop0_Golgi_pop0_syn1",      'synapseMode':"transient",'averageRate':350,'delay':610,'duration':15,'units':'ms',\
                        'numberModel':"constant number of inputs per cell",'noInputs':50,'targetingModel':"segment groups and segments",\
                          'segmentGroupList':["apical_dendrite_group"],'segmentGroupProbabilities':{"apical_dendrite_group":1}})
 
     synapseList1_pop0_exp5=[]
-    synapseList1_pop0_exp5.append({'synapseType':"MFSpikeSyn",'synapseMode':"persistent",'averageRate':2,\
+    synapseList1_pop0_exp5.append({'synapseType':"MFSpikeSyn",'inputIdLibrary':"XFpop0_background_Golgi_pop0_syn0",'synapseMode':"persistent",'averageRate':2,\
                        'numberModel':"constant number of inputs per cell",'noInputs':20,'targetingModel':"segment groups and segments",\
                          'segmentGroupList':["basal_dendrite_group"],'segmentGroupProbabilities':{"basal_dendrite_group":1}})
     
 
-    synapseList1_pop0_exp5.append({'synapseType':"PFSpikeSyn",'synapseMode':"persistent",'averageRate':0.5,\
+    synapseList1_pop0_exp5.append({'synapseType':"PFSpikeSyn",'inputIdLibrary':"XFpop0_background_Golgi_pop0_syn1",'synapseMode':"persistent",'averageRate':0.5,\
                        'numberModel':"constant number of inputs per cell",'noInputs':100,'targetingModel':"segment groups and segments",\
                          'segmentGroupList':["apical_dendrite_group"],'segmentGroupProbabilities':{"apical_dendrite_group":1}})
     
@@ -316,14 +316,15 @@ if __name__ == "__main__":
     
     #######
     
-    library_params={'libraryScale':1,'simulator':'jNeuroML_NEURON'}
-    sim_params={'simulator':"no_simulation",'duration':3000,'timeStep':0.0003,'numTrials':15,'globalSeed':False,'trialSeed':True,'plotSpecifier':False,\
+    #library_params={'libraryScale':1,'simulator':'jNeuroML_NEURON'}
+
+    sim_params={'simulator':"jNeuroML_NEURON",'duration':2700,'timeStep':0.0003,'numTrials':5,'globalSeed':False,'trialSeed':True,'plotSpecifier':False,\
     'saveSomataPositions':True,'parentDirRequired':True,'parentDir':parentdir,'currentDirRequired':True,'currentDir':currentdir,'networkDir':'example',\
         'saveInputReceivingCellID':True,'importPoissonTrainLibraries':True,'PoissonTrainLibraryID':'V2010_sp_scale_05_dens','libraryParams':library_params,\
        'selectOneTrialFromLibrary':'0'}
     
     
-    generatePoissonTrainLibraries(net_params_V2010_multiple,sim_params,library_params)
+    #generatePoissonTrainLibraries(net_params_V2010_multiple,sim_params,library_params)
     
     run_simulations(net_params_V2010_multiple,sim_params)
 

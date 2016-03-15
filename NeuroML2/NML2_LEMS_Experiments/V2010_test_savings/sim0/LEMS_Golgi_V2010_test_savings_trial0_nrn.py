@@ -5,7 +5,7 @@ Components:
     null (Type: include)
     null (Type: include)
     null (Type: include)
-    Pulse_vrpop0_Golgi_pop0_0 (Type: pulseGenerator:  delay=0.0 (SI time) duration=3.0 (SI time) amplitude=-5.7009456E-11 (SI current))
+    Pulse_vrpop0_Golgi_pop0_0 (Type: pulseGenerator:  delay=0.0 (SI time) duration=3.0 (SI time) amplitude=-2.049125E-11 (SI current))
     XFpop0_background_Golgi_pop0_cell0_syn0_0 (Type: spikeArray)
     XFpop0_background_Golgi_pop0_cell0_syn1_0 (Type: spikeArray)
     Golgi_V2010_test_savings_trial0_network (Type: networkWithTemperature:  temperature=296.15 (SI temperature))
@@ -107,7 +107,7 @@ for i in range(int(h.n_Golgi_pop0)):
     h("a_Golgi_pop0[%i] = new Golgi_10comp_13channels_2CaPools()"%i)
     h("access a_Golgi_pop0[%i].Soma"%i)
 
-h("a_Golgi_pop0[0].position(26.806701678505707, 24.78810465393363, 44.021402363235616)")
+h("a_Golgi_pop0[0].position(17.569964017150546, 10.562642562920216, 12.524079032848157)")
 
 h("proc initialiseV_Golgi_pop0() { for i = 0, n_Golgi_pop0-1 { a_Golgi_pop0[i].set_initial_v() } }")
 h("objref fih_Golgi_pop0")
@@ -156,16 +156,16 @@ for i in range(int(h.n_InputPop_XFpop0_background_Golgi_pop0_cell0_syn1_0)):
 # Adding projection: InputProj_XFpop0_background_Golgi_pop0_cell0_syn0_0, from InputPop_XFpop0_background_Golgi_pop0_cell0_syn0_0 to Golgi_pop0 with synapse MFSpikeSyn, 1 connection(s)
 h("objectvar syn_InputProj_XFpop0_background_Golgi_pop0_cell0_syn0_0_MFSpikeSyn[1]")
 
-# Connection 0: 0, seg 0 (0.500000) -> 0, seg 9 (0.668643)
-h("a_Golgi_pop0[0].Dend_bl_1_first syn_InputProj_XFpop0_background_Golgi_pop0_cell0_syn0_0_MFSpikeSyn[0] = new MFSpikeSyn(0.668643)")
+# Connection 0: 0, seg 0 (0.500000) -> 0, seg 10 (0.682927)
+h("a_Golgi_pop0[0].Dend_bl_2_first syn_InputProj_XFpop0_background_Golgi_pop0_cell0_syn0_0_MFSpikeSyn[0] = new MFSpikeSyn(0.682927)")
 h("objectvar nc_syn_InputProj_XFpop0_background_Golgi_pop0_cell0_syn0_0_MFSpikeSyn_0")
 h("InputPop_XFpop0_background_Golgi_pop0_cell0_syn0_0[0] nc_syn_InputProj_XFpop0_background_Golgi_pop0_cell0_syn0_0_MFSpikeSyn_0 = new NetCon(m_XFpop0_background_Golgi_pop0_cell0_syn0_0_InputPop_XFpop0_background_Golgi_pop0_cell0_syn0_0[0], syn_InputProj_XFpop0_background_Golgi_pop0_cell0_syn0_0_MFSpikeSyn[0], 0.000000, 0.0, 1.0)")  
 
 # Adding projection: InputProj_XFpop0_background_Golgi_pop0_cell0_syn1_0, from InputPop_XFpop0_background_Golgi_pop0_cell0_syn1_0 to Golgi_pop0 with synapse PFSpikeSyn, 1 connection(s)
 h("objectvar syn_InputProj_XFpop0_background_Golgi_pop0_cell0_syn1_0_PFSpikeSyn[1]")
 
-# Connection 0: 0, seg 0 (0.500000) -> 0, seg 5 (0.962664)
-h("a_Golgi_pop0[0].Dend_ap_2_second syn_InputProj_XFpop0_background_Golgi_pop0_cell0_syn1_0_PFSpikeSyn[0] = new PFSpikeSyn(0.962664)")
+# Connection 0: 0, seg 0 (0.500000) -> 0, seg 5 (0.076017)
+h("a_Golgi_pop0[0].Dend_ap_2_second syn_InputProj_XFpop0_background_Golgi_pop0_cell0_syn1_0_PFSpikeSyn[0] = new PFSpikeSyn(0.076017)")
 h("objectvar nc_syn_InputProj_XFpop0_background_Golgi_pop0_cell0_syn1_0_PFSpikeSyn_0")
 h("InputPop_XFpop0_background_Golgi_pop0_cell0_syn1_0[0] nc_syn_InputProj_XFpop0_background_Golgi_pop0_cell0_syn1_0_PFSpikeSyn_0 = new NetCon(m_XFpop0_background_Golgi_pop0_cell0_syn1_0_InputPop_XFpop0_background_Golgi_pop0_cell0_syn1_0[0], syn_InputProj_XFpop0_background_Golgi_pop0_cell0_syn1_0_PFSpikeSyn[0], 0.000000, 0.0, 1.0)")  
 

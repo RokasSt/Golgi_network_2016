@@ -6,8 +6,8 @@ Components:
     iaf (Type: iafCell:  leakConductance=5.2E-10 (SI conductance) leakReversal=-0.06 (SI voltage) thresh=-0.04 (SI voltage) reset=-0.07 (SI voltage) C=1.0000000000000001E-11 (SI capacitance))
     XFpop0_background_MFSpikeSyn_Golgi_pop0_syn0 (Type: poissonFiringSynapse:  averageRate=2.0 (SI per_time) averageIsi=0.5 (SI time))
     XFpop0_background_PFSpikeSyn_Golgi_pop0_syn1 (Type: poissonFiringSynapse:  averageRate=0.5 (SI per_time) averageIsi=2.0 (SI time))
-    XFpop0_MFSpikeSyn_Golgi_pop0_syn0 (Type: transientPoissonFiringSynapse:  averageRate=200.0 (SI per_time) delay=0.6 (SI time) duration=0.01 (SI time) averageIsi=0.005 (SI time))
-    XFpop0_PFSpikeSyn_Golgi_pop0_syn1 (Type: transientPoissonFiringSynapse:  averageRate=350.0 (SI per_time) delay=0.61 (SI time) duration=0.015 (SI time) averageIsi=0.002857142857142857 (SI time))
+    XFpop0_MFSpikeSyn_Golgi_pop0_syn0 (Type: transientPoissonFiringSynapse:  averageRate=200.0 (SI per_time) delay=0.6 (SI time) duration=0.01 (SI time) averageIsi=0.005 (SI time) LONG_TIME=3.6E12 (SI time))
+    XFpop0_PFSpikeSyn_Golgi_pop0_syn1 (Type: transientPoissonFiringSynapse:  averageRate=350.0 (SI per_time) delay=0.61 (SI time) duration=0.015 (SI time) averageIsi=0.002857142857142857 (SI time) LONG_TIME=3.6E12 (SI time))
     InputNet_V2010_test_savings_trial0_network (Type: network)
     InputNet_V2010_test_savings_trial0 (Type: Simulation:  length=3.0 (SI time) step=1.0E-5 (SI time))
 

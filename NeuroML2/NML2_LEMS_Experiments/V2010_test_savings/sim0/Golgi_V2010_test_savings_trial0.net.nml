@@ -2,23 +2,18 @@
     <include href="../../../Golgi_10comp_13channels_2CaPools.cell.nml"></include>
     <include href="/../../../MFSpikeSyn.synapse.nml"></include>
     <include href="/../../../PFSpikeSyn.synapse.nml"></include>
-    <pulseGenerator id="Pulse_vrpop0_Golgi_pop0_0" delay="0.000000ms" duration="3000.000000ms" amplitude="-57.009456pA"/>
+    <pulseGenerator id="Pulse_vrpop0_Golgi_pop0_0" delay="0.000000ms" duration="3000.000000ms" amplitude="-20.491250pA"/>
     <spikeArray id="XFpop0_background_Golgi_pop0_cell0_syn0_0">
-        <spike id="0" time="0.440820s"/>
-        <spike id="1" time="0.761020s"/>
-        <spike id="2" time="0.863080s"/>
-        <spike id="3" time="1.465480s"/>
-        <spike id="4" time="1.466100s"/>
-        <spike id="5" time="2.160330s"/>
-        <spike id="6" time="2.215930s"/>
-        <spike id="7" time="2.291330s"/>
-        <spike id="8" time="2.565550s"/>
-        <spike id="9" time="2.899060s"/>
+        <spike id="0" time="484.090000s"/>
+        <spike id="1" time="487.280000s"/>
+        <spike id="2" time="1871.790000s"/>
+        <spike id="3" time="1874.980000s"/>
+        <spike id="4" time="2144.870000s"/>
+        <spike id="5" time="2148.060000s"/>
     </spikeArray>
     <spikeArray id="XFpop0_background_Golgi_pop0_cell0_syn1_0">
-        <spike id="0" time="0.630090s"/>
-        <spike id="1" time="0.656010s"/>
-        <spike id="2" time="2.886260s"/>
+        <spike id="0" time="1317.080000s"/>
+        <spike id="1" time="1320.270000s"/>
     </spikeArray>
     <network id="Golgi_V2010_test_savings_trial0_network" type="networkWithTemperature" temperature="23 degC">
         <notes>Parameter arrays for building this network are listed below:
@@ -37,16 +32,16 @@ Input group parameters for Golgi_pop0:
 </notes>
         <population id="Golgi_pop0" type="populationList" component="Golgi_10comp_13channels_2CaPools" size="1">
             <instance id="0">
-                <location y="24.78810465393363" x="26.806701678505707" z="44.021402363235616"/>
+                <location y="10.562642562920216" x="17.569964017150546" z="12.524079032848157"/>
             </instance>
         </population>
         <population id="InputPop_XFpop0_background_Golgi_pop0_cell0_syn0_0" component="XFpop0_background_Golgi_pop0_cell0_syn0_0" size="1"/>
         <population id="InputPop_XFpop0_background_Golgi_pop0_cell0_syn1_0" component="XFpop0_background_Golgi_pop0_cell0_syn1_0" size="1"/>
         <projection id="InputProj_XFpop0_background_Golgi_pop0_cell0_syn0_0" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_XFpop0_background_Golgi_pop0_cell0_syn0_0" synapse="MFSpikeSyn">
-            <connection id="0" preCellId="../InputPop_XFpop0_background_Golgi_pop0_cell0_syn0_0[0]" postFractionAlong="0.668643" postSegmentId="9" postCellId="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+            <connection id="0" preCellId="../InputPop_XFpop0_background_Golgi_pop0_cell0_syn0_0[0]" postFractionAlong="0.682927" postSegmentId="10" postCellId="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
         </projection>
         <projection id="InputProj_XFpop0_background_Golgi_pop0_cell0_syn1_0" postsynapticPopulation="Golgi_pop0" presynapticPopulation="InputPop_XFpop0_background_Golgi_pop0_cell0_syn1_0" synapse="PFSpikeSyn">
-            <connection id="0" preCellId="../InputPop_XFpop0_background_Golgi_pop0_cell0_syn1_0[0]" postFractionAlong="0.962664" postSegmentId="5" postCellId="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
+            <connection id="0" preCellId="../InputPop_XFpop0_background_Golgi_pop0_cell0_syn1_0[0]" postFractionAlong="0.076017" postSegmentId="5" postCellId="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
         </projection>
         <inputList id="vrpop0_Golgi_pop0_0" component="Pulse_vrpop0_Golgi_pop0_0" population="Golgi_pop0">
             <input destination="synapses" id="0" target="../Golgi_pop0/0/Golgi_10comp_13channels_2CaPools"/>
