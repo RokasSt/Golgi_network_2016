@@ -33,7 +33,7 @@ if __name__ == "__main__":
     net_params_V2010_multiple['experiment1']['distributionParams']={}
     net_params_V2010_multiple['experiment1']['distributionParams']['populationList']=[]
     net_params_V2010_multiple['experiment1']['distributionParams']['populationList'].append({'distributionModel':"density_profile",'popID':'Golgi_pop0','densityFilePath':'/home/rokas/Golgi_data/Pure NeuG density matrix of shape 69 630.txt',\
-    'planeDimensions':{'dim1':'x','dim2':'y'},'dim1CoordinateVector':[0,3000],'dim2CoordinateVector':[0,110],'dim3':'z','dim3Boundary':300,\
+    'planeDimensions':{'dim1':'x','dim2':'y'},'dim1CoordinateVector':[0,3000],'dim2CoordinateVector':[0,110],'dim3':'z','dim3Boundary':120,\
     'distanceModel':'random','canonicalVolumeBaseAreainMicrons':5.00318495*5.00318495 })
     
 
@@ -91,7 +91,7 @@ if __name__ == "__main__":
     net_params_V2010_multiple['experiment2']['distributionParams']={}
     net_params_V2010_multiple['experiment2']['distributionParams']['populationList']=[]
     net_params_V2010_multiple['experiment2']['distributionParams']['populationList'].append({'distributionModel':"density_profile",'popID':'Golgi_pop0','densityFilePath':'/home/rokas/Golgi_data/Pure NeuG density matrix of shape 69 630.txt',\
-    'planeDimensions':{'dim1':'x','dim2':'y'},'dim1CoordinateVector':[0,3000],'dim2CoordinateVector':[0,110],'dim3':'z','dim3Boundary':300,\
+    'planeDimensions':{'dim1':'x','dim2':'y'},'dim1CoordinateVector':[0,3000],'dim2CoordinateVector':[0,110],'dim3':'z','dim3Boundary':120,\
     'distanceModel':'random','canonicalVolumeBaseAreainMicrons':5.00318495*5.00318495 })
     
 
@@ -150,7 +150,7 @@ if __name__ == "__main__":
     net_params_V2010_multiple['experiment3']['distributionParams']={}
     net_params_V2010_multiple['experiment3']['distributionParams']['populationList']=[]
     net_params_V2010_multiple['experiment3']['distributionParams']['populationList'].append({'distributionModel':"density_profile",'popID':'Golgi_pop0','densityFilePath':'/home/rokas/Golgi_data/Pure NeuG density matrix of shape 69 630.txt',\
-    'planeDimensions':{'dim1':'x','dim2':'y'},'dim1CoordinateVector':[0,3000],'dim2CoordinateVector':[0,110],'dim3':'z','dim3Boundary':300,\
+    'planeDimensions':{'dim1':'x','dim2':'y'},'dim1CoordinateVector':[0,3000],'dim2CoordinateVector':[0,110],'dim3':'z','dim3Boundary':120,\
     'distanceModel':'random','canonicalVolumeBaseAreainMicrons':5.00318495*5.00318495})
     
 
@@ -207,7 +207,7 @@ if __name__ == "__main__":
     net_params_V2010_multiple['experiment4']['distributionParams']={}
     net_params_V2010_multiple['experiment4']['distributionParams']['populationList']=[]
     net_params_V2010_multiple['experiment4']['distributionParams']['populationList'].append({'distributionModel':"density_profile",'popID':'Golgi_pop0','densityFilePath':'/home/rokas/Golgi_data/Pure NeuG density matrix of shape 69 630.txt',\
-    'planeDimensions':{'dim1':'x','dim2':'y'},'dim1CoordinateVector':[0,3000],'dim2CoordinateVector':[0,110],'dim3':'z','dim3Boundary':300,\
+    'planeDimensions':{'dim1':'x','dim2':'y'},'dim1CoordinateVector':[0,3000],'dim2CoordinateVector':[0,110],'dim3':'z','dim3Boundary':120,\
     'distanceModel':'random','canonicalVolumeBaseAreainMicrons':5.00318495*5.00318495})
     
 
@@ -265,7 +265,7 @@ if __name__ == "__main__":
     net_params_V2010_multiple['experiment5']['distributionParams']={}
     net_params_V2010_multiple['experiment5']['distributionParams']['populationList']=[]
     net_params_V2010_multiple['experiment5']['distributionParams']['populationList'].append({'distributionModel':"density_profile",'popID':'Golgi_pop0','densityFilePath':'/home/rokas/Golgi_data/Pure NeuG density matrix of shape 69 630.txt',\
-    'planeDimensions':{'dim1':'x','dim2':'y'},'dim1CoordinateVector':[0,3000],'dim2CoordinateVector':[0,110],'dim3':'z','dim3Boundary':300,\
+    'planeDimensions':{'dim1':'x','dim2':'y'},'dim1CoordinateVector':[0,3000],'dim2CoordinateVector':[0,110],'dim3':'z','dim3Boundary':120,\
     'distanceModel':'random','canonicalVolumeBaseAreainMicrons':5.00318495*5.00318495})
     
 

@@ -581,11 +581,13 @@ def generate_LEMS_and_run(sim_array,pop_array):
 	# save LEMS file
         if simulation_parameters['parentDirRequired']:
            if simulation_parameters['networkDir']=="example":
+              os.chdir(simulation_parameters['parentDir']+"/NeuroML2/NML2_LEMS_Net_Examples/"+simulation_parameters['experimentID']+"/"+"sim%d"%simulation_parameters['simID'])
               lems_file_name_dir=simulation_parameters['parentDir']+"/NeuroML2/NML2_LEMS_Net_Examples/"+simulation_parameters['experimentID']+"/"+"sim%d"%simulation_parameters['simID']+"/"+"LEMS_%s.xml"%ref
               lems_file_name = ls.save_to_file(lems_file_name_dir)
               
 
            if simulation_parameters['networkDir']=="experiment":
+              os.chdir(simulation_parameters['parentDir']+"/NeuroML2/NML2_LEMS_Experiments/"+simulation_parameters['experimentID']+"/"+"sim%d"%simulation_parameters['simID'])
               lems_file_name_dir=simulation_parameters['parentDir']+"/NeuroML2/NML2_LEMS_Experiments/"+simulation_parameters['experimentID']+"/"+"sim%d"%simulation_parameters['simID']+"/"+"LEMS_%s.xml"%ref
               lems_file_name = ls.save_to_file(lems_file_name_dir)
         else:
@@ -595,22 +597,22 @@ def generate_LEMS_and_run(sim_array,pop_array):
         if simulation_parameters['plotSpecifier']:
            if simulation_parameters['simulator']=="jNeuroML":
               print("Finished building a network. Starts running a simulation with jNeuroML for %s"%lems_file_name_dir)
-	      results1 = pynml.run_lems_with_jneuroml(lems_file_name, nogui=True, load_saved_data=True, plot=True,verbose=True)
+	      results1 = pynml.run_lems_with_jneuroml("LEMS_%s.xml"%ref, nogui=True, load_saved_data=True, plot=True,verbose=True)
               print("Finished running simulation with jNeuroML")
            elif simulation_parameters['simulator']=="jNeuroML_NEURON":
               print("Finished building a network. Starts running a simulation with NEURON for %s"%lems_file_name_dir)
-              results1 = pynml.run_lems_with_jneuroml_neuron(lems_file_name, nogui=True, load_saved_data=True, plot=True,verbose=True)
+              results1 = pynml.run_lems_with_jneuroml_neuron("LEMS_%s.xml"%ref, nogui=True, load_saved_data=True, plot=True,verbose=True)
               print("Finished running simulation with jNeuroML_NEURON")
            else:
               print("Finished building a network")
         else:
            if simulation_parameters['simulator']=="jNeuroML":
               print("Finished building a network. Starts running a simulation with jNeuroML for %s"%lems_file_name_dir)
-	      results1 = pynml.run_lems_with_jneuroml(lems_file_name, nogui=True, load_saved_data=False, plot=False,verbose=True)
+	      results1 = pynml.run_lems_with_jneuroml("LEMS_%s.xml"%ref, nogui=True, load_saved_data=False, plot=False,verbose=True)
               print("Finished running simulation with jNeuroML")
            elif simulation_parameters['simulator']=="jNeuroML_NEURON":
               print("Finished building a network. Starts running a simulation with NEURON for %s"%lems_file_name_dir)
-              results1 = pynml.run_lems_with_jneuroml_neuron(lems_file_name,nogui=True, load_saved_data=False, plot=False,verbose=True)
+              results1 = pynml.run_lems_with_jneuroml_neuron("LEMS_%s.xml"%ref,nogui=True, load_saved_data=False, plot=False,verbose=True)
               print("Finished running simulation with jNeuroML_NEURON")
            else:
               print("Finished building a network")
@@ -828,12 +830,14 @@ def generate_input_library(sim_array,pop_array):
 	# save LEMS file
         if simulation_parameters['parentDirRequired']:
            if simulation_parameters['networkDir']=="example":
+              os.chdir(simulation_parameters['parentDir']+"/NeuroML2/NML2_LEMS_Net_Examples/"+simulation_parameters['experimentID']+"/"+"sim%d"%simulation_parameters['simID'])
               lems_file_name_dir=simulation_parameters['parentDir']+"/NeuroML2/NML2_LEMS_Net_Examples/"+simulation_parameters['experimentID']+"/"+"sim%d"%simulation_parameters['simID']+"/"+"LEMS_%s.xml"%ref
               lems_file_name = ls.save_to_file(lems_file_name_dir)
               path=simulation_parameters['parentDir']+"/NeuroML2/NML2_LEMS_Net_Examples/"+simulation_parameters['experimentID']+"/"+"sim%d"%simulation_parameters['simID']
               
 
            if simulation_parameters['networkDir']=="experiment":
+              os.chdir(simulation_parameters['parentDir']+"/NeuroML2/NML2_LEMS_Experiments/"+simulation_parameters['experimentID']+"/"+"sim%d"%simulation_parameters['simID'])
               lems_file_name_dir=simulation_parameters['parentDir']+"/NeuroML2/NML2_LEMS_Experiments/"+simulation_parameters['experimentID']+"/"+"sim%d"%simulation_parameters['simID']+"/"+"LEMS_%s.xml"%ref
               lems_file_name = ls.save_to_file(lems_file_name_dir)
               path=simulation_parameters['parentDir']+"/NeuroML2/NML2_LEMS_Experiments/"+simulation_parameters['experimentID']+"/"+"sim%d"%simulation_parameters['simID']
@@ -848,11 +852,11 @@ def generate_input_library(sim_array,pop_array):
         
         if library_params['simulator']=="jNeuroML":
             print("Finished building a network which generates input trains. Starts running a simulation with jNeuroML for %s"%lems_file_name_dir)
-	    results1 = pynml.run_lems_with_jneuroml(lems_file_name, nogui=True, load_saved_data=False, plot=False,verbose=True)
+	    results1 = pynml.run_lems_with_jneuroml("LEMS_%s.xml"%ref, nogui=True, load_saved_data=False, plot=False,verbose=True)
             print("Finished running simulations with jNeuroML")
         elif library_params['simulator']=="jNeuroML_NEURON":
              print("Finished building a network which generates input trains. Starts running a simulation with NEURON for %s"%lems_file_name_dir)
-             results1 = pynml.run_lems_with_jneuroml_neuron(lems_file_name, nogui=True, load_saved_data=False, plot=False,verbose=True)
+             results1 = pynml.run_lems_with_jneuroml_neuron("LEMS_%s.xml"%ref, nogui=True, load_saved_data=False, plot=False,verbose=True)
              print("Finished running simulations with NEURON.")
         else:
               print("Finished building a network which generates input trains.")
