@@ -667,7 +667,7 @@ def generate_PoissonInputNet(ref,cell_array,location_array,connectivity_informat
                             no_of_inputs=input_group_array[input_group]['maxNoInputs']
                          ### other options can be added
                       LibrarySize=int(round(popSize*library_params['libraryScale']*no_of_inputs))
-                      Input_Golgi_pop=neuroml.Population(id="%s_%s_syn0"%(label,popID), size=LibrarySize,component='iaf0')
+                      Input_Golgi_pop=neuroml.Population(id="%s_%s_syn0"%(label,popID), size=LibrarySize,component='iaf')
                       PopID_array.append("%s_%s_syn0"%(label,popID))
                       net.populations.append(Input_Golgi_pop)
                       if input_group_array[input_group]['synapseMode']=="persistent":
@@ -690,7 +690,7 @@ def generate_PoissonInputNet(ref,cell_array,location_array,connectivity_informat
                       input_list =neuroml.InputList(id="List%s_%s_syn0one"%(label,popID),component=poisson_syn.id,populations=Input_Golgi_pop.id)
                       count=0
                       target_no_array.append(LibrarySize)
-                      for target_point in range(0,no_of_inputs*popSize):                     
+                      for target_point in range(0,LibrarySize):          
                           syn_input = neuroml.Input(id="%d"%(count),target="../%s_%s_syn0[%i]"%(label,popID,target_point),destination="synapses") 
                           input_list.input.append(syn_input)
                           count=count+1
@@ -828,14 +828,19 @@ def generate_input_library(sim_array,pop_array):
 	# save LEMS file
         if simulation_parameters['parentDirRequired']:
            if simulation_parameters['networkDir']=="example":
-              #os.chdir(simulation_parameters['parentDir']+"/NeuroML2/NML2_LEMS_Net_Examples/"+simulation_parameters['experimentID']+"/"+"sim%d"%simulation_parameters['simID'])
               lems_file_name_dir=simulation_parameters['parentDir']+"/NeuroML2/NML2_LEMS_Net_Examples/"+simulation_parameters['experimentID']+"/"+"sim%d"%simulation_parameters['simID']+"/"+"LEMS_%s.xml"%ref
               lems_file_name = ls.save_to_file(lems_file_name_dir)
+              path=simulation_parameters['parentDir']+"/NeuroML2/NML2_LEMS_Net_Examples/"+simulation_parameters['experimentID']+"/"+"sim%d"%simulation_parameters['simID']
               
 
            if simulation_parameters['networkDir']=="experiment":
               lems_file_name_dir=simulation_parameters['parentDir']+"/NeuroML2/NML2_LEMS_Experiments/"+simulation_parameters['experimentID']+"/"+"sim%d"%simulation_parameters['simID']+"/"+"LEMS_%s.xml"%ref
               lems_file_name = ls.save_to_file(lems_file_name_dir)
+              path=simulation_parameters['parentDir']+"/NeuroML2/NML2_LEMS_Experiments/"+simulation_parameters['experimentID']+"/"+"sim%d"%simulation_parameters['simID']
+
+           if not os.path.exists(path):
+                  os.makedirs(path)
+                 
         else:
            lems_file_name = ls.save_to_file()
            lems_file_name_dir="LEMS_%s.xml"%ref
