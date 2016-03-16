@@ -862,11 +862,11 @@ def generate_input_library(sim_array,pop_array):
         
         if library_params['simulator']=="jNeuroML":
             print("Finished building a network which generates input trains. Starts running a simulation with jNeuroML for %s"%lems_file_name_dir)
-	    results1 = pynml.run_lems_with_jneuroml("LEMS_%s.xml"%ref, nogui=True, load_saved_data=False,max_memory=2000, plot=False,verbose=True)
+	    results1 = pynml.run_lems_with_jneuroml("LEMS_%s.xml"%ref, nogui=True, load_saved_data=False,plot=False,verbose=True)
             print("Finished running simulations with jNeuroML")
         elif library_params['simulator']=="jNeuroML_NEURON":
              print("Finished building a network which generates input trains. Starts running a simulation with NEURON for %s"%lems_file_name_dir)
-             results1 = pynml.run_lems_with_jneuroml_neuron("LEMS_%s.xml"%ref, nogui=True, load_saved_data=False,max_memory=2000, plot=False,verbose=True)
+             results1 = pynml.run_lems_with_jneuroml_neuron("LEMS_%s.xml"%ref, nogui=True, load_saved_data=False, plot=False,verbose=True)
              print("Finished running simulations with NEURON.")
         else:
               print("Finished building a network which generates input trains.")
