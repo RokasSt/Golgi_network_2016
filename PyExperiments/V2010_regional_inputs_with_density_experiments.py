@@ -468,7 +468,7 @@ if __name__ == "__main__":
     #######
     
     
-    sim_params={'simulator':"no simulation",'duration':3000,'timeStep':0.005,'numTrials':4,'globalSeed':False,'trialSeed':True,'plotSpecifier':False,\
+    sim_params={'simulator':"no simulation",'duration':3000,'timeStep':0.0005,'numTrials':4,'globalSeed':False,'trialSeed':True,'plotSpecifier':False,\
     'saveSomataPositions':True,'parentDirRequired':True,'parentDir':parentdir,'currentDirRequired':True,'currentDir':currentdir,'networkDir':'experiment',\
         'saveInputReceivingCellID':True}
     
