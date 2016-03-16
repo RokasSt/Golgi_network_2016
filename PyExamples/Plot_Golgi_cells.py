@@ -30,7 +30,7 @@ if __name__ == "__main__":
   plot_params['saveSpecifier']=True
   plot_params['figureName']="2012based_test_1_plot.jpeg"
   plot_params['legendSpecifier']=True
-  plot_params['inputIDdict']={'Golgi_pop0':['vrpop0','XFpop0'],'Golgi_pop1': ['vrpop1','XFpop1']}
+  #plot_params['inputIDdict']={'Golgi_pop0':['vrpop0','XFpop0'],'Golgi_pop1': ['vrpop1','XFpop1']}
 
   plot_voltage_traces(plot_params)
 

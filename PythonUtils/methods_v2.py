@@ -429,18 +429,19 @@ def plot_voltage_traces(ploting_params):
     seed_specifier=ploting_params['seedSpecifier']
     saving_option=ploting_params['saveSpecifier']
     legend=ploting_params['legendSpecifier']
+    popID_list=ploting_params['popIDList']
     # no_of_cell_groups counts the number of cell groups per experiment
-    cell_no_array=[]
-    if seed_specifer:
+    cell_no_array={}
+    if seed_specifier:
        for cell_group in range(0,no_of_cell_groups):
-           cell_group_positions=np.loadtxt('simulations/%s/Golgi_pop%d.txt'%(experiment_id,cell_group))
+           cell_group_positions=np.loadtxt('simulations/%s/%s.txt'%(experiment_id,popID_list[cell_group]))
            dim_array=np.shape(cell_group_positions)
-           cell_no_array.append(dim_array[0])
+           cell_no_array[popID_list[cell_group]]=dim_array[0]
     else:
        for cell_group in range(0,no_of_cell_groups):
-           cell_group_positions=np.loadtxt('simulations/%s/sim%d/Golgi_pop%d.txt'%(experiment_id,trial_id,cell_group))
+           cell_group_positions=np.loadtxt('simulations/%s/sim%d/%s.txt'%(experiment_id,trial_id,popID_list[cell_group]))
            dim_array=np.shape(cell_group_positions)
-           cell_no_array.append(dim_array[0]) 
+           cell_no_array[popID_list[cell_group]]=dim_array[0]
     
     if plot_specifying_array[0]=="one population one subplot":
         
@@ -591,6 +592,83 @@ def plot_voltage_traces(ploting_params):
           plt.show()    
           plt.clf()
     #identify Golgi cell populations with pop id (0,1,2,3....) in the input array (here internal variable is plot_specifying_array)
+    if plot_specifying_array[0]=="population_list":
+       
+       
+       
+       fig,ax = plt.subplots(1,1,sharex=False,figsize=(8.5,4))
+
+       
+      
+       fig.canvas.set_window_title("Golgi cell models")
+       
+       for pop in range(0,no_of_cell_groups):
+           pop=popID_list[pop]
+           ax.set_xlabel('Time (s)')
+           ax.set_ylabel('Membrane potential (V)')
+           ax.xaxis.grid(True)
+           ax.yaxis.grid(True)
+           
+           
+           if plot_specifying_array[1]=="explicit lists":
+              
+              for cell in plot_specifying_array[2][pop]:
+                  data=[]
+                  time_array=[]
+                  voltage_array=[]
+                  data.append(time_array)
+                  data.append(voltage_array)
+                  cell_path='simulations/%s/sim'%experiment_id+'%d/'%trial_id+'%s_cell%d'%(pop,cell)+'.dat'
+                  for line in open(cell_path):
+                      values=line.split() # for each line there is a time point and voltage value at that time point
+                      for x in range(0,2):
+                          data[x].append(float(values[x]))
+                  
+                  
+                  ax.plot(data[0],data[1],label='%s_cell%d'%(pop,cell))
+                  print("Adding trace for: %s_cell%d, from: %s"%(pop,cell,cell_path))
+                  
+              
+  
+           if plot_specifying_array[1]=="random fraction":
+
+              which_cells_to_plot_pop=random.sample(range(0,cell_no_array[pop]),\
+                                                int(round(cell_no_array[pop]*plot_specifying_array[2][pop])))
+              
+              
+
+              for cell in which_cells_to_plot_pop:
+                  data=[]
+                  time_array=[]
+                  voltage_array=[]
+                  data.append(time_array)
+                  data.append(voltage_array)
+                  cell_path='simulations/%s/sim'%experiment_id+'%d/'%trial_id+'%s_cell%d'%(pop,cell)+'.dat'
+                  for line in open(cell_path):
+                      values=line.split() # for each line there is a time point and voltage value at that time point
+                      for x in range(0,2):
+                          data[x].append(float(values[x]))
+                  
+                 
+                  ax.plot(data[0],data[1],label='%s_cell%d'%(pop,cell))
+                  print("Adding trace for: %s_cell%d, from: %s"%(pop,cell,cell_path))
+
+              
+           
+       ax.used = True
+       ax.set_title("General behaviour of Golgi cell models")
+       ax.locator_params(tight=True, nbins=10)
+       if legend:
+           lgd=ax.legend(loc='lower center',bbox_to_anchor=(0.13, -0.30),fontsize=10, fancybox=True,ncol=3, shadow=True)
+           
+       for tick in ax.xaxis.get_major_ticks():
+           tick.label.set_fontsize(9)
+   
+       plt.tight_layout()
+       if saving_option:
+          plt.savefig('simulations/%s'%(ploting_params['figureName']),bbox_extra_artists=(lgd,),bbox_inches='tight')
+       plt.show()
+
     if plot_specifying_array[0]=="pairs":
        
        rows = max(1,math.ceil(len(plot_specifying_array[1])/3))

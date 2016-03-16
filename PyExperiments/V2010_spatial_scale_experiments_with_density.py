@@ -26,49 +26,49 @@ if __name__ == "__main__":
     
     #exp1 
     net_params_V2010_multiple['experiment1']['popParams']=[]
-    net_params_V2010_multiple['experiment1']['popParams'].append({'popID':'Golgi_pop0','cellType':"Golgi_10comp_13channels_2CaPools",\
-'size':45,"NeuroML2CellType":"cell2CaPools"})
+    net_params_V2010_multiple['experiment1']['popParams'].append({'popID':'Golgi_pop0','cellType':"Golgi_040408_C1",\
+'size':100,"NeuroML2CellType":"cell2CaPools"})
    
 
     net_params_V2010_multiple['experiment1']['distributionParams']={}
     net_params_V2010_multiple['experiment1']['distributionParams']['populationList']=[]
     net_params_V2010_multiple['experiment1']['distributionParams']['populationList'].append({'distributionModel':"density_profile",'popID':'Golgi_pop0','densityFilePath':'/home/rokas/Golgi_data/Pure NeuG density matrix of shape 69 630.txt',\
-    'planeDimensions':{'dim1':'x','dim2':'y'},'dim1CoordinateVector':[0,3000],'dim2CoordinateVector':[0,110],'dim3':'z','dim3Boundary':120,\
+    'planeDimensions':{'dim1':'x','dim2':'y'},'dim1CoordinateVector':[0,3000],'dim2CoordinateVector':[0,110],'dim3':'z','dim3Boundary':80,\
     'distanceModel':'random','canonicalVolumeBaseAreainMicrons':5.00318495*5.00318495 })
 
     net_params_V2010_multiple['experiment1']['connParams']={}
     net_params_V2010_multiple['experiment1']['connParams']['populationPairs']=[]
     net_params_V2010_multiple['experiment1']['connParams']['populationPairs'].append({'electricalConnModel':"Vervaeke_2010_based",'prePopID':'Golgi_pop0',\
     'postPopID':'Golgi_pop0','spatialScale':0.5,'testingConductanceScale':1,'units':'nS','normalizeConductances':True,\
-        'prePoptargetGroup':{'segmentGroupList':["apical_dendrite_group","basal_dendrite_group"],\
-        'segmentGroupProbabilities':{"apical_dendrite_group":0.5,"basal_dendrite_group":0.5 }},\
-        'postPoptargetGroup':{'segmentGroupList':["apical_dendrite_group","basal_dendrite_group"],\
-        'segmentGroupProbabilities':{"apical_dendrite_group":0.5,"basal_dendrite_group":0.5}}})
+        'prePoptargetGroup':{'segmentGroupList':["apical","basolateral"],\
+        'segmentGroupProbabilities':{"apical":0.5,"basalolateral":0.5 }},\
+        'postPoptargetGroup':{'segmentGroupList':["apical","basolateral"],\
+        'segmentGroupProbabilities':{"apical":0.5,"basalolateral":0.5}}})
 
     
     
     net_params_V2010_multiple['experiment1']['inputParams']=[]
     inputGroups_pop0_exp1=[]
     inputGroups_pop0_exp1.append({'inputModel':"variable_basal_firing_rate",'inputLabel':'vrpop0','amplitudeDistribution':"gaussian",'averageAmp':0,\
-    'stDevAmp':50,'ampUnits':"pA",'offsetDistribution':"constant",'valueOffset':0,'offsetUnits':"ms"})
+    'stDevAmp':32,'ampUnits':"pA",'offsetDistribution':"constant",'valueOffset':0,'offsetUnits':"ms"})
     synapseList0_pop0_exp1=[]
-    synapseList0_pop0_exp1.append({'synapseType':"MFSpikeSyn",'inputIdLibrary':"XFpop0_Golgi_pop0_syn0", 'synapseMode':"transient",'averageRate':200,'delay':600,'duration':10,'units':'ms',\
+    synapseList0_pop0_exp1.append({'synapseType':"MFSpikeSyn",'synapseMode':"transient",'averageRate':200,'delay':600,'duration':10,'units':'ms',\
                        'numberModel':"constant number of inputs per cell",'noInputs':8,'targetingModel':"segment groups and segments",\
-                         'segmentGroupList':["basal_dendrite_group"],'segmentGroupProbabilities':{"basal_dendrite_group":1}})
+                         'segmentGroupList':["basolateral"],'segmentGroupProbabilities':{"basolateral":1}})
 
-    synapseList0_pop0_exp1.append({'synapseType':"PFSpikeSyn",'inputIdLibrary':"XFpop0_Golgi_pop0_syn1",            'synapseMode':"transient",'averageRate':350,'delay':610,'duration':15,'units':'ms',\
+    synapseList0_pop0_exp1.append({'synapseType':"PFSpikeSyn", 'synapseMode':"transient",'averageRate':350,'delay':610,'duration':15,'units':'ms',\
                        'numberModel':"constant number of inputs per cell",'noInputs':50,'targetingModel':"segment groups and segments",\
-                         'segmentGroupList':["apical_dendrite_group"],'segmentGroupProbabilities':{"apical_dendrite_group":1}})
+                         'segmentGroupList':["apical"],'segmentGroupProbabilities':{"apical":1}})
 
     synapseList1_pop0_exp1=[]
-    synapseList1_pop0_exp1.append({'synapseType':"MFSpikeSyn",'inputIdLibrary':"XFpop0_background_Golgi_pop0_syn0",'synapseMode':"persistent",'averageRate':2,\
+    synapseList1_pop0_exp1.append({'synapseType':"MFSpikeSyn",'synapseMode':"persistent",'averageRate':2,\
                        'numberModel':"constant number of inputs per cell",'noInputs':20,'targetingModel':"segment groups and segments",\
-                         'segmentGroupList':["basal_dendrite_group"],'segmentGroupProbabilities':{"basal_dendrite_group":1}})
+                         'segmentGroupList':["basolateral"],'segmentGroupProbabilities':{"basolateral":1}})
     
 
-    synapseList1_pop0_exp1.append({'synapseType':"PFSpikeSyn",'inputIdLibrary':"XFpop0_background_Golgi_pop0_syn1",'synapseMode':"persistent",'averageRate':0.5,\
+    synapseList1_pop0_exp1.append({'synapseType':"PFSpikeSyn",'synapseMode':"persistent",'averageRate':0.5,\
                        'numberModel':"constant number of inputs per cell",'noInputs':100,'targetingModel':"segment groups and segments",\
-                         'segmentGroupList':["apical_dendrite_group"],'segmentGroupProbabilities':{"apical_dendrite_group":1}})
+                         'segmentGroupList':["apical"],'segmentGroupProbabilities':{"apical":1}})
     
 
     inputGroups_pop0_exp1.append({'inputModel':'XF','inputLabel':'XFpop0','targetingRegime':"uniform",'fractionToTarget':0.22,\
@@ -83,14 +83,14 @@ if __name__ == "__main__":
 
     #exp2
     net_params_V2010_multiple['experiment2']['popParams']=[]
-    net_params_V2010_multiple['experiment2']['popParams'].append({'popID':'Golgi_pop0','cellType':"Golgi_10comp_13channels_2CaPools",\
-'size':45,"NeuroML2CellType":"cell2CaPools"})
+    net_params_V2010_multiple['experiment2']['popParams'].append({'popID':'Golgi_pop0','cellType':"Golgi_040408_C1",\
+'size':100,"NeuroML2CellType":"cell2CaPools"})
    
 
     net_params_V2010_multiple['experiment2']['distributionParams']={}
     net_params_V2010_multiple['experiment2']['distributionParams']['populationList']=[]
     net_params_V2010_multiple['experiment2']['distributionParams']['populationList'].append({'distributionModel':"density_profile",'popID':'Golgi_pop0','densityFilePath':'/home/rokas/Golgi_data/Pure NeuG density matrix of shape 69 630.txt',\
-    'planeDimensions':{'dim1':'x','dim2':'y'},'dim1CoordinateVector':[0,3000],'dim2CoordinateVector':[0,110],'dim3':'z','dim3Boundary':120,\
+    'planeDimensions':{'dim1':'x','dim2':'y'},'dim1CoordinateVector':[0,3000],'dim2CoordinateVector':[0,110],'dim3':'z','dim3Boundary':80,\
     'distanceModel':'random','canonicalVolumeBaseAreainMicrons':5.00318495*5.00318495 })
     
 
@@ -98,35 +98,35 @@ if __name__ == "__main__":
     net_params_V2010_multiple['experiment2']['connParams']['populationPairs']=[]
     net_params_V2010_multiple['experiment2']['connParams']['populationPairs'].append({'electricalConnModel':"Vervaeke_2010_based",'prePopID':'Golgi_pop0',\
     'postPopID':'Golgi_pop0','spatialScale':1.0,'testingConductanceScale':1,'units':'nS','normalizeConductances':True,\
-        'prePoptargetGroup':{'segmentGroupList':["apical_dendrite_group","basal_dendrite_group"],\
-        'segmentGroupProbabilities':{"apical_dendrite_group":0.5,"basal_dendrite_group":0.5 }},\
-        'postPoptargetGroup':{'segmentGroupList':["apical_dendrite_group","basal_dendrite_group"],\
-        'segmentGroupProbabilities':{"apical_dendrite_group":0.5,"basal_dendrite_group":0.5}}})
+        'prePoptargetGroup':{'segmentGroupList':["apical","basolateral"],\
+        'segmentGroupProbabilities':{"apical":0.5,"basolateral":0.5 }},\
+        'postPoptargetGroup':{'segmentGroupList':["apical","basolateral"],\
+        'segmentGroupProbabilities':{"apical":0.5,"basolateral":0.5}}})
 
     
     
     net_params_V2010_multiple['experiment2']['inputParams']=[]
     inputGroups_pop0_exp2=[]
     inputGroups_pop0_exp2.append({'inputModel':"variable_basal_firing_rate",'inputLabel':'vrpop0','amplitudeDistribution':"gaussian",'averageAmp':0,\
-    'stDevAmp':50,'ampUnits':"pA",'offsetDistribution':"constant",'valueOffset':0,'offsetUnits':"ms"})
+    'stDevAmp':32,'ampUnits':"pA",'offsetDistribution':"constant",'valueOffset':0,'offsetUnits':"ms"})
     synapseList0_pop0_exp2=[]
-    synapseList0_pop0_exp2.append({'synapseType':"MFSpikeSyn",'inputIdLibrary':"XFpop0_Golgi_pop0_syn0",     'synapseMode':"transient",'averageRate':200,'delay':600,'duration':10,'units':'ms',\
+    synapseList0_pop0_exp2.append({'synapseType':"MFSpikeSyn",'synapseMode':"transient",'averageRate':200,'delay':600,'duration':10,'units':'ms',\
                        'numberModel':"constant number of inputs per cell",'noInputs':8,'targetingModel':"segment groups and segments",\
-                         'segmentGroupList':["basal_dendrite_group"],'segmentGroupProbabilities':{"basal_dendrite_group":1}})
+                         'segmentGroupList':["basolateral"],'segmentGroupProbabilities':{"basolateral":1}})
 
-    synapseList0_pop0_exp2.append({'synapseType':"PFSpikeSyn",'inputIdLibrary':"XFpop0_Golgi_pop0_syn1",   'synapseMode':"transient",'averageRate':350,'delay':610,'duration':15,'units':'ms',\
+    synapseList0_pop0_exp2.append({'synapseType':"PFSpikeSyn",'synapseMode':"transient",'averageRate':350,'delay':610,'duration':15,'units':'ms',\
                        'numberModel':"constant number of inputs per cell",'noInputs':50,'targetingModel':"segment groups and segments",\
-                         'segmentGroupList':["apical_dendrite_group"],'segmentGroupProbabilities':{"apical_dendrite_group":1}})
+                         'segmentGroupList':["apical"],'segmentGroupProbabilities':{"apical":1}})
 
     synapseList1_pop0_exp2=[]
-    synapseList1_pop0_exp2.append({'synapseType':"MFSpikeSyn",'inputIdLibrary':"XFpop0_background_Golgi_pop0_syn0",'synapseMode':"persistent",'averageRate':2,\
+    synapseList1_pop0_exp2.append({'synapseType':"MFSpikeSyn",'synapseMode':"persistent",'averageRate':2,\
                        'numberModel':"constant number of inputs per cell",'noInputs':20,'targetingModel':"segment groups and segments",\
-                         'segmentGroupList':["basal_dendrite_group"],'segmentGroupProbabilities':{"basal_dendrite_group":1}})
+                         'segmentGroupList':["basolateral"],'segmentGroupProbabilities':{"basolateral":1}})
     
 
-    synapseList1_pop0_exp2.append({'synapseType':"PFSpikeSyn",'inputIdLibrary':"XFpop0_background_Golgi_pop0_syn1",'synapseMode':"persistent",'averageRate':0.5,\
+    synapseList1_pop0_exp2.append({'synapseType':"PFSpikeSyn",'synapseMode':"persistent",'averageRate':0.5,\
                        'numberModel':"constant number of inputs per cell",'noInputs':100,'targetingModel':"segment groups and segments",\
-                         'segmentGroupList':["apical_dendrite_group"],'segmentGroupProbabilities':{"apical_dendrite_group":1}})
+                         'segmentGroupList':["apical"],'segmentGroupProbabilities':{"apical":1}})
     
 
     inputGroups_pop0_exp2.append({'inputModel':'XF','inputLabel':'XFpop0','targetingRegime':"uniform",'fractionToTarget':0.22,\
@@ -142,14 +142,14 @@ if __name__ == "__main__":
 
     #exp3
     net_params_V2010_multiple['experiment3']['popParams']=[]
-    net_params_V2010_multiple['experiment3']['popParams'].append({'popID':'Golgi_pop0','cellType':"Golgi_10comp_13channels_2CaPools",\
-'size':45,"NeuroML2CellType":"cell2CaPools"})
+    net_params_V2010_multiple['experiment3']['popParams'].append({'popID':'Golgi_pop0','cellType':"Golgi_040408_C1",\
+'size':100,"NeuroML2CellType":"cell2CaPools"})
    
 
     net_params_V2010_multiple['experiment3']['distributionParams']={}
     net_params_V2010_multiple['experiment3']['distributionParams']['populationList']=[]
     net_params_V2010_multiple['experiment3']['distributionParams']['populationList'].append({'distributionModel':"density_profile",'popID':'Golgi_pop0','densityFilePath':'/home/rokas/Golgi_data/Pure NeuG density matrix of shape 69 630.txt',\
-    'planeDimensions':{'dim1':'x','dim2':'y'},'dim1CoordinateVector':[0,3000],'dim2CoordinateVector':[0,110],'dim3':'z','dim3Boundary':120,\
+    'planeDimensions':{'dim1':'x','dim2':'y'},'dim1CoordinateVector':[0,3000],'dim2CoordinateVector':[0,110],'dim3':'z','dim3Boundary':80,\
     'distanceModel':'random','canonicalVolumeBaseAreainMicrons':5.00318495*5.00318495 })
     
 
@@ -157,35 +157,35 @@ if __name__ == "__main__":
     net_params_V2010_multiple['experiment3']['connParams']['populationPairs']=[]
     net_params_V2010_multiple['experiment3']['connParams']['populationPairs'].append({'electricalConnModel':"Vervaeke_2010_based",'prePopID':'Golgi_pop0',\
     'postPopID':'Golgi_pop0','spatialScale':5.0,'testingConductanceScale':1,'units':'nS','normalizeConductances':True,\
-        'prePoptargetGroup':{'segmentGroupList':["apical_dendrite_group","basal_dendrite_group"],\
-        'segmentGroupProbabilities':{"apical_dendrite_group":0.5,"basal_dendrite_group":0.5 }},\
-        'postPoptargetGroup':{'segmentGroupList':["apical_dendrite_group","basal_dendrite_group"],\
-        'segmentGroupProbabilities':{"apical_dendrite_group":0.5,"basal_dendrite_group":0.5}}})
+        'prePoptargetGroup':{'segmentGroupList':["apical","basolateral"],\
+        'segmentGroupProbabilities':{"apical":0.5,"basolateral":0.5 }},\
+        'postPoptargetGroup':{'segmentGroupList':["apical","basolateral"],\
+        'segmentGroupProbabilities':{"apical":0.5,"basolateral":0.5}}})
 
     
     
     net_params_V2010_multiple['experiment3']['inputParams']=[]
     inputGroups_pop0_exp3=[]
     inputGroups_pop0_exp3.append({'inputModel':"variable_basal_firing_rate",'inputLabel':'vrpop0','amplitudeDistribution':"gaussian",'averageAmp':0,\
-    'stDevAmp':50,'ampUnits':"pA",'offsetDistribution':"constant",'valueOffset':0,'offsetUnits':"ms"})
+    'stDevAmp':32,'ampUnits':"pA",'offsetDistribution':"constant",'valueOffset':0,'offsetUnits':"ms"})
     synapseList0_pop0_exp3=[]
-    synapseList0_pop0_exp3.append({'synapseType':"MFSpikeSyn",'inputIdLibrary':"XFpop0_Golgi_pop0_syn0",   'synapseMode':"transient",'averageRate':200,'delay':600,'duration':10,'units':'ms',\
+    synapseList0_pop0_exp3.append({'synapseType':"MFSpikeSyn",'synapseMode':"transient",'averageRate':200,'delay':600,'duration':10,'units':'ms',\
                        'numberModel':"constant number of inputs per cell",'noInputs':8,'targetingModel':"segment groups and segments",\
-                         'segmentGroupList':["basal_dendrite_group"],'segmentGroupProbabilities':{"basal_dendrite_group":1}})
+                         'segmentGroupList':["basolateral"],'segmentGroupProbabilities':{"basolateral":1}})
 
-    synapseList0_pop0_exp3.append({'synapseType':"PFSpikeSyn",'inputIdLibrary':"XFpop0_Golgi_pop0_syn1",     'synapseMode':"transient",'averageRate':350,'delay':610,'duration':15,'units':'ms',\
+    synapseList0_pop0_exp3.append({'synapseType':"PFSpikeSyn",'synapseMode':"transient",'averageRate':350,'delay':610,'duration':15,'units':'ms',\
                        'numberModel':"constant number of inputs per cell",'noInputs':50,'targetingModel':"segment groups and segments",\
-                         'segmentGroupList':["apical_dendrite_group"],'segmentGroupProbabilities':{"apical_dendrite_group":1}})
+                         'segmentGroupList':["apical"],'segmentGroupProbabilities':{"apical":1}})
 
     synapseList1_pop0_exp3=[]
-    synapseList1_pop0_exp3.append({'synapseType':"MFSpikeSyn",'inputIdLibrary':"XFpop0_background_Golgi_pop0_syn0",'synapseMode':"persistent",'averageRate':2,\
+    synapseList1_pop0_exp3.append({'synapseType':"MFSpikeSyn",'synapseMode':"persistent",'averageRate':2,\
                        'numberModel':"constant number of inputs per cell",'noInputs':20,'targetingModel':"segment groups and segments",\
-                         'segmentGroupList':["basal_dendrite_group"],'segmentGroupProbabilities':{"basal_dendrite_group":1}})
+                         'segmentGroupList':["basolateral"],'segmentGroupProbabilities':{"basolateral":1}})
     
 
-    synapseList1_pop0_exp3.append({'synapseType':"PFSpikeSyn",'inputIdLibrary':"XFpop0_background_Golgi_pop0_syn1",'synapseMode':"persistent",'averageRate':0.5,\
+    synapseList1_pop0_exp3.append({'synapseType':"PFSpikeSyn",'synapseMode':"persistent",'averageRate':0.5,\
                        'numberModel':"constant number of inputs per cell",'noInputs':100,'targetingModel':"segment groups and segments",\
-                         'segmentGroupList':["apical_dendrite_group"],'segmentGroupProbabilities':{"apical_dendrite_group":1}})
+                         'segmentGroupList':["apical"],'segmentGroupProbabilities':{"apical":1}})
     
 
     inputGroups_pop0_exp3.append({'inputModel':'XF','inputLabel':'XFpop0','targetingRegime':"uniform",'fractionToTarget':0.22,\
@@ -199,14 +199,14 @@ if __name__ == "__main__":
 
     #exp4
     net_params_V2010_multiple['experiment4']['popParams']=[]
-    net_params_V2010_multiple['experiment4']['popParams'].append({'popID':'Golgi_pop0','cellType':"Golgi_10comp_13channels_2CaPools",\
-'size':45,"NeuroML2CellType":"cell2CaPools"})
+    net_params_V2010_multiple['experiment4']['popParams'].append({'popID':'Golgi_pop0','cellType':"Golgi_040408_C1",\
+'size':100,"NeuroML2CellType":"cell2CaPools"})
    
 
     net_params_V2010_multiple['experiment4']['distributionParams']={}
     net_params_V2010_multiple['experiment4']['distributionParams']['populationList']=[]
     net_params_V2010_multiple['experiment4']['distributionParams']['populationList'].append({'distributionModel':"density_profile",'popID':'Golgi_pop0','densityFilePath':'/home/rokas/Golgi_data/Pure NeuG density matrix of shape 69 630.txt',\
-    'planeDimensions':{'dim1':'x','dim2':'y'},'dim1CoordinateVector':[0,3000],'dim2CoordinateVector':[0,110],'dim3':'z','dim3Boundary':120,\
+    'planeDimensions':{'dim1':'x','dim2':'y'},'dim1CoordinateVector':[0,3000],'dim2CoordinateVector':[0,110],'dim3':'z','dim3Boundary':80,\
     'distanceModel':'random','canonicalVolumeBaseAreainMicrons':5.00318495*5.00318495 })
     
 
@@ -214,35 +214,35 @@ if __name__ == "__main__":
     net_params_V2010_multiple['experiment4']['connParams']['populationPairs']=[]
     net_params_V2010_multiple['experiment4']['connParams']['populationPairs'].append({'electricalConnModel':"Vervaeke_2010_based",'prePopID':'Golgi_pop0',\
     'postPopID':'Golgi_pop0','spatialScale':25,'testingConductanceScale':1,'units':'nS','normalizeConductances':True,\
-        'prePoptargetGroup':{'segmentGroupList':["apical_dendrite_group","basal_dendrite_group"],\
-        'segmentGroupProbabilities':{"apical_dendrite_group":0.5,"basal_dendrite_group":0.5 }},\
-        'postPoptargetGroup':{'segmentGroupList':["apical_dendrite_group","basal_dendrite_group"],\
-        'segmentGroupProbabilities':{"apical_dendrite_group":0.5,"basal_dendrite_group":0.5}}})
+        'prePoptargetGroup':{'segmentGroupList':["apical","basolateral"],\
+        'segmentGroupProbabilities':{"apical":0.5,"basolateral":0.5 }},\
+        'postPoptargetGroup':{'segmentGroupList':["apical","basolateral"],\
+        'segmentGroupProbabilities':{"apical":0.5,"basolateral":0.5}}})
 
     
     
     net_params_V2010_multiple['experiment4']['inputParams']=[]
     inputGroups_pop0_exp4=[]
     inputGroups_pop0_exp4.append({'inputModel':"variable_basal_firing_rate",'inputLabel':'vrpop0','amplitudeDistribution':"gaussian",'averageAmp':0,\
-    'stDevAmp':50,'ampUnits':"pA",'offsetDistribution':"constant",'valueOffset':0,'offsetUnits':"ms"})
+    'stDevAmp':32,'ampUnits':"pA",'offsetDistribution':"constant",'valueOffset':0,'offsetUnits':"ms"})
     synapseList0_pop0_exp4=[]
-    synapseList0_pop0_exp4.append({'synapseType':"MFSpikeSyn",'inputIdLibrary':"XFpop0_Golgi_pop0_syn0",      'synapseMode':"transient",'averageRate':200,'delay':600,'duration':10,'units':'ms',\
+    synapseList0_pop0_exp4.append({'synapseType':"MFSpikeSyn",'synapseMode':"transient",'averageRate':200,'delay':600,'duration':10,'units':'ms',\
                        'numberModel':"constant number of inputs per cell",'noInputs':8,'targetingModel':"segment groups and segments",\
-                         'segmentGroupList':["basal_dendrite_group"],'segmentGroupProbabilities':{"basal_dendrite_group":1}})
+                         'segmentGroupList':["basolateral"],'segmentGroupProbabilities':{"basolateral":1}})
 
-    synapseList0_pop0_exp4.append({'synapseType':"PFSpikeSyn",'inputIdLibrary':"XFpop0_Golgi_pop0_syn1",      'synapseMode':"transient",'averageRate':350,'delay':610,'duration':15,'units':'ms',\
+    synapseList0_pop0_exp4.append({'synapseType':"PFSpikeSyn",'synapseMode':"transient",'averageRate':350,'delay':610,'duration':15,'units':'ms',\
                        'numberModel':"constant number of inputs per cell",'noInputs':50,'targetingModel':"segment groups and segments",\
-                         'segmentGroupList':["apical_dendrite_group"],'segmentGroupProbabilities':{"apical_dendrite_group":1}})
+                         'segmentGroupList':["apical"],'segmentGroupProbabilities':{"apical":1}})
 
     synapseList1_pop0_exp4=[]
-    synapseList1_pop0_exp4.append({'synapseType':"MFSpikeSyn",'inputIdLibrary':"XFpop0_background_Golgi_pop0_syn0",'synapseMode':"persistent",'averageRate':2,\
+    synapseList1_pop0_exp4.append({'synapseType':"MFSpikeSyn",'synapseMode':"persistent",'averageRate':2,\
                        'numberModel':"constant number of inputs per cell",'noInputs':20,'targetingModel':"segment groups and segments",\
-                         'segmentGroupList':["basal_dendrite_group"],'segmentGroupProbabilities':{"basal_dendrite_group":1}})
+                         'segmentGroupList':["basolateral"],'segmentGroupProbabilities':{"basolateral":1}})
     
 
-    synapseList1_pop0_exp4.append({'synapseType':"PFSpikeSyn",'inputIdLibrary':"XFpop0_background_Golgi_pop0_syn1",'synapseMode':"persistent",'averageRate':0.5,\
+    synapseList1_pop0_exp4.append({'synapseType':"PFSpikeSyn",'synapseMode':"persistent",'averageRate':0.5,\
                        'numberModel':"constant number of inputs per cell",'noInputs':100,'targetingModel':"segment groups and segments",\
-                         'segmentGroupList':["apical_dendrite_group"],'segmentGroupProbabilities':{"apical_dendrite_group":1}})
+                         'segmentGroupList':["apical"],'segmentGroupProbabilities':{"apical":1}})
     
 
     inputGroups_pop0_exp4.append({'inputModel':'XF','inputLabel':'XFpop0','targetingRegime':"uniform",'fractionToTarget':0.22,\
@@ -257,14 +257,14 @@ if __name__ == "__main__":
 
     #exp5
     net_params_V2010_multiple['experiment5']['popParams']=[]
-    net_params_V2010_multiple['experiment5']['popParams'].append({'popID':'Golgi_pop0','cellType':"Golgi_10comp_13channels_2CaPools",\
-'size':45,"NeuroML2CellType":"cell2CaPools"})
+    net_params_V2010_multiple['experiment5']['popParams'].append({'popID':'Golgi_pop0','cellType':"Golgi_040408_C1",\
+'size':100,"NeuroML2CellType":"cell2CaPools"})
    
 
     net_params_V2010_multiple['experiment5']['distributionParams']={}
     net_params_V2010_multiple['experiment5']['distributionParams']['populationList']=[]
     net_params_V2010_multiple['experiment5']['distributionParams']['populationList'].append({'distributionModel':"density_profile",'popID':'Golgi_pop0','densityFilePath':'/home/rokas/Golgi_data/Pure NeuG density matrix of shape 69 630.txt',\
-    'planeDimensions':{'dim1':'x','dim2':'y'},'dim1CoordinateVector':[0,3000],'dim2CoordinateVector':[0,110],'dim3':'z','dim3Boundary':120,\
+    'planeDimensions':{'dim1':'x','dim2':'y'},'dim1CoordinateVector':[0,3000],'dim2CoordinateVector':[0,110],'dim3':'z','dim3Boundary':80,\
     'distanceModel':'random','canonicalVolumeBaseAreainMicrons':5.00318495*5.00318495 })
     
 
@@ -282,25 +282,25 @@ if __name__ == "__main__":
     net_params_V2010_multiple['experiment5']['inputParams']=[]
     inputGroups_pop0_exp5=[]
     inputGroups_pop0_exp5.append({'inputModel':"variable_basal_firing_rate",'inputLabel':'vrpop0','amplitudeDistribution':"gaussian",'averageAmp':0,\
-    'stDevAmp':50,'ampUnits':"pA",'offsetDistribution':"constant",'valueOffset':0,'offsetUnits':"ms"})
+    'stDevAmp':32,'ampUnits':"pA",'offsetDistribution':"constant",'valueOffset':0,'offsetUnits':"ms"})
     synapseList0_pop0_exp5=[]
-    synapseList0_pop0_exp5.append({'synapseType':"MFSpikeSyn",'inputIdLibrary':"XFpop0_Golgi_pop0_syn0",      'synapseMode':"transient",'averageRate':200,'delay':600,'duration':10,'units':'ms',\
+    synapseList0_pop0_exp5.append({'synapseType':"MFSpikeSyn",'synapseMode':"transient",'averageRate':200,'delay':600,'duration':10,'units':'ms',\
                        'numberModel':"constant number of inputs per cell",'noInputs':8,'targetingModel':"segment groups and segments",\
-                         'segmentGroupList':["basal_dendrite_group"],'segmentGroupProbabilities':{"basal_dendrite_group":1}})
+                         'segmentGroupList':["basolateral"],'segmentGroupProbabilities':{"basolateral":1}})
 
-    synapseList0_pop0_exp5.append({'synapseType':"PFSpikeSyn",'inputIdLibrary':"XFpop0_Golgi_pop0_syn1",      'synapseMode':"transient",'averageRate':350,'delay':610,'duration':15,'units':'ms',\
+    synapseList0_pop0_exp5.append({'synapseType':"PFSpikeSyn",'synapseMode':"transient",'averageRate':350,'delay':610,'duration':15,'units':'ms',\
                        'numberModel':"constant number of inputs per cell",'noInputs':50,'targetingModel':"segment groups and segments",\
-                         'segmentGroupList':["apical_dendrite_group"],'segmentGroupProbabilities':{"apical_dendrite_group":1}})
+                         'segmentGroupList':["apical"],'segmentGroupProbabilities':{"apical":1}})
 
     synapseList1_pop0_exp5=[]
-    synapseList1_pop0_exp5.append({'synapseType':"MFSpikeSyn",'inputIdLibrary':"XFpop0_background_Golgi_pop0_syn0",'synapseMode':"persistent",'averageRate':2,\
+    synapseList1_pop0_exp5.append({'synapseType':"MFSpikeSyn",'synapseMode':"persistent",'averageRate':2,\
                        'numberModel':"constant number of inputs per cell",'noInputs':20,'targetingModel':"segment groups and segments",\
-                         'segmentGroupList':["basal_dendrite_group"],'segmentGroupProbabilities':{"basal_dendrite_group":1}})
+                         'segmentGroupList':["basolateral"],'segmentGroupProbabilities':{"basolateral":1}})
     
 
-    synapseList1_pop0_exp5.append({'synapseType':"PFSpikeSyn",'inputIdLibrary':"XFpop0_background_Golgi_pop0_syn1",'synapseMode':"persistent",'averageRate':0.5,\
+    synapseList1_pop0_exp5.append({'synapseType':"PFSpikeSyn",'synapseMode':"persistent",'averageRate':0.5,\
                        'numberModel':"constant number of inputs per cell",'noInputs':100,'targetingModel':"segment groups and segments",\
-                         'segmentGroupList':["apical_dendrite_group"],'segmentGroupProbabilities':{"apical_dendrite_group":1}})
+                         'segmentGroupList':["apical"],'segmentGroupProbabilities':{"apical":1}})
     
 
     inputGroups_pop0_exp5.append({'inputModel':'XF','inputLabel':'XFpop0','targetingRegime':"uniform",'fractionToTarget':0.22,\
@@ -318,13 +318,12 @@ if __name__ == "__main__":
     
     library_params={'libraryScale':1,'simulator':'jNeuroML_NEURON','timeStep':0.05}
 
-    sim_params={'simulator':"jNeuroML_NEURON",'duration':2700,'timeStep':0.0003,'numTrials':5,'globalSeed':False,'trialSeed':True,'plotSpecifier':False,\
-    'saveSomataPositions':True,'parentDirRequired':True,'parentDir':parentdir,'currentDirRequired':True,'currentDir':currentdir,'networkDir':'example',\
-        'saveInputReceivingCellID':True,'importPoissonTrainLibraries':True,'PoissonTrainLibraryID':'V2010_sp_scale_05_dens','libraryParams':library_params,\
-       'selectOneTrialFromLibrary':'0'}
+    sim_params={'simulator':"jNeuroML_NEURON",'duration':2700,'timeStep':0.0003,'numTrials':1,'globalSeed':False,'trialSeed':True,'plotSpecifier':False,\
+    'saveSomataPositions':True,'parentDirRequired':True,'parentDir':parentdir,'currentDirRequired':True,'currentDir':currentdir,'networkDir':'experiment',\
+        'saveInputReceivingCellID':True,'importPoissonTrainLibraries':True,'PoissonTrainLibraryID':'newlyGenerated','libraryParams':library_params}
     
     
-    #generatePoissonTrainLibraries(net_params_V2010_multiple,sim_params,library_params)
+    generatePoissonTrainLibraries(net_params_V2010_multiple,sim_params,library_params)
     
     run_simulations(net_params_V2010_multiple,sim_params)
 

@@ -204,95 +204,96 @@ def generate_golgi_cell_net(ref,cell_array,location_array,connectivity_informati
         connMatrix_array=[]
         initial_projection_counter=0
         synapse_counter=0
-        Note_string=Note_string+"Cell connectivity parameters:\n"
-        for pair in range(0,len(connectivity_information['populationPairs']) ):
-            prePop=connectivity_information['populationPairs'][pair]['prePopID']  
-            postPop=connectivity_information['populationPairs'][pair]['postPopID']
-            preCell_NML2type=None
-            postCell_NML2type=None
-            for pop in range(0,len(cell_array)):
-                if cell_array[pop]['popID']==prePop:
-                   prePop_listIndex=pop
-                   prePopSize=cell_array[pop]['size']
-                if cell_array[pop]['popID']==postPop:
-                   postPop_listIndex=pop
-                   postPopSize=cell_array[pop]['size']
+        if connectivity_information['populationPairs'] !=[]:
+           Note_string=Note_string+"Cell connectivity parameters:\n"
+           for pair in range(0,len(connectivity_information['populationPairs']) ):
+               prePop=connectivity_information['populationPairs'][pair]['prePopID']  
+               postPop=connectivity_information['populationPairs'][pair]['postPopID']
+               preCell_NML2type=None
+               postCell_NML2type=None
+               for pop in range(0,len(cell_array)):
+                   if cell_array[pop]['popID']==prePop:
+                      prePop_listIndex=pop
+                      prePopSize=cell_array[pop]['size']
+                   if cell_array[pop]['popID']==postPop:
+                      postPop_listIndex=pop
+                      postPopSize=cell_array[pop]['size']
 
-            if "NeuroML2CellType" in cell_array[prePop_listIndex]:
-               preCell_NML2type=cell_array[prePop_listIndex]["NeuroML2CellType"]
+               if "NeuroML2CellType" in cell_array[prePop_listIndex]:
+                  preCell_NML2type=cell_array[prePop_listIndex]["NeuroML2CellType"]
 
-            if "NeuroML2CellType" in cell_array[postPop_listIndex]:
-               postCell_NML2type=cell_array[postPop_listIndex]["NeuroML2CellType"]
+               if "NeuroML2CellType" in cell_array[postPop_listIndex]:
+                  postCell_NML2type=cell_array[postPop_listIndex]["NeuroML2CellType"]
             
-            if 'electricalConnModel' in connectivity_information['populationPairs'][pair]:
-               ########## 2012 publication-based generation of model connectivity 
-               if connectivity_information['populationPairs'][pair]['electricalConnModel']=="Vervaeke_2012_based" or connectivity_information['populationPairs'][pair]['electricalConnModel']=="explicit_connection_probabilities":
-                  pair_connectivity_parameters=connectivity_information['populationPairs'][pair]
-                  pre_pop_cell_component=cell_array[prePop_listIndex]['cellType']
-                  post_pop_cell_component=cell_array[postPop_listIndex]['cellType']
-                  pre_pop_cell_positions=cell_position_array[prePop]
-                  print pre_pop_cell_positions
-                  post_pop_cell_positions=cell_position_array[postPop]
-                  print post_pop_cell_positions
-                  if simulation_parameters['parentDirRequired']:
-                     proj, nonempty_projection,gap_junction_array=Vervaeke_2012_AND_explicit_conn_prob_model(pair,initial_projection_counter,prePop,prePop_listIndex,prePopSize,pre_pop_cell_component,preCell_NML2type,pre_pop_cell_positions,\
+               if 'electricalConnModel' in connectivity_information['populationPairs'][pair]:
+                  ########## 2012 publication-based generation of model connectivity 
+                  if connectivity_information['populationPairs'][pair]['electricalConnModel']=="Vervaeke_2012_based" or connectivity_information['populationPairs'][pair]['electricalConnModel']=="explicit_connection_probabilities":
+                     pair_connectivity_parameters=connectivity_information['populationPairs'][pair]
+                     pre_pop_cell_component=cell_array[prePop_listIndex]['cellType']
+                     post_pop_cell_component=cell_array[postPop_listIndex]['cellType']
+                     pre_pop_cell_positions=cell_position_array[prePop]
+                     print pre_pop_cell_positions
+                     post_pop_cell_positions=cell_position_array[postPop]
+                     print post_pop_cell_positions
+                     if simulation_parameters['parentDirRequired']:
+                        proj, nonempty_projection,gap_junction_array=Vervaeke_2012_AND_explicit_conn_prob_model(pair,initial_projection_counter,prePop,prePop_listIndex,prePopSize,pre_pop_cell_component,preCell_NML2type,pre_pop_cell_positions,\
                              postPop,postPop_listIndex,postPopSize,post_pop_cell_component,postCell_NML2type,post_pop_cell_positions,pair_connectivity_parameters,seed,simulation_parameters['parentDir'])
-                  else:
-                     proj, nonempty_projection,gap_junction_array=Vervaeke_2012_AND_explicit_conn_prob_model(pair,initial_projection_counter,prePop,prePop_listIndex,prePopSize,pre_pop_cell_component,preCell_NML2type,pre_pop_cell_positions,\
+                     else:
+                        proj, nonempty_projection,gap_junction_array=Vervaeke_2012_AND_explicit_conn_prob_model(pair,initial_projection_counter,prePop,prePop_listIndex,prePopSize,pre_pop_cell_component,preCell_NML2type,pre_pop_cell_positions,\
          postPop,postPop_listIndex,postPopSize,post_pop_cell_component,postCell_NML2type,post_pop_cell_positions,pair_connectivity_parameters,seed)
                   
-                  if nonempty_projection:
-                     initial_projection_counter+=1
-                     net.electrical_projections.append(proj)
-                     for gapJ in range(0,len(gap_junction_array)):
-                         nml_doc.gap_junctions.append(gap_junction_array[gapJ])
+                     if nonempty_projection:
+                        initial_projection_counter+=1
+                        net.electrical_projections.append(proj)
+                        for gapJ in range(0,len(gap_junction_array)):
+                            nml_doc.gap_junctions.append(gap_junction_array[gapJ])
                
                
-               ############# 2010, both connection probabilities and synaptic weights are distance-dependent              
-               if connectivity_information['populationPairs'][pair]['electricalConnModel']=="Vervaeke_2010_based":
+                  ############# 2010, both connection probabilities and synaptic weights are distance-dependent              
+                  if connectivity_information['populationPairs'][pair]['electricalConnModel']=="Vervaeke_2010_based":
+                     pair_connectivity_parameters=connectivity_information['populationPairs'][pair]
+                     pre_pop_cell_component=cell_array[prePop_listIndex]['cellType']
+                     post_pop_cell_component=cell_array[postPop_listIndex]['cellType']
+                     pre_pop_cell_positions=cell_position_array[prePop]
+                     post_pop_cell_positions=cell_position_array[postPop]
+                  
+                  
+                     if simulation_parameters['parentDirRequired']:
+                        proj, nonempty_projection,gap_junction_array=Vervaeke_2010_model(pair,initial_projection_counter,prePop,prePop_listIndex,prePopSize,pre_pop_cell_component,preCell_NML2type,pre_pop_cell_positions,\
+postPop,postPop_listIndex,postPopSize,post_pop_cell_component,postCell_NML2type,post_pop_cell_positions,pair_connectivity_parameters,seed,simulation_parameters['parentDir'])
+                     else:
+                        proj, nonempty_projection,gap_junction_array=Vervaeke_2010_model(pair,initial_projection_counter,prePop,prePop_listIndex,prePopSize,pre_pop_cell_component,preCell_NML2type,pre_pop_cell_positions,\
+ postPop,postPop_listIndex,postPopSize,post_pop_cell_component,postCell_NML2type,post_pop_cell_positions,pair_connectivity_parameters,seed)
+  
+                     if nonempty_projection:
+                        initial_projection_counter+=1
+                        net.electrical_projections.append(proj)
+                        for gapJ in range(0,len(gap_junction_array)):
+                            nml_doc.gap_junctions.append(gap_junction_array[gapJ])
+
+               #######  introduce chemical connections into network building    
+               if 'chemicalConnModel' in connectivity_information['populationPairs'][pair]:    
                   pair_connectivity_parameters=connectivity_information['populationPairs'][pair]
                   pre_pop_cell_component=cell_array[prePop_listIndex]['cellType']
                   post_pop_cell_component=cell_array[postPop_listIndex]['cellType']
                   pre_pop_cell_positions=cell_position_array[prePop]
                   post_pop_cell_positions=cell_position_array[postPop]
-                  
-                  
+               
                   if simulation_parameters['parentDirRequired']:
-                     proj, nonempty_projection,gap_junction_array=Vervaeke_2010_model(pair,initial_projection_counter,prePop,prePop_listIndex,prePopSize,pre_pop_cell_component,preCell_NML2type,pre_pop_cell_positions,\
+                     proj, nonempty_projection,gap_junction_array,synapse_name=chemical_connection_model(pair,initial_projection_counter,prePop,prePop_listIndex,prePopSize,pre_pop_cell_component,preCell_NML2type,pre_pop_cell_positions,\
 postPop,postPop_listIndex,postPopSize,post_pop_cell_component,postCell_NML2type,post_pop_cell_positions,pair_connectivity_parameters,seed,simulation_parameters['parentDir'])
                   else:
-                     proj, nonempty_projection,gap_junction_array=Vervaeke_2010_model(pair,initial_projection_counter,prePop,prePop_listIndex,prePopSize,pre_pop_cell_component,preCell_NML2type,pre_pop_cell_positions,\
- postPop,postPop_listIndex,postPopSize,post_pop_cell_component,postCell_NML2type,post_pop_cell_positions,pair_connectivity_parameters,seed)
-  
+                     proj, nonempty_projection,gap_junction_array,synapse_name=chemical_connection_model(pair,initial_projection_counter,prePop,prePop_listIndex,prePopSize,pre_pop_cell_component,preCell_NML2type,pre_pop_cell_positions,\
+postPop,postPop_listIndex,postPopSize,post_pop_cell_component,postCell_NML2type,post_pop_cell_positions,pair_connectivity_parameters,seed)
+
+                  synapse_name_array.append(synapse_name)
                   if nonempty_projection:
                      initial_projection_counter+=1
                      net.electrical_projections.append(proj)
                      for gapJ in range(0,len(gap_junction_array)):
                          nml_doc.gap_junctions.append(gap_junction_array[gapJ])
-
-            #######  introduce chemical connections into network building    
-            if 'chemicalConnModel' in connectivity_information['populationPairs'][pair]:    
-               pair_connectivity_parameters=connectivity_information['populationPairs'][pair]
-               pre_pop_cell_component=cell_array[prePop_listIndex]['cellType']
-               post_pop_cell_component=cell_array[postPop_listIndex]['cellType']
-               pre_pop_cell_positions=cell_position_array[prePop]
-               post_pop_cell_positions=cell_position_array[postPop]
-               
-               if simulation_parameters['parentDirRequired']:
-                  proj, nonempty_projection,gap_junction_array,synapse_name=chemical_connection_model(pair,initial_projection_counter,prePop,prePop_listIndex,prePopSize,pre_pop_cell_component,preCell_NML2type,pre_pop_cell_positions,\
-postPop,postPop_listIndex,postPopSize,post_pop_cell_component,postCell_NML2type,post_pop_cell_positions,pair_connectivity_parameters,seed,simulation_parameters['parentDir'])
-               else:
-                  proj, nonempty_projection,gap_junction_array,synapse_name=chemical_connection_model(pair,initial_projection_counter,prePop,prePop_listIndex,prePopSize,pre_pop_cell_component,preCell_NML2type,pre_pop_cell_positions,\
-postPop,postPop_listIndex,postPopSize,post_pop_cell_component,postCell_NML2type,post_pop_cell_positions,pair_connectivity_parameters,seed)
-
-               synapse_name_array.append(synapse_name)
-               if nonempty_projection:
-                  initial_projection_counter+=1
-                  net.electrical_projections.append(proj)
-                  for gapJ in range(0,len(gap_junction_array)):
-                      nml_doc.gap_junctions.append(gap_junction_array[gapJ])
             
-            Note_string=Note_string+"%s"%connectivity_information['populationPairs'][pair]+"\n"                                      
+               Note_string=Note_string+"%s"%connectivity_information['populationPairs'][pair]+"\n"                                      
         ####################        input block                                                           
         Note_string=Note_string+"Input parameters for a list of populations:"+"\n" 
         for pop in range(0,len(input_information)):
@@ -861,11 +862,11 @@ def generate_input_library(sim_array,pop_array):
         
         if library_params['simulator']=="jNeuroML":
             print("Finished building a network which generates input trains. Starts running a simulation with jNeuroML for %s"%lems_file_name_dir)
-	    results1 = pynml.run_lems_with_jneuroml("LEMS_%s.xml"%ref, nogui=True, load_saved_data=False, plot=False,verbose=True)
+	    results1 = pynml.run_lems_with_jneuroml("LEMS_%s.xml"%ref, nogui=True, load_saved_data=False,max_memory=2000, plot=False,verbose=True)
             print("Finished running simulations with jNeuroML")
         elif library_params['simulator']=="jNeuroML_NEURON":
              print("Finished building a network which generates input trains. Starts running a simulation with NEURON for %s"%lems_file_name_dir)
-             results1 = pynml.run_lems_with_jneuroml_neuron("LEMS_%s.xml"%ref, nogui=True, load_saved_data=False, plot=False,verbose=True)
+             results1 = pynml.run_lems_with_jneuroml_neuron("LEMS_%s.xml"%ref, nogui=True, load_saved_data=False,max_memory=2000, plot=False,verbose=True)
              print("Finished running simulations with NEURON.")
         else:
               print("Finished building a network which generates input trains.")

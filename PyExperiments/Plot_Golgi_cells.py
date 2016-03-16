@@ -1,5 +1,10 @@
-from methods import *
 
+import os,sys,inspect
+currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parentdir = os.path.dirname(currentdir)
+sys.path.insert(0,parentdir) 
+
+from PythonUtils.methods_v2 import plot_voltage_traces
 
 if __name__ == "__main__":
 
@@ -21,5 +26,30 @@ if __name__ == "__main__":
    #plot_voltage_traces(2,"test_Lists2_and_sync",2,["one population one subplot","random fraction",[[1],[1]]],["seed specifier",False],["save specifier",False],False)  
 
   #plot_voltage_traces(2,"test_Lists_and_sync",1,["one population one subplot","explicit lists",[ [],[5,6,7,8,9] ] ],["seed specifier",False],["save specifier",False],True)  
- 
-   plot_voltage_traces(2,"2012based_test_1",0,["one population one subplot","explicit lists",[[0],[0]] ],["seed specifier",False],["save specifier",True,"2012based_test_1_plot.jpeg"],True)
+
+
+
+
+
+
+
+  plot_params={}
+  plot_params['noOfPops']=3
+  plot_params['popIDList']=["Full_model","Reduced","Solinas"]
+  plot_params['expID']="three_cell_models_NeuroML2"
+  plot_params['trialID']=0
+  plot_params['subplotParams']=["population_list","explicit lists",{"Full_model":[0],"Reduced":[0],"Solinas":[0]}]
+  plot_params['seedSpecifier']=False
+  plot_params['saveSpecifier']=True
+  plot_params['figureName']="three_cell_models_NeuroML2_pcm.png"
+  plot_params['legendSpecifier']=True
+  #plot_params['inputIDdict']={'Golgi_pop0':['vrpop0','XFpop0'],'Golgi_pop1': ['vrpop1','XFpop1']}
+  #plot_which_cells_with_inputs(plot_params)
+  
+
+  plot_voltage_traces(plot_params)
+
+
+  
+
+   
