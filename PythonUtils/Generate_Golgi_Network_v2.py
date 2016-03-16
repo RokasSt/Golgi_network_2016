@@ -482,7 +482,7 @@ input_group_array[input_group],seed,sim_params_dict)
         for unique_synapse in unique_synapse_names:
             if 'networkDir' in simulation_parameters and 'parentDirRequired' in simulation_parameters:
                if simulation_parameters['parentDirRequired'] and ( simulation_parameters['networkDir']=="example" or simulation_parameters['networkDir']=="experiment"):
-                  include_synapse=neuroml.IncludeType(href="/../../../"+"%s.synapse.nml"%unique_synapse)
+                  include_synapse=neuroml.IncludeType(href="../../../"+"%s.synapse.nml"%unique_synapse)
             else:
                include_synapse=neuroml.IncludeType(href="%s.synapse.nml"%unique_synapse)
             nml_doc.includes.append(include_synapse)
