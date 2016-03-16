@@ -35,7 +35,7 @@ if __name__ == "__main__":
     net_params_V2010_multiple['experiment1']['distributionParams']={}
     net_params_V2010_multiple['experiment1']['distributionParams']['populationList']=[]
     net_params_V2010_multiple['experiment1']['distributionParams']['populationList'].append({'distributionModel':"density_profile",'popID':'Golgi_pop0','densityFilePath':'/home/rokas/Golgi_data/Pure NeuG density matrix of shape 69 630.txt',\
-    'planeDimensions':{'dim1':'x','dim2':'y'},'dim1CoordinateVector':[0,3000],'dim2CoordinateVector':[0,110],'dim3':'z','dim3Boundary':50,\
+    'planeDimensions':{'dim1':'x','dim2':'y'},'dim1CoordinateVector':[0,3000],'dim2CoordinateVector':[0,110],'dim3':'z','dim3Boundary':100,\
     'distanceModel':'random','canonicalVolumeBaseAreainMicrons':5.00318495*5.00318495 })
     
 
@@ -65,7 +65,7 @@ if __name__ == "__main__":
                          'segmentGroupList':["apical_dendrite_group"],'segmentGroupProbabilities':{"apical_dendrite_group":1}})
 
     
-    inputGroups_pop0_exp1.append({'inputModel':'XF','inputLabel':'XFpop0_left','targetingRegime':"3D_region_specific",'regionList':[ {'xVector':[0,1000],'yVector':[0,110],'zVector':[0,100]}],'fractionToTarget':0.22,'synapseList':synapseList0_pop0_exp1,'colocalizeSynapses':False})
+    inputGroups_pop0_exp1.append({'inputModel':'XF','inputLabel':'XFpop0l','targetingRegime':"3D_region_specific",'regionList':[ {'xVector':[0,1000],'yVector':[0,110],'zVector':[0,100]}],'fractionToTarget':0.22,'synapseList':synapseList0_pop0_exp1,'colocalizeSynapses':False})
 
     ##### middle band
     synapseList1_pop0_exp1=[]
@@ -78,7 +78,7 @@ if __name__ == "__main__":
                          'segmentGroupList':["apical_dendrite_group"],'segmentGroupProbabilities':{"apical_dendrite_group":1}})
 
     
-    inputGroups_pop0_exp1.append({'inputModel':'XF','inputLabel':'XFpop0_middle','targetingRegime':"3D_region_specific",\
+    inputGroups_pop0_exp1.append({'inputModel':'XF','inputLabel':'XFpop0m','targetingRegime':"3D_region_specific",\
 'regionList':[{'xVector':[1000,2000],'yVector':[0,110],'zVector':[0,100]}],'fractionToTarget':0.22,'synapseList':synapseList1_pop0_exp1,'colocalizeSynapses':False})
 
     ###### right band
@@ -92,7 +92,7 @@ if __name__ == "__main__":
                          'segmentGroupList':["apical_dendrite_group"],'segmentGroupProbabilities':{"apical_dendrite_group":1}})
 
     
-    inputGroups_pop0_exp1.append({'inputModel':'XF','inputLabel':'XFpop0_right','targetingRegime':"3D_region_specific",'regionList':[ {'xVector':[2000,3000],'yVector':[0,110],'zVector':[0,100]}],'fractionToTarget':0.22,'synapseList':synapseList2_pop0_exp1,'colocalizeSynapses':False})
+    inputGroups_pop0_exp1.append({'inputModel':'XF','inputLabel':'XFpop0r','targetingRegime':"3D_region_specific",'regionList':[ {'xVector':[2000,3000],'yVector':[0,110],'zVector':[0,100]}],'fractionToTarget':0.22,'synapseList':synapseList2_pop0_exp1,'colocalizeSynapses':False})
 
 
     ####### background
@@ -108,7 +108,7 @@ if __name__ == "__main__":
 
 
 
-    inputGroups_pop0_exp1.append({'inputModel':'XF','inputLabel':'XFpop0_background','targetingRegime':"uniform",'fractionToTarget':1,\
+    inputGroups_pop0_exp1.append({'inputModel':'XF','inputLabel':'XFpop0b','targetingRegime':"uniform",'fractionToTarget':1,\
                                   'synapseList':synapseList3_pop0_exp1,'colocalizeSynapses':False})
     
                              
@@ -154,7 +154,7 @@ if __name__ == "__main__":
                          'segmentGroupList':["apical_dendrite_group"],'segmentGroupProbabilities':{"apical_dendrite_group":1}})
 
     
-    inputGroups_pop0_exp2.append({'inputModel':'XF','inputLabel':'XFpop0_left','targetingRegime':"3D_region_specific",'regionList':[ {'xVector':[0,1000],'yVector':[0,110],'zVector':[0,100]}],'fractionToTarget':0.22,'synapseList':synapseList0_pop0_exp2,'colocalizeSynapses':False})
+    inputGroups_pop0_exp2.append({'inputModel':'XF','inputLabel':'XFpop0l','targetingRegime':"3D_region_specific",'regionList':[ {'xVector':[0,1000],'yVector':[0,110],'zVector':[0,100]}],'fractionToTarget':0.22,'synapseList':synapseList0_pop0_exp2,'colocalizeSynapses':False})
 
     ##### middle band
     synapseList1_pop0_exp2=[]
@@ -167,7 +167,7 @@ if __name__ == "__main__":
                          'segmentGroupList':["apical_dendrite_group"],'segmentGroupProbabilities':{"apical_dendrite_group":1}})
 
     
-    inputGroups_pop0_exp2.append({'inputModel':'XF','inputLabel':'XFpop0_middle','targetingRegime':"3D_region_specific",'regionList':[ {'xVector':[1000,2000],'yVector':[0,110],'zVector':[0,100]}],'fractionToTarget':0.22,'synapseList':synapseList1_pop0_exp2,'colocalizeSynapses':False})
+    inputGroups_pop0_exp2.append({'inputModel':'XF','inputLabel':'XFpop0m','targetingRegime':"3D_region_specific",'regionList':[ {'xVector':[1000,2000],'yVector':[0,110],'zVector':[0,100]}],'fractionToTarget':0.22,'synapseList':synapseList1_pop0_exp2,'colocalizeSynapses':False})
 
     ###### right band
     synapseList2_pop0_exp2=[]
@@ -180,7 +180,7 @@ if __name__ == "__main__":
                          'segmentGroupList':["apical_dendrite_group"],'segmentGroupProbabilities':{"apical_dendrite_group":1}})
 
     
-    inputGroups_pop0_exp2.append({'inputModel':'XF','inputLabel':'XFpop0_right','targetingRegime':"3D_region_specific",'regionList':[ {'xVector':[2000,3000],'yVector':[0,110],'zVector':[0,100]}],'fractionToTarget':0.22,'synapseList':synapseList2_pop0_exp2,'colocalizeSynapses':False})
+    inputGroups_pop0_exp2.append({'inputModel':'XF','inputLabel':'XFpop0r','targetingRegime':"3D_region_specific",'regionList':[ {'xVector':[2000,3000],'yVector':[0,110],'zVector':[0,100]}],'fractionToTarget':0.22,'synapseList':synapseList2_pop0_exp2,'colocalizeSynapses':False})
 
 
     ####### background
@@ -196,7 +196,7 @@ if __name__ == "__main__":
 
 
 
-    inputGroups_pop0_exp2.append({'inputModel':'XF','inputLabel':'XFpop0_background','targetingRegime':"uniform",'fractionToTarget':1,\
+    inputGroups_pop0_exp2.append({'inputModel':'XF','inputLabel':'XFpop0b','targetingRegime':"uniform",'fractionToTarget':1,\
                                   'synapseList':synapseList3_pop0_exp2,'colocalizeSynapses':False})
     
                              
@@ -241,7 +241,7 @@ if __name__ == "__main__":
                          'segmentGroupList':["apical_dendrite_group"],'segmentGroupProbabilities':{"apical_dendrite_group":1}})
 
     
-    inputGroups_pop0_exp3.append({'inputModel':'XF','inputLabel':'XFpop0_left','targetingRegime':"3D_region_specific",'regionList':[ {'xVector':[0,1000],'yVector':[0,110],'zVector':[0,100]}],'fractionToTarget':0.22,'synapseList':synapseList0_pop0_exp3,'colocalizeSynapses':False})
+    inputGroups_pop0_exp3.append({'inputModel':'XF','inputLabel':'XFpop0l','targetingRegime':"3D_region_specific",'regionList':[ {'xVector':[0,1000],'yVector':[0,110],'zVector':[0,100]}],'fractionToTarget':0.22,'synapseList':synapseList0_pop0_exp3,'colocalizeSynapses':False})
 
     ##### middle band
     synapseList1_pop0_exp3=[]
@@ -254,7 +254,7 @@ if __name__ == "__main__":
                          'segmentGroupList':["apical_dendrite_group"],'segmentGroupProbabilities':{"apical_dendrite_group":1}})
 
     
-    inputGroups_pop0_exp3.append({'inputModel':'XF','inputLabel':'XFpop0_middle','targetingRegime':"3D_region_specific",'regionList':[ {'xVector':[1000,2000],'yVector':[0,110],'zVector':[0,100]}],'fractionToTarget':0.22,'synapseList':synapseList1_pop0_exp3,'colocalizeSynapses':False})
+    inputGroups_pop0_exp3.append({'inputModel':'XF','inputLabel':'XFpop0m','targetingRegime':"3D_region_specific",'regionList':[ {'xVector':[1000,2000],'yVector':[0,110],'zVector':[0,100]}],'fractionToTarget':0.22,'synapseList':synapseList1_pop0_exp3,'colocalizeSynapses':False})
 
     ###### right band
     synapseList2_pop0_exp3=[]
@@ -267,7 +267,7 @@ if __name__ == "__main__":
                          'segmentGroupList':["apical_dendrite_group"],'segmentGroupProbabilities':{"apical_dendrite_group":1}})
 
     
-    inputGroups_pop0_exp3.append({'inputModel':'XF','inputLabel':'XFpop0_right','targetingRegime':"3D_region_specific",'regionList':[ {'xVector':[2000,3000],'yVector':[0,110],'zVector':[0,100]}],'fractionToTarget':0.22,'synapseList':synapseList2_pop0_exp3,'colocalizeSynapses':False})
+    inputGroups_pop0_exp3.append({'inputModel':'XF','inputLabel':'XFpop0r','targetingRegime':"3D_region_specific",'regionList':[ {'xVector':[2000,3000],'yVector':[0,110],'zVector':[0,100]}],'fractionToTarget':0.22,'synapseList':synapseList2_pop0_exp3,'colocalizeSynapses':False})
 
 
     ####### background
@@ -283,7 +283,7 @@ if __name__ == "__main__":
 
 
 
-    inputGroups_pop0_exp3.append({'inputModel':'XF','inputLabel':'XFpop0_background','targetingRegime':"uniform",'fractionToTarget':1,\
+    inputGroups_pop0_exp3.append({'inputModel':'XF','inputLabel':'XFpop0b','targetingRegime':"uniform",'fractionToTarget':1,\
                                   'synapseList':synapseList3_pop0_exp3,'colocalizeSynapses':False})
     
                              
@@ -329,7 +329,7 @@ if __name__ == "__main__":
                          'segmentGroupList':["apical_dendrite_group"],'segmentGroupProbabilities':{"apical_dendrite_group":1}})
 
     
-    inputGroups_pop0_exp4.append({'inputModel':'XF','inputLabel':'XFpop0_left','targetingRegime':"3D_region_specific",'regionList':[ {'xVector':[0,1000],'yVector':[0,110],'zVector':[0,100]}],'fractionToTarget':0.22,'synapseList':synapseList0_pop0_exp4,'colocalizeSynapses':False})
+    inputGroups_pop0_exp4.append({'inputModel':'XF','inputLabel':'XFpop0l','targetingRegime':"3D_region_specific",'regionList':[ {'xVector':[0,1000],'yVector':[0,110],'zVector':[0,100]}],'fractionToTarget':0.22,'synapseList':synapseList0_pop0_exp4,'colocalizeSynapses':False})
 
     ##### middle band
     synapseList1_pop0_exp4=[]
@@ -342,7 +342,7 @@ if __name__ == "__main__":
                          'segmentGroupList':["apical_dendrite_group"],'segmentGroupProbabilities':{"apical_dendrite_group":1}})
 
     
-    inputGroups_pop0_exp4.append({'inputModel':'XF','inputLabel':'XFpop0_middle','targetingRegime':"3D_region_specific",'regionList':[ {'xVector':[1000,2000],'yVector':[0,110],'zVector':[0,100]}],'fractionToTarget':0.22,'synapseList':synapseList1_pop0_exp4,'colocalizeSynapses':False})
+    inputGroups_pop0_exp4.append({'inputModel':'XF','inputLabel':'XFpop0m','targetingRegime':"3D_region_specific",'regionList':[ {'xVector':[1000,2000],'yVector':[0,110],'zVector':[0,100]}],'fractionToTarget':0.22,'synapseList':synapseList1_pop0_exp4,'colocalizeSynapses':False})
 
     ###### right band
     synapseList2_pop0_exp4=[]
@@ -355,7 +355,7 @@ if __name__ == "__main__":
                          'segmentGroupList':["apical_dendrite_group"],'segmentGroupProbabilities':{"apical_dendrite_group":1}})
 
     
-    inputGroups_pop0_exp4.append({'inputModel':'XF','inputLabel':'XFpop0_right','targetingRegime':"3D_region_specific",'regionList':[ {'xVector':[2000,3000],'yVector':[0,110],'zVector':[0,100]}],'fractionToTarget':0.22,'synapseList':synapseList2_pop0_exp4,'colocalizeSynapses':False})
+    inputGroups_pop0_exp4.append({'inputModel':'XF','inputLabel':'XFpop0r','targetingRegime':"3D_region_specific",'regionList':[ {'xVector':[2000,3000],'yVector':[0,110],'zVector':[0,100]}],'fractionToTarget':0.22,'synapseList':synapseList2_pop0_exp4,'colocalizeSynapses':False})
 
 
     ####### background
@@ -371,7 +371,7 @@ if __name__ == "__main__":
 
 
 
-    inputGroups_pop0_exp4.append({'inputModel':'XF','inputLabel':'XFpop0_background','targetingRegime':"uniform",'fractionToTarget':1,\
+    inputGroups_pop0_exp4.append({'inputModel':'XF','inputLabel':'XFpop0b','targetingRegime':"uniform",'fractionToTarget':1,\
                                   'synapseList':synapseList3_pop0_exp4,'colocalizeSynapses':False})
     
                              
@@ -417,7 +417,7 @@ if __name__ == "__main__":
                          'segmentGroupList':["apical_dendrite_group"],'segmentGroupProbabilities':{"apical_dendrite_group":1}})
 
     
-    inputGroups_pop0_exp5.append({'inputModel':'XF','inputLabel':'XFpop0_left','targetingRegime':"3D_region_specific",'regionList':[ {'xVector':[0,1000],'yVector':[0,110],'zVector':[0,100]}],'fractionToTarget':0.22,'synapseList':synapseList0_pop0_exp5,'colocalizeSynapses':False})
+    inputGroups_pop0_exp5.append({'inputModel':'XF','inputLabel':'XFpop0l','targetingRegime':"3D_region_specific",'regionList':[ {'xVector':[0,1000],'yVector':[0,110],'zVector':[0,100]}],'fractionToTarget':0.22,'synapseList':synapseList0_pop0_exp5,'colocalizeSynapses':False})
 
     ##### middle band
     synapseList1_pop0_exp5=[]
@@ -430,7 +430,7 @@ if __name__ == "__main__":
                          'segmentGroupList':["apical_dendrite_group"],'segmentGroupProbabilities':{"apical_dendrite_group":1}})
 
     
-    inputGroups_pop0_exp5.append({'inputModel':'XF','inputLabel':'XFpop0_middle','targetingRegime':"3D_region_specific",'regionList':[ {'xVector':[1000,2000],'yVector':[0,110],'zVector':[0,100]}],'fractionToTarget':0.22,'synapseList':synapseList1_pop0_exp5,'colocalizeSynapses':False})
+    inputGroups_pop0_exp5.append({'inputModel':'XF','inputLabel':'XFpop0m','targetingRegime':"3D_region_specific",'regionList':[ {'xVector':[1000,2000],'yVector':[0,110],'zVector':[0,100]}],'fractionToTarget':0.22,'synapseList':synapseList1_pop0_exp5,'colocalizeSynapses':False})
 
     ###### right band
     synapseList2_pop0_exp5=[]
@@ -443,7 +443,7 @@ if __name__ == "__main__":
                          'segmentGroupList':["apical_dendrite_group"],'segmentGroupProbabilities':{"apical_dendrite_group":1}})
 
     
-    inputGroups_pop0_exp5.append({'inputModel':'XF','inputLabel':'XFpop0_right','targetingRegime':"3D_region_specific",'regionList':[ {'xVector':[2000,3000],'yVector':[0,110],'zVector':[0,100]}],'fractionToTarget':0.22,'synapseList':synapseList2_pop0_exp5,'colocalizeSynapses':False})
+    inputGroups_pop0_exp5.append({'inputModel':'XF','inputLabel':'XFpop0r','targetingRegime':"3D_region_specific",'regionList':[ {'xVector':[2000,3000],'yVector':[0,110],'zVector':[0,100]}],'fractionToTarget':0.22,'synapseList':synapseList2_pop0_exp5,'colocalizeSynapses':False})
 
 
     ####### background
@@ -459,7 +459,7 @@ if __name__ == "__main__":
 
 
 
-    inputGroups_pop0_exp5.append({'inputModel':'XF','inputLabel':'XFpop0_background','targetingRegime':"uniform",'fractionToTarget':1,\
+    inputGroups_pop0_exp5.append({'inputModel':'XF','inputLabel':'XFpop0b','targetingRegime':"uniform",'fractionToTarget':1,\
                                   'synapseList':synapseList3_pop0_exp5,'colocalizeSynapses':False})
     
                              
