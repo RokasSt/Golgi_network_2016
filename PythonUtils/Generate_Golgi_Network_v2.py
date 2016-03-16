@@ -366,7 +366,8 @@ input_group_array[input_group],seed,sim_params_dict)
                          save_to_path=simulation_parameters['currentDir']+"/simulations/%s/sim%d"%(simulation_parameters['experimentID'],simulation_parameters['simID'])
                       else:
                          save_to_path="simulations/%s/sim%d"%(simulation_parameters['experimentID'],simulation_parameters['simID'])
-
+                      if not os.path.exists(save_to_path):
+                         os.makedirs(save_to_path)
                       np.savetxt('%s/%s_%s.txt'%(save_to_path,cell_array[pop_listIndex]['popID'],input_group_array[input_group]['inputLabel']),cells_with_inputs,\
                       fmt="%d" ) 
       
@@ -432,7 +433,8 @@ input_group_array[input_group],seed,sim_params_dict)
                          save_to_path=simulation_parameters['currentDir']+"/simulations/%s/sim%d"%(simulation_parameters['experimentID'],simulation_parameters['simID'])
                       else:
                          save_to_path="simulations/%s/sim%d"%(simulation_parameters['experimentID'],simulation_parameters['simID'])
-
+                      if not os.path.exists(save_to_path):
+                         os.makedirs(save_to_path)
                       np.savetxt('%s/%s_%s.txt'%(save_to_path,cell_array[pop_listIndex]['popID'],input_group_array[input_group]['inputLabel']),cells_with_inputs,\
                       fmt="%d" ) 
 	        ###### implementing physiological heterogeneity between cells with variations in a basal firing rate
