@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2beta4.xsd" id="PF">
+
+
+    <expTwoSynapse id="PF" tauRise="0.1ms" tauDecay="1.06ms" gbase="0.67nS" erev="0mV">
+
+        <notes>Fast spiking synapse, used for Parallel Fibre inputs to Golgi cells</notes>
+</expTwoSynapse>
+
+</neuroml>

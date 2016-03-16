@@ -87,9 +87,12 @@ def XF_input_models_uniform_import(popID,popSize,cellType,cellNML2Type,input_gro
                   spike_times=np.transpose(spike_times)
                   spike_times=spike_times[1]
                   spike_array=neuroml.SpikeArray(id="%s_%s_cell%d_%d"%(label,popID,target_cell,target_point))
-                                                  
+                  if 'units' in input_group_parameters:
+                      units=input_group_parameters['units']   
+                  else:
+                      units="ms"                           
                   for spike in range(0,len(spike_times)):
-                      spike_object=neuroml.Spike(id="%d"%spike,time="%fs"%spike_times[spike])
+                      spike_object=neuroml.Spike(id="%d"%spike,time="%f%s"%(spike_times[spike],units))
 	              spike_array.spikes.append(spike_object)
                   spike_arrays.append(spike_array)
                                                   
@@ -157,9 +160,12 @@ def XF_input_models_uniform_import(popID,popSize,cellType,cellNML2Type,input_gro
                       spike_times=np.transpose(spike_times)
                       spike_times=spike_times[1]
                       spike_array=neuroml.SpikeArray(id="%s_%s_cell%d_syn%d_%d"%(label,popID,target_cell,synapse_index,target_point))
-                                                  
+                      if 'units' in input_group_parameters:
+                          units=synapse_array['units']   
+                      else:
+                          units="ms"                           
                       for spike in range(0,len(spike_times)):
-                          spike_object=neuroml.Spike(id="%d"%spike,time="%fs"%spike_times[spike])
+                          spike_object=neuroml.Spike(id="%d"%spike,time="%f%s"%(spike_times[spike],units))
 	                  spike_array.spikes.append(spike_object)
                       spike_arrays.append(spike_array)
                                                   
@@ -271,9 +277,12 @@ def XF_input_models_3D_region_specific_import(popID,cellType,cellNML2Type,input_
                   spike_times=np.transpose(spike_times)
                   spike_times=spike_times[1]
                   spike_array=neuroml.SpikeArray(id="%s_%s_cell%d_%d"%(label,popID,target_cell,target_point))
-                                                  
+                  if 'units' in input_group_parameters:
+                      units=input_group_parameters['units']   
+                  else:
+                      units="ms"                               
                   for spike in range(0,len(spike_times)):
-                      spike_object=neuroml.Spike(id="%d"%spike,time="%fs"%spike_times[spike])
+                      spike_object=neuroml.Spike(id="%d"%spike,time="%f%s"%(spike_times[spike],units))
 	              spike_array.spikes.append(spike_object)
                   spike_arrays.append(spike_array)
                                                  
@@ -342,9 +351,12 @@ def XF_input_models_3D_region_specific_import(popID,cellType,cellNML2Type,input_
                       spike_times=np.transpose(spike_times)
                       spike_times=spike_times[1]
                       spike_array=neuroml.SpikeArray(id="%s_%s_cell%d_syn%d_%d"%(label,popID,target_cell,synapse_index,target_point))
-                                                  
+                      if 'units' in input_group_parameters:
+                          units=synapse_array['units']   
+                      else:
+                          units="ms"                       
                       for spike in range(0,len(spike_times)):
-                          spike_object=neuroml.Spike(id="%d"%spike,time="%fs"%spike_times[spike])
+                          spike_object=neuroml.Spike(id="%d"%spike,time="%f%s"%(spike_times[spike],units))
 	                  spike_array.spikes.append(spike_object)
                           spike_arrays.append(spike_array)
                                                   
