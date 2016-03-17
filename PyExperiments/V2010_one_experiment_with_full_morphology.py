@@ -64,7 +64,7 @@ if __name__ == "__main__":
                          'segmentGroupList':["apical"],'segmentGroupProbabilities':{"apical":1}})
     
 
-    inputGroups_pop0_exp1.append({'inputModel':'XF','inputLabel':'XFpop0','targetingRegime':"3D_region_specific",'regionList':[ {'xVector':[1300,1900],'yVector':[0,110],'zVector':[0,100]}],'fractionToTarget':0.22,\
+    inputGroups_pop0_exp1.append({'inputModel':'XF','inputLabel':'XFpop0','targetingRegime':"3D_region_specific",'regionList':[ {'xVector':[1300,1900],'yVector':[0,110],'zVector':[0,100]}],'fractionToTarget':0.25,\
                                   'synapseList':synapseList0_pop0_exp1,'colocalizeSynapses':False})
 
     inputGroups_pop0_exp1.append({'inputModel':'XF','inputLabel':'XFpop0_background','targetingRegime':"uniform",'fractionToTarget':1,\

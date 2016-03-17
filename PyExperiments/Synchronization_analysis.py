@@ -1,3 +1,7 @@
+import os,sys,inspect
+currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parentdir = os.path.dirname(currentdir)
+sys.path.insert(0,parentdir) 
 
 import sys
 import numpy as np
@@ -5,7 +9,7 @@ from matplotlib import pyplot as plt
 import matplotlib
 import seaborn as sns
 import pyspike
-from methods import *
+from PythonUtils.methods import *
 import string
 import subprocess
 import os
@@ -15,7 +19,7 @@ from mpl_toolkits.mplot3d import Axes3D
 ###### in the future (after exams), I might find time to introduce dictionaries to this function......
 
 
-def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_specify,spike_plot_parameters,general_plot_parameters,pop_label=None):
+def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_specify,spike_plot_parameters,general_plot_parameters):
     
     cell_no_array=[]
     for exp_id in range(0,len(exp_specify[0]) ):
@@ -173,15 +177,11 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
                           print target_cells
                           for cell in range(0,len(target_cells)):
                               #create target txt file containing spike times
-                              if pop_label==None:
-                                 get_spike_times('%d_cell%d'%(pop,target_cells[cell]),exp_specify[0][exp_id],trial)
-                                 spikes = np.loadtxt('%s/%d_cell%d.txt'%(sim_dir,pop,target_cells[cell]))
-                              else:
-                                 #if not os.path.isfile('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cells[cell])):
-                                 get_spike_times('Golgi_pop%d_cell%d'%(pop,target_cells[cell]),exp_specify[0][exp_id],trial)
-                                 spikes = np.loadtxt('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cells[cell]))
-                                 spike_train=pyspike.SpikeTrain(spikes,[0,sim_duration])
-                                 spike_trains.append(spike_train)
+                              #if not os.path.isfile('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cells[cell])):
+                              get_spike_times('Golgi_pop%d_cell%d'%(pop,target_cells[cell]),exp_specify[0][exp_id],trial)
+                              spikes = np.loadtxt('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cells[cell]))
+                              spike_train=pyspike.SpikeTrain(spikes,[0,sim_duration])
+                              spike_trains.append(spike_train)
                               print spike_trains
                               if spike_plot_parameters[0]=="2D raster plots":
                                  if spike_plot_parameters[1]==trial:
@@ -694,14 +694,15 @@ if __name__=="__main__":
 #Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_specify,spike_plot_parameters,general_plot_parameters):
 
 
-  spike_plot_params=["2D raster plots",1,"save all trials to one separate file","save sync plot to a separate file","pdf"]  
+   spike_plot_params=["2D raster plots",0,"save sync plot to a separate file","pdf"]  
 
 
 
-   plot_params=["2012based_test","Golgi pop 0 and pop1","Spatial scale",["1","20"],3,3] 
+   plot_params=["V2010_reg_l_to_r_200ms_86c","Golgi cell population","Number of cells",["86"],3,3] 
 
 
-   Synchronization_analysis(450,["3D region specific",[[0,100],[0,100],[0,100]],"subtype specific","random fraction",[ 1,1 ] ],2,[["2012based_test_1","2012based_test_2"],["seed specifier",False],2],spike_plot_params,plot_params)
+   Synchronization_analysis(3000,["3D region specific",[[0,3000],[0,110],[0,100]],"subtype specific","random fraction",[1] ],\
+1,[["V2010_regional_from_left_to_right_200ms"],["seed specifier",False],0],spike_plot_params,plot_params)
  
  
    #Synchronization_analysis(450,["3D region specific",[[0,50],[0,50],[0,50]],"subtype specific","random fraction","randomly set target ids only once",[ 0,1 ] ],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",True],5],spike_plot_params,plot_params)

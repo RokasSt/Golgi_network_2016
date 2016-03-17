@@ -19,7 +19,7 @@ if __name__ == "__main__":
     
     #exp1 
     net_params_V2010_multiple['experiment1']['popParams']=[]
-    net_params_V2010_multiple['experiment1']['popParams'].append({'popID':'Golgi_pop0','cellType':"Golgi_10comp_13channels_2CaPools",\
+    net_params_V2010_multiple['experiment1']['popParams'].append({'popID':'Golgi_pop0','cellType':"Golgi_10comp_13channels_2CaPoolsT",\
     'size':1,"NeuroML2CellType":"cell2CaPools"})
    
     
@@ -47,7 +47,7 @@ if __name__ == "__main__":
     inputGroups_pop0_exp1.append({'inputModel':"variable_basal_firing_rate",'inputLabel':'vrpop0','amplitudeDistribution':"gaussian",'averageAmp':0,\
     'stDevAmp':10,'ampUnits':"pA",'offsetDistribution':"constant",'valueOffset':0,'offsetUnits':"ms"})
     synapseList0_pop0_exp1=[]
-    synapseList0_pop0_exp1.append({'synapseType':"MFSpikeSyn",'synapseMode':"transient",'averageRate':200,'delay':200,'duration':10,'units':'ms',\
+    synapseList0_pop0_exp1.append({'synapseType':"MFSpikeSyn",'synapseMode':"transient",'averageRate':400,'delay':200,'duration':10,'units':'ms',\
                       'numberModel':"constant number of inputs per cell",'noInputs':1,'targetingModel':"segment groups and segments",\
                        'segmentGroupList':["basal_dendrite_group"],'segmentGroupProbabilities':{"basal_dendrite_group":1}})
 
@@ -56,12 +56,12 @@ if __name__ == "__main__":
                        'segmentGroupList':["apical_dendrite_group"],'segmentGroupProbabilities':{"apical_dendrite_group":1}})
 
     synapseList1_pop0_exp1=[]
-    synapseList1_pop0_exp1.append({'synapseType':"MFSpikeSyn",'synapseMode':"persistent",'averageRate':2,\
+    synapseList1_pop0_exp1.append({'synapseType':"MFSpikeSyn",'synapseMode':"persistent",'averageRate':400,\
                       'numberModel':"constant number of inputs per cell",'noInputs':1,'targetingModel':"segment groups and segments",\
                         'segmentGroupList':["basal_dendrite_group"],'segmentGroupProbabilities':{"basal_dendrite_group":1}})
     
 
-    synapseList1_pop0_exp1.append({'synapseType':"PFSpikeSyn",'synapseMode':"persistent",'averageRate':3,\
+    synapseList1_pop0_exp1.append({'synapseType':"PFSpikeSyn",'synapseMode':"persistent",'averageRate':400,\
                      'numberModel':"constant number of inputs per cell",'noInputs':1,'targetingModel':"segment groups and segments",\
                        'segmentGroupList':["apical_dendrite_group"],'segmentGroupProbabilities':{"apical_dendrite_group":1}})
     
@@ -84,7 +84,7 @@ if __name__ == "__main__":
     
     library_params={'libraryScale':2,'simulator':'jNeuroML_NEURON','timeStep':0.01}
 
-    sim_params={'simulator':"no simulation",'duration':1000,'timeStep':0.0005,'numTrials':1,'globalSeed':False,'trialSeed':True,'plotSpecifier':False,\
+    sim_params={'simulator':"no simulation",'duration':1000,'timeStep':0.0025,'numTrials':1,'globalSeed':False,'trialSeed':True,'plotSpecifier':False,\
     'saveSomataPositions':True,'parentDirRequired':True,'parentDir':parentdir,'currentDirRequired':True,'currentDir':currentdir,'networkDir':'experiment',\
         'saveInputReceivingCellID':True,'importPoissonTrainLibraries':True,'PoissonTrainLibraryID':'newlyGenerated','libraryParams':library_params}
     

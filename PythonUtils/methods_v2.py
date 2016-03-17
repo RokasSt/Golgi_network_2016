@@ -436,12 +436,12 @@ def plot_which_cells_with_inputs(ploting_params):
             cell_y=all_cells_y[cell_int]
             y.append(cell_y)
    
-        ax.scatter(x, y,color=colour_array[input_group])
+        ax.scatter(x, y,color=colour_array[input_group],s=55)
 
 
     
         for i, cell_id in enumerate(cells_per_input_group):
-            ax.annotate(cell_id, (x[i],y[i]),fontsize=10)
+            ax.annotate(cell_id, (x[i],y[i]))
 
     
     x_no_input=[]
@@ -450,9 +450,9 @@ def plot_which_cells_with_inputs(ploting_params):
         x_no_input.append(all_cells_x[background_cell])
         y_no_input.append(all_cells_y[background_cell])
 
-    ax.scatter(x_no_input,y_no_input,color='grey')
+    ax.scatter(x_no_input,y_no_input,color='grey',s=55)
     for i,background_cell in enumerate(all_cell_ids_list):
-        ax.annotate(background_cell,(x_no_input[i],y_no_input[i]),fontsize=10)
+        ax.annotate(background_cell,(x_no_input[i],y_no_input[i]))
 
 
 
@@ -474,6 +474,7 @@ def plot_voltage_traces(ploting_params):
     saving_option=ploting_params['saveSpecifier']
     legend=ploting_params['legendSpecifier']
     popID_list=ploting_params['popIDList']
+    shared_figure_title=ploting_params['title']
     # no_of_cell_groups counts the number of cell groups per experiment
     cell_no_array={}
     if seed_specifier:
@@ -501,7 +502,7 @@ def plot_voltage_traces(ploting_params):
           rows = max(1,math.ceil(no_of_pops_to_plot/3))
           columns = min(3,no_of_pops_to_plot)
           fig,ax = plt.subplots(rows,columns,sharex=True,
-                              figsize=(8.5*columns,4*rows))
+                              figsize=(8.5*columns,6*rows))
           if rows >1 or columns >1:
              ax = ax.ravel()
 
@@ -541,7 +542,7 @@ def plot_voltage_traces(ploting_params):
                  ax[pop].locator_params(tight=True, nbins=10)
               else:
                  ax.used = True
-                 ax.set_title("Golgi population with label %s"%which_pops_to_plot[pop],size=12)
+                 ax.set_title("%s %s"%(shared_figure_title,which_pops_to_plot[pop]),size=12)
                  ax.locator_params(tight=True, nbins=10)
               if legend:
                  if no_of_pops_to_plot > 1:
@@ -573,7 +574,7 @@ def plot_voltage_traces(ploting_params):
           rows = max(1,math.ceil(no_of_pops_to_plot/3))
           columns = min(3,no_of_pops_to_plot)
           fig,ax = plt.subplots(rows,columns,sharex=False,
-                              figsize=(8.5*columns,4*rows))
+                              figsize=(8.5*columns,6*rows))
           if rows >1 or columns >1:
              ax = ax.ravel()
 
@@ -614,11 +615,11 @@ def plot_voltage_traces(ploting_params):
                   print("Adding trace for: %s_cell%d, from: %s"%(which_pops_to_plot[pop],cell,cell_path))
               if no_of_pops_to_plot > 1:
                  ax[pop].used = True
-                 ax[pop].set_title("Golgi_pop%d"%which_pops_to_plot[pop],size=12)
+                 ax[pop].set_title("%s"%which_pops_to_plot[pop],size=12)
                  ax[pop].locator_params(tight=True, nbins=10)
               else:
                  ax.used = True
-                 ax.set_title("%s"%which_pops_to_plot[pop],size=12)
+                 ax.set_title("%s %s"%(shared_figure_title,which_pops_to_plot[pop]),size=12)
                  ax.locator_params(tight=True, nbins=10)
               if legend:
                  if no_of_pops_to_plot > 1:
