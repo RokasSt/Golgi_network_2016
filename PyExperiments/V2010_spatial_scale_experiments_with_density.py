@@ -316,9 +316,9 @@ if __name__ == "__main__":
     
     #######
     
-    library_params={'libraryScale':1,'simulator':'jNeuroML_NEURON','timeStep':0.05}
+    library_params={'libraryScale':1.3,'simulator':'jNeuroML_NEURON','timeStep':0.05}
 
-    sim_params={'simulator':"jNeuroML_NEURON",'duration':2700,'timeStep':0.0003,'numTrials':1,'globalSeed':False,'trialSeed':True,'plotSpecifier':False,\
+    sim_params={'simulator':"no simulation",'duration':2700,'timeStep':0.0003,'numTrials':1,'globalSeed':False,'trialSeed':True,'plotSpecifier':False,\
     'saveSomataPositions':True,'parentDirRequired':True,'parentDir':parentdir,'currentDirRequired':True,'currentDir':currentdir,'networkDir':'experiment',\
         'saveInputReceivingCellID':True,'importPoissonTrainLibraries':True,'PoissonTrainLibraryID':'newlyGenerated','libraryParams':library_params}
     

@@ -830,8 +830,7 @@ def generate_input_library(sim_array,pop_array):
                 of0 = "eventFile%d%d"%(x,i)
                 of1="0"
                 if simulation_parameters['currentDirRequired']:
-                   ls.create_event_output_file(of0,simulation_parameters['currentDir']+"/simulations/%s/sim%d/%s_PoissonTrain_%d.dat"%(simulation_parameters['experimentID'],simulation_parameters['simID'],\
-                                                                               popIDarray[x],i))
+                   ls.create_event_output_file(of0,simulation_parameters['currentDir']+"/simulations/%s/sim%d/%s_PoissonTrain_%d.dat"%(simulation_parameters['experimentID'],simulation_parameters['simID'],popIDarray[x],i))
                 else:
                    ls.create_event_output_file(of0,"simulations/%s/sim%d/%s_PoissonTrain_%d.dat"%(simulation_parameters['experimentID'],simulation_parameters['simID'],\
                                                                                 popIDarray[x],i))

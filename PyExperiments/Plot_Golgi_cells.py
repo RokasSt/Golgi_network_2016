@@ -28,28 +28,57 @@ if __name__ == "__main__":
   #plot_voltage_traces(2,"test_Lists_and_sync",1,["one population one subplot","explicit lists",[ [],[5,6,7,8,9] ] ],["seed specifier",False],["save specifier",False],True)  
 
 
+  #####################
+  
 
 
 
+  #plot_params={}
+  #plot_params['noOfPops']=3
+  #plot_params['popIDList']=["Full_model","Reduced","Solinas"]
+  #plot_params['expID']="three_cell_models_NeuroML2"
+  #plot_params['trialID']=0
+  #plot_params['subplotParams']=["population_list","explicit lists",{"Full_model":[0],"Reduced":[0],"Solinas":[0]}]
+  #plot_params['seedSpecifier']=False
+  #plot_params['saveSpecifier']=True
+  #plot_params['figureName']="three_cell_models_NeuroML2_pcm.png"
+  #plot_params['legendSpecifier']=True
+  
+  
+
+  #########################
+  #plot_voltage_traces(plot_params)
+
+
+  
+  
+
+  ####### for network simulations
 
 
   plot_params={}
-  plot_params['noOfPops']=3
-  plot_params['popIDList']=["Full_model","Reduced","Solinas"]
-  plot_params['expID']="three_cell_models_NeuroML2"
+  plot_params['noOfPops']=1
+  plot_params['popIDList']=["Golgi_pop0"]
+  plot_params['expID']="V2010_regional_from_left_to_right_200ms"
   plot_params['trialID']=0
-  plot_params['subplotParams']=["population_list","explicit lists",{"Full_model":[0],"Reduced":[0],"Solinas":[0]}]
+  plot_params['subplotParams']=["one population one subplot","explicit lists",{"Golgi_pop0":[0,1,2,3,4]}]
   plot_params['seedSpecifier']=False
   plot_params['saveSpecifier']=True
-  plot_params['figureName']="three_cell_models_NeuroML2_pcm.png"
+  plot_params['figureName']="V2010_regional_from_left_to_right_200ms.png"
   plot_params['legendSpecifier']=True
-  #plot_params['inputIDdict']={'Golgi_pop0':['vrpop0','XFpop0'],'Golgi_pop1': ['vrpop1','XFpop1']}
-  #plot_which_cells_with_inputs(plot_params)
+  plot_params['inputIDdict']={'Golgi_pop0':['XFpop0l','XFpop0m','XFpop0r']}
+  plot_which_cells_with_inputs(plot_params)
   
 
+  #########################
   plot_voltage_traces(plot_params)
 
 
-  
+
+
+
+
+
+
 
    

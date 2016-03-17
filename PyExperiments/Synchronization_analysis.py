@@ -12,8 +12,10 @@ import os
 import math
 from mpl_toolkits.mplot3d import Axes3D
 
+###### in the future (after exams), I might find time to introduce dictionaries to this function......
 
-def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_specify,spike_plot_parameters,general_plot_parameters):
+
+def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_specify,spike_plot_parameters,general_plot_parameters,pop_label=None):
     
     cell_no_array=[]
     for exp_id in range(0,len(exp_specify[0]) ):
@@ -171,11 +173,15 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
                           print target_cells
                           for cell in range(0,len(target_cells)):
                               #create target txt file containing spike times
-                              if not os.path.isfile('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cells[cell])):
+                              if pop_label==None:
+                                 get_spike_times('%d_cell%d'%(pop,target_cells[cell]),exp_specify[0][exp_id],trial)
+                                 spikes = np.loadtxt('%s/%d_cell%d.txt'%(sim_dir,pop,target_cells[cell]))
+                              else:
+                                 #if not os.path.isfile('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cells[cell])):
                                  get_spike_times('Golgi_pop%d_cell%d'%(pop,target_cells[cell]),exp_specify[0][exp_id],trial)
-                              spikes = np.loadtxt('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cells[cell]))
-                              spike_train=pyspike.SpikeTrain(spikes,[0,sim_duration])
-                              spike_trains.append(spike_train)
+                                 spikes = np.loadtxt('%s/Golgi_pop%d_cell%d.txt'%(sim_dir,pop,target_cells[cell]))
+                                 spike_train=pyspike.SpikeTrain(spikes,[0,sim_duration])
+                                 spike_trains.append(spike_train)
                               print spike_trains
                               if spike_plot_parameters[0]=="2D raster plots":
                                  if spike_plot_parameters[1]==trial:
@@ -373,7 +379,7 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
                         ax_all_trials[row_counter].set_yticks(ytick_array)
                         #ax_all_trials[row_counter].canvas.draw()
                         ax_all_trials[row_counter].set_ylim(0,(cell_no_array[target_pop_index_array[trial][pop]]+1)*len(general_plot_parameters[3]) )
-                        ax_all_trials[row_counter].set_ylabel('Cell ids for pop %d\ntrial %d'%(target_pop_index_array[trial][pop],non_empty_trial_indices[trial]),size=4)
+                        ax_all_trials[row_counter].set_ylabel('Cell ids for Golgi pop %d\ntrial %d'%(target_pop_index_array[trial][pop],non_empty_trial_indices[trial]),size=4)
                         ax_all_trials[row_counter].set_yticks([cell_no_array[target_pop_index_array[trial][pop]]+( cell_no_array[target_pop_index_array[trial][pop]]+2)*k for k in range(0,len(general_plot_parameters[3]))],minor=True)
                         ax_all_trials[row_counter].yaxis.grid(False, which='major')
                         ax_all_trials[row_counter].yaxis.grid(True, which='minor')
@@ -648,11 +654,7 @@ if __name__=="__main__":
    
    #spike_plot_params=["2D raster plots",3,"save all trials to separate files","save sync plot to a separate file","pdf"]  
 
-   spike_plot_params=["2D raster plots",1,"save all trials to one separate file","save sync plot to a separate file","pdf"]  
-
-
-
-   plot_params=["2012based_test","Golgi pop 0 and pop1","Spatial scale",["1","20"],3,3]   
+    
 
    # template: Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_specify,spike_plot_parameters,general_plot_parameters)
 
@@ -688,6 +690,16 @@ if __name__=="__main__":
 
 
    #Synchronization_analysis(450,["3D region specific",[[0,100],[0,100],[0,100]],"subtype specific","random fraction",[ 1,1 ] ],2,[["test_iteration_1","test_iteration_2"],["seed specifier",False],5],spike_plot_params,plot_params)
+
+#Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_specify,spike_plot_parameters,general_plot_parameters):
+
+
+  spike_plot_params=["2D raster plots",1,"save all trials to one separate file","save sync plot to a separate file","pdf"]  
+
+
+
+   plot_params=["2012based_test","Golgi pop 0 and pop1","Spatial scale",["1","20"],3,3] 
+
 
    Synchronization_analysis(450,["3D region specific",[[0,100],[0,100],[0,100]],"subtype specific","random fraction",[ 1,1 ] ],2,[["2012based_test_1","2012based_test_2"],["seed specifier",False],2],spike_plot_params,plot_params)
  

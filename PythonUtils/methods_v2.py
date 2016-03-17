@@ -402,24 +402,31 @@ def plot_which_cells_with_inputs(ploting_params):
     saving_option=ploting_params['saveSpecifier']
     seed_specifier=ploting_params['seedSpecifier']
     legend=ploting_params['legendSpecifier']
-    cell_no_array={}
+    cell_no=0
     if seed_specifer:
-       for cell_group in range(0,len(pop_inputID_dict)):
-           cell_group_positions=np.loadtxt('simulations/%s/Golgi_pop%d.txt'%(experiment_id,pop_inputID_dict.keys()[cell_group]))
-           dim_array=np.shape(cell_group_positions)
-           cell_no_array.append(dim_array[0])
+       cell_group_positions=np.loadtxt('simulations/%s/%s.txt'%(experiment_id,pop_inputID_dict.keys()[0]))
+       dim_array=np.shape(cell_group_positions)
+       cell_no=dim_array[0]
     else:
-       for cell_group in range(0,no_of_cell_groups):
-           cell_group_positions=np.loadtxt('simulations/%s/sim%d/Golgi_pop%d.txt'%(experiment_id,trial_id,pop_inputID_dict.keys()[cell_group]))
-           dim_array=np.shape(cell_group_positions)
-           cell_no_array.append(dim_array[0])
+       cell_group_positions=np.loadtxt('simulations/%s/sim%d/%s.txt'%(experiment_id,trial_id,pop_inputID_dict.keys()[0]))
+       dim_array=np.shape(cell_group_positions)
+       cell_no=dim_array[0]
            
-    
-    fig, ax = plt.subplots()
-    ax.scatter(z, y)
+    ###### scripted now to deal with one population only
+    fig, ax = plt.subplots(figsize=(8,8))
+    all_cells_x=cell_group_positions[0:,0]
+    all_cells_y=cell_group_positions[0:,1]
+    for input_group in range(0,len(pop_inputID_dict[pop_inputID_dict.keys()[0]])):
+        cells_per_input_group=np.loadtxt('simulations/%s/%s_%s.txt'%(experiment_id,pop_inputID_dict.keys()[0],pop_inputID_dict[pop_inputID_dict.keys()[0]][input_group]))
+        
 
-    for i, txt in enumerate(range(0,cell_no_array[pop_inputID_dict.keys()[cell_group]])):
-        ax.annotate(txt, (z[i],y[i]))
+
+
+    
+    ax.scatter(x, y)
+    
+    for i, txt in enumerate(range(0,cell_no)):
+        ax.annotate(txt, (x[i],y[i]))
     
 def plot_voltage_traces(ploting_params):
     no_of_cell_groups=ploting_params['noOfPops']
@@ -450,8 +457,8 @@ def plot_voltage_traces(ploting_params):
           no_of_pops_to_plot=0
           
           for cell_group in range(0,no_of_cell_groups):
-              if plot_specifying_array[2][cell_group] !=[]:
-                 which_pops_to_plot.append(cell_group)
+              if popID_list[cell_group] in plot_specifying_array[2]:
+                 which_pops_to_plot.append(popID_list[cell_group])
                  no_of_pops_to_plot=no_of_pops_to_plot+1
  
           rows = max(1,math.ceil(no_of_pops_to_plot/3))
@@ -481,7 +488,7 @@ def plot_voltage_traces(ploting_params):
                   voltage_array=[]
                   data.append(time_array)
                   data.append(voltage_array)
-                  cell_path='simulations/%s/sim'%experiment_id+'%d/'%trial_id+'Golgi_pop%d_cell%d'%(which_pops_to_plot[pop],cell)+'.dat'
+                  cell_path='simulations/%s/sim'%experiment_id+'%d/'%trial_id+'%s_cell%d'%(which_pops_to_plot[pop],cell)+'.dat'
                   for line in open(cell_path):
                       values=line.split() # for each line there is a time point and voltage value at that time point
                       for x in range(0,2):
@@ -490,10 +497,10 @@ def plot_voltage_traces(ploting_params):
                      ax[pop].plot(data[0],data[1],label='cell%d'%(cell))
                   else:
                      ax.plot(data[0],data[1],label='cell%d'%(cell))
-                  print("Adding trace for: Golgi_pop%d_cell%d, from: %s"%(which_pops_to_plot[pop],cell,cell_path))
+                  print("Adding trace for: %s_cell%d, from: %s"%(which_pops_to_plot[pop],cell,cell_path))
               if no_of_pops_to_plot > 1:
                  ax[pop].used = True
-                 ax[pop].set_title("Golgi_pop%d"%which_pops_to_plot[pop],size=12)
+                 ax[pop].set_title("%s"%which_pops_to_plot[pop],size=12)
                  ax[pop].locator_params(tight=True, nbins=10)
               else:
                  ax.used = True
@@ -521,8 +528,8 @@ def plot_voltage_traces(ploting_params):
           which_pops_to_plot=[]
           no_of_pops_to_plot=0
           for cell_group in range(0,no_of_cell_groups):
-              if plot_specifying_array[2][cell_group] !=[]:
-                 which_pops_to_plot.append(cell_group)
+              if popID_list[cell_group] in plot_specifying_array[2]:
+                 which_pops_to_plot.append(popID_list[cell_group])
                  no_of_pops_to_plot=no_of_pops_to_plot+1
           
           rows = max(1,math.ceil(no_of_pops_to_plot/3))
@@ -548,7 +555,7 @@ def plot_voltage_traces(ploting_params):
               
               
               which_cells_to_plot=random.sample(range(0,cell_no_array[which_pops_to_plot[pop]]),\
-                 int( round (cell_no_array[which_pops_to_plot[pop]]*plot_specifying_array[2][which_pops_to_plot[pop]][0] ) )  )
+                 int( round (cell_no_array[which_pops_to_plot[pop]]*plot_specifying_array[2][which_pops_to_plot[pop]]) )  )
               
               for cell in which_cells_to_plot:
                   data=[]
@@ -566,14 +573,14 @@ def plot_voltage_traces(ploting_params):
                      ax[pop].plot(data[0],data[1],label='cell%d'%(cell))
                   else:
                      ax.plot(data[0],data[1],label='cell%d'%(cell))
-                  print("Adding trace for: Golgi_pop%d_cell%d, from: %s"%(which_pops_to_plot[pop],cell,cell_path))
+                  print("Adding trace for: %s_cell%d, from: %s"%(which_pops_to_plot[pop],cell,cell_path))
               if no_of_pops_to_plot > 1:
                  ax[pop].used = True
                  ax[pop].set_title("Golgi_pop%d"%which_pops_to_plot[pop],size=12)
                  ax[pop].locator_params(tight=True, nbins=10)
               else:
                  ax.used = True
-                 ax.set_title("Golgi_pop%d"%which_pops_to_plot[pop],size=12)
+                 ax.set_title("%s"%which_pops_to_plot[pop],size=12)
                  ax.locator_params(tight=True, nbins=10)
               if legend:
                  if no_of_pops_to_plot > 1:
