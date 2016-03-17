@@ -36,6 +36,7 @@ if __name__ == "__main__":
         'prePoptargetGroup':{'segmentGroupList':["apical","basolateral"],\
         'segmentGroupProbabilities':{"apical":0.5,"basolateral":0.5 }},\
         'postPoptargetGroup':{'segmentGroupList':["apical","basolateral"],\
+        'segmentGroupProbabilities':{"apical":0.5,"basolateral":0.5}}})
 
     
     
