@@ -18,11 +18,11 @@ if __name__ == "__main__":
     
     #exp1
     net_params_multiple['experiment1']['popParams']=[]
-    net_params_multiple['experiment1']['popParams'].append({'popID':'Full_model','cellType':"Golgi_040408_C1",'size':1,"NeuroML2CellType":"cell2CaPools"})
+    net_params_multiple['experiment1']['popParams'].append({'popID':'Full_model','cellType':"Golgi_040408_C1T",'size':1,"NeuroML2CellType":"cell2CaPools"})
     net_params_multiple['experiment1']['popParams'].append({'popID':'Reduced',\
-    'cellType':"Golgi_10comp_13channels_2CaPools",'size':1,"NeuroML2CellType":"cell2CaPools"})
+    'cellType':"Golgi_10comp_13channels_2CaPoolsT",'size':1,"NeuroML2CellType":"cell2CaPools"})
     net_params_multiple['experiment1']['popParams'].append({'popID':'Solinas',\
-    'cellType':"Golgi_5comp_all_channels_twoCaPools",'size':1,"NeuroML2CellType":"cell2CaPools"})
+    'cellType':"Golgi_5comp_all_channels_twoCaPoolsT",'size':1,"NeuroML2CellType":"cell2CaPools"})
 
     net_params_multiple['experiment1']['distributionParams']={}
     net_params_multiple['experiment1']['distributionParams']['populationList']=[]
@@ -35,10 +35,10 @@ if __name__ == "__main__":
    
     net_params_multiple['experiment1']['connParams']={}
     net_params_multiple['experiment1']['connParams']['populationPairs']=[]
-    #net_params_multiple['experiment1']['connParams']['populationPairs'].append({'electricalConnModel':"none",'prePopID':'Golgi_pop0',\
-                                     #              'postPopID':'Golgi_pop0','spatialScale':1,'testingConductanceScale':1,'units':'nS','normalizeConductances':False,\
-                         # 'prePoptargetGroup':{'segmentGroupList':["apical"],'segmentGroupProbabilities':[1]},\
-                          # 'postPoptargetGroup':{'segmentGroupList':["apical"],'segmentGroupProbabilities':[1]}})
+   # net_params_multiple['experiment1']['connParams']['populationPairs'].append({'electricalConnModel':"none",'prePopID':'Golgi_pop0',\
+                             #                    'postPopID':'Golgi_pop0','spatialScale':1,'testingConductanceScale':1,'units':'nS','normalizeConductances':False,\
+                      #   'prePoptargetGroup':{'segmentGroupList':["apical"],'segmentGroupProbabilities':[1]},\
+                       #   'postPoptargetGroup':{'segmentGroupList':["apical"],'segmentGroupProbabilities':[1]}})
 
 
     net_params_multiple['experiment1']['inputParams']=[]
@@ -73,7 +73,7 @@ if __name__ == "__main__":
 
    ####### change 'simulator' to "jNeuroML_NEURON" in order to run simulations in NEURON
 
-    sim_params={'simulator':"no simulation",'duration':1500,'timeStep':0.0005,'numTrials':1,'globalSeed':False,'trialSeed':True,'plotSpecifier':False,\
+    sim_params={'simulator':"no simulation",'duration':1500,'timeStep':0.0025,'numTrials':1,'globalSeed':False,'trialSeed':True,'plotSpecifier':False,\
     'saveSomataPositions':True,'parentDirRequired':True,'parentDir':parentdir,'currentDirRequired':True,'currentDir':currentdir,'networkDir':'experiment', 'saveInputReceivingCellID':False}
     
     ##### run all simulations

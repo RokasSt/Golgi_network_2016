@@ -403,9 +403,8 @@ def plot_which_cells_with_inputs(ploting_params):
     seed_specifier=ploting_params['seedSpecifier']
     legend=ploting_params['legendSpecifier']
     colour_array=ploting_params['colourArray']
-    
     cell_no=0
-    if seed_specifer:
+    if seed_specifier:
        cell_group_positions=np.loadtxt('simulations/%s/%s.txt'%(experiment_id,pop_inputID_dict.keys()[0]))
        dim_array=np.shape(cell_group_positions)
        cell_no=dim_array[0]
@@ -418,25 +417,47 @@ def plot_which_cells_with_inputs(ploting_params):
     fig, ax = plt.subplots(figsize=(8,8))
     all_cells_x=cell_group_positions[0:,0]
     all_cells_y=cell_group_positions[0:,1]
-    
+    all_cell_ids_list=range(0,cell_no)
+    print all_cell_ids_list
     for input_group in range(0,len(pop_inputID_dict[pop_inputID_dict.keys()[0]])):
         x=[]
         y=[]
-        cells_per_input_group=np.loadtxt('simulations/%s/%s_%s.txt'%(experiment_id,pop_inputID_dict.keys()[0],pop_inputID_dict[pop_inputID_dict.keys()[0]][input_group]))
+        if seed_specifier:
+           file_string='simulations/%s/%s_%s.txt'%(experiment_id,pop_inputID_dict.keys()[0],pop_inputID_dict[pop_inputID_dict.keys()[0]][input_group])
+        else:
+           file_string='simulations/%s/sim%d/%s_%s.txt'%(experiment_id,trial_id,pop_inputID_dict.keys()[0],pop_inputID_dict[pop_inputID_dict.keys()[0]][input_group])
+        cells_per_input_group=np.loadtxt(file_string)
         for cell in cells_per_input_group:
-            cell_x=all_cells_x[cell]
+            cell_int=int(cell)
+            if cell_int in all_cell_ids_list:
+               all_cell_ids_list.remove(cell_int)
+            cell_x=all_cells_x[cell_int]
             x.append(cell_x)
-            cell_all_cells_y[cell]
+            cell_y=all_cells_y[cell_int]
             y.append(cell_y)
    
         ax.scatter(x, y,color=colour_array[input_group])
+
+
     
         for i, cell_id in enumerate(cells_per_input_group):
-            ax.annotate(cell_id, (x[i],y[i]))
+            ax.annotate(cell_id, (x[i],y[i]),fontsize=10)
+
+    
+    x_no_input=[]
+    y_no_input=[]
+    for background_cell in all_cell_ids_list:
+        x_no_input.append(all_cells_x[background_cell])
+        y_no_input.append(all_cells_y[background_cell])
+
+    ax.scatter(x_no_input,y_no_input,color='grey')
+    for i,background_cell in enumerate(all_cell_ids_list):
+        ax.annotate(background_cell,(x_no_input[i],y_no_input[i]),fontsize=10)
 
 
-    ax.set_xlabel('mediolateral position (micro m)')
-    ax.set_ylabel('cortical depth (micro m)')
+
+    ax.set_xlabel('Mediolateral position (micro m)')
+    ax.set_ylabel('Cortical depth (micro m)')
     ax.xaxis.grid(False)
     ax.yaxis.grid(False)
     fig.tight_layout()
@@ -480,7 +501,7 @@ def plot_voltage_traces(ploting_params):
           rows = max(1,math.ceil(no_of_pops_to_plot/3))
           columns = min(3,no_of_pops_to_plot)
           fig,ax = plt.subplots(rows,columns,sharex=True,
-                              figsize=(4*columns,4*rows))
+                              figsize=(8.5*columns,4*rows))
           if rows >1 or columns >1:
              ax = ax.ravel()
 
@@ -520,13 +541,14 @@ def plot_voltage_traces(ploting_params):
                  ax[pop].locator_params(tight=True, nbins=10)
               else:
                  ax.used = True
-                 ax.set_title("Golgi_pop%d"%which_pops_to_plot[pop],size=12)
+                 ax.set_title("Golgi population with label %s"%which_pops_to_plot[pop],size=12)
                  ax.locator_params(tight=True, nbins=10)
               if legend:
                  if no_of_pops_to_plot > 1:
-                    ax[pop].legend(loc='upper center',bbox_to_anchor=(0.5, -0.12),fontsize=6, fancybox=True,ncol=3, shadow=True)
+                    lgd=ax[pop].legend(loc='lower center',bbox_to_anchor=(0.13, -0.30),fontsize=10, fancybox=True,ncol=3, shadow=True)
+                    
                  else:
-                    ax.legend(loc='upper center',bbox_to_anchor=(0.5, -0.12),fontsize=6, fancybox=True,ncol=3, shadow=True)
+                     lgd=ax.legend(loc='lower center',bbox_to_anchor=(0.13, -0.30),fontsize=10, fancybox=True,ncol=3, shadow=True)
               if no_of_pops_to_plot > 1:
                  for tick in ax[pop].xaxis.get_major_ticks():
                      tick.label.set_fontsize(9) 
@@ -551,7 +573,7 @@ def plot_voltage_traces(ploting_params):
           rows = max(1,math.ceil(no_of_pops_to_plot/3))
           columns = min(3,no_of_pops_to_plot)
           fig,ax = plt.subplots(rows,columns,sharex=False,
-                              figsize=(4*columns,4*rows))
+                              figsize=(8.5*columns,4*rows))
           if rows >1 or columns >1:
              ax = ax.ravel()
 
@@ -579,7 +601,7 @@ def plot_voltage_traces(ploting_params):
                   voltage_array=[]
                   data.append(time_array)
                   data.append(voltage_array)
-                  cell_path='simulations/%s/sim'%experiment_id+'%d/'%trial_id+'Golgi_pop%d_cell%d'%(which_pops_to_plot[pop],cell)+'.dat'
+                  cell_path='simulations/%s/sim'%experiment_id+'%d/'%trial_id+'%s_cell%d'%(which_pops_to_plot[pop],cell)+'.dat'
                   for line in open(cell_path):
                       values=line.split() # for each line there is a time point and voltage value at that time point
                       for x in range(0,2):
@@ -600,9 +622,10 @@ def plot_voltage_traces(ploting_params):
                  ax.locator_params(tight=True, nbins=10)
               if legend:
                  if no_of_pops_to_plot > 1:
-                    ax[pop].legend(loc='upper center',bbox_to_anchor=(0.5, -0.12),fontsize=6, fancybox=True,ncol=3, shadow=True)
+                    lgd=ax[pop].legend(loc='lower center',bbox_to_anchor=(0.13, -0.30),fontsize=10, fancybox=True,ncol=3, shadow=True)
+                    
                  else:
-                    ax.legend(loc='upper center',bbox_to_anchor=(0.5, -0.12),fontsize=6, fancybox=True,ncol=3, shadow=True)
+                    lgd=ax.legend(loc='lower center',bbox_to_anchor=(0.13, -0.30),fontsize=10, fancybox=True,ncol=3, shadow=True)
               if no_of_pops_to_plot > 1:
                  for tick in ax[pop].xaxis.get_major_ticks():
                      tick.label.set_fontsize(9)  

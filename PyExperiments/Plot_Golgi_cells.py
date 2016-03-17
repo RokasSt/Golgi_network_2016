@@ -4,7 +4,7 @@ currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentfram
 parentdir = os.path.dirname(currentdir)
 sys.path.insert(0,parentdir) 
 
-from PythonUtils.methods_v2 import plot_voltage_traces
+from PythonUtils.methods_v2 import plot_voltage_traces, plot_which_cells_with_inputs
 
 if __name__ == "__main__":
 
@@ -58,15 +58,15 @@ if __name__ == "__main__":
 
   plot_params={}
   plot_params['noOfPops']=1
-  plot_params['popIDList']=["Golgi_pop0"]
+  plot_params['popIDList']=["0"]
   plot_params['expID']="V2010_regional_from_left_to_right_200ms"
   plot_params['trialID']=0
-  plot_params['subplotParams']=["one population one subplot","explicit lists",{"Golgi_pop0":[0,1,2,3,4]}]
+  plot_params['subplotParams']=["one population one subplot","random fraction",{"0":0.1}]
   plot_params['seedSpecifier']=False
   plot_params['saveSpecifier']=True
   plot_params['figureName']="V2010_regional_from_left_to_right_200ms.png"
   plot_params['legendSpecifier']=True
-  plot_params['inputIDdict']={'Golgi_pop0':['XFpop0l','XFpop0m','XFpop0r']}
+  plot_params['inputIDdict']={'0':['XFpop0l','XFpop0m','XFpop0r']}
   plot_params['colourArray']=['red','blue','green']
   
   plot_which_cells_with_inputs(plot_params)
