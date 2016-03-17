@@ -28,7 +28,7 @@ if __name__ == "__main__":
     net_params_multiple['experiment1']['distributionParams']={}
     net_params_multiple['experiment1']['distributionParams']['populationList']=[]
     
-    net_params_multiple['experiment1']['distributionParams']['populationList'].append({'popID':'Full_model','distributionModel':'explicit_cell_numbers','distanceModel':'random_no_overlap','xDim':50,'yDim':50,'zDim':50})
+    net_params_multiple['experiment1']['distributionParams']['populationList'].append({'popID':'Full_model','distributionModel':'explicit_cell_numbers','distanceModel':'random_no_overlap','xDim':40,'yDim':40,'zDim':40})
 
     #net_params_multiple['experiment1']['distributionParams']['populationList'].append({'popID':'Reduced','distributionModel':'explicit_cell_numbers','distanceModel':'random_no_overlap','xDim':50,'yDim':50,'zDim':50})
     

@@ -61,11 +61,11 @@ if __name__ == "__main__":
   plot_params['popIDList']=["Golgi_pop0"]
   plot_params['expID']="V2010_regional_from_left_to_right_200ms"
   plot_params['trialID']=0
-  plot_params['subplotParams']=["one population one subplot","explicit lists",{"Golgi_pop0":[16,59,49]}]
+  plot_params['subplotParams']=["one population one subplot","explicit lists",{"Golgi_pop0":[42,45,40,35]}]
   plot_params['seedSpecifier']=False
   plot_params['saveSpecifier']=True
-  plot_params['figureName']="V2010_reg_ltor_200ms_16_59_49.pdf"
-  plot_params['title']="Voltage traces for cells 16, 59 and 49 in"
+  plot_params['figureName']="V2010_reg_ltor_200ms_42_45_40.pdf"
+  plot_params['title']="Voltage traces for cells 42, 45, 40 and 35 in"
   plot_params['legendSpecifier']=True
   plot_params['inputIDdict']={'Golgi_pop0':['XFpop0l','XFpop0m','XFpop0r']}
   plot_params['colourArray']=['red','blue','green']

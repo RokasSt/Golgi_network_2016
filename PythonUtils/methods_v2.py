@@ -502,7 +502,7 @@ def plot_voltage_traces(ploting_params):
           rows = max(1,math.ceil(no_of_pops_to_plot/3))
           columns = min(3,no_of_pops_to_plot)
           fig,ax = plt.subplots(rows,columns,sharex=True,
-                              figsize=(8.5*columns,6*rows))
+                              figsize=(8.5*columns,4*rows))
           if rows >1 or columns >1:
              ax = ax.ravel()
 
@@ -560,7 +560,7 @@ def plot_voltage_traces(ploting_params):
           if saving_option:
              plt.savefig('simulations/%s'%(ploting_params['figureName']),bbox_extra_artists=(lgd,),bbox_inches='tight')
           plt.show() 
-       
+          
          
        # random fraction includes the case of ploting all cells of a given population       
        if plot_specifying_array[1]=="random fraction":
@@ -574,7 +574,7 @@ def plot_voltage_traces(ploting_params):
           rows = max(1,math.ceil(no_of_pops_to_plot/3))
           columns = min(3,no_of_pops_to_plot)
           fig,ax = plt.subplots(rows,columns,sharex=False,
-                              figsize=(8.5*columns,6*rows))
+                              figsize=(8.5*columns,4*rows))
           if rows >1 or columns >1:
              ax = ax.ravel()
 
@@ -637,7 +637,7 @@ def plot_voltage_traces(ploting_params):
           if saving_option:
              plt.savefig('simulations/%s'%(ploting_params['figureName']),bbox_extra_artists=(lgd,),bbox_inches='tight')
           plt.show()    
-          plt.clf()
+          
     #identify Golgi cell populations with pop id (0,1,2,3....) in the input array (here internal variable is plot_specifying_array)
     if plot_specifying_array[0]=="population_list":
        
