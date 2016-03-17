@@ -418,7 +418,7 @@ def plot_which_cells_with_inputs(ploting_params):
     all_cells_x=cell_group_positions[0:,0]
     all_cells_y=cell_group_positions[0:,1]
     all_cell_ids_list=range(0,cell_no)
-    print all_cell_ids_list
+    
     for input_group in range(0,len(pop_inputID_dict[pop_inputID_dict.keys()[0]])):
         x=[]
         y=[]
@@ -557,7 +557,7 @@ def plot_voltage_traces(ploting_params):
                      tick.label.set_fontsize(9)  
           plt.tight_layout()
           if saving_option:
-             plt.savefig('simulations/%s'%(ploting_params['figureName']))
+             plt.savefig('simulations/%s'%(ploting_params['figureName']),bbox_extra_artists=(lgd,),bbox_inches='tight')
           plt.show() 
        
          
@@ -634,7 +634,7 @@ def plot_voltage_traces(ploting_params):
                      tick.label.set_fontsize(9)  
           plt.tight_layout()
           if saving_option:
-             plt.savefig('simulations/%s'%(ploting_params['figureName']))
+             plt.savefig('simulations/%s'%(ploting_params['figureName']),bbox_extra_artists=(lgd,),bbox_inches='tight')
           plt.show()    
           plt.clf()
     #identify Golgi cell populations with pop id (0,1,2,3....) in the input array (here internal variable is plot_specifying_array)
