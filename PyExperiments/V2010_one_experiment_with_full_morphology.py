@@ -34,9 +34,8 @@ if __name__ == "__main__":
     net_params_V2010_multiple['experiment1']['connParams']['populationPairs'].append({'electricalConnModel':"Vervaeke_2010_based",'prePopID':'Golgi_pop0',\
     'postPopID':'Golgi_pop0','spatialScale':1,'testingConductanceScale':1,'units':'nS','normalizeConductances':True,\
         'prePoptargetGroup':{'segmentGroupList':["apical","basolateral"],\
-        'segmentGroupProbabilities':{"apical":0.5,"basalolateral":0.5 }},\
+        'segmentGroupProbabilities':{"apical":0.5,"basolateral":0.5 }},\
         'postPoptargetGroup':{'segmentGroupList':["apical","basolateral"],\
-        'segmentGroupProbabilities':{"apical":0.5,"basalolateral":0.5}}})
 
     
     
