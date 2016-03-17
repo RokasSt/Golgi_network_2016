@@ -86,7 +86,7 @@ if __name__ == "__main__":
     
     #######
     
-    library_params={'libraryScale':1.5,'simulator':'jNeuroML_NEURON','timeStep':0.05}
+    library_params={'libraryScale':1,'simulator':'jNeuroML_NEURON','timeStep':0.05}
 
     sim_params={'simulator':"no simulation",'duration':2500,'timeStep':0.0003,'numTrials':1,'globalSeed':False,'trialSeed':True,'plotSpecifier':False,\
     'saveSomataPositions':True,'parentDirRequired':True,'parentDir':parentdir,'currentDirRequired':True,'currentDir':currentdir,'networkDir':'experiment',\
