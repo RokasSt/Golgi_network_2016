@@ -86,7 +86,7 @@ if __name__ == "__main__":
     
     #######
     
-    library_params={'libraryScale':1,'simulator':'no simulation','timeStep':0.05}
+    library_params={'libraryScale':1,'simulator':'jNeuroML_NEURON','timeStep':0.05}
 
     sim_params={'simulator':"no simulation",'duration':2500,'timeStep':0.0003,'numTrials':1,'globalSeed':False,'trialSeed':True,'plotSpecifier':False,\
     'saveSomataPositions':True,'parentDirRequired':True,'parentDir':parentdir,'currentDirRequired':True,'currentDir':currentdir,'networkDir':'experiment',\
@@ -95,6 +95,6 @@ if __name__ == "__main__":
     
     generatePoissonTrainLibraries(net_params_V2010_multiple,sim_params,library_params)
     
-    #run_simulations(net_params_V2010_multiple,sim_params)
+    run_simulations(net_params_V2010_multiple,sim_params)
 
    

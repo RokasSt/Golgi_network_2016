@@ -402,6 +402,8 @@ def plot_which_cells_with_inputs(ploting_params):
     saving_option=ploting_params['saveSpecifier']
     seed_specifier=ploting_params['seedSpecifier']
     legend=ploting_params['legendSpecifier']
+    colour_array=ploting_params['colourArray']
+    
     cell_no=0
     if seed_specifer:
        cell_group_positions=np.loadtxt('simulations/%s/%s.txt'%(experiment_id,pop_inputID_dict.keys()[0]))
@@ -416,17 +418,31 @@ def plot_which_cells_with_inputs(ploting_params):
     fig, ax = plt.subplots(figsize=(8,8))
     all_cells_x=cell_group_positions[0:,0]
     all_cells_y=cell_group_positions[0:,1]
+    
     for input_group in range(0,len(pop_inputID_dict[pop_inputID_dict.keys()[0]])):
+        x=[]
+        y=[]
         cells_per_input_group=np.loadtxt('simulations/%s/%s_%s.txt'%(experiment_id,pop_inputID_dict.keys()[0],pop_inputID_dict[pop_inputID_dict.keys()[0]][input_group]))
-        
-
-
-
+        for cell in cells_per_input_group:
+            cell_x=all_cells_x[cell]
+            x.append(cell_x)
+            cell_all_cells_y[cell]
+            y.append(cell_y)
+   
+        ax.scatter(x, y,color=colour_array[input_group])
     
-    ax.scatter(x, y)
-    
-    for i, txt in enumerate(range(0,cell_no)):
-        ax.annotate(txt, (x[i],y[i]))
+        for i, cell_id in enumerate(cells_per_input_group):
+            ax.annotate(cell_id, (x[i],y[i]))
+
+
+    ax.set_xlabel('mediolateral position (micro m)')
+    ax.set_ylabel('cortical depth (micro m)')
+    ax.xaxis.grid(False)
+    ax.yaxis.grid(False)
+    fig.tight_layout()
+    if saving_option:
+       fig.savefig('simulations/%s'%(ploting_params['figureName']))
+    fig.show() 
     
 def plot_voltage_traces(ploting_params):
     no_of_cell_groups=ploting_params['noOfPops']

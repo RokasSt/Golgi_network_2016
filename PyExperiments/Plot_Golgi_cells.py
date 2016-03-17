@@ -67,6 +67,8 @@ if __name__ == "__main__":
   plot_params['figureName']="V2010_regional_from_left_to_right_200ms.png"
   plot_params['legendSpecifier']=True
   plot_params['inputIDdict']={'Golgi_pop0':['XFpop0l','XFpop0m','XFpop0r']}
+  plot_params['colourArray']=['red','blue','green']
+  
   plot_which_cells_with_inputs(plot_params)
   
 
