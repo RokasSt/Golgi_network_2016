@@ -639,7 +639,7 @@ def generate_PoissonInputNet(ref,cell_array,location_array,connectivity_informat
               random.seed(simulation_parameters["trialSeedNumber"])
               seed=simulation_parameters["trialSeedNumber"]
 
-        nml_doc = neuroml.NeuroMLDocument(id=ref)545.353964 mins
+        nml_doc = neuroml.NeuroMLDocument(id=ref)
         
 	# Create network
 	net = neuroml.Network(id=ref+"_network")
