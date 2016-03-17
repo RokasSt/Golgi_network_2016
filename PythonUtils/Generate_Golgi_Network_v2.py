@@ -570,7 +570,7 @@ def generate_LEMS_and_run(sim_array,pop_array):
                                                                                     cell_array[x]['popID'],i))
                    else:
                       ls.create_output_file(of0,"simulations/%s/sim%d/%s_cell%d.dat"%(simulation_parameters['experimentID'],simulation_parameters['simID'],\
-                                                                                    cell_array[x]['popID'],i))
+                                                                                                  cell_array[x]['popID'],i))
 		   ls.add_column_to_output_file(of0, 'v%i'%i, quantity)
 					   
 	    else:
@@ -583,9 +583,9 @@ def generate_LEMS_and_run(sim_array,pop_array):
 		   quantity = "%s/%i/%s/v"%(cell_array[x]['popID'], i,cell_array[x]['cellType'])
                    of0 = 'Volts%d_file0_%d'%(x,i)
                    if simulation_parameters['currentDirRequired']:
-                      ls.create_output_file(of0,simulation_parameters['currentDir']+"/simulations/%s/sim%d/%s_cell%d.dat"%(simulation_parameters['experimentID'],simulation_parameters['simID'],x,i))
+                      ls.create_output_file(of0,simulation_parameters['currentDir']+"/simulations/%s/sim%d/%s_cell%d.dat"%(simulation_parameters['experimentID'],simulation_parameters['simID'],cell_array[x]['popID'],i))
                    else:
-                      ls.create_output_file(of0,"simulations/%s/sim%d/%s_cell%d.dat"%(simulation_parameters['experimentID'],simulation_parameters['simID'],x,i))
+                      ls.create_output_file(of0,"simulations/%s/sim%d/%s_cell%d.dat"%(simulation_parameters['experimentID'],simulation_parameters['simID'],cell_array[x]['popID'],i))
 		   ls.add_column_to_output_file(of0, 'v%i'%i, quantity)
        
 	# save LEMS file
@@ -639,7 +639,7 @@ def generate_PoissonInputNet(ref,cell_array,location_array,connectivity_informat
               random.seed(simulation_parameters["trialSeedNumber"])
               seed=simulation_parameters["trialSeedNumber"]
 
-        nml_doc = neuroml.NeuroMLDocument(id=ref)
+        nml_doc = neuroml.NeuroMLDocument(id=ref)545.353964 mins
         
 	# Create network
 	net = neuroml.Network(id=ref+"_network")
