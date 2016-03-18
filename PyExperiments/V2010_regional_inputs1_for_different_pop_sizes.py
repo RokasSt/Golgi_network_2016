@@ -321,7 +321,7 @@ if __name__ == "__main__":
     net_params_V2010_multiple['experiment4']['inputParams']=[]
     ####### left band
     inputGroups_pop0_exp4=[]
-    inputGroups_pop0_exp3.append({'inputModel':"variable_basal_firing_rate",'inputLabel':'vrpop0','amplitudeDistribution':"gaussian",'averageAmp':0,\
+    inputGroups_pop0_exp4.append({'inputModel':"variable_basal_firing_rate",'inputLabel':'vrpop0','amplitudeDistribution':"gaussian",'averageAmp':0,\
     'stDevAmp':32,'ampUnits':"pA",'offsetDistribution':"constant",'valueOffset':0,'offsetUnits':"ms"})
     synapseList0_pop0_exp4=[]
     synapseList0_pop0_exp4.append({'synapseType':"MF",'synapseMode':"transient",'averageRate':200,'delay':600,'duration':10,'units':'ms',\

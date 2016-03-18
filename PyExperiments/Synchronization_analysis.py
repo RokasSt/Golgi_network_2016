@@ -77,7 +77,8 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
               else:
                  no_of_rasters=0
                  if target_cell_array != []:
-                    trial_indicator=True
+                    target_cell_array_target_trial=target_cell_array[0]
+                    trial_indicator_target=True
                     no_of_rasters=len(target_cell_array)
                     rows=1+no_of_rasters
                     columns=1
@@ -88,7 +89,7 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
                  raster_fig_array=[]
                  raster_ax_array=[]
                  pop_no_array=[]
-                 trial_indicator=False
+                 trial_indicator_target=False
                  if n_trials >1:
                     non_empty_trial_indices=[]
                     for trial in range(0,n_trials):
@@ -109,7 +110,7 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
                  else:
                     no_of_rasters=0
                     if target_cell_array != []:
-                       trial_indicator=True
+                       trial_indicator_target=True
                        no_of_rasters=len(target_cell_array)
                        rows=no_of_rasters
                        pop_no_array.append(rows)
@@ -163,7 +164,7 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
             if n_trials > 1:
                target_cell_array_per_trial=target_cell_array[trial]
             else:
-               target_cell_array_per_trial=target_cell_array
+               target_cell_array_per_trial=target_cell_array[0]
             
             if target_cell_array_per_trial !=[]:
                spike_trains = []
@@ -214,8 +215,8 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
 
                      raster_ax_row_counter+=1
                   
-
-               
+              
+               target_pop_index_array.append(target_pop_index_array_per_trial)
 
                if spike_plot_parameters[1]==trial:
                   target_trial_index=target_pop_index_array.index(target_pop_index_array_per_trial) 
@@ -224,7 +225,7 @@ def Synchronization_analysis(sim_duration,specify_targets,no_of_groups,exp_speci
                
 
 
-               target_pop_index_array.append(target_pop_index_array_per_trial)
+               #target_pop_index_array.append(target_pop_index_array_per_trial)
                ########   
                print("Length of spike_trains is %d"%len(spike_trains))
                if len(spike_trains) >1:
@@ -702,7 +703,7 @@ if __name__=="__main__":
 
 
    Synchronization_analysis(3000,["3D region specific",[[0,3000],[0,110],[0,100]],"subtype specific","random fraction",[1] ],\
-1,[["V2010_regional_from_left_to_right_200ms"],["seed specifier",False],0],spike_plot_params,plot_params)
+1,[["V2010_regional_from_left_to_right_200ms"],["seed specifier",False],1],spike_plot_params,plot_params)
  
  
    #Synchronization_analysis(450,["3D region specific",[[0,50],[0,50],[0,50]],"subtype specific","random fraction","randomly set target ids only once",[ 0,1 ] ],2,[["test_Lists_and_sync","test_Lists2_and_sync"],["seed specifier",True],5],spike_plot_params,plot_params)

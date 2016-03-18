@@ -27,7 +27,7 @@ if __name__ == "__main__":
     net_params_V2010_multiple['experiment1']['distributionParams']={}
     net_params_V2010_multiple['experiment1']['distributionParams']['populationList']=[]
     net_params_V2010_multiple['experiment1']['distributionParams']['populationList'].append({'distributionModel':"density_profile",'popID':'Golgi_pop0','densityFilePath':'/home/rokas/Golgi_data/Pure NeuG density matrix of shape 69 630.txt',\
-    'planeDimensions':{'dim1':'x','dim2':'y'},'dim1CoordinateVector':[0,3000],'dim2CoordinateVector':[0,110],'dim3':'z','dim3Boundary':100,\
+    'planeDimensions':{'dim1':'x','dim2':'y'},'dim1CoordinateVector':[0,3000],'dim2CoordinateVector':[0,110],'dim3':'z','dim3Boundary':50,\
     'distanceModel':'random','canonicalVolumeBaseAreainMicrons':5.00318495*5.00318495 })
     
 
@@ -83,7 +83,7 @@ if __name__ == "__main__":
     
 
    
-    sim_params={'simulator':"no simulation",'duration':50,'timeStep':0.0025,'numTrials':1,'globalSeed':False,'trialSeed':True,'plotSpecifier':False,\
+    sim_params={'simulator':"jNeuroML_NEURON",'duration':500,'timeStep':0.001,'numTrials':1,'globalSeed':False,'trialSeed':True,'plotSpecifier':False,\
     'saveSomataPositions':True,'parentDirRequired':True,'parentDir':parentdir,'currentDirRequired':True,'currentDir':currentdir,'networkDir':'experiment',\
         'saveInputReceivingCellID':True}
     

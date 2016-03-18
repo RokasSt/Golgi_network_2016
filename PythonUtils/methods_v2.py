@@ -414,7 +414,7 @@ def plot_which_cells_with_inputs(ploting_params):
        cell_no=dim_array[0]
            
     ###### scripted now to deal with one population only
-    fig, ax = plt.subplots(figsize=(8,8))
+    fig, ax = plt.subplots(figsize=(10,5))
     all_cells_x=cell_group_positions[0:,0]
     all_cells_y=cell_group_positions[0:,1]
     all_cell_ids_list=range(0,cell_no)
@@ -436,12 +436,16 @@ def plot_which_cells_with_inputs(ploting_params):
             cell_y=all_cells_y[cell_int]
             y.append(cell_y)
    
-        ax.scatter(x, y,color=colour_array[input_group],s=55)
+        ax.scatter(x, y,color=colour_array[input_group],s=65)
 
 
     
         for i, cell_id in enumerate(cells_per_input_group):
-            ax.annotate(cell_id, (x[i],y[i]))
+            if 'cellNoToDisplay' in ploting_params:
+               if cell_id  in ploting_params['cellNoToDisplay']:
+                  ax.annotate(cell_id,(x[i],y[i]))
+            else:
+               ax.annotate(cell_id, (x[i],y[i]))
 
     
     x_no_input=[]
@@ -452,7 +456,11 @@ def plot_which_cells_with_inputs(ploting_params):
 
     ax.scatter(x_no_input,y_no_input,color='grey',s=55)
     for i,background_cell in enumerate(all_cell_ids_list):
-        ax.annotate(background_cell,(x_no_input[i],y_no_input[i]))
+        if 'cellNoToDisplay' in ploting_params:
+           if background_cell in ploting_params['cellNoToDisplay']:
+              ax.annotate(background_cell,(x_no_input[i],y_no_input[i]))
+        else:
+          ax.annotate(background_cell,(x_no_input[i],y_no_input[i]))
 
 
 
@@ -519,6 +527,7 @@ def plot_voltage_traces(ploting_params):
                  ax.set_ylabel('Membrane potential (V)')
                  ax.xaxis.grid(True)
                  ax.yaxis.grid(True)
+                 
               
               for cell in plot_specifying_array[2][which_pops_to_plot[pop]]:
                   data=[]
@@ -534,7 +543,7 @@ def plot_voltage_traces(ploting_params):
                   if no_of_pops_to_plot >1:
                      ax[pop].plot(data[0],data[1],label='cell%d'%(cell))
                   else:
-                     ax.plot(data[0],data[1],label='cell%d'%(cell))
+                     ax.plot(data[0],data[1],label='cell%d'%(cell),color='b')
                   print("Adding trace for: %s_cell%d, from: %s"%(which_pops_to_plot[pop],cell,cell_path))
               if no_of_pops_to_plot > 1:
                  ax[pop].used = True
@@ -560,7 +569,7 @@ def plot_voltage_traces(ploting_params):
           if saving_option:
              plt.savefig('simulations/%s'%(ploting_params['figureName']),bbox_extra_artists=(lgd,),bbox_inches='tight')
           plt.show() 
-          
+          plt.clf()
          
        # random fraction includes the case of ploting all cells of a given population       
        if plot_specifying_array[1]=="random fraction":
