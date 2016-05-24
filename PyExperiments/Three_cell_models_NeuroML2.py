@@ -20,7 +20,7 @@ if __name__ == "__main__":
     net_params_multiple['experiment1']['popParams']=[]
     net_params_multiple['experiment1']['popParams'].append({'popID':'Full_model','cellType':"Golgi_040408_C1",'size':2,"NeuroML2CellType":"cell2CaPools"})
 
-    #net_params_multiple['experiment1']['popParams'].append({'popID':'Reduced',\
+    #######net_params_multiple['experiment1']['popParams'].append({'popID':'Reduced',\
     #'cellType':"Golgi_10comp_13channels_2CaPools",'size':1,"NeuroML2CellType":"cell2CaPools"})
    # net_params_multiple['experiment1']['popParams'].append({'popID':'Solinas',\
    # 'cellType':"Golgi_5comp_all_channels_twoCaPools",'size':1,"NeuroML2CellType":"cell2CaPools"})
